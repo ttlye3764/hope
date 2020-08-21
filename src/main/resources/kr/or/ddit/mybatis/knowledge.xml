@@ -3,7 +3,7 @@
 
 <mapper namespace="knowledge">
     	
-    	<!-- <resultType id="knowledgeResultMap" class="kVO">
+     <resultMap id="knowledgeResultMap" type="knowVO">
     		<result property="k_no" column="k_no"/>
 			<result property="k_title" column="k_title"/>
 			<result property="k_img" column="k_img"/>
@@ -14,8 +14,9 @@
 			<result property="k_answer4" column="k_answer4"/>
 			<result property="k_answer" column="k_answer"/>
 			<collection property="items" column="k_no" select="fileitem.fileitemList"></collection>
-    	</resultType>
-    	 -->
+    	</resultMap>
+    	
+    	
     	<sql id="selectAll">
     			SELECT *
     			FROM KNOWLEDGE 
@@ -26,21 +27,17 @@
     			 AND k_NO = #k_no#
     	</select>
     	
-    	<select id="knowledgeList" resultType="kVO" parameterType="map">
+    	<select id="knowledgeList" resultType="knowVO" parameterType="map">
    				SELECT B.*
 				FROM(SELECT ROWNUM RNUM, A.*
 					FROM (<include refid="selectAll"/>
 					ORDER BY K_NO)A) B
-				<![CDATA[
-				WHERE B.RNUM <= #startCount#
-				  AND B.RNUM >= #endCount#
-				  ]]>
 				ORDER BY B.RNUM
 						
     	</select>
     	
-    	<insert id="insertKnowledge" parameterType="kVO">
-    		<selectKey keyProperty="k_no" resultType="String">
+    	<insert id="insertKnowledge" parameterType="knowVO">
+    		<selectKey keyProperty="k_no" resultType="string" order="BEFORE">
     			SELECT KNOWLEDGE_SEQ.NEXTVAL FROM DUAL
     		</selectKey>
     		INSERT INTO KNOWLEDGE(K_NO
@@ -53,25 +50,25 @@
 									,K_ANSWER
 									,MEM_NO
 									)
-							VALUES(#k_no#
-									,#k_title#    
-									,#k_content#   
-									,#k_answer1# 
-									,#k_answer2# 
-									,#k_answer3# 
-									,#k_answer4#
-									,#k_answer#
+							VALUES(#{k_no}
+									,#{k_title} 
+									,#{k_content}  
+									,#{k_answer1}
+									,#{k_answer2} 
+									,#{k_answer3}
+									,#{k_answer4}
+									,#{k_answer}
 									,1
-									)    
+									)
     	</insert>
     	
     	<delete id="deleteKnowledge" parameterType="String">
     			DELETE
     		 	FROM KNOWLEDGE
-    		 	WHERE K_NO = #k_no#
+    		 	WHERE K_NO = #{k_no}
     	</delete>
     	
-    	<update id="updateKnowledge" parameterType="kVO">
+    	<update id="updateKnowledge" parameterType="knowVO">
     		UPDATE KNOWLEDGE
     		   SET K_TITLE = #k_title#
     		   	  ,K_CONTENT = #k_content#
@@ -82,7 +79,7 @@
     		WHERE K_NO = #k_no#
     	</update>
     	
-    	<select id="totalCount" parameterType="map" resultMap="string">
+    	<select id="totalCount" parameterType="map" resultType="string">
     		SELECT COUNT(K_NO)
     		  FROM KNOWLEDGE
     	</select>
