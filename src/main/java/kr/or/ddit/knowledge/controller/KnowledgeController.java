@@ -89,9 +89,10 @@ public class KnowledgeController {
 	
 	// 문제 삭제
 	@RequestMapping("deleteKnowledgeInfo")
-	public String deleteKnowledge(String k_no) throws Exception{
+	public String deleteKnowledge(@RequestParam(value="k_no") String k_no) throws Exception{
 		
 		this.knowledgeService.deleteKnowledge(k_no);
+		System.out.println(k_no);
 		
 		return "redirect:/admin/knowledge/knowledgeList.do";
 	}
