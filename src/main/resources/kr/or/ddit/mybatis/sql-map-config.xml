@@ -20,7 +20,7 @@
 		<typeAlias alias="memberVO" type="kr.or.ddit.vo.MemberVO" />
 		
 		<!-- 윤희 -->
-		<typeAlias alias="memberVO" type="kr.or.ddit.vo.BoardVO" />
+		<typeAlias alias="boardVO" type="kr.or.ddit.vo.BoardVO" />
 		
 		<!-- 수아 -->
 		<typeAlias alias="knowVO" type="kr.or.ddit.vo.KnowledgeVO" />
