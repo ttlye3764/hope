@@ -216,7 +216,7 @@ function setCalendar(data){
 				<!-- contact form -->
 				<div class="col-md-6">
 					<div class="h-100">
-						<form class="contact-form" id="contact-form" name="contactform" action="${pageContext.request.contextPath}/user/medical/insertMedicalInfo.do" method="post" >			
+						<form class="contact-form" id="contact-form" name="contactform" action="${pageContext.request.contextPath}/user/medical/insertMedicalInfo.do" method="post">			
 							<!-- Start main form -->
 							<div class="row">
 								<div class="col-md-6">

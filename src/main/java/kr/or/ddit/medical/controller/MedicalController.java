@@ -53,22 +53,28 @@ public class MedicalController {
 
 	
 	@RequestMapping("insertMedicalInfo")
-	public ModelAndView insertMedicalInfo(MypillVO mypillInfo)
+	public ModelAndView insertMedicalInfo(ModelAndView andView, MypillVO mypillInfo)
 			throws Exception {
-		ModelAndView andView = new ModelAndView();
-		andView.setViewName("");
-		System.out.println("Asdfasdfsdaf");
-		/*
-		 * System.out.println(mypillInfo.getPill_start());
-		 * System.out.println(mypillInfo.getPill_alerttime());
-		 * 
-		 * 
-		 * this.medicalService.insertMedicalInfo(mypillInfo, null);
-		 * 
-		 */
+		
+		andView.setViewName("user/medical/medicalList");
+		
+		System.out.println("asdfasdf");
+		
+		System.out.println(mypillInfo.getPill_start());
+		
+		String start = mypillInfo.getPill_start().concat("T");
+		start = start.concat(mypillInfo.getPill_alerttime());
+		mypillInfo.setPill_start(start);
+		
+		String end = mypillInfo.getPill_end().concat("T");
+		end = end.concat(mypillInfo.getPill_alerttime());
+		mypillInfo.setPill_end(end);
+		
+		mypillInfo.setMem_no("1");
+		  
+		this.medicalService.insertMedicalInfo(mypillInfo, null);
+		  
+		 
 		return andView;
 	}
-	
-	
-
 }

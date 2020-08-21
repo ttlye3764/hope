@@ -18,7 +18,8 @@
 			VALUES
 			    (
 					mypill_seq.nextval,		
-					#{pill_name},   
+					#{pill_name}, 
+					#{pill_count},  
 					#{pill_start},
 					#{pill_end},
 					#{pill_alerttime},
