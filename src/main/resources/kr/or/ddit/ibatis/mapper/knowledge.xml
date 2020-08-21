@@ -1,92 +1,74 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE sqlMap      
-    PUBLIC "-//ibatis.apache.org//DTD SQL Map  2.0//EN"      
-    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
-    
-    <sqlMap namespace="knowledge">
-    	<typeAlias alias="kVO" type="kr.or.ddit.vo.KnowledgeVO"/>
-    	
-    	<resultMap id="knowledgeResultMap" class="kVO">
-    		<result property="k_no" column="k_no"/>
-			<result property="k_title" column="k_title"/>
-			<result property="k_img" column="k_img"/>
-			<result property="k_content" column="k_content"/>
-			<result property="k_answer1" column="k_answer1"/>
-			<result property="k_answer2" column="k_answer2"/>
-			<result property="k_answer3" column="k_answer3"/>
-			<result property="k_answer4" column="k_answer4"/>
-			<result property="k_answer" column="k_answer"/>
-			<result property="items"  column="k_no" select="fileitem.fileitemList"/>
-    	</resultMap>
-    	
-    	<sql id="selectAll">
-    			SELECT *
-    			FROM KNOWLEDGE 
-    	</sql>
-    	
-    	<select id="knowledgeInfo" parameterClass="map" resultMap="knowledgeResultMap">
-    		<include refid="selectAll"/>
-    			 AND k_NO = #k_no#
-    	</select>
-    	
-    	<select id="knowledgeList" resultClass="kVO" parameterClass="map">
-   				SELECT B.*
-				FROM(SELECT ROWNUM RNUM, A.*
-					FROM (<include refid="selectAll"/>
-					ORDER BY K_NO)A) B
-				<![CDATA[
-				WHERE B.RNUM <= #startCount#
-				  AND B.RNUM >= #endCount#
-				  ]]>
-				ORDER BY B.RNUM
-						
-    	</select>
-    	
-    	<insert id="insertKnowledge" parameterClass="kVO">
-    		<selectKey keyProperty="k_no" resultClass="String">
-    			SELECT KNOWLEDGE_SEQ.NEXTVAL FROM DUAL
-    		</selectKey>
-    		INSERT INTO KNOWLEDGE(K_NO
-									,K_TITLE    
-									,K_CONTENT
-									,K_ANSWER1
-									,K_ANSWER2
-									,K_ANSWER3
-									,K_ANSWER4
-									,K_IMG
-									,K_ANSWER
-									)
-							VALUES(#k_no#
-									,#k_title#    
-									,#k_content#   
-									,#k_answer1# 
-									,#k_answer2# 
-									,#k_answer3# 
-									,#k_answer4#
-									,#k_img# 
-									,#k_answer#
-									)    
-    	</insert>
-    	
-    	<delete id="deleteKnowledge" parameterClass="String">
-    			DELETE
-    		 	FROM KNOWLEDGE
-    		 	WHERE K_NO = #k_no#
-    	</delete>
-    	
-    	<update id="updateKnowledge" parameterClass="kVO">
-    		UPDATE KNOWLEDGE
-    		   SET K_TITLE = #k_title#
-    		   	  ,K_CONTENT = #k_content#
-    		   	  ,k_answer1 = #k_answer1#
-    		   	  ,k_answer2 = #k_answer2#
-    		   	  ,k_answer3 = #k_answer3#
-    		   	  ,k_answer4 = #k_answer4#
-    		WHERE K_NO = #k_no#
-    	</update>
-    	
-    	<select id="totalCount" parameterClass="map" resultClass="string">
-    		SELECT COUNT(K_NO)
-    		  FROM KNOWLEDGE
-    	</select>
-    </sqlMap>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="knowledge">
+
+	<!-- <resultType id="knowledgeResultMap" class="kVO"><result property="k_no" 
+		column="k_no"/><result property="k_title" column="k_title"/><result property="k_img" 
+		column="k_img"/><result property="k_content" column="k_content"/><result 
+		property="k_answer1" column="k_answer1"/><result property="k_answer2" column="k_answer2"/><result 
+		property="k_answer3" column="k_answer3"/><result property="k_answer4" column="k_answer4"/><result 
+		property="k_answer" column="k_answer"/><collection property="items" column="k_no" 
+		select="fileitem.fileitemList"></collection></resultType> -->
+
+
+	<sql id="selectAll">
+	SELECT *
+	FROM KNOWLEDGE 
+	</sql>
+
+
+	<select id="knowledgeInfo" resultMap="knowledgeResultMap"
+		parameterType="map">
+		<include refid="selectAll" />
+		AND k_NO = #k_no#
+	</select>
+
+
+	<select id="knowledgeList" parameterType="map" resultType="kVO">
+		SELECT B.*
+		FROM (SELECT ROWNUM RNUM, A.*FROM (
+		<include refid="selectAll" />
+		ORDER BY K_NO)A) B
+		<![CDATA[]]>
+		ORDER BY B.RNUM
+	</select>
+
+
+	<insert id="insertKnowledge" parameterType="kVO">
+		<selectKey resultType="String" keyProperty="k_no">
+		SELECT KNOWLEDGE_SEQ.NEXTVAL 
+		FROM DUAL 
+		</selectKey>
+		INSERT INTO
+		KNOWLEDGE
+		(K_NO,K_TITLE,K_CONTENT,K_ANSWER1,K_ANSWER2,K_ANSWER3,K_ANSWER4,K_ANSWER,MEM_NO)
+		VALUES
+		(#k_no#,#k_title#,#k_content#,#k_answer1#,#k_answer2#,#k_answer3#,#k_answer4#,#k_answer#,1)
+	</insert>
+
+	<delete id="deleteKnowledge" parameterType="String">
+		DELETE
+		FROM
+		KNOWLEDGEWHERE K_NO = #k_no# 
+	</delete>
+
+	<update id="updateKnowledge" parameterType="kVO">
+	UPDATE KNOWLEDGE
+	SET
+	K_TITLE = #k_title#,
+	K_CONTENT = #k_content#,
+	k_answer1 = #k_answer1#,
+	k_answer2 = #k_answer2#,
+	k_answer3 = #k_answer3#,
+	k_answer4 = #k_answer4#
+	WHERE K_NO = #k_no# 
+	</update>
+
+	<select id="totalCount" resultMap="string" parameterType="map">SELECT
+		COUNT(K_NO)
+		FROM KNOWLEDGE 
+	</select>
+
+</mapper>
