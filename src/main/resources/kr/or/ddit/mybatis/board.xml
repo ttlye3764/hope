@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="freeboard">
+
+	<select id="boradList" resultType="List">
+		SELECT *
+		FROM BOARD
+	</select>
+	
+	<delete id="deleteBoard" parameterType="Map" >
+		DELETE FROM BOARD
+		WHERE = #{bd_no}
+	</delete>
+	
+	<update id="updateBoard" parameterType="BoardVO" >
+		UPDATE BOARD SET (bd_no,
+						bd_title,
+	 					bd_content,
+						bd_date,
+						bd_hit,
+						bd_pass,
+						bd_sequence,
+						bd_group,
+						bd_depth,
+						bd_division,
+						mem_no)
+							VALUES(#{bd_no},
+						#{bd_title},
+	 					#{bd_content},
+						#{bd_date},
+						#{bd_hit},
+						#{bd_pass},
+						#{bd_sequence},
+						#{bd_group},
+						#{bd_depth},
+						#{bd_division},
+						#{mem_no})
+	</update>
+	
+	<insert id="insertBoard" parameterType="BoardVO">
+		INSERT INTO BOARD (bd_no,
+						bd_title,
+	 					bd_content,
+						bd_date,
+						bd_hit,
+						bd_pass,
+						bd_sequence,
+						bd_group,
+						bd_depth,
+						bd_division,
+						mem_no)
+							VALUES(#{bd_no},
+						#{bd_title},
+	 					#{bd_content},
+						#{bd_date},
+						#{bd_hit},
+						#{bd_pass},
+						#{bd_sequence},
+						#{bd_group},
+						#{bd_depth},
+						#{bd_division},
+						#{mem_no})
+	</insert>
+</mapper>
