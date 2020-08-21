@@ -40,38 +40,15 @@ public class KnowledgeController {
 	
 	// 문제리스트
 	@RequestMapping("knowledgeList")
-	public ModelAndView knowledgeList(Map<String, String> params,
-									  ModelAndView andView,
-									  HttpSession session,
-									  HttpServletRequest request, 
-									  String currentPage, RolePaginationUtil pagination, 
-									  @RequestHeader("User-Agent") String agent,
-									  @RequestHeader("Accept-Language") String language,
-									  @CookieValue("JSESSIONID") String sessionID)throws Exception{
-		   if(currentPage == null){
-		         currentPage = "1";
-		      }
-
-		Map<String, String> publicKeyMap = this.cryptoGen.generatePairKey(session);
+	public ModelAndView knowledgeList(ModelAndView andView, Map<String, String> params) throws Exception {
 		
-	    String totalCount = this.knowledgeService.totalCount(params);
-	      
-	      pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount));
-	      String startCount = String.valueOf(pagination.getStartCount());
-	      String endCount = String.valueOf(pagination.getEndCount());
-	      params.put("startCount", startCount);
-	      params.put("endCount", endCount);
-
-	    
 		List<KnowledgeVO> knowledgeList = this.knowledgeService.knowledgeList(params);
 		
 		andView.addObject("knowledgeList", knowledgeList);
-		andView.addObject("publicKeyMap", publicKeyMap);
 		andView.setViewName("admin/knowledge/knowledgeList");
-		andView.addObject("pagination",pagination.getPagingHtmls());
-		
+
 		return andView;
-		
+
 	}
 	
 	// 문제 상세
@@ -114,7 +91,6 @@ public class KnowledgeController {
 	@RequestMapping("deleteKnowledgeInfo")
 	public String deleteKnowledge(String k_no) throws Exception{
 		
-		System.out.println(k_no);
 		this.knowledgeService.deleteKnowledge(k_no);
 		
 		return "redirect:/admin/knowledge/knowledgeList.do";

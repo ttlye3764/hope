@@ -167,9 +167,9 @@ $(function(){
 				</div>
 				
 			</div>
-				<div style="margin-left: 550px">
+				<%-- <div style="margin-left: 550px">
 				${pagination }
-				</div>
+				</div> --%>
 		</div>
 	</section>
 			
