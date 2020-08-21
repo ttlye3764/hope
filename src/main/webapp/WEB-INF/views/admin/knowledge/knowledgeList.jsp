@@ -28,8 +28,6 @@ $(function(){
 	// 삭제
 	$('#deleteBtn').click(function(){	
 		var k_no = document.getElementById("K_no").value;
-		alert(k_no);
-		
 		$(location).attr('href','${pageContext.request.contextPath}/admin/knowledge/deleteKnowledgeInfo.do?k_no=' + k_no);
 		
 	});

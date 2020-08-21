@@ -24,7 +24,7 @@
     	
     	<select id="knowledgeInfo" parameterType="map" resultMap="knowledgeResultMap">
     		<include refid="selectAll"/>
-    			 AND k_NO = #k_no#
+    			 AND K_NO = #{k_no}
     	</select>
     	
     	<select id="knowledgeList" resultType="knowVO" parameterType="map">
@@ -70,13 +70,13 @@
     	
     	<update id="updateKnowledge" parameterType="knowVO">
     		UPDATE KNOWLEDGE
-    		   SET K_TITLE = #k_title#
-    		   	  ,K_CONTENT = #k_content#
-    		   	  ,k_answer1 = #k_answer1#
-    		   	  ,k_answer2 = #k_answer2#
-    		   	  ,k_answer3 = #k_answer3#
-    		   	  ,k_answer4 = #k_answer4#
-    		WHERE K_NO = #k_no#
+    		   SET K_TITLE = #{k_title}
+    		   	  ,K_CONTENT = #{k_content}
+    		   	  ,k_answer1 = #{k_answer1}
+    		   	  ,k_answer2 = #{k_answer2}
+    		   	  ,k_answer3 = #{k_answer3}
+    		   	  ,k_answer4 = #{k_answer4}
+    		WHERE K_NO = #{k_no}
     	</update>
     	
     	<select id="totalCount" parameterType="map" resultType="string">
