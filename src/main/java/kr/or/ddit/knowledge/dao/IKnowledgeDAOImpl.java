@@ -3,35 +3,36 @@ package kr.or.ddit.knowledge.dao;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.ibatis.sqlmap.client.SqlMapClient;
 
 import kr.or.ddit.vo.KnowledgeVO;
 
 @Repository("knowledgeDAO")
 public class IKnowledgeDAOImpl implements IKnowledgeDAO {
-	//@Autowired
-	private SqlMapClient client;
+	@Resource
+	private SqlSessionTemplate client;
 	
-
 	@Override
 	public String totalCount(Map<String, String> params) throws Exception {
-		return (String) client.queryForObject("knowledge.totalCount", params);
+		return (String) client.selectOne("knowledge.totalCount", params);
 	}
 
 
 	@Override
 	public List<KnowledgeVO> knowledgeList(Map<String, String> params)
 			throws Exception {
-		return client.queryForList("knowledge.knowledgeList", params);
+		return client.selectList("knowledge.knowledgeList", params);
 	}
 
 
 	@Override
 	public String insertKnowledge(KnowledgeVO knowledgeInfo) throws Exception {
-		return (String) client.insert("knowledge.insertKnowledge", knowledgeInfo);
+		return Integer.toString(client.insert("knowledge.insertKnowledge", knowledgeInfo));
 	}
 
 
@@ -44,7 +45,7 @@ public class IKnowledgeDAOImpl implements IKnowledgeDAO {
 	@Override
 	public KnowledgeVO knowledgeInfo(Map<String, String> params)
 			throws Exception {
-		return (KnowledgeVO) client.queryForObject("knowledge.knowledgeInfo",params);
+		return (KnowledgeVO) client.selectOne("knowledge.knowledgeInfo",params);
 	}
 
 
