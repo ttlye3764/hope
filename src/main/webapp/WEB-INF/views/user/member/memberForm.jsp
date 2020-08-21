@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%-- <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%> --%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -96,19 +96,22 @@ td {
 	};
 
 	function mailSending() {
+		var mem_email = $('input[name=mem_mail1]').val() + '@' + $('select[name=mem_mail2]').val();		
+		$('input[name=mem_email]').val(mem_email);
+		
 		$.ajax({
 			type : 'POST',
-			url : '${pageContext.request.contextPath}/user/mail/mailSending.do',
+			url : '${pageContext.request.contextPath}/mail/mailSending.do',
 			dataType : 'JSON',
 			data : {
 				mem_email : $('input[name=mem_email]').val()
 			},
 			error : function(result) {
-				alert(result.status);
+				alert(result.responseText);
 			},
 			success : function(result) {
 				//{ flag : true | false}
-				alert(result.flag);
+				alert(result.responseText);
 			}
 		});
 	};
@@ -116,22 +119,28 @@ td {
 	function mailCheck() {
 		$.ajax({
 			type : 'POST',
-			url : '${pageContext.request.contextPath}/user/mail/mailCheck.do',
+			url : '${pageContext.request.contextPath}/mail/mailCheck.do',
 			dataType : 'JSON',
 			data : {
 				mem_email : $('input[name=mem_email]').val(),
 				mail_num : $('input[name=mail_num]').val()
 			},
 			error : function(result) {
-				alert(result.status);
+				alert(result.responseText);
+				if(result.responseText=='인증번호가 일치합니다.'){
+					alert("hi");
+				}
 			},
 			success : function(result) {
 				//{ flag : true | false}
-				alert(result.flag);
+				alert(result.responseText);
 			}
 		});
 	};
 
+	function mailchange(){
+
+	}
 	
 </script>
 <body>
@@ -200,9 +209,10 @@ td {
 				<td class="tLine" colspan="2"></td>
 			</tr>
 			<tr>
+			<input type="text" id="mailchange" name="mailchange" value="0"/>
 				<td class="fieldName" width="100px" height="25">이메일</td>
 				<td><input type="hidden" name="mem_email" /> <input type="text"
-					name="mem_mail1" value="" /> @ <select name="mem_mail2">
+					name="mem_mail1" value="" onchange="mailchange()"/> @ <select name="mem_mail2">
 						<option value="naver.com">naver.com</option>
 						<option value="daum.net">daum.net</option>
 						<option value="hanmail.net">hanmail.net</option>
