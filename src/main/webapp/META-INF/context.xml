@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+	<WatchedResource>WEB-INF/web.xml</WatchedResource>
+	<Resource name="jdbc/ddit"
+	          auth="bagrant"
+	          type="javax.sql.DataSource"
+	          driverClassName="oracle.jdbc.driver.OracleDriver"
+	          url="jdbc:oracle:thin:@112.220.114.130:1521:XE"
+	          username="notnullove"
+	          password="java"
+	          initialSize="10"
+	          maxActive="10"
+	          maxIdele="6"
+	          minIdele="3"
+	          removeAbandoned="true"
+	          removeAbandonedTimeout="60"
+	          maxWait="-1"
+	          factory="org.apache.tomcat.dbcp.dbcp.BasicDataSourceFactory">
+	</Resource>
+</Context>

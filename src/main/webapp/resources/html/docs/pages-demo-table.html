@@ -1,0 +1,78 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Hyper - Responsive Bootstrap 4 Admin Dashboard - Documentation</title><meta name="viewport" content="width=device-width,initial-scale=1"><meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"><meta content="Coderthemes" name="author"><link rel="shortcut icon" href="./public/images/favicon.ico"><style>body.loading{visibility:hidden}</style><link rel="shortcut icon" href="favicon.ico"><link href="css/vendor.css" rel="stylesheet"><link href="css/core.css" rel="stylesheet"></head><body class="loading" data-layout="dark-sidenav"><div class="wrapper"><div class="left-side-menu" id="left-side-bar"><div class="slimscroll-menu" id="left-side-menu-container"><a href="index.html" class="logo text-center"><span class="logo-lg"><img src="./public/images/logo.png" alt="" height="16" id="side-main-logo"> </span><span class="logo-sm"><img src="./public/images/logo_sm.png" alt="" height="16"></span></a><ul class="mt-3 metismenu side-nav" id="left-bar-menu"><li class="side-nav-title side-nav-item">Getting Started</li><li class="side-nav-item"><a href="index.html" class="side-nav-link"><i class="dripicons-box"></i> <span>Introduction</span></a></li><li class="side-nav-item"><a href="pages-installation.html" class="side-nav-link"><i class="dripicons-scale"></i> <span>Getting Started</span></a></li><li class="side-nav-title side-nav-item mt-2">Customization</li><li class="side-nav-item"><a href="pages-layout.html" class="side-nav-link"><i class="dripicons-browser"></i> <span>Layouts</span></a></li><li class="side-nav-item"><a href="pages-customization.html" class="side-nav-link"><i class="dripicons-document-edit"></i> <span>Themes & Others</span></a></li><li class="side-nav-title side-nav-item mt-2">UI Components</li><li class="side-nav-item"><a href="javascript: void(0);" class="side-nav-link"><span>Bootstrap </span><span class="menu-arrow"></span></a><ul class="side-nav-second-level" aria-expanded="false"><li><a href="pages-demo-alert.html">Alert</a></li><li><a href="pages-demo-card.html">Cards</a></li><li><a href="pages-demo-form.html">Form components</a></li><li><a href="pages-demo-modal.html">Modals/Dialog</a></li><li><a href="pages-demo-tab.html">Tabs</a></li><li><a href="pages-demo-table.html">Tables</a></li></ul></li><li class="side-nav-item"><a href="javascript: void(0);" class="side-nav-link"><span>Hyper </span><span class="menu-arrow"></span></a><ul class="side-nav-second-level" aria-expanded="false"><li><a href="pages-demo-notification.html">Notification</a></li><li><a href="pages-demo-form-advanced.html">Form Advanced</a></li><li><a href="pages-demo-chartjs.html">Chartjs - Charts</a></li><li><a href="pages-demo-brite.html">Brite Charts</a></li><li><a href="pages-demo-apex.html">Apex - Charts</a></li><li><a href="pages-demo-sparkline.html">Sparklines - Charts</a></li><li><a href="pages-demo-datatable.html">Datatables</a></li><li><a href="pages-demo-widget.html">Widgets</a></li><li><a href="pages-demo-dragula.html">Dragula</a></li><li><a href="pages-demo-fileupload.html">File Uploads</a></li><li><a href="pages-demo-summernote.html">Summernote</a></li><li><a href="pages-demo-simplemde.html">Simple MDE</a></li></ul></li><li class="side-nav-title side-nav-item mt-2">Other</li><li class="side-nav-item"><a href="pages-changelog.html" class="side-nav-link"><i class="dripicons-blog"></i> <span>Change log</span></a></li><li class="side-nav-item"><a href="pages-upgrade.html" class="side-nav-link"><i class="dripicons-checklist"></i> <span>Upgrade</span></a></li></ul><div class="clearfix"></div></div></div><div class="content-page"><div class="content"><div class="navbar-custom"><ul class="list-unstyled topbar-right-menu float-right mb-0"><li class="notification-list topbar-dropdown d-lg-block"></li></ul><button class="button-menu-mobile open-left disable-btn"><i class="mdi mdi-menu" id="button-menu-mobile-toggle"></i></button><div class="app-search"><h4>Documentation <label class="badge badge-success float-right">v2.0</label></h4></div></div><div class="container-fluid"><div class="row"><div class="col-12"><div class="page-title-box"><div class="page-title-right"><ol class="breadcrumb m-0"><li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li><li class="breadcrumb-item active">Bootstrap Table</li></ol></div><h4 class="page-title">Table</h4></div></div></div><div class="row"><div class="col"><div class="card"><div class="card-body"><div class="p-lg-1"><p>Tables are being used widespread and are kind of mandatory for most of web applications.</p><div class="pt-1 pb-3"><h5 class="mb-1">How to customize the style of tables?</h5><p>Open file <code>src/scss/custom/components/_tables.scss</code> and change the different style to change the background, text or other colors.</p></div></div><div class="p-lg-1"><div class="example-container"><div class="row"><div class="col-xl-12"><div class="card mb-0"><div class="card-body"><h4 class="header-title">Basic example</h4><p class="text-muted font-14 mb-4">For basic styling—light padding and only horizontal dividers—add the base class <code>.table</code> to any <code>&lt;table&gt;</code>.</p><div class="table-responsive-sm"><table class="table table-centered mb-0"><thead><tr><th>Name</th><th>Phone Number</th><th>Date of Birth</th><th>Active?</th></tr></thead><tbody><tr><td>Risa D. Pearson</td><td>336-508-2157</td><td>July 24, 1950</td><td><div><input type="checkbox" id="switch1" checked="" data-switch="success"> <label for="switch1" data-on-label="Yes" data-off-label="No" class="mb-0 d-block"></label></div></td></tr><tr><td>Ann C. Thompson</td><td>646-473-2057</td><td>January 25, 1959</td><td><div><input type="checkbox" id="switch2" checked="" data-switch="success"> <label for="switch2" data-on-label="Yes" data-off-label="No" class="mb-0 d-block"></label></div></td></tr><tr><td>Paul J. Friend</td><td>281-308-0793</td><td>September 1, 1939</td><td><div><input type="checkbox" id="switch3" data-switch="success"> <label for="switch3" data-on-label="Yes" data-off-label="No" class="mb-0 d-block"></label></div></td></tr><tr><td>Linda G. Smith</td><td>606-253-1207</td><td>May 3, 1962</td><td><div><input type="checkbox" id="switch4" data-switch="success"> <label for="switch4" data-on-label="Yes" data-off-label="No" class="mb-0 d-block"></label></div></td></tr></tbody></table></div></div></div></div></div></div><div class="highlight"><pre class="mb-0">
+                                                        <code class="html escape">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <h4 class="header-title">Basic example</h4>
+                                                                    <p class="text-muted font-14 mb-4">
+                                                                        For basic styling—light padding and only horizontal dividers—add the base class
+                                                                        <code>.table</code> to any
+                                                                        <code>&lt;table&gt;</code>.
+                                                                    </p>
+                                                            
+                                                                    <div class="table-responsive-sm">
+                                                                        <table class="table table-centered mb-0">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>Name</th>
+                                                                                    <th>Phone Number</th>
+                                                                                    <th>Date of Birth</th>
+                                                                                    <th>Active?</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td>Risa D. Pearson</td>
+                                                                                    <td>336-508-2157</td>
+                                                                                    <td>July 24, 1950</td>
+                                                                                    <td>
+                                                                                        
+                                                                                        <div>
+                                                                                            <input type="checkbox" id="switch1" checked="" data-switch="success">
+                                                                                            <label for="switch1" data-on-label="Yes" data-off-label="No" class="mb-0 d-block"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Ann C. Thompson</td>
+                                                                                    <td>646-473-2057</td>
+                                                                                    <td>January 25, 1959</td>
+                                                                                    <td>
+                                                                                        
+                                                                                        <div>
+                                                                                            <input type="checkbox" id="switch2" checked="" data-switch="success">
+                                                                                            <label for="switch2" data-on-label="Yes" data-off-label="No" class="mb-0 d-block"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Paul J. Friend</td>
+                                                                                    <td>281-308-0793</td>
+                                                                                    <td>September 1, 1939</td>
+                                                                                    <td>
+                                                                                        
+                                                                                        <div>
+                                                                                            <input type="checkbox" id="switch3" data-switch="success">
+                                                                                            <label for="switch3" data-on-label="Yes" data-off-label="No" class="mb-0 d-block"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Linda G. Smith</td>
+                                                                                    <td>606-253-1207</td>
+                                                                                    <td>May 3, 1962</td>
+                                                                                    <td>
+                                                                                        
+                                                                                        <div>
+                                                                                            <input type="checkbox" id="switch4" data-switch="success">
+                                                                                            <label for="switch4" data-on-label="Yes" data-off-label="No" class="mb-0 d-block"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                            
+                                                                </div>
+                                                            </div>
+                                                        </code>
+                                                    </pre></div></div><p>For more options, please refer to official documentation <a href="https://getbootstrap.com/docs/4.1/content/tables/" target="_blank">here</a></p></div></div></div></div></div></div><footer class="footer"><div class="container-fluid"><div class="row"><div class="col-md-6">2019 © Hyper - Coderthemes.com</div><div class="col-md-6"><div class="text-md-right footer-links d-none d-md-block"><a href="https://coderthemes.com/" target="_blank">About</a> <a href="https://coderthemes.com/" target="_blank">Support</a></div></div></div></div></footer></div></div><script src="js/runtime.f6feac2f73a36da488af.js"></script><script src="js/vendor.f6feac2f73a36da488af.js"></script><script src="js/core.f6feac2f73a36da488af.js"></script><script src="js/pagesshared.f6feac2f73a36da488af.js"></script></body></html>

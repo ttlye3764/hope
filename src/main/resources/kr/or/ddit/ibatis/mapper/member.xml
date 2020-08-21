@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap     
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="member">
+	<typeAlias alias="memberVO" type="kr.or.ddit.vo.MemberVO" />
+
+	<sql id="selectAll">
+		SELECT *
+		FROM MEMBER
+		WHERE MEM_DELETE = 'n'
+	</sql>
+	
+	
+<!-- 	<sql id="searchCondition"> -->
+<!-- 		<dynamic prepend="AND"> -->
+<!-- 			<isNotEmpty property="search_keyword" open="(" close=")"> -->
+<!-- 				<isEqual property="search_keycode" compareValue="ALL"> -->
+<!-- 					MEM_ID LIKE '%'||#search_keyword#||'%' -->
+<!-- 					OR MEM_NAME '%'||#search_keyword#||'%' -->
+<!-- 					OR MEM_ADDR '%'||#search_keyword#||'%'		 -->
+<!-- 				</isEqual> -->
+<!-- 				<isEqual property="search_keycode" compareValue="MEMID"> -->
+<!-- 					MEM_ID LIKE '%'||#search_keyword#||'%' -->
+<!-- 				</isEqual> -->
+<!-- 				<isEqual property="search_keycode" compareValue="MEMNAME"> -->
+<!-- 					MEM_NAME LIKE '%'||#search_keyword#||'%' -->
+<!-- 				</isEqual> -->
+<!-- 				<isEqual property="search_keycode" compareValue="MEMADDR"> -->
+<!-- 					MEM_ADD1 LIKE '%'||#search_keyword#||'%' -->
+<!-- 					OR MEM_ADD2 LIKE '%'||#search_keyword#||'%' -->
+<!-- 				</isEqual> -->
+<!-- 			</isNotEmpty> -->
+<!-- 		</dynamic> -->
+<!-- 	</sql> -->
+
+
+<!-- 	<select id="memberInfo" parameterClass="map" resultClass="memberVO"> -->
+<!-- 		<include refid="selectAll" /> -->
+<!-- 		AND MEM_ID = #mem_id# -->
+<!-- 		<dynamic prepend="AND"> -->
+<!-- 			<isNotEmpty property="mem_pass"> -->
+<!-- 				MEM_PASS = #mem_pass# -->
+<!-- 			</isNotEmpty> -->
+<!-- 		</dynamic> -->
+<!-- 	</select> -->
+
+
+<!-- 	<select id="memberList" resultClass="memberVO" parameterClass="map"> -->
+<!-- 		<include refid="selectAll" /> -->
+<!-- 		<include refid="searchCondition"/> -->
+<!-- 	</select> -->
+
+<!-- 	<update id="deleteMember" parameterClass="map"> -->
+<!-- 		UPDATE MEMBER -->
+<!-- 		SET MEM_DELETE = 'y' -->
+<!-- 		WHERE MEM_ID = #mem_id# -->
+<!-- 	</update> -->
+
+<!-- 	<update id="updateMember" parameterClass="memberVO"> -->
+<!-- 		UPDATE MEMBER -->
+<!-- 		SET -->
+<!-- 		MEM_PASS = #mem_pass# -->
+<!-- 		,MEM_ADDR1 = #mem_addr1# -->
+<!-- 		,MEM_ADDR2 = #mem_addr2# -->
+<!-- 		,MEM_HOMETEL = #mem_hometel# -->
+
+<!-- 		,MEM_HP = #mem_hp# -->
+<!-- 		,MEM_MAIL = #mem_mail# -->
+<!-- 		,MEM_JOB = #mem_job# -->
+<!-- 		,MEM_LIKE = #mem_like# -->
+<!-- 		WHERE mem_id = #mem_id# -->
+<!-- 	</update> -->
+
+
+	<insert id="insertMember" parameterClass="memberVO">
+		INSERT INTO MEMBER(
+		mem_no,mem_id,mem_pass,mem_name,mem_gender,mem_nickname,mem_birth,mem_email,mem_hp,mem_addr1,mem_addr2,mem_division,mem_zip1,mem_zip2
+		)
+		values(
+		MEMBER_SEQ.NEXTVAL,#mem_id#,#mem_pass#,#mem_name#,#mem_gender#,#mem_nickname#,
+		#mem_birth#,#mem_email#,#mem_hp#,#mem_addr1#,#mem_addr2#,#mem_division#,#mem_zip1#,#mem_zip2#
+		)
+	</insert>
+
+</sqlMap>    
+
+
+
+
+
+
+

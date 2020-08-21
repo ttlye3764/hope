@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+
+	
+<!-- 	 <context:property-placeholder location="classpath:kr/or/ddit/ibatis/config/SqlMapConfig.properties" -->
+<!-- 	 							   file-encoding="UTF-8"/>		 -->
+		 
+		 <bean id="dataSource" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource">
+		 	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		 	<property name="url" value="jdbc:oracle:thin:@112.220.114.130:1521:XE"/>
+		 	<property name="username" value="NOTNULLOVE"/>
+		 	<property name="password" value="java"/>
+		 </bean>
+		 
+		 <bean id="transactionMGR" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+		 	p:dataSource-ref="dataSource">
+		 	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:kr/or/ddit/mybatis/sql-map-config.xml"/>
+		<!-- <property name="mapperLocations" value="kr/or/ddit/mybatis/mappers/*.xml"/> -->
+	</bean>
+	
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+</beans>

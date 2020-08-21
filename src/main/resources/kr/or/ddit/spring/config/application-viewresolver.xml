@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+	
+	<!-- 
+		public class InternalResourceViewResolver {
+			private String prefix;
+			private String suffix;
+			public void setPrefix(String prefix) {
+				this.prefix = prefix;
+			}
+			public void setSuffix(String suffix) {
+				this.suffix = suffix;
+			}
+		}
+	 -->
+
+	<bean name="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="/WEB-INF/views/"
+		p:suffix=".jsp"
+		p:order="3">
+	</bean>
+	<!--
+		컨트롤러 메서드 반환값이 AbstractView를 상속받은 view 클래스의
+		빈 등록시의 id 또는 name 속성값일때 해당 View 클래스에 접근 
+		
+	 -->
+	<bean name="beanNameViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver"
+		p:order="2">
+	</bean>
+	
+	<bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver"
+		p:viewClass="org.springframework.web.servlet.view.tiles2.TilesView"
+		p:order="1">
+		</bean>
+	
+	<!-- <bean id="memberInfo" name="m1 m2 m3" class="kr.or.ddit.vo.MemberVO"
+		c:mem_id="a001" c:mem_pass="asdfasdf" c:mem_name="김은대"
+		p:mem_regno1="111111" p:mem_regno2="1111118"> -->
+		<!-- 
+		<constructor-arg name="mem_pass" value="asdfasdf"></constructor-arg>
+		<constructor-arg name="mem_id" value="a001"></constructor-arg>
+		<constructor-arg value="asdfasdf" index="1"></constructor-arg>
+		<constructor-arg value="a001" index="0"></constructor-arg>
+		<constructor-arg value="김은대" index="2"></constructor-arg>
+		 
+		<property name="mem_regno1" value="111111"></property>
+		<property name="mem_regno2" value="1111118"></property>
+		-->
+	<!-- </bean> -->
+</beans>

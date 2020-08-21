@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap     
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="buyer">
+	<typeAlias alias="buyerVO" type="kr.or.ddit.vo.BuyerVO"/>
+	
+	<sql id="selectAll">
+		SELECT *
+		FROM PROD
+		WHERE PROD_DELETE = 'n'
+	</sql>
+	
+	<sql id="searchCondition">
+		<dynamic prepend="AND">
+			<isNotEmpty property="search_keyword" open="(" close=")">
+				<isEqual property="search_keyword" compareValue="ALL">
+					BUYER_ID LIKE '%'||#search_keyword#||'%'
+					BUYER_NAME LIKE '%'||#search_keyword#||'%'
+					BUYER_CHARGER LIKE '%'||#search_keyword#||'%'
+				</isEqual>
+				<isEqual property="search_keycode" compareValue="BUYERID">
+					BUYER_ID LIKE '%'||#search_keyword#||'%'
+				</isEqual>
+				<isEqual property="search_keycode" compareValue="BUYERNAME">
+					BUYER_NAME LIKE '%'||#search_keyword#||'%'
+				</isEqual>
+				<isEqual property="search_keycode" compareValue="BUYERCHARGER">
+					BUYER_CHARGER LIKE '%'||#search_keyword#||'%'
+				</isEqual>
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+	
+	
+	
+	<select id="buyerInfo" parameterClass="map" resultClass="buyerVO">
+		SELECT *
+		FROM BUYER
+		WHERE BUYER_DELETE = 'n' 
+		AND BUYER_ID = #buyer_id#		
+	</select>
+	
+	
+	<select id="buyerList" parameterClass="map" resultClass="buyerVO">
+	 	 <include refid="selectAll"/> 
+	 	 AND BUYER_NAME LIKE '%'||#buyer_name#||'%' 
+	</select>
+	
+	<select id="buyer" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT *
+		FROM BUYER B JOIN LPROD L ON B.BUYER_LGU = L.LPROD_GU
+		WHERE BUYER_DELETE = 'n'
+		<include refid="searchCondition"/> 
+	</select>
+	
+
+	
+</sqlMap>

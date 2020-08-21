@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap     
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="fileitem">
+	<typeAlias alias="fileitemVO" type="kr.or.ddit.vo.FileItemVO"/>
+
+	<statement resultClass="fileitemVO" id="fileitemList">
+	SELECT *
+	FROM FileItem
+	</statement>
+
+	<insert id="insertFileItem" parameterClass="fileitemVO">
+		<selectKey keyProperty="file_no">
+		SELECT FILE_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO
+		FileItem(
+		FILE_NO,FILE_NAME,FILE_SAVE_NAME,
+		FILE_TYPE,FILE_SIZE, K_NO
+		)
+		
+		VALUES(
+		#file_no#,#file_name#,#file_save_name#,
+		#file_type#,#file_size#, #k_no#
+		)
+	</insert>
+
+	<select resultClass="fileitemVO" id="fileitemInfo" parameterClass="map">
+	SELECT *
+	FROM FileItem
+	WHERE FILE_NO = #file_no# 
+	</select>
+	
+	
+</sqlMap>

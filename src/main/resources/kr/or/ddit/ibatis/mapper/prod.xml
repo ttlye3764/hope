@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap     
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="prod">
+	<typeAlias alias="prodVO" type="kr.or.ddit.vo.ProdVO"/>
+	 
+<sql id="selectAll">
+	SELECT *
+	FROM PROD JOIN BUYER ON PROD.PROD_BUYER = BUYER.BUYER_ID
+	WHERE PROD_DELETE = 'n'
+</sql>	
+
+
+<sql id="searchCondition">
+	<dynamic prepend="AND">
+		<isNotEmpty property="search_keyword" open="(" close=")">
+			<isEqual property="search_keycode" compareValue="ALL">
+				PROD_LGU LIKE '%'||#search_keyword#||'%'
+				PROD_NAME LIKE '%'||#search_keyword#||'%'
+				PROD_BUYER LIKE '%'||#search_keyword#||'%'
+			</isEqual>
+			<isEqual property="search_keycode" compareValue="PRODLGU">
+				PROD_LGU LIKE '%'||#search_keyword#||'%'
+			</isEqual>
+			<isEqual property="search_keycode" compareValue="PRODNAME">
+				PROD_NAME LIKE '%'||#search_keyword#||'%'
+			</isEqual>
+			<isEqual property="search_keycode" compareValue="BUYERNAME">
+				BUYER_NAME LIKE '%'||#search_keyword#||'%'
+			</isEqual>
+		</isNotEmpty>
+	</dynamic>
+</sql>
+
+<select id="prodList" resultClass="prodVO">
+		<include refid="selectAll" />
+		<include refid="searchCondition" />
+</select>
+
+
+<select id="prodInfo" parameterClass="map" resultClass="prodVO">
+		<include refid="selectAll" />
+		AND PROD_NAME = #prod_name#
+</select>
+
+<update id="updateProdInfo" parameterClass="prodVO">
+	UPDATE PROD
+	SET
+	PROD_COST = #prod_cost#
+	,PROD_PRICE = #prod_price#
+	,PROD_SALE = #prod_sale#
+	,PROD_OUTLINE = #prod_outline#
+	,PROD_QTYIN = #prod_qtyin#
+	,PROD_TOTALSTOCK = #prod_totalstock#
+	,PROD_PROPERSTOCK = #prod_properstock#
+     ,PROD_INSDATE = #prod_insdate# 
+	WHERE prod_name = #prod_name#
+</update>
+
+<insert id="insertProdInfo" parameterClass="prodVO">
+		INSERT INTO PROD(
+		prod_id, prod_name, prod_lgu, prod_buyer, prod_cost, prod_price, prod_sale, prod_outline, prod_detail
+		)
+		values(
+		#prod_id#, #prod_name#, #prod_lgu#, #prod_buyer#, #prod_cost#, #prod_price#, #prod_sale#, #prod_outline#, #prod_detail#
+		)
+</insert>
+	
+	
+<update id="deleteProdInfo" parameterClass="map">
+	UPDATE PROD
+	SET PROD_DELETE = 'y'
+	WHERE PROD_NAME = #prod_name#
+</update>
+
+
+</sqlMap>    

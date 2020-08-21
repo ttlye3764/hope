@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<welcome-file-list>
+		<welcome-file>/WEB-INF/views/user/welcome.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<!-- 
+		서블릿 컨텍스트(DispatcherServlet) : 클라이언트의 요청을 처리하기 위해 선언된 DispatcherServlet
+										WebApplicationContext가 할당
+		루트 컨텍스트 : 서로 상이한 서블릿 컨텍스트 간에 공유되어야 하는 설정 및 자원의 공유
+		           WebApplicationContext 할당
+		           
+		           						  루트 컨텍스트(WebApplicationContext)
+		           						     설정 파일 : ContextLoaderListener
+		           			                      다른 서블릿 컨텍스트 간에 활용될 공유 설정과 공유 자원 활용
+		           			      * 루트 컨텍스트를 생성하기 위한 설정 파일 내 선언된 빈들의 인스턴스 시점은
+		           	                 서버 실행시 ServletContext 생성 직후 WebApplicationContext와 동반 인스턴스화
+		           						                |
+		           				=================================================================================================
+		           				|                                              |                                                |
+		           	서블릿 컨텍스트(firstDispatcher)                    서블릿 컨텍스트(secondDispathcer)				                    서블릿 컨텍스트(doDispatcher)
+		           	 WebApplicationContext 할당                                                   WebApplicationContext 할당						     WebApplication 할당
+		                 설정 파일 : firstDispatcher-servlet.xml            설정 파일 : secondDispathcer-servlet.xml					      설정 파일 : servlet-*.xml
+		    * 클라이언트 요청 시에 설정 파일 내 선언된 빈의 인스턴스화가 진행됨       * 클라이언트 요청 시에 설정 파일 내 선언된 빈의 인스턴스화가 진행됨		* 클라이언트 요청 시에 설정 파일 내 선언된 빈의 인스턴스화가 진행됨
+	 -->
+	<context-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:kr/or/ddit/spring/config/application-*.xml</param-value>
+    </context-param>
+    <listener>
+      <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+
+	<!-- 
+		스프링 프레임웍이 적용된 웹 애플리케이션 내에서 클라이언트의 요청을 처리하는 프론트 컨트롤러 선언
+		
+		스프링 프레임웍의 프론트 컨트롤러 선언 시 설정 파일
+		1. default
+		   WEB-INF/servlet-name의 텍스트값 + '-servlet.xml'
+		   ex) WEB-INF/firstDispatcher-servlet.xml
+		2. 프론트 컨트롤러(DispatcherServlet) - WebApplicationContext 할당
+										      다수의 WebApplicationContext는 공유 안됨
+	 -->
+	 
+	 <servlet>
+	 	<servlet-name>firstDispatcher</servlet-name>
+	 	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	 </servlet>
+	 <servlet-mapping>
+	 	<servlet-name>firstDispatcher</servlet-name>
+	 	<url-pattern>*.first</url-pattern>
+	 </servlet-mapping>
+	 
+	 <servlet>
+	 	<servlet-name>secondDispatcher</servlet-name>
+	 	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	 </servlet>
+	 <servlet-mapping>
+	 	<servlet-name>secondDispatcher</servlet-name>
+	 	<url-pattern>*.second</url-pattern>
+	 </servlet-mapping>
+	 
+	 <servlet>
+	 	<servlet-name>doDispatcher</servlet-name>
+	 	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	 	<init-param>
+	 		<param-name>contextConfigLocation</param-name>
+	 		<param-value>/WEB-INF/spring/config/servlet-*.xml</param-value>
+	 	</init-param>
+	 </servlet>
+	 <servlet-mapping>
+	 	<servlet-name>doDispatcher</servlet-name>
+	 	<url-pattern>*.do</url-pattern>
+	 </servlet-mapping>
+	 
+	 <!-- 
+	 	forceEncoding : true - 클라이언트가 서버 대상 요청 시 HttpServletRequest.getCharacterEncoding() 취득 시 다른 인코딩 타입으로 선언되어 있더라도 해당 취득 인코딩 타입을 적용
+	 	                                                   클라이언트가 서버 대상 요청 시 HttpServletRequest.getCharacterEncoding() 미취득 시 선언된 인코딩 타입이 적용
+                        false - 클라이언트가 서버 대상 요청 시 HttpServletRequest.getCharacterEncoding() 취득시에도 선언된 인코딩 타입이 강제 적용
+	  -->
+	 <filter>
+	 	<filter-name>encodingFilter</filter-name>
+	 	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+	 	<init-param>
+	 		<param-name>encoding</param-name>
+	 		<param-value>UTF-8</param-value>
+	 	</init-param>
+	 	<init-param>
+	 		<param-name>forceEncoding</param-name>
+	 		<param-value>true</param-value>
+	 	</init-param>
+	 </filter>
+	 <filter-mapping>
+	 	<filter-name>encodingFilter</filter-name>
+	 	<url-pattern>*.do</url-pattern>
+	 </filter-mapping>
+	 
+	 <context-param>
+	 	<param-name>logbackConfigLocation</param-name>
+	 	<param-value>classpath:kr/or/ddit/logback/config/logback.xml</param-value>
+	 </context-param>
+	 
+	 <listener>
+	 	<listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
+	 </listener>
+	 
+	 <absolute-ordering />
+</web-app>
