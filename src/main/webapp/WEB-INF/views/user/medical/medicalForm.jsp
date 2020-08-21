@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
 <script>
 $(function(){
-	
 	$('#pill_img').on('change', handleImgFileSelect);
 	
 	$('#pill_alerttime').change(function(){
@@ -93,7 +92,7 @@ $(function(){
 				<!-- contact form -->
 				<div class="col-md-6">
 					<div class="h-100">
-						<form class="contact-form" id="contact-form" name="contactform" action="#" method="post" enctype="multipart/form-data">			
+						<form class="contact-form" id="contact-form" name="contactform" action="${pageContext.request.contextPath}/user/medical/insertMedicalInfo.do" method="post" enctype="multipart/form-data">			
 							<!-- Start main form -->
 							<div class="row">
 								<div class="col-md-6">

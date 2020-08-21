@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="medical">
+	<insert id="insertMedicalInfo" parameterType="mypillVO">
+		INSERT 
+			INTO mypill
+				(
+					pill_no,
+					pill_name,
+					pill_count,
+					pill_start,
+					pill_end,
+					pill_alerttime,
+					pill_img,
+					pill_color,
+					mem_no
+				)
+			VALUES
+			    (
+					mypill_seq.nextval,		
+					#{pill_name},   
+					#{pill_start},
+					#{pill_end},
+					#{pill_alerttime},
+					#{pill_img},
+					#{pill_color},
+					#{mem_no}
+					)
+	</insert>
+	
+	
+	<select id="medicalList" resultType="mypillVO" parameterType="String">
+		SELECT *
+		FROM mypill
+		WHERE MEM_NO = #{mem_no}
+	</select>
+	
+	
+</mapper>
+	
+
+	

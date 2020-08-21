@@ -24,7 +24,6 @@ public class IMedicalFileServiceImpl implements IMedicalFileService {
 	@Transactional(propagation=Propagation.REQUIRED, rollbackFor={Exception.class})
 	@Override
 	public void insertFileItem(List<MypillFileVO> fileitemList)throws Exception {
-		// TODO Auto-generated method stub
 
 	}
 	
