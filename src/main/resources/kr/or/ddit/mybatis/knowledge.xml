@@ -13,7 +13,8 @@
 			<result property="k_answer3" column="k_answer3"/>
 			<result property="k_answer4" column="k_answer4"/>
 			<result property="k_answer" column="k_answer"/>
-			<collection property="items" column="k_no" select="fileitem.fileitemList"></collection>
+			<result property="mem_no" column="mem_no"/>
+			<collection property="items" column="items" select="fileitem.fileitemList" ofType="FileItemVO" javaType="java.util.ArrayList"></collection>
     	</resultMap>
     	
     	
@@ -24,7 +25,7 @@
     	
     	<select id="knowledgeInfo" parameterType="map" resultMap="knowledgeResultMap">
     		<include refid="selectAll"/>
-    			 AND K_NO = #{k_no}
+    			 WHERE K_NO = #{k_no}
     	</select>
     	
     	<select id="knowledgeList" resultType="knowVO" parameterType="map">
