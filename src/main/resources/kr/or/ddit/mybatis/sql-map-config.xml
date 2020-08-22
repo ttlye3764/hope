@@ -17,7 +17,7 @@
 		<typeAlias alias="mypillVO" type="kr.or.ddit.vo.MypillVO" />
 		<typeAlias alias="mypillfileVO" type="kr.or.ddit.vo.MypillFileVO" />
 		<!-- 한별 -->
-		
+		<typeAlias alias="scheduleVO" type="kr.or.ddit.vo.ScheduleVO" />
 		<!-- 승민 -->	
 		<typeAlias alias="memberVO" type="kr.or.ddit.vo.MemberVO" />
 			
@@ -40,7 +40,7 @@
 		<mapper resource="kr/or/ddit/mybatis/medical.xml" />
 		<mapper resource="kr/or/ddit/mybatis/medicalfile.xml" />
 	<!-- 한별 -->
-	
+	    <mapper resource="kr/or/ddit/mybatis/schedule.xml" />
 	<!-- 승민 -->	
 		<mapper resource="kr/or/ddit/mybatis/member.xml" />
 	<!-- 윤희 -->

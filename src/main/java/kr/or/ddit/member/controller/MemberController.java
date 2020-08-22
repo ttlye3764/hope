@@ -143,7 +143,16 @@ public class MemberController {
 		  // Model(view 대상 전송 데이타 저장) + String(view 경로와 이름)
 		  ModelAndView andView = new ModelAndView();
 		  andView.addObject("memberInfo", memberInfo);
-		  // <bean id="jsonCinvertView" class="..MappingJackson2JonView"/>
+		  
+		  String result;
+		  if(memberInfo==null) {
+			  result = "사용가능한 아이디입니다.";		  
+		  }
+		  else {
+			  result = "이미 존재하는 아이디입니다.";
+		  }
+		  
+		  andView.addObject("json", result);
 		  andView.setViewName("jsonConvertView");
 		  
 		  return andView;

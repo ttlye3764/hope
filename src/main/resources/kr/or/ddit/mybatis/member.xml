@@ -35,7 +35,9 @@
 	<select id="memberInfo" parameterType="map" resultType="memberVO">
 		<include refid="selectAll"/>
 		AND MEM_ID = #{mem_id}
-		AND MEM_PASS = #{mem_pass}
+		<if test="mem_pass != null">
+			AND MEM_PASS = #{mem_pass}
+		</if>
 	</select>
 
 
