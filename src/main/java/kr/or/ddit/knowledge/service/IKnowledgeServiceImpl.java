@@ -22,13 +22,11 @@ public class IKnowledgeServiceImpl implements IKnowledgeService {
 	@Autowired
 	private IFileItemDAO fileitemDAO;
 
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	@Override
 	public String totalCount(Map<String, String> params) throws Exception {
 		return knowledgeDAO.totalCount(params);
 	}
 
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	@Override
 	public List<KnowledgeVO> knowledgeList(Map<String, String> params)
 			throws Exception {
@@ -36,33 +34,30 @@ public class IKnowledgeServiceImpl implements IKnowledgeService {
 		return knowledgeDAO.knowledgeList(params);
 	}
 
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	@Override
 	public String insertKnowledge(KnowledgeVO knowledgeInfo, MultipartFile[] items) throws Exception {
-
-		String k_no = knowledgeDAO.insertKnowledge(knowledgeInfo);
-		 
+		knowledgeDAO.insertKnowledge(knowledgeInfo);
+		
+		String k_no = knowledgeDAO.fileSequence();
 		List<FileItemVO> fileItemList =AttachFileMapper.mapper(items, k_no);
+		
 	    fileitemDAO.insertFileItem(fileItemList);
 
 		return k_no;
 	}
 
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	@Override
 	public void updateKnowledge(KnowledgeVO knowledgeInfo) throws Exception {
 		knowledgeDAO.updateKnowledge(knowledgeInfo);
 
 	}
 
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	@Override
 	public KnowledgeVO knowledgeInfo(Map<String, String> params)
 			throws Exception {
 		return knowledgeDAO.knowledgeInfo(params);
 	}
 
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	@Override
 	public void deleteKnowledge(String k_no) throws Exception {
 		knowledgeDAO.deleteKnowledge(k_no);

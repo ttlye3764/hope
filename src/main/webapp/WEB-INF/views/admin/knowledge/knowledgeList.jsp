@@ -1,6 +1,7 @@
 <%@ page language="JAVA" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="radio" value="0"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +20,7 @@
 
 <script type="text/javascript">
 $(function(){
+	
 	// 등록
 	$('#regBtn').click(function(){	
 		$(location).attr('href','${pageContext.request.contextPath}/admin/knowledge/knowledgeForm.do');
@@ -35,6 +37,12 @@ $(function(){
 	
 
 });
+{
+	
+	
+}
+
+
 
 	
 </script>
@@ -93,6 +101,9 @@ $(function(){
 					
 				<c:if test="${!empty knowledgeList }">
 					<c:forEach items="${knowledgeList }" var="knowledgeInfo">
+					
+					<c:set var="radio" value="${radio + 1}" />
+					
 					<div class="card" style="width: 800px; margin-left: 150px">
 						<div class="card-body">
 							<h4 class="mb-2">
@@ -103,10 +114,6 @@ $(function(){
 							</div>
 							
 							<!-- 파일  -->
-							<!-- <div id="image_container">
-								<img src="" alt="pic1" width="250"/>
-							</div>  -->
-							
 							<%-- <c:if test="${!empty knowledgeInfo.items }">  --%>
 							<div id="image_container" style="width: 300px; height: 200px;">
 								<c:forEach items="${knowledgeInfo.items }" var="fileitemInfo">
@@ -120,16 +127,15 @@ $(function(){
 							<div class="list-group-number list-unstyled list-group-borderless">
 								
 								<div class="custom-control custom-radio" style="padding: 10px">
-									<input type="radio" id="customRadio1" name="radioname" value="k_answer1" 
+									<input type="radio" id="customRadio1" name="${radio }" value="k_answer1" 
 									<c:if test="${knowledgeInfo.k_answer eq 'k_answer1'}">checked</c:if>
 									class="custom-control-input">
 									<label class="custom-control-label" for="customRadio1"><span>01</span>
 									${knowledgeInfo.k_answer1 }
 									</label>
-								</div>
-								
+								</div>								
 								<div class="custom-control custom-radio" style="padding: 10px">
-									<input type="radio" id="customRadio2" name="radioname" value="k_answer2" 
+									<input type="radio" id="customRadio2" name="${radio }" value="k_answer2" 
 									<c:if test="${knowledgeInfo.k_answer eq 'k_answer2'}">checked</c:if>
 									class="custom-control-input">
 									<label class="custom-control-label" for="customRadio2"><span>02</span> 
@@ -137,7 +143,7 @@ $(function(){
 									</label>
 								</div>
 								<div class="custom-control custom-radio" style="padding: 10px">
-									<input type="radio" id="customRadio3" name="radioname" value="k_answer3" 
+									<input type="radio" id="customRadio3" name="${radio }" value="k_answer3" 
 									<c:if test="${knowledgeInfo.k_answer eq 'k_answer3'}">checked</c:if>
 									class="custom-control-input">
 									<label class="custom-control-label" for="customRadio3"><span>03</span> 
@@ -145,14 +151,15 @@ $(function(){
 									</label>
 								</div>
 								<div class="custom-control custom-radio" style="padding: 10px">
-									<input type="radio" id="customRadio4" name="radioname" value="k_answer4" 
+									<input type="radio" id="customRadio4" name="${radio }" value="k_answer4" 
 									<c:if test="${knowledgeInfo.k_answer eq 'k_answer4'}">checked</c:if>
 									class="custom-control-input">
 									<label class="custom-control-label" for="customRadio4"><span>04</span> 
 									${knowledgeInfo.k_answer4 }
-									</label>
+									</label>							
 								</div>
 							</div>
+							
 						<button type="button" class="btn btn-danger" value="삭제" id="deleteBtn" style="float: right; margin-left: 10px; width: 80px">삭제</button>
 						<button type="button" class="btn btn-primary" value="수정" id="updateBtn" style="float: right; width: 80px">수정</button>
 						</div>

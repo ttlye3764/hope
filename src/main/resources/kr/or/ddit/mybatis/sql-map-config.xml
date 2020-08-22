@@ -25,6 +25,7 @@
 		
 		<!-- 수아 -->
 		<typeAlias alias="knowVO" type="kr.or.ddit.vo.KnowledgeVO" />
+		<typeAlias alias="fileitemVO" type="kr.or.ddit.vo.FileItemVO"/>
 		
 	</typeAliases>
 
@@ -45,6 +46,7 @@
 		<mapper resource="kr/or/ddit/mybatis/board.xml" />
 	<!-- 수아 -->
 		<mapper resource="kr/or/ddit/mybatis/knowledge.xml" />
+		<mapper resource="kr/or/ddit/mybatis/fileitem.xml" />
 	
 	
 	</mappers>

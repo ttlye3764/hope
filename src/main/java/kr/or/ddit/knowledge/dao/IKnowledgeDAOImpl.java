@@ -53,4 +53,10 @@ public class IKnowledgeDAOImpl implements IKnowledgeDAO {
 	public void deleteKnowledge(String k_no) throws Exception {
 		client.delete("knowledge.deleteKnowledge", k_no);
 	}
+
+
+	@Override
+	public String fileSequence() throws Exception {
+		return client.selectOne("knowledge.fileSequence");
+	}
 }

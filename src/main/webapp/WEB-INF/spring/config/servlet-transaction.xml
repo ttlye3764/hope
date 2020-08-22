@@ -22,7 +22,7 @@
 			                       @Transactional이 선언된 서비스 레이어의 해당 메서드 원형이 컨트롤러와 DispatcherServlet을 거쳐서 
 			                                             트랜잭션 매니저에 전달로 Commit과 Rollback 처리가 수행
 		 -->																			
-		 <tx:annotation-driven transaction-manager="transactionMGR" proxy-target-class="false"/>
+		 <tx:annotation-driven transaction-manager="transactionMGR" proxy-target-class="true"/>
 
 
 </beans>

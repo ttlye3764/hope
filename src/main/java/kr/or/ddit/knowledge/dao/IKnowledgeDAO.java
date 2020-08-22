@@ -24,5 +24,8 @@ public interface IKnowledgeDAO {
 	
 	// 페이지
 	public String totalCount(Map<String, String> params) throws Exception;
+	
+	// 파일 시퀀스
+	public String fileSequence() throws Exception;
 
 }
