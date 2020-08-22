@@ -28,11 +28,18 @@ public class IMedicalServiceImpl implements IMedicalService {
 	@Transactional(propagation=Propagation.REQUIRED, rollbackFor={Exception.class})
     @Override
 	public String insertMedicalInfo(MypillVO mypillInfo, MultipartFile[] items) throws Exception{
+		 
 		  String bo_no = medicalDAO.insertMedicalInfo(mypillInfo);
 	      
-	      List<MypillFileVO> fileItemList =AttachFileMapper.medicalMapper(items, bo_no);
-	      medicalFileDAO.insertFileItem(fileItemList);
+	     // List<MypillFileVO> fileItemList =AttachFileMapper.medicalMapper(items, bo_no);
+	      
+	     // medicalFileDAO.insertFileItem(fileItemList);
 	      return bo_no;
+	}
+
+	@Override
+	public List<MypillVO> medicalList(String mem_no) throws Exception {
+		return medicalDAO.medicalList(mem_no);
 	}
 
 }

@@ -12,6 +12,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/mail/")
@@ -24,7 +25,7 @@ public class MailController {
 	// mailSending 코드
 	@ResponseBody
 	@RequestMapping(value = "mailSending")
-	public String mailSending(HttpServletRequest request) {
+	public ModelAndView mailSending(HttpServletRequest request, ModelAndView andView) {
 		String setfrom = "jyabiseu@gmail.com";
 		String tomail = request.getParameter("mem_email"); // 받는 사람 이메일
 		String title = "[쟈비스] 회원가입 인증 메일 입니다."; // 제목
@@ -49,23 +50,39 @@ public class MailController {
 		} catch (Exception e) {
 			System.out.println(e);
 		}	
-		return "인증메일을 발송하였습니다.";
+		String result = "인증번호가 전송되었습니다.";
+		andView.addObject("json", result);
+		andView.setViewName("jsonConvertView");
+		return andView;
 	}	
 	
 	// 인증번호 확인 메서드
 	@ResponseBody
 	@RequestMapping(value = "mailCheck")
-	public String mailCheck(HttpServletRequest request) {	
-		String mail = (String)request.getParameter("mem_mail");
+	public ModelAndView mailCheck(HttpServletRequest request, ModelAndView andView) {	
+		String mail = (String)request.getParameter("mem_email");
 		String num = (String)request.getParameter("mail_num");		
 		
 		String innum = check.get(mail);
 		
+		if(check.get(mail)==null) {
+			String result="인증번호가 일치하지 않습니다.";
+			andView.addObject("json", result);		
+			andView.setViewName("jsonConvertView");	
+			return andView;
+		}
+		
 		if(innum.equals(num)) {
 			check.remove(mail);
-			return "인증번호가 일치합니다.";
+			String result = "인증이 완료되었습니다.";
+			andView.addObject("json", result);
+			andView.setViewName("jsonConvertView");
+			return andView;
 		}else {
-			return "인증번호가 일치하지 않습니다.";
+			String result="인증번호가 일치하지 않습니다.";
+			andView.addObject("json", result);		
+			andView.setViewName("jsonConvertView");	
+			return andView;
 		}		
 	}
 	

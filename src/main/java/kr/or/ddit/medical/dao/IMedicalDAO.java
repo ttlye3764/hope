@@ -8,4 +8,6 @@ import kr.or.ddit.vo.MypillVO;
 
 public interface IMedicalDAO {
 	public String insertMedicalInfo(MypillVO mypillInfo) throws Exception;
+
+	public List<MypillVO> medicalList(String mem_no) throws Exception;
 }

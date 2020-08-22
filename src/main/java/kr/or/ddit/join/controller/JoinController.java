@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 // /SpringToddler/user/join/loginForm.do
@@ -53,14 +54,18 @@ public class JoinController {
 			System.out.println("RedirectAttribute 전달된 취득값 :" + message);
 		}
 	}
-	@RequestMapping(value="loginCheck", method=RequestMethod.GET)
-	public String loginCheck(String mem_id, 
-						     String mem_pass,
-						     HttpServletRequest request,
+	@RequestMapping(value="loginCheck")
+	public ModelAndView loginCheck(HttpServletRequest request,
+							String mem_id,
+							String mem_pass,
 						     HttpSession session,
 						     HttpServletResponse response,
-						     Map<String, String> params)
+						     Map<String, String> params,
+						     ModelAndView andView)
 							 throws Exception{
+		
+		System.out.println(mem_id + mem_pass);
+	
 //		Map<String, String> params = new HashMap<String, String>();
 		params.put("mem_id", mem_id);
 		params.put("mem_pass", mem_pass);
@@ -71,11 +76,14 @@ public class JoinController {
 			// 리다이렉트(컨텍스트 루트 | 패스 생략)
 			String message = this.accessor.getMessage("fail.common.join", Locale.KOREA);
 			message = URLEncoder.encode(message, "UTF-8");
-			return "redirect:/user/join/loginForm.do?message=" + message;
+			andView.addObject(message);
+			andView.setViewName("user/join/loginForm");
+			return andView;
 		}else{
 			session.setAttribute("LOGIN_MEMBERINFO", memberInfo);
 			// 포워드(컨텍스트 루트 | 패스 생략)
-			return "forward:/user/member/memberList.do";
+			andView.setViewName("user/freeboard/freeboardForm");
+			return andView;
 		}
 	}
 		@RequestMapping("memberView")

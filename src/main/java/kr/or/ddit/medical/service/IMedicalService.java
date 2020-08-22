@@ -11,6 +11,8 @@ import kr.or.ddit.vo.MypillVO;
 
 public interface IMedicalService {
 	public String insertMedicalInfo(MypillVO mypillInfo, MultipartFile[] items)throws Exception;
+
+	public List<MypillVO> medicalList(String mem_no)throws Exception;
 }
 
 
