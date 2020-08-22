@@ -2,9 +2,7 @@ package kr.or.ddit.schedule.controller;
 
 
 import java.util.List;
-
-
-
+import java.util.Map;
 
 import kr.or.ddit.schedule.service.IScheduleService;
 import kr.or.ddit.vo.MypillVO;
@@ -54,7 +52,6 @@ public class ScheduleController {
    @RequestMapping("insertScheduleInfo")
    public ModelAndView insertSchedule(ScheduleVO insertScheduleInfo, ModelAndView andView) throws Exception{
    
-	  System.out.println("____________________________"+insertScheduleInfo.getMem_no());
       String start1 = insertScheduleInfo.getS_startdate();
       String start2 = insertScheduleInfo.getS_startdate();
       String end1 = insertScheduleInfo.getS_enddate();
@@ -102,7 +99,7 @@ public class ScheduleController {
     
     
     
-  /*  @RequestMapping("deleteSchedule")
+    @RequestMapping("deleteSchedule")
    public String deleteSchedule(Map<String, String>params, String s_no) throws Exception{
       params.put("s_no",s_no);
       this.service.deleteSchedule(params);
@@ -112,8 +109,25 @@ public class ScheduleController {
    
    @RequestMapping("updateScheduleInfo")
    public String updateScheduleInfo(ScheduleVO scheduleInfo) throws Exception{
+	   String start1 = scheduleInfo.getS_startdate();
+	      String start2 = scheduleInfo.getS_startdate();
+	      String end1 = scheduleInfo.getS_enddate();
+	      String end2 = scheduleInfo.getS_enddate();
+	      
+	      start1 = start1.substring(0, start1.indexOf(" "));
+	      start1 = start1.replace("/", "-");
+	      start2 = start2.substring(start2.indexOf(" ")+1,start2.length());
+	      start1 = start1.concat("T");
+	      scheduleInfo.setS_startdate(start1.concat(start2));
+	      
+	      end1 = end1.substring(0,end1.indexOf(" "));
+	      end1 = end1.replace("/", "-");
+	      end2 = end2.substring(end2.indexOf(" ")+1,end2.length());
+	      end1 = end1.concat("T");
+	      scheduleInfo.setS_enddate(end1.concat(end2));
+
       this.service.updateScheduleInfo(scheduleInfo);
       return "redirect:/user/schedule/schedule.do";
-   }*/
+   }
    
 }

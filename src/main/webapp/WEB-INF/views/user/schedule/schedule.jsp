@@ -77,18 +77,19 @@ function setCalendar(data){
                $('#change-modal [name="s_startdate"]').val(moment(eventObj.start).format('YYYY/MM/DD HH:mm:ss'));
                $('#change-modal [name="s_enddate"]').val(moment(eventObj.end).format('YYYY/MM/DD HH:mm:ss'));
                $('#change-modal [name="s_memo"]').val(eventObj.title);
+               $('#change-modal [name="s_no"]').val(eventObj.id);
            $("#change-modal").modal("show"); //모달창 띄우기
            
-          /* $('#scheduleChangeForm [name="save"]').submit(function(){
-                $(this).attr('action','${pageContext.request.contextPath }/user/schedule/updateScheduleInfo.do?s_no='+eventObj.id);
+            $('form[name=scheduleChangeForm').submit(function(){
+                $(this).attr('action','${pageContext.request.contextPath }/user/schedule/updateScheduleInfo.do');
                 return true;
-              });  //서브밋
-           
-            $('#scheduleChangeForm [name="delete"]').click(function(){
+              });  //서브밋 
+              
+            $('#delete').click(function(){
                location.href='${pageContext.request.contextPath}/user/schedule/deleteSchedule.do?s_no='+eventObj.id;
                 return true;
               });  //버튼 클릭
-             */
+             
          },
           initialView: 'dayGridMonth', //초기화면설정
           navLinks: true, 
@@ -130,7 +131,7 @@ function setCalendar(data){
             <div class="modal-body">
                <div class="text-center mt-2 mb-4">
                   <a href="index.html" class="text-success"> <span><img
-                        src="${pageContext.request.contextPath }/resources/html/dist/assets/images/logo-dark.png"
+                        src="${pageContext.request.contextPath }/resources/dist/assets/images/logo-dark.png"
                         alt="" height="18"></span>
                   </a>
                </div>
@@ -188,7 +189,7 @@ function setCalendar(data){
             <div class="modal-body">
                <div class="text-center mt-2 mb-4">
                   <a href="index.html" class="text-success"> <span><img
-                        src="${pageContext.request.contextPath }/resources/html/dist/assets/images/logo-dark.png"
+                        src="${pageContext.request.contextPath }/resources/dist/assets/images/logo-dark.png"
                         alt="" height="18"></span>
                   </a>
                </div>
@@ -219,6 +220,7 @@ function setCalendar(data){
                   </div>
                   
                   <input type="hidden" name="mem_no" value=2>
+                  <input type="hidden" name="s_no">
                   
                   <div class="form-group text-center">
                      <button id="save" name="save" class="btn btn-rounded btn-primary"

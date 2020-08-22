@@ -36,17 +36,18 @@ public class IScheduleServiceImpl implements IScheduleService {
       return dao.scheduleList(mem_no);
    }
 
-   /*@Override
+   @Override
    public void deleteSchedule(Map<String, String> params) throws Exception {
       dao.deleteSchedule(params);
       
    }
-
+   
+  
    @Override
    public void updateScheduleInfo(ScheduleVO scheduleInfo) throws Exception {
       dao.updateScheduleInfo(scheduleInfo);
       
-   }*/
+   }
 
    /*@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
    @Override

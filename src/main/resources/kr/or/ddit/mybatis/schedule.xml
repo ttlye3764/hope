@@ -31,6 +31,22 @@
       WHERE MEM_NO = #{mem_no}
    </select>
    
+   
+    <delete id="deleteSchedule" parameterType="map">
+      DELETE 
+      FROM SCHEDULE
+      WHERE S_NO = #{s_no}
+   </delete>
+   
+   
+   <update id="updateSchedule" parameterType="scheduleVO">
+      UPDATE SCHEDULE
+         SET 
+            S_MEMO    = #{s_memo}   
+            ,S_STARTDATE = #{s_startdate}
+            ,S_ENDDATE      = #{s_enddate}      
+         WHERE S_NO = #{s_no}
+   </update>
 
 </mapper>    
 
