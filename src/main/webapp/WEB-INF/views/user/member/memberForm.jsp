@@ -62,11 +62,11 @@ td {
 				mem_hp : $('input[name=mem_hp]').val()
 			},
 			error : function(result) {
-				alert(result.responseText);
+				alert(result.json);
 			},
 			success : function(result) {
 				//{ flag : true | false}
-				alert(result.responseText);
+				alert(result.json);
 			}
 		});
 	};
@@ -80,17 +80,17 @@ td {
 		$.ajax({
 			type : 'POST',
 			url : '${pageContext.request.contextPath}/sms/checkSms.do',
-			dataType : 'JSON',
+			dataType : 'json',
 			data : {
 				mem_hp : $('input[name=mem_hp]').val(),
 				hp_num : $('input[name=hp_num]').val()
 			},
 			error : function(result) {
-				alert(result.responseText);
+				alert(result.json);
 			},
 			success : function(result) {
 				//{ flag : true | false}
-				alert(result.responseText);
+				alert(result.json);
 			}
 		});
 	};
@@ -107,16 +107,19 @@ td {
 				mem_email : $('input[name=mem_email]').val()
 			},
 			error : function(result) {
-				alert(result.responseText);
+				alert(result.json);
 			},
 			success : function(result) {
 				//{ flag : true | false}
-				alert(result.responseText);
+				alert(result.json);
 			}
 		});
 	};
 
 	function mailCheck() {
+		var mem_email = $('input[name=mem_mail1]').val() + '@' + $('select[name=mem_mail2]').val();		
+		$('input[name=mem_email]').val(mem_email);
+		
 		$.ajax({
 			type : 'POST',
 			url : '${pageContext.request.contextPath}/mail/mailCheck.do',
@@ -126,14 +129,12 @@ td {
 				mail_num : $('input[name=mail_num]').val()
 			},
 			error : function(result) {
-				alert(result.responseText);
-				if(result.responseText=='인증번호가 일치합니다.'){
-					alert("hi");
-				}
+				alert(result.json);
+				
 			},
 			success : function(result) {
 				//{ flag : true | false}
-				alert(result.responseText);
+				alert(result.json);
 			}
 		});
 	};
