@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fileitem">
+	<select resultType="fileitemVO" id="fileitemList">
+		SELECT *
+		FROM FileItem
+	</select>
+
+	<insert id="insertFileItem" parameterType="fileitemVO">
+		INSERT INTO
+		FileItem(
+		FILE_NO,FILE_NAME,FILE_SAVE_NAME,
+		FILE_TYPE,FILE_SIZE, K_NO
+		)
+
+		VALUES(
+		FILE_SEQ.NEXTVAL,#{file_name},#{file_save_name},
+		#{file_type},#{file_size}, #{k_no}
+		)
+	</insert>
+
+	<select resultType="fileitemVO" id="fileitemInfo" parameterType="map">
+		SELECT *
+		FROM FileItem
+		WHERE FILE_NO = #{file_no}
+	</select>
+
+	<delete id="deleteFileItem" parameterType="String">
+			DELETE
+		 	FROM FileItem
+		 	WHERE file_NO = #{file_no}
+    	</delete>
+
+</mapper>

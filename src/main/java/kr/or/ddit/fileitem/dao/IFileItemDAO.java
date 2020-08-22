@@ -9,4 +9,6 @@ public interface IFileItemDAO {
 	public void insertFileItem(List<FileItemVO> fileitemList) throws Exception;
 	
 	public FileItemVO fileitemInfo(Map<String, String> params) throws Exception;
+	
+	public void deleteFileItem(String file_no) throws Exception;
 }

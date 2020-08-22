@@ -36,8 +36,12 @@
 						
     	</select>
     	
+    	<select id="fileSequence" resultType="String">
+    		SELECT KNOWLEDGE_SEQ.CURRVAL FROM DUAL
+    	</select>
+    	
     	<insert id="insertKnowledge" parameterType="knowVO">
-    		<selectKey keyProperty="k_no" resultType="string" order="BEFORE">
+    		<selectKey keyProperty="k_no" resultType="java.lang.String" order="BEFORE">
     			SELECT KNOWLEDGE_SEQ.NEXTVAL FROM DUAL
     		</selectKey>
     		INSERT INTO KNOWLEDGE(K_NO

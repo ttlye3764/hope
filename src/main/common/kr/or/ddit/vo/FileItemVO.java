@@ -2,7 +2,6 @@ package kr.or.ddit.vo;
 
 public class FileItemVO {
 	private String file_no;
-	private String file_bd_no;
 	private String file_name;
 	private String file_save_name;
 	private String file_type;
@@ -23,14 +22,6 @@ public class FileItemVO {
 
 	public void setFile_no(String file_no) {
 		this.file_no = file_no;
-	}
-
-	public String getFile_bd_no() {
-		return file_bd_no;
-	}
-
-	public void setFile_bd_no(String file_bd_no) {
-		this.file_bd_no = file_bd_no;
 	}
 
 	public String getFile_name() {

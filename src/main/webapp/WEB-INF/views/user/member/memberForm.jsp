@@ -62,11 +62,11 @@ td {
 				mem_hp : $('input[name=mem_hp]').val()
 			},
 			error : function(result) {
-				alert(result.responseText);
+				alert(result.json);
 			},
 			success : function(result) {
 				//{ flag : true | false}
-				alert(result.responseText);
+				alert(result.json);
 			}
 		});
 	};
@@ -80,17 +80,24 @@ td {
 		$.ajax({
 			type : 'POST',
 			url : '${pageContext.request.contextPath}/sms/checkSms.do',
-			dataType : 'JSON',
+			dataType : 'json',
 			data : {
 				mem_hp : $('input[name=mem_hp]').val(),
 				hp_num : $('input[name=hp_num]').val()
 			},
 			error : function(result) {
-				alert(result.responseText);
+				alert(result.json);
 			},
 			success : function(result) {
 				//{ flag : true | false}
-				alert(result.responseText);
+				alert(result.json);
+				if(result.json == '인증이 완료되었습니다.'){
+					$('select[name=mem_hp1]').attr("disabled", true)
+					$('input[name=mem_hp2]').attr("disabled", true)
+					$('input[name=mem_hp3]').attr("disabled", true)
+					$('input[name=hp_num]').attr("hidden",true)
+					$('input[name=hp_btn]').attr("hidden",true)
+				}
 			}
 		});
 	};
@@ -107,16 +114,19 @@ td {
 				mem_email : $('input[name=mem_email]').val()
 			},
 			error : function(result) {
-				alert(result.responseText);
+				alert(result.json);
 			},
 			success : function(result) {
 				//{ flag : true | false}
-				alert(result.responseText);
+				alert(result.json);
 			}
 		});
 	};
 
 	function mailCheck() {
+		var mem_email = $('input[name=mem_mail1]').val() + '@' + $('select[name=mem_mail2]').val();		
+		$('input[name=mem_email]').val(mem_email);		
+		
 		$.ajax({
 			type : 'POST',
 			url : '${pageContext.request.contextPath}/mail/mailCheck.do',
@@ -126,14 +136,16 @@ td {
 				mail_num : $('input[name=mail_num]').val()
 			},
 			error : function(result) {
-				alert(result.responseText);
-				if(result.responseText=='인증번호가 일치합니다.'){
-					alert("hi");
-				}
+				alert(result.json);							
 			},
 			success : function(result) {
 				//{ flag : true | false}
-				alert(result.responseText);
+				alert(result.json);
+				if(result.json == '인증이 완료되었습니다.'){
+					$('input[name=mem_mail1]').attr("disabled", true)
+					$('input[name=mail_num]').attr("hidden",true)
+					$('input[name=mail_btn]').attr("hidden",true)
+				}	
 			}
 		});
 	};
@@ -145,8 +157,8 @@ td {
 </script>
 <body>
 	<form name="memberForm" method="post">
+	<input type="hidden" name="mem_division" value="0"> 
 		<table width="100%" border="0" cellpadding="0" cellspacing="0">
-			<input type="hidden" name="mem_division" value="0">
 			<tr>
 				<td class="tLine" colspan="2"></td>
 			</tr>
@@ -209,10 +221,9 @@ td {
 				<td class="tLine" colspan="2"></td>
 			</tr>
 			<tr>
-			<input type="text" id="mailchange" name="mailchange" value="0"/>
 				<td class="fieldName" width="100px" height="25">이메일</td>
 				<td><input type="hidden" name="mem_email" /> <input type="text"
-					name="mem_mail1" value="" onchange="mailchange()"/> @ <select name="mem_mail2">
+					name="mem_mail1" value="" /> @ <select name="mem_mail2">
 						<option value="naver.com">naver.com</option>
 						<option value="daum.net">daum.net</option>
 						<option value="hanmail.net">hanmail.net</option>
@@ -220,7 +231,7 @@ td {
 						<option value="gmail.com">gmail.com</option>
 				</select> <a href="javascript:mailSending();">[인증번호 전송]</a><br>
 				<input type="text" name="mail_num">
-				<a href="javascript:mailCheck();">[인증번호 확인]</a>
+				<input type="button" name="mail_btn" onClick="mailCheck()" value="인증번호 확인"></a>
 				</td>
 			</tr>
 			<tr>
@@ -239,7 +250,7 @@ td {
 				<input	type="text" name="mem_hp3" size="4" value="" />
 				<a href="javascript:sendsms();">[인증번호 전송]</a><br>
 				<input type="text" name="hp_num"/>
-				<a href="javascript:checksms();">[인증번호 확인]</a>
+				<input type="button" name="hp_btn" onClick="checksms()" value="인증번호 확인">
 				</td>
 			</tr>
 			<tr>

@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class AttachFileMapper {
 	public static List<FileItemVO> mapper(MultipartFile[] items,
-											String bo_no){
+											String k_no){
 		List<FileItemVO> fileItemList = new ArrayList<FileItemVO>();
 		
 		if(items != null){
@@ -24,7 +24,7 @@ public class AttachFileMapper {
 			for(MultipartFile item : items){
 				if(item.getSize() > 0){
 				fileItemInfo = new FileItemVO();
-				fileItemInfo.setFile_bd_no(bo_no);
+				fileItemInfo.setK_no(k_no);
 				
 				// 파일명 취득
 				// 브라우저별 d:\\temp\image\a.png

@@ -19,16 +19,19 @@ public class IFileItemServiceImpl implements IFileItemService {
 	@Autowired
 	private IFileItemDAO dao;
 	
-	@Transactional(propagation=Propagation.REQUIRED, rollbackFor={Exception.class})
 	@Override
 	public void insertFileItem(List<FileItemVO> fileitemList)throws Exception {
 
 	}
 	
-	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
 	@Override
 	public FileItemVO fileitemInfo(Map<String, String> params)throws Exception {
 		return dao.fileitemInfo(params);
+	}
+
+	@Override
+	public void deleteFileItem(String file_no) throws Exception {
+		
 	}
 
 }
