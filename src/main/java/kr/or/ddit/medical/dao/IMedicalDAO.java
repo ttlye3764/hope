@@ -10,4 +10,10 @@ public interface IMedicalDAO {
 	public String insertMedicalInfo(MypillVO mypillInfo) throws Exception;
 
 	public List<MypillVO> medicalList(String mem_no) throws Exception;
+
+	public void deleteMedicalInfo(String pill_no) throws Exception;
+
+	public MypillVO medicalInfo(String pill_no) throws Exception;
+
+	public String selectPill_no() throws Exception;
 }

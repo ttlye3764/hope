@@ -25,21 +25,32 @@ public class IMedicalServiceImpl implements IMedicalService {
 	@Autowired
 	private IMedicalFileDAO medicalFileDAO;
 	
-	@Transactional(propagation=Propagation.REQUIRED, rollbackFor={Exception.class})
     @Override
 	public String insertMedicalInfo(MypillVO mypillInfo, MultipartFile[] items) throws Exception{
-		 
-		  String bo_no = medicalDAO.insertMedicalInfo(mypillInfo);
+		 System.out.println("서비스 들어옴");
+		  medicalDAO.insertMedicalInfo(mypillInfo);
+		  String pill_no = medicalDAO.selectPill_no();
+		  System.out.println(pill_no);
+	      List<MypillFileVO> fileItemList =AttachFileMapper.medicalMapper(items, pill_no);
 	      
-	     // List<MypillFileVO> fileItemList =AttachFileMapper.medicalMapper(items, bo_no);
-	      
-	     // medicalFileDAO.insertFileItem(fileItemList);
-	      return bo_no;
+	      medicalFileDAO.insertFileItem(fileItemList);
+	      return pill_no;
 	}
 
 	@Override
 	public List<MypillVO> medicalList(String mem_no) throws Exception {
 		return medicalDAO.medicalList(mem_no);
 	}
+
+	@Override
+	public void deleteMedicalInfo(String pill_no) throws Exception {
+		medicalDAO.deleteMedicalInfo(pill_no);
+	}
+
+	@Override
+	public MypillVO medicalInfo(String pill_no) throws Exception {
+		return medicalDAO.medicalInfo(pill_no);
+	}
+
 
 }

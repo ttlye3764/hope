@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddit.medical.service.IMedicalService;
+import kr.or.ddit.medicalfile.service.IMedicalFileService;
+import kr.or.ddit.vo.MypillFileVO;
 import kr.or.ddit.vo.MypillVO;
 
 // 이용춘 - 깃 커밋 테스트
@@ -21,6 +23,8 @@ import kr.or.ddit.vo.MypillVO;
 public class MedicalController {
 	@Autowired
 	private IMedicalService medicalService;
+	@Autowired
+	private IMedicalFileService medicalFileService;
 	
 	@Autowired
 	private MessageSourceAccessor accessor;
@@ -39,6 +43,17 @@ public class MedicalController {
 		andView.setViewName("jsonConvertView");
 		return andView;
 	}
+	@RequestMapping("viewJson2")
+	public ModelAndView medicalInfo(String pill_no) throws Exception{	
+		
+		MypillVO medicalInfo  = this.medicalService.medicalInfo(pill_no);
+		//MypillFileVO medicalImg = this.medicalFileService.selectImg(pill_no);
+		ModelAndView andView = new ModelAndView();
+		andView.addObject("json", medicalInfo);		
+		//andView.addObject("json2", medicalImg);		
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
 	
 	
 	
@@ -53,28 +68,29 @@ public class MedicalController {
 
 	
 	@RequestMapping("insertMedicalInfo")
-	public ModelAndView insertMedicalInfo(ModelAndView andView, MypillVO mypillInfo)
+	public ModelAndView insertMedicalInfo(ModelAndView andView,
+			MypillVO mypillInfo , @RequestParam("files") MultipartFile[] items)
 			throws Exception {
 		
+		  andView.setViewName("user/medical/medicalList");
+		  String start = mypillInfo.getPill_start().concat("T"); 
+		  start = start.concat(mypillInfo.getPill_alerttime());
+		  mypillInfo.setPill_start(start);
+		  
+		  String end = mypillInfo.getPill_end().concat("T");
+		  end = end.concat(mypillInfo.getPill_alerttime());
+		  mypillInfo.setPill_end(end);
+		  
+		  mypillInfo.setMem_no("1");
+		  
+		  this.medicalService.insertMedicalInfo(mypillInfo, items);
+		return andView;
+	}
+	
+	@RequestMapping("deleteMedicalInfo")
+	public ModelAndView deleteMedicalInfo(ModelAndView andView, String pill_no) throws Exception {
 		andView.setViewName("user/medical/medicalList");
-		
-		System.out.println("asdfasdf");
-		
-		System.out.println(mypillInfo.getPill_start());
-		
-		String start = mypillInfo.getPill_start().concat("T");
-		start = start.concat(mypillInfo.getPill_alerttime());
-		mypillInfo.setPill_start(start);
-		
-		String end = mypillInfo.getPill_end().concat("T");
-		end = end.concat(mypillInfo.getPill_alerttime());
-		mypillInfo.setPill_end(end);
-		
-		mypillInfo.setMem_no("1");
-		  
-		this.medicalService.insertMedicalInfo(mypillInfo, null);
-		  
-		 
+		medicalService.deleteMedicalInfo(pill_no);
 		return andView;
 	}
 }
