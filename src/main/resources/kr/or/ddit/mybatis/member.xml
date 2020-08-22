@@ -32,8 +32,14 @@
 <!-- 		</dynamic> -->
 <!-- 	</sql> -->
 
+	<select id="memberInfo" parameterType="map" resultType="memberVO">
+		<include refid="selectAll"/>
+		AND MEM_ID = #{mem_id}
+		AND MEM_PASS = #{mem_pass}
+	</select>
 
-<!-- 	<select id="memberInfo" parameterClass="map" resultClass="memberVO"> -->
+
+<!-- 	<select id="memberInfo" parameterType="map" resultType="memberVO"> -->
 <!-- 		<include refid="selectAll" /> -->
 <!-- 		AND MEM_ID = #mem_id# -->
 <!-- 		<dynamic prepend="AND"> -->

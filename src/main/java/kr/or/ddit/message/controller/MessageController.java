@@ -46,12 +46,6 @@ public class MessageController {
 		
 		if ((boolean)result.get("status") == true) {
             // 메시지 보내기 성공 및 전송결과 출력
-            System.out.println("성공");
-            System.out.println(result.get("group_id")); // 그룹아이디
-            System.out.println(result.get("result_code")); // 결과코드
-            System.out.println(result.get("result_message")); // 결과 메시지
-            System.out.println(result.get("success_count")); // 메시지아이디
-            System.out.println(result.get("error_count")); // 여러개 보낼시 오류난 메시지 수
             return "인증번호가 전송되었습니다.";
           } else {
 

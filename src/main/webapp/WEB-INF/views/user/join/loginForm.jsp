@@ -18,10 +18,9 @@
                alert('${param.message}');
             }
             
-            
             $('.loginBtn').click(function(){
-               var mem_id = $('input[name=mem_id]').val();
-               var mem_pass = $('input[name=mem_pass]').val();
+               var mem_id = $('#id').val();
+               var mem_pass = $('#pass').val();
        
                var $frm = $('<form action="${pageContext.request.contextPath }/user/join/loginCheck.do" method="post"></form>');
                var $inputID = $('<input type="hidden" value="' +mem_id+ '" name="mem_id" />');
@@ -30,10 +29,6 @@
                $frm.append($inputPWD);
                $(document.body).append($frm);
                $frm.submit();
-               
-               
-               
-       
            
             });
       });
@@ -59,14 +54,14 @@
                         cellspacing="0">
                         <tr>
                            <td><b><spring:message code="cop.id"></spring:message></b></td>
-                           <td><input type="text" name="mem_id" class="box" tabindex="3" height="18" /></td>
+                           <td><input type="text" name="mem_id" id="id" class="box" tabindex="3" height="18" /></td>
                            <td rowspan="2">
                               <img src="${pageContext.request.contextPath }/image/login.gif" class="loginBtn"/>
                            </td>
                         </tr>
                         <tr>
                            <td><b><spring:message code="cop.password"></spring:message></b></td>
-                           <td><input type="password" name="mem_pass" class="box" tabindex="3" height="18" /></td>
+                           <td><input type="password" name="mem_pass" id="pass" class="box" tabindex="3" height="18" /></td>
                         </tr>
                         <tr>
                            <td colspan="2">
