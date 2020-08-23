@@ -47,10 +47,10 @@ public class MedicalController {
 	public ModelAndView medicalInfo(String pill_no) throws Exception{	
 		
 		MypillVO medicalInfo  = this.medicalService.medicalInfo(pill_no);
-		//MypillFileVO medicalImg = this.medicalFileService.selectImg(pill_no);
+		MypillFileVO medicalImg = this.medicalFileService.selectImg(pill_no);
 		ModelAndView andView = new ModelAndView();
 		andView.addObject("json", medicalInfo);		
-		//andView.addObject("json2", medicalImg);		
+		andView.addObject("json2", medicalImg);		
 		andView.setViewName("jsonConvertView");
 		return andView;
 	}
@@ -84,6 +84,34 @@ public class MedicalController {
 		  mypillInfo.setMem_no("1");
 		  
 		  this.medicalService.insertMedicalInfo(mypillInfo, items);
+		return andView;
+	}
+	
+	@RequestMapping("updateMedicalInfo")
+	public ModelAndView updateMedicalInfo(ModelAndView andView,
+			MypillVO mypillInfo , @RequestParam("files") MultipartFile[] items)
+					throws Exception {
+		
+		andView.setViewName("user/medical/medicalList");
+		String start = mypillInfo.getPill_start().concat("T"); 
+		start = start.concat(mypillInfo.getPill_alerttime());
+		mypillInfo.setPill_start(start);
+		
+		String end = mypillInfo.getPill_end().concat("T");
+		end = end.concat(mypillInfo.getPill_alerttime());
+		mypillInfo.setPill_end(end);
+		
+		mypillInfo.setMem_no("1");
+		
+		System.out.println(mypillInfo.getPill_no());
+		System.out.println(mypillInfo.getPill_name());
+		System.out.println(mypillInfo.getPill_start());
+		System.out.println(mypillInfo.getPill_end());
+		System.out.println(mypillInfo.getPill_count());
+		System.out.println(mypillInfo.getPill_alerttime());
+		System.out.println(mypillInfo.getPill_color());
+		
+		this.medicalService.updateMedicalInfo(mypillInfo, items);
 		return andView;
 	}
 	

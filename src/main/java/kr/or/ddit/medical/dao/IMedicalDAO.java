@@ -16,4 +16,6 @@ public interface IMedicalDAO {
 	public MypillVO medicalInfo(String pill_no) throws Exception;
 
 	public String selectPill_no() throws Exception;
+
+	public void updateMedicalInfo(MypillVO mypillInfo) throws Exception;
 }

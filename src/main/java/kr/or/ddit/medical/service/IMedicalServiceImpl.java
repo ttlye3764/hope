@@ -52,5 +52,14 @@ public class IMedicalServiceImpl implements IMedicalService {
 		return medicalDAO.medicalInfo(pill_no);
 	}
 
+	@Override
+	public void updateMedicalInfo(MypillVO mypillInfo, MultipartFile[] items) throws Exception {
+		//medicalDAO.updateMedicalInfo(mypillInfo);
+		
+		//파일업데이트문 
+		List<MypillFileVO> fileItemList =AttachFileMapper.medicalMapper(items, mypillInfo.getPill_no());
+		medicalFileDAO.updateFileItem(fileItemList);
+	}
+
 
 }

@@ -78,6 +78,43 @@ $(function(){
 			$('#pill_count').val(betweenDay);
 		}
 	});
+	$('#pill_start_update').change(function (){
+		var date = $('#pill_start_update').val();
+        date2 = $('#pill_end_update').val();
+        if(date > date2){
+			alert('복용시작일과 복용종료일을 제대로 입력해주세요.');
+			$('#pill_count1_update').val("0");
+		}else{			
+			var dateString = date; 
+			var dateString2 = date2;
+			var dateArray = dateString.split("-");
+			var dateArray2 = dateString2.split("-");
+			var dateObj = new Date(dateArray[0], Number(dateArray[1])-1, dateArray[2]);  
+			var dateObj2 = new Date(dateArray2[0], Number(dateArray2[1])-1, dateArray2[2]);  
+			var betweenDay = (dateObj2.getTime() - dateObj.getTime())/1000/60/60/24;
+			$('#pill_count_update').val(betweenDay);
+			$('#pill_count1_update').val(betweenDay);
+		}
+ 	});
+ 	
+	$('#pill_end_update').change(function (){
+		var date = $('#pill_start_update').val();
+		var date2 = $('#pill_end_update').val();
+		if(date > date2){
+			alert('복용시작일과 복용종료일을 제대로 입력해주세요.');
+			$('#pill_count1_update').val("0");
+		}else{
+			var dateString = date; 
+			var dateString2 = date2;
+			var dateArray = dateString.split("-");
+			var dateArray2 = dateString2.split("-");
+			var dateObj = new Date(dateArray[0], Number(dateArray[1])-1, dateArray[2]);  
+			var dateObj2 = new Date(dateArray2[0], Number(dateArray2[1])-1, dateArray2[2]);  
+			var betweenDay = (dateObj2.getTime() - dateObj.getTime())/1000/60/60/24;
+			$('#pill_count1_update').val(betweenDay);
+			$('#pill_count_update').val(betweenDay);
+		}
+	});
 	
 	
 })
@@ -152,8 +189,9 @@ function setCalendar(data){
     	     	        $("#regist-modal2 input[name='pill_end']").val(subend[0]);
     	     	        $("#regist-modal2 input[name='pill_alerttime']").val(result.json.pill_alerttime);
     	     	        $("#regist-modal2 input[name='pill_color']").val(result.json.pill_color);
-    	     	        //$("#regist-modal2 img[id=img2]").attr("src", result.json2.file_save_name);
-    	     	        //alert(result.json2.file_save_name);
+    	     	        $("#regist-modal2 input[name='pill_no']").val(result.json.pill_no);
+    	     	        $("#regist-modal2 img[id=img2]").attr("src", "D:/temp/files/"+result.json2.file_save_name);
+    	     	        alert(result.json2.file_save_name);
     	             }
         	    });
     	       
@@ -299,16 +337,17 @@ function setCalendar(data){
 				<!-- contact form -->
 				<div class="col-md-6">
 					<div class="h-100">
-						<form class="contact-form" id="contact-form" name="contactform2" action="${pageContext.request.contextPath}/user/medical/updateMedicalInfo.do" method="post">			
+						<form class="contact-form" id="contact-form" name="contactform2" action="${pageContext.request.contextPath}/user/medical/updateMedicalInfo.do" method="post" enctype="multipart/form-data">			
 							<!-- Start main form -->
 							<div class="row">
 								<div class="col-md-6">
 									<!-- name -->
+										<input id="pill_no" name="pill_no" type="hidden" class="form-control">
 										<label>제품 명 </label><input id="pill_name" name="pill_name" type="text" class="form-control" placeholder="제품명">
-										<label>복용일수 </label><input id="pill_count1" name="pill_count1" type="text" class="form-control" disabled>
-										<input id="pill_count" name="pill_count" type="hidden" class="form-control">
-										<label>복용시작일</label><input type="date" id="pill_start" name="pill_start"  class="form-control">
-										<label>복용종료일</label><input type="date" id="pill_end" name="pill_end" class="form-control">
+										<label>복용일수 </label><input id="pill_count1_update" name="pill_count1" type="text" class="form-control" disabled>
+										<input id="pill_count_update" name="pill_count" type="hidden" class="form-control">
+										<label>복용시작일</label><input type="date" id="pill_start_update" name="pill_start"  class="form-control">
+										<label>복용종료일</label><input type="date" id="pill_end_update" name="pill_end" class="form-control">
 										<label>알림시간설정</label><input type="time" id="pill_alerttime" name="pill_alerttime" class="form-control">
 								</div>	
 								<div class="col-md-6" style="width: 100px;">

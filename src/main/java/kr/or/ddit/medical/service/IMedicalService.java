@@ -18,6 +18,8 @@ public interface IMedicalService {
 	public void deleteMedicalInfo(String pill_no) throws Exception;
 
 	public MypillVO medicalInfo(String pill_no) throws Exception;
+
+	public void updateMedicalInfo(MypillVO mypillInfo, MultipartFile[] items) throws Exception;
 	
 	
 

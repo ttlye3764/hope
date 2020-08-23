@@ -11,7 +11,6 @@
 					pill_start,
 					pill_end,
 					pill_alerttime,
-					pill_img,
 					pill_color,
 					mem_no
 				)
@@ -23,7 +22,6 @@
 					#{pill_start},
 					#{pill_end},
 					#{pill_alerttime},
-					#{pill_img},
 					#{pill_color},
 					#{mem_no}
 					)
@@ -49,6 +47,19 @@
 		SELECT mypill_SEQ.CURRVAL FROM DUAL
 	</select>
 	
+	<update id="updateMedicalInfo" parameterType="mypillVO">
+		update mypill 
+		set 
+			pill_no = ${pill_no},
+			pill_name = ${pill_name},
+			pill_count = ${pill_count},
+			pill_start = ${pill_start},
+			pill_end = ${pill_end},
+			pill_alerttime = ${pill_alerttime},
+			pill_color = ${pill_color},
+			mem_no = ${mem_no}
+		where pill_no = ${pill_no} 
+	</update>
 </mapper>
 	
 

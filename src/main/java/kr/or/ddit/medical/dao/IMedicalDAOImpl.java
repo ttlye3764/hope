@@ -44,6 +44,12 @@ public class IMedicalDAOImpl implements IMedicalDAO {
 	public String selectPill_no() throws Exception {
 		return client.selectOne("medical.selectPill_no");
 	}
+
+
+	@Override
+	public void updateMedicalInfo(MypillVO mypillInfo) throws Exception {
+		client.update("medical.updateMedicalInfo", mypillInfo);
+	}
 	
 		
 	

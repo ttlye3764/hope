@@ -44,4 +44,11 @@ public class IMedicalFileDAOImpl implements IMedicalFileDAO {
 		return (MypillFileVO) client.selectOne("medicalfile.selectImg", pill_no);
 	}
 
+	@Override
+	public void updateFileItem(List<MypillFileVO> fileItemList) throws Exception {
+		for(MypillFileVO fileItemInfo : fileItemList){
+			client.update("medicalfile.updateFileItem", fileItemInfo);
+		}
+	}
+
 }

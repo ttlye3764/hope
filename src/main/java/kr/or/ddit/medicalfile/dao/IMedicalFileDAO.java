@@ -10,4 +10,5 @@ public interface IMedicalFileDAO {
 	public void insertFileItem(List<MypillFileVO> fileitemList) throws Exception;
 	public MypillFileVO fileitemInfo(Map<String, String> params) throws Exception;
 	public MypillFileVO selectImg(String pill_no) throws Exception;
+	public void updateFileItem(List<MypillFileVO> fileItemList) throws Exception;
 }
