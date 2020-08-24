@@ -34,7 +34,13 @@
 
 	<select id="memberInfo" parameterType="map" resultType="memberVO">
 		<include refid="selectAll"/>
-		AND MEM_ID = #{mem_id}
+		<if test="mem_pass != null">
+			AND MEM_ID = #{mem_id}
+		</if>
+		<if test="mem_name != null">
+			AND MEM_NAME = #{mem_name}
+		</if>
+		
 		<if test="mem_pass != null">
 			AND MEM_PASS = #{mem_pass}
 		</if>
@@ -79,7 +85,7 @@
 <!-- 	</update> -->
 
 
-	<insert id="insertMember" parameterType="memberVO">
+	<insert id="insertMember" parameterType="map">
 		INSERT INTO MEMBER(MEM_NO,MEM_ID,MEM_PASS,MEM_NAME,MEM_GENDER,MEM_NICKNAME,MEM_BIRTH,MEM_EMAIL,MEM_HP,MEM_ADDR1,MEM_ADDR2,MEM_DIVISION,MEM_ZIP1,MEM_ZIP2)
 		values(
 		member_seq.nextval,#{mem_id},#{mem_pass},#{mem_name},#{mem_gender},#{mem_nickname},
@@ -91,10 +97,10 @@
 		SELECT MEMBER_SEQ.NEXTVAL FROM DUAL
 	</select>
 	
-	<select id="friendMemberList" parameterType="Map" resultType="memberVO">
+	<select id="friendMemberList" parameterType="map" resultType="friendVO">
 		SELECT *
-		FROM MEMBER
-		WHERE = #{mem_no}
+		FROM FRIEND
+		WHERE MEM_NO = #{mem_no}
 	</select>
 
 </mapper>    

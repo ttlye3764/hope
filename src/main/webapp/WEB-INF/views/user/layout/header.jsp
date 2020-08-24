@@ -307,6 +307,20 @@
 								<li> <a class="dropdown-item" href="http://support.webestica.com/" target="_blank">Support</a> </li>
 							</ul>
 						</li>
+						<!-- Menu item 7 chat-->
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/user/chat/chat.do" id="docMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">chat</a>
+							<ul class="dropdown-menu" aria-labelledby="docMenu">
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/chat/chat.do">chat</a> </li>
+								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/">Introduction</a> </li>
+								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/#getting-started-section">Directory structure</a> </li>
+								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/#installation-section">Gulp</a> </li>
+								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/#edit-section">Customization</a> </li>
+								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/#faqs">FAQs</a> </li>
+								<li class="dropdown-divider"></li>
+								<li> <a class="dropdown-item" href="http://support.webestica.com/" target="_blank">Support</a> </li>
+							</ul>
+						</li>
 					</ul>
 				</div>
 				<!-- Main Menu End -->

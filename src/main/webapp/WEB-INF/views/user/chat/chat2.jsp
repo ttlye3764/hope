@@ -95,7 +95,7 @@
 			<div class="row">
 				<div class="col-12 col-lg-8 mx-auto">
 					<div class="title text-center">
-						<h2>친구추가</h2>
+						<h2>약 복용정보</h2>
 					</div>
 				</div>
 			</div>
@@ -109,12 +109,18 @@
 								<div class="col-md-6">
 									<!-- name -->
 										<input id="pill_no" name="pill_no" type="hidden" class="form-control">
-										<label>친구 이름 </label><input id="mem_name" name="mem_name" type="text" class="form-control" placeholder="친구이름">
-										<button type="button" id="search_fri">검색</button>
-								</div>
-							<br><br>	
+										<label>제품 명 </label><input id="pill_name" name="pill_name" type="text" class="form-control" placeholder="제품명">
+										<label>복용일수 </label><input id="pill_count1_update" name="pill_count1" type="text" class="form-control" disabled>
+										<input id="pill_count_update" name="pill_count" type="hidden" class="form-control">
+										<label>복용시작일</label><input type="date" id="pill_start_update" name="pill_start"  class="form-control">
+										<label>복용종료일</label><input type="date" id="pill_end_update" name="pill_end" class="form-control">
+										<label>알림시간설정</label><input type="time" id="pill_alerttime" name="pill_alerttime" class="form-control">
+								</div>	
 								<div class="col-md-6" style="width: 100px;">
 									<div></div>
+									<div class="col-md-12 text-center">
+									<input type="file" class="btn btn-outline-primary btn-block" style="margin-top: 30px;" id="files2" name="files">
+									</div>
 									<div style="width: 230px; height: 150px;" >
 									<img id="img2" style="width: 100%; height: 100%; margin-left: 15px; margin-top: 30px;">
 									</div>
@@ -248,32 +254,15 @@
 
 		}
 
-
-		
-
 	})();
 
+	
 	function addFriend(){
 		$("#regist-modal").modal("show"); //모달창 띄우기
 	}
-	$('#search_fri').click(function(){
-			$.ajax({
-				type : 'POST',
-				url : '${pageContext.request.contextPath}/user/chat/searchMember.do',
-				dataType : 'JSON',
-				data : {
-					mem_name : $('#mem_name').val()
-				},
-				error : function(result) {
-					alert(result.memberInfo.mem_name);
-				},
-				success : function(result) {
-					alert(result.memberInfo.mem_name);
-					
-				}
-			});
-
-		})
+	
+		
+		
 
 </script>
 </html>

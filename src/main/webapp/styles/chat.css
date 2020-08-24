@@ -1,0 +1,170 @@
+:root{
+	--green: #86BB71;
+	--blue: #94C2ED;
+	--orange: #E38968;
+	--gray: #92959E;
+}
+
+*{
+	box-sizing: border-box;
+}
+.chat{ 
+	max-width: 700px;
+	width: 100%;
+	display: flex;
+	margin: 0 auto;
+	box-shadow: 0 80px 400px 3px  rgba(0,0,0, .8);
+}
+.chat-left{
+	min-height: 500px;
+	width: 35%;
+	min-width: 120px;
+	background-color: #444753;
+	padding: 20px;
+}
+
+.input-wrap{
+	position: relative;
+}
+.input-wrap input{
+	background-color: #6A6C75;
+	width: 90%;
+	height: 44px;
+	border: none;
+	padding-left: 5px;
+	padding-right: 40px;
+	color: #222;
+	border-radius: 4px 4px 4px 4px ;
+
+}
+.input-wrap .fa-search{
+	position: absolute;
+	top: 22px;
+	right: 35px;
+	transform: translateY(-50%);
+	color: white;
+}
+
+.user{
+	display: flex;
+	margin-top: 15px;
+}
+img {
+	width: 55px;
+	height: 55px;
+	border-radius: 50%;
+	border: 4px solid #676771;
+}
+.user .icon-user{
+	margin-right: 5px;
+}
+.user .name{
+	color: white;
+}
+.user .status{
+	color: #898C95;
+}
+.user .fa-circle.offline{
+	color: #E38968;
+}
+.user .fa-circle{
+	color: var(--green);
+}
+.chat-right{
+	width: 65%;
+	display: flex;
+	flex-wrap: wrap;
+	background-color: #F2F5F8;
+}
+
+.chating{
+	padding: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 15%;
+	width: 100%;
+	background-color: #F2F5F8;
+	border-bottom: 1px solid white;
+}
+.chating .name-chat{
+	color: #434651;
+}
+.chating .chating-with{
+	margin-left: -150px;
+}
+.chating .status{
+	color: #9995A4;
+	font-size: 16px;
+}
+.chating .fa{
+	color: #D8DADF;
+	font-size: 22px;
+}
+.message{
+	overflow-y: scroll;
+	height: 70%;
+	max-height: 450px;
+}
+.solo-message{
+	margin: 10px;
+	display: block;
+	clear: both;
+}
+.message-text{
+	margin-top: 10px;
+	max-width: 90%;
+	display: inline-block;
+	border-radius: 10px;
+	padding: 10px 15px;
+	word-wrap: break-word;
+}
+.message-text.right{
+	float: right;
+	background-color: var(--blue);
+}
+.message-text.left{
+	float: left;
+	background-color: var(--green);
+}
+
+.line-input{
+	height: 15%;
+	width: 100%;
+	padding: 5px 10px;
+	align-self: flex-end;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-top: 1px solid white;
+}
+.line-input .input{
+	position: relative;
+	width: 100%;
+}
+.line-input .input input{
+	width: 100%;
+	border: none;
+	padding: 10px 20px;
+}
+.line-input .input:after{
+	content:" ";
+	display: block;
+	position: absolute;
+	left: 51%;
+	right: 50%;
+	bottom: 0%;
+	height: 2px;
+	background-color: #444753;
+	transition: all 300ms;
+}
+.line-input .input:hover:after{
+	left:0%;
+	right: 0%;
+	bottom: 0%;
+}
+.line-input .add{
+	padding: 9px 15px;
+	width: 15%;
+	margin-left: 1px;
+}

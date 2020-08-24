@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import kr.or.ddit.vo.FriendVO;
 import kr.or.ddit.vo.MemberVO;
 
 // 설정파일 : <bean name="IMemberDAOImpl"
@@ -61,7 +62,7 @@ public class IMemberDAOImpl implements IMemberDAO {
 	}
 	
 	@Override
-	public List<MemberVO> friendMemberList(Map<String, String> params) throws Exception {
-		return client.selectList("member.friendMemberList");
+	public List<FriendVO> friendMemberList(Map<String, String> params) throws Exception {
+		return client.selectList("member.friendMemberList",params);
 	}
 }
