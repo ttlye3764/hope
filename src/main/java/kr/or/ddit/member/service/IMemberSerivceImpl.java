@@ -55,5 +55,8 @@ public class IMemberSerivceImpl implements IMemberService {
 	}
 	
 	
-
+	@Override
+	public List<MemberVO> friendMemberList(Map<String, String> params) throws Exception {
+		return dao.friendMemberList(params);
+	}
 }

@@ -88,6 +88,12 @@
 	<select id="selectSeq" resultType="String">
 		SELECT MEMBER_SEQ.NEXTVAL FROM DUAL
 	</select>
+	
+	<select id="friendMemberList" parameterType="Map" resultType="memberVO">
+		SELECT *
+		FROM MEMBER
+		WHERE = #{mem_no}
+	</select>
 
 </mapper>    
 

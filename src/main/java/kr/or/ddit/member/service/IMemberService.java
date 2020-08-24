@@ -12,4 +12,5 @@ public interface IMemberService {
 	public void updateMemberInfo(MemberVO memberInfo)throws Exception;
 	public void insertMember (MemberVO memberVO)throws Exception;
 	public String selectSeq()throws Exception;
+	public List<MemberVO> friendMemberList(Map<String, String> params) throws Exception;
 }
