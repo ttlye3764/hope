@@ -27,6 +27,29 @@ public class IMedicalDAOImpl implements IMedicalDAO {
 	public List<MypillVO> medicalList(String mem_no) throws Exception {
 		return client.selectList("medical.medicalList",mem_no); 
 	}
+
+
+	@Override
+	public void deleteMedicalInfo(String pill_no) throws Exception {
+		client.delete("medical.deleteMedicalInfo",pill_no);
+	}
+
+
+	@Override
+	public MypillVO medicalInfo(String pill_no) throws Exception {
+		return client.selectOne("medical.medicalInfo",pill_no);
+	}
+
+	@Override
+	public String selectPill_no() throws Exception {
+		return client.selectOne("medical.selectPill_no");
+	}
+
+
+	@Override
+	public void updateMedicalInfo(MypillVO mypillInfo) throws Exception {
+		client.update("medical.updateMedicalInfo", mypillInfo);
+	}
 	
 		
 	

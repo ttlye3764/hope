@@ -7,6 +7,8 @@ public class ScheduleVO {
 	private String s_enddate;
 	private String s_alerttime;
 	private String mem_no;
+	private String s_color;
+	
 	public String getS_no() {
 		return s_no;
 	}
@@ -42,6 +44,12 @@ public class ScheduleVO {
 	}
 	public void setMem_no(String mem_no) {
 		this.mem_no = mem_no;
+	}
+	public String getS_color() {
+		return s_color;
+	}
+	public void setS_color(String s_color) {
+		this.s_color = s_color;
 	}
     
 	

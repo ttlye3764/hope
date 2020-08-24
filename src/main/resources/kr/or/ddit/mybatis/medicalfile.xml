@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="medicalfile">
+	<select resultType="fileitemVO" id="fileitemList">
+		SELECT *
+		FROM mypill_file
+	</select>
+	<select id="selectImg" parameterType="String" resultType="mypillfileVO">
+		select *
+		from mypill_file
+		where file_pill_no = #{pill_no}
+	</select>
+
+	<insert id="insertFileItem" parameterType="mypillfileVO">
+		INSERT INTO
+		mypill_file(
+		FILE_NO,FILE_NAME,FILE_SAVE_NAME,
+		FILE_TYPE,FILE_SIZE, file_pill_no
+		)
+
+		VALUES(
+		mypill_FILE_SEQ.NEXTVAL,#{file_name},#{file_save_name},
+		#{file_type},#{file_size}, #{file_pill_no}
+		)
+	</insert>
+
+	<select resultType="mypillfileVO" id="fileitemInfo" parameterType="map">
+		SELECT *
+		FROM mypill_file
+		WHERE  file_pill_no = #{ file_pill_no}
+	</select>
+
+	<delete id="deleteFileItem" parameterType="String">
+			DELETE
+		 	FROM mypill_file
+		 	WHERE file_pill_no = #{file_pill_no}
+    </delete>
+    
+    <update id="updateFileItem" parameterType="mypillfileVO">
+    	update mypill_file
+    	set file_name = #{file_name}, file_save_name = #{file_save_name}, file_type = #{file_type}, file_size = #{file_size}
+    	where file_pill_no = #{file_pill_no}
+    </update>
+
+</mapper>

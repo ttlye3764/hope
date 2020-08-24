@@ -11,14 +11,16 @@
                s_memo,
                s_startdate,
                s_enddate,
-               mem_no)
+               mem_no,
+               s_color)
          VALUES
              (
                schedule_seq.nextval,      
                #{s_memo},   
                #{s_startdate},
                #{s_enddate},
-               #{mem_no}
+               #{mem_no},
+               #{s_color}
                )
          
    </insert>
@@ -31,6 +33,23 @@
       WHERE MEM_NO = #{mem_no}
    </select>
    
+   
+    <delete id="deleteSchedule" parameterType="map">
+      DELETE 
+      FROM SCHEDULE
+      WHERE S_NO = #{s_no}
+   </delete>
+   
+   
+   <update id="updateSchedule" parameterType="scheduleVO">
+      UPDATE SCHEDULE
+         SET 
+            S_MEMO    = #{s_memo}   
+            ,S_STARTDATE = #{s_startdate}
+            ,S_ENDDATE      = #{s_enddate}  
+            ,S_COLOR      = #{s_color}      
+         WHERE S_NO = #{s_no}
+   </update>
 
 </mapper>    
 

@@ -35,15 +35,16 @@ td {
 			url : '${pageContext.request.contextPath}/user/member/idCheck.do',
 			dataType : 'JSON',
 			data : {
-				mem_id : $('input[name=mem_id]').val()
+				mem_id : $('#mem_id').val()
 			},
 			error : function(result) {
-				alert(result.status);
+				alert(result.json);
 			},
 			success : function(result) {
-				//{ flag : true | false}
-
-				alert(result.flag);
+				alert(result.json);
+				if(result.json == '사용가능한 아이디입니다.'){
+					$('input[name=mem_id]').attr("disabled", true)
+				}
 			}
 		});
 	};
@@ -145,15 +146,10 @@ td {
 					$('input[name=mem_mail1]').attr("disabled", true)
 					$('input[name=mail_num]').attr("hidden",true)
 					$('input[name=mail_btn]').attr("hidden",true)
-				}	
+				}
 			}
 		});
 	};
-
-	function mailchange(){
-
-	}
-	
 </script>
 <body>
 	<form name="memberForm" method="post">
@@ -164,7 +160,8 @@ td {
 			</tr>
 			<tr>
 				<td class="fieldName" width="100px" height="25">아이디</td>
-				<td><input type="text" name="mem_id" value="">&nbsp;&nbsp;<b><a
+				<td>
+				<input type="text" id="mem_id" name="mem_id" value="">&nbsp;&nbsp;<b><a
 						href="javascript:idCheck();">[ID 중복검사]</a></b></td>
 			</tr>
 			<tr>

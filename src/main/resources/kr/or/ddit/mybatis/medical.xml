@@ -11,7 +11,6 @@
 					pill_start,
 					pill_end,
 					pill_alerttime,
-					pill_img,
 					pill_color,
 					mem_no
 				)
@@ -23,7 +22,6 @@
 					#{pill_start},
 					#{pill_end},
 					#{pill_alerttime},
-					#{pill_img},
 					#{pill_color},
 					#{mem_no}
 					)
@@ -35,8 +33,33 @@
 		FROM mypill
 		WHERE MEM_NO = #{mem_no}
 	</select>
+	<select id="medicalInfo" parameterType="String" resultType="mypillVO">
+		select *
+		from mypill
+		where pill_no = #{pill_no}
+	</select>
 	
+	<delete id="deleteMedicalInfo" parameterType="String">
+		delete from mypill
+		where pill_no = #{pill_no}
+	</delete>
+	<select id="selectPill_no" resultType="String">
+		SELECT mypill_SEQ.CURRVAL FROM DUAL
+	</select>
 	
+	<update id="updateMedicalInfo" parameterType="mypillVO">
+		update mypill 
+		set 
+			pill_no = #{pill_no},
+			pill_name = #{pill_name},
+			pill_count = #{pill_count},
+			pill_start = #{pill_start},
+			pill_end = #{pill_end},
+			pill_alerttime = #{pill_alerttime},
+			pill_color = #{pill_color},
+			mem_no = #{mem_no}
+		where pill_no = #{pill_no} 
+	</update>
 </mapper>
 	
 

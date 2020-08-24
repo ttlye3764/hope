@@ -16,6 +16,7 @@ import kr.or.ddit.vo.KnowledgeVO;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -53,15 +54,16 @@ public class KnowledgeController {
 	
 	// 문제 상세
 	@RequestMapping("knowledgeView")
-	//@ModelAttribute("memberInfo")
-		public KnowledgeVO knowledgeView(String k_no,
+		public KnowledgeVO knowledgeView(@RequestParam(value="k_no") String k_no,
 									   Map<String, String> params,
 									   ModelMap modelMap,
+									   Model model,
 									   KnowledgeVO knowledgeInfo)throws Exception{
 		params.put("k_no", k_no);
 		knowledgeInfo = this.knowledgeService.knowledgeInfo(params);
+		System.out.println(knowledgeInfo.getK_title());
 		
-		modelMap.addAttribute("knowledgeInfo", knowledgeInfo);
+		model.addAttribute("knowledgeInfo", knowledgeInfo);
 		
 		return knowledgeInfo;
 	}

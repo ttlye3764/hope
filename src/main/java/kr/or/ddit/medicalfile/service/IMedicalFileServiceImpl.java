@@ -21,17 +21,21 @@ public class IMedicalFileServiceImpl implements IMedicalFileService {
 	@Autowired
 	private IMedicalFileDAO dao;
 	
-	@Transactional(propagation=Propagation.REQUIRED, rollbackFor={Exception.class})
 	@Override
 	public void insertFileItem(List<MypillFileVO> fileitemList)throws Exception {
 
 	}
 	
 	
-	@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
 	@Override
 	public MypillFileVO fileitemInfo(Map<String, String> params)throws Exception {
 		return dao.fileitemInfo(params);
+	}
+
+
+	@Override
+	public MypillFileVO selectImg(String pill_no) throws Exception {
+		return dao.selectImg(pill_no);
 	}
 
 }
