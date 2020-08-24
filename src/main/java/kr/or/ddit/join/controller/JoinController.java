@@ -74,15 +74,17 @@ public class JoinController {
 		
 		if(memberInfo == null){
 			// 리다이렉트(컨텍스트 루트 | 패스 생략)
-			String message = this.accessor.getMessage("fail.common.join", Locale.KOREA);
-			message = URLEncoder.encode(message, "UTF-8");
-			andView.addObject(message);
-			andView.setViewName("user/join/loginForm");
+//			String message = this.accessor.getMessage("가입되지 않은 회원이거나, 비밀번호를 확인해주세요.", Locale.KOREA);
+			String message = "가입되지 않은 회원이거나, 비밀번호를 확인해주세요.";
+//			message = URLEncoder.encode(message, "UTF-8");
+			andView.addObject("json",message);
+			andView.setViewName("jsonConvertView");
 			return andView;
 		}else{
 			session.setAttribute("LOGIN_MEMBERINFO", memberInfo);
 			// 포워드(컨텍스트 루트 | 패스 생략)
-			andView.setViewName("user/freeboard/freeboardForm");
+			andView.addObject("json",1);
+			andView.setViewName("jsonConvertView");
 			return andView;
 		}
 	}

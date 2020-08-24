@@ -13,25 +13,74 @@
 <title><spring:message code="cop.memberMngr.login"></spring:message></title>
      <script type='text/javascript' src='http://code.jquery.com/jquery-latest.js'></script>
       <script type='text/javascript'>
+      
       $(function(){
             if(eval('${!empty param.message}')){
                alert('${param.message}');
             }
-            
-            $('.loginBtn').click(function(){
-               var mem_id = $('#id').val();
-               var mem_pass = $('#pass').val();
-       
-               var $frm = $('<form action="${pageContext.request.contextPath }/user/join/loginCheck.do" method="post"></form>');
-               var $inputID = $('<input type="hidden" value="' +mem_id+ '" name="mem_id" />');
-               var $inputPWD = $('<input type="hidden" value="' +mem_pass+ '" name="mem_pass" />');
-               $frm.append($inputID);
-               $frm.append($inputPWD);
-               $(document.body).append($frm);
-               $frm.submit();
-           
-            });
+
+            $('#loginBtn').click(function(){
+          	  	var mem_id = $('#mem_id').val();
+                var mem_pass = $('#mem_pass').val();
+
+                if(mem_id==''){
+             	   	$('#label').text("아이디를 입력해주세요.");
+             	  	$('#label').css('color', 'red');
+             	  	return false;
+                }
+                if(mem_pass==''){
+      				$('#label').text("비밀번호를 입력해주세요.");
+      				$('#label').css('color', 'red');
+      				return false;
+                }    
+                
+                $.ajax({
+        			type : 'POST',
+        			url : '${pageContext.request.contextPath}/user/join/loginCheck.do',
+        			dataType : 'json',
+        			data : {
+        				mem_id : $('#mem_id').val(),
+        				mem_pass : $('#mem_pass').val()
+        			},
+        			error : function(result) {
+        				$('#label').text(result.json);
+        				$('#label').css('color', 'red');
+        			},
+        			success : function(result) {
+        				//{ flag : true | false}
+        				if(result.json==1){
+        					$(location).attr('href', '${pageContext.request.contextPath}/user/freeboard/freeboardForm.do');
+        				}else{
+        					$('#label').text(result.json);
+        					$('#label').css('color', 'red');
+                		}
+        			}
+        		});
+        	});
       });
+
+      function caps_lock(e) {
+              var keyCode = 0;
+              var shiftKey = false;
+              keyCode = e.keyCode;
+              shiftKey = e.shiftKey;
+              if (((keyCode >= 65 && keyCode <= 90) && !shiftKey)
+                      || ((keyCode >= 97 && keyCode <= 122) && shiftKey)) {
+                  show_caps_lock();
+                  setTimeout("hide_caps_lock()", 3500);
+              } else {
+                  hide_caps_lock();
+              }
+          }
+   
+      function show_caps_lock() {
+    	  $('#label').css('color', 'red');
+           $("#label").text("CapsLock이 켜져있습니다.");
+      }
+   
+      function hide_caps_lock() {
+           $("#label").text("");
+      }
       </script>
 </head>
 <body>
@@ -53,15 +102,21 @@
                      <table border="0" align="center" cellpadding="5"
                         cellspacing="0">
                         <tr>
-                           <td><b><spring:message code="cop.id"></spring:message></b></td>
-                           <td><input type="text" name="mem_id" id="id" class="box" tabindex="3" height="18" /></td>
-                           <td rowspan="2">
-                              <img src="${pageContext.request.contextPath }/image/login.gif" class="loginBtn"/>
-                           </td>
+                           <td width="500"><input type="text" name="mem_id" id="mem_id" class="box" tabindex="3" placeholder="아이디" height="18" /></td>                           
                         </tr>
                         <tr>
-                           <td><b><spring:message code="cop.password"></spring:message></b></td>
-                           <td><input type="password" name="mem_pass" id="pass" class="box" tabindex="3" height="18" /></td>
+                           <td><input type="password" name="mem_pass" id="mem_pass" class="box" tabindex="3" height="18" placeholder="비밀번호" onkeypress="caps_lock(event)"/>              
+                           </td>
+                        </tr>
+                        <tr>                      
+                        <td>
+<!--                       	 <p id="capslock" style="position:relative; bottom:0px; display:none">&nbsp;<b>CapsLock</b>이 켜져있습니다.&nbsp;</p></td> -->
+                      	 <label id="label"></label>
+                        </tr>
+                        <tr>
+                        <td colspan="2">
+                              <img src="${pageContext.request.contextPath }/image/login.gif" class="loginBtn" id="loginBtn"/>
+                           </td>
                         </tr>
                         <tr>
                            <td colspan="2">

@@ -146,7 +146,7 @@ td {
 					$('input[name=mem_mail1]').attr("disabled", true)
 					$('input[name=mail_num]').attr("hidden",true)
 					$('input[name=mail_btn]').attr("hidden",true)
-				}	
+				}
 			}
 		});
 	};
