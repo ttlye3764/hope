@@ -9,7 +9,7 @@
 <body>
 <div id="footer">
 	<div class="copyright">
-		<a href="http://themifycloud.com">2015 © DHRD Responsive & SMAC</a>
+		<a href="http://themifycloud.com">대덕인재개발원</a>
 	</div>
 </div>
 </body>
