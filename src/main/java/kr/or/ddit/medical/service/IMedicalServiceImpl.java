@@ -54,11 +54,13 @@ public class IMedicalServiceImpl implements IMedicalService {
 
 	@Override
 	public void updateMedicalInfo(MypillVO mypillInfo, MultipartFile[] items) throws Exception {
-		//medicalDAO.updateMedicalInfo(mypillInfo);
+		medicalDAO.updateMedicalInfo(mypillInfo);
 		
 		//파일업데이트문 
 		List<MypillFileVO> fileItemList =AttachFileMapper.medicalMapper(items, mypillInfo.getPill_no());
+		System.out.println("파일 업데이트문 실행 전");
 		medicalFileDAO.updateFileItem(fileItemList);
+		System.out.println("파일 업데이트문 실행 후");
 	}
 
 

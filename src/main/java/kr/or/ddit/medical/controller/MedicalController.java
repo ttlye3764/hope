@@ -103,13 +103,7 @@ public class MedicalController {
 		
 		mypillInfo.setMem_no("1");
 		
-		System.out.println(mypillInfo.getPill_no());
-		System.out.println(mypillInfo.getPill_name());
-		System.out.println(mypillInfo.getPill_start());
-		System.out.println(mypillInfo.getPill_end());
-		System.out.println(mypillInfo.getPill_count());
-		System.out.println(mypillInfo.getPill_alerttime());
-		System.out.println(mypillInfo.getPill_color());
+		
 		
 		this.medicalService.updateMedicalInfo(mypillInfo, items);
 		return andView;

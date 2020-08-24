@@ -6,6 +6,35 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- 부트스트랩 -->
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="${pageContext.request.contextPath }/resources/template/assets/images/favicon.ico">
+
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900%7CPlayfair+Display:400,400i,700,700i%7CRoboto:400,400i,500,700" rel="stylesheet">
+
+	<!-- Plugins CSS -->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/font-awesome/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/themify-icons/css/themify-icons.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/animate/animate.min.css" />
+
+	<!-- Theme CSS -->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/css/style.css" />
+	
+	<script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
+
+<!-- 부트스트랩 -->
+	<!--Global JS-->
+	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/jquery/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/popper.js/umd/popper.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+
+
+
+
+
 
 <!-- timepicker -->
 <link
@@ -190,7 +219,7 @@ function setCalendar(data){
     	     	        $("#regist-modal2 input[name='pill_alerttime']").val(result.json.pill_alerttime);
     	     	        $("#regist-modal2 input[name='pill_color']").val(result.json.pill_color);
     	     	        $("#regist-modal2 input[name='pill_no']").val(result.json.pill_no);
-    	     	        $("#regist-modal2 img[id=img2]").attr("src", "D:/temp/files/"+result.json2.file_save_name);
+    	     	        $("#regist-modal2 img[id=img2]").attr("src", "/D:/temp/files/"+result.json2.file_save_name);
     	     	        alert(result.json2.file_save_name);
     	             }
         	    });
@@ -262,7 +291,7 @@ function setCalendar(data){
 	<div id="regist-modal" class="modal fade" tabindex="-1" role="dialog"
 		aria-hidden="true">
 		<div class="modal-dialog">
-			<div class="modal-content">
+			<div class="modal-content" style="width:580px;">
 				<div class="modal-body">
 					<div class="container" style="">
 			<div class="row">
@@ -275,11 +304,11 @@ function setCalendar(data){
 			<div class="row ">
 				<!-- contact form -->
 				<div class="col-md-6">
-					<div class="h-100">
-						<form class="contact-form" id="contact-form" name="contactform" action="${pageContext.request.contextPath}/user/medical/insertMedicalInfo.do" method="post" enctype="multipart/form-data">			
+					<div class="h-100" style="width:500px;">
+						<form class="contact-form" id="contact-form" name="contactform2" action="${pageContext.request.contextPath}/user/medical/insertMedicalInfo.do" method="post" enctype="multipart/form-data">			
 							<!-- Start main form -->
-							<div class="row">
-								<div class="col-md-6">
+							
+								<div class="col-md-12" style="width:50%;" >
 									<!-- name -->
 										<label>제품 명 </label><input id="pill_name" name="pill_name" type="text" class="form-control" placeholder="제품명">
 										<label>복용일수 </label><input id="pill_count1" name="pill_count1" type="text" class="form-control" disabled>
@@ -287,8 +316,9 @@ function setCalendar(data){
 										<label>복용시작일</label><input type="date" id="pill_start" name="pill_start"  class="form-control">
 										<label>복용종료일</label><input type="date" id="pill_end" name="pill_end" class="form-control">
 										<label>알림시간설정</label><input type="time" id="pill_alerttime" name="pill_alerttime" class="form-control">
-								</div>	
-								<div class="col-md-6" style="width: 100px;">
+								</div>
+							
+								<div class="col-md-12" style="width:50%; float: left;">
 									<div></div>
 									<div class="col-md-12 text-center">
 									<input type="file" class="btn btn-outline-primary btn-block" style="margin-top: 30px;" id="files" name="files">
@@ -298,18 +328,19 @@ function setCalendar(data){
 									</div>
 									<div class="col-md-12 text-center"><button class="btn btn-outline-primary btn-block" style="margin-top: 60px;">약 상세보기</button></div>
 									<label>달력 표시 색 설정</label><div><input type="color" id="pill_color" name="pill_color"></div>
-								</div>																							
+								</div>		
+																											
 								<!-- submit button -->
 								<div class="col-md-12 text-center">
 								<button class="btn btn-outline-grad btn-block" type="submit">등록</button>
 								</div>
-							</div>
+							
 							<!-- End main form -->
 						</form>
 					</div>
 				</div>
 			</div>
-		</div>
+		</div><!-- 컨테이너 -->
 
 				</div>
 			</div>
@@ -337,7 +368,7 @@ function setCalendar(data){
 				<!-- contact form -->
 				<div class="col-md-6">
 					<div class="h-100">
-						<form class="contact-form" id="contact-form" name="contactform2" action="${pageContext.request.contextPath}/user/medical/updateMedicalInfo.do" method="post" enctype="multipart/form-data">			
+						<form class="contact-form" id="contact-form" name="contactform" action="${pageContext.request.contextPath}/user/medical/updateMedicalInfo.do" method="post" enctype="multipart/form-data">			
 							<!-- Start main form -->
 							<div class="row">
 								<div class="col-md-6">

@@ -39,8 +39,8 @@
     
     <update id="updateFileItem" parameterType="mypillfileVO">
     	update mypill_file
-    	set file_name = ${file_name}, file_save_name = ${file_save_name}, file_type = ${file_type}, file_size = ${file_size}
-    	where file_no = ${file_pill_no}
+    	set file_name = #{file_name}, file_save_name = #{file_save_name}, file_type = #{file_type}, file_size = #{file_size}
+    	where file_pill_no = #{file_pill_no}
     </update>
 
 </mapper>
