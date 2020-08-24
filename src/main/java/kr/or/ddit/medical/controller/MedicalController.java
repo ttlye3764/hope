@@ -115,4 +115,7 @@ public class MedicalController {
 		medicalService.deleteMedicalInfo(pill_no);
 		return andView;
 	}
+	
+	@RequestMapping("medicalMap")
+	public void medicalMap() {}
 }

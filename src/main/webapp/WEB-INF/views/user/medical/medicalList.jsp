@@ -191,8 +191,7 @@ var subend=[];
              		  });
              	 });            	   
           	   setCalendar(event);
-          	   console.log(result);
-          	   console.log(event);  
+          	  
   			}
   		});
 });
@@ -220,7 +219,6 @@ function setCalendar(data){
     	     	        $("#regist-modal2 input[name='pill_color']").val(result.json.pill_color);
     	     	        $("#regist-modal2 input[name='pill_no']").val(result.json.pill_no);
     	     	        $("#regist-modal2 img[id=img2]").attr("src", "/D:/temp/files/"+result.json2.file_save_name);
-    	     	        alert(result.json2.file_save_name);
     	             }
         	    });
     	       
@@ -280,7 +278,7 @@ function setCalendar(data){
 
 
 
-    </script>
+</script>
 </head>
 <body>
 
@@ -308,7 +306,7 @@ function setCalendar(data){
 						<form class="contact-form" id="contact-form" name="contactform2" action="${pageContext.request.contextPath}/user/medical/insertMedicalInfo.do" method="post" enctype="multipart/form-data">			
 							<!-- Start main form -->
 							
-								<div class="col-md-12" style="width:50%;" >
+								<div class="" style="width:50%; float: left;" >
 									<!-- name -->
 										<label>제품 명 </label><input id="pill_name" name="pill_name" type="text" class="form-control" placeholder="제품명">
 										<label>복용일수 </label><input id="pill_count1" name="pill_count1" type="text" class="form-control" disabled>
@@ -318,7 +316,7 @@ function setCalendar(data){
 										<label>알림시간설정</label><input type="time" id="pill_alerttime" name="pill_alerttime" class="form-control">
 								</div>
 							
-								<div class="col-md-12" style="width:50%; float: left;">
+								<div class="" style="width:50%; float: right;">
 									<div></div>
 									<div class="col-md-12 text-center">
 									<input type="file" class="btn btn-outline-primary btn-block" style="margin-top: 30px;" id="files" name="files">
@@ -327,13 +325,11 @@ function setCalendar(data){
 									<img id="img" style="width: 100%; height: 100%; margin-left: 15px; margin-top: 30px;">
 									</div>
 									<div class="col-md-12 text-center"><button class="btn btn-outline-primary btn-block" style="margin-top: 60px;">약 상세보기</button></div>
-									<label>달력 표시 색 설정</label><div><input type="color" id="pill_color" name="pill_color"></div>
-								</div>		
-																											
-								<!-- submit button -->
-								<div class="col-md-12 text-center">
-								<button class="btn btn-outline-grad btn-block" type="submit">등록</button>
-								</div>
+									<label style="margin-top: 30px; margin-left: 15px;">달력 표시 색 설정</label><div><input type="color" id="pill_color" name="pill_color" style="margin-left: 15px;"></div>
+								
+								</div>																													
+								
+								<button class="btn btn-outline-grad btn-block" type="submit">등록</button>								
 							
 							<!-- End main form -->
 						</form>
@@ -354,7 +350,7 @@ function setCalendar(data){
 	<div id="regist-modal2" class="modal fade" tabindex="-1" role="dialog"
 		aria-hidden="true">
 		<div class="modal-dialog">
-			<div class="modal-content">
+			<div class="modal-content" style="width:580px;">
 				<div class="modal-body">
 					<div class="container" style="">
 			<div class="row">
@@ -367,11 +363,10 @@ function setCalendar(data){
 			<div class="row ">
 				<!-- contact form -->
 				<div class="col-md-6">
-					<div class="h-100">
+					<div class="h-100" style="width:500px;">
 						<form class="contact-form" id="contact-form" name="contactform" action="${pageContext.request.contextPath}/user/medical/updateMedicalInfo.do" method="post" enctype="multipart/form-data">			
-							<!-- Start main form -->
-							<div class="row">
-								<div class="col-md-6">
+							<!-- Start main form -->							
+								<div class="" style="width:50%; float: left;">
 									<!-- name -->
 										<input id="pill_no" name="pill_no" type="hidden" class="form-control">
 										<label>제품 명 </label><input id="pill_name" name="pill_name" type="text" class="form-control" placeholder="제품명">
@@ -381,7 +376,7 @@ function setCalendar(data){
 										<label>복용종료일</label><input type="date" id="pill_end_update" name="pill_end" class="form-control">
 										<label>알림시간설정</label><input type="time" id="pill_alerttime" name="pill_alerttime" class="form-control">
 								</div>	
-								<div class="col-md-6" style="width: 100px;">
+								<div class="" style="width:50%; float: left;">
 									<div></div>
 									<div class="col-md-12 text-center">
 									<input type="file" class="btn btn-outline-primary btn-block" style="margin-top: 30px;" id="files2" name="files">
@@ -390,14 +385,13 @@ function setCalendar(data){
 									<img id="img2" style="width: 100%; height: 100%; margin-left: 15px; margin-top: 30px;">
 									</div>
 									<div class="col-md-12 text-center"><button class="btn btn-outline-primary btn-block" style="margin-top: 60px;">약 상세보기</button></div>
-									<label>달력 표시 색 설정</label><div><input type="color" id="pill_color" name="pill_color"></div>
+									<label style="margin-top: 30px; margin-left: 15px;">달력 표시 색 설정</label><div><input type="color" id="pill_color" name="pill_color" style="margin-left: 15px;"></div>
 								</div>																							
 								<!-- submit button -->
-								<div class="col-md-12 text-center">
-								<button class="btn btn-outline-grad " type="submit">수정</button>
-								<button class="btn btn-outline-grad " id="deleteBTN" type="button">삭제</button>
-								</div>
-							</div>
+							
+								<button class="btn btn-outline-grad btn-block" type="submit">수정</button>
+								<button class="btn btn-outline-grad btn-block" id="deleteBTN" type="button">삭제</button>
+							
 							<!-- End main form -->
 						</form>
 					</div>
