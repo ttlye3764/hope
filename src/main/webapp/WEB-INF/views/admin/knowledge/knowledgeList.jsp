@@ -28,9 +28,9 @@ $(function(){
 	});
 
 	// 수정
-	$('button[value="수정"]').click(function(){	
-		var k_no = document.getElementsByClassName("k_no").value;
-		alert(k_no);
+	$('button[value="수정"]').click(function(){
+		var k_no = $(this).data("kno");	
+		//var k_no = document.getElementById("k_no").value;
 		$(location).attr('href','${pageContext.request.contextPath}/admin/knowledge/knowledgeView.do?k_no=' + k_no);
 		
 	});
@@ -38,7 +38,8 @@ $(function(){
 	// 삭제
 	$('button[value="삭제"]').click(function(){	
 		alert("삭제 되었습니다.");
-		var k_no = document.getElementsByClassName("k_no").value;
+		var k_no = $(this).data("kno");
+		//var k_no = document.getElementById("k_no").value;
 		$(location).attr('href','${pageContext.request.contextPath}/admin/knowledge/deleteKnowledgeInfo.do?k_no=' + k_no);
 		
 	});
@@ -103,14 +104,11 @@ $(function(){
 					<c:forEach items="${knowledgeList }" var="knowledgeInfo">
 					
 					<c:set var="radio" value="${radio + 1}" />
-					<c:set var="deleteBtn" value="${deleteBtn + 1}" />
-					<c:set var="updateBtn" value="${updateBtn + 1}" />
-					<c:set var="k_no" value="${k_no + 1}" />
 					
 					<div class="card" style="width: 800px; margin-left: 150px">
 						<div class="card-body">
 							<h4 class="mb-2">
-							<input type="hidden" value="${knowledgeInfo.k_no}" id="${k_no}" class="k_no"/>
+							<input type="hidden" value="${knowledgeInfo.k_no}" id="k_no"/>
 							${knowledgeInfo.rnum }. ${knowledgeInfo.k_title }</h4>
 							<div class="form-group">
 								${knowledgeInfo.k_content }
@@ -163,8 +161,8 @@ $(function(){
 								</div>
 							</div>
 							
-						<button type="button" class="btn btn-danger" value="삭제" id="${deleteBtn}" style="float: right; margin-left: 10px; width: 80px">삭제</button>
-						<button type="button" class="btn btn-primary" value="수정" id="${updateBtn}" style="float: right; width: 80px">수정</button>
+						<button type="button" class="btn btn-danger" value="삭제" id="${deleteBtn}" style="float: right; margin-left: 10px; width: 80px" data-kno="${knowledgeInfo.k_no}">삭제</button>
+						<button type="button" class="btn btn-primary" value="수정" id="${updateBtn}" style="float: right; width: 80px" data-kno="${knowledgeInfo.k_no}">수정</button>
 						</div>
 						
 						

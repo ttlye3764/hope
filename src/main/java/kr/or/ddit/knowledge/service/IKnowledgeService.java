@@ -15,7 +15,7 @@ public interface IKnowledgeService {
 		public String insertKnowledge(KnowledgeVO knowledgeInfo, MultipartFile[] items) throws Exception;
 
 		// 문제 수정
-		public void updateKnowledge(KnowledgeVO knowledgeInfo) throws Exception;
+		public void updateKnowledge(KnowledgeVO knowledgeInfo, MultipartFile[] items) throws Exception;
 		
 		// 문제 상세
 		public KnowledgeVO knowledgeInfo(Map<String, String> params) throws Exception;

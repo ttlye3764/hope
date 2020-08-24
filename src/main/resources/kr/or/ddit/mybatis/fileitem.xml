@@ -23,13 +23,19 @@
 	<select resultType="fileitemVO" id="fileitemInfo" parameterType="map">
 		SELECT *
 		FROM FileItem
-		WHERE FILE_NO = #{file_no}
+		WHERE K_NO = #{k_no}
 	</select>
 
 	<delete id="deleteFileItem" parameterType="String">
 			DELETE
 		 	FROM FileItem
-		 	WHERE file_NO = #{file_no}
+		 	WHERE K_NO = #{k_no}
     	</delete>
+    	
+    <update id="updateFileItem" parameterType="fileitemVO">
+    	update FileItem
+    	set FILE_NAME = ${file_name}, FILE_SAVE_NAME = ${file_save_name}, FILE_TYPE = ${file_type}, FILE_SIZE = ${file_size}
+    	where K_NO = ${k_no}
+    </update>
 
 </mapper>

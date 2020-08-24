@@ -17,14 +17,12 @@ public class IFileItemDAOImpl implements IFileItemDAO {
 	@Resource
 	private SqlSessionTemplate client;
 	
-	
 	@Override
 	public void insertFileItem(List<FileItemVO> fileitemList) throws Exception {
 		
 			for(FileItemVO fileItemInfo : fileitemList){
 				client.insert("fileitem.insertFileItem", fileItemInfo);
 			}
-		
 	}
 
 	@Override
@@ -33,8 +31,8 @@ public class IFileItemDAOImpl implements IFileItemDAO {
 	}
 
 	@Override
-	public void deleteFileItem(String file_no) throws Exception {
-		client.delete(file_no);
+	public void updateFileItem(List<FileItemVO> fileItemList) throws Exception {
+		client.update("fileitem.updateFileItem", fileItemList);
 	}
 
 }
