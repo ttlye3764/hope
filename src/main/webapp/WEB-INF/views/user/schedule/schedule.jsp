@@ -52,7 +52,8 @@ var sJson;
                    title : v.s_memo,
                    start : v.s_startdate,
                    end : v.s_enddate, 
-                   id : v.s_no
+                   id : v.s_no,
+                   color : v.s_color
                   });
                 });                
                  setCalendar(event);
@@ -78,6 +79,8 @@ function setCalendar(data){
                $('#change-modal [name="s_enddate"]').val(moment(eventObj.end).format('YYYY/MM/DD HH:mm:ss'));
                $('#change-modal [name="s_memo"]').val(eventObj.title);
                $('#change-modal [name="s_no"]').val(eventObj.id);
+               $('#change-modal [name="s_color"]').val(eventObj.color);
+            
            $("#change-modal").modal("show"); //모달창 띄우기
            
             $('form[name=scheduleChangeForm').submit(function(){
@@ -164,7 +167,7 @@ function setCalendar(data){
                   </div>
                   
                   <input type="hidden" name="mem_no" value=2>
-                  
+                  <label>달력 표시 색 설정</label><div><input type="color" id="s_color" name="s_color"></div>
                   <div class="form-group text-center">
                      <button id="regist" class="btn btn-rounded btn-primary"
                         type="submit">regist</button>
@@ -221,7 +224,7 @@ function setCalendar(data){
                   
                   <input type="hidden" name="mem_no" value=2>
                   <input type="hidden" name="s_no">
-                  
+                  <label>달력 표시 색 설정</label><div><input type="color" id="s_color" name="s_color"></div>
                   <div class="form-group text-center">
                      <button id="save" name="save" class="btn btn-rounded btn-primary"
                         type="submit">save</button>

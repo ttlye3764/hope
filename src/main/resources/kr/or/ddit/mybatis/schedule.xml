@@ -11,14 +11,16 @@
                s_memo,
                s_startdate,
                s_enddate,
-               mem_no)
+               mem_no,
+               s_color)
          VALUES
              (
                schedule_seq.nextval,      
                #{s_memo},   
                #{s_startdate},
                #{s_enddate},
-               #{mem_no}
+               #{mem_no},
+               #{s_color}
                )
          
    </insert>
@@ -44,7 +46,8 @@
          SET 
             S_MEMO    = #{s_memo}   
             ,S_STARTDATE = #{s_startdate}
-            ,S_ENDDATE      = #{s_enddate}      
+            ,S_ENDDATE      = #{s_enddate}  
+            ,S_COLOR      = #{s_color}      
          WHERE S_NO = #{s_no}
    </update>
 
