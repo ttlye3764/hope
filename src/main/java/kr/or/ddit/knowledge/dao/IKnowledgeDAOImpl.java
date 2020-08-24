@@ -38,7 +38,7 @@ public class IKnowledgeDAOImpl implements IKnowledgeDAO {
 
 	@Override
 	public void updateKnowledge(KnowledgeVO knowledgeInfo) throws Exception {
-		client.update("knowledge.updateknowledge", knowledgeInfo);
+		client.update("knowledge.updateKnowledge", knowledgeInfo);
 	}
 
 

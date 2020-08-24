@@ -3,6 +3,7 @@ package kr.or.ddit.member.service;
 import java.util.List;
 import java.util.Map;
 
+import kr.or.ddit.vo.FriendVO;
 import kr.or.ddit.vo.MemberVO;
 
 public interface IMemberService {
@@ -12,4 +13,5 @@ public interface IMemberService {
 	public void updateMemberInfo(MemberVO memberInfo)throws Exception;
 	public void insertMember (MemberVO memberVO)throws Exception;
 	public String selectSeq()throws Exception;
+	public List<FriendVO> friendMemberList(Map<String, String> params) throws Exception;
 }

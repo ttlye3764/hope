@@ -29,9 +29,5 @@ public class IFileItemServiceImpl implements IFileItemService {
 		return dao.fileitemInfo(params);
 	}
 
-	@Override
-	public void deleteFileItem(String file_no) throws Exception {
-		
-	}
 
 }

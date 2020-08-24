@@ -12,7 +12,6 @@ public class KnowledgeVO {
 	private String k_answer3; // 퀴즈 답3
 	private String k_answer4; // 퀴즈 답4
 	private String k_answer; // 퀴즈 정답
-	private String k_img; // 이미지
 	private int t_no; // 통계 번호
 	private int rnum; // 순서
 	private String mem_no; // 멤버 번호
@@ -104,14 +103,6 @@ public class KnowledgeVO {
 
 	public void setK_title(String k_title) {
 		this.k_title = k_title;
-	}
-
-	public String getK_img() {
-		return k_img;
-	}
-
-	public void setK_img(String k_img) {
-		this.k_img = k_img;
 	}
 
 	public int getT_no() {

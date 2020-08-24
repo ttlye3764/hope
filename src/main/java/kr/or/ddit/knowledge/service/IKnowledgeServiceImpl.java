@@ -38,17 +38,20 @@ public class IKnowledgeServiceImpl implements IKnowledgeService {
 	public String insertKnowledge(KnowledgeVO knowledgeInfo, MultipartFile[] items) throws Exception {
 		knowledgeDAO.insertKnowledge(knowledgeInfo);
 		
-		String k_no = knowledgeDAO.fileSequence();
-		List<FileItemVO> fileItemList =AttachFileMapper.mapper(items, k_no);
+		String fileSequence = knowledgeDAO.fileSequence();
+		List<FileItemVO> fileItemList =AttachFileMapper.mapper(items, fileSequence);
 		
 	    fileitemDAO.insertFileItem(fileItemList);
 
-		return k_no;
+		return fileSequence;
 	}
 
 	@Override
-	public void updateKnowledge(KnowledgeVO knowledgeInfo) throws Exception {
+	public void updateKnowledge(KnowledgeVO knowledgeInfo , MultipartFile[] items) throws Exception {
 		knowledgeDAO.updateKnowledge(knowledgeInfo);
+		
+		List<FileItemVO> fileItemList =AttachFileMapper.mapper(items, knowledgeInfo.getK_no());
+		fileitemDAO.updateFileItem(fileItemList);
 
 	}
 

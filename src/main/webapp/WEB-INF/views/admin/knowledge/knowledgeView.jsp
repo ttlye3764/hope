@@ -20,8 +20,10 @@
 <script type="text/javascript">
 $(function(){
 	$('form[name=knowledgeView]').on('submit', function(){	
+
 	    var k_answer = $('input[name="k_answer"]:checked').val();
-		 $(this).attr('action','${pageContext.request.contextPath}/admin/knowledge/updateKnowledgeInfo.do?k_answer=' + k_answer);
+		$(this).append('<input type="hidden" name="k_no" value="${knowledgeInfo.k_no}"/>');
+     	$(this).attr('action','${pageContext.request.contextPath}/admin/knowledge/updateKnowledgeInfo.do?k_answer=' + k_answer);
 	        
 	        return true;
 	});
@@ -30,7 +32,6 @@ $(function(){
 		$(location).attr('href','${pageContext.request.contextPath}/admin/knowledge/knowledgeList.do');
 		
 	});
-
 
 });
  function setThumbnail(event) { 
@@ -85,6 +86,7 @@ $(function(){
 	</div> -->
 	
 	<!-- 문제 -->
+<form name="knowledgeView" class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
 	<section class="timeline-page">
 		<div class="container">
 			<div class="row">
@@ -99,13 +101,12 @@ $(function(){
 				<div class="col-md py-2">
 					<div class="card">
 						<div class="card-body">
-							<form name="knowledgeView" class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
 								<h4 class="mb-2">
-									<input type="text" size="30px" id="k_title" name="k_title" value="${KnowledgeInfo.k_title}">
+									<input type="text" size="30px" id="k_title" name="k_title" value="${knowledgeInfo.k_title}">
 								</h4>
 							<div class="form-group">
 								<textarea class="form-control" rows="5" placeholder="내용을 입력하세요." id="k_content" name="k_content"
-								value="${KnowledgeInfo.k_content}" ></textarea>
+								>${knowledgeInfo.k_content}</textarea>
 							</div>
 							
 							 <c:if test="${!empty knowledgeInfo.items }">  
@@ -123,7 +124,7 @@ $(function(){
 									<c:if test="${knowledgeInfo.k_answer eq 'k_answer1'}">checked</c:if>
 									class="custom-control-input">
 									<label class="custom-control-label" for="customRadio1"><span>01</span>
-									<input type="text" size="30px" id="k_answer1" name="k_answer1" value="${KnowledgeInfo.k_answer1}">
+									<input type="text" size="30px" id="k_answer1" name="k_answer1" value="${knowledgeInfo.k_answer1}">
 									</label>
 								</div>
 								
@@ -132,7 +133,7 @@ $(function(){
 									<c:if test="${knowledgeInfo.k_answer eq 'k_answer2'}">checked</c:if>
 									class="custom-control-input">
 									<label class="custom-control-label" for="customRadio2"><span>02</span> 
-									<input type="text" size="30px" id="k_answer2" name="k_answer2" value="${KnowledgeInfo.k_answer2}">
+									<input type="text" size="30px" id="k_answer2" name="k_answer2" value="${knowledgeInfo.k_answer2}">
 									</label>
 								</div>
 								<div class="custom-control custom-radio" style="padding: 10px">
@@ -140,7 +141,7 @@ $(function(){
 									<c:if test="${knowledgeInfo.k_answer eq 'k_answer3'}">checked</c:if>
 									class="custom-control-input">
 									<label class="custom-control-label" for="customRadio3"><span>03</span> 
-									<input type="text" size="30px" id="k_answer3" name="k_answer3" value="${KnowledgeInfo.k_answer3}">
+									<input type="text" size="30px" id="k_answer3" name="k_answer3" value="${knowledgeInfo.k_answer3}">
 									</label>
 								</div>
 								<div class="custom-control custom-radio" style="padding: 10px">
@@ -148,16 +149,16 @@ $(function(){
 									<c:if test="${knowledgeInfo.k_answer eq 'k_answer4'}">checked</c:if>
 									class="custom-control-input">
 									<label class="custom-control-label" for="customRadio4"><span>04</span> 
-									<input type="text" size="30px" id="k_answer4" name="k_answer4" value="${KnowledgeInfo.k_answer4}">
+									<input type="text" size="30px" id="k_answer4" name="k_answer4" value="${knowledgeInfo.k_answer4}">
 									</label>
 								</div>
 								
 							</div>
-									<div class="form-group">
-										<label for="exampleFormControlFile1"></label>
-										<input type="file" class="form-control-file" name="files"
-										  id="exampleFormControlFile1" onchange="setThumbnail(event);"/>
-									</div>
+								<div class="form-group">
+									<label for="exampleFormControlFile1"></label>
+									<input type="file" class="form-control-file" name="files"
+									  id="exampleFormControlFile1" onchange="setThumbnail(event);"/>
+								</div>
 						</div>
 					</div>
 				</div>
@@ -175,9 +176,10 @@ $(function(){
 						</div>
 					</div>
 				</div>
-			</form>
 			</section>
 			
+			<!-- end form -->
+			</form>
 		</div>
 	</div>
 </div>
