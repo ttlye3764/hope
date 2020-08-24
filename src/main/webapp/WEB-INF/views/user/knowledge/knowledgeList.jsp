@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,6 +30,11 @@
 	   document.getElementById("check").innerHTML="오답입니다."; */
 	   document.getElementById("result").innerHTML=count;
 	 }
+
+ $(function(){
+	
+	 });
+	 
   
 </script>
 </head>
@@ -120,15 +126,15 @@
 				<div class="col-md py-2">
 					<c:if test="${empty knowledgeList }">
 					
-					<div class="card" style="width: 800px; margin-left: 150px">
+					<div class="card" style="width: 600px; margin-left: 150px; height: 500px;">
 						<div class="card-body">
 							<h4 class="mb-2" style="text-align: center;">등록된 게시글이 존재하지 않습니다!!!</h4>
 						</div>
 					</div>
 					</c:if>
 					
-					<c:if test="${!empty knowledgeList}">
-					<c:forEach items="${knowledgeList}" var="knowledgeInfo">
+					<c:if test="${!empty knowledgeList }">
+					<c:forEach items= "${knowledgeList }" var= "knowledgeInfo">
 					<c:set var="radio" value="${radio + 1}" />
 					
 					<div class="card" style="width: 800px; margin-left: 150px">
@@ -139,8 +145,6 @@
 							<div class="form-group">
 								${knowledgeInfo.k_content }
 							</div>
-							
-							${knowledgeInfo.k_content }
 							
 							<!-- 파일  -->
 							 <c:if test="${!empty knowledgeInfo.items }">  
@@ -184,10 +188,15 @@
 							</div>
 						</div>
 					</div>
+					
+					<br><br><br><br>
+					
 					</c:forEach>
 					</c:if>
 				</div>
 			</div>
+			
+			<br><br><br><br>
 			
 	<!-- =======================
 	call to action-->
