@@ -37,6 +37,10 @@ public class JoinController {
 	private MessageSourceAccessor accessor;
 	@Autowired
 	private IMemberService service;
+	
+	@RequestMapping("joinChoiceForm")
+	  public void joinChoiceForm(){}
+	
 	@RequestMapping("loginForm")
 	public void loginForm(HttpServletRequest request){
 		// 반환값 : join/loginForm
@@ -75,7 +79,7 @@ public class JoinController {
 		if(memberInfo == null){
 			// 리다이렉트(컨텍스트 루트 | 패스 생략)
 //			String message = this.accessor.getMessage("가입되지 않은 회원이거나, 비밀번호를 확인해주세요.", Locale.KOREA);
-			String message = "아이디 또는 비밀번호가 일치하지 않습니다.";
+			String message = "아이디나 비밀번호가 일치하지 않습니다.";
 //			message = URLEncoder.encode(message, "UTF-8");
 			andView.addObject("json",message);
 			andView.setViewName("jsonConvertView");

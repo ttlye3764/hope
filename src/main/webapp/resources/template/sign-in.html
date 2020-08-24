@@ -21,6 +21,76 @@
 
 	<!-- Theme CSS -->
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+	
+	<script type='text/javascript'>
+      $(function(){
+            if(eval('${!empty param.message}')){
+               alert('${param.message}');
+            }
+
+            $('#loginBtn').click(function(){
+          	  	var mem_id = $('#mem_id').val();
+                var mem_pass = $('#mem_pass').val();
+
+                if(mem_id==''){
+             	   	$('#label').text("아이디를 입력해주세요.");
+             	  	$('#label').css('color', 'red');
+             	  	return false;
+                }
+                if(mem_pass==''){
+      				$('#label').text("비밀번호를 입력해주세요.");
+      				$('#label').css('color', 'red');
+      				return false;
+                }    
+                
+                $.ajax({
+        			type : 'POST',
+        			url : '${pageContext.request.contextPath}/user/join/loginCheck.do',
+        			dataType : 'json',
+        			data : {
+        				mem_id : $('#mem_id').val(),
+        				mem_pass : $('#mem_pass').val()
+        			},
+        			error : function(result) {
+        				$('#label').text(result.json);
+        				$('#label').css('color', 'red');
+        			},
+        			success : function(result) {
+        				//{ flag : true | false}
+        				if(result.json==1){
+        					$(location).attr('href', '${pageContext.request.contextPath}/user/freeboard/freeboardForm.do');
+        				}else{
+        					$('#label').text(result.json);
+        					$('#label').css('color', 'red');
+                		}
+        			}
+        		});
+        	});
+      });
+
+      function caps_lock(e) {
+              var keyCode = 0;
+              var shiftKey = false;
+              keyCode = e.keyCode;
+              shiftKey = e.shiftKey;
+              if (((keyCode >= 65 && keyCode <= 90) && !shiftKey)
+                      || ((keyCode >= 97 && keyCode <= 122) && shiftKey)) {
+                  show_caps_lock();
+                  setTimeout("hide_caps_lock()", 3500);
+              } else {
+                  hide_caps_lock();
+              }
+          }
+   
+      function show_caps_lock() {
+    	  $('#label').css('color', 'red');
+           $("#label").text("CapsLock이 켜져있습니다.");
+      }
+   
+      function hide_caps_lock() {
+           $("#label").text("");
+      }
+</script>
 
 </head>
 
@@ -60,23 +130,26 @@
 					<div class="row h-100">
 						<div class="col-12 col-md-10 col-lg-5 text-left mx-auto d-flex align-items-center">
 							<div class="w-100">
-								<h2 class="">Sign into your account!</h2>
-								<h5 class="font-weight-light">Nice to see you! Please log in with your account.</h5>
+								<h2 class="">Login</h2>
+								<h5 class="font-weight-light">쟈비스에 로그인하여 더 많은 기능을 이용해보세요!</h5>
 								<div class="form mt-4 ">
 									<div>
-										<p class="text-left mb-2">Email address</p>
-										<span class="form-group"><input type="email" class="form-control" placeholder="E-mail"></span>
+										<p class="text-left mb-2">아이디</p>
+										<span class="form-group"><input type="email" class="form-control" placeholder="User ID"></span>
 									</div>
 									<div>
 										<div class="d-flex justify-content-between align-items-center">
-											<p class="text-left mb-2">Password</p>
-											<a class="text-muted small mb-2" href="password-recovery.html">Lost password? Click Here.</a>
+											<p class="text-left mb-2">패스워드</p>											
 										</div>
-										<span class="form-group"><input type="password" class="form-control" placeholder="*********"></span>
+										<span class="form-group"><input type="password" class="form-control" placeholder="*********" onkeypress="caps_lock(event)"></span>
 									</div>
 									<div class="row align-items-center no-gutters m-0">
-										<div class="col-6 col-md-8"><span class="text-muted">Don't have an account? <a href="sign-up.html">Signup</a></span></div>
-										<div class="col-6 col-md-4 text-right"><button class="btn btn-dark ">Let's Rock</button></div>
+										<div class="col-6 col-md-8"><label id="label">g</label></div>
+										<div class="col-6 col-md-8"><span class="text-muted">회원이 아니신가요?  <a href="sign-up.html">Signup</a></span></div>
+										<div class="col-6 col-md-8">
+										<a class="text-muted small mb-2" href="id-recovery.html">아이디찾기</a> / 
+										<a class="text-muted small mb-2" href="password-recovery.html">비밀번호찾기</a></div>
+										<div class="col-6 col-md-4 text-right"><button class="btn btn-dark ">로그인</button></div>
 									</div>
 								</div>
 							</div>

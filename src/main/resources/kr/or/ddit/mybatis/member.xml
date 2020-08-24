@@ -34,7 +34,7 @@
 
 	<select id="memberInfo" parameterType="map" resultType="memberVO">
 		<include refid="selectAll"/>
-		<if test="mem_pass != null">
+		<if test="mem_id != null">
 			AND MEM_ID = #{mem_id}
 		</if>
 		<if test="mem_name != null">
