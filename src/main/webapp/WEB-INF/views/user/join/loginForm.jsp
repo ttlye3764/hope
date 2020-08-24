@@ -15,11 +15,21 @@
 <title><spring:message code="cop.memberMngr.login"></spring:message></title>
 <script type='text/javascript'
 	src='http://code.jquery.com/jquery-latest.js'></script>
-	<script>
+<style>
 	.box{
-  	  border-color : red #333;
+  	  border-color : gray;
+  	  width : 330px;
+  	  height : 45px;
      }
-	</script>
+	.tLine {
+		background-color: #d2d2d2;
+		height: 1px;
+		margin: 5px;
+	}
+ 	#loginimg{ 
+ 		padding-right : 2px;  
+ 	} 
+</style>
 <script type='text/javascript'>
       $(function(){
             if(eval('${!empty param.message}')){
@@ -88,7 +98,13 @@
       function hide_caps_lock() {
            $("#label").text("");
       }
-      
+
+      function mover(){
+			$("#loginBtn").attr("src", "${pageContext.request.contextPath }/image/login1.png");
+      }
+      function mout(){
+    	  $("#loginBtn").attr("src", "${pageContext.request.contextPath }/image/login.png");
+      }
       </script>
 </head>
 <body>
@@ -100,7 +116,7 @@
 		</tr>
 		<tr>
 			<td>
-				<table border="0" align="center" cellpadding="5" cellspacing="0">
+				<table border="0" align="center" cellpadding="1" cellspacing="0" >
 					<tr>
 						<td width="500" align="center">
 						<input type="text" name="mem_id" id="mem_id" class="box" tabindex="3" height="18" placeholder="아이디"/></td>
@@ -116,14 +132,14 @@
 						<td>
 					</tr>
 					<tr>
-						<td colspan="2" align="center">
-						<img src="${pageContext.request.contextPath }/image/login.gif"
-							class="loginBtn" id="loginBtn" /></td>
+						<td colspan="2" align="center" id="loginimg">
+						<img src="${pageContext.request.contextPath }/image/login.png" class="loginBtn" id="loginBtn" onmouseover="mover()" onmouseout="mout()"/></td>
 					</tr>
+					<tr><td class="tLine" colspan="2"></td></tr>
 					<tr>
-						<td colspan="2"><spring:message code="cop.idSave"></spring:message>
-							: <input type="checkbox" name="saveID" /> <a
-							href='${regustMemberURI}'><spring:message
+						<td align="center" ><spring:message code="cop.idSave"></spring:message>
+							: <input type="checkbox" name="saveID" /> 
+							<a href='${regustMemberURI}' ><spring:message
 									code="cop.regist.msg"></spring:message></a></td>
 					</tr>
 				</table>
