@@ -6,7 +6,6 @@
      <resultMap id="knowledgeResultMap" type="knowVO">
     		<result property="k_no" column="k_no"/>
 			<result property="k_title" column="k_title"/>
-			<result property="k_img" column="k_img"/>
 			<result property="k_content" column="k_content"/>
 			<result property="k_answer1" column="k_answer1"/>
 			<result property="k_answer2" column="k_answer2"/>
@@ -81,6 +80,7 @@
     		   	  ,k_answer2 = #{k_answer2}
     		   	  ,k_answer3 = #{k_answer3}
     		   	  ,k_answer4 = #{k_answer4}
+    		   	  ,k_answer = #{k_answer}
     		WHERE K_NO = #{k_no}
     	</update>
     	
