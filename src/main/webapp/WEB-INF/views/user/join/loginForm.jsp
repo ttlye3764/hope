@@ -27,7 +27,7 @@
 		margin: 5px;
 	}
  	#loginimg{ 
- 		padding-right : 2px;  
+ 		padding-right : 4px;  
  	} 
 </style>
 <script type='text/javascript'>
@@ -118,11 +118,11 @@
 			<td>
 				<table border="0" align="center" cellpadding="1" cellspacing="0" >
 					<tr>
-						<td width="500" align="center">
+						<td width="330" align="center">
 						<input type="text" name="mem_id" id="mem_id" class="box" tabindex="3" height="18" placeholder="아이디"/></td>
 					</tr>
 					<tr>
-						<td width="500" align="center">
+						<td width="330" align="center">
 						<input type="password" name="mem_pass" id="mem_pass" class="box" tabindex="3" height="18" placeholder="비밀번호"
 							width="300" onkeypress="caps_lock(event)" /></td>
 					</tr>
@@ -135,12 +135,37 @@
 						<td colspan="2" align="center" id="loginimg">
 						<img src="${pageContext.request.contextPath }/image/login.png" class="loginBtn" id="loginBtn" onmouseover="mover()" onmouseout="mout()"/></td>
 					</tr>
+					<tr>
+						<td>&nbsp
+						</td>
+					</tr>
+					<tr>
+						<td align="left"><spring:message code="cop.idSave"></spring:message>
+							: <input type="checkbox" name="saveID" /> 
+					</tr>
 					<tr><td class="tLine" colspan="2"></td></tr>
 					<tr>
-						<td align="center" ><spring:message code="cop.idSave"></spring:message>
-							: <input type="checkbox" name="saveID" /> 
-							<a href='${regustMemberURI}' ><spring:message
-									code="cop.regist.msg"></spring:message></a></td>
+						<td>&nbsp
+						</td>
+					</tr>
+					<tr>
+						<td align="center">
+						<a>아이디 찾기</a> | <a>비밀번호 찾기</a> | <a href=${regustMemberURI}>회원가입</a></td>
+					</tr>
+					<tr>
+						<td>&nbsp
+						</td>
+					</tr>
+					<tr><td class="tLine" colspan="2"></td></tr>
+					<tr>
+						<td>&nbsp
+						</td>
+					</tr>
+					<tr>
+						<td>
+						<a href="${url}"> 
+						<img width="330" src="${pageContext.request.contextPath }/image/naver_login.png" /></a>
+						</td>
 					</tr>
 				</table>
 			</td>
