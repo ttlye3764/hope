@@ -112,7 +112,7 @@
 		cellspacing="0">
 		<tr>
 			<td height="150" align="center"><img
-				src="${pageContext.request.contextPath }/image/p_login.gif" /></td>
+				src="${pageContext.request.contextPath }/image/p_login1.gif" /></td>
 		</tr>
 		<tr>
 			<td>
