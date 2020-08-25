@@ -34,8 +34,8 @@
     	
     <update id="updateFileItem" parameterType="fileitemVO">
     	update FileItem
-    	set FILE_NAME = ${file_name}, FILE_SAVE_NAME = ${file_save_name}, FILE_TYPE = ${file_type}, FILE_SIZE = ${file_size}
-    	where K_NO = ${k_no}
+    	set FILE_NAME = #{file_name}, FILE_SAVE_NAME = #{file_save_name}, FILE_TYPE = #{file_type}, FILE_SIZE = #{file_size}
+    	where K_NO = #{k_no}
     </update>
 
 </mapper>

@@ -12,6 +12,7 @@
 		<typeAlias alias="freeboardVO" type="kr.or.ddit.vo.FreeboardVO" />
 		
 		<!-- 재호  -->
+		<typeAlias alias="friendVO" type="kr.or.ddit.vo.FriendVO"/>
 		
 		<!-- 용춘 -->
 		<typeAlias alias="mypillVO" type="kr.or.ddit.vo.MypillVO" />

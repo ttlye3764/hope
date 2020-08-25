@@ -13,4 +13,6 @@ public interface IBoardService {
 		public void deleteBoard(int bd_no) throws Exception;
 		//테이블 등
 		public void insertBoard(BoardVO boardVO) throws Exception;
+		
+		//test
 }

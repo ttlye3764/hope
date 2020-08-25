@@ -4,7 +4,7 @@
 
 <mapper namespace="freeboard">
 
-	<select id="boradList" resultType="List">
+	<select id="boradList" resultType="boardVO">
 		SELECT *
 		FROM BOARD
 	</select>

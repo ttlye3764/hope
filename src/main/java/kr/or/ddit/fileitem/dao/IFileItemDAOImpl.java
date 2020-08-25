@@ -32,7 +32,8 @@ public class IFileItemDAOImpl implements IFileItemDAO {
 
 	@Override
 	public void updateFileItem(List<FileItemVO> fileItemList) throws Exception {
-		client.update("fileitem.updateFileItem", fileItemList);
+		for (FileItemVO fileItemInfo : fileItemList) {
+			client.update("fileitem.updateFileItem", fileItemInfo);
+		}
 	}
-
 }

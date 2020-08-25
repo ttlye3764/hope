@@ -88,7 +88,7 @@
 						<div class="dropdown">
 						  <a class="dropdown-toggle" href="#" role="button" id="dropdownAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ti-user mr-2"></i>Account </a>
 						  <div class="dropdown-menu mt-2 shadow" aria-labelledby="dropdownAccount">
-						    <a class="dropdown-item" href="sign-in.html">Log In</a>
+						    <a class="dropdown-item" href="${pageContext.request.contextPath}/user/join/loginForm.do">Log In</a>
 						    <a class="dropdown-item" href="sign-up.html">Register</a>
 						    <a class="dropdown-item" href="#">Settings</a>
 						  </div>
@@ -178,32 +178,17 @@
 						</li>
 						<!-- Menu item 2 Blog-->
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="blogMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blog</a>
+							<a class="nav-link dropdown-toggle" href="#" id="blogMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Medical</a>
 							<ul class="dropdown-menu" aria-labelledby="blogMenu">
 								<li class="dropdown-submenu">
-									<a class="dropdown-item dropdown-toggle" href="#">Blog default</a>
-									<ul class="dropdown-menu">
-										<li> <a class="dropdown-item" href="blog-classic.html">Full Width</a> </li>
-										<li> <a class="dropdown-item" href="blog-classic-left-sidebar.html">Left Sidebar</a> </li>
-										<li> <a class="dropdown-item" href="blog-classic-right-sidebar.html">Right Sidebar</a> </li>
-									</ul>
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalList.do">복용내역</a>
 								</li>
 								<li class="dropdown-submenu">
-									<a class="dropdown-item dropdown-toggle" href="#">Blog Grid</a>
-									<ul class="dropdown-menu">
-										<li> <a class="dropdown-item" href="blog-grid-column-3.html">Three column</a> </li>
-										<li> <a class="dropdown-item" href="blog-grid-column-4.html">Four column</a> </li>
-										<li> <a class="dropdown-item" href="blog-grid-left-sidebar.html">Left Sidebar</a> </li>
-										<li> <a class="dropdown-item" href="blog-grid-right-sidebar.html">Right Sidebar</a> </li>
-									</ul>
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalMap.do">내 주위 병원/약국 위치보기</a>
 								</li>
-								<li><a class="dropdown-item" href="blog-minimal.html">Blog minimal</a></li>
+								<li><a class="dropdown-item" href="#">Blog minimal</a></li>
 								<li class="dropdown-submenu">
-									<a class="dropdown-item dropdown-toggle" href="#">Blog Single</a>
-									<ul class="dropdown-menu">
-										<li> <a class="dropdown-item" href="blog-single-classic.html">Single classic</a> </li>
-										<li> <a class="dropdown-item" href="blog-single-minimal.html">Single Minimal</a> </li>
-									</ul>
+									<a class="dropdown-item" href="#">Blog Single</a>
 								</li>
 							</ul>
 						</li>
@@ -298,6 +283,20 @@
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="docMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Docs</a>
 							<ul class="dropdown-menu" aria-labelledby="docMenu">
+								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/">Introduction</a> </li>
+								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/#getting-started-section">Directory structure</a> </li>
+								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/#installation-section">Gulp</a> </li>
+								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/#edit-section">Customization</a> </li>
+								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/#faqs">FAQs</a> </li>
+								<li class="dropdown-divider"></li>
+								<li> <a class="dropdown-item" href="http://support.webestica.com/" target="_blank">Support</a> </li>
+							</ul>
+						</li>
+						<!-- Menu item 7 chat-->
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/user/chat/chat.do" id="docMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">chat</a>
+							<ul class="dropdown-menu" aria-labelledby="docMenu">
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/chat/chat.do">chat</a> </li>
 								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/">Introduction</a> </li>
 								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/#getting-started-section">Directory structure</a> </li>
 								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/#installation-section">Gulp</a> </li>

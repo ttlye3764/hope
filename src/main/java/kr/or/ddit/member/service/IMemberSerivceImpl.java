@@ -6,8 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.or.ddit.member.dao.IMemberDAOImpl;
 import kr.or.ddit.member.dao.IMemberDAO;
+import kr.or.ddit.vo.FriendVO;
 import kr.or.ddit.vo.MemberVO;
 
 // 설정 파일 : <bean name="iMemberServiceImpl"
@@ -55,5 +55,13 @@ public class IMemberSerivceImpl implements IMemberService {
 	}
 	
 	
+	@Override
+	public List<FriendVO> friendMemberList(Map<String, String> params) throws Exception {
+		return dao.friendMemberList(params);
+	}
 
+	@Override
+	public String searchID(Map<String, String> params) throws Exception {
+		return dao.searchID(params);
+	}
 }
