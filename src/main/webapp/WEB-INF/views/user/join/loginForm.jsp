@@ -41,8 +41,8 @@
 .endbtn{
 	background-color: #4CBD94; 
 	color : white;
-	height : 30px;
-	width : 80px;
+	height : 40px;
+	width : 110px;
 }
 
 </style>
@@ -120,6 +120,79 @@
       function search_id_modal(){
     	  $("#search_id_modal").modal("show"); //모달창 띄우기
       }
+
+      function search_pw_modal(){
+    	  $("#search_id_modal_result").modal("hide");
+    	  $("#search_pw_modal").modal("show"); //모달창 띄우기
+      }
+
+      function sendsms() {
+  		var mem_hp = $('select[name=mem_hp1_pw]').val() + '-'
+  				+ $('input[name=mem_hp2_pw]').val() + '-'
+  				+ $('input[name=mem_hp3_pw]').val();
+  		$('input[name=mem_hp_pw]').val(mem_hp);
+
+  		hp = $('input[name=mem_hp2_pw]').val();
+  		hp1 = $('input[name=mem_hp3_pw]').val();
+
+  		if(hp=='' || hp1==''){
+  			alert('올바른 휴대전화 번호를 입력해주세요.');
+  			return false;
+  		}
+  		
+  		$.ajax({
+  			type : 'POST',
+  			url : '${pageContext.request.contextPath}/sms/sendSms.do',
+  			dataType : 'JSON',
+  			data : {
+  				mem_hp : $('input[name=mem_hp_pw]').val()
+  			},
+  			error : function(result) {
+  				alert(result.json);
+  			},
+  			success : function(result) {
+  				//{ flag : true | false}
+  				alert(result.json);
+  			}
+  		});
+  	};
+  	
+  	function checksms() {
+  		var mem_hp = $('select[name=mem_hp1_pw]').val() + '-'
+  				+ $('input[name=mem_hp2_pw]').val() + '-'
+  				+ $('input[name=mem_hp3_pw]').val();
+  		$('input[name=mem_hp_pw]').val(mem_hp);
+
+  		hp_num = $('input[name=hp_num_pw]').val();
+  		if(hp_num==''){
+  			alert('인증번호를 입력해주세요.');
+  			return false;
+  		}
+  		
+  		$.ajax({
+  			type : 'POST',
+  			url : '${pageContext.request.contextPath}/sms/checkSms.do',
+  			dataType : 'json',
+  			data : {
+  				mem_hp : $('input[name=mem_hp_pw]').val(),
+  				hp_num : $('input[name=hp_num_pw]').val()
+  			},
+  			error : function(result) {
+  				alert(result.json);
+  			},
+  			success : function(result) {
+  				//{ flag : true | false}
+  				alert(result.json);
+  				if(result.json == '인증이 완료되었습니다.'){
+  					$('select[name=mem_hp1_pw]').attr("disabled", true)
+  					$('input[name=mem_hp2_pw]').attr("disabled", true)
+  					$('input[name=mem_hp3_pw]').attr("disabled", true)
+  					$('input[name=hp_num_pw]').attr("hidden",true)
+  					$('input[name=hp_btn]').attr("hidden",true)
+  				}
+  			}
+  		});
+  	};
       
       function searchID(){
     	  var mem_birth = $('input[name=mem_bir1]').val() + '-'
@@ -150,15 +223,72 @@
 				mem_birth : $('#mem_birth').val()
 			},
 			success : function(result) {
-				big_mem_id = result.json;
+				if(result.json=='' || result.json==null){
+					big_mem_id = '일치하는 사용자가 없습니다.';
+				}else{
+					big_mem_id = '아이디 : ' + result.json;
+				}
 				$("#search_id_modal").modal("hide");
 				searchIDResult();
 			}
 		});
 	};
+
+	function searchPW(){
+  	  var mem_birth = $('input[name=mem_bir1_pw]').val() + '-'
+			+ $('input[name=mem_bir2_pw]').val() + '-'
+			+ $('input[name=mem_bir3_pw]').val();
+		$('#mem_birth_pw').val(mem_birth);
+
+		var bir1 = $('input[name=mem_bir1_pw]').val();
+		var bir2 = $('input[name=mem_bir2_pw]').val();
+		var bir3 = $('input[name=mem_bir3_pw]').val();
+
+		var mem_hp = $('select[name=mem_hp1_pw]').val() + '-'
+		+ $('input[name=mem_hp2_pw]').val() + '-'
+		+ $('input[name=mem_hp3_pw]').val();
+		$('input[name=mem_hp_pw]').val(mem_hp);
+		
+		if($('#mem_name_pw').val()==''){
+			alert('이름을 입력해주세요');
+			return false;
+		}
+
+		if(bir1=='' || bir2=='' || bir3==''){
+			alert('생년월일을 정확하게 입력해주세요');
+			return false;
+		}
+
+		$.ajax({
+			type : 'POST',
+			url : '${pageContext.request.contextPath}/user/member/searchPW.do',
+			dataType : 'json',
+			data : {
+				mem_id : $('#mem_id_pw').val(),
+				mem_name : $('#mem_name_pw').val(),
+				mem_birth : $('#mem_birth_pw').val(),
+				mem_hp : $('#mem_hp_pw').val()
+			},
+			success : function(result) {
+				if(result.json=='' || result.json==null){
+					big_mem_id = '일치하는 사용자가 없습니다.';
+				}else{
+					big_mem_id = '임시비밀번호 : ' + result.json;
+				}
+				$("#search_pw_modal").modal("hide");
+				searchPWResult();
+			}
+		});
+	};
+	
 	function searchIDResult(){
 		$("#search_id_modal_result").modal("show");
-		$('#IDresult').text("아이디 : " + big_mem_id);
+		$('#IDresult').text(big_mem_id);
+	}
+
+	function searchPWResult(){
+		$("#search_pw_modal_result").modal("show");
+		$('#PWresult').text(big_mem_id);
 	}
 </script>
 
@@ -290,9 +420,82 @@
 
                   <div class="form-group text-center">
                      <button class="endbtn"
-						type="button" onclick="searchPW()">비밀번호 찾기
+						type="button" onclick="search_pw_modal()">비밀번호 찾기
 					</button>
                   </div>
+               </form>
+            </div>
+         </div>
+         <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+   </div>
+   <!-- /.modal -->
+   
+<div id="search_pw_modal" class="modal fade" tabindex="-1" role="dialog"
+      aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-body">
+               <h5>비밀번호찾기</h5><br>
+
+               <form name="searchUserPW"   class="pl-3 pr-3">
+              	 <div class="form-group">
+                     	아&nbsp;&nbsp;이&nbsp;&nbsp;디 <input type="text" id="mem_id_pw" name="mem_id_pw" >
+                  </div>
+                  
+                  <div class="form-group">
+                     	이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름 <input type="text" id="mem_name_pw" name="mem_name_pw" >
+                  </div>
+
+                  <div class="form-group">
+                     	생년월일 <input type="hidden" name="mem_birth_pw" id="mem_birth_pw"/> <input type="text"
+					name="mem_bir1_pw" size="4" value="" />년 <input type="text"
+					name="mem_bir2_pw" size="2" value="" />월 <input type="text"
+					name="mem_bir3_pw" size="2" value="" />일
+                  </div>
+                  
+                  <div class="form-group">
+	                  	휴대전화<input type="hidden" name="mem_hp_pw" id="mem_hp_pw" /> <select
+						name="mem_hp1_pw">
+							<option value="010">010</option>
+							<option value="011">011</option>
+							<option value="016">016</option>
+							<option value="017">017</option>
+							<option value="019">019</option>
+					</select> - <input type="text" name="mem_hp2_pw" size="4" value="" /> - 
+					<input	type="text" name="mem_hp3_pw" size="4" value="" />
+					<a href="javascript:sendsms();">[인증번호 전송]</a><br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="text" name="hp_num_pw"/>
+					<input type="button" name="hp_btn" onClick="checksms()" class="btn" value="[인증번호 확인]">
+                  </div>
+
+                  <div class="form-group text-center">
+                     <button class="endbtn"
+						id="searchUserPW" type="button" onclick="searchPW()">
+					</button>
+                  </div>
+               </form>
+            </div>
+         </div>
+         <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+   </div>
+   <!-- /.modal -->
+   
+   <div id="search_pw_modal_result" class="modal fade" tabindex="-1" role="dialog"
+      aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-body">
+               <h5>비밀번호 찾기</h5><br>
+               <form name="searchUserPWResult"   class="pl-3 pr-3">
+                  <div class="form-group">
+                  	<label id="PWresult"></label>
+                  </div>
+                  
                </form>
             </div>
          </div>

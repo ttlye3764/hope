@@ -109,6 +109,15 @@
 		WHERE MEM_NAME = #{mem_name}
 		AND MEM_BIRTH = #{mem_birth}
 	</select>
+	
+	<select id="searchPW" resultType="String" parameterType="map">
+		SELECT MEM_PASS
+		FROM MEMBER
+		WHERE MEM_NAME = #{mem_name}
+		AND MEM_BIRTH = #{mem_birth}
+		AND MEM_ID = #{mem_id}
+		AND MEM_hp = #{mem_hp}
+	</select>
 
 </mapper>    
 

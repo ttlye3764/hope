@@ -71,4 +71,10 @@ public class IMemberDAOImpl implements IMemberDAO {
 		String mem_id = client.selectOne("member.searchID",params);
 		return mem_id;
 	}
+
+	@Override
+	public String searchPW(Map<String, String> params) throws Exception {
+		String mem_pass = client.selectOne("member.searchPW",params);
+		return mem_pass;
+	}
 }

@@ -173,4 +173,27 @@ public class MemberController {
 		  
 		  return andView;
 	  }
+	  
+	  @RequestMapping("searchPW")
+	  public ModelAndView searchPW(@RequestParam String mem_id,@RequestParam String mem_name, @RequestParam String mem_birth,@RequestParam String mem_hp
+			  					,Map<String, String> params) throws Exception{
+		  params.put("mem_name", mem_name);
+		  params.put("mem_birth", mem_birth);
+		  params.put("mem_id", mem_id);
+		  params.put("mem_hp", mem_hp);
+		  
+		  String result = this.service.searchPW(params);
+		  
+		  if(result==null) { }
+		  else {
+			  
+		  }
+		  		  
+		  ModelAndView andView = new ModelAndView();
+		  
+		  andView.addObject("json", result);
+		  andView.setViewName("jsonConvertView");
+		  
+		  return andView;
+	  }
 }
