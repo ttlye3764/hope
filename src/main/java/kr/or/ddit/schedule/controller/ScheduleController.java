@@ -55,28 +55,39 @@ public class ScheduleController {
 
 
 	  @RequestMapping("insertScheduleInfo")
-	  public ModelAndView insertSchedule(@RequestBody ScheduleListVO scheduleListVO, ModelAndView andView) throws Exception 
+	  public String insertSchedule(@RequestBody List<Map> scheduleListVO) throws Exception 
 	  {
-		  System.out.println("schedueListVo :" + scheduleListVO);
-	  /*String start1 = insertScheduleInfo.getS_startdate(); String start2 =
-	  insertScheduleInfo.getS_startdate(); String end1 =
-	  insertScheduleInfo.getS_enddate(); String end2 =
-	  insertScheduleInfo.getS_enddate();
-	  
-	  start1 = start1.substring(0, start1.indexOf(" ")); start1 =
-	  start1.replace("/", "-"); start2 = start2.substring(start2.indexOf(" ") + 1,
-	  start2.length()); start1 = start1.concat("T");
-	  insertScheduleInfo.setS_startdate(start1.concat(start2));
-	  
-	  end1 = end1.substring(0, end1.indexOf(" ")); end1 = end1.replace("/", "-");
-	  end2 = end2.substring(end2.indexOf(" ") + 1, end2.length()); end1 =
-	  end1.concat("T"); insertScheduleInfo.setS_enddate(end1.concat(end2));
-	  
-	  this.service.insertSchedule(insertScheduleInfo);*/ 
-	  andView.setViewName("user/schedule/schedule"); 
-	  return andView; 
+		  ScheduleVO insertScheduleInfo = new ScheduleVO();
+
+		  for(int i=0; i<scheduleListVO.size(); i++) {
+			  
+			  System.out.println(scheduleListVO.get(i).get("mem_no"));
+			  String start1 = (String) scheduleListVO.get(i).get("s_startdate");
+			  String start2 = (String) scheduleListVO.get(i).get("s_startdate");
+			  String end1 = (String) scheduleListVO.get(i).get("s_enddate");
+			  String end2 = (String) scheduleListVO.get(i).get("s_enddate");
+			  
+			  start1 = start1.substring(0, start1.indexOf(" "));
+			  start1 = start1.replace("/", "-");
+			  start2 = start2.substring(start2.indexOf(" ")+1, start2.length());
+			  start1 = start1.concat("T");
+			  insertScheduleInfo.setS_startdate(start1.concat(start2));
+			  
+			  end1 = end1.substring(0, end1.indexOf(" "));
+			  end1 = end1.replace("/", "-");
+			  end2 = end2.substring(end2.indexOf(" ")+1, end2.length());
+			  end1 = end1.concat("T"); 
+			  insertScheduleInfo.setS_enddate(end1.concat(end2));
+			  
+			  insertScheduleInfo.setMem_no(scheduleListVO.get(i).get("mem_no").toString());
+			  insertScheduleInfo.setS_memo(scheduleListVO.get(i).get("s_memo").toString());
+			  insertScheduleInfo.setS_color(scheduleListVO.get(i).get("s_color").toString());
+			  this.service.insertSchedule(insertScheduleInfo); 
+		  }
+
+		  return "redirect:/user/schedule/schedule.do";
 	  }
-	 
+
 
 	
 

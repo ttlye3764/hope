@@ -99,8 +99,8 @@
 
                   <label>달력 표시 색 설정</label><div><input type="color" id="s_color" name="s_color"></div>
                   <div class="form-group text-center">
-                     <button id="regist" class="btn btn-rounded btn-primary"
-                        type="submit">regist</button>
+                     <button id="regist" name="regist" class="btn btn-rounded btn-primary"
+                        type="button">regist</button> 
                   </div>
                </form>
 
@@ -337,10 +337,10 @@ function setCalendar(data){
           dateClick: function(info) {
           $("#regist-modal").modal("show"); //모달창 띄우기
 
-          $('form[name=scheduleForm]').submit(function(e){
-        	  e.preventDefault();
+//           $('form[name=scheduleForm]').submit(function(e){
+//         	  e.preventDefault();
         	  
-              	
+        	  $('#regist').click(function(){
 		           var shareId = $("#list option:selected").text(); 
 		           var array = shareId.split(" "); //배열로 담기
 		           var memNo = [];//memNo를 담을 배열 선언
@@ -348,7 +348,8 @@ function setCalendar(data){
 		           array.push('user'); // 작성자 mem_id
 		           var schedule = new Object();
 				   var arrSchedule = new Array();
-			           
+
+
 					 for(var i=0; i<array.length; i++){ //아이디 갯수만큼 반복
 						$.ajax({
 						   	   url     : '${pageContext.request.contextPath}/user/schedule/searchId.do',
@@ -357,11 +358,8 @@ function setCalendar(data){
 						        dataType: 'json',
 						        data : {'mem_id':array[i]},
 						        success : function(result) {
-							        console.log("--------------------------"+result.memberInfo.mem_no);
-							        alert(result.memberInfo.mem_no);
+							      
 						        	memNo.push(result.memberInfo.mem_no); //memNo라는 배열에 담았다.
-
-						        	for(var i=0; i<array.length; i++){
 
 										schedule = new Object();
 										schedule.mem_no = memNo[i];
@@ -374,37 +372,30 @@ function setCalendar(data){
 								        schedule.s_color = $('#regist-modal [name="s_color"]').val();
 								        arrSchedule.push(schedule);
 								        $('#regist-modal [name="mem_no"]').val(arrSchedule[i].mem_no);
-								       // location.href='${pageContext.request.contextPath }/user/schedule/insertScheduleInfo.do';
-									}
-
-									console.log(arrSchedule);
-									console.log(arrSchedule.length);
-									console.log(arrSchedule[0].mem_no);
-									console.log("----------------");
-
-									
-
-				 					$.ajax({
-				 					   	    url     : '${pageContext.request.contextPath}/user/schedule/insertScheduleInfo.do',
-				 					        type    : 'post',
-				 					        //dataType: 'json',
-				 					        contentType : 'application/json',
-				 					        data : arrSchedule,
-				 					        success : function(result) {
-				 						        alert("성공");
-				 					        },
-				 					        error : function(e){
-					 					        console.log(e);
-					 					    }	        
-				 					 });
-
 						        }
 						  	}); 
-					  } 
+					  }
 
+					 $.ajax({
+					   	    url     : '${pageContext.request.contextPath}/user/schedule/insertScheduleInfo.do',
+					        type    : 'POST',
+					        dataType: 'json',
+					        contentType : 'application/json; charset=UTF-8',
+					        async: false,
+					        data :JSON.stringify(arrSchedule),
+					        success : function(result) {
+					        	
+					        },
+					        error : function(e){
+	 					        console.log(e);
+	 					    }	        
+					 });
+					 $("#regist-modal").modal("hide"); 
+					location.reload();
 					        				 
                  return true;
-            });  //서브밋
+
+             });  //서브밋
        },//클릭
        events:(jsonData)
      });//캘린더
