@@ -178,32 +178,17 @@
 						</li>
 						<!-- Menu item 2 Blog-->
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="blogMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blog</a>
+							<a class="nav-link dropdown-toggle" href="#" id="blogMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Medical</a>
 							<ul class="dropdown-menu" aria-labelledby="blogMenu">
 								<li class="dropdown-submenu">
-									<a class="dropdown-item dropdown-toggle" href="#">Blog default</a>
-									<ul class="dropdown-menu">
-										<li> <a class="dropdown-item" href="blog-classic.html">Full Width</a> </li>
-										<li> <a class="dropdown-item" href="blog-classic-left-sidebar.html">Left Sidebar</a> </li>
-										<li> <a class="dropdown-item" href="blog-classic-right-sidebar.html">Right Sidebar</a> </li>
-									</ul>
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalList.do">복용내역</a>
 								</li>
 								<li class="dropdown-submenu">
-									<a class="dropdown-item dropdown-toggle" href="#">Blog Grid</a>
-									<ul class="dropdown-menu">
-										<li> <a class="dropdown-item" href="blog-grid-column-3.html">Three column</a> </li>
-										<li> <a class="dropdown-item" href="blog-grid-column-4.html">Four column</a> </li>
-										<li> <a class="dropdown-item" href="blog-grid-left-sidebar.html">Left Sidebar</a> </li>
-										<li> <a class="dropdown-item" href="blog-grid-right-sidebar.html">Right Sidebar</a> </li>
-									</ul>
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalMap.do">내 주위 병원/약국 위치보기</a>
 								</li>
-								<li><a class="dropdown-item" href="blog-minimal.html">Blog minimal</a></li>
+								<li><a class="dropdown-item" href="#">Blog minimal</a></li>
 								<li class="dropdown-submenu">
-									<a class="dropdown-item dropdown-toggle" href="#">Blog Single</a>
-									<ul class="dropdown-menu">
-										<li> <a class="dropdown-item" href="blog-single-classic.html">Single classic</a> </li>
-										<li> <a class="dropdown-item" href="blog-single-minimal.html">Single Minimal</a> </li>
-									</ul>
+									<a class="dropdown-item" href="#">Blog Single</a>
 								</li>
 							</ul>
 						</li>

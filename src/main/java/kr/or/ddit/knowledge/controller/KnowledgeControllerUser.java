@@ -52,5 +52,6 @@ public class KnowledgeControllerUser {
 		return andView;
 
 	}
+
 	
 }
