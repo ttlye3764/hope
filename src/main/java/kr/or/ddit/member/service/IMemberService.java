@@ -16,4 +16,5 @@ public interface IMemberService {
 	public List<FriendVO> friendMemberList(Map<String, String> params) throws Exception;
 	public String searchID(Map<String, String>params) throws Exception;
 	public String searchPW(Map<String, String>params) throws Exception;
+	public void makePass(Map<String,String>params) throws Exception;
 }
