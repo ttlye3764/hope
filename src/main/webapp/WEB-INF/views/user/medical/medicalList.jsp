@@ -59,7 +59,12 @@
 <!-- timepicker -->
 <script
 	src='${pageContext.request.contextPath }/resources/timepicker/jquery.datetimepicker.full.js'></script>
-
+<style type="text/css">
+.calendarClass{
+	width: 50%;
+	margin-left: 25%;
+}
+</style>
 
 <script>
 $(function(){
@@ -282,7 +287,7 @@ function setCalendar(data){
 </head>
 <body>
 
-	<div id='calendar'></div>
+	<div id='calendar' class="calendarClass"></div>
 
 
 	<!-- SignIn modal content -->

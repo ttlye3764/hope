@@ -186,7 +186,7 @@
 								<li class="dropdown-submenu">
 									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalMap.do">내 주위 병원/약국 위치보기</a>
 								</li>
-								<li><a class="dropdown-item" href="#">Blog minimal</a></li>
+								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/searchPill.do">알약정보조회</a></li>
 								<li class="dropdown-submenu">
 									<a class="dropdown-item" href="#">Blog Single</a>
 								</li>

@@ -118,4 +118,7 @@ public class MedicalController {
 	
 	@RequestMapping("medicalMap")
 	public void medicalMap() {}
+	
+	@RequestMapping("searchPill")
+	public void searchPill() {}
 }

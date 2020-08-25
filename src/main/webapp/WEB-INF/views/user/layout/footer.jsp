@@ -6,9 +6,6 @@
 <meta charset="UTF-8">
 </head>
 <body>
-<<<<<<< HEAD
-<!-- =======================
-	footer  -->
 	<footer class="footer bg-light pt-6">
 		<div class="footer-content pb-3">
 			<div class="container">
@@ -98,14 +95,10 @@
 			</div>
 		</div>
 	</footer>
-	<!-- =======================
-	footer  -->
-=======
 <div id="footer">
 	<div class="copyright">
 		<a href="http://themifycloud.com">대덕인재개발원</a>
 	</div>
 </div>
->>>>>>> branch 'master' of https://github.com/ttlye3764/hope
 </body>
 </html>

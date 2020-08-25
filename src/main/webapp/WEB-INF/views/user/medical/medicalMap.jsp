@@ -175,7 +175,7 @@
 						
 						marker.setMap(map);
 
-						var iwContent ='<div class ="label"><span class="left"></span><span class="center">내위치</span><span class="right"></span></div>';
+						var iwContent ='<div class ="label">내위치</div>';
 						// 인포윈도우를 생성합니다
 						var infowindow2 = new kakao.maps.InfoWindow({
 						    position : markerPosition, 
