@@ -52,6 +52,20 @@ public class KnowledgeControllerUser {
 		return andView;
 
 	}
+	
+	// 문제 정답 리스트
+	@RequestMapping("knowledgeAnswerList")
+	public ModelAndView knowledgeAnswerList(ModelAndView andView, Map<String, String> params) throws Exception {
 
+		List<KnowledgeVO> knowledgeList = this.knowledgeService.knowledgeList(params);
+
+		andView.addObject("knowledgeList", knowledgeList);
+		andView.setViewName("user/knowledge/knowledgeAnswerList");
+
+		return andView;
+	
+	
+	
+	}
 	
 }
