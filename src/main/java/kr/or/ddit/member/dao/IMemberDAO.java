@@ -14,4 +14,5 @@ public interface IMemberDAO {
 	public void insertMember (MemberVO memberVO) throws Exception;
 	public String selectSeq() throws Exception;
 	public List<FriendVO> friendMemberList(Map<String, String> params) throws Exception;
+	public String searchID(Map<String, String>params) throws Exception;
 }

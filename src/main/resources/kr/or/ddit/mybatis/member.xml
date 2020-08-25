@@ -102,6 +102,13 @@
 		FROM FRIEND
 		WHERE MEM_NO = #{mem_no}
 	</select>
+	
+	<select id="searchID" resultType="String" parameterType="map">
+		SELECT MEM_ID
+		FROM MEMBER
+		WHERE MEM_NAME = #{mem_name}
+		AND MEM_BIRTH = #{mem_birth}
+	</select>
 
 </mapper>    
 

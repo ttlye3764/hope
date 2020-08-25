@@ -65,4 +65,10 @@ public class IMemberDAOImpl implements IMemberDAO {
 	public List<FriendVO> friendMemberList(Map<String, String> params) throws Exception {
 		return client.selectList("member.friendMemberList",params);
 	}
+
+	@Override
+	public String searchID(Map<String, String> params) throws Exception {
+		String mem_id = client.selectOne("member.searchID",params);
+		return mem_id;
+	}
 }

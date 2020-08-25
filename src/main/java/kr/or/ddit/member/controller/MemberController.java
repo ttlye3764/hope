@@ -157,4 +157,20 @@ public class MemberController {
 		  
 		  return andView;
 	  }
+	  
+	  @RequestMapping("searchID")
+	  public ModelAndView searchID(@RequestParam String mem_name, @RequestParam String mem_birth
+			  					,Map<String, String> params) throws Exception{
+		  params.put("mem_name", mem_name);
+		  params.put("mem_birth", mem_birth);
+		  
+		  String result = this.service.searchID(params);
+		  
+		  ModelAndView andView = new ModelAndView();
+		  
+		  andView.addObject("json", result);
+		  andView.setViewName("jsonConvertView");
+		  
+		  return andView;
+	  }
 }

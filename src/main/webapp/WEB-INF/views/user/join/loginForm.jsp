@@ -29,7 +29,26 @@
 	<!-- Theme CSS -->
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 	
+<style>
+.btn{
+	color : #4CBD94;
+}
+.tLine {
+		background-color: #d2d2d2;
+		height: 1px;
+		margin: 5px;
+}
+.endbtn{
+	background-color: #4CBD94; 
+	color : white;
+	height : 30px;
+	width : 80px;
+}
+
+</style>
+	
 <script type='text/javascript'>
+	var big_mem_id;
       $(function(){
             if(eval('${!empty param.message}')){
                alert('${param.message}');
@@ -97,6 +116,50 @@
       function hide_caps_lock() {
            $("#label").text("");
       }
+
+      function search_id_modal(){
+    	  $("#search_id_modal").modal("show"); //모달창 띄우기
+      }
+      
+      function searchID(){
+    	  var mem_birth = $('input[name=mem_bir1]').val() + '-'
+			+ $('input[name=mem_bir2]').val() + '-'
+			+ $('input[name=mem_bir3]').val();
+		$('#mem_birth').val(mem_birth);
+
+		var bir1 = $('input[name=mem_bir1]').val();
+		var bir2 = $('input[name=mem_bir2]').val();
+		var bir3 = $('input[name=mem_bir3]').val();
+
+		if($('#mem_name').val()==''){
+			alert('이름을 입력해주세요');
+			return false;
+		}
+
+		if(bir1=='' || bir2=='' || bir3==''){
+			alert('생년월일을 정확하게 입력해주세요');
+			return false;
+		}
+
+		$.ajax({
+			type : 'POST',
+			url : '${pageContext.request.contextPath}/user/member/searchID.do',
+			dataType : 'json',
+			data : {
+				mem_name : $('#mem_name').val(),
+				mem_birth : $('#mem_birth').val()
+			},
+			success : function(result) {
+				big_mem_id = result.json;
+				$("#search_id_modal").modal("hide");
+				searchIDResult();
+			}
+		});
+	};
+	function searchIDResult(){
+		$("#search_id_modal_result").modal("show");
+		$('#IDresult').text("아이디 : " + big_mem_id);
+	}
 </script>
 
 </head>
@@ -156,8 +219,9 @@
 										<a href="${pageContext.request.contextPath}/user/member/memberForm.do">Signup</a></span></div>
 <%-- 										<a href="${pageContext.request.contextPath}/user/join/joinChoiceForm.do">Signup</a></span></div> --%>
 										<div class="col-6 col-md-8">
-										<a class="text-muted small mb-2" href="id-recovery.html">아이디찾기</a> / 
-										<a class="text-muted small mb-2" href="password-recovery.html">비밀번호찾기</a></div>
+											<input type="button" name="hp_btn" onClick="search_id_modal()" class="btn" value="아이디찾기"> / 
+											<input type="button" name="hp_btn" onClick="search_pw_modal()" class="btn" value="비밀번호찾기">
+										</div>
 										<div class="col-6 col-md-4 text-right"><button class="btn btn-dark" id="loginBtn">로그인</button></div>
 									</div>
 								</div>
@@ -179,6 +243,64 @@
 
 	<!--Template Functions-->
 	<script src="assets/js/functions.js"></script>
+	
+	<div id="search_id_modal" class="modal fade" tabindex="-1" role="dialog"
+      aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-body">
+               <h5>아이디찾기</h5><br>
+
+               <form name="searchUserId"   class="pl-3 pr-3">
+                  <div class="form-group">
+                     	이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름 <input type="text" id="mem_name" name="mem_name" >
+                  </div>
+
+                  <div class="form-group">
+                     	생년월일 <input type="hidden" name="mem_birth" id="mem_birth"/> <input type="text"
+					name="mem_bir1" size="4" value="" />년 <input type="text"
+					name="mem_bir2" size="2" value="" />월 <input type="text"
+					name="mem_bir3" size="2" value="" />일
+                  </div>
+
+                  <div class="form-group text-center">
+                     <button class="endbtn"
+						id="searchUserID" type="button" onclick="searchID()">찾기
+					</button>
+                  </div>
+               </form>
+            </div>
+         </div>
+         <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+   </div>
+   <!-- /.modal -->
+   
+   <div id="search_id_modal_result" class="modal fade" tabindex="-1" role="dialog"
+      aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-body">
+               <h5>아이디찾기</h5><br>
+               <form name="searchUserIdResult"   class="pl-3 pr-3">
+                  <div class="form-group">
+                  	<label id="IDresult"></label>
+                  </div>
+
+                  <div class="form-group text-center">
+                     <button class="endbtn"
+						type="button" onclick="searchPW()">비밀번호 찾기
+					</button>
+                  </div>
+               </form>
+            </div>
+         </div>
+         <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+   </div>
+   <!-- /.modal -->
 
 </body>
 </html>
