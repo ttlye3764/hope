@@ -124,6 +124,18 @@
 		SET MEM_TEMPORARY_PASS = #{mem_temporary_pass}
 		WHERE MEM_ID = #{mem_id}
 	</update>
+	
+	<update id="deletePass" parameterType="String">
+		UPDATE MEMBER
+		SET MEM_TEMPORARY_PASS = null
+		WHERE MEM_ID = #{mem_id}
+	</update>
+	
+	<update id="updatePass" parameterType="map">
+		UPDATE MEMBER
+		SET MEM_PASS = #{mem_pass}
+		WHERE MEM_ID = #{mem_id}
+	</update>
 
 </mapper>    
 

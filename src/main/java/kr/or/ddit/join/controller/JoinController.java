@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.mail.Session;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,7 +35,9 @@ public class JoinController {
 	private MessageSourceAccessor accessor;
 	@Autowired
 	private IMemberService service;
-
+	
+	MemberVO memberInfo;
+	
 	@RequestMapping("joinChoiceForm")
 	public void joinChoiceForm() {
 	}
@@ -46,6 +49,12 @@ public class JoinController {
 			String message = (String) paramMap.get("message");
 			System.out.println("RedirectAttribute 전달된 취득값 :" + message);
 		}
+	}
+	
+	@RequestMapping("loginForm2")
+	public String loginForm2(HttpSession session) {
+		session.invalidate();
+		return "redirect:/user/join/loginForm.do";
 	}
 
 	@RequestMapping(value = "loginCheck")
@@ -68,6 +77,7 @@ public class JoinController {
 			return andView;
 		} else {
 			session.setAttribute("LOGIN_MEMBERINFO", memberInfo);
+			this.memberInfo = memberInfo;
 			if (memberInfo.getMem_temporary_pass() == null) {
 				andView.addObject("json", 1);
 				andView.setViewName("jsonConvertView");
@@ -79,10 +89,27 @@ public class JoinController {
 				} else {
 					andView.addObject("json", 2);
 				}
+				this.service.deletePass(mem_id);
 				andView.setViewName("jsonConvertView");
 				return andView;
 			}
 		}
+	}
+	
+	@RequestMapping("passChangeForm")
+	public void passChangeForm() {
+	}
+	
+	@RequestMapping("passChange")
+	public String passChange(String mem_pass, Map<String,String>params) throws Exception {
+		String mem_id = this.memberInfo.getMem_id();
+		
+		params.put("mem_id", mem_id);
+		params.put("mem_pass", mem_pass);
+		
+		this.service.updatePass(params);
+		
+		return "redirect:/user/freeboard/freeboardForm.do";
 	}
 
 	@RequestMapping("memberView")

@@ -17,4 +17,6 @@ public interface IMemberDAO {
 	public String searchID(Map<String, String>params) throws Exception;
 	public String searchPW(Map<String, String>params) throws Exception;
 	public void makePass(Map<String,String>params) throws Exception;
+	public void deletePass(String mem_id) throws Exception;
+	public void updatePass(Map<String,String>params) throws Exception;
 }
