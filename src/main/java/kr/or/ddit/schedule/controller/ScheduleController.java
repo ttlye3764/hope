@@ -52,6 +52,11 @@ public class ScheduleController {
 	public void schedule() {
 
 	}
+	
+	@RequestMapping("dday")
+	public void dday() {
+
+	}
 
 
 	  @RequestMapping("insertScheduleInfo")

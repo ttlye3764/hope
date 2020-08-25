@@ -35,8 +35,9 @@
 
 </head>
 <body>
-
+<div style=" height: auto; width: 1500px; margin: auto; ">
    <div id='calendar'></div>
+</div>
 
 
    <!-- SignIn modal content -->
@@ -385,7 +386,7 @@ function setCalendar(data){
 					        data :JSON.stringify(arrSchedule),
 					        success : function(result) {
 					        	
-					        },
+					        }, 
 					        error : function(e){
 	 					        console.log(e);
 	 					    }	        
