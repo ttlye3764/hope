@@ -64,4 +64,9 @@ public class IMemberSerivceImpl implements IMemberService {
 	public String searchID(Map<String, String> params) throws Exception {
 		return dao.searchID(params);
 	}
+
+	@Override
+	public String searchPW(Map<String, String> params) throws Exception {
+		return dao.searchPW(params);
+	}
 }
