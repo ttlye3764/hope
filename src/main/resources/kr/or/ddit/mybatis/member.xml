@@ -40,9 +40,9 @@
 		<if test="mem_name != null">
 			AND MEM_NAME = #{mem_name}
 		</if>
-		
 		<if test="mem_pass != null">
-			AND MEM_PASS = #{mem_pass}
+			AND (MEM_PASS = #{mem_pass}
+			OR MEM_TEMPORARY_PASS = #{mem_pass})
 		</if>
 	</select>
 
@@ -118,6 +118,12 @@
 		AND MEM_ID = #{mem_id}
 		AND MEM_hp = #{mem_hp}
 	</select>
+	
+	<update id="makePass" parameterType="map">
+		UPDATE MEMBER
+		SET MEM_TEMPORARY_PASS = #{mem_temporary_pass}
+		WHERE MEM_ID = #{mem_id}
+	</update>
 
 </mapper>    
 

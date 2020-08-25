@@ -85,10 +85,12 @@
         				//{ flag : true | false}
         				if(result.json==1){
         					$(location).attr('href', '${pageContext.request.contextPath}/user/freeboard/freeboardForm.do');
-        				}else{
-        					$('#label').text(result.json);
+        				}else if(result.json==2){
+        					alert('임시비밀번호로 로그인하셨습니다.');
+                		}else{
+                			$('#label').text(result.json);
         					$('#label').css('color', 'red');
-                		}
+                        }
         			}
         		});
         	});
