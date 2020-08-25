@@ -19,6 +19,7 @@ public interface IScheduleDAO {
    public void deleteSchedule(Map<String, String> params) throws Exception;
    public int insertSchedule(ScheduleVO insertScheduleInfo) throws Exception; 
    public List<ScheduleVO> scheduleList(String mem_no) throws Exception;
+   public ScheduleVO scheduleInfo(int s_no) throws Exception;
    
 /*   public String totalCount(Map<String, String> params) throws Exception;*/
 }

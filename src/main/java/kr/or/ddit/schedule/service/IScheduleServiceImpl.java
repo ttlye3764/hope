@@ -49,6 +49,12 @@ public class IScheduleServiceImpl implements IScheduleService {
       
    }
 
+	@Override
+	public ScheduleVO scheduleInfo(int s_no) throws Exception {
+		return dao.scheduleInfo(s_no);
+		
+	}
+
    /*@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
    @Override
    public MemberVO memberInfo(Map<String, String> params) throws Exception {

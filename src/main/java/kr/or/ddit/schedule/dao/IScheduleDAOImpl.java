@@ -52,6 +52,11 @@ public class IScheduleDAOImpl implements IScheduleDAO {
       client.update("schedule.updateSchedule", scheduleInfo);
       
    }
+
+	@Override
+	public ScheduleVO scheduleInfo(int s_no) throws Exception {
+		return client.selectOne("schedule.scheduleInfo",s_no);
+	}
    
    
    /*   
