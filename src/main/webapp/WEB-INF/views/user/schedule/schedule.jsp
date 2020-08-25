@@ -407,9 +407,6 @@ function setCalendar(data){
    $('#change-modal [name="s_enddate"]').datetimepicker();
    $('#regist-modal [name="s_startdate"]').datetimepicker();
    $('#regist-modal [name="s_enddate"]').datetimepicker();
-
-
-
    
 </script>
 

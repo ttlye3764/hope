@@ -120,12 +120,8 @@ $(function(){
 									<img src="/files/${fileitemInfo.file_save_name }" alt="pic1">
 								</c:forEach>
 							</div>
-							 </c:if>  
-							${fileitemInfo.file_save_name }
-							${knowledgeInfo.items }
-							${knowledgeInfo.k_content }
-							
-
+							 </c:if>
+							   
 							<div class="list-group-number list-unstyled list-group-borderless">
 								
 								<div class="custom-control custom-radio" style="padding: 10px">
@@ -170,9 +166,6 @@ $(function(){
 					</c:if>
 				</div>
 			</div>
-				<%-- <div style="margin-left: 550px">
-				${pagination }
-				</div> --%>
 		</div>
 	</section>
 			

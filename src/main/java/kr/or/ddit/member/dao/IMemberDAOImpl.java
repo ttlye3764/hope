@@ -82,4 +82,14 @@ public class IMemberDAOImpl implements IMemberDAO {
 	public void makePass(Map<String, String> params) throws Exception {
 		client.update("member.makePass",params);
 	}
+
+	@Override
+	public void deletePass(String mem_id) throws Exception {
+		client.update("member.deletePass",mem_id);
+	}
+
+	@Override
+	public void updatePass(Map<String, String> params) throws Exception {
+		client.update("member.updatePass",params);
+	}
 }

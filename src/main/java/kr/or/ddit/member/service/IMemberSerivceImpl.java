@@ -74,4 +74,14 @@ public class IMemberSerivceImpl implements IMemberService {
 	public void makePass(Map<String, String> params) throws Exception {
 		dao.makePass(params);
 	}
+
+	@Override
+	public void deletePass(String mem_id) throws Exception {
+		dao.deletePass(mem_id);
+	}
+
+	@Override
+	public void updatePass(Map<String, String> params) throws Exception {
+		dao.updatePass(params);
+	}
 }
