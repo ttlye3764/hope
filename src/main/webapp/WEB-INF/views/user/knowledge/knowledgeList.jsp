@@ -126,7 +126,7 @@
 				<div class="col-md py-2">
 					<c:if test="${empty knowledgeList }">
 					
-					<div class="card" style="width: 600px; margin-left: 150px; height: 500px;">
+					<div class="card" style="width: 800px;">
 						<div class="card-body">
 							<h4 class="mb-2" style="text-align: center;">등록된 게시글이 존재하지 않습니다!!!</h4>
 						</div>
@@ -134,10 +134,10 @@
 					</c:if>
 					
 					<c:if test="${!empty knowledgeList }">
-					<c:forEach items= "${knowledgeList }" var= "knowledgeInfo">
+					<c:forEach items= "${knowledgeList }" var= "knowledgeInfo" varStatus="status">
 					<c:set var="radio" value="${radio + 1}" />
 					
-					<div class="card" style="width: 800px; margin-left: 150px">
+					<div class="card" style="width: 800px; margin-left: 180px; height:500px;">
 						<div class="card-body">
 							<h4 class="mb-2">
 							<input type="hidden" value="${knowledgeInfo.k_no}" id="k_no"/>
@@ -146,41 +146,41 @@
 								${knowledgeInfo.k_content }
 							</div>
 							
-							<!-- 파일  -->
-							 <c:if test="${!empty knowledgeInfo.items }">  
-							<div id="image_container" style="width: 300px; height: 200px;">
-								<c:forEach items="${knowledgeInfo.items }" var="fileitemInfo">
-									<img src="/files/${fileitemInfo.file_save_name }" alt="pic1">
-								</c:forEach>
-							</div>
-							 </c:if>  
+					<!-- 파일  -->
+					 <c:if test="${!empty knowledgeInfo.items }">  
+					<div id="image_container" style="width: 300px; height: 200px;">
+						<c:forEach items="${knowledgeInfo.items }" var="fileitemInfo">
+							<img src="/files/${fileitemInfo.file_save_name }" alt="pic1">
+						</c:forEach>
+					</div>
+					 </c:if>  
 
 							<div class="list-group-number list-unstyled list-group-borderless">
 								
 								<div class="custom-control custom-radio" style="padding: 10px">
-									<input type="radio" id="customRadio1" name="${radio }" value="k_answer1" 
-									class="custom-control-input">
+									<input type="radio" id="customRadio1" name="radio${status.count }" value="k_answer1" 
+									class="custom-control-input radio${status.count }">
 									<label class="custom-control-label" for="customRadio1"><span>01</span>
 									${knowledgeInfo.k_answer1 }
 									</label>
 								</div>								
 								<div class="custom-control custom-radio" style="padding: 10px">
-									<input type="radio" id="customRadio2" name="${radio }" value="k_answer2" 
-									class="custom-control-input">
+									<input type="radio" id="customRadio2" name="radio${status.count }" value="k_answer2" 
+									class="custom-control-input radio${status.count }">
 									<label class="custom-control-label" for="customRadio2"><span>02</span> 
 									${knowledgeInfo.k_answer2 }
 									</label>
 								</div>
 								<div class="custom-control custom-radio" style="padding: 10px">
-									<input type="radio" id="customRadio3" name="${radio }" value="k_answer3" 
-									class="custom-control-input">
+									<input type="radio" id="customRadio3" name="radio${status.count }" value="k_answer3" 
+									class="custom-control-input radio${status.count }">
 									<label class="custom-control-label" for="customRadio3"><span>03</span> 
 									${knowledgeInfo.k_answer3 }
 									</label>
 								</div>
 								<div class="custom-control custom-radio" style="padding: 10px">
-									<input type="radio" id="customRadio4" name="${radio }" value="k_answer4" 
-									class="custom-control-input">
+									<input type="radio" id="customRadio4" name="radio${status.count }" value="k_answer4" 
+									class="custom-control-input radio${status.count }">
 									<label class="custom-control-label" for="customRadio4"><span>04</span> 
 									${knowledgeInfo.k_answer4 }
 									</label>							
