@@ -31,7 +31,7 @@ public class EncodingInterceptor extends HandlerInterceptorAdapter {
 	public void afterCompletion(HttpServletRequest request,
 			HttpServletResponse response, Object handler, Exception ex)
 					throws Exception {
-		System.out.println("psotHandler() 종료 후 컨트롤러 메서드의 변환값이 ViewResolver에 전달로 "
+		System.out.println("postHandler() 종료 후 컨트롤러 메서드의 변환값이 ViewResolver에 전달로 "
 				+ "응답 컨텐츠가 HttpServletResponse의 출력버퍼에 저장된 직후 출력");
 	}
 	

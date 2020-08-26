@@ -4,7 +4,7 @@
 <mapper namespace="knowledge">
     	
      <resultMap id="knowledgeResultMap" type="knowVO">
-    		<result property="k_no" column="k_no"/>
+    		<id property="k_no" column="k_no"/>
 			<result property="k_title" column="k_title"/>
 			<result property="k_content" column="k_content"/>
 			<result property="k_answer1" column="k_answer1"/>
@@ -13,9 +13,8 @@
 			<result property="k_answer4" column="k_answer4"/>
 			<result property="k_answer" column="k_answer"/>
 			<result property="mem_no" column="mem_no"/>
-			<collection property="items" column="items" select="fileitem.fileitemList" ofType="FileItemVO" javaType="java.util.ArrayList"></collection>
+			<collection property="items" column="k_no" select="fileitem.fileitemList" ofType="fileitemVO" javaType="java.util.List"></collection>
     	</resultMap>
-    	
     	
     	<sql id="selectAll">
     			SELECT *
@@ -27,7 +26,7 @@
     			 WHERE K_NO = #{k_no}
     	</select>
     	
-    	<select id="knowledgeList" resultType="knowVO" parameterType="map">
+    	<select id="knowledgeList" resultType  ="knowVO" parameterType="map" resultMap="knowledgeResultMap">
    				SELECT B.*
 				FROM(SELECT ROWNUM RNUM, A.*
 					FROM (<include refid="selectAll"/>

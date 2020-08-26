@@ -21,6 +21,7 @@
 $(function(){
 	$('form[name=knowledgeView]').on('submit', function(){	
 
+		alert("수정 완료");
 	    var k_answer = $('input[name="k_answer"]:checked').val();
 		$(this).append('<input type="hidden" name="k_no" value="${knowledgeInfo.k_no}"/>');
      	$(this).attr('action','${pageContext.request.contextPath}/admin/knowledge/updateKnowledgeInfo.do?k_answer=' + k_answer);
@@ -48,8 +49,7 @@ $(function(){
 			reader.readAsDataURL(event.target.files[0]);
 
 			document.querySelector("div#image_container").addEventListener('click', function() {
-			//document.querySelector("div#image_container").style.display = 'none';
-			document.querySelector("div#image_container").remove();
+				document.querySelector("div#image_container").remove();
 			});
 		};
 		

@@ -64,4 +64,29 @@ public class IMemberSerivceImpl implements IMemberService {
 	public void addFriend(FriendVO friendInfo) throws Exception {
 		dao.addFriend(friendInfo);	
 	}
+
+	@Override
+	public String searchID(Map<String, String> params) throws Exception {
+		return dao.searchID(params);
+	}
+
+	@Override
+	public String searchPW(Map<String, String> params) throws Exception {
+		return dao.searchPW(params);
+	}
+
+	@Override
+	public void makePass(Map<String, String> params) throws Exception {
+		dao.makePass(params);
+	}
+
+	@Override
+	public void deletePass(String mem_id) throws Exception {
+		dao.deletePass(mem_id);
+	}
+
+	@Override
+	public void updatePass(Map<String, String> params) throws Exception {
+		dao.updatePass(params);
+	}
 }

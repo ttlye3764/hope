@@ -20,8 +20,8 @@
 <script type="text/javascript">
 $(function(){
 	$('form[name=knowledgeForm]').on('submit', function(){	
+		alert("등록 완료");
 	    var k_answer = $('input[name="k_answer"]:checked').val();
-		
 		 $(this).attr('action','${pageContext.request.contextPath}/admin/knowledge/insertKnowledgeInfo.do?k_answer=' + k_answer);
 	        
 	        return true;

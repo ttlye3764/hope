@@ -13,7 +13,7 @@
 <div id="wrapper">
 	<tiles:insertAttribute name="left"></tiles:insertAttribute>
 	<div id="page-wrapper">
-		<tiles:insertAttribute name="content_header"></tiles:insertAttribute>
+		<%-- <tiles:insertAttribute name="content_header"></tiles:insertAttribute> --%>
 		<div class="page-content">
 			<tiles:insertAttribute name="content"></tiles:insertAttribute>
 		</div>

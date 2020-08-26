@@ -15,4 +15,9 @@ public interface IMemberService {
 	public String selectSeq()throws Exception;
 	public List<FriendVO> friendMemberList(Map<String, String> params) throws Exception;
 	public void addFriend(FriendVO friendInfo) throws Exception;
+	public String searchID(Map<String, String>params) throws Exception;
+	public String searchPW(Map<String, String>params) throws Exception;
+	public void makePass(Map<String,String>params) throws Exception;
+	public void deletePass(String mem_id) throws Exception;
+	public void updatePass(Map<String,String>params) throws Exception;
 }

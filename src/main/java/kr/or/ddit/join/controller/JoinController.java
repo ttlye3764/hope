@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.mail.Session;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,120 +31,131 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 @Controller
 @RequestMapping("/user/join/")
 public class JoinController {
-	/*@Loggable
-	private Logger logger;*/
-	
 	@Autowired
 	private MessageSourceAccessor accessor;
 	@Autowired
 	private IMemberService service;
+	
+	MemberVO memberInfo;
+	
+	@RequestMapping("joinChoiceForm")
+	public void joinChoiceForm() {
+	}
+
 	@RequestMapping("loginForm")
-	public void loginForm(HttpServletRequest request){
-		// 반환값 : join/loginForm
-		// InternalResourceViewResolver 취득
-		//   prefix(/WEB-INF/views/user/)
-		//   suffix(.jsp)
-		// /WEB-INF/view/user/join/loginFormjsp 포워딩 처리
-		//return "user/join/loginForm";
-		// /SpringToddler/user/join/loginCheck.do
-		// POST 전송방식 : mem_id=a001&mem_pass=asdfasdf
-		// RedirctAttribute를 활용해 전송되는 값 취득
+	public void loginForm(HttpServletRequest request) {
 		Map<String, ?> paramMap = RequestContextUtils.getInputFlashMap(request);
-		if(paramMap != null){
+		if (paramMap != null) {
 			String message = (String) paramMap.get("message");
 			System.out.println("RedirectAttribute 전달된 취득값 :" + message);
 		}
 	}
-	@RequestMapping(value="loginCheck")
-	public ModelAndView loginCheck(HttpServletRequest request,
-							String mem_id,
-							String mem_pass,
-						     HttpSession session,
-						     HttpServletResponse response,
-						     Map<String, String> params,
-						     ModelAndView andView)
-							 throws Exception{
-		
-		System.out.println(mem_id + mem_pass);
 	
+	@RequestMapping("loginForm2")
+	public String loginForm2(HttpSession session) {
+		session.invalidate();
+		return "redirect:/user/join/loginForm.do";
+	}
+
+	@RequestMapping(value = "loginCheck")
+	public ModelAndView loginCheck(HttpServletRequest request, String mem_id, String mem_pass, HttpSession session,
+			HttpServletResponse response, Map<String, String> params, ModelAndView andView) throws Exception {
+
 //		Map<String, String> params = new HashMap<String, String>();
 		params.put("mem_id", mem_id);
 		params.put("mem_pass", mem_pass);
-		
+
 		MemberVO memberInfo = this.service.memberInfo(params);
-		
-		if(memberInfo == null){
+
+		if (memberInfo == null) {
 			// 리다이렉트(컨텍스트 루트 | 패스 생략)
 //			String message = this.accessor.getMessage("가입되지 않은 회원이거나, 비밀번호를 확인해주세요.", Locale.KOREA);
-			String message = "아이디 또는 비밀번호가 일치하지 않습니다.";
+			String message = "아이디나 비밀번호가 일치하지 않습니다.";
 //			message = URLEncoder.encode(message, "UTF-8");
-			andView.addObject("json",message);
+			andView.addObject("json", message);
 			andView.setViewName("jsonConvertView");
 			return andView;
-		}else{
+		} else {
 			session.setAttribute("LOGIN_MEMBERINFO", memberInfo);
-			// 포워드(컨텍스트 루트 | 패스 생략)
-			andView.addObject("json",1);
-			andView.setViewName("jsonConvertView");
-			return andView;
-		}
-	}
-		@RequestMapping("memberView")
-		public ModelMap memberView(String mem_id,
-								   Map<String, String> params,
-								   ModelMap modelMap)throws Exception{
-			params.put("mem_id", mem_id);
-			
-			MemberVO memberInfo = this.service.memberInfo(params);
-			
-//			ModelMap modelMap = new ModelMap();
-			modelMap.addAttribute("memberInfo", memberInfo);
-			
-			return modelMap;
-		
-	}
-		@RequestMapping("logout")
-		public String logout(HttpSession session) throws Exception{
-			session.invalidate();
-			String message = this.accessor.getMessage("success.common.logout", Locale.KOREA);
-			message = URLEncoder.encode(message, "UTF-8");
-			return "redirect:/user/join/loginForm.do?message=" + message;
-		}
-		
-		@RequestMapping(value="freeboardloginCheck",method=RequestMethod.POST)
-		public String freeboardloginCheck(String mem_id, 
-							     String mem_pass,
-							     HttpServletRequest request,
-							     HttpSession session,
-							     HttpServletResponse response,
-							     Map<String, String> params)
-								 throws Exception{
-//			Map<String, String> params = new HashMap<String, String>();
-			params.put("mem_id", mem_id);
-			params.put("mem_pass", mem_pass);
-			
-			MemberVO memberInfo = this.service.memberInfo(params);
-			
-			if(memberInfo == null){
-				// 리다이렉트(컨텍스트 루트 | 패스 생략)
-				String message = this.accessor.getMessage("fail.common.join", Locale.KOREA);
-				message = URLEncoder.encode(message, "UTF-8");
-				return "redirect:/user/join/loginForm.do?message=" + message;
-			}else{
-				session.setAttribute("LOGIN_MEMBERINFO", memberInfo);
+			this.memberInfo = memberInfo;
+			if (memberInfo.getMem_temporary_pass() == null) {
+				andView.addObject("json", 1);
+				andView.setViewName("jsonConvertView");
+				return andView;
+			} else {
 				// 포워드(컨텍스트 루트 | 패스 생략)
-				return "forward:/user/freeboard/freeboardList.do";
+				if (memberInfo.getMem_pass().equals(mem_pass)) { // 만약 임시비밀번호칸이 채워져있는데 본인비밀번호로 로그인 했을 경우
+					andView.addObject("json", 1);
+				} else {
+					andView.addObject("json", 2);
+				}
+				this.service.deletePass(mem_id);
+				andView.setViewName("jsonConvertView");
+				return andView;
 			}
 		}
+	}
+	
+	@RequestMapping("passChangeForm")
+	public void passChangeForm() {
+	}
+	
+	@RequestMapping("passChange")
+	public String passChange(String mem_pass, Map<String,String>params) throws Exception {
+		String mem_id = this.memberInfo.getMem_id();
 		
-		@RequestMapping("freeboardlogout")
-		public String freeboardlogout(HttpSession session) throws Exception{
-			session.invalidate();
-			String message = this.accessor.getMessage("success.common.logout", Locale.KOREA);
+		params.put("mem_id", mem_id);
+		params.put("mem_pass", mem_pass);
+		
+		this.service.updatePass(params);
+		
+		return "redirect:/user/freeboard/freeboardForm.do";
+	}
+
+	@RequestMapping("memberView")
+	public ModelMap memberView(String mem_id, Map<String, String> params, ModelMap modelMap) throws Exception {
+		params.put("mem_id", mem_id);
+
+		MemberVO memberInfo = this.service.memberInfo(params);
+
+		modelMap.addAttribute("memberInfo", memberInfo);
+
+		return modelMap;
+	}
+
+	@RequestMapping("logout")
+	public String logout(HttpSession session) throws Exception {
+		session.invalidate();
+		String message = this.accessor.getMessage("success.common.logout", Locale.KOREA);
+		message = URLEncoder.encode(message, "UTF-8");
+		return "redirect:/user/join/loginForm.do?message=" + message;
+	}
+
+	@RequestMapping(value = "freeboardloginCheck", method = RequestMethod.POST)
+	public String freeboardloginCheck(String mem_id, String mem_pass, HttpServletRequest request, HttpSession session,
+			HttpServletResponse response, Map<String, String> params) throws Exception {
+		params.put("mem_id", mem_id);
+		params.put("mem_pass", mem_pass);
+
+		MemberVO memberInfo = this.service.memberInfo(params);
+
+		if (memberInfo == null) {
+			// 리다이렉트(컨텍스트 루트 | 패스 생략)
+			String message = this.accessor.getMessage("fail.common.join", Locale.KOREA);
 			message = URLEncoder.encode(message, "UTF-8");
 			return "redirect:/user/join/loginForm.do?message=" + message;
+		} else {
+			session.setAttribute("LOGIN_MEMBERINFO", memberInfo);
+			// 포워드(컨텍스트 루트 | 패스 생략)
+			return "forward:/user/freeboard/freeboardList.do";
 		}
-	
-	
+	}
 
+	@RequestMapping("freeboardlogout")
+	public String freeboardlogout(HttpSession session) throws Exception {
+		session.invalidate();
+		String message = this.accessor.getMessage("success.common.logout", Locale.KOREA);
+		message = URLEncoder.encode(message, "UTF-8");
+		return "redirect:/user/join/loginForm.do?message=" + message;
+	}
 }

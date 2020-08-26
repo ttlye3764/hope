@@ -20,7 +20,6 @@
 
 <script type="text/javascript">
 $(function(){
-	
 	// 등록
 	$('#regBtn').click(function(){	
 		$(location).attr('href','${pageContext.request.contextPath}/admin/knowledge/knowledgeForm.do');
@@ -121,10 +120,8 @@ $(function(){
 									<img src="/files/${fileitemInfo.file_save_name }" alt="pic1">
 								</c:forEach>
 							</div>
-							 </c:if>  
-							${knowledgeInfo.items }
-							
-
+							 </c:if>
+							   
 							<div class="list-group-number list-unstyled list-group-borderless">
 								
 								<div class="custom-control custom-radio" style="padding: 10px">
@@ -164,18 +161,11 @@ $(function(){
 						<button type="button" class="btn btn-danger" value="삭제" id="${deleteBtn}" style="float: right; margin-left: 10px; width: 80px" data-kno="${knowledgeInfo.k_no}">삭제</button>
 						<button type="button" class="btn btn-primary" value="수정" id="${updateBtn}" style="float: right; width: 80px" data-kno="${knowledgeInfo.k_no}">수정</button>
 						</div>
-						
-						
-						
 					</div>
 					</c:forEach>
 					</c:if>
 				</div>
-				
 			</div>
-				<%-- <div style="margin-left: 550px">
-				${pagination }
-				</div> --%>
 		</div>
 	</section>
 			
@@ -190,11 +180,8 @@ $(function(){
 					</div>
 				</div>
 			</section>
-			
-			
 		</div>
 	</div>
 </div>
-
 </body>
 </html>

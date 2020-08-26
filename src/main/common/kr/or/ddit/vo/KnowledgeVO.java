@@ -12,10 +12,9 @@ public class KnowledgeVO {
 	private String k_answer3; // 퀴즈 답3
 	private String k_answer4; // 퀴즈 답4
 	private String k_answer; // 퀴즈 정답
-	private int t_no; // 통계 번호
 	private int rnum; // 순서
 	private String mem_no; // 멤버 번호
-	private List<FileItemVO> items; // 이미지
+	private List<FileItemVO> items; // 이미지 리스트
 
 	public String getMem_no() {
 		return mem_no;
@@ -103,14 +102,6 @@ public class KnowledgeVO {
 
 	public void setK_title(String k_title) {
 		this.k_title = k_title;
-	}
-
-	public int getT_no() {
-		return t_no;
-	}
-
-	public void setT_no(int t_no) {
-		this.t_no = t_no;
 	}
 
 }

@@ -34,15 +34,15 @@
 
 	<select id="memberInfo" parameterType="map" resultType="memberVO">
 		<include refid="selectAll"/>
-		<if test="mem_pass != null">
+		<if test="mem_id != null">
 			AND MEM_ID = #{mem_id}
 		</if>
 		<if test="mem_name != null">
 			AND MEM_NAME = #{mem_name}
 		</if>
-		
 		<if test="mem_pass != null">
-			AND MEM_PASS = #{mem_pass}
+			AND (MEM_PASS = #{mem_pass}
+			OR MEM_TEMPORARY_PASS = #{mem_pass})
 		</if>
 	</select>
 
@@ -116,6 +116,40 @@
 					 		#{fri_mem_name})
 		
 	</insert>
+	
+	<select id="searchID" resultType="String" parameterType="map">
+		SELECT MEM_ID
+		FROM MEMBER
+		WHERE MEM_NAME = #{mem_name}
+		AND MEM_BIRTH = #{mem_birth}
+	</select>
+	
+	<select id="searchPW" resultType="String" parameterType="map">
+		SELECT MEM_PASS
+		FROM MEMBER
+		WHERE MEM_NAME = #{mem_name}
+		AND MEM_BIRTH = #{mem_birth}
+		AND MEM_ID = #{mem_id}
+		AND MEM_hp = #{mem_hp}
+	</select>
+	
+	<update id="makePass" parameterType="map">
+		UPDATE MEMBER
+		SET MEM_TEMPORARY_PASS = #{mem_temporary_pass}
+		WHERE MEM_ID = #{mem_id}
+	</update>
+	
+	<update id="deletePass" parameterType="String">
+		UPDATE MEMBER
+		SET MEM_TEMPORARY_PASS = null
+		WHERE MEM_ID = #{mem_id}
+	</update>
+	
+	<update id="updatePass" parameterType="map">
+		UPDATE MEMBER
+		SET MEM_PASS = #{mem_pass}
+		WHERE MEM_ID = #{mem_id}
+	</update>
 
 </mapper>    
 
