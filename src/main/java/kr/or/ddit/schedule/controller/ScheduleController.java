@@ -29,6 +29,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/user/schedule/")
 public class ScheduleController {
 
+
 	@Autowired
 	private MessageSourceAccessor accessor;
 
@@ -48,16 +49,33 @@ public class ScheduleController {
 	 *//**
 		 * Simply selects the home view to render by returning its name.
 		 */
+	
+	
+	
 	@RequestMapping("schedule")
 	public void schedule() {
 
+	}
+	
+	@RequestMapping("bis")
+	public void bis() {
+		
 	}
 	
 	@RequestMapping("dday")
 	public void dday() {
 
 	}
-
+	
+	@RequestMapping("dday2")
+	public ModelAndView dday2(String mem_no) throws Exception {
+		List<ScheduleVO> scheduleList = this.service.scheduleList("2"); //mem_no가 들어가야하는데,,,,,,,,,, 
+		ModelAndView andView = new ModelAndView();
+		andView.addObject("scheduleList", scheduleList);
+		andView.setViewName("user/schedule/dday2");
+		return andView;
+	}
+	
 
 	  @RequestMapping("insertScheduleInfo")
 	  public String insertSchedule(@RequestBody List<Map> scheduleListVO) throws Exception 
