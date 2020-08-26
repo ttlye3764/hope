@@ -27,6 +27,7 @@
 			<mvc:mapping path="/user/**/*.do"/>
 			<bean class="kr.or.ddit.utiles.EncodingInterceptor"></bean>
 		</mvc:interceptor>
+		
 		<!-- <mvc:interceptor>
 			<mvc:mapping path="/user/**/*.do"/>
 			<bean class="kr.or.ddit.utiles.IPCheckInterceptor"></bean>

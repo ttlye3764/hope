@@ -60,8 +60,9 @@
 	 </servlet>
 	 <servlet-mapping>
 	 	<servlet-name>doDispatcher</servlet-name>
-	 	<url-pattern>*.do</url-pattern>
+	 	<url-pattern>/</url-pattern>
 	 </servlet-mapping>
+	 
 	 
 	 <!-- 
 	 	forceEncoding : true - 클라이언트가 서버 대상 요청 시 HttpServletRequest.getCharacterEncoding() 취득 시 다른 인코딩 타입으로 선언되어 있더라도 해당 취득 인코딩 타입을 적용

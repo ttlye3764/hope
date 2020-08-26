@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,8 @@ public class ChatController {
 							ModelAndView andView) throws Exception {
 		
 ////		test code
+		
+		
 		
 		System.out.println("안녕하세");
 		
@@ -69,5 +72,47 @@ public class ChatController {
 		return andView;
 	}
 	
+	@RequestMapping("addFriend")
+	public ModelAndView addFriend(ModelAndView andView,
+								 Map<String, String> params,
+								 @RequestParam String mem_name,
+								 MemberVO memberInfo,
+								 FriendVO friendInfo,
+								 HttpServletRequest request) throws Exception{
+		
+		HttpSession session = request.getSession();
+		
+		params.put("mem_name",mem_name);
+		
+		// 등록할 친구
+		memberInfo = memberDao.memberInfo(params);
+		
+//		memberDao.addFriend(memberInfo);
+		
+		// 나
+		MemberVO member = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		
+		System.out.println(memberInfo.getMem_no());
+		
+		System.out.println(member.getMem_no());
+		
+		friendInfo.setFri_mem_no(memberInfo.getMem_no());
+		friendInfo.setFri_mem_name(memberInfo.getMem_name());
+		friendInfo.setMem_name(member.getMem_name());
+		friendInfo.setMem_no(member.getMem_no());
+		
+		memberDao.addFriend(friendInfo);
+		
+		friendInfo.setFri_mem_no(member.getMem_no());
+		friendInfo.setFri_mem_name(member.getMem_name());
+		friendInfo.setMem_name(memberInfo.getMem_name());
+		friendInfo.setMem_no(memberInfo.getMem_no());
+		
+		memberDao.addFriend(friendInfo);
+		
+		andView.setViewName("/lastProject/user/chat/chat.do");
+		
+		return andView;
+	}
 	
 }
