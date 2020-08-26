@@ -11,6 +11,34 @@
  position: relative; top:0; left:0; 
  width: 100%; height: 40px;  text-align: center; background: #3399ff;
 }
+.arrow_box {
+	position: relative;
+	background: #fffafb;
+	border: 1px solid #000000;
+}
+.arrow_box:after, .arrow_box:before {
+	right: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:after {
+	border-color: rgba(255, 250, 251, 0);
+	border-right-color: #fffafb;
+	border-width: 10px;
+	margin-top: -10px;
+}
+.arrow_box:before {
+	border-color: rgba(0, 0, 0, 0);
+	border-right-color: #000000;
+	border-width: 11px;
+	margin-top: -11px;
+}
 </style>
 <!--Global JS-->
 <script src="${pageContext.request.contextPath }/resources/template/assets/vendor/jquery/jquery.min.js"></script>
@@ -160,12 +188,15 @@
 							</div>
 							
 					<!-- 파일  -->
-					 <c:if test="${!empty knowledgeInfo.items }">  
+					 <c:if test="${!empty knowledgeInfo.items[status.index].file_save_name }">  
 					<div id="image_container" style="width: 300px; height: 200px;">
-						<c:forEach items="${knowledgeInfo.items }" var="fileitemInfo">
-							<img src="/files/${fileitemInfo.file_save_name }" alt="pic1">
-						</c:forEach>
-					</div>
+<%-- 						<c:forEach items="${knowledgeInfo.items }" var="fileitemInfo"> --%>
+<%-- 							<img src="/files/${fileitemInfo.file_save_name }" alt="pic1"> --%>
+<%-- 						</c:forEach> --%>
+							<img src="/files/${knowledgeInfo.items[status.index].file_save_name}" alt="pic1">
+ 					</div> 
+						
+							
 					 </c:if>  
 
 							<div class="list-group-number list-unstyled list-group-borderless">
