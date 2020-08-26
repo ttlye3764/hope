@@ -79,6 +79,8 @@
 
         var count = 0;
 		for (var i = 0; i < list.length; i++) {
+			var a = list[i].length + 1;
+
 			if(list[i] == hap[i]){
 					count++;
 				}
@@ -86,14 +88,18 @@
 
 			document.getElementById("allChk").innerHTML = "총 맞은 갯수 : " + count;
 
-			if (count <= 3) {
+			var below = a * 0.3;
+			var average = a * 0.6;
+ 
+			if (count <= below) {
 				document.getElementById("check").innerHTML = "아이큐 100 이하 입니다. 다시 한 번 풀어볼까요?";
-			} else if (3 < count && count <= 6) {
+			} else if (below < count && count <= average) {
 				document.getElementById("check").innerHTML = "아이큐 100-129 입니다. 잘하셨어요!";
 			} else {
 				document.getElementById("check").innerHTML = "아이큐 130 이상 입니다. 천재시군요!";
 			}
 
+			// 통계 차트
 			google.charts.load("current", {packages:["corechart"]});
 	        google.charts.setOnLoadCallback(drawChart);
 	        function drawChart() {
