@@ -63,6 +63,20 @@
 	 	<url-pattern>/</url-pattern>
 	 </servlet-mapping>
 	 
+<!-- 	 <servlet> -->
+<!-- 	 	<servlet-name>doDispatchera</servlet-name> -->
+<!-- 	 	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class> -->
+<!-- 	 	<init-param> -->
+<!-- 	 		<param-name>contextConfigLocation</param-name> -->
+<!-- 	 		<param-value>/WEB-INF/spring/config/servlet-websocket.xml</param-value> -->
+<!-- 	 	</init-param> -->
+<!-- 	 	<load-on-startup>1</load-on-startup> -->
+<!-- 	 	<async-supported>true</async-supported> -->
+<!-- 	 </servlet> -->
+<!-- 	 <servlet-mapping> -->
+<!-- 	 	<servlet-name>doDispatchera</servlet-name> -->
+<!-- 	 	<url-pattern>/</url-pattern> -->
+<!-- 	 </servlet-mapping> -->
 	 
 	 <!-- 
 	 	forceEncoding : true - 클라이언트가 서버 대상 요청 시 HttpServletRequest.getCharacterEncoding() 취득 시 다른 인코딩 타입으로 선언되어 있더라도 해당 취득 인코딩 타입을 적용
