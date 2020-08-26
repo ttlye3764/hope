@@ -2,65 +2,61 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="freeboard">
+<mapper namespace="board">
 
-	<select id="boradList" resultType="boardVO">
+	<sql id="selectAll">
 		SELECT *
 		FROM BOARD
+	</sql>
+	
+	
+	
+	<select id="boardInfo" parameterType="map" resultType="boardVO">
+		<include refid="selectAll"/>
+		WHERE BD_NO = #{bd_no}
 	</select>
 	
-	<delete id="deleteBoard" parameterType="Map" >
+	<select id="totalCount" parameterType="map" resultType="String">
+		SELECT COUNT(BD_NO)
+		FROM BOARD
+	</select>
+
+	<select id="boardList" resultType="boardVO" parameterType="map">
+		SELECT B.*
+		FROM(SELECT ROWNUM RNUM, A.*
+		FROM (<include refid="selectAll"/>
+		ORDER BY BD_NO)A) B
+		ORDER BY B.RNUM
+	</select>
+	
+	<delete id="deleteBoardInfo" parameterType="String" >
 		DELETE FROM BOARD
-		WHERE = #{bd_no}
+		WHERE BD_NO = #{bd_no}
 	</delete>
 	
-	<update id="updateBoard" parameterType="BoardVO" >
-		UPDATE BOARD SET (bd_no,
-						bd_title,
-	 					bd_content,
-						bd_date,
-						bd_hit,
-						bd_pass,
-						bd_sequence,
-						bd_group,
-						bd_depth,
-						bd_division,
-						mem_no)
-							VALUES(#{bd_no},
-						#{bd_title},
-	 					#{bd_content},
-						#{bd_date},
-						#{bd_hit},
-						#{bd_pass},
-						#{bd_sequence},
-						#{bd_group},
-						#{bd_depth},
-						#{bd_division},
-						#{mem_no})
+	<update id="updateBoardInfo" parameterType="boardVO" >
+		UPDATE BOARD
+		   SET BD_TITLE   = #{bd_title},
+	 		   BD_CONTENT = #{bd_content},
+			   MEM_NO     = 1
+		 WHERE BD_NO      = #{bd_no}			
 	</update>
 	
-	<insert id="insertBoard" parameterType="BoardVO">
+
+	<insert id="insertBoardInfo" parameterType="boardVO">
 		INSERT INTO BOARD (bd_no,
-						bd_title,
-	 					bd_content,
-						bd_date,
-						bd_hit,
-						bd_pass,
-						bd_sequence,
-						bd_group,
-						bd_depth,
-						bd_division,
-						mem_no)
-							VALUES(#{bd_no},
-						#{bd_title},
-	 					#{bd_content},
-						#{bd_date},
-						#{bd_hit},
-						#{bd_pass},
-						#{bd_sequence},
-						#{bd_group},
-						#{bd_depth},
-						#{bd_division},
-						#{mem_no})
+						   bd_title,
+						   bd_date,
+	 					   bd_content,
+		                   mem_no
+						   )
+				   VALUES (bd_seq.nextval,
+						   #{bd_title},
+						   SYSDATE,
+	 					   #{bd_content},
+	 					   1
+						   )
 	</insert>
+	
+	
 </mapper>

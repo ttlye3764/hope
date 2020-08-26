@@ -1,18 +1,37 @@
 package kr.or.ddit.vo;
 
 public class BoardVO {
+	
 	private String bd_no;
 	private String bd_title;
 	private String bd_content;
 	private String bd_date;
-	private String bd_hit;
+	private int    bd_hit;
 	private String bd_pass;
 	private String bd_sequence;
 	private String bd_group;
 	private String bd_depth;
 	private String bd_division;
 	private String mem_no;
+	private String rnum;
+	private String bd_writer;
 	
+	
+	
+	
+	
+	public String getBd_writer() {
+		return bd_writer;
+	}
+	public void setBd_writer(String bd_writer) {
+		this.bd_writer = bd_writer;
+	}
+	public String getRnum() {
+		return rnum;
+	}
+	public void setRnum(String rnum) {
+		this.rnum = rnum;
+	}
 	public String getBd_no() {
 		return bd_no;
 	}
@@ -37,10 +56,10 @@ public class BoardVO {
 	public void setBd_date(String bd_date) {
 		this.bd_date = bd_date;
 	}
-	public String getBd_hit() {
+	public int getBd_hit() {
 		return bd_hit;
 	}
-	public void setBd_hit(String bd_hit) {
+	public void setBd_hit(int bd_hit) {
 		this.bd_hit = bd_hit;
 	}
 	public String getBd_pass() {
@@ -79,6 +98,9 @@ public class BoardVO {
 	public void setMem_no(String mem_no) {
 		this.mem_no = mem_no;
 	}
+
+	
+	
 	
 	
 	
