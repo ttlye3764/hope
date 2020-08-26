@@ -5,6 +5,7 @@
 	<select resultType="fileitemVO" id="fileitemList">
 		SELECT *
 		FROM FileItem
+		order by file_no
 	</select>
 
 	<insert id="insertFileItem" parameterType="fileitemVO">
