@@ -17,7 +17,6 @@
 					<input type="text" name="" placeholder="seach"> <i
 						class="fa fa-search" aria-hidden="true"></i>
 				</div>
-
 				<c:if test="${empty friendList }">
 					<tr align="center">
 						<td colspan="5"><font color="blue">친구가 없네요 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</font></td>

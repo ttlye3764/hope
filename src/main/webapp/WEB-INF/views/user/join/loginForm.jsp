@@ -388,7 +388,7 @@
                   <div class="form-group">
                      	이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름 <input type="text" id="mem_name" name="mem_name" >
                   </div>
-
+				
                   <div class="form-group">
                      	생년월일 <input type="hidden" name="mem_birth" id="mem_birth"/> <input type="text"
 					name="mem_bir1" size="4" value="" />년 <input type="text"

@@ -1,4 +1,5 @@
 <!doctype html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="en">
 <head>
 	<title>Wizixo | Creative Multipurpose Bootstrap Template</title>
@@ -88,7 +89,12 @@
 						<div class="dropdown">
 						  <a class="dropdown-toggle" href="#" role="button" id="dropdownAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ti-user mr-2"></i>Account </a>
 						  <div class="dropdown-menu mt-2 shadow" aria-labelledby="dropdownAccount">
-						    <a class="dropdown-item" href="${pageContext.request.contextPath}/user/join/loginForm.do">Log In</a>
+							<c:if test="${LOGIN_MEMBERINFO==null}">
+								<a class="dropdown-item" href="${pageContext.request.contextPath}/user/join/loginForm.do">Log In</a>
+							</c:if>
+							<c:if test="${LOGIN_MEMBERINFO!=null}">
+							    <a class="dropdown-item" href="${pageContext.request.contextPath}/user/join/logout.do">Log Out</a>
+							</c:if>
 						    <a class="dropdown-item" href="sign-up.html">Register</a>
 						    <a class="dropdown-item" href="#">Settings</a>
 						  </div>

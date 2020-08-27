@@ -36,8 +36,6 @@ public class JoinController {
 	@Autowired
 	private IMemberService service;
 	
-	MemberVO memberInfo;
-	
 	@RequestMapping("joinChoiceForm")
 	public void joinChoiceForm() {
 	}
@@ -77,7 +75,6 @@ public class JoinController {
 			return andView;
 		} else {
 			session.setAttribute("LOGIN_MEMBERINFO", memberInfo);
-			this.memberInfo = memberInfo;
 			if (memberInfo.getMem_temporary_pass() == null) {
 				andView.addObject("json", 1);
 				andView.setViewName("jsonConvertView");
@@ -101,15 +98,21 @@ public class JoinController {
 	}
 	
 	@RequestMapping("passChange")
-	public String passChange(String mem_pass, Map<String,String>params) throws Exception {
-		String mem_id = this.memberInfo.getMem_id();
+	public ModelAndView passChange(String mem_pass, Map<String,String>params, ModelAndView andView, HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		
+		String mem_id = memberInfo.getMem_id();
 		
 		params.put("mem_id", mem_id);
 		params.put("mem_pass", mem_pass);
 		
 		this.service.updatePass(params);
 		
-		return "redirect:/user/freeboard/freeboardForm.do";
+		andView.addObject("json", 1);
+		andView.setViewName("jsonConvertView");
+		
+		return andView;
 	}
 
 	@RequestMapping("memberView")
