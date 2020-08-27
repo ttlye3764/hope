@@ -16,6 +16,7 @@
 		
 		<!-- 용춘 -->
 		<typeAlias alias="mypillVO" type="kr.or.ddit.vo.MypillVO" />
+		<typeAlias alias="pillVO" type="kr.or.ddit.vo.PillVO" />
 		<typeAlias alias="mypillfileVO" type="kr.or.ddit.vo.MypillFileVO" />
 		<!-- 한별 -->
 		<typeAlias alias="scheduleVO" type="kr.or.ddit.vo.ScheduleVO" />
@@ -40,6 +41,7 @@
 	<!-- 용춘 -->
 		<mapper resource="kr/or/ddit/mybatis/medical.xml" />
 		<mapper resource="kr/or/ddit/mybatis/medicalfile.xml" />
+		<mapper resource="kr/or/ddit/mybatis/pill.xml" />
 	<!-- 한별 -->
 	    <mapper resource="kr/or/ddit/mybatis/schedule.xml" />
 	<!-- 승민 -->	
