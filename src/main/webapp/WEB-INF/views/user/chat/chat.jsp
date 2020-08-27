@@ -17,7 +17,6 @@
 					<input type="text" name="" placeholder="seach"> <i
 						class="fa fa-search" aria-hidden="true"></i>
 				</div>
-
 				<c:if test="${empty chatingRoomList }">
 					<tr align="center">
 						<td colspan="5"><font color="blue">참여중인 채팅이 없습니다.</font></td>

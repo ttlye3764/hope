@@ -37,10 +37,21 @@ $(function(){
 			alert('비밀번호를 확인해주세요.');
 			return false;
 		}
-		var mem_id = $('#mem_id').val();
-		var mem_pass = $('#mem_pass').val();
-		$(location).attr('href','${pageContext.request.contextPath}/user/join/passChange.do?mem_id='+mem_id+'&mem_pass='+mem_pass);
+		
+		$.ajax({
+			type : 'POST',
+			url : '${pageContext.request.contextPath}/user/join/passChange.do',
+			dataType : 'json',
+			data : {
+				mem_pass : $('#mem_pass').val()
+			},
+			success : function(result) {
+				//{ flag : true | false}
+				$(location).attr('href','${pageContext.request.contextPath}/user/main/mainForm.do');
+			}
+		});
 	});
+		
 	$('#btn3').click(function() {
 		$(location).attr('href','${pageContext.request.contextPath}/user/join/loginForm2.do');
 	});

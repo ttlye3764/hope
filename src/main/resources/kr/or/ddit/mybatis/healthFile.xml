@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="healthFile">
+	<select resultType="healthFileVO" id="healthFileList">
+		SELECT *
+		FROM HEALTHFILE
+		ORDER BY FILE_NO
+	</select>
+
+	<insert id="inserthealthFile" parameterType="healthFileVO">
+		INSERT INTO
+		HEALTHFILE(
+		FILE_NO,FILE_NAME,FILE_SAVE_NAME,
+		FILE_TYPE,FILE_SIZE,
+		FILE_HEALTHIMAGE_NO
+		)
+
+		VALUES(
+		HEALTHIMAGE_SEQ.NEXTVAL,#{file_name},#{file_save_name},
+		#{file_type},#{file_size}, #{file_healthImage_no}
+		)
+	</insert>
+
+	<select resultType="healthFileVO" id="healthFileInfo"
+		parameterType="map">
+		SELECT *
+		FROM HEALTHFILE
+		WHERE FILE_HEALTHIMAGE_NO = #{file_healthImage_no}
+	</select>
+
+	<delete id="deletehealthFile" parameterType="String">
+		DELETE
+		FROM HEALTHFILE
+		WHERE FILE_HEALTHIMAGE_NO = #{file_healthImage_no}
+	</delete>
+
+	<update id="updatehealthFile" parameterType="healthFileVO">
+		UPDATE HEALTHFILE
+		SET FILE_NAME = #{file_name}, FILE_SAVE_NAME = #{file_save_name},
+		FILE_TYPE = #{file_type}, FILE_SIZE = #{file_size}
+		WHERE FILE_HEALTHIMAGE_NO = #{file_healthImage_no}
+	</update>
+
+</mapper>

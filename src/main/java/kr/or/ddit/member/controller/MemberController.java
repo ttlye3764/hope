@@ -3,6 +3,9 @@ package kr.or.ddit.member.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.MessageSourceAccessor;
@@ -50,11 +53,20 @@ public class MemberController {
 
 	@RequestMapping("memberView")
 	public ModelMap memberView(String mem_id, Map<String, String> params, ModelMap modelMap) throws Exception {
-
 		params.put("mem_id", mem_id);
 		MemberVO memberInfo = this.service.memberInfo(params);
 
 //	      ModelMap modelMap = new ModelMap();
+		modelMap.addAttribute("memberInfo", memberInfo);
+
+		return modelMap;
+	}
+	
+	@RequestMapping("myPage")
+	public ModelMap memberView(Map<String, String> params, ModelMap modelMap, HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		
 		modelMap.addAttribute("memberInfo", memberInfo);
 
 		return modelMap;

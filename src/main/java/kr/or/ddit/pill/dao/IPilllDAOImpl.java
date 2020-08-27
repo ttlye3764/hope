@@ -26,7 +26,8 @@ public class IPilllDAOImpl implements IPillDAO {
 
 
 	@Override
-	public String totalCount(Map<String, String> params) throws Exception {
+	public String totalCount(HashMap params) throws Exception {
+		System.out.println(params);
 		return client.selectOne("pill.totalCount",params);
 	}
 

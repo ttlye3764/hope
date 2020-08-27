@@ -33,7 +33,7 @@ public class IPillServiceImpl implements IPillService {
 	}
 
 	@Override
-	public String totalCount(Map<String, String> params) throws Exception {
+	public String totalCount(HashMap params) throws Exception {
 		return dao.totalCount(params);
 	}
 

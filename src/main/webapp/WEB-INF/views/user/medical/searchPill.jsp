@@ -214,8 +214,61 @@ button.sort.desc .caret { display:inline-block; }
 var shapes = [];
 var colors = [];
 var lines = [];
+	function ajaxCall(var i){
+		var pname = $("input[id='pname']").val();
+		var	cname = $("input[id='cname']").val();
+        $('input[name="shapes"]:checked').each(function(i){
+        	shapes.push($(this).val());
+        });
+        $('input[name="colors"]:checked').each(function(i){
+        	colors.push($(this).val());
+        });
+        $('input[name="lines"]:checked').each(function(i){
+        	lines.push($(this).val());
+        });
+		
+		 $.ajax({
+             url     : '${pageContext.request.contextPath}/user/medical/searchPillJson.do',
+             type    : 'post',
+             dataType: 'json',
+             data : {'shapes':shapes, 'colors':colors, 'pname':pname,'cname':cname, 'lines':lines,'currentPage':i },
+             success : function(result) { 
+            	  $('.list').empty();
+            	  $('#paginationDIV').empty();
+            	  $('#paginationDIV').append(result.pagination);
+	    		  console.log(result.list);
+	    		  console.log(result.pagination);
+		
+				  $.each(result.list, function(index, item){						 
+					  var newTr = $('<tr data-timestamp="1509426000" data-status="3" style="height: 60px;"></tr>');			 
+					  newTr.append('<input type="hidden" value="'+item.pi_no+'"/>');
+					  newTr.append('<td class="" style="height: 60px;"><img alt="" src="'+item.pi_bigimg+'" style="width: 96px; height: 71px;"></td>');
+					  var fmark = item.pi_f_mark;
+					  var bmark = item.pi_b_mark;
+					  if(fmark == null){
+					  	fmark = " ";
+					  }
+					  if(bmark == null){
+					  	bmark = " ";
+					  }
+					  var mark = fmark.concat("/");
+					  mark = mark.concat(bmark);
+					  newTr.append('<td class="" style="height: 60px; text-align:center;">'+mark+'</td>');						 
+					  newTr.append('<td class="" style="height: 60px; text-align:center;">'+item.pi_shape_name+'</td>');
+					  newTr.append('<td class="" style="height: 60px; text-align:center;">'+item.pi_x_size+'</td>');
+					  newTr.append('<td class="" style="height: 60px; text-align:center;">'+item.pi_y_size+'</td>');
+					  newTr.append('<td class="" style="height: 60px; text-align:center;">'+item.pi_z_size+'</td>');
+					  newTr.append('<td class="" style="height: 60px; text-align:center;">'+item.pi_name+'</td>');
+					  newTr.append('<td class="" style="height: 60px; text-align:center;">'+item.pi_b_name+'</td>');
 
+					  $('.list').append(newTr);
+				  })
+  			}
+  		});
+	}
 	$(function() {
+
+		
 		$('.idty li').click(function() {
 			if ($(this).hasClass('li_selected')) {
 				$(this).removeClass('li_selected');
@@ -245,9 +298,41 @@ var lines = [];
 	             type    : 'post',
 	             dataType: 'json',
 	             data : {'shapes':shapes, 'colors':colors, 'pname':pname,'cname':cname, 'lines':lines },
-	             success : function(result) {  
-		             alert("성공");   
-		              console.log(result.list);
+	             success : function(result) { 
+	            	  $('.list').empty();
+	            	  $('#paginationDIV').empty();
+	            	  $('#paginationDIV').append(result.pagination);
+		    		  console.log(result.list);
+		    		  console.log(result.pagination);
+			
+					  $.each(result.list, function(index, item){						 
+						  var newTr = $('<tr data-timestamp="1509426000" data-status="3" style="height: 60px;"></tr>');			 
+						  newTr.append('<input type="hidden" value="'+item.pi_no+'"/>');
+						  newTr.append('<td class="" style="height: 60px;"><img alt="" src="'+item.pi_bigimg+'" style="width: 96px; height: 71px;"></td>');
+						  var fmark = item.pi_f_mark;
+						  var bmark = item.pi_b_mark;
+						  if(fmark == null){
+						  	fmark = " ";
+						  }
+						  if(bmark == null){
+						  	bmark = " ";
+						  }
+						  var mark = fmark.concat("/");
+						  mark = mark.concat(bmark);
+						  newTr.append('<td class="" style="height: 60px; text-align:center;">'+mark+'</td>');						 
+						  newTr.append('<td class="" style="height: 60px; text-align:center;">'+item.pi_shape_name+'</td>');
+						  newTr.append('<td class="" style="height: 60px; text-align:center;">'+item.pi_x_size+'</td>');
+						  newTr.append('<td class="" style="height: 60px; text-align:center;">'+item.pi_y_size+'</td>');
+						  newTr.append('<td class="" style="height: 60px; text-align:center;">'+item.pi_z_size+'</td>');
+						  newTr.append('<td class="" style="height: 60px; text-align:center;">'+item.pi_name+'</td>');
+						  newTr.append('<td class="" style="height: 60px; text-align:center;">'+item.pi_b_name+'</td>');
+
+						  $('.list').append(newTr);
+						  
+
+						  
+						  
+					  })
 	  			}
 	  		});
 		})
@@ -388,10 +473,10 @@ var lines = [];
 
 					<!-- IMPORTANT, class="list" must be on tbody -->
 					<tbody class="list">
+						
 						<c:forEach items="${pillList }" var="pillInfo">
 						<tr data-timestamp="1509426000" data-status="3" style="height: 60px;">
 							<input type="hidden" value="${pillInfo.pi_no}"/>
-							<%-- <td class="" style="height: 60px;"><img alt="" src="${pageContext.request.contextPath}/images/unnamed.jpg" style="width: 96px; height: 71px;"></td> --%>
 							<td class="" style="height: 60px;"><img alt="" src="${pillInfo.pi_bigimg}" style="width: 96px; height: 71px;"></td>
 							<td class="" style="height: 60px;">${pillInfo.pi_f_mark}</td>
 							<td class="" style="height: 60px;">${pillInfo.pi_shape_name}</td>
@@ -401,10 +486,11 @@ var lines = [];
 							<td class="" style="height: 60px;">${pillInfo.pi_name}</td>
 							<td class="" style="height: 60px;">${pillInfo.pi_b_name}</td>
 						</tr>
-						</c:forEach>									
+						</c:forEach>	
+														
 					</tbody>
 				</table>
-<div style="margin-left: 50%;">${pagination }</div>
+				<div id="paginationDIV" style="margin-left: 50%;"><div>${pagination }</div></div>
 							
 			</div>
 		</div>

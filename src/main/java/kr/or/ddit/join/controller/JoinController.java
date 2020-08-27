@@ -36,8 +36,6 @@ public class JoinController {
 	@Autowired
 	private IMemberService service;
 	
-	MemberVO memberInfo;
-	
 	@RequestMapping("joinChoiceForm")
 	public void joinChoiceForm() {
 	}
@@ -77,7 +75,6 @@ public class JoinController {
 			return andView;
 		} else {
 			session.setAttribute("LOGIN_MEMBERINFO", memberInfo);
-			this.memberInfo = memberInfo;
 			if (memberInfo.getMem_temporary_pass() == null) {
 				andView.addObject("json", 1);
 				andView.setViewName("jsonConvertView");
@@ -101,34 +98,30 @@ public class JoinController {
 	}
 	
 	@RequestMapping("passChange")
-	public String passChange(String mem_pass, Map<String,String>params) throws Exception {
-		String mem_id = this.memberInfo.getMem_id();
+	public ModelAndView passChange(String mem_pass, Map<String,String>params, ModelAndView andView, HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		
+		String mem_id = memberInfo.getMem_id();
 		
 		params.put("mem_id", mem_id);
 		params.put("mem_pass", mem_pass);
 		
 		this.service.updatePass(params);
 		
-		return "redirect:/user/freeboard/freeboardForm.do";
-	}
-
-	@RequestMapping("memberView")
-	public ModelMap memberView(String mem_id, Map<String, String> params, ModelMap modelMap) throws Exception {
-		params.put("mem_id", mem_id);
-
-		MemberVO memberInfo = this.service.memberInfo(params);
-
-		modelMap.addAttribute("memberInfo", memberInfo);
-
-		return modelMap;
+		andView.addObject("json", 1);
+		andView.setViewName("jsonConvertView");
+		
+		return andView;
 	}
 
 	@RequestMapping("logout")
-	public String logout(HttpSession session) throws Exception {
+	public ModelAndView logout(HttpSession session, ModelAndView andView) throws Exception {
 		session.invalidate();
-		String message = this.accessor.getMessage("success.common.logout", Locale.KOREA);
-		message = URLEncoder.encode(message, "UTF-8");
-		return "redirect:/user/join/loginForm.do?message=" + message;
+		andView.addObject("json", "로그아웃 되었습니다.");
+		andView.setViewName("jsonConvertView");
+		
+		return andView;
 	}
 
 	@RequestMapping(value = "freeboardloginCheck", method = RequestMethod.POST)

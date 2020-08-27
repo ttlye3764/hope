@@ -15,7 +15,7 @@ import kr.or.ddit.vo.PillVO;
 public interface IPillService {
 	public List<PillVO> pillList() throws Exception;
 
-	public String totalCount(Map<String, String> params) throws Exception;
+	public String totalCount(HashMap params) throws Exception;
 
 	public List<PillVO> pillList(HashMap params) throws Exception;
 
