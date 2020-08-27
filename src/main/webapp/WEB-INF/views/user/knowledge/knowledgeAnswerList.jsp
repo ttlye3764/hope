@@ -26,6 +26,8 @@
 
 		});
 	});
+
+
 </script>
 </head>
 <body>
@@ -71,7 +73,7 @@
 					<c:forEach items= "${knowledgeList }" var= "knowledgeInfo" varStatus="status">
 					<c:set var="radio" value="${radio + 1}" />
 					
-					<div class="card" style="width: 800px; margin-left: 180px; height:500px;">
+					<div class="card" style="width: 800px; margin-left: 180px; height:550px;">
 						<div class="card-body">
 							<h4 class="mb-2">
 							<input type="hidden" value="${knowledgeInfo.k_no}" id="k_no"/>
@@ -81,13 +83,11 @@
 							</div>
 							
 					<!-- 파일  -->
-					 <c:if test="${!empty knowledgeInfo.items }">  
-					<div id="image_container" style="width: 300px; height: 200px;">
-						<c:forEach items="${knowledgeInfo.items }" var="fileitemInfo">
-							<img src="/files/${fileitemInfo.file_save_name }" alt="pic1">
-						</c:forEach>
-					</div>
-					 </c:if>  
+					 <c:if test="${!empty knowledgeInfo.items[status.index].file_save_name }">  
+						<div id="image_container" style="width: 300px; height: 230px;">
+								<img src="/files/${knowledgeInfo.items[status.index].file_save_name}" alt="pic1" style="width: 300px; height: 230px;">
+	 					</div> 
+					 </c:if>   
 
 							<div class="list-group-number list-unstyled list-group-borderless">
 								
@@ -133,8 +133,6 @@
 					</c:if>
 				</div>
 			</div>
-			
-			<br><br>
 			
 	<!-- =======================
 	call to action-->

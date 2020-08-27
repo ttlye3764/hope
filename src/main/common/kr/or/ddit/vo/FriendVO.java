@@ -5,6 +5,7 @@ public class FriendVO {
 	private String mem_no;
 	private String fri_mem_no;
 	private String mem_name;
+	private String fri_mem_name;
 	
 	public String getFri_no() {
 		return fri_no;
@@ -29,6 +30,12 @@ public class FriendVO {
 	}
 	public void setMem_name(String mem_name) {
 		this.mem_name = mem_name;
+	}
+	public String getFri_mem_name() {
+		return fri_mem_name;
+	}
+	public void setFri_mem_name(String fri_mem_name) {
+		this.fri_mem_name = fri_mem_name;
 	}
 	
 	

@@ -435,6 +435,7 @@
 			<groupId>org.logback-extensions</groupId>
 			<artifactId>logback-ext-spring</artifactId>
 			<version>${logback.ext.spring-version}</version>
+			<scope>runtime</scope>
 		</dependency>
 
 		<!-- <dependency> -->

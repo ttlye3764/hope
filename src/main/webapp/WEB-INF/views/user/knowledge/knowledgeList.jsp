@@ -11,6 +11,34 @@
  position: relative; top:0; left:0; 
  width: 100%; height: 40px;  text-align: center; background: #3399ff;
 }
+.arrow_box {
+	position: relative;
+	background: #fffafb;
+	border: 1px solid #000000;
+}
+.arrow_box:after, .arrow_box:before {
+	right: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:after {
+	border-color: rgba(255, 250, 251, 0);
+	border-right-color: #fffafb;
+	border-width: 10px;
+	margin-top: -10px;
+}
+.arrow_box:before {
+	border-color: rgba(0, 0, 0, 0);
+	border-right-color: #000000;
+	border-width: 11px;
+	margin-top: -11px;
+}
 </style>
 <!--Global JS-->
 <script src="${pageContext.request.contextPath }/resources/template/assets/vendor/jquery/jquery.min.js"></script>
@@ -24,6 +52,7 @@
 <!--Template Functions-->
 <script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
 
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
  function myFucntion(){
 	
@@ -50,13 +79,47 @@
 
         var count = 0;
 		for (var i = 0; i < list.length; i++) {
+			var a = list[i].length + 1;
+
 			if(list[i] == hap[i]){
 					count++;
 				}
 			}
 
 			document.getElementById("allChk").innerHTML = "총 맞은 갯수 : " + count;
-			document.getElementById("check").innerHTML = "잘하셨어요!";
+
+			var below = a * 0.3;
+			var average = a * 0.6;
+ 
+			if (count <= below) {
+				document.getElementById("check").innerHTML = "아이큐 100 이하 입니다. 다시 한 번 풀어볼까요?";
+			} else if (below < count && count <= average) {
+				document.getElementById("check").innerHTML = "아이큐 100-129 입니다. 잘하셨어요!";
+			} else {
+				document.getElementById("check").innerHTML = "아이큐 130 이상 입니다. 천재시군요!";
+			}
+
+			// 통계 차트
+			google.charts.load("current", {packages:["corechart"]});
+	        google.charts.setOnLoadCallback(drawChart);
+	        function drawChart() {
+	          var data = google.visualization.arrayToDataTable([
+	            ['knowledge', 'Hours per Day'],
+	            ['80-89',     2],	// 지능지수
+	            ['90-99',      2],	// 감정지수
+	            ['100-119',  7],	// 창조지수
+	            ['120-129', 3], // 유추지수
+	            ['130+',    1] // 열정지수
+	          ]);
+
+	          var options = {
+	            title: '세계 IQ 평균 지수',
+	            pieHole: 0.4,
+	          };
+
+	          var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+	          chart.draw(data, options);
+	        }
 
 		</c:forEach>
 
@@ -68,6 +131,11 @@
 
 		});
 
+		$('#return').click(function() {
+			$(location).attr('href','${pageContext.request.contextPath}/user/knowledge/knowledgeList.do');
+
+		});
+
 		var i = 0;
 		var $output = $("#output");
 			
@@ -75,7 +143,7 @@
 			i++;
 			$output.text(i);
 
-       	 	if (i == 80) {
+       	 	if (i == 300) {
 				clearInterval(timer);
 	       	 }
 
@@ -126,7 +194,7 @@
 			
 			<div style="position:relative; float:right; width:100px;">  
 		        <div id="scroll" style="position:absolute;top:0px;left:0px;"> 
-			        <p style="margin: 0 auto; text-align: center; color: black;">80초 안에 <br>풀어보세요!</p> 
+			        <p style="margin: 0 auto; text-align: center; color: black;">300초 안에 <br>풀어보세요!</p> 
 			           <div id="output" style="margin: 0 auto; text-align: center; font-size: 30px; color: black;">
 							<p id="timer" style="font-size: 30px;"></p>
 						</div> 
@@ -150,7 +218,7 @@
 					<c:forEach items= "${knowledgeList }" var= "knowledgeInfo" varStatus="status">
 					<c:set var="radio" value="${radio + 1}" />
 					
-					<div class="card" style="width: 800px; margin-left: 180px; height:500px;">
+					<div class="card" style="width: 800px; margin-left: 180px; height:550px;">
 						<div class="card-body">
 							<h4 class="mb-2">
 							<input type="hidden" value="${knowledgeInfo.k_no}" id="k_no"/>
@@ -160,12 +228,10 @@
 							</div>
 							
 					<!-- 파일  -->
-					 <c:if test="${!empty knowledgeInfo.items }">  
-					<div id="image_container" style="width: 300px; height: 200px;">
-						<c:forEach items="${knowledgeInfo.items }" var="fileitemInfo">
-							<img src="/files/${fileitemInfo.file_save_name }" alt="pic1">
-						</c:forEach>
-					</div>
+					 <c:if test="${!empty knowledgeInfo.items[status.index].file_save_name }">  
+						<div id="image_container" style="width: 300px; height: 230px;">
+								<img src="/files/${knowledgeInfo.items[status.index].file_save_name}" alt="pic1" style="width: 300px; height: 230px;">
+	 					</div> 
 					 </c:if>  
 
 							<div class="list-group-number list-unstyled list-group-borderless">
@@ -209,8 +275,6 @@
 				</div>
 			</div>
 			
-			<br><br>
-			
 	<!-- =======================
 	call to action-->
 	<c:if test="${!empty knowledgeList }" >
@@ -241,16 +305,20 @@
 										<p id="check"></p>
 									</div>
 									
-									<div class="col-xl-6" >
+									<!-- <div class="col-xl-6" >
 			                            <div class="card" style="width: 470px; height: 300px; margin-bottom: 30px;" id="statistic">
 			                                <div class="card-body">
 			                                    <h4 class="header-title mb-4">통계 분석</h4>
-			                                    <div class="bar-container-horizontal" style="width: 100%;height: 300px;"></div>
+			                                    <div class="bar-container-horizontal" style="width: 100%;height: 300px;">
+			                                    
+			                                    </div>
 			                                </div>
-			                                <!-- end card body-->
+			                                end card body
 			                            </div>
-			                            <!-- end card -->
-			                        </div>
+			                            end card
+			                        </div> -->
+			                        
+			                       <div id="donutchart" style="width: 450px; height: 400px; margin: 0 auto;"></div>
 									
 									<div class="modal-footer">
 										<button type="button" class="btn btn-light" id="answer">정답보기</button>

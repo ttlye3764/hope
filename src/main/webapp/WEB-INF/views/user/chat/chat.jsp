@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Chat</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/chat.css">
+<!-- <script type='text/javascript' src='http://code.jquery.com/jquery-latest.js'></script> -->
 </head>
 <body>
 	<div class="wrapper">
@@ -19,35 +20,25 @@
 
 				<c:if test="${empty friendList }">
 					<tr align="center">
-						<td colspan="5"><font color="red">등록된 게시글이 존재하지 않습니다</font></td>
+						<td colspan="5"><font color="blue">친구가 없네요 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</font></td>
 					</tr>
 				</c:if>
 				<c:if test="${!empty friendList }">
 					<c:forEach items="${friendList }" var="friendInfo">
 
-						<div class="user" onclick="openSocket();">
+						<div class="user" onclick="">
 							<img
 								src="https://media1.popsugar-assets.com/files/thumbor/WjFR-_7dQ3eGnp_oHtDor3Au1gI/fit-in/550x550/filters:format_auto-!!-:strip_icc-!!-/2017/08/18/840/n/1922398/d06222d559973b8d6550b9.76731985_edit_img_image_43907487_1503079245/i/Leonardo-DiCaprio-Halloween-Costume-Ideas.jpg"
 								alt="" class="icon-user">
 							<div class="user-status">
-								<div class="name">${friendInfo.mem_name }</div>
+								<div class="name">${friendInfo.fri_mem_name }</div>
+								<input type="hidden" value="${friendInfo.fri_mem_no }" class="targetMemNo">
 								<i class="fa fa-circle offline"></i> <span class="status">online</span>
 							</div>
 						</div>
 
 					</c:forEach>
 				</c:if>
-
-				<div class="user">
-					<img
-						src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/a1/a139201eecad23108dc4a2b1453ffa74a9e51387_full.jpg"
-						alt="" class="icon-user">
-					<div class="user-status">
-						<div class="name">Donald Trump</div>
-						<i class="fa fa-circle offline"></i> <span class="status">online</span>
-					</div>
-				</div>
-
 			</div>
 
 			<div class="chat-right">
@@ -76,10 +67,9 @@
 				<div class="line-input">
 					<div class="input">
 						<input type="text" id="messageinput">
-					</div>
-					<input type="text" id="sender" value="${sessionScope.id}"
-						style="display: none;">
-					<button class="add" onclick="send()">Send</button>
+					</div>LOGIN_MEMBERINFO
+					<input type="text" id="sender" value="${LOGIN_MEMBERINFO.mem_no}" style="display: none;">
+					<button class="add" id="sendBtn">Send</button>
 				</div>
 			</div>
 		</div>
@@ -103,7 +93,7 @@
 				<!-- contact form -->
 				<div class="col-md-6">
 					<div class="h-100">
-						<form class="contact-form" id="contact-form" name="contactform" action="${pageContext.request.contextPath}/user/medical/updateMedicalInfo.do" method="post" enctype="multipart/form-data">			
+						<form class="contact-form" id="contact-form" name="contactform" action="${pageContext.request.contextPath}/user/chat/addFriend.do" method="post" enctype="multipart/form-data">			
 							<!-- Start main form -->
 							<div class="row">
 								<div class="col-md-6">
@@ -111,6 +101,8 @@
 										<input id="pill_no" name="pill_no" type="hidden" class="form-control">
 										<label>친구 이름 </label><input id="mem_name" name="mem_name" type="text" class="form-control" placeholder="친구이름">
 										<button type="button" id="search_fri">검색</button>
+										
+										<label>검색 내용 - 친구 이름 </label><input id="search_mem_name" name="search_mem_name" type="text" class="form-control" placeholder="친구이름">
 								</div>
 							<br><br>	
 								<div class="col-md-6" style="width: 100px;">
@@ -123,7 +115,7 @@
 								</div>																							
 								<!-- submit button -->
 								<div class="col-md-12 text-center">
-								<button class="btn btn-outline-grad " type="submit">수정</button>
+								<button class="btn btn-outline-grad " type="submit">추가</button>
 								<button class="btn btn-outline-grad " id="deleteBTN" type="button">삭제</button>
 								</div>
 							</div>
@@ -141,139 +133,132 @@
 		<!-- /.modal-dialog -->
 	</div>
 </body>
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js'></script>
 <script type="text/javascript">
-	var ws;
-	var messages = document.getElementById("messages");
+//var ws;
+var messages = document.getElementById("messages");
+var targetMemNo;
 
-	function openSocket() {
-		if (ws !== undefined && ws.readyState !== WebSocket.CLOSED) {
-			writeResponse("WebSocket is already opened.");
-			return;
-		}
-		//웹소켓 객체 만드는 코드
-		ws = new WebSocket("ws://localhost:8080/lastProject/echo.do");
+function addFriend(){
+	$("#regist-modal").modal("show"); //모달창 띄우기
+}
 
-		ws.onopen = function(event) {
-			if (event.data === undefined) {
-				return;
-			}
-			writeResponse(event.data);
-		};
+function closeSocket() {
+	ws.close();
+}
 
-		ws.onmessage = function(event) {
-			console.log('writeResponse');
-			console.log(event.data)
-			writeResponse(event.data);
-		};
+function writeResponse(text) {
+	messages.innerHTML += "<br/>" + text;
+}
 
-		ws.onclose = function(event) {
-			writeResponse("대화 종료");
-		}
+function clearText() {
+	console.log(messages.parentNode);
+	messages.parentNode.removeChild(messages)
+}
 
+
+var socket;
+
+function initSocket(url) {
+	socket = new SockJS(url);
+	
+	socket.onmessage = function(evt) {
+		console.log(evt.data + "<br/>");
+
+
+		// 받아온 메세지 넣어주기
+
+		var bot = document.createElement("div");
+		bot.className = "message-text left";
+
+		bot.innerHTML = evt.data;
+		var out = document.querySelector(".message");
+		var innerDiv = document.createElement("div");
+
+		innerDiv.className = "solo-message";
+
+		innerDiv.appendChild(bot);
+		out.appendChild(innerDiv);
+
+		out.scrollBy(0, 1000);
+		document.querySelector(".input input").value = "";
+	};
+	
+	socket.onclose = function(evt) {
+		console.log("연결 종료료");
 	}
-
-	function send() {
-		// var text=document.getElementById("messageinput").value+","+document.getElementById("sender").value;
-		var text = document.getElementById("messageinput").value + ","
-				+ document.getElementById("sender").value;
-		ws.send(text);
+	
+	$("#sendBtn").on("click", function() {
+		var msg = $("#message").val();
+		var text = document.getElementById("messageinput").value + "," +targetMemNo;
+		socket.send(text);
 		console.log(text);
 		text = "";
-	}
+	});
+}
 
-	function closeSocket() {
-		ws.close();
-	}
+$(function(){
+	
+	initSocket("http://192.168.31.47:8080/lastProject/echo?mem_no=" + ${LOGIN_MEMBERINFO.mem_no});
+	
+	var i = 0;
+	document.querySelector(".add").addEventListener("click", addMessage);
 
-	function writeResponse(text) {
-		messages.innerHTML += "<br/>" + text;
-	}
-
-	function clearText() {
-		console.log(messages.parentNode);
-		messages.parentNode.removeChild(messages)
-	}
-	(function() {
-		var i = 0;
-		document.querySelector(".add").addEventListener("click", addMessage);
-
-		document.querySelector(".input").onkeypress = function(e) {
-			if (e.key === "Enter") {
-				addMessage();
-			}
+	document.querySelector(".input").onkeypress = function(e) {
+		if (e.key === "Enter") {
+			addMessage();
 		}
-
-		function addMessage() {
-			var message = document.querySelector(".input input").value;
-
-			if (message !== "") {
-				var botText = [
-						'Why did the web developer leave the restaurant? Because of the table layout.',
-						'How do you comfort a JavaScript bug? You console it.',
-						'An SQL query enters a bar, approaches two tables and asks: "May I join you?"',
-						'What is the most used language in programming? Profanity.',
-						'What is the object-oriented way to become wealthy? Inheritance.',
-						'An SEO expert walks into a bar, bars, pub, tavern, public house, Irish pub, drinks, beer, alcohol' ];
-
-				var text = document.createElement("div");
-				var bot = document.createElement("div");
-
-				text.className = "message-text right";
-				bot.className = "message-text left";
-
-				text.innerHTML = message;
-				append(text);
-
-				setTimeout(function() {
-					bot.innerHTML = botText[i];
-					i++;
-					append(bot);
-
-				}, 1000);
-
-			}
-		}
-
-		function append(child) {
-			var out = document.querySelector(".message");
-			var innerDiv = document.createElement("div");
-
-			innerDiv.className = "solo-message";
-
-			innerDiv.appendChild(child);
-			out.appendChild(innerDiv);
-
-			out.scrollBy(0, 1000);
-			document.querySelector(".input input").value = "";
-
-		}
-
-
+	}
+	
+	function addMessage() {
+		var message = document.querySelector(".input input").value;
 		
-
-	})();
-
-	function addFriend(){
-		$("#regist-modal").modal("show"); //모달창 띄우기
+		if (message !== "") {
+			var text = document.createElement("div");
+			text.className = "message-text right";
+			text.innerHTML = message;
+			append(text);
+		}
 	}
+
+	function append(child) {
+		var out = document.querySelector(".message");
+		var innerDiv = document.createElement("div");
+
+		innerDiv.className = "solo-message";
+
+		innerDiv.appendChild(child);
+		out.appendChild(innerDiv);
+
+		out.scrollBy(0, 1000);
+		document.querySelector(".input input").value = "";
+
+	}
+
 	$('#search_fri').click(function(){
-			$.ajax({
-				type : 'POST',
-				url : '${pageContext.request.contextPath}/user/chat/searchMember.do',
-				dataType : 'JSON',
-				data : {
-					mem_name : $('#mem_name').val()
-				},
-				error : function(result) {
-					alert(result.memberInfo.mem_name);
-				},
-				success : function(result) {
-					alert(result.memberInfo.mem_name);
-					
-				}
-			});
+		$.ajax({
+			type : 'POST',
+			url : '${pageContext.request.contextPath}/user/chat/searchMember.do',
+			dataType : 'JSON',
+			data : {
+				mem_name : $('#mem_name').val()
+			},
+			error : function(result) {
+				alert(result.memberInfo.mem_name);
+			},
+			success : function(result) {
+				alert(result.memberInfo.mem_name);
+				$('#search_mem_name').val(result.memberInfo.mem_name);
+			}
+		});
 
-		})
+	})
+$('.user').click(function(){
+	targetMemNo = $(this).find('div input').val();
+	console.log(targetMemNo);
+});
 
+	
+});
 </script>
 </html>

@@ -103,6 +103,20 @@
 		WHERE MEM_NO = #{mem_no}
 	</select>
 	
+	<insert id="addFriend" parameterType="friendVO">
+		INSERT INTO FRIEND(FRI_NO, 
+						MEM_NO,
+						FRI_MEM_NO,
+						MEM_NAME,
+						FRI_MEM_NAME)
+					 values(FRIEND_SEQ.NEXTVAL,
+					 		#{mem_no},
+					 		#{fri_mem_no},
+					 		#{mem_name},
+					 		#{fri_mem_name})
+		
+	</insert>
+	
 	<select id="searchID" resultType="String" parameterType="map">
 		SELECT MEM_ID
 		FROM MEMBER
