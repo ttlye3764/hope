@@ -16,6 +16,7 @@
 		<typeAlias alias="chatingRoomVO" type="kr.or.ddit.vo.ChatingRoomVO"/>
 		<typeAlias alias="messageVO" type="kr.or.ddit.vo.MessageVO"/>
 		<typeAlias alias="participationVO" type="kr.or.ddit.vo.ParticipationVO"/>
+		<typeAlias alias="dietVO" type="kr.or.ddit.vo.DietVO"/>
 		
 		<!-- 용춘 -->
 		<typeAlias alias="mypillVO" type="kr.or.ddit.vo.MypillVO" />
@@ -43,6 +44,8 @@
 		<mapper resource="kr/or/ddit/mybatis/freeboard.xml" />
 	<!-- 재호  -->
 		<mapper resource="kr/or/ddit/mybatis/chat.xml" />
+		<mapper resource="kr/or/ddit/mybatis/diet.xml" />
+		
 	<!-- 용춘 -->
 		<mapper resource="kr/or/ddit/mybatis/medical.xml" />
 		<mapper resource="kr/or/ddit/mybatis/medicalfile.xml" />
