@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+
 import kr.or.ddit.vo.BoardVO;
 
 @Repository("boardDao")
@@ -55,6 +56,11 @@ public class BoardDaoImpl implements IBoardDao{
 	public String totalCount(Map<String, String> params) throws Exception {
 		return (String)client.selectOne("board.totalCount", params);
 	}
+
+//	@Override
+//	public String fileSequence() throws Exception {
+//		return client.selectOne("board.fileSequence");
+//	}
 
 
 

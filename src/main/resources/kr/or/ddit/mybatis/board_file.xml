@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="boardfile">
+	<select id="boardfileList" resultType="board_fileVO">
+		SELECT *
+		FROM BOARD_FILE
+		ORDER BY file_no
+	</select>
+	
+	<insert id="insertBoard_File" parameterType="board_fileVO">
+		INSERT INTO
+		BOARD_FILE( FILE_NO, FILE_BD_NO, FILE_NAME, 
+		            FILE_SAVE_NAME, FILE_TYPE, FILE_SIZE
+				  )
+		   VAlUES ( FILE_SEQ.NEXTVAL, #{file_bd_no}, #{file_name},
+				   #{file_save_name}, #{file_type}, #{file_size}		   
+		          )
+	</insert>
+	
+	<select id="board_FileInfo" resultType="board_fileVO" parameterType="map">
+		SELECT *
+		FROM BOARD_FILE
+		WHERE BD_NO = #{bd_no}
+	</select>
+	
+	<delete id="delete_File" parameterType="String">
+		DELETE
+		FROM BOARD_FILE
+		WHERE BD_NO = #{BD_NO}
+	</delete>
+	
+	<update id="updateBoard_File" parameterType="board_fileVO">
+		UPDATE BOARD_FILE
+		SET FILE_NAME = #{file_name},
+		    FILE_SAVE_NAME = #{file_save_name},
+		    FILE_TYPE = #{file_type},
+		    FILE_SIZE = #{file_size}
+		WHERE BD_NO = #{bd_no}    
+	</update>
+	
+	
+
+</mapper>

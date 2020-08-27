@@ -24,6 +24,7 @@
 			
 		<!-- 윤희 -->
 		<typeAlias alias="boardVO" type="kr.or.ddit.vo.BoardVO" />
+		<typeAlias alias="board_fileVO" type="kr.or.ddit.vo.Board_FileVO"/>
 		
 		<!-- 수아 -->
 		<typeAlias alias="knowVO" type="kr.or.ddit.vo.KnowledgeVO" />
@@ -47,6 +48,7 @@
 		<mapper resource="kr/or/ddit/mybatis/member.xml" />
 	<!-- 윤희 -->
 		<mapper resource="kr/or/ddit/mybatis/board.xml" />
+		<mapper resource="kr/or/ddit/mybatis/board_file.xml" />
 	<!-- 수아 -->
 		<mapper resource="kr/or/ddit/mybatis/knowledge.xml" />
 		<mapper resource="kr/or/ddit/mybatis/fileitem.xml" />
