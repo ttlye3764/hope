@@ -11,7 +11,7 @@
 											 InternalResourceViewResolver와 연계되어 에러페이지 포워딩 처리
 			
 		 -->
-		<util:properties id="exceptionMappings">
+		<!-- <util:properties id="exceptionMappings">
 			<prop key="NullPointerException">error/error500</prop>
 			<prop key="RuntimeException">error/error500</prop>
 			<prop key="org.springframework.dao.DataAccessException">error/error500</prop>
@@ -21,5 +21,5 @@
 		<bean class="kr.or.ddit.globalexception.CustomExceptionResolver"
 			   p:defaultErrorView="error/error500.jsp"
 			   p:exceptionMappings-ref="exceptionMappings">
-		</bean>
+		</bean> -->
 </beans>

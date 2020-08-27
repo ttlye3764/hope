@@ -8,22 +8,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.http.HttpRequest;
+import org.apache.maven.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.or.ddit.chat.dao.IChatDao;
 import kr.or.ddit.member.dao.IMemberDAO;
+import kr.or.ddit.vo.ChatingRoomVO;
 import kr.or.ddit.vo.FriendVO;
 import kr.or.ddit.vo.MemberVO;
+import kr.or.ddit.vo.ParticipationVO;
 
 @Controller
-@RequestMapping("/user/chat")
+@RequestMapping("/user/chat/")
 public class ChatController {
 	
 	@Autowired
 	IMemberDAO memberDao;
+	
+	@Autowired
+	IChatDao chatDao;
 	
 	@RequestMapping("chat")
 	public ModelAndView chat(HttpServletRequest request,
@@ -50,7 +57,12 @@ public class ChatController {
 		List<FriendVO> friendList = memberDao.friendMemberList(params);
 		
 		System.out.println(friendList.size());
-
+		
+		
+		//참여중인 채팅방 리스트
+		List<ChatingRoomVO> chatingRoomList = chatDao.ChatingRoomList(params);
+		
+		andView.addObject("chatingRoomList", chatingRoomList);
 		andView.addObject("friendList",friendList);
 		andView.setViewName("user/chat/chat");
 		return andView;
@@ -110,8 +122,40 @@ public class ChatController {
 		
 		memberDao.addFriend(friendInfo);
 		
-		andView.setViewName("/lastProject/user/chat/chat.do");
+		andView.setViewName("jsonConvertView");
 		
+		return andView;
+	}
+	
+	@RequestMapping("createChatingRoom")
+	public ModelAndView createChatingRoom(ModelAndView andView, ChatingRoomVO chatingRoomInfo) throws Exception{
+		
+		chatDao.createChatRoom(chatingRoomInfo);
+		
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
+	
+	@RequestMapping("insertParticipation")
+	public ModelAndView insertParticipation(@RequestParam String mem_no, @RequestParam String target_mem_no,
+											Map<String, String> params,
+											ModelAndView andView) throws Exception {
+		
+		System.out.println(mem_no);
+		
+		System.out.println("타겟 : " + target_mem_no);
+		
+		ParticipationVO participationInfo = new ParticipationVO();
+		
+		participationInfo.setMem_no(mem_no);
+		
+		chatDao.insertParticipation(participationInfo);
+		
+		participationInfo.setMem_no(target_mem_no);
+		
+		chatDao.insertParticipation(participationInfo);
+		
+		andView.setViewName("jsonConvertView");
 		return andView;
 	}
 	

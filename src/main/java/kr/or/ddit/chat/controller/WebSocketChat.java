@@ -6,37 +6,36 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.websocket.OnClose;
-import javax.websocket.OnError;
 import javax.websocket.OnMessage;
-import javax.websocket.OnOpen;
 import javax.websocket.RemoteEndpoint.Basic;
 import javax.websocket.Session;
-import javax.websocket.server.ServerEndpoint;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import kr.or.ddit.chat.dao.IChatDao;
 import kr.or.ddit.member.dao.IMemberDAO;
 import kr.or.ddit.vo.MemberVO;
+import kr.or.ddit.vo.ParticipationVO;
 
 public class WebSocketChat extends TextWebSocketHandler{
 	
 	@Autowired
 	IMemberDAO memberDao;
+	
+	@Autowired
+	IChatDao chatDao;
     
     private static final List<WebSocketSession> sessionList=new ArrayList<WebSocketSession>();;
     private static final Logger logger = LoggerFactory.getLogger(WebSocketChat.class);
     
     private static Map<String, Object> userMap;
+    private static Map<String, String> chatingRoomMap;
     
     private MemberVO memberInfo = null;
     
@@ -103,12 +102,11 @@ public class WebSocketChat extends TextWebSocketHandler{
 		
 		System.out.println(message.getPayload());
 		
-		String targetMemNo = message.getPayload().split(",")[1];
+		String chatingRoomNo = message.getPayload().split(",")[1];
 		
 		String text = message.getPayload().split(",")[0];
 		
- 
-		sendOneSessionToMessage(my_mem_no, text, userMap, targetMemNo);
+		sendOneSessionToMessage(my_mem_no, text, userMap, chatingRoomNo);
 		
 	}
 
@@ -130,14 +128,28 @@ public class WebSocketChat extends TextWebSocketHandler{
 	
     
     
-    private void sendOneSessionToMessage(String my_mem_no, String text, Map<String, Object> userMap, String targetMemNo) {
+    private void sendOneSessionToMessage(String my_mem_no, String text, Map<String, Object> userMap, String chatingRoomNo) {
+    	
+    	// 채팅방 번호에 해당하는 유저들
+    	Map<String, String> params = new HashMap<String, String>();
+    	params.put("ch_no", chatingRoomNo);
+    	List<ParticipationVO> participationList = null;
+		try {
+			participationList = chatDao.participationList(params);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    	
         try {
-        	for (String mem_no : userMap.keySet()) {
-                if(!my_mem_no.equals(mem_no) && targetMemNo.equals(mem_no)) {
-                	WebSocketSession currentSession = (WebSocketSession) userMap.get(mem_no);
-                	currentSession.sendMessage(new TextMessage(mem_no + " : " + text));
-                }              
-            }
+        	for(ParticipationVO participationInfo : participationList){
+        		for (String mem_no : userMap.keySet()) {
+        			if(participationInfo.getMem_no().equals(mem_no) && !mem_no.equals(my_mem_no)) {
+        				WebSocketSession currentSession = (WebSocketSession) userMap.get(mem_no);
+                    	currentSession.sendMessage(new TextMessage(my_mem_no + " : " + text));
+        			}
+        		}
+        	}
         }catch (Exception e) {
             // TODO: handle exception
             System.out.println(e.getMessage());
@@ -153,41 +165,41 @@ public class WebSocketChat extends TextWebSocketHandler{
      * @param message
      * @param session
      */
-    @OnMessage
-    public void onMessage(String message,Session session) {
-    	
-    	String targetMemNo = message.split(",")[2];
-    	String sender = message.split(",")[1];
-    	message = message.split(",")[0];
-    	
-    	userMap.put(sender, session);
-    	
-    	Map<String, String> params = new HashMap<String, String>();
-    	
-    	params.put("mem_no", sender);
-    	
-    	
-    	
-    	try {
-			memberInfo = memberDao.memberInfo(params);
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-    	
-    	String mem_name = memberInfo.getMem_no();
-    	
-        logger.info("Message From "+mem_name + ": "+message);
-        
-        try {
-            final Basic basic=session.getBasicRemote();
-            basic.sendText("<보낸사람> : "+message);
-        }catch (Exception e) {
-            // TODO: handle exception
-            System.out.println(e.getMessage());
-        }
-//        sendAllSessionToMessage(session, sender, message);
-        //  sendOneSessionToMessage(session, sender, message, userMap, targetMemNo);
-    }
+//    @OnMessage
+//    public void onMessage(String message,Session session) {
+//    	
+//    	String targetMemNo = message.split(",")[2];
+//    	String sender = message.split(",")[1];
+//    	message = message.split(",")[0];
+//    	
+//    	userMap.put(sender, session);
+//    	
+//    	Map<String, String> params = new HashMap<String, String>();
+//    	
+//    	params.put("mem_no", sender);
+//    	
+//    	
+//    	
+//    	try {
+//			memberInfo = memberDao.memberInfo(params);
+//		} catch (Exception e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//    	
+//    	String mem_name = memberInfo.getMem_no();
+//    	
+//        logger.info("Message From "+mem_name + ": "+message);
+//        
+//        try {
+//            final Basic basic=session.getBasicRemote();
+//            basic.sendText("<보낸사람> : "+message);
+//        }catch (Exception e) {
+//            // TODO: handle exception
+//            System.out.println(e.getMessage());
+//        }
+////        sendAllSessionToMessage(session, sender, message);
+//        //  sendOneSessionToMessage(session, sender, message, userMap, targetMemNo);
+//    }
  
 }

@@ -19,10 +19,6 @@ $(function(){
 	$('input[value=회원목록]').click(function(){
 		$(location).attr('href','${pageContext.request.contextPath}/user/member/memberList.do');
 	});
-	
-	$('input[value=로그아웃]').click(function(){
-		$(location).attr('href','${pageContext.request.contextPath}/user/join/logout.do');
-	});
 });
 </script>
 
@@ -34,48 +30,51 @@ $(function(){
 		<tr>                                                              
 			<td>아이디</td>                                                  
 			<td>                                                          
-				<input type='text' name='mem_id' value='${memberInfo.mem_id }' disabled="disabled"/>                   
+				<input type='text' id="mem_id" name='mem_id' value='${memberInfo.mem_id }' disabled="disabled"/>                   
 			</td>                                                         
 		</tr>                                                             
 		<tr>                                                              
 			<td>패스워드</td>                                                 
 			<td>                                                          
-				<input type='text' name='mem_pass' value='${memberInfo.mem_pass }'/>                      
+				<input type='password' id="pass" name='mem_pass'/>                      
 			</td>                                                         
-		</tr>                                                             
+		</tr>   
 		<tr>                                                              
-			<td>성명</td>                                                   
+			<td>패스워드</td>                                                 
+			<td>                                                          
+				<input type='password' id="pass2" name='mem_pass_confirm'/>                      
+			</td>                                                         
+		</tr>   
+		<tr>
+				<td>성 별</td>
+				<td><input type="radio" name="mem_gender" value="m">남              
+				<input type="radio" name="mem_gender" value="w">여
+				</td>
+			</tr>                                                         
+		<tr>                                                              
+			<td>이름</td>                                                   
 			<td><input type='text' name='mem_name' value='${memberInfo.mem_name }' disabled="disabled"/></td>
 		</tr>                                                             
 		<tr>                                                              
-			<td>주민등록번호</td>                                               
+			<td>닉네임</td>                                               
 			<td>                                                          
-				<input type='text' name='mem_regno1' value='${memberInfo.mem_regno1 }' disabled="disabled"/>        
-				<input type='text' name='mem_regno2' value='${memberInfo.mem_regno2 }' disabled="disabled" />         
+				<input type='text' name='mem_regno1' value='${memberInfo.mem_nickname }' disabled="disabled"/>        
 			</td>                                                         
 		</tr>                                                             
 		<tr>                                                              
 			<td>생년월일</td>                                                 
-			<td><input type='text' name='mem_bir' value='${memberInfo.mem_bir }'/></td> 
+			<td><input type='text' name='mem_bir' value='${memberInfo.mem_birth }'/></td> 
 		</tr>                                                             
 		<tr>                                                              
 			<td>우편번호</td>                                                 
-			<td><input type='text' name='mem_zip' value='${memberInfo.mem_zip }'/></td>
+			<td><input type='text' name='mem_zip' value='${memberInfo.mem_zip1 }'/></td>
 		</tr>                                                             
 		<tr>                                                              
 			<td>주소</td>                                                   
 			<td>                                                          
-				<input type='text' name='mem_add1' value='${memberInfo.mem_add1 }' />-                    
-				<input type='text' name='mem_add2' value='${memberInfo.mem_add2 }' />                     
+				<input type='text' name='mem_add1' value='${memberInfo.mem_addr1 }' />-                    
+				<input type='text' name='mem_add2' value='${memberInfo.mem_addr2 }' />                     
 			</td>                                                         
-		</tr>                                                             
-		<tr>                                                              
-			<td>집전화번호</td>                                                
-			<td><input type='text' name='mem_hometel' value='${memberInfo.mem_hometel }'/></td>              
-		</tr>                                                             
-		<tr>                                                              
-			<td>회사전화번호</td>                                               
-			<td><input type='text' name='mem_comtel' value='${memberInfo.mem_comtel }'/></td>               
 		</tr>                                                             
 		<tr>                                                              
 			<td>휴대폰번호</td>                                                
@@ -83,23 +82,13 @@ $(function(){
 		</tr>                                                             
 		<tr>                                                              
 			<td>이메일</td>                                                  
-			<td><input type='text' name='mem_mail' value='${memberInfo.mem_mail }'/></td>                
-		</tr>                                                             
-		<tr>                                                              
-			<td>직업</td>                                                   
-			<td><input type='text' name='mem_job' value='${memberInfo.mem_job }' /></td>                 
-		</tr>                                                             
-		<tr>                                                              
-			<td>취미</td>                                                   
-			<td><input type='text' name='mem_like' value='${memberInfo.mem_like }'/></td>                 
+			<td><input type='text' name='mem_mail' value='${memberInfo.mem_email }'/></td>                
 		</tr>                                                             
 		<tr>                                                              
 			<td colspan='2'>                                              
 				<input type='submit' value='수정' />                      
 				<input type='button' value='탈퇴' />                      
 				<input type='reset' value='취소' />                         
-				<input type='button' value='회원목록' /> 
-				<input type='button' value='로그아웃' /> 				                        
 			</td>                                                         
 		</tr>                                                             
 	</table>                                                              

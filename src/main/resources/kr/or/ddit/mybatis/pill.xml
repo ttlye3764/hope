@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pill">
+
+
+
+
+	<select id="pillList"  resultType="pillVO" parameterType="hashmap">		
+		SELECT B.*
+				FROM(SELECT ROWNUM RNUM, A.*
+					FROM (select *
+						  from pill_info
+						  where 1=1
+						  		<if test="pname !=null">
+									and 
+									pi_name like '%' || #{pname} || '%' 
+								</if>
+								<if test="cname !=null">
+									and
+									pi_b_name like '%'||#{cname}||'%' 
+								</if> 
+
+						  		<if test="shapes !=null">
+						  		and
+						  		<foreach collection="shapes" item="shape" open="(" close=")" separator="or">
+						  			pi_shape like #{shape,jdbcType=VARCHAR}
+						  		</foreach>
+						  		</if>
+						  		<if test="colors != null">
+						  		and
+						  		<foreach collection="colors" item="color" open="(" close=")" separator="or" >
+						  			pi_f_color like #{color,jdbcType=VARCHAR} or pi_b_color like #{color,jdbcType=VARCHAR}
+						  		</foreach>
+						  		</if>
+						  		<if test="lines !=null">
+						  		and
+						  		<foreach collection="lines" item="line" open="(" close=")" separator="or">
+						  			pi_f_dividing_line like #{line,jdbcType=VARCHAR} or pi_b_dividing_line like #{line,jdbcType=VARCHAR}
+						  		</foreach>
+						  		</if>
+					)A
+				)B
+		<![CDATA[
+			   WHERE B.RNUM <= #{startCount}
+				 AND B.RNUM >= #{endCount}
+		]]>
+		 ORDER BY b.pi_no desc
+	</select>
+	
+	<select id="totalCount" parameterType="hashmap" resultType="String">
+		select count(*)
+		from pill_info
+		where 1=1 				<if test="pname !=null">
+									and 
+									pi_name like '%' || #{pname} || '%' 
+								</if>
+								<if test="cname !=null">
+									and
+									pi_b_name like '%'||#{cname}||'%' 
+								</if> 
+
+						  		<if test="shapes !=null">
+						  		and
+						  		<foreach collection="shapes" item="shape" open="(" close=")" separator="or">
+						  			pi_shape like #{shape,jdbcType=VARCHAR}
+						  		</foreach>
+						  		</if>
+						  		<if test="colors != null">
+						  		and
+						  		<foreach collection="colors" item="color" open="(" close=")" separator="or" >
+						  			pi_f_color like #{color,jdbcType=VARCHAR} or pi_b_color like #{color,jdbcType=VARCHAR}
+						  		</foreach>
+						  		</if>
+						  		<if test="lines !=null">
+						  		and
+						  		<foreach collection="lines" item="line" open="(" close=")" separator="or">
+						  			pi_f_dividing_line like #{line,jdbcType=VARCHAR} or pi_b_dividing_line like #{line,jdbcType=VARCHAR}
+						  		</foreach>
+						  		</if>
+	</select>
+</mapper>
+	
+
+	

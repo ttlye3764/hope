@@ -46,18 +46,6 @@
 		</if>
 	</select>
 
-
-<!-- 	<select id="memberInfo" parameterType="map" resultType="memberVO"> -->
-<!-- 		<include refid="selectAll" /> -->
-<!-- 		AND MEM_ID = #mem_id# -->
-<!-- 		<dynamic prepend="AND"> -->
-<!-- 			<isNotEmpty property="mem_pass"> -->
-<!-- 				MEM_PASS = #mem_pass# -->
-<!-- 			</isNotEmpty> -->
-<!-- 		</dynamic> -->
-<!-- 	</select> -->
-
-
 <!-- 	<select id="memberList" resultClass="memberVO" parameterClass="map"> -->
 <!-- 		<include refid="selectAll" /> -->
 <!-- 		<include refid="searchCondition"/> -->

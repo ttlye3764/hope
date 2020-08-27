@@ -56,7 +56,7 @@ public class RolePaginationUtil {
 		this.pagingHtmls.append("<ul class='pagination mtm mbm'>");
 		
 		String requestURI = request.getRequestURI();
-		
+		System.out.println(requestURI);
 		// 이전|1|2|3|4|5|다음
 		// 이전
 		if((this.currentPage - 1) == 0){

@@ -1,6 +1,11 @@
 package kr.or.ddit.medical.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +18,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddit.medical.service.IMedicalService;
 import kr.or.ddit.medicalfile.service.IMedicalFileService;
+import kr.or.ddit.pill.service.IPillService;
+import kr.or.ddit.utiles.RolePaginationUtil;
+import kr.or.ddit.utiles.RolePaginationUtil_pill;
 import kr.or.ddit.vo.MypillFileVO;
 import kr.or.ddit.vo.MypillVO;
+import kr.or.ddit.vo.PillVO;
 
 // 이용춘 - 깃 커밋 테스트
 
@@ -25,6 +34,11 @@ public class MedicalController {
 	private IMedicalService medicalService;
 	@Autowired
 	private IMedicalFileService medicalFileService;
+	@Autowired
+	private IPillService pillService;
+	
+	
+	
 	
 	@Autowired
 	private MessageSourceAccessor accessor;
@@ -51,6 +65,59 @@ public class MedicalController {
 		ModelAndView andView = new ModelAndView();
 		andView.addObject("json", medicalInfo);		
 		andView.addObject("json2", medicalImg);		
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
+	@RequestMapping("searchPillJson")
+	public ModelAndView searchPillJson(@RequestParam(value="shapes[]",required=false) List<String> shapes, 
+											@RequestParam(value="colors[]",required=false) List<String> colors,
+											@RequestParam(value="lines[]",required=false) List<String> lines, String pname, String cname
+											,HttpServletRequest request, String currentPage, RolePaginationUtil_pill pagination) throws Exception{	
+		
+		System.out.println(shapes);
+		System.out.println(colors);
+		System.out.println(lines);
+		System.out.println(pname);
+		System.out.println(cname);
+		
+		HashMap map = new HashMap<>();		
+		if(pname != null) {
+			map.put("pname", pname);
+		}
+		if(cname != null) {
+			map.put("cname", cname);
+		}
+		if(shapes != null) {
+			map.put("shapes", shapes);	
+		}
+		if(colors != null) {
+			map.put("colors", colors);
+		}
+		if(lines != null) {
+			map.put("lines", lines);
+		}
+		
+		//페이징처리
+		if (currentPage == null) {
+			currentPage = "1";
+		}
+		
+		String totalCount = pillService.totalCount(map);
+		
+		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount));
+		
+		String startCount = String.valueOf(pagination.getStartCount());
+		
+		String endCount = String.valueOf(pagination.getEndCount());
+		
+		map.put("startCount", startCount);
+		map.put("endCount", endCount);
+		
+		List<PillVO> list = pillService.pillList(map);
+		
+		ModelAndView andView = new ModelAndView();
+		andView.addObject("pagination",pagination.getPagingHtmls());
+		andView.addObject("list",list);
 		andView.setViewName("jsonConvertView");
 		return andView;
 	}
@@ -120,5 +187,55 @@ public class MedicalController {
 	public void medicalMap() {}
 	
 	@RequestMapping("searchPill")
-	public void searchPill() {}
+	public ModelAndView searchPill(HttpServletRequest request, String currentPage, HashMap params, RolePaginationUtil_pill pagination)  throws Exception{
+		if (currentPage == null) {
+			currentPage = "1";
+		}
+		
+		String totalCount = pillService.totalCount(params);
+		
+		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount));
+		
+		String startCount = String.valueOf(pagination.getStartCount());
+		
+		String endCount = String.valueOf(pagination.getEndCount());
+		
+		params.put("startCount", startCount);
+		params.put("endCount", endCount);
+		
+		
+		List<PillVO> list = pillService.pillList(params);
+		
+		ModelAndView andView = new ModelAndView();
+		andView.addObject("pillList", list);	
+		andView.addObject("pagination",pagination.getPagingHtmls());
+		andView.setViewName("user/medical/searchPill");
+		return andView;
+	}
+	@RequestMapping("paginationPill")
+	public ModelAndView paginationPill(HttpServletRequest request, String currentPage, HashMap params, RolePaginationUtil_pill pagination)  throws Exception{
+		if (currentPage == null) {
+			currentPage = "1";
+		}
+		
+		String totalCount = pillService.totalCount(params);
+		
+		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount));
+		
+		String startCount = String.valueOf(pagination.getStartCount());
+		
+		String endCount = String.valueOf(pagination.getEndCount());
+		
+		params.put("startCount", startCount);
+		params.put("endCount", endCount);
+		
+		List<PillVO> list = pillService.pillList(params);
+		
+		ModelAndView andView = new ModelAndView();
+		andView.addObject("pillList", list);	
+		andView.addObject("pagination",pagination.getPagingHtmls());
+		andView.setViewName("user/medical/searchPill");
+		return andView;
+	}
+	
 }
