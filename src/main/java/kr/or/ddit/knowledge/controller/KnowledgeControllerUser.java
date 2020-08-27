@@ -7,10 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import kr.or.ddit.fileitem.service.IFileItemService;
+import kr.or.ddit.iqStatistics.service.IIQstatisticsService;
 import kr.or.ddit.knowledge.service.IKnowledgeService;
 import kr.or.ddit.utiles.CryptoGenerator;
 import kr.or.ddit.utiles.RolePaginationUtil;
 import kr.or.ddit.vo.FileItemVO;
+import kr.or.ddit.vo.IQstatisticsVO;
 import kr.or.ddit.vo.KnowledgeVO;
 
 import org.apache.ibatis.annotations.Param;
@@ -38,7 +40,7 @@ public class KnowledgeControllerUser {
 	@Autowired
 	private IKnowledgeService knowledgeService;
 	@Autowired
-	private IFileItemService fileItemService;
+	private IIQstatisticsService iqService;
 
 	// 문제리스트
 	@RequestMapping("knowledgeList")
@@ -64,8 +66,14 @@ public class KnowledgeControllerUser {
 
 		return andView;
 	
-	
-	
+	}
+
+	@RequestMapping("insertIq")
+	public void insertIq(IQstatisticsVO iqInfo) throws Exception {
+		this.iqService.insertIq(iqInfo);
 	}
 	
+	@RequestMapping("chart")
+	public void chart() {
+	}
 }

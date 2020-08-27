@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <style>
-td, th {
+#searchTable td,#searchTable th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
 }
-ul{
+#searchTable ul{
 	list-style: none outside none;
 }
 .idty{
@@ -30,11 +31,11 @@ ul{
 	text-align:center;
 	border-radius:4px;
 }
-th{
+#searchTable th{
 	width: 100px;
 	text-align:center;
 }
-td{
+#searchTable td{
 	width:300px;
 	text-align:center;
 }
@@ -47,12 +48,10 @@ span{
 	cursor:pointer; 
 	border:1px solid rgb(74, 186, 238);
 }
-.selected{
-	border:2px solid rgb(110, 63, 219);
-}
+
 #searchForm{
-	margin-left: 25%;
-	margin-right: 25%;
+	margin-left: 15%;
+	margin-right: 15%;
 }
 #pname, #cname{
 	margin-top: 20px;
@@ -61,95 +60,359 @@ span{
 #searchTable{
 	width:100%;
 }
+
+
+
+
+<!--리스트-------------------------------------------------------------------------------------------->
+
+#table-list-tr th ul li{
+	text-align: center;
+}
+#list tr{
+	text-align: center;
+}
+
+#list-ul{
+	list-style: none;
+	text-align: center;
+}
+
+
+.table-list-container {
+  max-width:800px; margin:20px auto;
+  background-color:#ffffff; 
+  border:1px solid #d2d2d2;  
+  position: relative;
+  z-index: 0;
+}
+
+@media (max-width: 640px ) {
+  .table-list-container { border-width: 1px 0; } 
+}
+
+.table-list {
+  min-height:176px;
+} 
+
+.table-list th { 
+  border-bottom: .6px solid #d2d2d2;
+}
+
+.table-list td { 
+  white-space:nowrap;
+  height:1.75rem;
+  vertical-align:top; 
+  padding:10px;
+  border-bottom:1px solid #d2d2d2; }
+
+.table-list tr:last-child td { 
+  height:auto; }
+
+
+th button.sort {
+  text-align:left; 
+  padding:0 10px;
+  line-height: 1.75rem;
+  border: none; background: none; 
+  display: block; width:100%; 
+  font-size: 12px; color: #888; 
+  border-bottom: 1px solid transparent;  
+}
+
+th button.sort.textcenter,
+th button.sort.text-center { text-align:center; }
+
+th button.sort.textright,
+th button.sort.text-right { text-align:right; }
+
+button.sort .bullet { margin-top:13px; }
+
+
+
+.table-list .caret:after { content:""; }
+.asc .caret:after {
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-top: 3px solid #808080;
+  content: "";
+  position: relative;
+  top: -3px;
+  right: -4px;
+  font-size:0; }
+.desc .caret:after {
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-bottom: 3px solid #808080;
+  content: "";
+  position: relative;
+  top: -4px;
+  right: -4px;
+  font-size:0; }
+
+button.sort .caret { display:none; }
+button.sort.asc .caret { display:inline-block; }
+button.sort.desc .caret { display:inline-block; }
+
+.table-footer { 
+  background-color:#fff;
+  margin-top:-1px; 
+  position:relative; 
+  z-index:-1; }
+.table-search {
+  width:310px;
+  border-left:1px solid #d2d2d2; }
+.table-search .search { 
+  width:100%;
+  border:none; 
+  background:transparent; 
+  box-shadow:none; }
+
+
+.table-pagination {
+  white-space:nowrap; }
+
+.table-pagination:after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+
+.jPaginateBack, 
+.jPaginateNext, 
+.table-list-container .pagination {
+  float:left; }
+
+.jPaginateBack, 
+.jPaginateNext {  
+    line-height:1.75rem;
+    width:1.75rem; 
+    text-align:center; 
+    user-select:none; }
+
+
+.jPaginateBack .material-icons, 
+.jPaginateNext .material-icons { 
+  display:block;
+  font-size:16px;
+  line-height:inherit;
+} 
+
+
+
+
+.li_selected{
+	border:1px solid rgb(110, 63, 219) !important;
+}
+
 </style>
 <script>
-	$(function(){
-		$('.idty li').click(function(){
-	if ($(this).hasClass('selected')) {
-		$(this).removeClass('selected');
-		$(this).find('input[type="checkbox"]').prop("checked",false);
-	} else {
-		$(this).addClass('selected');
-		$(this).find('input[type="checkbox"]').prop("checked",true);
-	}
-	})
-});
+var shapes = [];
+var colors = [];
+var lines = [];
+
+	$(function() {
+		$('.idty li').click(function() {
+			if ($(this).hasClass('li_selected')) {
+				$(this).removeClass('li_selected');
+				$(this).find('input[type="checkbox"]').prop("checked", false);
+			} else {
+				$(this).addClass('li_selected');
+				$(this).find('input[type="checkbox"]').prop("checked", true);
+			}
+		})
+       
+
+		$('#searchBTN').click(function(){
+			var pname = $("input[id='pname']").val();
+			var	cname = $("input[id='cname']").val();
+	        $('input[name="shapes"]:checked').each(function(i){
+	        	shapes.push($(this).val());
+	        });
+	        $('input[name="colors"]:checked').each(function(i){
+	        	colors.push($(this).val());
+	        });
+	        $('input[name="lines"]:checked').each(function(i){
+	        	lines.push($(this).val());
+	        });
+			
+			 $.ajax({
+	             url     : '${pageContext.request.contextPath}/user/medical/searchPillJson.do',
+	             type    : 'post',
+	             dataType: 'json',
+	             data : {'shapes':shapes, 'colors':colors, 'pname':pname,'cname':cname, 'lines':lines },
+	             success : function(result) {  
+		             alert("성공");   
+		              console.log(result.list);
+	  			}
+	  		});
+		})
+	});
 </script>
 </head>
 <body>
-<form id="searchForm">
-		<table id="searchTable">
-			<tbody>
+<!-- =======================
+	Banner innerpage -->
+	<div class="innerpage-banner left bg-overlay-dark-7" style="background:url(/assets/images/bg/03.jpg) no-repeat; margin-bottom:50px; text-align:center; background-size:cover; background-position: center center;">
+		<div class="container">
+			<div class="row all-text-white">
+				<div class="col-md-12 align-self-center">
+					<h1 class="innerpage-title">알약 정보 페이지</h1>
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item active"><a href="index.html"><i class="ti-home"></i> Home</a></li>
+							<li class="breadcrumb-item">Kakao Maps</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- =======================
+	Banner innerpage -->
+
+<div>
+	<form id="searchForm" style="margin-bottom: 50px;">
+			<table id="searchTable">
+				<tbody>
+					<tr>
+						<th>제품명</th>
+							<td>
+								<input type="text" id="pname" name="">
+							</td>
+						<th style="width: 100px;">회사명</th>
+							<td>
+								<input type="text" id="cname" name="">
+							</td>
+					</tr>
 				<tr>
-					<th>제품명</th>
-						<td>
-							<input type="text" id="pname" name="">
-						</td>
-					<th style="width: 100px;">회사명</th>
-						<td>
-							<input type="text" id="cname" name="">
-						</td>
+					<th>모양</th>
+					<td colspan="3" class="shape">
+						<ul id="shapeids" class="idty">
+							<li id="" class="li_style"><img src="${pageContext.request.contextPath }/images/pills/shape01.jpg" alt="원형"><input type="checkbox" name="shapes" value="원형"></li>
+							<li id="" class="li_style"><img src="${pageContext.request.contextPath }/images/pills/shape02.jpg" alt="타원형"><input type="checkbox" name="shapes" value="타원형"></li>
+							<li id="" class="li_style"><img src="${pageContext.request.contextPath }/images/pills/shape07.jpg" alt="장방형"><input type="checkbox" name="shapes" value="장방형"></li>
+							<li id="" class="li_style"><img src="${pageContext.request.contextPath }/images/pills/shape03.jpg" alt="반원형"><input type="checkbox" name="shapes" value="반원형"></li>
+							<li id="" class="li_style"><img src="${pageContext.request.contextPath }/images/pills/shape04.jpg" alt="삼각형"><input type="checkbox" name="shapes" value="삼각형"></li>
+							<li id="" class="li_style"><img src="${pageContext.request.contextPath }/images/pills/shape05.jpg" alt="사각형"><input type="checkbox" name="shapes" value="사각형"></li>
+							<li id="" class="li_style"><img src="${pageContext.request.contextPath }/images/pills/shape06.jpg" alt="마름모형"><input type="checkbox" name="shapes" value="마름모형"></li>
+							<li id="" class="li_style"><img src="${pageContext.request.contextPath }/images/pills/shape10.jpg" alt="오각형"><input type="checkbox" name="shapes" value="오각형"></li>
+							<li id="" class="li_style"><img src="${pageContext.request.contextPath }/images/pills/shape08.jpg" alt="육각형"><input type="checkbox" name="shapes" value="육각형"></li>
+							<li id="" class="li_style"><img src="${pageContext.request.contextPath }/images/pills/shape09.jpg" alt="팔각형"><input type="checkbox" name="shapes" value="팔각형"></li>
+						</ul>			
+					</td>
 				</tr>
-			<tr>
-				<th>모양</th>
-				<td colspan="3" class="shape">
-					<ul id="shapeids" class="idty">
-						<li id="" class="li_style"><img src="${pageContext.request.contextPath }/images/pills/shape01.jpg" alt="원형"><input type="checkbox" name="shapes" value="원형"></li>
-						<li id="" class="li_style"><img src="${pageContext.request.contextPath }/images/pills/shape02.jpg" alt="타원형"><input type="checkbox" name="shapes" value="타원형"></li>
-						<li id="" class="li_style"><img src="${pageContext.request.contextPath }/images/pills/shape07.jpg" alt="장방형"><input type="checkbox" name="shapes" value="장방형"></li>
-						<li id="" class="li_style"><img src="${pageContext.request.contextPath }/images/pills/shape03.jpg" alt="반원형"><input type="checkbox" name="shapes" value="반원형"></li>
-						<li id="" class="li_style"><img src="${pageContext.request.contextPath }/images/pills/shape04.jpg" alt="삼각형"><input type="checkbox" name="shapes" value="삼각형"></li>
-						<li id="" class="li_style"><img src="${pageContext.request.contextPath }/images/pills/shape05.jpg" alt="사각형"><input type="checkbox" name="shapes" value="사각형"></li>
-						<li id="" class="li_style"><img src="${pageContext.request.contextPath }/images/pills/shape06.jpg" alt="마름모형"><input type="checkbox" name="shapes" value="마름모형"></li>
-						<li id="" class="li_style"><img src="${pageContext.request.contextPath }/images/pills/shape10.jpg" alt="오각형"><input type="checkbox" name="shapes" value="오각형"></li>
-						<li id="" class="li_style"><img src="${pageContext.request.contextPath }/images/pills/shape08.jpg" alt="육각형"><input type="checkbox" name="shapes" value="육각형"></li>
-						<li id="" class="li_style"><img src="${pageContext.request.contextPath }/images/pills/shape09.jpg" alt="팔각형"><input type="checkbox" name="shapes" value="팔각형"></li>
-					</ul>			
-				</td>
-			</tr>
-			<tr id="color">
-				<th>색상</th>
-				<td colspan="3" class="idty_td8">
-					<ul id="colorids" class="idty">
-						<li id="color_white" class="li_style" onclick=""><a ><span class="white" style="background: rgba(255, 255, 255, 0.87);" ></span>하양</a><input type="checkbox" name="colors" value="하양"></li>
-						<li id="color_yellow" class="li_style"><a onclick=""><span class="yellow" style="background: yellow"></span>노랑</a><input type="checkbox" name="colors" value="노랑"></li>
-						<li id="color_orange" class="li_style"><a onclick=""><span class="orange" style="background: orange"></span>주황</a><input type="checkbox" name="colors" value="주황"></li>
-						<li id="color_pink" class="li_style"><a onclick=""><span class="pink" style="background: pink"></span>분홍</a><input type="checkbox" name="colors" value="분홍"></li>
-						<li id="color_red" class="li_style" ><a onclick=""><span class="red" style="background: red"></span>빨강</a><input type="checkbox" name="colors" value="빨강"></li>
-						<li id="color_brown" class="li_style"><a onclick=""><span class="brown" style="background: brown"></span>갈색</a><input type="checkbox" name="colors" value="갈색"></li>
-						<li id="color_ygreen" class="li_style"><a onclick=""><span class="ygreen" style="background: yellowgreen"></span>연두</a><input type="checkbox" name="colors" value="연두"></li>
-						<li id="color_green" class="li_style"><a onclick=""><span class="green" style="background: green"></span>초록</a><input type="checkbox" name="colors" value="초록"></li>
-						<li id="color_bgreen" class="li_style" ><a onclick=""><span class="bgreen" style="background: rgb(00, 97, 70)"></span>청록</a><input type="checkbox" name="colors" value="청록"></li>
-						<li id="color_blue" class="li_style" ><a onclick=""><span class="blue" style="background: blue"></span>파랑</a><input type="checkbox" name="colors" value="파랑"></li>
-						<li id="color_navy" class="li_style" ><a onclick=""><span class="navy" style="background: navy"></span>남색</a><input type="checkbox" name="colors" value="남색"></li>
-						<li id="color_wine" class="li_style" ><a onclick=""><span class="wine" style="background: rgb(245, 140, 245)"></span>자주</a><input type="checkbox" name="colors" value="자주"></li>
-						<li id="color_purple" class="li_style"><a onclick=""><span class="purple"  style="background: purple"></span>보라</a><input type="checkbox" name="colors" value="보라"></li>
-						<li id="color_grey" class="li_style"><a onclick=""><span class="grey"  style="background: gray"></span>회색</a><input type="checkbox" name="colors" value="회색"></li>
-						<li id="color_black" class="li_style"><a onclick=""><span class="black"  style="background: black"></span>검정</a><input type="checkbox" name="colors" value="검정"></li>
-						<li id="color_transp" class="li_style"><a onclick=""><span class="transp"></span>투명</a><input type="checkbox" name="colors" value="투명"></li>
-					</ul>
-				</td>	
-			</tr>
-			<tr>
-				<th>분할선</th>
-				<td colspan="3">
-					<ul id="lineids" class="idty">
-						<li id="line_no" class="li_style"><a onclick=""><img src="${pageContext.request.contextPath }/images/pills/line01.jpg" alt="없음"></a><input type="checkbox" name="lines" value="no"></li>
-						<li id="line_plus" class="li_style"><a onclick=""><img src="${pageContext.request.contextPath }/images/pills/line02.jpg" alt="(+)형"></a><input type="checkbox" name="lines" value="plus"></li>
-						<li id="line_minus" class="li_style"><a onclick=""><img src="${pageContext.request.contextPath }/images/pills/line03.jpg" alt="(-)형"></a><input type="checkbox" name="lines" value="minus"></li>
-					</ul>	
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2" style="border: none;">
-				<button class="btn btn-outline-grad btn-block" type="submit">검색</button>
-				</td>
-				<td colspan="2" style="border: none;">
-				<button class="btn btn-outline-grad btn-block" id="cancleBTN" type="button">취소</button>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-</form>
+				<tr id="color">
+					<th>색상</th>
+					<td colspan="3" class="idty_td8">
+						<ul id="colorids" class="idty">
+							<li id="color_white" class="li_style" onclick=""><a ><span class="white" style="background: rgba(255, 255, 255, 0.87);" ></span>하양</a><input type="checkbox" name="colors" value="하양"></li>
+							<li id="color_yellow" class="li_style"><a onclick=""><span class="yellow" style="background: yellow"></span>노랑</a><input type="checkbox" name="colors" value="노랑"></li>
+							<li id="color_orange" class="li_style"><a onclick=""><span class="orange" style="background: orange"></span>주황</a><input type="checkbox" name="colors" value="주황"></li>
+							<li id="color_pink" class="li_style"><a onclick=""><span class="pink" style="background: pink"></span>분홍</a><input type="checkbox" name="colors" value="분홍"></li>
+							<li id="color_red" class="li_style" ><a onclick=""><span class="red" style="background: red"></span>빨강</a><input type="checkbox" name="colors" value="빨강"></li>
+							<li id="color_brown" class="li_style"><a onclick=""><span class="brown" style="background: brown"></span>갈색</a><input type="checkbox" name="colors" value="갈색"></li>
+							<li id="color_ygreen" class="li_style"><a onclick=""><span class="ygreen" style="background: yellowgreen"></span>연두</a><input type="checkbox" name="colors" value="연두"></li>
+							<li id="color_green" class="li_style"><a onclick=""><span class="green" style="background: green"></span>초록</a><input type="checkbox" name="colors" value="초록"></li>
+							<li id="color_bgreen" class="li_style" ><a onclick=""><span class="bgreen" style="background: rgb(00, 97, 70)"></span>청록</a><input type="checkbox" name="colors" value="청록"></li>
+							<li id="color_blue" class="li_style" ><a onclick=""><span class="blue" style="background: blue"></span>파랑</a><input type="checkbox" name="colors" value="파랑"></li>
+							<li id="color_navy" class="li_style" ><a onclick=""><span class="navy" style="background: navy"></span>남색</a><input type="checkbox" name="colors" value="남색"></li>
+							<li id="color_wine" class="li_style" ><a onclick=""><span class="wine" style="background: rgb(245, 140, 245)"></span>자주</a><input type="checkbox" name="colors" value="자주"></li>
+							<li id="color_purple" class="li_style"><a onclick=""><span class="purple"  style="background: purple"></span>보라</a><input type="checkbox" name="colors" value="보라"></li>
+							<li id="color_grey" class="li_style"><a onclick=""><span class="grey"  style="background: gray"></span>회색</a><input type="checkbox" name="colors" value="회색"></li>
+							<li id="color_black" class="li_style"><a onclick=""><span class="black"  style="background: black"></span>검정</a><input type="checkbox" name="colors" value="검정"></li>
+							<li id="color_transp" class="li_style"><a onclick=""><span class="transp"></span>투명</a><input type="checkbox" name="colors" value="투명"></li>
+						</ul>
+					</td>	
+				</tr>
+				<tr>
+					<th>분할선</th>
+					<td colspan="3">
+						<ul id="lineids" class="idty">
+							<li id="line_plus" class="li_style"><a onclick=""><img src="${pageContext.request.contextPath }/images/pills/line02.jpg" alt="(+)형"></a><input type="checkbox" name="lines" value="+"></li>
+							<li id="line_minus" class="li_style"><a onclick=""><img src="${pageContext.request.contextPath }/images/pills/line03.jpg" alt="(-)형"></a><input type="checkbox" name="lines" value="-"></li>
+						</ul>	
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" style="border: none;">
+					<button class="btn btn-outline-grad btn-block" id="searchBTN" type="button">검색</button>
+					</td>
+					<td colspan="2" style="border: none;">
+					<button class="btn btn-outline-grad btn-block" id="cancleBTN" type="button">취소</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+</div>
+
+
+	<div class="card"
+		style="margin-left: 15%; margin-right: 15%;">
+		<div class="card-body" style="">
+			<div id="" class="" style="width: auto;">
+				<table class="table-list" data-currentpage="1">
+
+					<thead>
+					<tr id="table-list-tr">
+						<th rowspan="2" style="border:1px solid #d2d2d2; width: 10%;">
+								<ul id="list-ul"><li>식별이미지</li></ul><i class="caret"></i>
+						</th>
+						<th rowspan="2" style="border:1px solid #d2d2d2; width: 10%;">
+								<ul id="list-ul"><li>식별표시(앞/뒤)</li></ul><i class="caret"></i>
+						</th>
+						<th rowspan="2" style="border:1px solid #d2d2d2; width: 10%;">
+								<ul id="list-ul"><li>제형</li></ul><i class="caret"></i>
+						</th>
+						<th colspan="3" style="border:1px solid #d2d2d2; width: 15%;">
+								<ul id="list-ul"><li>크기(mm)</li></ul><i class="caret"></i>
+						</th>
+						<th rowspan="2" style="border:1px solid #d2d2d2; width: 40%;">
+								<ul id="list-ul"><li>제품명/성분명</li></ul><i class="caret"></i>
+						</th>
+						<th rowspan="2" style="border:1px solid #d2d2d2; width: 15%;">
+								<ul id="list-ul"><li>회사명</li></ul><i class="caret"></i>
+						</th>						
+					</tr>
+					<tr id="table-list-tr">
+						<th style="border:1px solid #d2d2d2; width: 50px;"><ul id="list-ul"><li>장축</li></ul></th>
+						<th style="border:1px solid #d2d2d2; width: 50px;"><ul id="list-ul"><li>단축</li></ul></th>
+						<th style="border:1px solid #d2d2d2; width: 50px;"><ul id="list-ul"><li>두께</li></ul></th>
+					</tr>
+					</thead>
+
+					<!-- IMPORTANT, class="list" must be on tbody -->
+					<tbody class="list">
+						<c:forEach items="${pillList }" var="pillInfo">
+						<tr data-timestamp="1509426000" data-status="3" style="height: 60px;">
+							<input type="hidden" value="${pillInfo.pi_no}"/>
+							<%-- <td class="" style="height: 60px;"><img alt="" src="${pageContext.request.contextPath}/images/unnamed.jpg" style="width: 96px; height: 71px;"></td> --%>
+							<td class="" style="height: 60px;"><img alt="" src="${pillInfo.pi_bigimg}" style="width: 96px; height: 71px;"></td>
+							<td class="" style="height: 60px;">${pillInfo.pi_f_mark}</td>
+							<td class="" style="height: 60px;">${pillInfo.pi_shape_name}</td>
+							<td class="" style="height: 60px;">${pillInfo.pi_x_size}</td>
+							<td class="" style="height: 60px;">${pillInfo.pi_y_size}</td>
+							<td class="" style="height: 60px;">${pillInfo.pi_z_size}</td>
+							<td class="" style="height: 60px;">${pillInfo.pi_name}</td>
+							<td class="" style="height: 60px;">${pillInfo.pi_b_name}</td>
+						</tr>
+						</c:forEach>									
+					</tbody>
+				</table>
+<div style="margin-left: 50%;">${pagination }</div>
+							
+			</div>
+		</div>
+	</div>
+
+
+
+
+
 </body>
 </html>

@@ -65,8 +65,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	    // otherwise they'd all just say "list"
 	    views: {
 	      listDay: { buttonText: 'D-DAY' },
-	      listWeek: { buttonText: 'D-7' },
-	      listMonth: { buttonText: 'D-30' }
+	      listWeek: { buttonText: 'weekend' },
+	      listMonth: { buttonText: 'month' }
 	    },
 
 	    headerToolbar: {
@@ -75,7 +75,16 @@ document.addEventListener('DOMContentLoaded', function() {
 	      right: 'listDay,listWeek,listMonth'
 	    },
 
-	    events:(jsonData)
+	    events:(jsonData),
+	    eventClick: function(info) {
+	        alert('Event: ' + info.event.title);
+	        alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
+	        alert('View: ' + info.view.type);
+
+	        // change the border color just for fun
+	        info.el.style.borderColor = 'red';
+	      }
+	    
 	   
 	  });
 

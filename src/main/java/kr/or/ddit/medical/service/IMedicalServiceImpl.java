@@ -27,8 +27,8 @@ public class IMedicalServiceImpl implements IMedicalService {
 	
     @Override
 	public String insertMedicalInfo(MypillVO mypillInfo, MultipartFile[] items) throws Exception{
-		 System.out.println("서비스 들어옴");
 		  medicalDAO.insertMedicalInfo(mypillInfo);
+		  
 		  String pill_no = medicalDAO.selectPill_no();
 		  System.out.println(pill_no);
 	      List<MypillFileVO> fileItemList =AttachFileMapper.medicalMapper(items, pill_no);
@@ -58,9 +58,7 @@ public class IMedicalServiceImpl implements IMedicalService {
 		
 		//파일업데이트문 
 		List<MypillFileVO> fileItemList =AttachFileMapper.medicalMapper(items, mypillInfo.getPill_no());
-		System.out.println("파일 업데이트문 실행 전");
 		medicalFileDAO.updateFileItem(fileItemList);
-		System.out.println("파일 업데이트문 실행 후");
 	}
 
 

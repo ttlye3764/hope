@@ -223,7 +223,11 @@ function setCalendar(data){
     	     	        $("#regist-modal2 input[name='pill_alerttime']").val(result.json.pill_alerttime);
     	     	        $("#regist-modal2 input[name='pill_color']").val(result.json.pill_color);
     	     	        $("#regist-modal2 input[name='pill_no']").val(result.json.pill_no);
-    	     	        $("#regist-modal2 img[id=img2]").attr("src", "/D:/temp/files/"+result.json2.file_save_name);
+    	     	        if(result.json2==null){
+        	     	    $("#regist-modal2 img[id=img2]").attr("src", "${pageContext.request.contextPath}/images/unnamed.jpg");
+        	     	    }else{
+    	     	        $("#regist-modal2 img[id=img2]").attr("src", "/files/"+result.json2.file_save_name);
+            	     	}
     	             }
         	    });
     	       
@@ -286,7 +290,27 @@ function setCalendar(data){
 </script>
 </head>
 <body>
-
+  
+  <!-- =======================
+	Banner innerpage -->
+	<div class="innerpage-banner left bg-overlay-dark-7" style="background:url(/assets/images/bg/03.jpg) no-repeat; text-align:center; margin-bottom:50px; background-size:cover; background-position: center center;">
+		<div class="container">
+			<div class="row all-text-white">
+				<div class="col-md-12 align-self-center">
+					<h1 class="innerpage-title">복용관리</h1>
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item active"><a href="index.html"><i class="ti-home"></i> Home</a></li>
+							<li class="breadcrumb-item">Kakao Maps</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- =======================
+	Banner innerpage -->
+  
 	<div id='calendar' class="calendarClass"></div>
 
 
