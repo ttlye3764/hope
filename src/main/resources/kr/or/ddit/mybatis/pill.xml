@@ -16,24 +16,24 @@
 									pi_name like '%' || #{pname} || '%' 
 								</if>
 								<if test="cname !=null">
-									or
-									pi_b_name = '%'||#{cname}||'%' 
+									and
+									pi_b_name like '%'||#{cname}||'%' 
 								</if> 
 
 						  		<if test="shapes !=null">
-						  		or
+						  		and
 						  		<foreach collection="shapes" item="shape" open="(" close=")" separator="or">
-						  			pi_shape like #{shape.value}
+						  			pi_shape like #{shape.value,jdbcType=VARCHAR}
 						  		</foreach>
 						  		</if>
 						  		<if test="colors != null">
-						  		or
+						  		and
 						  		<foreach collection="colors" item="color" open="(" close=")" separator="or" >
 						  			pi_f_color like #{color.value} or pi_b_color like #{color.value}
 						  		</foreach>
 						  		</if>
 						  		<if test="lines !=null">
-						  		or
+						  		and
 						  		<foreach collection="lines" item="line" open="(" close=")" separator="or">
 						  			pi_f_dividing_line like #{line.value} or pi_b_dividing_line like #{line.value}
 						  		</foreach>
@@ -52,27 +52,27 @@
 		from pill_info
 		where 1=1 				<if test="pname !=null">
 									and 
-									pi_name like '%' || #{pname} || '%' 
+									pi_name like '%'|| #{pname} ||'%' 
 								</if>
 								<if test="cname !=null">
-									or
-									pi_b_name = '%'||#{cname}||'%' 
+									and
+									pi_b_name like '%'||#{cname}||'%' 
 								</if> 
 
 						  		<if test="shapes !=null">
-						  		or
-						  		<foreach collection="shapes" item="shape" open="(" close=")" separator="or">
-						  			pi_shape like #{shape.value}
+						  		and
+						  		<foreach collection="shapes" item="shape" open="(" close=")" separator="or" >
+						  			pi_shape like #{shape}
 						  		</foreach>
 						  		</if>
 						  		<if test="colors != null">
-						  		or
+						  		and
 						  		<foreach collection="colors" item="color" open="(" close=")" separator="or" >
 						  			pi_f_color like #{color.value} or pi_b_color like #{color.value}
 						  		</foreach>
 						  		</if>
 						  		<if test="lines !=null">
-						  		or
+						  		and
 						  		<foreach collection="lines" item="line" open="(" close=")" separator="or">
 						  			pi_f_dividing_line like #{line.value} or pi_b_dividing_line like #{line.value}
 						  		</foreach>
