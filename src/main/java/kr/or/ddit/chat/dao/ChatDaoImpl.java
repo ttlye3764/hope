@@ -1,5 +1,41 @@
 package kr.or.ddit.chat.dao;
 
-public class ChatDaoImpl {
+import java.util.List;
+import java.util.Map;
 
+import javax.annotation.Resource;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Repository;
+
+import kr.or.ddit.vo.ChatingRoomVO;
+import kr.or.ddit.vo.MessageVO;
+import kr.or.ddit.vo.ParticipationVO;
+
+@Repository
+public class ChatDaoImpl implements IChatDao{
+	
+	@Resource
+	private SqlSessionTemplate client;
+
+	@Override
+	public int createChatRoom(ChatingRoomVO chatingRoomInfo) throws Exception {
+		return client.insert("chat.createChatRoom", chatingRoomInfo);
+	}
+
+	@Override
+	public int insertParticipation(ParticipationVO participationInfo) throws Exception {
+		return client.insert("chat.insertParticipation", participationInfo);
+	}
+
+	@Override
+	public int insertMessage(MessageVO messageInfo) throws Exception {
+		return client.insert("chat.insertMessage", messageInfo);
+	}
+	
+	@Override
+	public List<ChatingRoomVO> ChatingRoomList(Map<String, String> params) throws Exception {
+		return client.selectList("chat.chatingRoomList",params);
+	}
+	
 }

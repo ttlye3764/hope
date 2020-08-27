@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="chat">
+
+	<insert id="createChatRoom" parameterType="chatingRoomVO">
+		INSERT 
+			INTO CHATINGROOM
+				(
+					CH_NO,
+					CH_DATE
+				)
+			VALUES
+			    (
+					ch_seq.nextval,
+					sysdate
+				)
+	</insert>
+	
+	<insert id="insertParticipation" parameterType="participationVO">
+		<selectKey keyProperty="ch_no" resultType="java.lang.String" order="BEFORE">
+    			SELECT MAX(CH_NO) FROM CHATINGROOM
+    	</selectKey>
+  		INSERT INTO PARTICIPATION(
+  							CH_NO,
+  							MEM_NO)
+  							VLAUES(
+  							#{ch_no},
+  							#{mem_no}
+  							)
+	</insert>
+	
+	<insert id="insertMessage" parameterType="messageVO">
+		INSERT INTO MESSAGE(
+					MSG_NO,
+					MEM_NO,
+					CH_NO,
+					MSG_CONTENT,
+					MSG_DATE)
+					VALUES(
+						msg_seq.nextval,
+						#{mem_no},
+						#{ch_no},
+						#{msg_content},
+						sysdate
+					)
+	</insert>
+	
+	<select id="chatingRoomList" parameterType="Map" resultType="chatingRoomVO">
+		SELECT a.ch_no
+		FROM CHATINGROOM a inner join PARTICIPATION b
+		on a.ch_no = b.ch_no
+		WHERE b.MEM_NO = #{mem_no}
+	</select>
+</mapper>
+	
+
+	
