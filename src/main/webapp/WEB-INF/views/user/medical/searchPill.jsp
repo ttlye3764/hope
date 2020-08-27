@@ -209,12 +209,25 @@ button.sort.desc .caret { display:inline-block; }
 	border:1px solid rgb(110, 63, 219) !important;
 }
 
+.clickPagination{
+	color: rgb(177, 113, 236);	
+}
+
+
 </style>
 <script>
-var shapes = [];
-var colors = [];
-var lines = [];
-	function ajaxCall(var i){
+
+
+  
+	
+	function callAjax(i){
+		/* $('.pagination li').click(function(){
+			$(this).find('font').addClass('clickPagination');
+
+		}); */
+		var shapes = [];
+		var colors = [];
+		var lines = [];
 		var pname = $("input[id='pname']").val();
 		var	cname = $("input[id='cname']").val();
         $('input[name="shapes"]:checked').each(function(i){
@@ -226,18 +239,17 @@ var lines = [];
         $('input[name="lines"]:checked').each(function(i){
         	lines.push($(this).val());
         });
-		
-		 $.ajax({
-             url     : '${pageContext.request.contextPath}/user/medical/searchPillJson.do',
-             type    : 'post',
-             dataType: 'json',
-             data : {'shapes':shapes, 'colors':colors, 'pname':pname,'cname':cname, 'lines':lines,'currentPage':i },
-             success : function(result) { 
-            	  $('.list').empty();
-            	  $('#paginationDIV').empty();
-            	  $('#paginationDIV').append(result.pagination);
-	    		  console.log(result.list);
-	    		  console.log(result.pagination);
+
+
+        $.ajax({
+            url     : '${pageContext.request.contextPath}/user/medical/searchPillJson.do',
+            type    : 'post',
+            dataType: 'json',
+            data : {'shapes':shapes, 'colors':colors, 'pname':pname,'cname':cname, 'lines':lines, 'currentPage':i },
+            success : function(result) { 
+           	  $('.list').empty();
+           	  $('#paginationDIV').empty();
+           	  $('#paginationDIV').append(result.pagination);
 		
 				  $.each(result.list, function(index, item){						 
 					  var newTr = $('<tr data-timestamp="1509426000" data-status="3" style="height: 60px;"></tr>');			 
@@ -263,11 +275,15 @@ var lines = [];
 
 					  $('.list').append(newTr);
 				  })
-  			}
-  		});
+ 			}
+ 		});
 	}
+
+
 	$(function() {
 
+		
+		
 		
 		$('.idty li').click(function() {
 			if ($(this).hasClass('li_selected')) {
@@ -281,6 +297,13 @@ var lines = [];
        
 
 		$('#searchBTN').click(function(){
+			/* $('.pagination li').click(function(){
+				$(this).find('font').addClass('clickPagination');
+
+			}); */
+			var shapes = [];
+			var colors = [];
+			var lines = [];
 			var pname = $("input[id='pname']").val();
 			var	cname = $("input[id='cname']").val();
 	        $('input[name="shapes"]:checked').each(function(i){
@@ -490,12 +513,10 @@ var lines = [];
 														
 					</tbody>
 				</table>
-				<div id="paginationDIV" style="margin-left: 50%;"><div>${pagination }</div></div>
-							
 			</div>
 		</div>
 	</div>
-
+				<div id="paginationDIV" style="margin-left: 40%; margin-bottom: 20px;"><div>${pagination }</div></div>
 
 
 

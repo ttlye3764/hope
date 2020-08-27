@@ -4,15 +4,30 @@
 
 <mapper namespace="board">
 
-	<sql id="selectAll">
-		SELECT *
-		FROM BOARD
-	</sql>
+<!-- 	<resultMap id="boardResultMap" type="boardVO"> -->
+<!--     		<id property="bd_no" column="bd_no"/> -->
+<!-- 			<result property="bd_title" column="bd_title"/> -->
+<!-- 			<result property="bd_content" column="bd_content"/> -->
+<!-- 			<result property="bd_date" column="bd_date"/> -->
+<!-- 			<result property="bd_hit" column="bd_hit"/> -->
+<!-- 			<result property="bd_pass" column="bd_pass"/> -->
+<!-- 			<result property="bd_sequence" column="bd_sequence"/> -->
+<!-- 			<result property="bd_group" column="bd_group"/> -->
+<!-- 			<result property="bd_depth" column="bd_depth"/> -->
+<!-- 			<result property="bd_division" column="bd_division"/> -->
+<!-- 			<result property="mem_no" column="mem_no"/> -->
+<!-- 			<result property="rnum" column="rnum"/> -->
+<!-- 			<result property="bd_writer" column="bd_writer"/> -->
+<!-- 			<collection property="items" column="bd_no" select="board_file.board_fileList" ofType="board_fileVO" javaType="java.util.List"></collection> -->
+<!--     </resultMap> -->
 	
-	
+<!-- 	<select id="fileSequence" resultType="String"> -->
+<!-- 		SELECT BOARD_SEQ.CURRVAL FROM DUAL -->
+<!-- 	</select> -->
 	
 	<select id="boardInfo" parameterType="map" resultType="boardVO">
-		<include refid="selectAll"/>
+		SELECT *
+		FROM BOARD
 		WHERE BD_NO = #{bd_no}
 	</select>
 	
@@ -21,12 +36,11 @@
 		FROM BOARD
 	</select>
 
-	<select id="boardList" resultType="boardVO" parameterType="map">
-		SELECT B.*
-		FROM(SELECT ROWNUM RNUM, A.*
-		FROM (<include refid="selectAll"/>
-		ORDER BY BD_NO)A) B
-		ORDER BY B.RNUM
+	<select id="boardList" resultType="boardVO" parameterType="map" >
+		SELECT ROWNUM RNUM, A.*
+		  FROM (SELECT *
+              	FROM BOARD
+		ORDER BY BD_NO DESC)A
 	</select>
 	
 	<delete id="deleteBoardInfo" parameterType="String" >
@@ -57,6 +71,7 @@
 	 					   1
 						   )
 	</insert>
+	
 	
 	
 </mapper>
