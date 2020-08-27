@@ -112,19 +112,10 @@ public class MedicalController {
 		map.put("startCount", startCount);
 		map.put("endCount", endCount);
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		List<PillVO> list = pillService.pillList(map);
 		
-		System.out.println(list);
 		ModelAndView andView = new ModelAndView();
+		andView.addObject("pagination",pagination.getPagingHtmls());
 		andView.addObject("list",list);
 		andView.setViewName("jsonConvertView");
 		return andView;
