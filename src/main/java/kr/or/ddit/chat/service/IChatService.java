@@ -16,4 +16,6 @@ public interface IChatService {
 			public int insertMessage(MessageVO messageInfo) throws Exception;
 			//채팅방 리스트 조회
 			public List<ChatingRoomVO> ChatingRoomList(Map<String, String> params) throws Exception;
+			//참여 테이블 리스트 조회
+			public List<ParticipationVO> participationList(Map<String, String> params) throws Exception;
 }

@@ -16,17 +16,16 @@
 				)
 	</insert>
 	
+<!-- 	<select id = "searchMaxCH" resultType="java.lang.String"> -->
+<!-- 		SELECT MAX(CH_NO) FROM CHATINGROOM -->
+<!-- 	</select> -->
+	
 	<insert id="insertParticipation" parameterType="participationVO">
 		<selectKey keyProperty="ch_no" resultType="java.lang.String" order="BEFORE">
     			SELECT MAX(CH_NO) FROM CHATINGROOM
     	</selectKey>
-  		INSERT INTO PARTICIPATION(
-  							CH_NO,
-  							MEM_NO)
-  							VLAUES(
-  							#{ch_no},
-  							#{mem_no}
-  							)
+  		INSERT INTO PARTICIPATION(CH_NO, MEM_NO)
+  							VALUES(#{ch_no}, #{mem_no})
 	</insert>
 	
 	<insert id="insertMessage" parameterType="messageVO">
@@ -50,6 +49,12 @@
 		FROM CHATINGROOM a inner join PARTICIPATION b
 		on a.ch_no = b.ch_no
 		WHERE b.MEM_NO = #{mem_no}
+	</select>
+	
+	<select id ="participationList" parameterType="Map" resultType="participationVO">
+		SELECT *
+		FROM PARTICIPATION
+		WHERE CH_NO = #{ch_no}
 	</select>
 </mapper>
 	

@@ -20,7 +20,7 @@
 
 				<c:if test="${empty chatingRoomList }">
 					<tr align="center">
-						<td colspan="5"><font color="blue">친구가 없네요 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</font></td>
+						<td colspan="5"><font color="blue">참여중인 채팅이 없습니다.</font></td>
 					</tr>
 				</c:if>
 				<c:if test="${!empty chatingRoomList }">
@@ -32,7 +32,7 @@
 								alt="" class="icon-user">
 							<div class="user-status">
 								<div class="name">${chatingRoomInfo.ch_no }</div>
-								<input type="hidden" value="${chatingRoomInfo.fri_mem_no }" class="targetMemNo">
+								<input type="hidden" value="${chatingRoomInfo.ch_no }">
 								<i class="fa fa-circle offline"></i> <span class="status">online</span>
 							</div>
 						</div>
@@ -102,7 +102,7 @@
 							
 							<c:if test="${empty friendList }">
 								<tr align="center">
-									<td colspan="5"><font color="blue">참여중인 채팅이 없습니다.</font></td>
+									<td colspan="5"><font color="blue">친구가 없네요 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</font></td>
 								</tr>
 							</c:if>
 
@@ -172,7 +172,7 @@
 				<!-- contact form -->
 				<div class="col-md-6">
 					<div class="h-100">
-						<form class="contact-form" id="contact-form" name="contactform" action="${pageContext.request.contextPath}/user/chat/addFriend.do" method="post" enctype="multipart/form-data">			
+						<form class="contact-form" id="contact-form" name="contactform" action="${pageContext.request.contextPath}/user/chat/addFriend" method="post" enctype="multipart/form-data">			
 							<!-- Start main form -->
 							<div class="row">
 							
@@ -180,22 +180,14 @@
 									<!-- name -->
 										<input id="pill_no" name="pill_no" type="hidden" class="form-control">
 										<label>친구 이름 </label><input id="mem_name" name="mem_name" type="text" class="form-control" placeholder="친구이름">
-										<button type="button" id="search_fri">검색</button>
-										
+										<button type="button" id="search_fri">검색</button>			
 										<label>검색 내용 - 친구 이름 </label><input id="search_mem_name" name="search_mem_name" type="text" class="form-control" placeholder="친구이름">
 								</div>
 							<br><br>	
-								<div class="col-md-6" style="width: 100px;">
-									<div></div>
-									<div style="width: 230px; height: 150px;" >
-									<img id="img2" style="width: 100%; height: 100%; margin-left: 15px; margin-top: 30px;">
-									</div>
-									<div class="col-md-12 text-center"><button class="btn btn-outline-primary btn-block" style="margin-top: 60px;">약 상세보기</button></div>
-									<label>달력 표시 색 설정</label><div><input type="color" id="pill_color" name="pill_color"></div>
-								</div>																							
+																												
 								<!-- submit button -->
 								<div class="col-md-12 text-center">
-								<button class="btn btn-outline-grad " type="submit">추가</button>
+								<button class="btn btn-outline-grad " type="button" id="insertBtn">추가</button>
 								<button class="btn btn-outline-grad " id="deleteBTN" type="button">삭제</button>
 								</div>
 							</div>
@@ -220,7 +212,8 @@
 var messages = document.getElementById("messages");
 var targetMemNo;
 var currentTargetMemNo;
-var mem_no = ${LOGIN_MEMBERINFO.mem_no}
+var mem_no = ${LOGIN_MEMBERINFO.mem_no};
+var chatingRoomNO;
 
 function addFriend(){
 	$("#search_friend").modal("show"); //모달창 띄우기
@@ -251,8 +244,6 @@ function initSocket(url) {
 	
 	socket.onmessage = function(evt) {
 		console.log(evt.data + "<br/>");
-
-
 		// 받아온 메세지 넣어주기
 
 		var bot = document.createElement("div");
@@ -277,7 +268,7 @@ function initSocket(url) {
 	
 	$("#sendBtn").on("click", function() {
 		var msg = $("#message").val();
-		var text = document.getElementById("messageinput").value + "," +targetMemNo;
+		var text = document.getElementById("messageinput").value + "," + chatingRoomNo;
 		socket.send(text);
 		console.log(text);
 		text = "";
@@ -380,74 +371,26 @@ $(function(){
 	//채팅방 특정하기.
 	$('.user').click(function(){
 	
-	targetMemNo = $(this).find('div input').val();
-	
+	chatingRoomNo = $(this).find('div input').val();
+	console.log(chatingRoomNo);
 	currentTargetMemNo = 100000;
 
-	
+	});
 
-	// 채팅방 테이블 삽입
-	$.ajax({
-				type : 'POST',
-				url : '${pageContext.request.contextPath}/user/chat/createChatingRoom',
-// 				dataType : 'JSON',
-// 				data : {
-// 					mem_no : ${LOGIN.MEMBERINFO.mem_no},
-// 					target_mem_no : targetMemno
-// 				},
-				error : function(result) {
-					alert("채팅방 생성 실패");
-				},
-				success : function(result) {
-					alert("채팅방 생성 성공");
-					
-				},
-				complete : function(result){
-					
-					 $.ajax({
-							type : 'POST',
-							url : '${pageContext.request.contextPath}/user/chat/insertParticipation',
-							dataType : 'JSON',
-							data : {
-								mem_no : mem_no,
-								target_mem_no : targetMemno
-								},
-							success : function(result){
-								
-								},
-							complete	
-						 })
-					}
-			});
-	
-
-	if(!targetMemNo == currentTargetMemNo){
-			$("#message").empty();
-
-			$.ajax({
-				type : 'POST',
-				url : '${pageContext.request.contextPath}/user/chat/chatList.do',
-				dataType : 'JSON',
-				data : {
-					mem_name : $('#mem_name').val()
-				},
-				error : function(result) {
-					alert(result.memberInfo.mem_name);
-				},
-				success : function(result) {
-					alert(result.memberInfo.mem_name);
-					$('#search_mem_name').val(result.memberInfo.mem_name);
-				}
-			});
-			
-		}
-	
-	console.log(targetMemNo);
-
-	currentTargetMemNo = targetMemNo;
-});
-
-	
+	//친구 검색 후 친구 추가 하기
+	$("#insertBtn").click(function(){
+		$.ajax({
+			type : 'POST',
+			url : '${pageContext.request.contextPath}/user/chat/addFriend',
+			data : "mem_name=" + $("#search_mem_name").val(),
+			error : function(result) {
+				alert("친구 추가 실패");
+			},
+			success : function(result) {
+				alert("친구 추가 성공");
+			},
+		});
+	});
 });
 </script>
 </html>

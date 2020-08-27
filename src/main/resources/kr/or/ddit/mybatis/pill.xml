@@ -23,7 +23,7 @@
 						  		<if test="shapes !=null">
 						  		or
 						  		<foreach collection="shapes" item="shape" open="(" close=")" separator="or">
-						  			pi_shape like #{shape.value}
+						  			pi_shape like #{shapes}
 						  		</foreach>
 						  		</if>
 						  		<if test="colors != null">

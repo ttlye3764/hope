@@ -36,5 +36,9 @@ public class ChatServiceImpl implements IChatService {
 	public List<ChatingRoomVO> ChatingRoomList(Map<String, String> params) throws Exception {
 		return chatDao.ChatingRoomList(params);
 	}
+	@Override
+	public List<ParticipationVO> participationList(Map<String, String> params) throws Exception {
+		return chatDao.participationList(params);
+	}
 
 }

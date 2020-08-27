@@ -37,5 +37,8 @@ public class ChatDaoImpl implements IChatDao{
 	public List<ChatingRoomVO> ChatingRoomList(Map<String, String> params) throws Exception {
 		return client.selectList("chat.chatingRoomList",params);
 	}
-	
+	@Override
+	public List<ParticipationVO> participationList(Map<String, String> params) throws Exception {
+		return client.selectList("chat.participationList", params);
+	}
 }

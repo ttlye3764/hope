@@ -58,9 +58,11 @@ public class ChatController {
 		
 		System.out.println(friendList.size());
 		
+		
+		//참여중인 채팅방 리스트
 		List<ChatingRoomVO> chatingRoomList = chatDao.ChatingRoomList(params);
 		
-		andView.addObject(chatingRoomList);
+		andView.addObject("chatingRoomList", chatingRoomList);
 		andView.addObject("friendList",friendList);
 		andView.setViewName("user/chat/chat");
 		return andView;
@@ -120,7 +122,7 @@ public class ChatController {
 		
 		memberDao.addFriend(friendInfo);
 		
-		andView.setViewName("user/chat/chat");
+		andView.setViewName("jsonConvertView");
 		
 		return andView;
 	}
