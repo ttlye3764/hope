@@ -20,14 +20,6 @@ public class IMedicalFileDAOImpl implements IMedicalFileDAO {
 	@Override
 	public void insertFileItem(List<MypillFileVO> fileitemList) throws Exception {
 	
-			// iBatis 트랜잭션
-			//	 Commit : startTransaction() => 쿼리 질의(전체 성공)
-			//            => commitTransaction()
-			//            => endTransaction();
-			
-			//	 Rollback : startTransaction() => 쿼리 질의(전체 성공)
-			//             => endTransaction();
-		
 			for(MypillFileVO fileItemInfo : fileitemList){
 				client.insert("medicalfile.insertFileItem", fileItemInfo);
 			}

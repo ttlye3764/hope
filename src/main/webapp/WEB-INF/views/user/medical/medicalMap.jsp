@@ -37,7 +37,7 @@
 
 	<!-- =======================
 	Banner innerpage -->
-	<div class="innerpage-banner left bg-overlay-dark-7" style="background:url(/assets/images/bg/03.jpg) no-repeat; background-size:cover; background-position: center center;">
+	<div class="innerpage-banner left bg-overlay-dark-7" style="background:url(/assets/images/bg/03.jpg) no-repeat;  margin-bottom:50px;  text-align:center; background-size:cover; background-position: center center;">
 		<div class="container">
 			<div class="row all-text-white">
 				<div class="col-md-12 align-self-center">
