@@ -3,6 +3,8 @@ package kr.or.ddit.schedule.controller;
 import java.util.List;
 import java.util.Map;
 
+import kr.or.ddit.bis.Bis;
+import kr.or.ddit.bis.Bis_location;
 import kr.or.ddit.member.service.IMemberService;
 import kr.or.ddit.schedule.service.IScheduleService;
 import kr.or.ddit.vo.MemberVO;
@@ -12,13 +14,14 @@ import kr.or.ddit.vo.ScheduleVO;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jettison.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -57,6 +60,7 @@ public class ScheduleController {
 
 	}
 	
+		
 	@RequestMapping("bis")
 	public void bis() {
 		
@@ -190,5 +194,20 @@ public class ScheduleController {
 		this.service.updateScheduleInfo(scheduleInfo);
 		return "redirect:/user/schedule/schedule.do";
 	}
+	
+	@ResponseBody
+	@RequestMapping("bisSearch")
+	public String bisSearch(String citycode, String routeid) throws Exception {
+		String bisResult = Bis.bisSearch(citycode, routeid);
+		return bisResult;
+	}
+	
+	@ResponseBody
+	@RequestMapping("bisLocation")
+	public String bisLocation(String citycode, String res_routeid) throws Exception {
+		String bisLocationResult = Bis_location.location(citycode, res_routeid);
+		return bisLocationResult;
+	}
+	
 
 }
