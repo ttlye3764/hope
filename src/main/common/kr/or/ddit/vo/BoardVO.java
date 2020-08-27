@@ -1,12 +1,14 @@
 package kr.or.ddit.vo;
 
+import java.util.List;
+
 public class BoardVO {
 	
 	private String bd_no;
 	private String bd_title;
 	private String bd_content;
 	private String bd_date;
-	private int    bd_hit;
+	private String bd_hit;
 	private String bd_pass;
 	private String bd_sequence;
 	private String bd_group;
@@ -16,9 +18,16 @@ public class BoardVO {
 	private String rnum;
 	private String bd_writer;
 	
+//	private List<Board_FileVO> items;
 	
+//	public List<Board_FileVO> getItems() {
+//		return items;
+//	}
+//	public void setItems(List<Board_FileVO> items) {
+//		this.items = items;
+//	}
 	
-	
+
 	
 	public String getBd_writer() {
 		return bd_writer;
@@ -56,10 +65,10 @@ public class BoardVO {
 	public void setBd_date(String bd_date) {
 		this.bd_date = bd_date;
 	}
-	public int getBd_hit() {
+	public String getBd_hit() {
 		return bd_hit;
 	}
-	public void setBd_hit(int bd_hit) {
+	public void setBd_hit(String bd_hit) {
 		this.bd_hit = bd_hit;
 	}
 	public String getBd_pass() {

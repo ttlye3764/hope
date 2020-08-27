@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,17 +18,21 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddit.board.service.IBoardService;
+
 import kr.or.ddit.utiles.CryptoGenerator;
 import kr.or.ddit.vo.BoardVO;
+import kr.or.ddit.vo.Board_FileVO;
+import kr.or.ddit.vo.FileItemVO;
 import kr.or.ddit.vo.FreeboardVO;
 import kr.or.ddit.vo.KnowledgeVO;
 
 @Controller
 @RequestMapping("/user/board/")
 public class BoardController {
-	
 	@Autowired
 	private IBoardService boardService;
+//	@Autowired
+//	private IBoard_FileService board_fileService;
 	
 	//컨트롤러에서의 리턴타입
 	
@@ -38,6 +43,7 @@ public class BoardController {
 	// 3. model
 	
 	// 4. modelAndView
+	
 	
 	// 조회
 	@RequestMapping("boardList")
@@ -56,9 +62,9 @@ public class BoardController {
 	// 상세보기
 	@RequestMapping("boardView")
 		public BoardVO boardView(String bd_no,
-									   Map<String, String> params,
-									   ModelMap modelMap,
-									   BoardVO boardInfo)throws Exception{
+							     Map<String, String> params,
+							     ModelMap modelMap,
+							     BoardVO boardInfo)throws Exception{
 		params.put("bd_no", bd_no);
 		 boardInfo = this.boardService.boardInfo(params);
 		
@@ -68,11 +74,9 @@ public class BoardController {
 	}
 
 	// 수정
-	@RequestMapping("updateBoardInfo")
-	public String updateBoard(BoardVO boardVO) throws Exception{
-//		System.out.println("updateboard");
-//		System.out.println(boardVO);
-		
+	@RequestMapping("updateBoardInfo")       //, @RequestParam("files") MultipartFile[] items
+	public String updateBoard(BoardVO boardVO ) throws Exception{
+                                            //, items
         this.boardService.updateBoard(boardVO);
 		return "redirect:/user/board/boardList.do";
 	}
@@ -88,17 +92,31 @@ public class BoardController {
 	}
 	
 	// 등록
-	@RequestMapping("insertBoardInfo")
-	public String insertBoard(ModelAndView andView,BoardVO boardVO) throws Exception {
-		
-//		System.out.println("insertBoard");
-//		System.out.println(boardVO);
-		
-		boardService.insertBoard(boardVO);
+	@RequestMapping("insertBoardInfo")       //, @RequestParam("files") MultipartFile[] items 
+	public String insertBoard(BoardVO boardVO ) throws Exception {
+		                                //, items
+		boardService.insertBoard(boardVO );
 		return "redirect:/user/board/boardList.do";
 	}
 	
 	// 게시판 폼
 	@RequestMapping("boardForm")
 	public void boardForm() {}
+	
+	
+	// 파일 다운로드
+//	@RequestMapping("fileDownload")
+//	public ModelAndView fileDownload(String file_seq, Map<String, String> params, ModelAndView andView) throws Exception {
+//			params.put("file_seq", file_seq);
+//
+//			Board_FileVO fileitemInfo = this.board_fileService.board_fileInfo(params);
+//
+//			andView.addObject("fileitemInfo", fileitemInfo);
+//			andView.setViewName("fileDownloadView");
+//
+//			return andView;
+//
+//		}
+	
 }
+

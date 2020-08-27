@@ -37,6 +37,9 @@
 		p:order="1">
 		</bean>
 	
+	<bean id="naverLoginBO"
+		class="kr.or.ddit.naver.controller.NaverLoginBO" />
+	
 	<!-- <bean id="memberInfo" name="m1 m2 m3" class="kr.or.ddit.vo.MemberVO"
 		c:mem_id="a001" c:mem_pass="asdfasdf" c:mem_name="김은대"
 		p:mem_regno1="111111" p:mem_regno2="1111118"> -->

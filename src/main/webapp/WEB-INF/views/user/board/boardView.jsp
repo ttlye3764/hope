@@ -8,15 +8,6 @@
 <script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
 <script>
 $(function(){
-	// 섬머노트를 div를 활용한 textarea에 추가.
-	// http://summernote.org 활용
-//     $('#bd_content').summernote({
-//     		lang: 'ko-KR',
-// 			height: 150,
-// 			codemirror: {
-// 			theme: 'monokai'
-// 		}
-//     });
 
 
     // 수정버튼
@@ -33,20 +24,14 @@ $(function(){
      });
 
     // 삭제버튼
-//     $('#deleteBtn').on('click', function(){
-		
-// 		var bd_no = $('input[name="bd_no"]').val();
-// 		$(this).attr('href','${pageContext.request.contextPath}/user/board/deleteBoardInfo.do?bd_no=' + bd_no);
-		
-//        });
   	$('#deleteBtn').on('click', function(){
-		alert('클릭');
+		alert('삭제');
 		var bd_no = $('input[name="bd_no"]').val();
 		$(location).attr('href','${pageContext.request.contextPath}/user/board/deleteBoardInfo.do?bd_no=' + bd_no);
   	 });  
 
   	
-    //목록버튼
+    // 목록버튼
     $('#listBtn').on('click', function(){	
 		$(location).attr('href','${pageContext.request.contextPath}/user/board/boardList.do');
 		

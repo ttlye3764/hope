@@ -20,6 +20,7 @@ import kr.or.ddit.medical.service.IMedicalService;
 import kr.or.ddit.medicalfile.service.IMedicalFileService;
 import kr.or.ddit.pill.service.IPillService;
 import kr.or.ddit.utiles.RolePaginationUtil;
+import kr.or.ddit.utiles.RolePaginationUtil_pill;
 import kr.or.ddit.vo.MypillFileVO;
 import kr.or.ddit.vo.MypillVO;
 import kr.or.ddit.vo.PillVO;
@@ -71,7 +72,7 @@ public class MedicalController {
 	public ModelAndView searchPillJson(@RequestParam(value="shapes[]",required=false) List<String> shapes, 
 											@RequestParam(value="colors[]",required=false) List<String> colors,
 											@RequestParam(value="lines[]",required=false) List<String> lines, String pname, String cname
-											,HttpServletRequest request, String currentPage, RolePaginationUtil pagination) throws Exception{	
+											,HttpServletRequest request, String currentPage, RolePaginationUtil_pill pagination) throws Exception{	
 		
 		System.out.println(shapes);
 		System.out.println(colors);
@@ -186,7 +187,7 @@ public class MedicalController {
 	public void medicalMap() {}
 	
 	@RequestMapping("searchPill")
-	public ModelAndView searchPill(HttpServletRequest request, String currentPage, HashMap params, RolePaginationUtil pagination)  throws Exception{
+	public ModelAndView searchPill(HttpServletRequest request, String currentPage, HashMap params, RolePaginationUtil_pill pagination)  throws Exception{
 		if (currentPage == null) {
 			currentPage = "1";
 		}
@@ -210,7 +211,31 @@ public class MedicalController {
 		andView.addObject("pagination",pagination.getPagingHtmls());
 		andView.setViewName("user/medical/searchPill");
 		return andView;
-		
-		
 	}
+	@RequestMapping("paginationPill")
+	public ModelAndView paginationPill(HttpServletRequest request, String currentPage, HashMap params, RolePaginationUtil_pill pagination)  throws Exception{
+		if (currentPage == null) {
+			currentPage = "1";
+		}
+		
+		String totalCount = pillService.totalCount(params);
+		
+		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount));
+		
+		String startCount = String.valueOf(pagination.getStartCount());
+		
+		String endCount = String.valueOf(pagination.getEndCount());
+		
+		params.put("startCount", startCount);
+		params.put("endCount", endCount);
+		
+		List<PillVO> list = pillService.pillList(params);
+		
+		ModelAndView andView = new ModelAndView();
+		andView.addObject("pillList", list);	
+		andView.addObject("pagination",pagination.getPagingHtmls());
+		andView.setViewName("user/medical/searchPill");
+		return andView;
+	}
+	
 }

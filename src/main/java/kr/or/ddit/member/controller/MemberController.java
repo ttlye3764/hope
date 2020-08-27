@@ -73,10 +73,16 @@ public class MemberController {
 	}
 
 	@RequestMapping("updateMemberInfo")
-	public String updateMember(MemberVO memberInfo) throws Exception {
-		this.service.updateMemberInfo(memberInfo);
+	public String updateMember(MemberVO memberInfo, HttpSession session, Map<String, String> params) throws Exception {
+		this.service.updateMemberInfo(memberInfo);		
+		
+		params.put("mem_id", memberInfo.getMem_id());
+		params.put("mem_pass", memberInfo.getMem_pass());
+		
+		memberInfo = this.service.memberInfo(params);
+		session.setAttribute("LOGIN_MEMBERINFO", memberInfo);
 
-		return "redirect:/user/member/memberList.do";
+		return "redirect:/user/main/mainForm.do";
 	}
 
 	// /user/member/deleteMemberInfo.do?user_id=a001
@@ -139,6 +145,29 @@ public class MemberController {
 			result = "사용가능한 아이디입니다.";
 		} else {
 			result = "이미 존재하는 아이디입니다.";
+		}
+
+		andView.addObject("json", result);
+		andView.setViewName("jsonConvertView");
+
+		return andView;
+	}
+	
+	@RequestMapping("passCheck")
+	public ModelAndView passCheck(@RequestParam String mem_pass, Map<String, String> params, HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		
+		String session_mem_pass = memberInfo.getMem_pass();
+
+		ModelAndView andView = new ModelAndView();
+		andView.addObject("memberInfo", memberInfo);
+
+		String result;
+		if (session_mem_pass.equals(mem_pass)) {
+			result = "1";
+		} else {
+			result = "0";
 		}
 
 		andView.addObject("json", result);
