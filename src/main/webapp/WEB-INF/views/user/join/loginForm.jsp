@@ -84,7 +84,7 @@
         			success : function(result) {
         				//{ flag : true | false}
         				if(result.json==1){
-        					$(location).attr('href', '${pageContext.request.contextPath}/user/freeboard/freeboardForm.do');
+        					$(location).attr('href', '${pageContext.request.contextPath}/user/main/mainForm.do');
         				}else if(result.json==2){
         					alert('임시비밀번호로 로그인하셨습니다. \n비밀번호 변경창으로 이동합니다.');
         					$(location).attr('href', '${pageContext.request.contextPath}/user/join/passChangeForm.do');

@@ -1,7 +1,24 @@
 <!doctype html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<html lang="en">
+<html>
 <head>
+<meta charset="UTF-8">
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+function LogOut(){
+	$.ajax({
+		type : 'POST',
+		url : '${pageContext.request.contextPath}/user/join/logout.do',
+		dataType : 'JSON',
+		data : {
+		},
+		success : function(result) {
+			location.reload(true);
+		}
+	});
+}
+</script>
 	<title>Wizixo | Creative Multipurpose Bootstrap Template</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -67,8 +84,8 @@
 						  <div class="dropdown-menu mt-2 shadow" aria-labelledby="dropdownLanguage">
 						  	<span class="dropdown-item-text">Select language</span>
 						  	<div class="dropdown-divider"></div>
-						    <a class="dropdown-item" href="#"><img class="dropdown-item-icon" src="assets/images/flags/sp.svg" alt=""> Español</a>
-						    <a class="dropdown-item" href="#"><img class="dropdown-item-icon" src="assets/images/flags/fr.svg" alt=""> Français</a>
+						    <a class="dropdown-item" href="#"><img class="dropdown-item-icon" src="assets/images/flags/sp.svg" alt=""> EspaÃ±ol</a>
+						    <a class="dropdown-item" href="#"><img class="dropdown-item-icon" src="assets/images/flags/fr.svg" alt=""> FranÃ§ais</a>
 						    <a class="dropdown-item" href="#"><img class="dropdown-item-icon" src="assets/images/flags/gr.svg" alt=""> Deutsch</a>
 						  </div>
 						</div>
@@ -87,16 +104,15 @@
 					<div class="d-flex align-items-center">
 						<!-- Top Account -->
 						<div class="dropdown">
-						  <a class="dropdown-toggle" href="#" role="button" id="dropdownAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ti-user mr-2"></i>Account </a>
-						  <div class="dropdown-menu mt-2 shadow" aria-labelledby="dropdownAccount">
 							<c:if test="${LOGIN_MEMBERINFO==null}">
-								<a class="dropdown-item" href="${pageContext.request.contextPath}/user/join/loginForm.do">Log In</a>
+								<a class="dropdown-item" href="${pageContext.request.contextPath}/user/join/loginForm.do" role="button" aria-haspopup="true" aria-expanded="false"><i class="ti-user mr-2"></i>Log In </a>
 							</c:if>
 							<c:if test="${LOGIN_MEMBERINFO!=null}">
-							    <a class="dropdown-item" href="${pageContext.request.contextPath}/user/join/logout.do">Log Out</a>
+							    <a class="dropdown-toggle" href="#" role="button" id="dropdownAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ti-user mr-2"></i>${LOGIN_MEMBERINFO.mem_name } </a>
 							</c:if>
-						    <a class="dropdown-item" href="sign-up.html">Register</a>
-						    <a class="dropdown-item" href="#">Settings</a>
+						  <div class="dropdown-menu mt-2 shadow" aria-labelledby="dropdownAccount">
+						  	<a class="dropdown-item" href="${pageContext.request.contextPath}/user/member/myPage.do">My Page</a>
+							    <a class="dropdown-item" href="javascript:LogOut();">Log Out</a>
 						  </div>
 						</div>
 						<!-- top link -->
@@ -127,7 +143,7 @@
 		<nav class="navbar navbar-expand-lg">
 			<div class="container">
 				<!-- Logo -->
-				<a class="navbar-brand" href="index.html">
+				<a class="navbar-brand" href="${pageContext.request.contextPath}/user/main/mainForm.do">
 					<!-- SVG Logo Start -->
 					<svg class="navbar-brand-item" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMinYMid" width="325.656" height="100" viewBox="0 0 325.656 100">
 					  <defs>
@@ -187,12 +203,12 @@
 							<a class="nav-link dropdown-toggle" href="#" id="blogMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Medical</a>
 							<ul class="dropdown-menu" aria-labelledby="blogMenu">
 								<li class="dropdown-submenu">
-									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalList.do">복용내역</a>
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalList.do">ë³µì©ë´ì­</a>
 								</li>
 								<li class="dropdown-submenu">
-									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalMap.do">내 주위 병원/약국 위치보기</a>
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalMap.do">ë´ ì£¼ì ë³ì/ì½êµ­ ìì¹ë³´ê¸°</a>
 								</li>
-								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/searchPill.do">알약정보조회</a></li>
+								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/searchPill.do">ìì½ì ë³´ì¡°í</a></li>
 								<li class="dropdown-submenu">
 									<a class="dropdown-item" href="#">Blog Single</a>
 								</li>

@@ -213,7 +213,6 @@ table{
 	<form name="memberForm" method="post">
 	<input type="hidden" name="mem_division" value="0"> 
 		<table width="100%" border="0" cellpadding="0" cellspacing="0">
-			
 			<tr>				
 				<td class="fieldName" width="100px" height="25">아이디</td>
 				<td>

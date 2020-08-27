@@ -115,23 +115,13 @@ public class JoinController {
 		return andView;
 	}
 
-	@RequestMapping("memberView")
-	public ModelMap memberView(String mem_id, Map<String, String> params, ModelMap modelMap) throws Exception {
-		params.put("mem_id", mem_id);
-
-		MemberVO memberInfo = this.service.memberInfo(params);
-
-		modelMap.addAttribute("memberInfo", memberInfo);
-
-		return modelMap;
-	}
-
 	@RequestMapping("logout")
-	public String logout(HttpSession session) throws Exception {
+	public ModelAndView logout(HttpSession session, ModelAndView andView) throws Exception {
 		session.invalidate();
-		String message = this.accessor.getMessage("success.common.logout", Locale.KOREA);
-		message = URLEncoder.encode(message, "UTF-8");
-		return "redirect:/user/join/loginForm.do?message=" + message;
+		andView.addObject("json", "로그아웃 되었습니다.");
+		andView.setViewName("jsonConvertView");
+		
+		return andView;
 	}
 
 	@RequestMapping(value = "freeboardloginCheck", method = RequestMethod.POST)

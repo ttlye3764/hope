@@ -47,7 +47,7 @@ $(function(){
 			},
 			success : function(result) {
 				//{ flag : true | false}
-				$(location).attr('href','${pageContext.request.contextPath}/user/freeboard/freeboardForm.do');
+				$(location).attr('href','${pageContext.request.contextPath}/user/main/mainForm.do');
 			}
 		});
 	});
