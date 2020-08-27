@@ -100,10 +100,8 @@ public class MemberController {
 	public String insertMember(MemberVO memberInfo, @RequestBody String totalparams,
 			RedirectAttributes redirectAttributes) throws Exception {
 
-		// String message =
-		// this.accessor.getMessage("cop.regist.msg.confiem",Locale.KOREA);
-		// message = URLEncoder.encode(message, "UTF-8");
-		// return "redirect:/user/join/loginForm.do?message="+ message;
+		this.service.insertMember(memberInfo);
+		
 		redirectAttributes.addFlashAttribute("message", "회원가입이 완료되었습니다");
 		return "redirect:/user/join/loginForm.do";
 	}

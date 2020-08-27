@@ -27,7 +27,15 @@ $(function(){
 	$('#mem_bir1').val(mem_birth[0]);
 	$('#mem_bir2').val(mem_birth[1]);
 	$('#mem_bir3').val(mem_day[0]);
+
+	var mem_email = '${memberInfo.mem_email}';
+	mem_email = mem_email.split("@");
+	alert(mem_email[0]);
+
+	$('input[name=mem_mail1]').val(mem_email[0]);
+	$('select[name=mem_mail2]').val(mem_email[1]);
 });
+
 function pwcheck(){
 	var pw = $('#pass').val();
 	var pw2 = $('#pass2').val();
@@ -107,10 +115,20 @@ function pwcheck(){
 			<td>휴대폰번호</td>                                                
 			<td><input type='text' name='mem_hp' value='${memberInfo.mem_hp }'></td>                    
 		</tr>                                                             
-		<tr>                                                              
-			<td>이메일</td>                                                  
-			<td><input type='text' name='mem_mail' value='${memberInfo.mem_email }'/></td>                
-		</tr>                                                             
+		<tr>
+				<td class="fieldName" width="100px" height="25">이메일</td>
+				<td><input type="hidden" name="mem_email" value='${memberInfo.mem_email}'/> <input type="text"
+					name="mem_mail1" value="" /> @ <select name="mem_mail2">
+						<option value="naver.com">naver.com</option>
+						<option value="daum.net">daum.net</option>
+						<option value="hanmail.net">hanmail.net</option>
+						<option value="nate.com">nate.com</option>
+						<option value="gmail.com">gmail.com</option>
+				</select> <a href="javascript:mailSending();">[인증번호 전송]</a><br>
+				<input type="text" name="mail_num">
+				<input type="button" name="mail_btn" onClick="mailCheck()" class="btn" value="[인증번호 확인]"></a>
+				</td>
+			</tr>                                                             
 		<tr>                                                              
 			<td colspan='2'>                                              
 				<input type='submit' id="fix" value='수정' />                      
