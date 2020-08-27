@@ -3,31 +3,15 @@ package kr.or.ddit.knowledge.controller;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import kr.or.ddit.fileitem.service.IFileItemService;
-import kr.or.ddit.iqStatistics.service.IIQstatisticsService;
 import kr.or.ddit.knowledge.service.IKnowledgeService;
 import kr.or.ddit.utiles.CryptoGenerator;
-import kr.or.ddit.utiles.RolePaginationUtil;
-import kr.or.ddit.vo.FileItemVO;
-import kr.or.ddit.vo.IQstatisticsVO;
 import kr.or.ddit.vo.KnowledgeVO;
 
-import org.apache.ibatis.annotations.Param;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -39,8 +23,6 @@ public class KnowledgeControllerUser {
 	private ObjectMapper mapper;
 	@Autowired
 	private IKnowledgeService knowledgeService;
-	@Autowired
-	private IIQstatisticsService iqService;
 
 	// 문제리스트
 	@RequestMapping("knowledgeList")
@@ -68,11 +50,6 @@ public class KnowledgeControllerUser {
 	
 	}
 
-	@RequestMapping("insertIq")
-	public void insertIq(IQstatisticsVO iqInfo) throws Exception {
-		this.iqService.insertIq(iqInfo);
-	}
-	
 	@RequestMapping("chart")
 	public void chart() {
 	}

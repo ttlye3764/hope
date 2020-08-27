@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="healthImage">
+
+	<resultMap id="healthResultMap" type="healthImageVO">
+		<id property="healthImage_no" column="healthImage_no" />
+		<result property="healthImage_title" column="healthImage_title" />
+		<result property="healthImage_content" column="healthImage_content" />
+		<result property="mem_no" column="mem_no" />
+		<collection property="items" column="file_healthImage_no" select="healthFile.healthFileList" ofType="healthFileVO" javaType="java.util.List"></collection>
+	</resultMap>
+
+	<sql id="selectAll">
+		SELECT *
+		FROM HEALTHIMAGE
+	</sql>
+
+	<select id="healthImageList" resultType="healthImageVO"
+		parameterType="map" resultMap="healthResultMap">
+		SELECT B.*
+		FROM(SELECT ROWNUM RNUM, A.*
+		FROM (
+		<include refid="selectAll" />
+		ORDER BY healthImage_no)A) B
+		ORDER BY B.RNUM
+	</select>
+
+	<select id="healthImageInfo" parameterType="map"
+		resultMap="healthResultMap">
+		<include refid="selectAll" />
+		WHERE healthImage_no = #{healthImage_no}
+	</select>
+
+	<select id="fileSequence" resultType="String">
+		SELECT HEALTHIMAGE_SEQ.CURRVAL FROM DUAL
+	</select>
+
+	<insert id="InsertHealth" parameterType="healthImageVO">
+		INSERT INTO KNOWLEDGE(healthImage_no
+		,healthImage_title
+		,healthImage_content
+		,healthImage_age
+		,healthImage_diet
+		,healthImage_tiem
+		,MEM_NO
+		)
+		VALUES(healthimage_SEQ.NEXTVAL
+		,#{healthImage_title}
+		,#{healthImage_content}
+		,#{healthImage_age}
+		,#{healthImage_diet}
+		,#{healthImage_tiem}
+		,1
+		)
+	</insert>
+
+	<delete id="deleteHealth" parameterType="String">
+		DELETE
+		FROM HEALTHIMAGE
+		WHERE HEALTHIMAGE_NO = #{healthImage_no}
+	</delete>
+
+	<update id="updateHealth" parameterType="healthImageVO">
+		UPDATE KNOWLEDGE
+		SET healthImage_title = #{healthImage_title}
+		,healthImage_content = #{healthImage_content}
+		,healthImage_age = #{healthImage_age}
+		,healthImage_diet = #{healthImage_diet}
+		,healthImage_tiem = #{healthImage_tiem}
+		WHERE healthImage_no = #{healthImage_no}
+	</update>
+
+</mapper>

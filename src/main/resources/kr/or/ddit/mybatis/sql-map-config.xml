@@ -29,7 +29,8 @@
 		<!-- 수아 -->
 		<typeAlias alias="knowVO" type="kr.or.ddit.vo.KnowledgeVO" />
 		<typeAlias alias="fileitemVO" type="kr.or.ddit.vo.FileItemVO"/>
-		<typeAlias alias="iqVO" type="kr.or.ddit.vo.IQstatisticsVO"/>
+		<typeAlias alias="healthFileVO" type="kr.or.ddit.vo.HealthFileVO"/>
+		<typeAlias alias="healthImageVO" type="kr.or.ddit.vo.HealthImageVO"/>
 		
 	</typeAliases>
 
@@ -52,7 +53,8 @@
 	<!-- 수아 -->
 		<mapper resource="kr/or/ddit/mybatis/knowledge.xml" />
 		<mapper resource="kr/or/ddit/mybatis/fileitem.xml" />
-		<mapper resource="kr/or/ddit/mybatis/iqStatistics.xml" />
+		<mapper resource="kr/or/ddit/mybatis/healthFile.xml" />
+		<mapper resource="kr/or/ddit/mybatis/healthImage.xml" />
 	
 	</mappers>
 </configuration>
