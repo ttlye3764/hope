@@ -356,6 +356,10 @@
 											<input type="button" name="hp_btn" onClick="search_pw_modal()" class="btn" value="비밀번호찾기">
 										</div>
 										<div class="col-6 col-md-4 text-right"><button class="btn btn-dark" id="loginBtn">로그인</button></div>
+										<div id="naver_id_login" style="text-align: center">
+										<a href="${url}"> <img width="223"
+											src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
+									</div>
 									</div>
 								</div>
 							</div>
