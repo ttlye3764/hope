@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.or.ddit.member.dao.IMemberDAO;
 import kr.or.ddit.member.dao.IMemberDAOImpl;
 import kr.or.ddit.schedule.dao.IScheduleDAO;
+import kr.or.ddit.vo.BusVO;
 import kr.or.ddit.vo.MemberVO;
 import kr.or.ddit.vo.ScheduleVO;
 
@@ -53,6 +54,17 @@ public class IScheduleServiceImpl implements IScheduleService {
 	public ScheduleVO scheduleInfo(int s_no) throws Exception {
 		return dao.scheduleInfo(s_no);
 		
+	}
+
+	@Override
+	public void registBus(BusVO busInfo) throws Exception {
+		dao.registBus(busInfo);
+		
+	}
+
+	@Override
+	public List<BusVO> bisList(String mem_no) throws Exception {
+		return dao.bisList(mem_no);
 	}
 
    /*@Transactional(propagation=Propagation.REQUIRED, readOnly=true)

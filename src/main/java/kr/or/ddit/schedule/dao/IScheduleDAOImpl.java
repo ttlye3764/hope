@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 
+import kr.or.ddit.vo.BusVO;
 import kr.or.ddit.vo.MemberVO;
 import kr.or.ddit.vo.ScheduleVO;
 
@@ -56,6 +57,16 @@ public class IScheduleDAOImpl implements IScheduleDAO {
 	@Override
 	public ScheduleVO scheduleInfo(int s_no) throws Exception {
 		return client.selectOne("schedule.scheduleInfo",s_no);
+	}
+
+	@Override
+	public void registBus(BusVO busInfo) throws Exception {
+		client.insert("schedule.busInfo",busInfo);
+	}
+
+	@Override
+	public List<BusVO> bisList(String mem_no) throws Exception {
+		return client.selectList("schedule.bisList",mem_no);
 	}
    
    
