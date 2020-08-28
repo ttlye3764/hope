@@ -248,9 +248,11 @@ function LogOut(){
 						</li>
 						<!-- Menu item 4 Portfolio-->
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="portfolioMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Portfolio</a>
+							<a class="nav-link dropdown-toggle" href="#" id="portfolioMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Schedule</a>
 							<ul class="dropdown-menu" aria-labelledby="portfolioMenu">
-								<li> <a class="dropdown-item" href="portfolio-grid-column-3.html">Portfolio Column 3</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/schedule.do">scheduleList</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/dday.do">dday</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/bis.do">bis</a> </li>
 								<li> <a class="dropdown-item" href="portfolio-grid-column-4.html">Portfolio Column 4</a> </li>
 								<li> <a class="dropdown-item" href="portfolio-grid-column-5.html">Portfolio Column 5</a> </li>
 								<li> <a class="dropdown-item" href="portfolio-grid-column-6.html">Portfolio Column 6</a> </li>

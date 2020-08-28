@@ -245,7 +245,7 @@ public class MedicalController {
 		String pillResult = pillInfo.pillAPI(pname, cname); //json으로 옴
 		return pillResult;
 	}
-	
+
 
 
 

@@ -27,12 +27,37 @@
          
    </insert>
    
+	<insert id="busInfo" parameterType="busVO">
+      INSERT 
+         INTO BUS
+            (
+              bus_no,
+              mem_no,
+              city_code,
+              bus_index)
+         VALUES
+             (    
+               #{bus_no},   
+               #{mem_no},
+               #{city_code},
+               bus_seq.nextval
+               )
+         
+   </insert>
+   
    
    
    <select id="scheduleList" resultType="scheduleVO" parameterType="String">
       SELECT *
       FROM SCHEDULE
       WHERE MEM_NO = #{mem_no}
+   </select>
+   
+   <select id="bisList" resultType="busVO" parameterType="String">
+      SELECT *
+      FROM BUS
+      WHERE MEM_NO = #{mem_no}
+      ORDER BY TO_NUMBER(BUS_INDEX) DESC
    </select>
    
    <select id="scheduleInfo" resultType="scheduleVO" parameterType="Integer">

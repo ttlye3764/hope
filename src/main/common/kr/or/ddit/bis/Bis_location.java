@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class Bis_location {
     public static void main(String[] args) throws IOException {
-        
+  
     }
     public static String location(String a,String b) throws Exception{
     	StringBuilder urlBuilder = new StringBuilder("http://openapi.tago.go.kr/openapi/service/BusLcInfoInqireService/getRouteAcctoBusLcList"); /*URL*/
@@ -45,4 +45,11 @@ public class Bis_location {
         
         return xmlJSONObjString;
     }
+    
+
+
+
+    
+    
+
 }

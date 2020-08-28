@@ -44,6 +44,9 @@
 	height : 40px;
 	width : 110px;
 }
+.di{
+	width : 200px;
+}
 
 </style>
 	
@@ -388,7 +391,7 @@
             <div class="modal-body">
                <h5>아이디찾기</h5><br>
 
-               <form name="searchUserId"   class="pl-3 pr-3">
+               <form name="searchUserId" class="pl-3 pr-3">
                   <div class="form-group">
                      	이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름 <input type="text" id="mem_name" name="mem_name" >
                   </div>

@@ -12,10 +12,47 @@
 <script type='text/javascript' src='http://code.jquery.com/jquery-latest.js'></script>
 <script type="text/javascript">
 $(function(){
+	$('form[name=myPage]').submit(function(){
+			var userpass = '${memberInfo.mem_pass}';
+			var inputpass = $('#pass').val();
+
+			if(userpass == inputpass){}
+			else{
+				alert('비밀번호가 일치하지 않습니다.');
+				return false;
+			}
+			
+			$(this).attr('action','${pageContext.request.contextPath}/user/member/updateMemberInfo.do');
+
+			var mem_birth = $('input[name=mem_bir1]').val() + '-'
+							+ $('input[name=mem_bir2]').val() + '-'
+							+ $('input[name=mem_bir3]').val();
+			$('input[name=mem_birth]').val(mem_birth);
+
+			var mem_hp = $('select[name=mem_hp1]').val() + '-'
+							+ $('input[name=mem_hp2]').val() + '-'
+							+ $('input[name=mem_hp3]').val();
+			$('input[name=mem_hp]').val(mem_hp);
+
+			var mem_email = $('input[name=mem_mail1]').val()
+							+ '@' + $('select[name=mem_mail2]').val();
+			$('input[name=mem_email]').val(mem_email);
+
+			var mem_zip = $('input[name=mem_zip1]').val() + '-'
+							+ $('input[name=mem_zip2]').val();
+			$('input[name=mem_zip]').val(mem_zip);
+
+			return true;
+	});	
+	
+	var id = '${memberInfo.mem_id}';
 	var social = '${memberInfo.mem_join_addr}';
 	if(social=='n'){
 		alert('소셜 로그인 사용자는 이용할 수 없습니다.');
 		window.history.back();
+	}else if(id==''){
+		alert('로그인 후 이용해주세요.');
+		$(location).attr('href','${pageContext.request.contextPath}/user/main/mainForm.do');
 	}
 	
 	$('input[value=탈퇴]').click(function(){
@@ -47,58 +84,6 @@ $(function(){
 	$('select[name=mem_hp1]').val(mem_hp[0]);
 	$('input[name=mem_hp2]').val(mem_hp[1]);
 	$('input[name=mem_hp3]').val(mem_hp[2]);
-
-	var flag = 1;
-	$('form[name=myPage]').submit(
-			function() {
-				$.ajax({
-					type : 'POST',
-					url : '${pageContext.request.contextPath}/user/member/passCheck.do',
-					dataType : 'JSON',
-					data : {
-						mem_pass : $('#pass').val()
-					},
-					error : function(result){
-						if(result.json == '0'){
-							alert('비밀번호가 일치하지 않습니다.');
-							flag = 0;
-						}
-					},
-					success : function(result) {
-						if(result.json == '0'){
-							alert('비밀번호가 일치하지 않습니다.');
-							flag = 0;
-						}
-					}
-				});
-
-				if(flag==0){
-					alert('hi!');
-					return false;
-				}else {
-					$(this).attr('action','${pageContext.request.contextPath}/user/member/updateMemberInfo.do');
-
-					var mem_birth = $('input[name=mem_bir1]').val() + '-'
-										+ $('input[name=mem_bir2]').val() + '-'
-										+ $('input[name=mem_bir3]').val();
-								$('input[name=mem_birth]').val(mem_birth);
-
-					var mem_hp = $('select[name=mem_hp1]').val() + '-'
-										+ $('input[name=mem_hp2]').val() + '-'
-										+ $('input[name=mem_hp3]').val();
-								$('input[name=mem_hp]').val(mem_hp);
-
-					var mem_email = $('input[name=mem_mail1]').val()
-										+ '@' + $('select[name=mem_mail2]').val();
-								$('input[name=mem_email]').val(mem_email);
-
-					var mem_zip = $('input[name=mem_zip1]').val() + '-'
-										+ $('input[name=mem_zip2]').val();
-								$('input[name=mem_zip]').val(mem_zip);
-
-					return true;
-				}
-			});	
 });
 
 function pwcheck(){
