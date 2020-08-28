@@ -36,206 +36,199 @@ public class MedicalController {
 	private IMedicalFileService medicalFileService;
 	@Autowired
 	private IPillService pillService;
-	
-	
-	
-	
+
 	@Autowired
 	private MessageSourceAccessor accessor;
-	
+
 	@Autowired
 	private ObjectMapper mapper;
-	
-	
-	
+
 	@RequestMapping("viewJson")
-	public ModelAndView medicalList(String mem_no) throws Exception{	
-		
-		List<MypillVO> medicalList  = this.medicalService.medicalList(mem_no);
+	public ModelAndView medicalList(String mem_no) throws Exception {
+
+		List<MypillVO> medicalList = this.medicalService.medicalList(mem_no);
 		ModelAndView andView = new ModelAndView();
-		andView.addObject("json", medicalList);		
+		andView.addObject("json", medicalList);
 		andView.setViewName("jsonConvertView");
 		return andView;
 	}
+
 	@RequestMapping("viewJson2")
-	public ModelAndView medicalInfo(String pill_no) throws Exception{	
-		
-		MypillVO medicalInfo  = this.medicalService.medicalInfo(pill_no);
+	public ModelAndView medicalInfo(String pill_no) throws Exception {
+
+		MypillVO medicalInfo = this.medicalService.medicalInfo(pill_no);
 		MypillFileVO medicalImg = this.medicalFileService.selectImg(pill_no);
 		ModelAndView andView = new ModelAndView();
-		andView.addObject("json", medicalInfo);		
-		andView.addObject("json2", medicalImg);		
+		andView.addObject("json", medicalInfo);
+		andView.addObject("json2", medicalImg);
 		andView.setViewName("jsonConvertView");
 		return andView;
 	}
+
 	@RequestMapping("searchPillJson")
-	public ModelAndView searchPillJson(@RequestParam(value="shapes[]",required=false) List<String> shapes, 
-											@RequestParam(value="colors[]",required=false) List<String> colors,
-											@RequestParam(value="lines[]",required=false) List<String> lines, String pname, String cname
-											,HttpServletRequest request, String currentPage, RolePaginationUtil_pill pagination) throws Exception{	
-		
+	public ModelAndView searchPillJson(@RequestParam(value = "shapes[]", required = false) List<String> shapes,
+			@RequestParam(value = "colors[]", required = false) List<String> colors,
+			@RequestParam(value = "lines[]", required = false) List<String> lines, String pname, String cname,
+			HttpServletRequest request, String currentPage, RolePaginationUtil_pill pagination) throws Exception {
+
 		System.out.println(shapes);
 		System.out.println(colors);
 		System.out.println(lines);
 		System.out.println(pname);
 		System.out.println(cname);
-		
-		HashMap map = new HashMap<>();		
-		if(pname != null) {
+
+		HashMap map = new HashMap<>();
+		if (pname != null) {
 			map.put("pname", pname);
 		}
-		if(cname != null) {
+		if (cname != null) {
 			map.put("cname", cname);
 		}
-		if(shapes != null) {
-			map.put("shapes", shapes);	
+		if (shapes != null) {
+			map.put("shapes", shapes);
 		}
-		if(colors != null) {
+		if (colors != null) {
 			map.put("colors", colors);
 		}
-		if(lines != null) {
+		if (lines != null) {
 			map.put("lines", lines);
 		}
-		
-		//페이징처리
+
+		// 페이징처리
 		if (currentPage == null) {
 			currentPage = "1";
 		}
-		
+
 		String totalCount = pillService.totalCount(map);
-		
+
 		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount));
-		
+
 		String startCount = String.valueOf(pagination.getStartCount());
-		
+
 		String endCount = String.valueOf(pagination.getEndCount());
-		
+
 		map.put("startCount", startCount);
 		map.put("endCount", endCount);
-		
+
 		List<PillVO> list = pillService.pillList(map);
-		
+
 		ModelAndView andView = new ModelAndView();
-		andView.addObject("pagination",pagination.getPagingHtmls());
-		andView.addObject("list",list);
+		andView.addObject("pagination", pagination.getPagingHtmls());
+		andView.addObject("list", list);
 		andView.setViewName("jsonConvertView");
 		return andView;
 	}
-	
-	
-	
+
 	// http://localhost/SpringToddler/user/medical/medicalForm.do
 	@RequestMapping("medicalForm")
 	public void medicalForm() {
 	}
-	
+
 	@RequestMapping("medicalList")
 	public void medicalList() {
 	}
 
-	
 	@RequestMapping("insertMedicalInfo")
-	public ModelAndView insertMedicalInfo(ModelAndView andView,
-			MypillVO mypillInfo , @RequestParam("files") MultipartFile[] items)
-			throws Exception {
-		
-		  andView.setViewName("user/medical/medicalList");
-		  String start = mypillInfo.getPill_start().concat("T"); 
-		  start = start.concat(mypillInfo.getPill_alerttime());
-		  mypillInfo.setPill_start(start);
-		  
-		  String end = mypillInfo.getPill_end().concat("T");
-		  end = end.concat(mypillInfo.getPill_alerttime());
-		  mypillInfo.setPill_end(end);
-		  
-		  mypillInfo.setMem_no("1");
-		  
-		  this.medicalService.insertMedicalInfo(mypillInfo, items);
-		return andView;
-	}
-	
-	@RequestMapping("updateMedicalInfo")
-	public ModelAndView updateMedicalInfo(ModelAndView andView,
-			MypillVO mypillInfo , @RequestParam("files") MultipartFile[] items)
-					throws Exception {
-		
+	public ModelAndView insertMedicalInfo(ModelAndView andView, MypillVO mypillInfo,
+			@RequestParam("files") MultipartFile[] items) throws Exception {
+
 		andView.setViewName("user/medical/medicalList");
-		String start = mypillInfo.getPill_start().concat("T"); 
+		String start = mypillInfo.getPill_start().concat("T");
 		start = start.concat(mypillInfo.getPill_alerttime());
 		mypillInfo.setPill_start(start);
-		
+
 		String end = mypillInfo.getPill_end().concat("T");
 		end = end.concat(mypillInfo.getPill_alerttime());
 		mypillInfo.setPill_end(end);
-		
+
 		mypillInfo.setMem_no("1");
-		
-		
-		
+
+		this.medicalService.insertMedicalInfo(mypillInfo, items);
+		return andView;
+	}
+
+	@RequestMapping("updateMedicalInfo")
+	public ModelAndView updateMedicalInfo(ModelAndView andView, MypillVO mypillInfo,
+			@RequestParam("files") MultipartFile[] items) throws Exception {
+
+		andView.setViewName("user/medical/medicalList");
+		String start = mypillInfo.getPill_start().concat("T");
+		start = start.concat(mypillInfo.getPill_alerttime());
+		mypillInfo.setPill_start(start);
+
+		String end = mypillInfo.getPill_end().concat("T");
+		end = end.concat(mypillInfo.getPill_alerttime());
+		mypillInfo.setPill_end(end);
+
+		mypillInfo.setMem_no("1");
+
 		this.medicalService.updateMedicalInfo(mypillInfo, items);
 		return andView;
 	}
-	
+
 	@RequestMapping("deleteMedicalInfo")
 	public ModelAndView deleteMedicalInfo(ModelAndView andView, String pill_no) throws Exception {
 		andView.setViewName("user/medical/medicalList");
 		medicalService.deleteMedicalInfo(pill_no);
 		return andView;
 	}
-	
+
 	@RequestMapping("medicalMap")
-	public void medicalMap() {}
-	
+	public void medicalMap() {
+	}
+
 	@RequestMapping("searchPill")
-	public ModelAndView searchPill(HttpServletRequest request, String currentPage, HashMap params, RolePaginationUtil_pill pagination)  throws Exception{
+	public ModelAndView searchPill(HttpServletRequest request, String currentPage, HashMap params,
+			RolePaginationUtil_pill pagination) throws Exception {
 		if (currentPage == null) {
 			currentPage = "1";
 		}
-		
+
 		String totalCount = pillService.totalCount(params);
-		
+
 		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount));
-		
+
 		String startCount = String.valueOf(pagination.getStartCount());
-		
+
 		String endCount = String.valueOf(pagination.getEndCount());
-		
+
 		params.put("startCount", startCount);
 		params.put("endCount", endCount);
-		
-		
+
 		List<PillVO> list = pillService.pillList(params);
-		
+
 		ModelAndView andView = new ModelAndView();
-		andView.addObject("pillList", list);	
-		andView.addObject("pagination",pagination.getPagingHtmls());
+		andView.addObject("pillList", list);
+		andView.addObject("pagination", pagination.getPagingHtmls());
 		andView.setViewName("user/medical/searchPill");
 		return andView;
 	}
+
 	@RequestMapping("paginationPill")
-	public ModelAndView paginationPill(HttpServletRequest request, String currentPage, HashMap params, RolePaginationUtil_pill pagination)  throws Exception{
+	public ModelAndView paginationPill(HttpServletRequest request, String currentPage, HashMap params,
+			RolePaginationUtil_pill pagination) throws Exception {
 		if (currentPage == null) {
 			currentPage = "1";
 		}
-		
+
 		String totalCount = pillService.totalCount(params);
-		
+
 		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount));
-		
+
 		String startCount = String.valueOf(pagination.getStartCount());
-		
+
 		String endCount = String.valueOf(pagination.getEndCount());
-		
+
 		params.put("startCount", startCount);
 		params.put("endCount", endCount);
-		
+
 		List<PillVO> list = pillService.pillList(params);
-		
+
 		ModelAndView andView = new ModelAndView();
-		andView.addObject("pillList", list);	
-		andView.addObject("pagination",pagination.getPagingHtmls());
+		andView.addObject("pillList", list);
+		andView.addObject("pagination", pagination.getPagingHtmls());
 		andView.setViewName("user/medical/searchPill");
 		return andView;
 	}
-	
+
 }

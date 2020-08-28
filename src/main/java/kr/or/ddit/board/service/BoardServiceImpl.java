@@ -15,6 +15,7 @@ import kr.or.ddit.utiles.AttachFileMapper;
 import kr.or.ddit.vo.BoardVO;
 import kr.or.ddit.vo.Board_FileVO;
 import kr.or.ddit.vo.FileItemVO;
+import kr.or.ddit.vo.MypillFileVO;
 
 @Service("boardService")
 public class BoardServiceImpl implements IBoardService{
@@ -37,12 +38,20 @@ public class BoardServiceImpl implements IBoardService{
 	}
 	// 등록
 	@Override            
-	public int insertBoard(BoardVO boardVO ) throws Exception {
+	public int insertBoard(BoardVO boardVO, MultipartFile[] items) throws Exception {
 		
 //		String fileSequence = boardDao.fileSequence();
 //		List<FileItemVO> boardfileList = AttachFileMapper.mapper(items, fileSequence);
 		
 //		board_fileDao.insertBoard_File(boardfileList);
+		
+		String bd_no = String.valueOf(boardDao.insertBoard(boardVO));
+		  
+		System.out.println(bd_no);
+		
+	    List<Board_FileVO> fileItemList =AttachFileMapper.boardMapper(items, bd_no);
+	      
+	     //medicalFileDAO.insertFileItem(fileItemList);
 		
 		return boardDao.insertBoard(boardVO);
 		
@@ -67,5 +76,10 @@ public class BoardServiceImpl implements IBoardService{
 		return boardDao.totalCount(params);
 	}
 	
+	@Override
+	public void countHit(String bd_no) throws Exception {
+		boardDao.countHit(bd_no);
+		
+	}
 
 }

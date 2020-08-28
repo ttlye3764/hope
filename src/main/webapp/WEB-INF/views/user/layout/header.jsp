@@ -203,7 +203,7 @@ function LogOut(){
 							<a class="nav-link dropdown-toggle" href="#" id="blogMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Medical</a>
 							<ul class="dropdown-menu" aria-labelledby="blogMenu">
 								<li class="dropdown-submenu">
-									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalList.do">ë³µì©ë´ì­</a>
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalList.do">ë³µì©ë´ì</a>
 								</li>
 								<li class="dropdown-submenu">
 									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalMap.do">ë´ ì£¼ì ë³ì/ì½êµ­ ìì¹ë³´ê¸°</a>
@@ -312,6 +312,22 @@ function LogOut(){
 								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/#faqs">FAQs</a> </li>
 								<li class="dropdown-divider"></li>
 								<li> <a class="dropdown-item" href="http://support.webestica.com/" target="_blank">Support</a> </li>
+							</ul>
+						</li>
+						<!-- Menu item 8 board-->
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="blogMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">board</a>
+							<ul class="dropdown-menu" aria-labelledby="blogMenu">
+								<li class="dropdown-submenu">
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=2">notice</a>
+								</li>
+								<li class="dropdown-submenu">
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=3">aaa</a>
+								</li>
+								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=1">freeboard</a></li>
+								<li class="dropdown-submenu">
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=4">QNA board</a>
+								</li>
 							</ul>
 						</li>
 						<!-- Menu item 7 chat-->

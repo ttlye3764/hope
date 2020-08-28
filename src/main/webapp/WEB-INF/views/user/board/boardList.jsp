@@ -64,7 +64,7 @@ Banner innerpage -->
 		<div class="container">
 			<div class="row all-text-white">
 				<div class="col-md-12 align-self-center">
-					<h1 class="innerpage-title">게시판</h1>
+					<h1 class="innerpage-title">${board_division_name} </h1>
 					<h6 class="subtitle">We transform your perception into an excellent website</h6>
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
@@ -113,7 +113,7 @@ Banner innerpage -->
 							<!-- 등록버튼 시작-->
 							<div class="nav-item border-0 d-none d-lg-inline-block align-self-center">
 								<a
-									href="${pageContext.request.contextPath}/user/board/boardForm.do"
+									href="${pageContext.request.contextPath}/user/board/boardForm.do?bd_division=${bd_division }" 
 									class=" btn btn-sm btn-grad text-white mb-0"
 									style="float: right">등록</a>
 							</div>
