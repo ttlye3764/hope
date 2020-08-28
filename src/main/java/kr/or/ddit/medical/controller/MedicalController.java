@@ -232,7 +232,7 @@ public class MedicalController {
 		andView.setViewName("user/medical/searchPill");
 		return andView;
 	}
-<<<<<<< HEAD
+
 	
 	@ResponseBody
 	@RequestMapping(value="pillAPI",produces="text/plain;charset=UTF-8")
@@ -246,7 +246,7 @@ public class MedicalController {
 		return pillResult;
 	}
 	
-=======
 
->>>>>>> branch 'master' of https://github.com/ttlye3764/hope
+
+
 }

@@ -290,9 +290,10 @@ button.sort.desc .caret { display:inline-block; }
             type    : 'post',
             dataType: 'json',
             data : {'pi_no':pi_no },
-            success : function(result) {            	 	
-                console.log(result.response.body.items.item);
-                
+            success : function(result) { 
+            	$("#pill-modal").modal("show");
+            	           	 	
+                console.log(result.response.body.items.item);                
            	 	console.log(result.response.body.items.item.ITEM_NAME);		//제품명
            	 	console.log(result.response.body.items.item.MAIN_ITEM_INGR);		//성분
            	 	console.log(result.response.body.items.item.MATERIAL_NAME);		//함량
@@ -308,14 +309,24 @@ button.sort.desc .caret { display:inline-block; }
            	 	console.log(result.response.body.items.item.INDUTY_TYPE);  //업종구분
            	 	console.log(result.response.body.items.item.EE_DOC_DATA.DOC.title);  //효능 효과
            	 	console.log(result.response.body.items.item.EE_DOC_DATA.DOC.SECTION.ARTICLE.PARAGRAPH.content);  //내용
-           	 	console.log(result.response.body.items.item.NB_DOC_DATA.DOC.title);  //사용상의주의사항
-           	 	console.log(result.response.body.items.item.NB_DOC_DATA.DOC.SECTION.ARTICLE);  // 내용(배열)
-           	 	console.log(result.response.body.items.item.UD_DOC_DATA.DOC.title);  //용법용량
-           	 	console.log(result.response.body.items.item.UD_DOC_DATA.DOC.SECTION.ARTICLE.PARAGRAPH);  // 내용(배열)
 
+
+           	 	//데이터 가공해야함!!
+           	 	console.log(result.response.body.items.item.NB_DOC_DATA.DOC.title);  //사용상의주의사항
+           		$.each(result.response.body.items.item.NB_DOC_DATA.DOC.SECTION.ARTICLE,function(i,v){
+					alert(v.title);
+					$.each(v.PARAGRAPH,function(index,value){
+						console.log(value.content);
+						alert(value.content);
+					});
+        	 	}); 
            	 	
-           	 	
-           	 
+           	 	console.log(result.response.body.items.item.UD_DOC_DATA.DOC.title);  //용법용량
+					alert(result.response.body.items.item.UD_DOC_DATA.DOC.title);
+           		$.each(result.response.body.items.item.UD_DOC_DATA.DOC.SECTION.ARTICLE.PARAGRAPH,function(i,v){
+               		console.log(v.content);
+					alert(v.content);
+     	 		}); 
  			}
  		});
 
@@ -555,6 +566,63 @@ button.sort.desc .caret { display:inline-block; }
 
 
 
+<div id="pill-modal" class="modal fade" tabindex="-1" role="dialog"
+		aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" style="width:580px;">
+				<div class="modal-body">
+					<div class="container" style="">
+			<div class="row">
+				<div class="col-12 col-lg-8 mx-auto">
+					<div class="title text-center">
+						<h2>약 복용정보</h2>
+					</div>
+				</div>
+			</div>
+			<div class="row ">
+				<!-- contact form -->
+				<div class="col-md-6">
+					<div class="h-100" style="width:500px;">
+						<form class="contact-form" id="contact-form" name="contactform" action="${pageContext.request.contextPath}/user/medical/updateMedicalInfo.do" method="post" enctype="multipart/form-data">			
+							<!-- Start main form -->							
+								<div class="" style="width:50%; float: left;">
+									<!-- name -->
+										<input id="pill_no" name="pill_no" type="hidden" class="form-control">
+										<label>제품 명 </label><input id="pill_name" name="pill_name" type="text" class="form-control" placeholder="제품명">
+										<label>복용일수 </label><input id="pill_count1_update" name="pill_count1" type="text" class="form-control" disabled>
+										<input id="pill_count_update" name="pill_count" type="hidden" class="form-control">
+										<label>복용시작일</label><input type="date" id="pill_start_update" name="pill_start"  class="form-control">
+										<label>복용종료일</label><input type="date" id="pill_end_update" name="pill_end" class="form-control">
+										<label>알림시간설정</label><input type="time" id="pill_alerttime" name="pill_alerttime" class="form-control">
+								</div>	
+								<div class="" style="width:50%; float: left;">
+									<div></div>
+									<div class="col-md-12 text-center">
+									<input type="file" class="btn btn-outline-primary btn-block" style="margin-top: 30px;" id="files2" name="files">
+									</div>
+									<div style="width: 230px; height: 150px;" >
+									<img id="img2" style="width: 100%; height: 100%; margin-left: 15px; margin-top: 30px;">
+									</div>
+									<div class="col-md-12 text-center"><button class="btn btn-outline-primary btn-block" style="margin-top: 60px;">약 상세보기</button></div>
+									<label style="margin-top: 30px; margin-left: 15px;">달력 표시 색 설정</label><div><input type="color" id="pill_color" name="pill_color" style="margin-left: 15px;"></div>
+								</div>																							
+								<!-- submit button -->
+							
+								<button class="btn btn-outline-grad btn-block" type="submit">수정</button>
+								<button class="btn btn-outline-grad btn-block" id="deleteBTN" type="button">삭제</button>
+							
+							<!-- End main form -->
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
 </body>
 </html>
