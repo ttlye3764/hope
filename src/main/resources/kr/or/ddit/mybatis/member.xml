@@ -78,10 +78,10 @@
 
 
 	<insert id="insertMember" parameterType="map">
-		INSERT INTO MEMBER(MEM_NO,MEM_ID,MEM_PASS,MEM_NAME,MEM_GENDER,MEM_NICKNAME,MEM_BIRTH,MEM_EMAIL,MEM_HP,MEM_ADDR1,MEM_ADDR2,MEM_DIVISION,MEM_ZIP1,MEM_ZIP2)
+		INSERT INTO MEMBER(MEM_NO,MEM_ID,MEM_PASS,MEM_NAME,MEM_GENDER,MEM_NICKNAME,MEM_BIRTH,MEM_EMAIL,MEM_HP,MEM_ADDR1,MEM_ADDR2,MEM_DIVISION,MEM_ZIP1,MEM_ZIP2,MEM_JOIN_ADDR)
 		values(
 		member_seq.nextval,#{mem_id},#{mem_pass},#{mem_name},#{mem_gender},#{mem_nickname},
-		#{mem_birth},#{mem_email},#{mem_hp},#{mem_addr1},#{mem_addr2},#{mem_division},#{mem_zip1},#{mem_zip2}
+		#{mem_birth},#{mem_email},#{mem_hp},#{mem_addr1},#{mem_addr2},#{mem_division},#{mem_zip1},#{mem_zip2},#{mem_join_addr}
 		)
 	</insert>
 	

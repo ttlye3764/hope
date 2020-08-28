@@ -12,6 +12,12 @@
 <script type='text/javascript' src='http://code.jquery.com/jquery-latest.js'></script>
 <script type="text/javascript">
 $(function(){
+	var social = '${memberInfo.mem_join_addr}';
+	if(social=='n'){
+		alert('소셜 로그인 사용자는 이용할 수 없습니다.');
+		window.history.back();
+	}
+	
 	$('input[value=탈퇴]').click(function(){
 		$(location).attr('href', '${pageContext.request.contextPath}/user/member/deleteMemberInfo/${memberInfo.mem_id}.do');
 	});
