@@ -41,23 +41,80 @@ table{
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
+$(function(){
+	$('form[name=memberForm]').submit(function() {
+		var idcheck = $('#idlabel').text();
+		var emailcheck = $('#emaillabel').text();
+		var smscheck = $('#hplabel').text();
+			if(idcheck == '이미 존재하는 아이디입니다.' || idcheck == '형식에 맞지 않는 아이디입니다.'){
+				alert('아이디를 확인해주세요.');
+				return false;
+			}
+			if(emailcheck == ''){
+				alert('이메일 인증을 완료해주세요.');
+				return false;
+			}
+			if(smscheck == ''){
+				alert('휴대폰 인증을 완료해주세요.');
+				return false;
+			}
+		
+			$(this).attr('action','${pageContext.request.contextPath}/user/member/insertMemberInfo.do');
+
+			var mem_birth = $('input[name=mem_bir1]').val() + '-'
+								+ $('input[name=mem_bir2]').val() + '-'
+								+ $('input[name=mem_bir3]').val();
+						$('input[name=mem_birth]').val(mem_birth);
+
+			var mem_hp = $('select[name=mem_hp1]').val() + '-'
+								+ $('input[name=mem_hp2]').val() + '-'
+								+ $('input[name=mem_hp3]').val();
+						$('input[name=mem_hp]').val(mem_hp);
+
+			var mem_email = $('input[name=mem_mail1]').val()
+								+ '@' + $('select[name=mem_mail2]').val();
+						$('input[name=mem_email]').val(mem_email);
+
+			var mem_zip = $('input[name=mem_zip1]').val() + '-'
+								+ $('input[name=mem_zip2]').val();
+						$('input[name=mem_zip]').val(mem_zip);
+
+				return true;
+			});
+		$('#btn3').click(function() {
+			$(location).attr('href','${pageContext.request.contextPath}/user/join/loginForm.do');
+		});
+	});
+
 	function idCheck() {
+		var id = $('#mem_id').val();
+// 		if(id==''){
+// 			alert('아이디를 입력해주세요');
+// 			return false;
+// 		}
+		if(id.length < 5){
+			$('#idlabel').text("형식에 맞지 않는 아이디입니다.");
+			$('#idlabel').css('color', 'red');
+			return false;
+		}
 		$.ajax({
 			type : 'POST',
 			url : '${pageContext.request.contextPath}/user/member/idCheck.do',
 			dataType : 'JSON',
 			data : {
-				mem_id : $('#mem_id1').val()
+				mem_id : $('#mem_id').val()
 			},
 			error : function(result) {
 				alert(result.json);
 			},
 			success : function(result) {
-				alert(result.json);
+				$('#idlabel').text(result.json);
 				if(result.json == '사용가능한 아이디입니다.'){
-					var mem_id = $('#mem_id1').val();
-					$('#mem_id').val(mem_id);
-					$('#mem_id1').attr("disabled", true)
+					$('#idlabel').css('color', 'blue');
+					var mem_id = $('#mem_id').val();
+					idcheck = 1;
+				}else{
+					$('#idlabel').css('color', 'red');
 				}
 			}
 		});
@@ -73,7 +130,7 @@ table{
 		hp1 = $('input[name=mem_hp3]').val();
 
 		if(hp=='' || hp1==''){
-			alert('올바른 휴대전화 번호를 입력해주세요.');
+			alert('휴대전화 번호를 입력해주세요.');
 			return false;
 		}
 		
@@ -101,10 +158,6 @@ table{
 		$('input[name=mem_hp]').val(mem_hp);
 
 		hp_num = $('input[name=hp_num]').val();
-		if(hp_num==''){
-			alert('인증번호를 입력해주세요.');
-			return false;
-		}
 		
 		$.ajax({
 			type : 'POST',
@@ -114,18 +167,11 @@ table{
 				mem_hp : $('input[name=mem_hp]').val(),
 				hp_num : $('input[name=hp_num]').val()
 			},
-			error : function(result) {
-				alert(result.json);
-			},
 			success : function(result) {
 				//{ flag : true | false}
-				alert(result.json);
 				if(result.json == '인증이 완료되었습니다.'){
-					$('select[name=mem_hp1]').attr("disabled", true)
-					$('input[name=mem_hp2]').attr("disabled", true)
-					$('input[name=mem_hp3]').attr("disabled", true)
-					$('input[name=hp_num]').attr("hidden",true)
-					$('input[name=hp_btn]').attr("hidden",true)
+					$('#hplabel').text(result.json);
+					$('input[name=hp_num]').attr("disabled",true);
 				}
 			}
 		});
@@ -161,12 +207,6 @@ table{
 	function mailCheck() {
 		var mem_email = $('input[name=mem_mail1]').val() + '@' + $('select[name=mem_mail2]').val();		
 		$('input[name=mem_email]').val(mem_email);
-
-		var email = $('input[name=mem_mail1]').val();
-		if(email==''){
-			alert('인증번호를 입력해주세요.');
-			return false;
-		}
 		
 		$.ajax({
 			type : 'POST',
@@ -176,16 +216,11 @@ table{
 				mem_email : $('input[name=mem_email]').val(),
 				mail_num : $('input[name=mail_num]').val()
 			},
-			error : function(result) {
-				alert(result.json);							
-			},
 			success : function(result) {
 				//{ flag : true | false}
-				alert(result.json);
 				if(result.json == '인증이 완료되었습니다.'){
-					$('input[name=mem_mail1]').attr("disabled", true)
-					$('input[name=mail_num]').attr("hidden",true)
-					$('input[name=mail_btn]').attr("hidden",true)
+					$('#emaillabel').text(result.json);
+					$('input[name=mail_num]').attr("disabled",true);
 				}
 			}
 		});
@@ -208,23 +243,33 @@ table{
 			$('#passchecklb').css('color', 'red');
 		}
 	}
+	
+	function smschange(){
+		$('#hplabel').text("");
+		$('input[name=hp_num]').removeAttr("disabled");
+	}
+	function mailchange(){
+		$('#emaillabel').text("");
+		$('input[name=mail_num]').removeAttr("disabled");
+	}
 </script>
 <body>
 	<form name="memberForm" method="post">
 	<input type="hidden" name="mem_division" value="0"> 
-		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
+			<tr>
+				<td colspan="2"><h2>회원가입</h2></td>
+			</tr>
 			<tr>				
 				<td class="fieldName" width="100px" height="25">아이디</td>
 				<td>
-				<input type="hidden" id="mem_id" name="mem_id" />
-				<input type="text" id="mem_id1" value="">&nbsp;&nbsp;<b><a
-						href="javascript:idCheck();" >[ID 중복검사]</a></b>
+				<input type="text" id="mem_id" name="mem_id" onkeyup="idCheck()"/>&nbsp;<label id="idlabel"></label>
 				</td>
 			</tr>
 			<tr>
 				<td class="fieldName" width="100px" height="25">비밀번호</td>
 				<td><input type="password" name="mem_pass" id="pass" value="" onkeyup="pwcheck()"/> 
-				<label class="btn">8 ~ 20 자리 영문자 및 숫자 사용</label></td>
+				<label>8 ~ 20 자리 영문자 및 숫자 사용</label></td>
 			</tr>
 			
 			<tr>
@@ -260,33 +305,33 @@ table{
 			
 			<tr>
 				<td class="fieldName" width="100px" height="25">이메일</td>
-				<td><input type="hidden" name="mem_email" /> <input type="text"
-					name="mem_mail1" value="" /> @ <select name="mem_mail2">
+				<td><input type="hidden" name="mem_email"  /> <input type="text"
+					name="mem_mail1" onkeydown="mailchange()" /> @ <select name="mem_mail2" onchange="mailchange()">
 						<option value="naver.com">naver.com</option>
 						<option value="daum.net">daum.net</option>
 						<option value="hanmail.net">hanmail.net</option>
 						<option value="nate.com">nate.com</option>
 						<option value="gmail.com">gmail.com</option>
 				</select> <a href="javascript:mailSending();">[인증번호 전송]</a><br>
-				<input type="text" name="mail_num">
-				<input type="button" name="mail_btn" onClick="mailCheck()" class="btn" value="[인증번호 확인]"></a>
+				<input type="text" name="mail_num" onkeyup="mailCheck()">
+				<label id="emaillabel"></label>
 				</td>
 			</tr>
 			
 			<tr>
 				<td class="fieldName" width="100px" height="25">휴대전화</td>
-				<td><input type="hidden" name="mem_hp" /> <select
-					name="mem_hp1">
+				<td><input type="hidden" name="mem_hp"/> <select
+					name="mem_hp1" onchange="smschange()">
 						<option value="010">010</option>
 						<option value="011">011</option>
 						<option value="016">016</option>
 						<option value="017">017</option>
 						<option value="019">019</option>
-				</select> - <input type="text" name="mem_hp2" size="4" value="" /> - 
-				<input	type="text" name="mem_hp3" size="4" value="" />
+				</select> - <input type="text" name="mem_hp2" size="4" onchange="smschange()"/> - 
+				<input	type="text" name="mem_hp3" size="4" onchange="smschange()" />
 				<a href="javascript:sendsms();">[인증번호 전송]</a><br>
-				<input type="text" name="hp_num"/>
-				<input type="button" name="hp_btn" onClick="checksms()" class="btn" value="[인증번호 확인]">
+				<input type="text" name="hp_num" onkeyup="checksms()"/>
+				<label id="hplabel"></label>
 				</td>
 			</tr>
 			
@@ -318,38 +363,4 @@ table{
 		</table>
 	</form>
 </body>
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript">
-	$(function() {
-		$('form[name=memberForm]').submit(
-			function() {
-				$(this).attr('action','${pageContext.request.contextPath}/user/member/insertMemberInfo.do');
-
-				var mem_birth = $('input[name=mem_bir1]').val() + '-'
-									+ $('input[name=mem_bir2]').val() + '-'
-									+ $('input[name=mem_bir3]').val();
-							$('input[name=mem_birth]').val(mem_birth);
-
-				var mem_hp = $('select[name=mem_hp1]').val() + '-'
-									+ $('input[name=mem_hp2]').val() + '-'
-									+ $('input[name=mem_hp3]').val();
-							$('input[name=mem_hp]').val(mem_hp);
-
-				var mem_email = $('input[name=mem_mail1]').val()
-									+ '@' + $('select[name=mem_mail2]').val();
-							$('input[name=mem_email]').val(mem_email);
-
-				var mem_zip = $('input[name=mem_zip1]').val() + '-'
-									+ $('input[name=mem_zip2]').val();
-							$('input[name=mem_zip]').val(mem_zip);
-
-					return true;
-				});
-
-		$('#btn3').click(function() {
-			$(location).attr('href','${pageContext.request.contextPath}/user/join/loginForm.do');
-		});
-	});
-</script>
 </html>

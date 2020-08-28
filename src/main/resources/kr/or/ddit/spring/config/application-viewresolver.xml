@@ -20,7 +20,7 @@
 
 	<bean name="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
 		p:prefix="/WEB-INF/views/"
-		p:suffix=".jsp"
+		p:suffix=".do"
 		p:order="3">
 	</bean>
 	<!--

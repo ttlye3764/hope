@@ -266,23 +266,80 @@ button.sort.desc .caret { display:inline-block; }
 					  var mark = fmark.concat("/");
 					  mark = mark.concat(bmark);
 					  newTr.append('<td class="" style="height: 60px; text-align:center;">'+mark+'</td>');						 
-					  newTr.append('<td class="" style="height: 60px; text-align:center;">'+item.pi_shape_name+'</td>');
-					  newTr.append('<td class="" style="height: 60px; text-align:center;">'+item.pi_x_size+'</td>');
-					  newTr.append('<td class="" style="height: 60px; text-align:center;">'+item.pi_y_size+'</td>');
-					  newTr.append('<td class="" style="height: 60px; text-align:center;">'+item.pi_z_size+'</td>');
-					  newTr.append('<td class="" style="height: 60px; text-align:center;">'+item.pi_name+'</td>');
-					  newTr.append('<td class="" style="height: 60px; text-align:center;">'+item.pi_b_name+'</td>');
+					  newTr.append('<td class="" style="height: 60px;">'+item.pi_shape_name+'</td>');
+					  newTr.append('<td class="" style="height: 60px;">'+item.pi_x_size+'</td>');
+					  newTr.append('<td class="" style="height: 60px;">'+item.pi_y_size+'</td>');
+					  newTr.append('<td class="" style="height: 60px;">'+item.pi_z_size+'</td>');
+					  newTr.append('<td class="" style="height: 60px;">'+item.pi_name+'</td>');
+					  newTr.append('<td class="" style="height: 60px;">'+item.pi_b_name+'</td>');
 
 					  $('.list').append(newTr);
 				  })
+				  $('.list tr').on('click', function(){
+						var pi_no = $(this).find('input').val();
+						getpillAPI(pi_no);
+				  });
  			}
  		});
 	}
 
+	function getpillAPI(pi_no){
+
+		$.ajax({
+            url     : '${pageContext.request.contextPath}/user/medical/pillAPI.do',
+            type    : 'post',
+            dataType: 'json',
+            data : {'pi_no':pi_no },
+            success : function(result) {            	 	
+                console.log(result.response.body.items.item);
+                
+           	 	console.log(result.response.body.items.item.ITEM_NAME);		//제품명
+           	 	console.log(result.response.body.items.item.MAIN_ITEM_INGR);		//성분
+           	 	console.log(result.response.body.items.item.MATERIAL_NAME);		//함량
+           	 	console.log(result.response.body.items.item.INGR_NAME);		//첨가제
+           	 	console.log(result.response.body.items.item.ETC_OTC_CODE);		//전문/일반
+           	 	console.log(result.response.body.items.item.ENTP_NAME);  //제조/수입사
+           	 	console.log(result.response.body.items.item.CHART);  //성상
+           	 	console.log(result.response.body.items.item.ITEM_PERMIT_DATE);  //허가일
+           	 	console.log(result.response.body.items.item.PACK_UNIT);  //포장단위
+           	 	console.log(result.response.body.items.item.STORAGE_METHOD);  //저장방법
+           	 	console.log(result.response.body.items.item.VALID_TERM);  //유효기간
+           	 	console.log(result.response.body.items.item.MAKE_MATERIAL_FLAG);  //완제/원료구분
+           	 	console.log(result.response.body.items.item.INDUTY_TYPE);  //업종구분
+           	 	console.log(result.response.body.items.item.EE_DOC_DATA.DOC.title);  //효능 효과
+           	 	console.log(result.response.body.items.item.EE_DOC_DATA.DOC.SECTION.ARTICLE.PARAGRAPH.content);  //내용
+           	 	console.log(result.response.body.items.item.NB_DOC_DATA.DOC.title);  //사용상의주의사항
+           	 	console.log(result.response.body.items.item.NB_DOC_DATA.DOC.SECTION.ARTICLE);  // 내용(배열)
+           	 	console.log(result.response.body.items.item.UD_DOC_DATA.DOC.title);  //용법용량
+           	 	console.log(result.response.body.items.item.UD_DOC_DATA.DOC.SECTION.ARTICLE.PARAGRAPH);  // 내용(배열)
+
+           	 	
+           	 	
+           	 
+ 			}
+ 		});
+
+
+
+
+
+
+	}
+	
+		
 
 	$(function() {
 
-		
+		$('.list tr').on('click', function(){
+			var pi_no = $(this).find('input').val();
+			getpillAPI(pi_no);
+		 });
+		/* $('.list tr').click(function(){
+			var pi_no = $(this).find('input').val();
+			alert(pi_no);
+			//$(location).attr('href', '${pageContext.request.contextPath}/user/freeboard/freeboardView.do?bo_no=' + bo_no + '&rnum=' + rnum);
+		}); */
+
 		
 		
 		$('.idty li').click(function() {
@@ -325,8 +382,6 @@ button.sort.desc .caret { display:inline-block; }
 	            	  $('.list').empty();
 	            	  $('#paginationDIV').empty();
 	            	  $('#paginationDIV').append(result.pagination);
-		    		  console.log(result.list);
-		    		  console.log(result.pagination);
 			
 					  $.each(result.list, function(index, item){						 
 						  var newTr = $('<tr data-timestamp="1509426000" data-status="3" style="height: 60px;"></tr>');			 
@@ -342,20 +397,20 @@ button.sort.desc .caret { display:inline-block; }
 						  }
 						  var mark = fmark.concat("/");
 						  mark = mark.concat(bmark);
-						  newTr.append('<td class="" style="height: 60px; text-align:center;">'+mark+'</td>');						 
-						  newTr.append('<td class="" style="height: 60px; text-align:center;">'+item.pi_shape_name+'</td>');
-						  newTr.append('<td class="" style="height: 60px; text-align:center;">'+item.pi_x_size+'</td>');
-						  newTr.append('<td class="" style="height: 60px; text-align:center;">'+item.pi_y_size+'</td>');
-						  newTr.append('<td class="" style="height: 60px; text-align:center;">'+item.pi_z_size+'</td>');
-						  newTr.append('<td class="" style="height: 60px; text-align:center;">'+item.pi_name+'</td>');
-						  newTr.append('<td class="" style="height: 60px; text-align:center;">'+item.pi_b_name+'</td>');
+						  newTr.append('<td class="" style="height: 60px; text-align:center; ">'+mark+'</td>');						 
+						  newTr.append('<td class="" style="height: 60px;">'+item.pi_shape_name+'</td>');
+						  newTr.append('<td class="" style="height: 60px;">'+item.pi_x_size+'</td>');
+						  newTr.append('<td class="" style="height: 60px;">'+item.pi_y_size+'</td>');
+						  newTr.append('<td class="" style="height: 60px;">'+item.pi_z_size+'</td>');
+						  newTr.append('<td class="" style="height: 60px;">'+item.pi_name+'</td>');
+						  newTr.append('<td class="" style="height: 60px;">'+item.pi_b_name+'</td>');
 
 						  $('.list').append(newTr);
-						  
-
-						  
-						  
 					  })
+					  $('.list tr').on('click', function(){
+							var pi_no = $(this).find('input').val();
+							getpillAPI(pi_no);
+					  });
 	  			}
 	  		});
 		})
@@ -363,25 +418,6 @@ button.sort.desc .caret { display:inline-block; }
 </script>
 </head>
 <body>
-<!-- =======================
-	Banner innerpage -->
-	<div class="innerpage-banner left bg-overlay-dark-7" style="background:url(/assets/images/bg/03.jpg) no-repeat; margin-bottom:50px; text-align:center; background-size:cover; background-position: center center;">
-		<div class="container">
-			<div class="row all-text-white">
-				<div class="col-md-12 align-self-center">
-					<h1 class="innerpage-title">알약 정보 페이지</h1>
-					<nav aria-label="breadcrumb">
-						<ol class="breadcrumb">
-							<li class="breadcrumb-item active"><a href="index.html"><i class="ti-home"></i> Home</a></li>
-							<li class="breadcrumb-item">Kakao Maps</li>
-						</ol>
-					</nav>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- =======================
-	Banner innerpage -->
 
 <div>
 	<form id="searchForm" style="margin-bottom: 50px;">
@@ -498,10 +534,10 @@ button.sort.desc .caret { display:inline-block; }
 					<tbody class="list">
 						
 						<c:forEach items="${pillList }" var="pillInfo">
-						<tr data-timestamp="1509426000" data-status="3" style="height: 60px;">
+						<tr data-timestamp="1509426000" id="tr_id" data-status="3" style="height: 60px;">
 							<input type="hidden" value="${pillInfo.pi_no}"/>
 							<td class="" style="height: 60px;"><img alt="" src="${pillInfo.pi_bigimg}" style="width: 96px; height: 71px;"></td>
-							<td class="" style="height: 60px;">${pillInfo.pi_f_mark}</td>
+							<td class="" style="height: 60px; text-align:center;">${pillInfo.pi_f_mark}</td>
 							<td class="" style="height: 60px;">${pillInfo.pi_shape_name}</td>
 							<td class="" style="height: 60px;">${pillInfo.pi_x_size}</td>
 							<td class="" style="height: 60px;">${pillInfo.pi_y_size}</td>
@@ -510,7 +546,6 @@ button.sort.desc .caret { display:inline-block; }
 							<td class="" style="height: 60px;">${pillInfo.pi_b_name}</td>
 						</tr>
 						</c:forEach>	
-														
 					</tbody>
 				</table>
 			</div>

@@ -17,12 +17,14 @@ public interface IBoardService {
 		//테이블 삭제
 		public void deleteBoard(String bd_no) throws Exception;
 		//테이블 등록                                                             
-		public int insertBoard(BoardVO boardVO ) throws Exception;
+		public int insertBoard(BoardVO boardVO, MultipartFile[] items) throws Exception;
 		
 		public BoardVO boardInfo(Map<String, String> params) throws Exception;
 		
 		public String totalCount(Map<String, String> params) throws Exception;
 		
+		// 조회수 증가
+		public void countHit(String bd_no) throws Exception;
 
 	
 	

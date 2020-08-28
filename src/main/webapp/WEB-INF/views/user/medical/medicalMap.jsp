@@ -35,25 +35,6 @@
 
 
 
-	<!-- =======================
-	Banner innerpage -->
-	<div class="innerpage-banner left bg-overlay-dark-7" style="background:url(/assets/images/bg/03.jpg) no-repeat;  margin-bottom:50px;  text-align:center; background-size:cover; background-position: center center;">
-		<div class="container">
-			<div class="row all-text-white">
-				<div class="col-md-12 align-self-center">
-					<h1 class="innerpage-title">내 주변 병원 / 약국 위치 보기</h1>
-					<nav aria-label="breadcrumb">
-						<ol class="breadcrumb">
-							<li class="breadcrumb-item active"><a href="index.html"><i class="ti-home"></i> Home</a></li>
-							<li class="breadcrumb-item">Kakao Maps</li>
-						</ol>
-					</nav>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- =======================
-	Banner innerpage -->
 
 	
 	<!-- =======================

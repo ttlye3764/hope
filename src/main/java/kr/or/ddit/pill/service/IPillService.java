@@ -19,6 +19,8 @@ public interface IPillService {
 
 	public List<PillVO> pillList(HashMap params) throws Exception;
 
+	public PillVO pillInfo(String pi_no)  throws Exception;
+
 
 
 }

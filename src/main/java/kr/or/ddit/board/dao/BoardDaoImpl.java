@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
-
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.ddit.vo.BoardVO;
 
@@ -61,6 +61,12 @@ public class BoardDaoImpl implements IBoardDao{
 //	public String fileSequence() throws Exception {
 //		return client.selectOne("board.fileSequence");
 //	}
+	
+	@Override
+	public void countHit(String bd_no) throws Exception {
+		client.update("board.countHit", bd_no);
+		
+	}
 
 
 

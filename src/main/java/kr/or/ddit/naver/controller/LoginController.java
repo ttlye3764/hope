@@ -1,17 +1,22 @@
 package kr.or.ddit.naver.controller;
 
-import java.io.IOException;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import com.github.scribejava.core.model.OAuth2AccessToken;
+
+import kr.or.ddit.member.service.IMemberService;
+import kr.or.ddit.vo.MemberVO;
 
 /**
  * Handles requests for the application home page.
@@ -21,6 +26,9 @@ public class LoginController {
 	/* NaverLoginBO */
 	private NaverLoginBO naverLoginBO;
 	private String apiResult = null;
+	
+	@Autowired
+	private IMemberService service;
 
 	@Autowired
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
@@ -29,7 +37,7 @@ public class LoginController {
 
 //로그인 첫 화면 요청 메소드
 	@RequestMapping(value = "/user/join/loginForm", method = { RequestMethod.GET, RequestMethod.POST })
-	public String login(Model model, HttpSession session) {
+	public String login(Model model, HttpSession session)throws Exception {
 		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
 //https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
@@ -41,9 +49,9 @@ public class LoginController {
 	}
 
 //네이버 로그인 성공시 callback호출 메소드
-	@RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST })
-	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
-			throws IOException, ParseException {
+	@RequestMapping(value = "/user/main/callback", method = { RequestMethod.GET, RequestMethod.POST })
+	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session, Map<String, String> params)
+			throws Exception {
 		System.out.println("여기는 callback");
 		OAuth2AccessToken oauthToken;
 		oauthToken = naverLoginBO.getAccessToken(session, code, state);
@@ -63,27 +71,42 @@ public class LoginController {
 		JSONObject response_obj = (JSONObject) jsonObj.get("response");
 //response의 nickname값 파싱
 		String nickname = (String) response_obj.get("nickname");
-		System.out.println(nickname);
+		
+		String gender = (String) response_obj.get("gender");
 		
 		String name = (String) response_obj.get("name");
-		System.out.println(name);
 		
 		String email = (String) response_obj.get("email");
-		System.out.println(email);
 		
 		String [] id = email.split("@");
-		System.out.println(id[0]);
 //4.파싱 닉네임 세션으로 저장
-		session.setAttribute("sessionId", nickname); // 세션 생성
+		params.put("mem_id", id[0]);
+		params.put("mem_join_addr", "n");
+		MemberVO memberInfo1 = this.service.memberInfo(params);
+		MemberVO memberInfo = new MemberVO();
+		
+		memberInfo.setMem_id(id[0]);
+		memberInfo.setMem_nickname(nickname);
+		memberInfo.setMem_name(name);
+		memberInfo.setMem_email(email);
+		memberInfo.setMem_addr1("주소1");
+		memberInfo.setMem_addr2("주소2");
+		memberInfo.setMem_birth("2020-01-01");
+		memberInfo.setMem_division("0");
+		memberInfo.setMem_gender(gender);
+		memberInfo.setMem_hp("010-0000-0000");
+		memberInfo.setMem_join_addr("n");
+		memberInfo.setMem_pass("a");
+		memberInfo.setMem_zip1("123");
+		memberInfo.setMem_zip2("123");
+		
+		if(memberInfo1 == null) {
+			this.service.insertMember(memberInfo);
+		}
+		session.setAttribute("LOGIN_MEMBERINFO", memberInfo); // 세션 생성
+		
 		model.addAttribute("result", apiResult);
-		return "login";
-	}
-
-//로그아웃
-	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
-	public String logout(HttpSession session) throws IOException {
-		System.out.println("여기는 logout");
-		session.invalidate();
-		return "redirect:index.jsp";
+		return "redirect:mainForm";
 	}
 }
+

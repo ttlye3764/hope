@@ -1,3 +1,5 @@
+<%@ page language="JAVA" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!doctype html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
@@ -108,7 +110,7 @@ function LogOut(){
 								<a class="dropdown-item" href="${pageContext.request.contextPath}/user/join/loginForm.do" role="button" aria-haspopup="true" aria-expanded="false"><i class="ti-user mr-2"></i>Log In </a>
 							</c:if>
 							<c:if test="${LOGIN_MEMBERINFO!=null}">
-							    <a class="dropdown-toggle" href="#" role="button" id="dropdownAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ti-user mr-2"></i>${LOGIN_MEMBERINFO.mem_name } </a>
+							    <a class="dropdown-toggle" href="#" role="button" id="dropdownAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ti-user mr-2"></i>${LOGIN_MEMBERINFO.mem_nickname } </a>
 							</c:if>
 						  <div class="dropdown-menu mt-2 shadow" aria-labelledby="dropdownAccount">
 						  	<a class="dropdown-item" href="${pageContext.request.contextPath}/user/member/myPage.do">My Page</a>
@@ -203,12 +205,16 @@ function LogOut(){
 							<a class="nav-link dropdown-toggle" href="#" id="blogMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Medical</a>
 							<ul class="dropdown-menu" aria-labelledby="blogMenu">
 								<li class="dropdown-submenu">
-									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalList.do">ë³µì©ë´ì­</a>
+<<<<<<< HEAD
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalList.do">복용관리</a>
+=======
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalList.do">ë³µì©ë´ì</a>
+>>>>>>> branch 'master' of https://github.com/ttlye3764/hope
 								</li>
 								<li class="dropdown-submenu">
-									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalMap.do">ë´ ì£¼ì ë³ì/ì½êµ­ ìì¹ë³´ê¸°</a>
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalMap.do">내 주변 병원/약국 위치보기</a>
 								</li>
-								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/searchPill.do">ìì½ì ë³´ì¡°í</a></li>
+								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/searchPill.do">알약 정보보기</a></li>
 								<li class="dropdown-submenu">
 									<a class="dropdown-item" href="#">Blog Single</a>
 								</li>
@@ -314,6 +320,22 @@ function LogOut(){
 								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/#faqs">FAQs</a> </li>
 								<li class="dropdown-divider"></li>
 								<li> <a class="dropdown-item" href="http://support.webestica.com/" target="_blank">Support</a> </li>
+							</ul>
+						</li>
+						<!-- Menu item 8 board-->
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="blogMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">board</a>
+							<ul class="dropdown-menu" aria-labelledby="blogMenu">
+								<li class="dropdown-submenu">
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=2">notice</a>
+								</li>
+								<li class="dropdown-submenu">
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=3">aaa</a>
+								</li>
+								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=1">freeboard</a></li>
+								<li class="dropdown-submenu">
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=4">QNA board</a>
+								</li>
 							</ul>
 						</li>
 						<!-- Menu item 7 chat-->
