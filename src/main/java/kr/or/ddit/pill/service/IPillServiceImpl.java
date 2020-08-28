@@ -41,6 +41,11 @@ public class IPillServiceImpl implements IPillService {
 	public List<PillVO> pillList(HashMap params) throws Exception {
 		return dao.pillList(params);
 	}
+
+	@Override
+	public PillVO pillInfo(String pi_no) throws Exception {
+		return dao.pillInfo(pi_no);
+	}
 	
 
 
