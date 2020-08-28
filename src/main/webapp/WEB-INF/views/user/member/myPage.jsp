@@ -12,10 +12,14 @@
 <script type='text/javascript' src='http://code.jquery.com/jquery-latest.js'></script>
 <script type="text/javascript">
 $(function(){
+	var id = '${memberInfo.mem_id}';
 	var social = '${memberInfo.mem_join_addr}';
 	if(social=='n'){
 		alert('소셜 로그인 사용자는 이용할 수 없습니다.');
 		window.history.back();
+	}else if(id==''){
+		alert('로그인 후 이용해주세요.');
+		$(location).attr('href','${pageContext.request.contextPath}/user/main/mainForm.do');
 	}
 	
 	$('input[value=탈퇴]').click(function(){
