@@ -44,6 +44,9 @@
 			AND (MEM_PASS = #{mem_pass}
 			OR MEM_TEMPORARY_PASS = #{mem_pass})
 		</if>
+		<if test="mem_join_addr != null">
+			AND MEM_JOIN_ADDR IS NOT NULL
+		</if>
 	</select>
 
 <!-- 	<select id="memberList" resultClass="memberVO" parameterClass="map"> -->
@@ -57,20 +60,21 @@
 <!-- 		WHERE MEM_ID = #mem_id# -->
 <!-- 	</update> -->
 
-<!-- 	<update id="updateMember" parameterClass="memberVO"> -->
-<!-- 		UPDATE MEMBER -->
-<!-- 		SET -->
-<!-- 		MEM_PASS = #mem_pass# -->
-<!-- 		,MEM_ADDR1 = #mem_addr1# -->
-<!-- 		,MEM_ADDR2 = #mem_addr2# -->
-<!-- 		,MEM_HOMETEL = #mem_hometel# -->
-
-<!-- 		,MEM_HP = #mem_hp# -->
-<!-- 		,MEM_MAIL = #mem_mail# -->
-<!-- 		,MEM_JOB = #mem_job# -->
-<!-- 		,MEM_LIKE = #mem_like# -->
-<!-- 		WHERE mem_id = #mem_id# -->
-<!-- 	</update> -->
+	<update id="updateMember" parameterType="memberVO">
+		UPDATE MEMBER
+		SET
+		MEM_PASS = #{mem_pass}
+		,MEM_GENDER = #{mem_gender}
+		,MEM_BIRTH = #{mem_birth}
+		,MEM_NICKNAME = #{mem_nickname}
+		,MEM_ZIP1 = #{mem_zip1}
+		,MEM_ZIP2 = #{mem_zip2}
+		,MEM_ADDR1 = #{mem_addr1}
+		,MEM_ADDR2 = #{mem_addr2}
+		,MEM_HP = #{mem_hp}
+		,MEM_EMAIL = #{mem_email}
+		WHERE MEM_ID = #{mem_id}
+	</update>
 
 
 	<insert id="insertMember" parameterType="map">
@@ -138,7 +142,6 @@
 		SET MEM_PASS = #{mem_pass}
 		WHERE MEM_ID = #{mem_id}
 	</update>
-
 </mapper>    
 
 

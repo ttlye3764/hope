@@ -221,7 +221,6 @@ table{
 						href="javascript:idCheck();" >[ID 중복검사]</a></b>
 				</td>
 			</tr>
-			
 			<tr>
 				<td class="fieldName" width="100px" height="25">비밀번호</td>
 				<td><input type="password" name="mem_pass" id="pass" value="" onkeyup="pwcheck()"/> 

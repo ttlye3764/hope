@@ -1,409 +1,124 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@page import="kr.or.ddit.bis.Bis"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
 <html>
 <head>
-	<meta charset="utf-8"/>
-	<title>Kakao Áöµµ ½ÃÀÛÇÏ±â</title>
-<style>	
-	.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'µ¸¿ò',sans-serif;font-size:12px;}
-.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
-.map_wrap {position:relative;width:100%;height:500px;}
-#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
-.bg_white {background:#fff;}
-#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
-#menu_wrap .option{text-align: center;}
-#menu_wrap .option p {margin:10px 0;}  
-#menu_wrap .option button {margin-left:5px;}
-#placesList li {list-style: none;}
-#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
-#placesList .item span {display: block;margin-top:4px;}
-#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
-#placesList .item .info{padding:10px 0 10px 55px;}
-#placesList .info .gray {color:#8a8a8a;}
-#placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
-#placesList .info .tel {color:#009900;}
-#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
-#placesList .item .marker_1 {background-position: 0 -10px;}
-#placesList .item .marker_2 {background-position: 0 -56px;}
-#placesList .item .marker_3 {background-position: 0 -102px}
-#placesList .item .marker_4 {background-position: 0 -148px;}
-#placesList .item .marker_5 {background-position: 0 -194px;}
-#placesList .item .marker_6 {background-position: 0 -240px;}
-#placesList .item .marker_7 {background-position: 0 -286px;}
-#placesList .item .marker_8 {background-position: 0 -332px;}
-#placesList .item .marker_9 {background-position: 0 -378px;}
-#placesList .item .marker_10 {background-position: 0 -423px;}
-#placesList .item .marker_11 {background-position: 0 -470px;}
-#placesList .item .marker_12 {background-position: 0 -516px;}
-#placesList .item .marker_13 {background-position: 0 -562px;}
-#placesList .item .marker_14 {background-position: 0 -608px;}
-#placesList .item .marker_15 {background-position: 0 -654px;}
-#pagination {margin:10px auto;text-align: center;}
-#pagination a {display:inline-block;margin-right:10px;}
-#pagination .on {font-weight: bold; cursor: default;color:#777;}
-</style>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <title>ë²„ìŠ¤</title>
 </head>
-
-
 <body>
 
-<div id="body" >
-        <div id="searchMenu" class="leftBox">
-            <div id="searchBox" class="leftBox" >
-                <p class="margin0">À§µµ  <input type="text" id="lat" value="36.12354" style="width:150px; height:20px;"></p>
-                <p class="margin0">°æµµ  <input type="text" id="lng" value="128.11828" style="width:150px; height:20px;"></p>
-                <input type="hidden" value="${nodeid }" id="nodeidVal" >
-                <input type="hidden" value="${nodename }" id="nodenameVal">
-                <input type="hidden" value="${lat }" id="latVal">
-                <input type="hidden" value="${lng }" id="lngVal">
-                <a href="#this" id="sc_btn" class="btn" >Ã£±â</a>
-            </div>
-        </div>
-        <div id="resultBox" class="leftBox">
-        </div>
-         
-        <div id="bodyBox">
-            <div id="mapBox" class="mapBox">
-            </div>
-        </div>
-    </div>
-
-<div class="map_wrap">
-    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-
-    <div id="menu_wrap" class="bg_white">
-        <div class="option">
-            <div>
-                <form onsubmit="searchPlaces(); return false;">
-                    Å°¿öµå : <input type="text" value="ÀÌÅÂ¿ø ¸ÀÁı" id="keyword" size="15"> 
-                    <button type="submit">°Ë»öÇÏ±â</button> 
-                </form>
-            </div>
-        </div>
-        <hr>
-        <ul id="placesList"></ul>
-        <div id="pagination"></div>
-    </div>
+<div style=" height: auto; width: 1500px; margin: auto; ">
+<br>
+<br>
+ì§€ì—­ : <input type="text" id="citycode" class="citycode"  name="citycode" >
+ë²„ìŠ¤ ë²ˆí˜¸ : <input type="text" id="routeid" class="routeid" name="routeid" >
+<input type ="button" id="searchbtn" value="ë²„íŠ¼">
 </div>
 
-
-
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=695a00dbf1560fd30746e2be14b3f633&libraries=services"></script>
+<div id="map" style="width:100%;height:700px;"></div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=695a00dbf1560fd30746e2be14b3f633"></script>
 <script>
-// ¸¶Ä¿¸¦ ´ãÀ» ¹è¿­ÀÔ´Ï´Ù
-var markers = [];
+var citycode;
+var routeid;  //ë…¸ì„  ë²ˆí˜¸
+var positions = [];
+var startx;
+var starty;
 
-var mapContainer = document.getElementById('map'), // Áöµµ¸¦ Ç¥½ÃÇÒ div 
-    mapOption = {
-        center: new kakao.maps.LatLng(37.566826, 126.9786567), // ÁöµµÀÇ Áß½ÉÁÂÇ¥
-        level: 3 // ÁöµµÀÇ È®´ë ·¹º§
-    };  
+   $(function(){
+	   var mapContainer = document.getElementById('map'), // ì§€ë„ë¥¼ í‘œì‹œí•  div  
+       mapOption = { 
+           center: new kakao.maps.LatLng(36.40457,127.304968), // ì§€ë„ì˜ ì¤‘ì‹¬ì¢Œí‘œ
+           level: 8 // ì§€ë„ì˜ í™•ëŒ€ ë ˆë²¨
+       };
 
-// Áöµµ¸¦ »ı¼ºÇÕ´Ï´Ù    
-var map = new kakao.maps.Map(mapContainer, mapOption); 
-
-// Àå¼Ò °Ë»ö °´Ã¼¸¦ »ı¼ºÇÕ´Ï´Ù
-var ps = new kakao.maps.services.Places();  
-
-// °Ë»ö °á°ú ¸ñ·ÏÀÌ³ª ¸¶Ä¿¸¦ Å¬¸¯ÇßÀ» ¶§ Àå¼Ò¸íÀ» Ç¥ÃâÇÒ ÀÎÆ÷À©µµ¿ì¸¦ »ı¼ºÇÕ´Ï´Ù
-var infowindow = new kakao.maps.InfoWindow({zIndex:1});
-
-// Å°¿öµå·Î Àå¼Ò¸¦ °Ë»öÇÕ´Ï´Ù
-searchPlaces();
-
-// Å°¿öµå °Ë»öÀ» ¿äÃ»ÇÏ´Â ÇÔ¼öÀÔ´Ï´Ù
-function searchPlaces() {
-
-    var keyword = document.getElementById('keyword').value;
-
-    if (!keyword.replace(/^\s+|\s+$/g, '')) {
-        alert('Å°¿öµå¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä!');
-        return false;
-    }
-
-    // Àå¼Ò°Ë»ö °´Ã¼¸¦ ÅëÇØ Å°¿öµå·Î Àå¼Ò°Ë»öÀ» ¿äÃ»ÇÕ´Ï´Ù
-    ps.keywordSearch( keyword, placesSearchCB); 
-}
-
-// Àå¼Ò°Ë»öÀÌ ¿Ï·áµÆÀ» ¶§ È£ÃâµÇ´Â Äİ¹éÇÔ¼ö ÀÔ´Ï´Ù
-function placesSearchCB(data, status, pagination) {
-    if (status === kakao.maps.services.Status.OK) {
-
-        // Á¤»óÀûÀ¸·Î °Ë»öÀÌ ¿Ï·áµÆÀ¸¸é
-        // °Ë»ö ¸ñ·Ï°ú ¸¶Ä¿¸¦ Ç¥ÃâÇÕ´Ï´Ù
-        displayPlaces(data);
-
-        // ÆäÀÌÁö ¹øÈ£¸¦ Ç¥ÃâÇÕ´Ï´Ù
-        displayPagination(pagination);
-
-    } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
-
-        alert('°Ë»ö °á°ú°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.');
-        return;
-
-    } else if (status === kakao.maps.services.Status.ERROR) {
-
-        alert('°Ë»ö °á°ú Áß ¿À·ù°¡ ¹ß»ıÇß½À´Ï´Ù.');
-        return;
-
-    }
-}
-
-// °Ë»ö °á°ú ¸ñ·Ï°ú ¸¶Ä¿¸¦ Ç¥ÃâÇÏ´Â ÇÔ¼öÀÔ´Ï´Ù
-function displayPlaces(places) {
-
-    var listEl = document.getElementById('placesList'), 
-    menuEl = document.getElementById('menu_wrap'),
-    fragment = document.createDocumentFragment(), 
-    bounds = new kakao.maps.LatLngBounds(), 
-    listStr = '';
-    
-    // °Ë»ö °á°ú ¸ñ·Ï¿¡ Ãß°¡µÈ Ç×¸ñµéÀ» Á¦°ÅÇÕ´Ï´Ù
-    removeAllChildNods(listEl);
-
-    // Áöµµ¿¡ Ç¥½ÃµÇ°í ÀÖ´Â ¸¶Ä¿¸¦ Á¦°ÅÇÕ´Ï´Ù
-    removeMarker();
-    
-    for ( var i=0; i<places.length; i++ ) {
-
-        // ¸¶Ä¿¸¦ »ı¼ºÇÏ°í Áöµµ¿¡ Ç¥½ÃÇÕ´Ï´Ù
-        var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
-            marker = addMarker(placePosition, i), 
-            itemEl = getListItem(i, places[i]); // °Ë»ö °á°ú Ç×¸ñ Element¸¦ »ı¼ºÇÕ´Ï´Ù
-
-        // °Ë»öµÈ Àå¼Ò À§Ä¡¸¦ ±âÁØÀ¸·Î Áöµµ ¹üÀ§¸¦ Àç¼³Á¤ÇÏ±âÀ§ÇØ
-        // LatLngBounds °´Ã¼¿¡ ÁÂÇ¥¸¦ Ãß°¡ÇÕ´Ï´Ù
-        bounds.extend(placePosition);
-
-        // ¸¶Ä¿¿Í °Ë»ö°á°ú Ç×¸ñ¿¡ mouseover ÇßÀ»¶§
-        // ÇØ´ç Àå¼Ò¿¡ ÀÎÆ÷À©µµ¿ì¿¡ Àå¼Ò¸íÀ» Ç¥½ÃÇÕ´Ï´Ù
-        // mouseout ÇßÀ» ¶§´Â ÀÎÆ÷À©µµ¿ì¸¦ ´İ½À´Ï´Ù
-        (function(marker, title) {
-            kakao.maps.event.addListener(marker, 'mouseover', function() {
-                displayInfowindow(marker, title);
-            });
-
-            kakao.maps.event.addListener(marker, 'mouseout', function() {
-                infowindow.close();
-            });
-
-            itemEl.onmouseover =  function () {
-                displayInfowindow(marker, title);
-            };
-
-            itemEl.onmouseout =  function () {
-                infowindow.close();
-            };
-        })(marker, places[i].place_name);
-
-        fragment.appendChild(itemEl);
-    }
-
-    // °Ë»ö°á°ú Ç×¸ñµéÀ» °Ë»ö°á°ú ¸ñ·Ï Elemnet¿¡ Ãß°¡ÇÕ´Ï´Ù
-    listEl.appendChild(fragment);
-    menuEl.scrollTop = 0;
-
-    // °Ë»öµÈ Àå¼Ò À§Ä¡¸¦ ±âÁØÀ¸·Î Áöµµ ¹üÀ§¸¦ Àç¼³Á¤ÇÕ´Ï´Ù
-    map.setBounds(bounds);
-}
-
-// °Ë»ö°á°ú Ç×¸ñÀ» Element·Î ¹İÈ¯ÇÏ´Â ÇÔ¼öÀÔ´Ï´Ù
-function getListItem(index, places) {
-
-    var el = document.createElement('li'),
-    itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
-                '<div class="info">' +
-                '   <h5>' + places.place_name + '</h5>';
-
-    if (places.road_address_name) {
-        itemStr += '    <span>' + places.road_address_name + '</span>' +
-                    '   <span class="jibun gray">' +  places.address_name  + '</span>';
-    } else {
-        itemStr += '    <span>' +  places.address_name  + '</span>'; 
-    }
-                 
-      itemStr += '  <span class="tel">' + places.phone  + '</span>' +
-                '</div>';           
-
-    el.innerHTML = itemStr;
-    el.className = 'item';
-
-    return el;
-}
-
-// ¸¶Ä¿¸¦ »ı¼ºÇÏ°í Áöµµ À§¿¡ ¸¶Ä¿¸¦ Ç¥½ÃÇÏ´Â ÇÔ¼öÀÔ´Ï´Ù
-function addMarker(position, idx, title) {
-    var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // ¸¶Ä¿ ÀÌ¹ÌÁö url, ½ºÇÁ¶óÀÌÆ® ÀÌ¹ÌÁö¸¦ ¾¹´Ï´Ù
-        imageSize = new kakao.maps.Size(36, 37),  // ¸¶Ä¿ ÀÌ¹ÌÁöÀÇ Å©±â
-        imgOptions =  {
-            spriteSize : new kakao.maps.Size(36, 691), // ½ºÇÁ¶óÀÌÆ® ÀÌ¹ÌÁöÀÇ Å©±â
-            spriteOrigin : new kakao.maps.Point(0, (idx*46)+10), // ½ºÇÁ¶óÀÌÆ® ÀÌ¹ÌÁö Áß »ç¿ëÇÒ ¿µ¿ªÀÇ ÁÂ»ó´Ü ÁÂÇ¥
-            offset: new kakao.maps.Point(13, 37) // ¸¶Ä¿ ÁÂÇ¥¿¡ ÀÏÄ¡½ÃÅ³ ÀÌ¹ÌÁö ³»¿¡¼­ÀÇ ÁÂÇ¥
-        },
-        markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
-            marker = new kakao.maps.Marker({
-            position: position, // ¸¶Ä¿ÀÇ À§Ä¡
-            image: markerImage 
-        });
-
-    marker.setMap(map); // Áöµµ À§¿¡ ¸¶Ä¿¸¦ Ç¥ÃâÇÕ´Ï´Ù
-    markers.push(marker);  // ¹è¿­¿¡ »ı¼ºµÈ ¸¶Ä¿¸¦ Ãß°¡ÇÕ´Ï´Ù
-
-    return marker;
-}
-
-// Áöµµ À§¿¡ Ç¥½ÃµÇ°í ÀÖ´Â ¸¶Ä¿¸¦ ¸ğµÎ Á¦°ÅÇÕ´Ï´Ù
-function removeMarker() {
-    for ( var i = 0; i < markers.length; i++ ) {
-        markers[i].setMap(null);
-    }   
-    markers = [];
-}
-
-// °Ë»ö°á°ú ¸ñ·Ï ÇÏ´Ü¿¡ ÆäÀÌÁö¹øÈ£¸¦ Ç¥½Ã´Â ÇÔ¼öÀÔ´Ï´Ù
-function displayPagination(pagination) {
-    var paginationEl = document.getElementById('pagination'),
-        fragment = document.createDocumentFragment(),
-        i; 
-
-    // ±âÁ¸¿¡ Ãß°¡µÈ ÆäÀÌÁö¹øÈ£¸¦ »èÁ¦ÇÕ´Ï´Ù
-    while (paginationEl.hasChildNodes()) {
-        paginationEl.removeChild (paginationEl.lastChild);
-    }
-
-    for (i=1; i<=pagination.last; i++) {
-        var el = document.createElement('a');
-        el.href = "#";
-        el.innerHTML = i;
-
-        if (i===pagination.current) {
-            el.className = 'on';
-        } else {
-            el.onclick = (function(i) {
-                return function() {
-                    pagination.gotoPage(i);
-                }
-            })(i);
-        }
-
-        fragment.appendChild(el);
-    }
-    paginationEl.appendChild(fragment);
-}
-
-// °Ë»ö°á°ú ¸ñ·Ï ¶Ç´Â ¸¶Ä¿¸¦ Å¬¸¯ÇßÀ» ¶§ È£ÃâµÇ´Â ÇÔ¼öÀÔ´Ï´Ù
-// ÀÎÆ÷À©µµ¿ì¿¡ Àå¼Ò¸íÀ» Ç¥½ÃÇÕ´Ï´Ù
-function displayInfowindow(marker, title) {
-    var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
-
-    infowindow.setContent(content);
-    infowindow.open(map, marker);
-}
-
- // °Ë»ö°á°ú ¸ñ·ÏÀÇ ÀÚ½Ä Element¸¦ Á¦°ÅÇÏ´Â ÇÔ¼öÀÔ´Ï´Ù
-function removeAllChildNods(el) {   
-    while (el.hasChildNodes()) {
-        el.removeChild (el.lastChild);
-    }
-}
+   	 var map = new kakao.maps.Map(mapContainer, mapOption); // ì§€ë„ë¥¼ ìƒì„±í•©ë‹ˆë‹¤
+   	 
+	   var res_routeid;   //ë…¸ì„ ID
+      $('#searchbtn').click(function(){
+    	  positions = []; //ì´ˆê¸°í™”
+    	  citycode = $('.citycode').val();
+    	  routeid = $('.routeid').val();
+    	  alert(citycode);
+    	  alert(routeid);
+    	           
+	         $.ajax({
+	                async    : false,
+	                url     : '${pageContext.request.contextPath}/user/schedule/bisSearch.do',
+	                type    : 'post',
+	                data : {'citycode':citycode,'routeid':routeid},
+	                dataType: 'json',
+	                success : function(Result) {                      
+	                   res_routeid = Result.response.body.items.item.routeid;
+	                   console.log(res_routeid);
+	                },
+	                error : function(request,status,error){
+	    				alert(error);
+	    			}
+	           }); //ë²„ìŠ¤ì•„ì´ë”” ì–»ì–´ì˜¤ê¸°(res_routeid)
 
 
+	         $.ajax({
+	        	 async    : false,
+	             url     : '${pageContext.request.contextPath}/user/schedule/bisLocation.do',
+	             type    : 'post',
+	             data : {'citycode':citycode,'res_routeid':res_routeid},
+	             dataType: 'json',
+	             success : function(Result) {
+	                                      
+	                for(var i=0; i<Result.response.body.totalCount; i++){
+	                    
+						console.log(Result.response.body.items.item[i].gpslong);
+						console.log(Result.response.body.items.item[i].gpslati);
+						positions.push({latlng:new kakao.maps.LatLng(Result.response.body.items.item[i].gpslati,Result.response.body.items.item[i].gpslong)});
+						startx = Result.response.body.items.item[i].gpslati;
+						starty = Result.response.body.items.item[i].gpslong;
+						
+	                 }
+	                console.log(positions);
+	                
+	             },
+	             error : function(request,status,error){
+	 				alert(error);
+	 			}
+	        }); //ë²„ìŠ¤ìœ„ì¹˜
+        
+        
+	         var mapContainer = document.getElementById('map'), // ì§€ë„ë¥¼ í‘œì‹œí•  div  
+	         mapOption = { 
+	             center: new kakao.maps.LatLng(startx, starty), // ì§€ë„ì˜ ì¤‘ì‹¬ì¢Œí‘œ
+	             level: 8 // ì§€ë„ì˜ í™•ëŒ€ ë ˆë²¨
+	         };
+	
+	     	 var map = new kakao.maps.Map(mapContainer, mapOption); // ì§€ë„ë¥¼ ìƒì„±í•©ë‹ˆë‹¤
+	      
+	    	 // ë§ˆì»¤ ì´ë¯¸ì§€ì˜ ì´ë¯¸ì§€ ì£¼ì†Œì…ë‹ˆë‹¤
+	    	 var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+	         
+		     for (var i = 0; i < positions.length; i ++) {
+		         
+		         // ë§ˆì»¤ ì´ë¯¸ì§€ì˜ ì´ë¯¸ì§€ í¬ê¸° ì…ë‹ˆë‹¤
+		         var imageSize = new kakao.maps.Size(24, 35); 
+		         
+		         // ë§ˆì»¤ ì´ë¯¸ì§€ë¥¼ ìƒì„±í•©ë‹ˆë‹¤    
+		         var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+		         
+		         // ë§ˆì»¤ë¥¼ ìƒì„±í•©ë‹ˆë‹¤
+		         var marker = new kakao.maps.Marker({
+		             map: map, // ë§ˆì»¤ë¥¼ í‘œì‹œí•  ì§€ë„
+		             position: positions[i].latlng, // ë§ˆì»¤ë¥¼ í‘œì‹œí•  ìœ„ì¹˜
+		             image : markerImage // ë§ˆì»¤ ì´ë¯¸ì§€ 
+		         });
+		     } 
+      })
+      
+   });
 
-function fn_clickSetting(){
-    var clickMarker=null;
-    //³ë¼± ¸¶Ä¿¿Í À§Ä¡ Å¬¸¯ ¸¶Ä¿
-     
-    var clickIcon = new daum.maps.MarkerImage(
-            "./image/location.png",
-            new daum.maps.Size(32,32));
-     
-    //Áöµµ¿¡ Å¬¸¯ ÀÌº¥Æ®¸¦ µî·ÏÇÕ´Ï´Ù
-    // Áöµµ¸¦ Å¬¸¯ÇÏ¸é ¸¶Áö¸· ÆÄ¶ó¹ÌÅÍ·Î ³Ñ¾î¿Â ÇÔ¼ö¸¦ È£ÃâÇÕ´Ï´Ù
-    daum.maps.event.addListener(map, 'click', function(mouseEvent) {        
-         
-        if(clickMarker!=null){
-            clickMarker.setMap(null);
-        }
-         
-        // Å¬¸¯ÇÑ À§µµ, °æµµ Á¤º¸¸¦ °¡Á®¿É´Ï´Ù 
-        var latlng = mouseEvent.latLng;
-         
-        var resultDiv1 = document.getElementById('lat'); 
-        resultDiv1.value = Math.floor(latlng.getLat()*100000)/100000;
-        var resultDiv2 = document.getElementById('lng');
-        resultDiv2.value = Math.floor(latlng.getLng()*100000)/100000;
-         
-        clickMarker = new daum.maps.Marker({
-            position: new daum.maps.LatLng(resultDiv1.value,resultDiv2.value),
-            image:clickIcon,
-            clickable:false
-        });
-         
-         
-        clickMarker.setMap(map);
-         
-    });
-}
-
-function setMarkers(map){
-    for(var i=0; i<markers.length;i++){
-        markers[i].setMap(map);
-    }
-}
-
-$("#node_find").addClass("selected");
- 
-fn_clickSetting();
 
 </script>
 </body>
 
 
-<!-- <body>
 
-<div id="map" style="width:100%;height:350px;"></div>
-
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=695a00dbf1560fd30746e2be14b3f633&libraries=services"></script>
-<script>
-var mapContainer = document.getElementById('map'), // Áöµµ¸¦ Ç¥½ÃÇÒ div 
-    mapOption = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // ÁöµµÀÇ Áß½ÉÁÂÇ¥
-        level: 3 // ÁöµµÀÇ È®´ë ·¹º§
-    };  
-
-// Áöµµ¸¦ »ı¼ºÇÕ´Ï´Ù    
-var map = new kakao.maps.Map(mapContainer, mapOption); 
-
-// ÁÖ¼Ò-ÁÂÇ¥ º¯È¯ °´Ã¼¸¦ »ı¼ºÇÕ´Ï´Ù
-var geocoder = new kakao.maps.services.Geocoder();
-
-// ÁÖ¼Ò·Î ÁÂÇ¥¸¦ °Ë»öÇÕ´Ï´Ù
-geocoder.addressSearch('´ëÀü±¤¿ª½Ã Áß±¸ ´ëÈïµ¿ 500-5', function(result, status) {
-
-    // Á¤»óÀûÀ¸·Î °Ë»öÀÌ ¿Ï·áµÆÀ¸¸é 
-     if (status === kakao.maps.services.Status.OK) {
-
-        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-        // °á°ú°ªÀ¸·Î ¹ŞÀº À§Ä¡¸¦ ¸¶Ä¿·Î Ç¥½ÃÇÕ´Ï´Ù
-        var marker = new kakao.maps.Marker({
-            map: map,
-            position: coords
-        });
-
-        // ÀÎÆ÷À©µµ¿ì·Î Àå¼Ò¿¡ ´ëÇÑ ¼³¸íÀ» Ç¥½ÃÇÕ´Ï´Ù
-        var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">¿ì¸®Áı</div>'
-        });
-        infowindow.open(map, marker);
-
-        // ÁöµµÀÇ Áß½ÉÀ» °á°ú°ªÀ¸·Î ¹ŞÀº À§Ä¡·Î ÀÌµ¿½ÃÅµ´Ï´Ù
-        map.setCenter(coords);
-    } 
-});    
-</script>
-</body> -->
 </html>
