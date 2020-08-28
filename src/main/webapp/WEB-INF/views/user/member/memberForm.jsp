@@ -46,7 +46,7 @@ $(function(){
 		var idcheck = $('#idlabel').text();
 		var emailcheck = $('#emaillabel').text();
 		var smscheck = $('#hplabel').text();
-			if(idcheck == '이미 존재하는 아이디입니다.' || idcheck == '5글자 이상 입력해주세요.'){
+			if(idcheck == '이미 존재하는 아이디입니다.' || idcheck == '형식에 맞지 않는 아이디입니다.'){
 				alert('아이디를 확인해주세요.');
 				return false;
 			}
@@ -93,7 +93,7 @@ $(function(){
 // 			return false;
 // 		}
 		if(id.length < 5){
-			$('#idlabel').text("5글자 이상 입력해주세요.");
+			$('#idlabel').text("형식에 맞지 않는 아이디입니다.");
 			$('#idlabel').css('color', 'red');
 			return false;
 		}
@@ -256,12 +256,14 @@ $(function(){
 <body>
 	<form name="memberForm" method="post">
 	<input type="hidden" name="mem_division" value="0"> 
-		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
+			<tr>
+				<td colspan="2"><h2>회원가입</h2></td>
+			</tr>
 			<tr>				
 				<td class="fieldName" width="100px" height="25">아이디</td>
 				<td>
-				<input type="text" id="mem_id" name="mem_id" onkeyup="idCheck()"/><label id="idlabel">영어 소문자와 숫자로 5 ~ 15자리로 입력해주세요.</label>
-<!-- 				<a href="javascript:idCheck();" >[ID 중복검사]</a> -->
+				<input type="text" id="mem_id" name="mem_id" onkeyup="idCheck()"/>&nbsp;<label id="idlabel"></label>
 				</td>
 			</tr>
 			<tr>
