@@ -1,3 +1,5 @@
+<%@ page language="JAVA" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!doctype html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
@@ -203,12 +205,12 @@ function LogOut(){
 							<a class="nav-link dropdown-toggle" href="#" id="blogMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Medical</a>
 							<ul class="dropdown-menu" aria-labelledby="blogMenu">
 								<li class="dropdown-submenu">
-									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalList.do">ë³µì©ë´ì­</a>
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalList.do">복용관리</a>
 								</li>
 								<li class="dropdown-submenu">
-									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalMap.do">ë´ ì£¼ì ë³ì/ì½êµ­ ìì¹ë³´ê¸°</a>
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalMap.do">내 주변 병원/약국 위치보기</a>
 								</li>
-								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/searchPill.do">ìì½ì ë³´ì¡°í</a></li>
+								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/searchPill.do">알약 정보보기</a></li>
 								<li class="dropdown-submenu">
 									<a class="dropdown-item" href="#">Blog Single</a>
 								</li>
