@@ -3,6 +3,8 @@ package kr.or.ddit.board.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import kr.or.ddit.domain.Criteria;
 
 import kr.or.ddit.vo.BoardVO;
@@ -22,5 +24,8 @@ public interface IBoardDao {
 	public String totalCount(Map<String, String> params) throws Exception;
 	
 //	public String fileSequence() throws Exception;
+	
+	// 조회수 증가
+	public void countHit(String bd_no) throws Exception; 
 	
 }
