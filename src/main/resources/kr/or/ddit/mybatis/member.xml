@@ -44,6 +44,9 @@
 			AND (MEM_PASS = #{mem_pass}
 			OR MEM_TEMPORARY_PASS = #{mem_pass})
 		</if>
+		<if test="mem_join_addr != null">
+			AND MEM_JOIN_ADDR IS NOT NULL
+		</if>
 	</select>
 
 <!-- 	<select id="memberList" resultClass="memberVO" parameterClass="map"> -->

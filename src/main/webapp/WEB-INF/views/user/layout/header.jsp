@@ -108,7 +108,7 @@ function LogOut(){
 								<a class="dropdown-item" href="${pageContext.request.contextPath}/user/join/loginForm.do" role="button" aria-haspopup="true" aria-expanded="false"><i class="ti-user mr-2"></i>Log In </a>
 							</c:if>
 							<c:if test="${LOGIN_MEMBERINFO!=null}">
-							    <a class="dropdown-toggle" href="#" role="button" id="dropdownAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ti-user mr-2"></i>${LOGIN_MEMBERINFO.mem_name } </a>
+							    <a class="dropdown-toggle" href="#" role="button" id="dropdownAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ti-user mr-2"></i>${LOGIN_MEMBERINFO.mem_nickname } </a>
 							</c:if>
 						  <div class="dropdown-menu mt-2 shadow" aria-labelledby="dropdownAccount">
 						  	<a class="dropdown-item" href="${pageContext.request.contextPath}/user/member/myPage.do">My Page</a>
