@@ -307,26 +307,174 @@ button.sort.desc .caret { display:inline-block; }
            	 	console.log(result.response.body.items.item.VALID_TERM);  //유효기간
            	 	console.log(result.response.body.items.item.MAKE_MATERIAL_FLAG);  //완제/원료구분
            	 	console.log(result.response.body.items.item.INDUTY_TYPE);  //업종구분
-           	 	console.log(result.response.body.items.item.EE_DOC_DATA.DOC.title);  //효능 효과
-           	 	console.log(result.response.body.items.item.EE_DOC_DATA.DOC.SECTION.ARTICLE.PARAGRAPH.content);  //내용
+           	 	/* console.log(result.response.body.items.item.EE_DOC_DATA.DOC.title);  //효능 효과
+           	 	console.log(result.response.body.items.item.EE_DOC_DATA.DOC.SECTION.ARTICLE.PARAGRAPH.content);  //내용 */
+				var ee_doc_data="";
+				var paraIndex=1;
+				var index = 0;
+				var list = new Array();
+				if(result.response.body.items.item.EE_DOC_DATA.DOC.title){
+					ee_doc_data = "<h4>"+result.response.body.items.item.EE_DOC_DATA.DOC.title  +  "</h4>";
+					console.log(ee_doc_data);
+				}
+				if(result.response.body.items.item.EE_DOC_DATA.DOC.SECTION.title){
+					ee_doc_data += "<h5>"+result.response.body.items.item.EE_DOC_DATA.DOC.SECTION.title +  "</h5>";
+					console.log(ee_doc_data);
 
+				}
 
-           	 	//데이터 가공해야함!!
-           	 	console.log(result.response.body.items.item.NB_DOC_DATA.DOC.title);  //사용상의주의사항
-           		$.each(result.response.body.items.item.NB_DOC_DATA.DOC.SECTION.ARTICLE,function(i,v){
-					alert(v.title);
-					$.each(v.PARAGRAPH,function(index,value){
-						console.log(value.content);
-						alert(value.content);
-					});
-        	 	}); 
-           	 	
-           	 	console.log(result.response.body.items.item.UD_DOC_DATA.DOC.title);  //용법용량
-					alert(result.response.body.items.item.UD_DOC_DATA.DOC.title);
-           		$.each(result.response.body.items.item.UD_DOC_DATA.DOC.SECTION.ARTICLE.PARAGRAPH,function(i,v){
-               		console.log(v.content);
-					alert(v.content);
-     	 		}); 
+				$.each(result.response.body.items.item.EE_DOC_DATA.DOC.SECTION,function(i,v){	//v=article, title
+					if(i=='ARTICLE'){
+						if(jQuery.type(v) == "array"){
+							list = v;
+							$.each(list,function(i1,v1){  //i1=0,1
+								ee_doc_data += v1.title + "<br>";
+								
+								if(jQuery.type(v1.PARAGRAPH)=="array"){
+									var list2 = v1.PARAGRAPH;
+									$.each(list2,function(index,value){
+										ee_doc_data += "<"+value.tagName + ">" + value.content + "</"+value.tagName + ">";
+										console.log(ee_doc_data); 
+									});
+								}
+								
+								
+							});
+						}
+						else{
+							$.each(result.response.body.items.item.EE_DOC_DATA.DOC.SECTION.ARTICLE,function(i1,v1){  //v=paragraph,title
+								if(i1=='PARAGRAPH'){
+									if(jQuery.type(v1) == "array"){
+										list = v1;
+										$.each(list,function(index,value){
+											ee_doc_data += "<"+value.tagName + ">" + value.content + "</"+value.tagName + ">";
+											console.log(ee_doc_data); 
+										});	
+									}
+									else{
+										ee_doc_data += "<"+v1.tagName + ">" + v1.content + "</"+v1.tagName + ">";
+										console.log(ee_doc_data); 
+									}				
+								}else{
+									if(result.response.body.items.item.EE_DOC_DATA.DOC.SECTION.ARTICLE.title){
+										ee_doc_data = v1 + "<br>" + ee_doc_data;
+										console.log(ee_doc_data);
+									}
+								}
+							});
+						}
+					}
+				});
+
+				//NB_DOC_DATA
+				if(result.response.body.items.item.NB_DOC_DATA.DOC.title){
+					ee_doc_data += "<h4>"+result.response.body.items.item.NB_DOC_DATA.DOC.title  +  "</h4>";
+					console.log(ee_doc_data);
+				}
+				if(result.response.body.items.item.NB_DOC_DATA.DOC.SECTION.title){
+					ee_doc_data += "<h5>"+result.response.body.items.item.NB_DOC_DATA.DOC.SECTION.title +  "</h5>";
+					console.log(ee_doc_data);
+
+				}
+				$.each(result.response.body.items.item.NB_DOC_DATA.DOC.SECTION,function(i,v){	//v=article, title
+					if(i=='ARTICLE'){
+						if(jQuery.type(v) == "array"){
+							list = v;
+							$.each(list,function(i1,v1){  //i1=0,1
+								ee_doc_data += v1.title + "<br>";
+								
+								if(jQuery.type(v1.PARAGRAPH)=="array"){
+									var list2 = v1.PARAGRAPH;
+									$.each(list2,function(index,value){
+										ee_doc_data += "<"+value.tagName + ">" + value.content + "</"+value.tagName + ">";
+										console.log(ee_doc_data); 
+									});
+								}
+								
+								
+							});
+						}
+						else{
+							$.each(result.response.body.items.item.NB_DOC_DATA.DOC.SECTION.ARTICLE,function(i1,v1){  //v=paragraph,title
+								if(i1=='PARAGRAPH'){
+									if(jQuery.type(v1) == "array"){
+										list = v1;
+										$.each(list,function(index,value){
+											ee_doc_data += "<"+value.tagName + ">" + value.content + "</"+value.tagName + ">";
+											console.log(ee_doc_data); 
+										});	
+									}
+									else{
+										ee_doc_data += "<"+v1.tagName + ">" + v1.content + "</"+v1.tagName + ">";
+										console.log(ee_doc_data); 
+									}				
+								}else{
+									if(result.response.body.items.item.NB_DOC_DATA.DOC.SECTION.ARTICLE.title){
+										ee_doc_data = v1 + "<br>" + ee_doc_data;
+										console.log(ee_doc_data);
+									}
+								}
+							});
+						}
+					}
+				});
+				
+				//UD_DOC_DATA
+				if(result.response.body.items.item.UD_DOC_DATA.DOC.title){
+					ee_doc_data += "<h4>"+result.response.body.items.item.UD_DOC_DATA.DOC.title  +  "</h4>";
+					console.log(ee_doc_data);
+				}
+				if(result.response.body.items.item.UD_DOC_DATA.DOC.SECTION.title){
+					ee_doc_data += "<h5>"+result.response.body.items.item.UD_DOC_DATA.DOC.SECTION.title +  "</h5>";
+					console.log(ee_doc_data);
+
+				}
+				$.each(result.response.body.items.item.UD_DOC_DATA.DOC.SECTION,function(i,v){	//v=article, title
+					if(i=='ARTICLE'){
+						if(jQuery.type(v) == "array"){
+							list = v;
+							$.each(list,function(i1,v1){  //i1=0,1
+								ee_doc_data += v1.title + "<br>";
+								
+								if(jQuery.type(v1.PARAGRAPH)=="array"){
+									var list2 = v1.PARAGRAPH;
+									$.each(list2,function(index,value){
+										ee_doc_data += "<"+value.tagName + ">" + value.content + "</"+value.tagName + ">";
+										console.log(ee_doc_data); 
+									});
+								}
+								
+								
+							});
+						}
+						else{
+							$.each(result.response.body.items.item.UD_DOC_DATA.DOC.SECTION.ARTICLE,function(i1,v1){  //v=paragraph,title
+								if(i1=='PARAGRAPH'){
+									if(jQuery.type(v1) == "array"){
+										list = v1;
+										$.each(list,function(index,value){
+											ee_doc_data += "<"+value.tagName + ">" + value.content + "</"+value.tagName + ">";
+											console.log(ee_doc_data); 
+										});	
+									}
+									else{
+										ee_doc_data += "<"+v1.tagName + ">" + v1.content + "</"+v1.tagName + ">";
+										console.log(ee_doc_data); 
+									}				
+								}else{
+									if(result.response.body.items.item.UD_DOC_DATA.DOC.SECTION.ARTICLE.title){
+										ee_doc_data = v1 + "<br>" + ee_doc_data;
+										console.log(ee_doc_data);
+									}
+								}
+							});
+						}
+					}
+				});
+				
+				
+				$('#aa').html(ee_doc_data);
+
  			}
  		});
 
@@ -564,6 +712,9 @@ button.sort.desc .caret { display:inline-block; }
 	</div>
 				<div id="paginationDIV" style="margin-left: 40%; margin-bottom: 20px;"><div>${pagination }</div></div>
 
+
+
+	<div id="aa">asdasdasdas</div>
 
 
 <div id="pill-modal" class="modal fade" tabindex="-1" role="dialog"

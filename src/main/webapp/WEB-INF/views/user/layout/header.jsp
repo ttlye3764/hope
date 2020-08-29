@@ -205,11 +205,9 @@ function LogOut(){
 							<a class="nav-link dropdown-toggle" href="#" id="blogMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Medical</a>
 							<ul class="dropdown-menu" aria-labelledby="blogMenu">
 								<li class="dropdown-submenu">
-<<<<<<< HEAD
+
 									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalList.do">복용관리</a>
-=======
-									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalList.do">ë³µì©ë´ì</a>
->>>>>>> branch 'master' of https://github.com/ttlye3764/hope
+
 								</li>
 								<li class="dropdown-submenu">
 									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalMap.do">내 주변 병원/약국 위치보기</a>
