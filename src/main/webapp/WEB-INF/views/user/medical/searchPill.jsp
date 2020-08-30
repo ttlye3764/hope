@@ -213,7 +213,20 @@ button.sort.desc .caret { display:inline-block; }
 	color: rgb(177, 113, 236);	
 }
 
-
+.infotable{
+	border: 1px solid black !important;
+}
+.infotable tr,.infotable td,.infotable th{
+	border: 1px solid black !important;
+	width: auto;
+	height: auto;
+}
+.infotable li{
+	list-style: none;
+}
+.infotable th{
+	width:100px;
+}
 </style>
 <script>
 
@@ -291,8 +304,7 @@ button.sort.desc .caret { display:inline-block; }
             dataType: 'json',
             data : {'pi_no':pi_no },
             success : function(result) { 
-            	$("#pill-modal").modal("show");
-            	           	 	
+            	
                 console.log(result.response.body.items.item);                
            	 	console.log(result.response.body.items.item.ITEM_NAME);		//제품명
            	 	console.log(result.response.body.items.item.MAIN_ITEM_INGR);		//성분
@@ -304,12 +316,15 @@ button.sort.desc .caret { display:inline-block; }
            	 	console.log(result.response.body.items.item.ITEM_PERMIT_DATE);  //허가일
            	 	console.log(result.response.body.items.item.PACK_UNIT);  //포장단위
            	 	console.log(result.response.body.items.item.STORAGE_METHOD);  //저장방법
-           	 	console.log(result.response.body.items.item.VALID_TERM);  //유효기간
+           	 	console.log(result.response.body.items.item.VALID_TERM);  //유효기간//완제/원료구분/업종구분
            	 	console.log(result.response.body.items.item.MAKE_MATERIAL_FLAG);  //완제/원료구분
            	 	console.log(result.response.body.items.item.INDUTY_TYPE);  //업종구분
            	 	/* console.log(result.response.body.items.item.EE_DOC_DATA.DOC.title);  //효능 효과
            	 	console.log(result.response.body.items.item.EE_DOC_DATA.DOC.SECTION.ARTICLE.PARAGRAPH.content);  //내용 */
 				var ee_doc_data="";
+				var nb_doc_data="";
+				var ub_doc_data="";
+				
 				var paraIndex=1;
 				var index = 0;
 				var list = new Array();
@@ -368,11 +383,11 @@ button.sort.desc .caret { display:inline-block; }
 
 				//NB_DOC_DATA
 				if(result.response.body.items.item.NB_DOC_DATA.DOC.title){
-					ee_doc_data += "<h4>"+result.response.body.items.item.NB_DOC_DATA.DOC.title  +  "</h4>";
+					nb_doc_data += "<h4>"+result.response.body.items.item.NB_DOC_DATA.DOC.title  +  "</h4>";
 					console.log(ee_doc_data);
 				}
 				if(result.response.body.items.item.NB_DOC_DATA.DOC.SECTION.title){
-					ee_doc_data += "<h5>"+result.response.body.items.item.NB_DOC_DATA.DOC.SECTION.title +  "</h5>";
+					nb_doc_data += "<h5>"+result.response.body.items.item.NB_DOC_DATA.DOC.SECTION.title +  "</h5>";
 					console.log(ee_doc_data);
 
 				}
@@ -381,12 +396,12 @@ button.sort.desc .caret { display:inline-block; }
 						if(jQuery.type(v) == "array"){
 							list = v;
 							$.each(list,function(i1,v1){  //i1=0,1
-								ee_doc_data += v1.title + "<br>";
+								nb_doc_data += v1.title + "<br>";
 								
 								if(jQuery.type(v1.PARAGRAPH)=="array"){
 									var list2 = v1.PARAGRAPH;
 									$.each(list2,function(index,value){
-										ee_doc_data += "<"+value.tagName + ">" + value.content + "</"+value.tagName + ">";
+										nb_doc_data += "<"+value.tagName + ">" + value.content + "</"+value.tagName + ">";
 										console.log(ee_doc_data); 
 									});
 								}
@@ -400,17 +415,17 @@ button.sort.desc .caret { display:inline-block; }
 									if(jQuery.type(v1) == "array"){
 										list = v1;
 										$.each(list,function(index,value){
-											ee_doc_data += "<"+value.tagName + ">" + value.content + "</"+value.tagName + ">";
+											nb_doc_data += "<"+value.tagName + ">" + value.content + "</"+value.tagName + ">";
 											console.log(ee_doc_data); 
 										});	
 									}
 									else{
-										ee_doc_data += "<"+v1.tagName + ">" + v1.content + "</"+v1.tagName + ">";
+										nb_doc_data += "<"+v1.tagName + ">" + v1.content + "</"+v1.tagName + ">";
 										console.log(ee_doc_data); 
 									}				
 								}else{
 									if(result.response.body.items.item.NB_DOC_DATA.DOC.SECTION.ARTICLE.title){
-										ee_doc_data = v1 + "<br>" + ee_doc_data;
+										nb_doc_data = v1 + "<br>" + nb_doc_data;
 										console.log(ee_doc_data);
 									}
 								}
@@ -421,11 +436,11 @@ button.sort.desc .caret { display:inline-block; }
 				
 				//UD_DOC_DATA
 				if(result.response.body.items.item.UD_DOC_DATA.DOC.title){
-					ee_doc_data += "<h4>"+result.response.body.items.item.UD_DOC_DATA.DOC.title  +  "</h4>";
+					ud_doc_data += "<h4>"+result.response.body.items.item.UD_DOC_DATA.DOC.title  +  "</h4>";
 					console.log(ee_doc_data);
 				}
 				if(result.response.body.items.item.UD_DOC_DATA.DOC.SECTION.title){
-					ee_doc_data += "<h5>"+result.response.body.items.item.UD_DOC_DATA.DOC.SECTION.title +  "</h5>";
+					ud_doc_data += "<h5>"+result.response.body.items.item.UD_DOC_DATA.DOC.SECTION.title +  "</h5>";
 					console.log(ee_doc_data);
 
 				}
@@ -434,12 +449,12 @@ button.sort.desc .caret { display:inline-block; }
 						if(jQuery.type(v) == "array"){
 							list = v;
 							$.each(list,function(i1,v1){  //i1=0,1
-								ee_doc_data += v1.title + "<br>";
+								ud_doc_data += "<font style='font-size:5px;'>" + v1.title + "<br></font>";
 								
 								if(jQuery.type(v1.PARAGRAPH)=="array"){
 									var list2 = v1.PARAGRAPH;
 									$.each(list2,function(index,value){
-										ee_doc_data += "<"+value.tagName + ">" + value.content + "</"+value.tagName + ">";
+										ud_doc_data += "<"+value.tagName + ">" + value.content + "</"+value.tagName + ">";
 										console.log(ee_doc_data); 
 									});
 								}
@@ -453,17 +468,17 @@ button.sort.desc .caret { display:inline-block; }
 									if(jQuery.type(v1) == "array"){
 										list = v1;
 										$.each(list,function(index,value){
-											ee_doc_data += "<"+value.tagName + ">" + value.content + "</"+value.tagName + ">";
+											ud_doc_data += "<"+value.tagName + ">" + value.content + "</"+value.tagName + ">";
 											console.log(ee_doc_data); 
 										});	
 									}
 									else{
-										ee_doc_data += "<"+v1.tagName + ">" + v1.content + "</"+v1.tagName + ">";
+										ud_doc_data += "<"+v1.tagName + ">" + v1.content + "</"+v1.tagName + ">";
 										console.log(ee_doc_data); 
 									}				
 								}else{
 									if(result.response.body.items.item.UD_DOC_DATA.DOC.SECTION.ARTICLE.title){
-										ee_doc_data = v1 + "<br>" + ee_doc_data;
+										ud_doc_data = "<font style='font-size:5px;'>"+ v1 + "<br></font>" + ud_doc_data;
 										console.log(ee_doc_data);
 									}
 								}
@@ -471,9 +486,9 @@ button.sort.desc .caret { display:inline-block; }
 						}
 					}
 				});
+
+				$("#pillInfoDIV").modal("show");
 				
-				
-				$('#aa').html(ee_doc_data);
 
  			}
  		});
@@ -710,70 +725,108 @@ button.sort.desc .caret { display:inline-block; }
 			</div>
 		</div>
 	</div>
-				<div id="paginationDIV" style="margin-left: 40%; margin-bottom: 20px;"><div>${pagination }</div></div>
+			<div id="paginationDIV" style="margin-left: 40%; margin-bottom: 20px;"><div>${pagination }</div></div>
 
-
-
-	<div id="aa">asdasdasdas</div>
-
-
-<div id="pill-modal" class="modal fade" tabindex="-1" role="dialog"
-		aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content" style="width:580px;">
+	<div class="modal fade text-left" id="pillInfoDIV" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalCenter"
+		style="display: none;" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">알약 정보 상세보기</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
 				<div class="modal-body">
-					<div class="container" style="">
-			<div class="row">
-				<div class="col-12 col-lg-8 mx-auto">
-					<div class="title text-center">
-						<h2>약 복용정보</h2>
-					</div>
+				
+				<table class="infotable" id="infotable" >
+					    <tbody>
+					        <tr>
+					            <th style="border: 2px soild black;">제품명</th>
+					            <td colspan="2" id="result_drug_name">가나릴정 </td>
+					            <td><img id="idfy_img_small" src="https://www.pharm.or.kr:442/images/sb_photo/big3/A11AOOOOO895502.jpg" alt="식별 이미지" onclick="" style="height: 123px;"></td>
+					        </tr>
+					    <tr>
+					        <th>성분 / 함량</th>
+					        <td colspan="3"> 
+					            <ul id="ingr_mg">aaaa aaaa</ul>
+					        </td>
+					    </tr>
+					
+					    <tr>
+					        <th>첨가제</th>
+					        <td colspan="3" class="additives" id="additives_td">
+					            <ul id="additives">산화티탄<br>스테아르산마그네슘<br>유당수화물<br></ul>
+					        </td>
+					    </tr>
+					
+					    <tr>
+					        <th>전문 / 일반</th>
+					        <td>전문</td>
+					        <th>단일 / 복합</th>
+					        <td id="sunb_count">단일</td>
+					    </tr>
+					    <tr>
+					        <th>제조 / 수입사</th>
+					        <td style="width:130px;">
+					               	 영풍제약
+					        </td>
+					        <th>유효기간</th>
+					        <td>
+					        	2020.02.21
+					        </td>
+					    </tr>
+					    <tr>
+					        <th>완제/원료</th>
+					        <td id="drug_form">완제</td>
+					        <th>업종구분</th>
+					        <td id="dosage_route">경구(내용고형)</td>
+					    </tr>
+					    <tr>
+					        <th>성상</th>
+					        <td colspan="3" id="charact">백색원형의 필름코팅정</td>
+					    </tr>
+					    <tr>
+					        <th>허가일</th>
+					        <td colspan="3">
+					            2004년 10월 29일
+					        </td>
+					    </tr>           
+					    <tr>
+					        <th>포장단위<br>(식약처 기준)</th>
+					        <td colspan="3" class="br0" id="drug_box">30정/병,100정/병,500정/병</td>					              
+					    </tr>
+					    <tr>
+					        <th class="bb0">저장방법 </th>
+					        <td colspan="4" class="bb0 br0" id="stmt">기밀용기, 실온보관(1-30℃)</td>
+					    </tr>
+					    
+					</tbody>
+				</table>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				</div>
-			</div>
-			<div class="row ">
-				<!-- contact form -->
-				<div class="col-md-6">
-					<div class="h-100" style="width:500px;">
-						<form class="contact-form" id="contact-form" name="contactform" action="${pageContext.request.contextPath}/user/medical/updateMedicalInfo.do" method="post" enctype="multipart/form-data">			
-							<!-- Start main form -->							
-								<div class="" style="width:50%; float: left;">
-									<!-- name -->
-										<input id="pill_no" name="pill_no" type="hidden" class="form-control">
-										<label>제품 명 </label><input id="pill_name" name="pill_name" type="text" class="form-control" placeholder="제품명">
-										<label>복용일수 </label><input id="pill_count1_update" name="pill_count1" type="text" class="form-control" disabled>
-										<input id="pill_count_update" name="pill_count" type="hidden" class="form-control">
-										<label>복용시작일</label><input type="date" id="pill_start_update" name="pill_start"  class="form-control">
-										<label>복용종료일</label><input type="date" id="pill_end_update" name="pill_end" class="form-control">
-										<label>알림시간설정</label><input type="time" id="pill_alerttime" name="pill_alerttime" class="form-control">
-								</div>	
-								<div class="" style="width:50%; float: left;">
-									<div></div>
-									<div class="col-md-12 text-center">
-									<input type="file" class="btn btn-outline-primary btn-block" style="margin-top: 30px;" id="files2" name="files">
-									</div>
-									<div style="width: 230px; height: 150px;" >
-									<img id="img2" style="width: 100%; height: 100%; margin-left: 15px; margin-top: 30px;">
-									</div>
-									<div class="col-md-12 text-center"><button class="btn btn-outline-primary btn-block" style="margin-top: 60px;">약 상세보기</button></div>
-									<label style="margin-top: 30px; margin-left: 15px;">달력 표시 색 설정</label><div><input type="color" id="pill_color" name="pill_color" style="margin-left: 15px;"></div>
-								</div>																							
-								<!-- submit button -->
-							
-								<button class="btn btn-outline-grad btn-block" type="submit">수정</button>
-								<button class="btn btn-outline-grad btn-block" id="deleteBTN" type="button">삭제</button>
-							
-							<!-- End main form -->
-						</form>
-					</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
 				</div>
 			</div>
 		</div>
-
-				</div>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal-dialog -->
 	</div>
+	
 </body>
 </html>
