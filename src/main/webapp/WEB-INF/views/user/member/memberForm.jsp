@@ -49,10 +49,14 @@ $(function(){
 		var smscheck = $('#hplabel').text();
 		var pass = $('#pass').val();
 		var pass2 = $('#pass2').val();
-		var passlb = $('#passchecklb').text();		
-		
+		var passlb = $('#passchecklb').text();
+
 			if(idcheck == '' || idcheck == '이미 존재하는 아이디입니다.' || idcheck == '형식에 맞지 않는 아이디입니다.'){
 				alert('아이디를 확인해주세요.');
+				return false;
+			}	
+			if(idcheck == '' || idcheck == '이미 존재하는 닉네임입니다.' || idcheck == '형식에 맞지 않는 닉네임입니다.'){
+				alert('닉네임을 확인해주세요.');
 				return false;
 			}
 			if(pass == '' || pass2 == ''){
@@ -135,17 +139,47 @@ $(function(){
 			data : {
 				mem_id : $('#mem_id').val()
 			},
-			error : function(result) {
-				alert(result.json);
-			},
 			success : function(result) {
 				$('#idlabel').text(result.json);
 				if(result.json == '사용가능한 아이디입니다.'){
 					$('#idlabel').css('color', 'blue');
-					var mem_id = $('#mem_id').val();
-					idcheck = 1;
 				}else{
 					$('#idlabel').css('color', 'red');
+				}
+			}
+		});
+	};
+
+	function nickCheck() {
+		var nick = $('#nickname').val();
+
+		if (!nick.validationNICKNAME()) {
+			$('#nicklb').text("형식에 맞지 않는 닉네임입니다.");
+			$('#nicklb').css('color', 'red');
+			return false;
+		}
+		
+		$.ajax({
+			type : 'POST',
+			url : '${pageContext.request.contextPath}/user/member/nickCheck.do',
+			dataType : 'JSON',
+			data : {
+				mem_nickname : $('#nickname').val()
+			},
+			success : function(result) {
+				$('#nicklb').text(result.json);
+				if(result.json == '사용가능한 닉네임입니다.'){
+					$('#nicklb').css('color', 'blue');
+				}else{
+					$('#nicklb').css('color', 'red');
+				}
+			},
+			error : function(result){
+				$('#nicklb').text(result.json);
+				if(result.json == '사용가능한 닉네임입니다.'){
+					$('#nicklb').css('color', 'blue');
+				}else{
+					$('#nicklb').css('color', 'red');
 				}
 			}
 		});
@@ -319,7 +353,7 @@ $(function(){
 			
 			<tr>
 				<td class="fieldName" width="100px" height="25">닉네임</td>
-				<td><input type="text" name="mem_nickname" value="" /></td>
+				<td><input type="text" name="mem_nickname" onkeyup="nickCheck()" id="nickname" />&nbsp;<label id="nicklb"></label></td>
 			</tr>
 			
 			<tr>

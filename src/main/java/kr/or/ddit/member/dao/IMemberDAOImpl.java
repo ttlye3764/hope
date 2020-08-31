@@ -97,4 +97,10 @@ public class IMemberDAOImpl implements IMemberDAO {
 	public void updatePass(Map<String, String> params) throws Exception {
 		client.update("member.updatePass",params);
 	}
+
+	@Override
+	public String selectNick(String mem_nick) throws Exception {
+		String nick = client.selectOne("member.selectNick",mem_nick);
+		return nick;
+	}
 }

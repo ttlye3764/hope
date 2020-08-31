@@ -89,4 +89,9 @@ public class IMemberSerivceImpl implements IMemberService {
 	public void updatePass(Map<String, String> params) throws Exception {
 		dao.updatePass(params);
 	}
+
+	@Override
+	public String selectNick(String mem_nick) throws Exception {
+		return dao.selectNick(mem_nick);
+	}
 }

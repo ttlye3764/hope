@@ -63,16 +63,16 @@
 	<update id="updateMember" parameterType="memberVO">
 		UPDATE MEMBER
 		SET
-		MEM_PASS = #{mem_pass}
-		,MEM_GENDER = #{mem_gender}
-		,MEM_BIRTH = #{mem_birth}
-		,MEM_NICKNAME = #{mem_nickname}
+		MEM_NICKNAME = #{mem_nickname}
 		,MEM_ZIP1 = #{mem_zip1}
 		,MEM_ZIP2 = #{mem_zip2}
 		,MEM_ADDR1 = #{mem_addr1}
 		,MEM_ADDR2 = #{mem_addr2}
 		,MEM_HP = #{mem_hp}
 		,MEM_EMAIL = #{mem_email}
+		<if test="mem_pass != null and mem_pass != ''">
+			,MEM_PASS = #{mem_pass}
+		</if>
 		WHERE MEM_ID = #{mem_id}
 	</update>
 
@@ -142,6 +142,13 @@
 		SET MEM_PASS = #{mem_pass}
 		WHERE MEM_ID = #{mem_id}
 	</update>
+	
+	<select id="selectNick" parameterType="String" resultType="String">
+		SELECT MEM_NICKNAME
+		FROM MEMBER
+		WHERE MEM_DELETE = 'n'
+		AND MEM_NICKNAME = #{mem_nick}
+	</select>
 </mapper>    
 
 
