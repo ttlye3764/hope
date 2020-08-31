@@ -20,6 +20,7 @@ public interface IScheduleService {
    public List<BusVO> bisList(String mem_no) throws Exception;
    public ScheduleVO scheduleInfo(int s_no) throws Exception;
    public void registBus(BusVO busInfo) throws Exception;
+   public void deleteBus(String bus_index) throws Exception;
    /*public String totalCount(Map<String, String> params) throws Exception;*/
    
 }

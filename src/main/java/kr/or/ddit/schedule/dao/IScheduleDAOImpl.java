@@ -68,6 +68,11 @@ public class IScheduleDAOImpl implements IScheduleDAO {
 	public List<BusVO> bisList(String mem_no) throws Exception {
 		return client.selectList("schedule.bisList",mem_no);
 	}
+
+	@Override
+	public void deleteBus(String bus_index) throws Exception {
+		client.update("schedule.deleteBus", bus_index);
+	}
    
    
    /*   

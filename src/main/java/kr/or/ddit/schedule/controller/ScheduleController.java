@@ -5,6 +5,7 @@ import java.util.Map;
 
 import kr.or.ddit.bis.Bis;
 import kr.or.ddit.bis.Bis_location;
+import kr.or.ddit.bis.BusStop;
 import kr.or.ddit.member.service.IMemberService;
 import kr.or.ddit.schedule.service.IScheduleService;
 import kr.or.ddit.vo.BusVO;
@@ -211,6 +212,19 @@ public class ScheduleController {
 		return bisLocationResult;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="busStop",produces="text/plain; charset=UTF-8")
+	public String busStop(String gpsLati, String gpsLong) throws Exception {
+		String busStopResult = BusStop.location(gpsLati, gpsLong);
+		return busStopResult;
+	}
+	@ResponseBody
+	@RequestMapping(value="busStopInfo",produces="text/plain; charset=UTF-8")
+	public String busStopInfo(String cityCode, String nodeId) throws Exception {
+		String busStopResult = BusStop.busStopInfo(cityCode, nodeId);
+		return busStopResult;
+	}
+	
 	@RequestMapping("registBus")
 	public String registBus(String routeid, String citycode, String mem_no, BusVO busInfo) throws Exception {
 		busInfo.setBus_no(routeid);
@@ -230,6 +244,11 @@ public class ScheduleController {
 		return andView;
 	}
 
+	@RequestMapping("deleteBus")
+	public String deleteBus(String bus_index) throws Exception {
+		this.service.deleteBus(bus_index);
+		return "redirect:/user/schedule/bis.do";
+	}
 	
 	
 

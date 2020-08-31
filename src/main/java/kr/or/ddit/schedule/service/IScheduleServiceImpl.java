@@ -67,6 +67,11 @@ public class IScheduleServiceImpl implements IScheduleService {
 		return dao.bisList(mem_no);
 	}
 
+	@Override
+	public void deleteBus(String bus_index) throws Exception {
+		dao.deleteBus(bus_index);
+	}
+
    /*@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
    @Override
    public MemberVO memberInfo(Map<String, String> params) throws Exception {

@@ -71,6 +71,11 @@
       FROM SCHEDULE
       WHERE S_NO = #{s_no}
    </delete>
+    <delete id="deleteBus" parameterType="String">
+      DELETE 
+      FROM BUS
+      WHERE BUS_INDEX = #{bus_index}
+   </delete>
    
    
    <update id="updateSchedule" parameterType="scheduleVO">
