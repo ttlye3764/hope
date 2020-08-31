@@ -7,6 +7,11 @@
 		<id property="healthImage_no" column="healthImage_no" />
 		<result property="healthImage_title" column="healthImage_title" />
 		<result property="healthImage_content" column="healthImage_content" />
+		<result property="healthImage_category" column="healthImage_category" />
+		<result property="healthImage_age" column="healthImage_age" />
+		<result property="healthImage_diet" column="healthImage_diet" />
+		<result property="healthImage_time" column="healthImage_time" />
+		<result property="healthImage_difficulty" column="healthImage_difficulty" />
 		<result property="mem_no" column="mem_no" />
 		<collection property="items" column="file_healthImage_no" select="healthFile.healthFileList" ofType="healthFileVO" javaType="java.util.List"></collection>
 	</resultMap>
@@ -16,18 +21,20 @@
 		FROM HEALTHIMAGE
 	</sql>
 
-	<select id="healthImageList" resultType="healthImageVO"
-		parameterType="map" resultMap="healthResultMap">
+	<select id="healthImageList" resultType="healthImageVO" parameterType="map" resultMap="healthResultMap">
 		SELECT B.*
 		FROM(SELECT ROWNUM RNUM, A.*
 		FROM (
 		<include refid="selectAll" />
-		ORDER BY healthImage_no)A) B
+		<if test="healthImage_category != null">
+			where healthImage_category = #{healthImage_category}
+		</if>
+		ORDER BY healthImage_no desc)A) B
 		ORDER BY B.RNUM
+		
 	</select>
 
-	<select id="healthImageInfo" parameterType="map"
-		resultMap="healthResultMap">
+	<select id="healthImageInfo" parameterType="map" resultMap="healthResultMap">
 		<include refid="selectAll" />
 		WHERE healthImage_no = #{healthImage_no}
 	</select>
@@ -37,20 +44,26 @@
 	</select>
 
 	<insert id="InsertHealth" parameterType="healthImageVO">
-		INSERT INTO KNOWLEDGE(healthImage_no
+		INSERT INTO HEALTHIMAGE
+		(healthImage_no
 		,healthImage_title
+		,healthImage_category
 		,healthImage_content
 		,healthImage_age
+		,healthImage_time
 		,healthImage_diet
-		,healthImage_tiem
+		,healthImage_difficulty
 		,MEM_NO
 		)
-		VALUES(healthimage_SEQ.NEXTVAL
+		VALUES
+		(healthimage_SEQ.NEXTVAL
 		,#{healthImage_title}
+		,#{healthImage_category}
 		,#{healthImage_content}
 		,#{healthImage_age}
+		,#{healthImage_time}
 		,#{healthImage_diet}
-		,#{healthImage_tiem}
+		,#{healthImage_difficulty}
 		,1
 		)
 	</insert>
@@ -62,12 +75,14 @@
 	</delete>
 
 	<update id="updateHealth" parameterType="healthImageVO">
-		UPDATE KNOWLEDGE
+		UPDATE HEALTHIMAGE
 		SET healthImage_title = #{healthImage_title}
 		,healthImage_content = #{healthImage_content}
+		,healthImage_category = #{healthImage_category}
 		,healthImage_age = #{healthImage_age}
 		,healthImage_diet = #{healthImage_diet}
-		,healthImage_tiem = #{healthImage_tiem}
+		,healthImage_time = #{healthImage_time}
+		,healthImage_difficulty = #{healthImage_difficulty}
 		WHERE healthImage_no = #{healthImage_no}
 	</update>
 
