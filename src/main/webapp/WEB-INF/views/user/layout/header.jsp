@@ -107,14 +107,15 @@ function LogOut(){
 						<!-- Top Account -->
 						<div class="dropdown">
 							<c:if test="${LOGIN_MEMBERINFO==null}">
-								<a class="dropdown-item" href="${pageContext.request.contextPath}/user/join/loginForm.do" role="button" aria-haspopup="true" aria-expanded="false"><i class="ti-user mr-2"></i>Log In </a>
+								<a class="dropdown-item" href="${pageContext.request.contextPath}/user/join/loginForm.do" role="button" aria-haspopup="true" aria-expanded="false"><i class="ti-user mr-2"></i>로그인</a>
 							</c:if>
 							<c:if test="${LOGIN_MEMBERINFO!=null}">
 							    <a class="dropdown-toggle" href="#" role="button" id="dropdownAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ti-user mr-2"></i>${LOGIN_MEMBERINFO.mem_nickname } </a>
 							</c:if>
 						  <div class="dropdown-menu mt-2 shadow" aria-labelledby="dropdownAccount">
-						  	<a class="dropdown-item" href="${pageContext.request.contextPath}/user/member/myPage.do">My Page</a>
-							    <a class="dropdown-item" href="javascript:LogOut();">Log Out</a>
+						  	<a class="dropdown-item" href="${pageContext.request.contextPath}/user/member/myPage.do">나의 정보 관리</a>
+						  	<a class="dropdown-item" href="${pageContext.request.contextPath}/user/member/">내가 작성한 게시글</a>
+							<a class="dropdown-item" href="javascript:LogOut();">로그아웃</a>
 						  </div>
 						</div>
 						<!-- top link -->
@@ -248,9 +249,9 @@ function LogOut(){
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="portfolioMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Schedule</a>
 							<ul class="dropdown-menu" aria-labelledby="portfolioMenu">
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/schedule.do">scheduleList</a> </li>
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/dday.do">dday</a> </li>
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/bis.do">bis</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/schedule.do">일정관리</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/dday.do">D-day</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/bis.do">자주타는 버스</a> </li>
 								<li> <a class="dropdown-item" href="portfolio-grid-column-4.html">Portfolio Column 4</a> </li>
 								<li> <a class="dropdown-item" href="portfolio-grid-column-5.html">Portfolio Column 5</a> </li>
 								<li> <a class="dropdown-item" href="portfolio-grid-column-6.html">Portfolio Column 6</a> </li>
@@ -325,14 +326,16 @@ function LogOut(){
 							<a class="nav-link dropdown-toggle" href="#" id="blogMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">board</a>
 							<ul class="dropdown-menu" aria-labelledby="blogMenu">
 								<li class="dropdown-submenu">
-									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=2">notice</a>
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=2">공지사항</a>
 								</li>
 								<li class="dropdown-submenu">
-									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=3">aaa</a>
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=3">건의사항</a>
 								</li>
-								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=1">freeboard</a></li>
 								<li class="dropdown-submenu">
-									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=4">QNA board</a>
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=1">자유게시판</a>
+								</li>
+								<li class="dropdown-submenu">
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=4">QNA</a>
 								</li>
 							</ul>
 						</li>

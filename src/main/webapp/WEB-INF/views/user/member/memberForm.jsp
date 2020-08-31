@@ -308,11 +308,6 @@ $(function(){
 		var pw = $('#pass').val();
 		var pw2 = $('#pass2').val();
 
-		if(pw=='' || pw2==''){
-			$('#passchecklb').text("");
-			return false;
-		}
-
 		if(pw==pw2){
 			$('#passchecklb').text("비밀번호가 일치합니다.");
 			$('#passchecklb').css('color', 'blue');
@@ -375,6 +370,7 @@ $(function(){
            }
         }).open();
     }
+
 </script>
 <body>
 	<form name="memberForm" method="post">
