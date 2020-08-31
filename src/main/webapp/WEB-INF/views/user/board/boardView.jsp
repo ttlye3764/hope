@@ -18,22 +18,22 @@ $(function(){
   			 기능이 수행되지 않아서  body부분에 <input type="hidden" name="bd_no" value="${boardInfo.bd_no}"/>을 넣기..
   		*/
   		var bd_no = $('input[name="bd_no"]').val();
-        $(this).attr('action','${pageContext.request.contextPath}/user/board/updateBoardInfo.do?bd_no=' + bd_no);
+        $(this).attr('action','${pageContext.request.contextPath}/user/board/updateBoardInfo.do?bd_no=' + bd_no + "&bd_division=${bd_division}");
         
         return true;
      });
 
     // 삭제버튼
   	$('#deleteBtn').on('click', function(){
-		alert('삭제');
+		//alert('삭제');
 		var bd_no = $('input[name="bd_no"]').val();
-		$(location).attr('href','${pageContext.request.contextPath}/user/board/deleteBoardInfo.do?bd_no=' + bd_no);
+		$(location).attr('href','${pageContext.request.contextPath}/user/board/deleteBoardInfo.do?bd_no=' + bd_no + "&bd_division=${bd_division}");
   	 });  
 
   	
     // 목록버튼
     $('#listBtn').on('click', function(){	
-		$(location).attr('href','${pageContext.request.contextPath}/user/board/boardList.do');
+		$(location).attr('href','${pageContext.request.contextPath}/user/board/boardList.do?bd_division=${bd_division }');
 		
 	});
     
@@ -60,6 +60,7 @@ function alertPrint(msg){
 			<div class="row mt-5">
 						<div class="col-md-12">
 							<h2 class="mb-3">게시판 상세보기</h2></div>
+							                                           <input type="hidden" id="bd_division" name="bd_division" value="${bd_division }">
 																	   <input type="hidden" name="bd_no" value="${boardInfo.bd_no}"/>
 						<div class="col-md-9"><span class="form-group"><input type="text" class="form-control" placeholder="title"  id="bd_title" name="bd_title" value="${boardInfo.bd_title}"></span></div>
 						<div class="col-md-9"><span class="form-group"><input type="text" class="form-control" placeholder="writer" id="bd_writer" name="bd_writer" value="${boardInfo.bd_writer}"></span></div>

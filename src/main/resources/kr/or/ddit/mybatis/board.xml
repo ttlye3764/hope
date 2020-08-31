@@ -64,7 +64,7 @@
 						   bd_date,
 	 					   bd_content,
 		                   mem_no,
-		                   bd_division.
+		                   bd_division,
 		                   bd_hit
 						   )
 				   VALUES (bd_seq.nextval,
@@ -81,4 +81,19 @@
 		UPDATE BOARD SET BD_HIT = BD_HIT+1
 		WHERE BD_NO = #{bd_no}
 	</update>
+	
+	
+	
+<!--  	<select id="getListWithPaging" resultType="boardVO">  -->
+<!--  		<![CDATA[ -->
+<!--  			SELECT A.*  -->
+<!--  		 	  FROM (  -->
+<!--  		 	        SELECT ROWNUM RNUM, BOARD.*  -->
+<!--  		 	          FROM BOARD  -->
+<!--  		 	         WHERE ROWNUM <= #{pageNum} * #{amount}  -->
+<!--  		 	  		)A  -->
+<!--  		 	  WHERE RNUM > (#{pageNum} -1) * #{amount}	  -->
+<!--  		]]>  -->
+<!--  	</select>  -->
+	
 </mapper>
