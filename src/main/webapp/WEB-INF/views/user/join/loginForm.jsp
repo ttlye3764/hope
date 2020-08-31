@@ -50,6 +50,7 @@
 
 </style>
 	
+<script type='text/javascript' src='<%=request.getContextPath()%>/js/validation.js'></script>
 <script type='text/javascript'>
 	var big_mem_id;
       $(function(){
@@ -74,7 +75,19 @@
       			$('#label').text("비밀번호를 입력해주세요.");
       			$('#label').css('color', 'red');
       			return false;
-          }    
+          }  
+
+          if (!mem_id.validationID()) {
+	  			$('#label').text("아이디를 확인해주세요.");
+	  			$('#label').css('color', 'red');
+	  			return false;
+	  	  }  
+
+	  	  if(mem_pass.length < 4){
+		  		$('#label').text("비밀번호는 최소 4자리 이상 입력해주세요.");
+	  			$('#label').css('color', 'red');
+	  			return false;
+		  }
                 
           $.ajax({
         	type : 'POST',

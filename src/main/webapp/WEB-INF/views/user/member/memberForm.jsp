@@ -40,14 +40,51 @@ table{
 </style>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.js"></script>
+<script type='text/javascript' src='<%=request.getContextPath()%>/js/validation.js'></script>
 <script type="text/javascript">
 $(function(){
 	$('form[name=memberForm]').submit(function() {
 		var idcheck = $('#idlabel').text();
 		var emailcheck = $('#emaillabel').text();
 		var smscheck = $('#hplabel').text();
-			if(idcheck == '이미 존재하는 아이디입니다.' || idcheck == '형식에 맞지 않는 아이디입니다.'){
+		var pass = $('#pass').val();
+		var pass2 = $('#pass2').val();
+		var passlb = $('#passchecklb').text();		
+		
+			if(idcheck == '' || idcheck == '이미 존재하는 아이디입니다.' || idcheck == '형식에 맞지 않는 아이디입니다.'){
 				alert('아이디를 확인해주세요.');
+				return false;
+			}
+			if(pass == '' || pass2 == ''){
+				alert('비밀번호를 입력해주세요.');
+				return false;
+			}
+			if(pass.length < 8){
+				alert('비밀번호는 최소 8자리 이상 입력해주세요.');
+				return false;
+			}
+			if(passlb == '비밀번호가 일치하지 않습니다.'){
+				alert('비밀번호를 확인해주세요.');
+				return false;
+			}
+
+			if(!$('input:radio[name=mem_gender]').is(':checked')){
+				alert('성별을 선택해주세요.');
+				return false;
+			}
+
+			var name = $('#mem_name').val();
+			if (!name.validationNAME()) {
+				alert('올바른 이름을 입력해주세요.')
+				return false;
+			}
+			var mem_birth = $('input[name=mem_bir1]').val() + '-'
+							+ $('input[name=mem_bir2]').val() + '-'
+							+ $('input[name=mem_bir3]').val();
+			$('input[name=mem_birth]').val(mem_birth);
+			
+			if (!mem_birth.validationBIR()) {
+				alert('올바른 생년월일을 입력해주세요.')
 				return false;
 			}
 			if(emailcheck == ''){
@@ -58,13 +95,9 @@ $(function(){
 				alert('휴대폰 인증을 완료해주세요.');
 				return false;
 			}
+			
 		
 			$(this).attr('action','${pageContext.request.contextPath}/user/member/insertMemberInfo.do');
-
-			var mem_birth = $('input[name=mem_bir1]').val() + '-'
-								+ $('input[name=mem_bir2]').val() + '-'
-								+ $('input[name=mem_bir3]').val();
-						$('input[name=mem_birth]').val(mem_birth);
 
 			var mem_hp = $('select[name=mem_hp1]').val() + '-'
 								+ $('input[name=mem_hp2]').val() + '-'
@@ -88,15 +121,13 @@ $(function(){
 
 	function idCheck() {
 		var id = $('#mem_id').val();
-// 		if(id==''){
-// 			alert('아이디를 입력해주세요');
-// 			return false;
-// 		}
-		if(id.length < 5){
+
+		if (!id.validationID()) {
 			$('#idlabel').text("형식에 맞지 않는 아이디입니다.");
 			$('#idlabel').css('color', 'red');
 			return false;
 		}
+		
 		$.ajax({
 			type : 'POST',
 			url : '${pageContext.request.contextPath}/user/member/idCheck.do',
@@ -126,11 +157,8 @@ $(function(){
 				+ $('input[name=mem_hp3]').val();
 		$('input[name=mem_hp]').val(mem_hp);
 
-		hp = $('input[name=mem_hp2]').val();
-		hp1 = $('input[name=mem_hp3]').val();
-
-		if(hp=='' || hp1==''){
-			alert('휴대전화 번호를 입력해주세요.');
+		if (!mem_hp.validationHP()) {
+			alert('휴대전화번호를 바르게 입력해주세요.');
 			return false;
 		}
 		
@@ -181,12 +209,11 @@ $(function(){
 		var mem_email = $('input[name=mem_mail1]').val() + '@' + $('select[name=mem_mail2]').val();		
 		$('input[name=mem_email]').val(mem_email);
 
-		mem_email = $('input[name=mem_mail1]').val();
-		if(mem_email==''){
-				alert('이메일을 입력해주세요.');
-				return false;
-			}
-		
+		if (!mem_email.validationMAIL()) {
+			alert('이메일을 바르게 입력해주세요.');
+			return false;
+		}
+
 		$.ajax({
 			type : 'POST',
 			url : '${pageContext.request.contextPath}/mail/mailSending.do',
@@ -287,7 +314,7 @@ $(function(){
 			
 			<tr>
 				<td class="fieldName" width="100px" height="25">이 름</td>
-				<td><input type="text" name="mem_name" value="" /></td>
+				<td><input type="text" name="mem_name" id="mem_name" value="" /></td>
 			</tr>
 			
 			<tr>
