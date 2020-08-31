@@ -84,7 +84,7 @@ border: 1px solid #bcbcbc;
 			버스 번호 : <input type="text" id="routeid" class="routeid" name="routeid" >
 			<button type ="button" id="searchbtn">검색</button>
 			<button type ="button" id="registbtn">등록</button>
-			<div id="map" style=" width:1000px;height:700px; margin: 20px 20px 20px 30px; "></div>
+			<div id="map" style=" width:80%;height:700px; margin: 20px 20px 20px 30px; "></div>
 				<button type="button" id="searchBusStop" onclick="searchBusStop()">정류소 정보 보기</button> 지도위의 정류소를 클릭한 후 버튼을 클릭해주세요.
 			
 			<div id="information" style="overflow:scroll; width: 800px; height:200px;"></div>
@@ -169,24 +169,130 @@ var startx;
 var starty;
 var gpsLati;
 var gpsLong;
+var latitude;
+var longitude;
+
+navigator.geolocation.getCurrentPosition(function(pos) {
+    latitude = pos.coords.latitude;
+    longitude = pos.coords.longitude;
+    /* alert("현재 위치는 : " + latitude + ", "+ longitude); */
+});
+
 
    $(function(){
-
-		   
 		   var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 	       mapOption = { 
-	           center: new kakao.maps.LatLng(36.40457,127.304968), // 지도의 중심좌표
-	           level: 8 // 지도의 확대 레벨
+	           center: new kakao.maps.LatLng(latitude,longitude), // 지도의 중심좌표
+	           level: 3 // 지도의 확대 레벨
 	        };
 
-			
 	   	   var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
 
+			   	// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+			   	if (navigator.geolocation) {
+			   	    
+			   	    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+			   	    navigator.geolocation.getCurrentPosition(function(position) {
+			   	        
+			   	        var lat = position.coords.latitude, // 위도
+			   	            lon = position.coords.longitude; // 경도
+			   	        
+			   	        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+			   	            message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
+			   	        
+			   	        // 마커와 인포윈도우를 표시합니다
+			   	        displayMarker(locPosition, message);
+			   	            
+			   	      });
+			   	    
+			   	} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+			   	    
+			   	    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
+			   	        message = 'geolocation을 사용할수 없어요..'
+			   	        
+			   	    displayMarker(locPosition, message);
+			   	}
 
-	   	   
+			   	// 지도에 마커와 인포윈도우를 표시하는 함수입니다
+			   	function displayMarker(locPosition, message) {
+		
+			   	    // 마커를 생성합니다
+			   	    var marker = new kakao.maps.Marker({  
+			   	        map: map, 
+			   	        position: locPosition
+			   	    }); 
+			   	    
+			   	    var iwContent = message, // 인포윈도우에 표시할 내용
+			   	        iwRemoveable = true;
+		
+			   	    // 인포윈도우를 생성합니다
+			   	    var infowindow = new kakao.maps.InfoWindow({
+			   	        content : iwContent,
+			   	        removable : iwRemoveable
+			   	    });
+			   	    
+			   	    // 인포윈도우를 마커위에 표시합니다 
+			   	    infowindow.open(map, marker);
+			   	    
+			   	    // 지도 중심좌표를 접속위치로 변경합니다
+			   	    map.setCenter(locPosition);      
+			   	}    
+	   	
+
 	   		kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
-	   	    
+
+
+	   		// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+	   			if (navigator.geolocation) {
+	   			    
+	   			    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+	   			    navigator.geolocation.getCurrentPosition(function(position) {
+	   			        
+	   			        var lat = position.coords.latitude, // 위도
+	   			            lon = position.coords.longitude; // 경도
+	   			        
+	   			        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+	   			            message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
+	   			        
+	   			        // 마커와 인포윈도우를 표시합니다
+	   			        displayMarker(locPosition, message);
+	   			            
+	   			      });
+	   			    
+	   			} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+	   			    
+	   			    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
+	   			        message = 'geolocation을 사용할수 없어요..'
+	   			        
+	   			    displayMarker(locPosition, message);
+	   			}
+
+	   			// 지도에 마커와 인포윈도우를 표시하는 함수입니다
+	   			function displayMarker(locPosition, message) {
+
+	   			    // 마커를 생성합니다
+	   			    var marker = new kakao.maps.Marker({  
+	   			        map: map, 
+	   			        position: locPosition
+	   			    }); 
+	   			    
+	   			    var iwContent = message, // 인포윈도우에 표시할 내용
+	   			        iwRemoveable = true;
+
+	   			    // 인포윈도우를 생성합니다
+	   			    var infowindow = new kakao.maps.InfoWindow({
+	   			        content : iwContent,
+	   			        removable : iwRemoveable
+	   			    });
+	   			    
+	   			    // 인포윈도우를 마커위에 표시합니다 
+	   			    infowindow.open(map, marker);
+	   			    
+	   			    // 지도 중심좌표를 접속위치로 변경합니다
+	   			    map.setCenter(locPosition);      
+	   			}    
+	   			
 	   	    // 클릭한 위도, 경도 정보를 가져옵니다 
 	   	    var latlng = mouseEvent.latLng; 
 			console.log(latlng.getLat()+"_"+latlng.getLng());
@@ -260,7 +366,7 @@ var gpsLong;
 			         var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 			         mapOption = { 
 			             center: new kakao.maps.LatLng(startx, starty), // 지도의 중심좌표
-			             level: 8 // 지도의 확대 레벨
+			             level: 3 // 지도의 확대 레벨
 			         };
 			
 			     	 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -429,7 +535,7 @@ var gpsLong;
 			    var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 			    mapOption = { 
 			        center: new kakao.maps.LatLng(startx, starty), // 지도의 중심좌표
-			        level: 8 // 지도의 확대 레벨
+			        level: 4 // 지도의 확대 레벨
 			    };
 			
 				 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -487,7 +593,7 @@ var gpsLong;
 		               console.log(Result.response.body.items.item[0].nodenm)
 		               console.log(Result.response.body.items.item[0].citycode)
 				        }
-			        else if(Result.response.body.totalCount==0){
+			        else if(Result.response.body.totalCount==1){
 			        	busStopNodeid = Result.response.body.items.item.nodeid;
 		        		busStopcityCode	= Result.response.body.items.item.citycode;
 		               console.log(Result.response.body.items.item.nodeid)
@@ -500,6 +606,7 @@ var gpsLong;
 		        },
 		   }); //정류소목록 불러오기
 
+		   var html;
 		   $.ajax({
 			   	 async    : false,
 			        url     : '${pageContext.request.contextPath}/user/schedule/busStopInfo.do',
@@ -508,16 +615,23 @@ var gpsLong;
 			        dataType: 'json',
 			        success : function(Result) {
 			            console.log(Result)
+			            if(Result.response.body.totalCount==1){
+			            	html = "<h3>"+Result.response.body.items.item.routeno+"번 버스가 "+parseInt(Result.response.body.items.item.arrtime/60)+"분 "+Result.response.body.items.item.arrtime%60+"초 뒤에 진입예정입니다.</h3>";
+							$('#information').append(html);
+					    }
 				        for(var i=0; i<Result.response.body.totalCount; i++){
 							console.log(Result.response.body.items.item[i].routeno);
 							console.log(Result.response.body.items.item[i].arrtime);
-							var html = "<h3>"+Result.response.body.items.item[i].routeno+"번 버스가"+Result.response.body.items.item[i].arrtime+"초 뒤에 진입예정입니다.</h3>";
+							html = "<h3>"+Result.response.body.items.item[i].routeno+"번 버스가 "+parseInt(Result.response.body.items.item[i].arrtime/60)+"분 "+Result.response.body.items.item[i].arrtime%60+"초 뒤에 진입예정입니다.</h3>";
 							$('#information').append(html);
 					    }
 			        },
 			   }); //정류소목록 불러오기
 	   
    }
+
+
+   
 
 </script>
 </body>
