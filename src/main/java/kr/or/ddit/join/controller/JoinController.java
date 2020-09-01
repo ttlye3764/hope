@@ -75,6 +75,11 @@ public class JoinController {
 			return andView;
 		} else {
 			session.setAttribute("LOGIN_MEMBERINFO", memberInfo);
+			if(memberInfo.getMem_division().equals("1")) {
+				andView.addObject("json", 0);
+				andView.setViewName("jsonConvertView");
+				return andView;
+			}
 			if (memberInfo.getMem_temporary_pass() == null) {
 				andView.addObject("json", 1);
 				andView.setViewName("jsonConvertView");
@@ -83,7 +88,7 @@ public class JoinController {
 				// 포워드(컨텍스트 루트 | 패스 생략)
 				if (memberInfo.getMem_pass().equals(mem_pass)) { // 만약 임시비밀번호칸이 채워져있는데 본인비밀번호로 로그인 했을 경우
 					andView.addObject("json", 1);
-				} else {
+				} else { // 임시비밀번호로 로그인했을 경우
 					andView.addObject("json", 2);
 				}
 				this.service.deletePass(mem_id);
