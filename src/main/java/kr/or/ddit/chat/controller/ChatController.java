@@ -256,7 +256,7 @@ public class ChatController {
 	  	@RequestMapping("ocr")
 		  public static void detectText(HttpServletRequest request) throws IOException {
 		    // TODO(developer): Replace these variables before running the sample.
-		    String filePath = request.getSession().getServletContext().getRealPath("/image/ocr.png");
+		    String filePath = request.getSession().getServletContext().getRealPath("/image/ocrTest.png");
 		    detectText(filePath);
 		  }
 
