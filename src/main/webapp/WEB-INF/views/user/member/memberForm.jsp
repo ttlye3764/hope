@@ -28,12 +28,7 @@ td {
 .addr{
 	width : 250px;
 }
-.endbtn{
-	background-color: #4CBD94; 
-	color : white;
-	height : 40px;
-	width : 150px;
-}
+
 table{
 	margin-left: 40%;
 }
@@ -487,12 +482,9 @@ $(function(){
 			</tr>
 			<tr>
 				<td class="btnGroup" colspan="2">
-					<button	class="endbtn"
-						id="btn1" type="submit">가입하기
-					</button>
+					<input id="btn1" type="submit" value="가입"/>					
 					&nbsp;&nbsp;&nbsp;&nbsp;
-					<button	class="endbtn"
-						id="btn3" type="reset">취소
+					<button	id="btn3" type="button">취소
 					</button>
 				</td>
 			</tr>

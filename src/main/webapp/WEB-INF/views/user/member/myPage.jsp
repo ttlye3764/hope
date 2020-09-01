@@ -464,8 +464,8 @@ function execPostCode() {
 		</tr>                                                             
 			<td colspan='2'>                                              
 				<input type='submit' id="fix" value='수정' />                      
-				<input type='button' id="out" value='탈퇴' />                      
-				<input type='button' id="cancel" value='취소' />                         
+				<button type='button' id="out">탈퇴</button>             
+				<button type='button' id="cancel">취소</button>                
 			</td>                                                         
 		</tr>                                                             
 	</table>                                                              

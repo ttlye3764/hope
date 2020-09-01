@@ -108,7 +108,11 @@
         		}else if(result.json==2){
         			alert('임시비밀번호로 로그인하셨습니다. \n비밀번호 변경창으로 이동합니다.');
         			$(location).attr('href', '${pageContext.request.contextPath}/user/join/passChangeForm.do');
-            	}else{
+            	}else if(result.json==0){
+					alert('관리자님 환영합니다!');
+					$(location).attr('href', '${pageContext.request.contextPath}/admin/main/mainForm.do');
+                }
+            	else{
             		$('#label').text(result.json);
         			$('#label').css('color', 'red');
                 }
@@ -421,8 +425,7 @@
                   </div>
 
                   <div class="form-group text-center">
-                     <button class="endbtn"
-						id="searchUserID" type="button" onclick="searchID()">찾기
+                     <button id="searchUserID" type="button" onclick="searchID()">찾기
 					</button>
                   </div>
                </form>
@@ -498,8 +501,7 @@
                   </div>
 
                   <div class="form-group text-center">
-                     <button class="endbtn"
-						id="searchUserPW" type="button" onclick="searchPW()">
+                     <button id="searchUserPW" type="button" onclick="searchPW()">찾기
 					</button>
                   </div>
                </form>

@@ -67,9 +67,9 @@
 				</td>
 			</tr>
 			<tr>
-				<td align="center" valign="top"><input type="button" value="동의"
-					onclick="chk()" />&nbsp;&nbsp;&nbsp; <input type="button"
-					value="동의하지 않습니다" onclick="nochk()" /></td>
+				<td align="center" valign="top"><button type="button"
+					onclick="chk()">동의</button>&nbsp;&nbsp;&nbsp; 
+					<button type="button" onclick="nochk()" >동의하지 않습니다.</button></td>
 			</tr>
 		</table>
 	</form>
