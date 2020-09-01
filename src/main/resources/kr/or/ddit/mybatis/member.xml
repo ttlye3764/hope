@@ -54,11 +54,11 @@
 <!-- 		<include refid="searchCondition"/> -->
 <!-- 	</select> -->
 
-<!-- 	<update id="deleteMember" parameterClass="map"> -->
-<!-- 		UPDATE MEMBER -->
-<!-- 		SET MEM_DELETE = 'y' -->
-<!-- 		WHERE MEM_ID = #mem_id# -->
-<!-- 	</update> -->
+	<update id="deleteMember" parameterType="map">
+		UPDATE MEMBER
+		SET MEM_DELETE = 'y'
+		WHERE MEM_ID = #{mem_id}
+	</update>
 
 	<update id="updateMember" parameterType="memberVO">
 		UPDATE MEMBER
@@ -150,10 +150,3 @@
 		AND MEM_NICKNAME = #{mem_nick}
 	</select>
 </mapper>    
-
-
-
-
-
-
-

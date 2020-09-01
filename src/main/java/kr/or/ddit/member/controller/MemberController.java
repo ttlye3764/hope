@@ -95,17 +95,17 @@ public class MemberController {
 	@RequestMapping("deleteMemberForm")
 	public void deleteMemberForm() {}
 
-	// /user/member/deleteMemberInfo.do?user_id=a001
-	@RequestMapping("deleteMemberInfo/{user_id}")
-//	  public String deleteMember(@RequestParam(required=false, defaultValue="널 대체값") String mem_id,
-//			  					Map<String, String> params) throws Exception{
-// 			/user/member/deleteMemberInfo/a001.do
-	public String deleteMember(@PathVariable("user_id") String mem_id, Map<String, String> params) throws Exception {
-
+	@RequestMapping("deleteMember")
+	public ModelAndView deleteMember(@RequestParam String mem_id, Map<String, String> params, ModelAndView andView) throws Exception {
 		params.put("mem_id", mem_id);
 		this.service.deleteMemberInfo(params);
-
-		return "redirect:/user/member/memberList.do";
+		
+		String result = "성공적으로 처리되었습니다.";
+		
+		andView.addObject("json", result);
+		andView.setViewName("jsonConvertView");
+		
+		return andView;
 	}
 
 	@RequestMapping("memberForm")
@@ -122,24 +122,6 @@ public class MemberController {
 		return "redirect:/user/join/loginForm.do";
 	}
 
-//	  @RequestMapping("idCheck")
-//	  @ResponseBody
-//	  public String idCheck(@RequestParam String mem_id,
-//			  				Map<String, String> params,
-//			  				Map<String, String> jsonMap)throws Exception{
-//		  params.put("mem_id", mem_id);
-//		  
-//		  MemberVO memberInfo = this.service.memberInfo(params);
-//		  
-//		  if(memberInfo == null){
-//			  jsonMap.put("flag", "true");
-//		  }else{
-//			  jsonMap.put("flag", "false");
-//		  }
-//		  String jsonData = this.mapper.writeValueAsString(jsonMap);
-//		  
-//		  return jsonData;
-//	  }
 	@RequestMapping("idCheck")
 	public ModelAndView idCheck(@RequestParam String mem_id, Map<String, String> params) throws Exception {
 		params.put("mem_id", mem_id);
