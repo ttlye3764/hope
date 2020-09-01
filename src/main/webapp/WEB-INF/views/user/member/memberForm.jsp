@@ -8,17 +8,6 @@
 <title>회원가입</title>
 </head>
 <style>
-.fieldName {
-	text-align: center;
-	background-color: #f4f4f4;
-	margin-top : 10px;
-}
-
-.tLine {
-	background-color: #d2d2d2;
-	height: 1px;
-}
-
 td {
 	text-align: left;
 	border-right:none;
@@ -411,7 +400,7 @@ $(function(){
 <div class="wrap-loading display-none">
     <div><img src="../../image/Progress_Loading.gif"/></div>
 </div> 
-	<form name="memberForm" style="width:100%" method="post">
+	<form name="memberForm" method="post">
 	<input type="hidden" name="mem_division" value="0"> 
 		<table style="border: none" align="center">
 			<tr>
