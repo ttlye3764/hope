@@ -119,11 +119,11 @@ $(function(){
 				return false;
 			}
 
-			var name = $('#mem_name').val();
-			if (!name.validationNAME()) {
-				alert('올바른 이름을 입력해주세요.')
-				return false;
-			}
+// 			var name = $('#mem_name').val();
+// 			if (!name.validationNAME()) {
+// 				alert('올바른 이름을 입력해주세요.')
+// 				return false;
+// 			}
 			var mem_birth =	$('input[name=mem_birth]').val();
 			
 			if (!mem_birth.validationBIR()) {
@@ -154,20 +154,11 @@ $(function(){
 		
 			$(this).attr('action','${pageContext.request.contextPath}/user/member/insertMemberInfo.do');
 
-			var mem_hp = $('select[name=mem_hp1]').val() + '-'
-								+ $('input[name=mem_hp2]').val() + '-'
-								+ $('input[name=mem_hp3]').val();
-						$('input[name=mem_hp]').val(mem_hp);
-
-			var mem_email = $('input[name=mem_mail1]').val()
-								+ '@' + $('select[name=mem_mail2]').val();
-						$('input[name=mem_email]').val(mem_email);
-
 			var mem_zip = $('input[name=mem_zip1]').val();
 				$('input[name=mem_zip1]').val(mem_zip);
 				$('input[name=mem_zip2]').val(mem_zip);
 
-				var mem_addr = $('#mem_addr1').val();
+			var mem_addr = $('#mem_addr1').val();
 				$('input[name=mem_addr1]').val(mem_addr);
 
 				return true;
@@ -245,11 +236,8 @@ $(function(){
 	};
 
 	function sendsms() {
-		var mem_hp = $('select[name=mem_hp1]').val() + '-'
-				+ $('input[name=mem_hp2]').val() + '-'
-				+ $('input[name=mem_hp3]').val();
-		$('input[name=mem_hp]').val(mem_hp);
-
+		var mem_hp = $('input[name=mem_hp]').val();
+		
 		if (!mem_hp.validationHP()) {
 			alert('휴대전화번호를 바르게 입력해주세요.');
 			return false;
@@ -273,10 +261,7 @@ $(function(){
 	};
 	
 	function checksms() {
-		var mem_hp = $('select[name=mem_hp1]').val() + '-'
-				+ $('input[name=mem_hp2]').val() + '-'
-				+ $('input[name=mem_hp3]').val();
-		$('input[name=mem_hp]').val(mem_hp);
+		var mem_hp = $('input[name=mem_hp]').val();
 
 		hp_num = $('input[name=hp_num]').val();
 		
@@ -299,8 +284,7 @@ $(function(){
 	};
 
 	function mailSending() {
-		var mem_email = $('input[name=mem_mail1]').val() + '@' + $('select[name=mem_mail2]').val();		
-		$('input[name=mem_email]').val(mem_email);
+		var mem_email = $('input[name=mem_email]').val();	
 
 		if (!mem_email.validationMAIL()) {
 			alert('이메일을 바르게 입력해주세요.');
@@ -330,8 +314,7 @@ $(function(){
 	};
 
 	function mailCheck() {
-		var mem_email = $('input[name=mem_mail1]').val() + '@' + $('select[name=mem_mail2]').val();		
-		$('input[name=mem_email]').val(mem_email);
+		var mem_email = $('input[name=mem_email]').val();
 		
 		$.ajax({
 			type : 'POST',
@@ -415,15 +398,16 @@ $(function(){
 </div> 
 	<form name="memberForm" style="width:100%" method="post">
 	<input type="hidden" name="mem_division" value="0"> 
-		<table style="border: none">
+		<table style="border: none" align="center">
 			<tr>
-				<td colspan="2"><h2>회원가입</h2></td>
+				<td colspan="3" align="center"><h3>회원가입</h3></td>
 			</tr>
 			<tr>				
 				<td width="150px" height="25" class="idright">아이디</td>
 				<td>
 				<input type="text" class="form-control" id="mem_id" name="mem_id" onkeyup="idCheck()"/>&nbsp;<label id="idlabel"></label>
 				</td>
+				<td width="150px"></td>
 			</tr>
 			<tr>
 				<td width="150px" height="25" class="idright">비밀번호</td>

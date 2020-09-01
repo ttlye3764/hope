@@ -81,30 +81,46 @@ function pwcheck(){
 	height : 30px;
 	width : 80px;
 }
+tr{
+	border-right:none;
+	border-left:none;
+	border-top:none;
+	border-bottom:none;
+	margin : 10px;
+	padding : 10px;
+}
+td{
+	border-right:none;
+	border-left:none;
+	border-top:none;
+	border-bottom:none;
+	margin : 10px;
+	padding : 10px;
+}
+.idright{
+	text-align:right;
+}
 </style>
 </head>
 <body>
 <div align="center">
 <h3>비밀번호 변경</h3>
 	<table width="500px">
-		<tr><td></td></tr>
-		<tr><td></td></tr>
-		<tr><td></td></tr>
 		<tr>
-			<td class="fieldName" width="100px" height="25">비밀번호</td>
+			<td class="fieldName" width="120px" height="25" class="idright">비밀번호</td>
 			<td><input type="password" name="mem_pass" id="mem_pass" onkeyup="pwcheck()" 
 			class="form-control"/></td>
 		</tr>
 
 		<tr>
-			<td class="fieldName" width="100px" height="25">비밀번호확인</td>
+			<td class="fieldName" width="120px" height="25" class="idright">비밀번호확인</td>
 			<td><input type="password" name="mem_pass_confirm" id="pass2" onkeyup="pwcheck()" 
 			class="form-control"/> <label id="passchecklb"></label></td>
 		</tr>
 	</table>
-	<button	class="endbtn" id="btn1" type="submit">변경 </button>
+	<input id="btn1" type="submit" value="변경">
 					&nbsp;&nbsp;&nbsp;&nbsp;
-	<button	class="endbtn" id="btn3" type="reset">취소 </button>
+	<button	id="btn3" type="button">취소 </button>
 </div>
 </body>
 </html>

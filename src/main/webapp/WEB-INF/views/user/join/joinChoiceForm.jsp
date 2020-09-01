@@ -31,10 +31,6 @@
 	<form action="${pageContext.request.contextPath}/user/member/memberForm.do" name="form" method="post">
 		<table width="900" height="650">
 			<tr>
-				<td width="100%" height="10%"><br>
-					<hr></td>
-			</tr>
-			<tr>
 				<td width="100%" height="50%" align="center">
 					<p align="left">
 						<span style="padding-left: 160px">
