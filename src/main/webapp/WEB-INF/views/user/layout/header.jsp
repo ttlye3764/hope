@@ -13,6 +13,7 @@ function LogOut(){
 			location.reload(true);
 		}
 	});
+}
 
 </script>
 
