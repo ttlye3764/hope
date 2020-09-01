@@ -2,51 +2,11 @@
 	pageEncoding="UTF-8"%>
 
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<!-- 부트스트랩 -->
-	<!-- Favicon -->
-	<link rel="shortcut icon" href="${pageContext.request.contextPath }/resources/template/assets/images/favicon.ico">
-
-	<!-- Google Font -->
-	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900%7CPlayfair+Display:400,400i,700,700i%7CRoboto:400,400i,500,700" rel="stylesheet">
-
-	<!-- Plugins CSS -->
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/font-awesome/css/font-awesome.min.css" />
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/themify-icons/css/themify-icons.css" />
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/animate/animate.min.css" />
-
-	<!-- Theme CSS -->
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/css/style.css" />
-	
-	<script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
-
-<!-- 부트스트랩 -->
-	<!--Global JS-->
-	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/jquery/jquery.min.js"></script>
-	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/popper.js/umd/popper.min.js"></script>
-	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-
-
-
-
 
 
 <!-- timepicker -->
-<link
-	href='${pageContext.request.contextPath }/resources/timepicker/jquery.datetimepicker.min.css'
-	rel='stylesheet' />
-<!-- 캘린더 -->
-<link
-	href='${pageContext.request.contextPath }/resources/fullcalendar-5.3.0/lib/main.css'
-	rel='stylesheet' />
-<link
-	href='${pageContext.request.contextPath }/resources/fullcalendar-5.3.0/lib/main.min.css'
-	rel='stylesheet' />
+
+	
 <!-- 캘린더 -->
 <script
 	src='${pageContext.request.contextPath }/resources/fullcalendar-5.3.0/lib/main.js'></script>
@@ -55,10 +15,13 @@
 <script
 	src='${pageContext.request.contextPath }/resources/fullcalendar-5.3.0/lib/locales-all.js'></script>
 <script
-	src='${pageContext.request.contextPath }/resources/fullcalendar-5.3.0/lib/locales-all.min.js'></script>
+	src='${pageContext.request.contextPath }/resources/fullcalendar-5.3.0/lib/locales-all.min.js'></script>	
 <!-- timepicker -->
-<script
-	src='${pageContext.request.contextPath }/resources/timepicker/jquery.datetimepicker.full.js'></script>
+<script>
+	src='${pageContext.request.contextPath }/resources/timepicker/jquery.datetimepicker.full.js'>
+</script>
+	
+	
 <style type="text/css">
 .calendarClass{
 	width: 50%;
@@ -281,16 +244,8 @@ function setCalendar(data){
      });//캘린더
      calendar.render();
 }
-
-
-
-
-
-
 </script>
-</head>
-<body>
-  
+
   
 	<div id='calendar' class="calendarClass"></div>
 
@@ -419,11 +374,10 @@ function setCalendar(data){
 
 
 
-</body>
+
 
 <script>
    $("#s_enddate").datetimepicker();
    $("#s_startdate").datetimepicker();
 </script>
 
-</html>
