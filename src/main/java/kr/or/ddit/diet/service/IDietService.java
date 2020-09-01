@@ -20,4 +20,7 @@ public interface IDietService {
 		
 		//메뉴 테이블 리스트
 		public List<MenuVO> menuList(Map<String, String> params) throws Exception;
+		
+		// diet_mem 테이블 조회
+		public List<Diet_memVO> dietMemList(Map<String, String> params) throws Exception;
 }

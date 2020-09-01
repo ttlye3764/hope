@@ -76,7 +76,19 @@ public class DietController {
 	} 
 	
 	@RequestMapping("diet_my")
-	public void diet_my(){}
+	public ModelAndView diet_my(ModelAndView andView,
+								Map<String, String> params) throws Exception{
+		params.put("mem_no", "1");
+		
+		List<Diet_memVO> dietMemList = dietService.dietMemList(params);
+		
+		Diet_memVO dietMemLast = dietMemList.get(dietMemList.size()-1);
+		
+		andView.addObject("dietMemLast", dietMemLast);
+		andView.addObject("dietMemList", dietMemList);
+		andView.setViewName("user/diet/diet_my");
+		return andView;
+	}
 	
 	@RequestMapping("recommendDiet")
 	public void recommendDiet() {}

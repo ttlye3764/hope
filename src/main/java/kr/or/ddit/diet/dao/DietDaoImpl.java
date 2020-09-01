@@ -37,4 +37,9 @@ public class DietDaoImpl implements IDietDao {
 	public List<MenuVO> menuList(Map<String, String> params) throws Exception {
 		return client.selectList("diet.menuList", params);
 	}
+	
+	// diet_mem 테이블 조회
+	public List<Diet_memVO> dietMemList(Map<String, String> params) throws Exception{
+		return client.selectList("diet.dietMemList", params);
+	}
 }

@@ -12,7 +12,7 @@
 						)
 	</insert>
 	
-	<insert id="insertDietMem" parameterType="diet_memVO">
+	<insert id="insertDietMem" parameterType="dietMemVO">
 		INSERT INTO DIET_MEM(DM_NO,
 							HEIGHT,
 	 						DATE,
@@ -41,7 +41,15 @@
     	]]>
 		</if>
 	</select>
+	
+	<select id="dietMemList" resultType="dietMemVO" parameterType="Map">
+		SELECT *
+		FROM DIET_MEM
+		WHERE MEM_NO = #{mem_no}
+	</select>
 </mapper>
+
+
 	
 
 	

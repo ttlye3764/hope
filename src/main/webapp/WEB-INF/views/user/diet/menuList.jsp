@@ -51,6 +51,12 @@
 					<!-- Post item  with image-->
 					
 					<h5 class="widget-title">메뉴 리스트</h5>
+					<div class="input-group">
+								<input type="text" class="form-control" placeholder="검색어를 입력해주요">
+								<span class="input-group-btn">
+									<button type="submit" class="btn btn-grad mb-0"><i class="fa fa-paper-plane m-0"></i></button>
+								</span>
+							</div>
 					<table class="table table-lg table-noborder table-striped">
 							<thead class="all-text-white bg-grad">
 								<tr>
@@ -71,12 +77,7 @@
 								</c:forEach>
 							</tbody>
 						</table>
-						<div class="input-group">
-								<input type="text" class="form-control" placeholder="검색어를 입력해주요">
-								<span class="input-group-btn">
-									<button type="submit" class="btn btn-grad mb-0"><i class="fa fa-paper-plane m-0"></i></button>
-								</span>
-							</div>
+						
 					<!-- pagination -->
 					<div class="container mb-6">
 						<div class="row justify-content-center">

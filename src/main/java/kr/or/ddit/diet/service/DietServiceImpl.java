@@ -37,4 +37,9 @@ public class DietServiceImpl implements IDietService {
 	public List<MenuVO> menuList(Map<String, String> params) throws Exception {
 		return dietDao.menuList(params);
 	}
+	
+	@Override
+	public List<Diet_memVO> dietMemList(Map<String, String> params) throws Exception {
+		return dietDao.dietMemList(params);
+	}
 }

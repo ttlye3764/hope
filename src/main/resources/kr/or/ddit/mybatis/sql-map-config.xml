@@ -16,7 +16,7 @@
 		<typeAlias alias="messageVO" type="kr.or.ddit.vo.MessageVO"/>
 		<typeAlias alias="participationVO" type="kr.or.ddit.vo.ParticipationVO"/>
 		<typeAlias alias="dietVO" type="kr.or.ddit.vo.DietVO"/>
-		<typeAlias alias="diet_memVO" type="kr.or.ddit.vo.Diet_memVO"/>
+		<typeAlias alias="dietMemVO" type="kr.or.ddit.vo.Diet_memVO"/>
 		<typeAlias alias="menuVO" type="kr.or.ddit.vo.MenuVO"/>
 		
 		<!-- 용춘 -->
