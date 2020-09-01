@@ -85,6 +85,21 @@ table{
 <script src="/resources/js/addressapi.js"></script>
 <script type="text/javascript">
 $(function(){
+	$("#mem_hp").keyup(function(e){
+		if(e.keyCode == 8){
+			var code = $('input[name=mem_hp]').val();
+			var lastChar = code.charAt(code.length-1);
+			if(lastChar == '-'){
+				code = code.substr(0,code.length-1);
+				$('input[name=mem_hp]').val(code);
+			}
+		}else{
+			var hp = $('input[name=mem_hp]').val();
+			if(hp.length == 3 || hp.length == 8){
+				$('input[name=mem_hp]').val(hp + "-");
+			}
+		}
+	});
 	$('form[name=memberForm]').submit(function() {
 		var idcheck = $('#idlabel').text();
 		var emailcheck = $('#emaillabel').text();
@@ -458,7 +473,7 @@ $(function(){
 				<td width="150px" height="25" class="idright">휴대전화</td>
 				<td>
 				<div class="input-group mb-3" style="width:350px">
-				<input type="text" name="mem_hp" class="form-control" placeholder="010-1234-5678" onchange="smschange()"/> 
+				<input type="text" name="mem_hp" id="mem_hp" class="form-control" placeholder="- 빼고 입력" onchange="smschange()"/> 
 				<a href="javascript:sendsms();">[인증번호 전송]</a></div>
 				<input type="text" class="form-control" name="hp_num" onkeyup="checksms()"/>
 				<label id="hplabel"></label>
