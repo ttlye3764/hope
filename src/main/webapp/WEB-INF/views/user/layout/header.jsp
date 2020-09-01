@@ -219,25 +219,20 @@ function LogOut(){
 							<a class="nav-link dropdown-toggle" href="#" id="portfolioMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Schedule</a>
 							<ul class="dropdown-menu" aria-labelledby="portfolioMenu">
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/schedule.do">일정관리</a> </li>
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/dday.do">D-day</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/dday.do">일정리스트</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/bis.do">자주타는 버스</a> </li>
-								<li> <a class="dropdown-item" href="portfolio-grid-column-4.html">Portfolio Column 4</a> </li>
-								<li> <a class="dropdown-item" href="portfolio-grid-column-5.html">Portfolio Column 5</a> </li>
-								<li> <a class="dropdown-item" href="portfolio-grid-column-6.html">Portfolio Column 6</a> </li>
-								<li> <a class="dropdown-item" href="portfolio-single.html">Portfolio Single</a> </li>
-								<li> <a class="dropdown-item" href="portfolio-single-02.html">Portfolio Single 2</a> </li>
-								<li> <a class="dropdown-item" href="portfolio-case-studies.html">Portfolio case studies <span class="badge badge-success ml-2">Hot</span></a> </li>
+								
 							</ul>
 						</li>
 						<!-- Menu item 5 Elements-->
 						<li class="nav-item dropdown megamenu">
-							<a class="nav-link dropdown-toggle" href="#" id="elementsMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Elements</a>
+							<a class="nav-link dropdown-toggle" href="#" id="elementsMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Asset management</a>
 							<div class="dropdown-menu" aria-labelledby="elementsMenu" style="background-image:url(assets/images/menu-bg.jpg); background-position: right bottom; background-repeat: no-repeat;">
 								<div class="container">
 									<div class="row w-100">
 										<div class="col-sm-6 col-lg-3">
 											<ul class="list-unstyled">
-												<li> <a class="dropdown-item" href="elements-accordion.html">Accordion</a> </li>
+												<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/accountBook/setting.do">자산관리</a> </li>
 												<li> <a class="dropdown-item" href="elements-action-box.html">Action box</a> </li>
 												<li> <a class="dropdown-item" href="elements-alerts.html">Alerts</a> </li>
 												<li> <a class="dropdown-item" href="elements-animated-headlines.html">Animated Headlines</a> </li>
