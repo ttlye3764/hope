@@ -1,6 +1,8 @@
 package kr.or.ddit.accountBook.dao;
 
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -27,6 +29,11 @@ public class DealDaoImpl implements IDealDao{
 	         e.printStackTrace();
 	      }
 	      return cnt; 
+	}
+
+	@Override
+	public List<DealVO> dealList(String mem_no) throws Exception {
+		return client.selectList("deal.dealList",mem_no);
 	}
 	
 

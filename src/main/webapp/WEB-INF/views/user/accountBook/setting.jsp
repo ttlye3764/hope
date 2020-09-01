@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
 $(function(){
-	$('#registBtn').click(function(){
+		 alert($("#accountTable > tbody > tr:nth-last-child(n) > th").textContent);
 		
+	
+			
+	$('#registBtn').click(function(){
 		paymentOption = $('#paymentOption option:selected').val();
 		paymentMethod = $('#paymentMethod option:selected').val();
 		date = $('#date').val();
@@ -16,6 +20,7 @@ $(function(){
 	        type    : 'post',
 	        data : {'deal_option':paymentOption,'deal_kind':paymentMethod,'deal_date':date,'deal_name':item,'deal_price':price, 'mem_no':2},
 	        success : function(Result) {
+		        alert(count);
 	          $('#accountTable').append('<tr><td></td><td>'+date+'</td><td>'+item+'</td><td>'+price+'</td><td>'+paymentMethod+'</td><td><button id="deleteBtn" type="button">삭제</button></td></tr>');
 	           
 	        }
@@ -89,46 +94,16 @@ $(function(){
 														</tr>
 													</thead>
 													<tbody>
+														<c:forEach var="dealVO" items="${dealList }" varStatus="status">
 															<tr>
-																<td> </td>
-																<td>a</td>
-									 							<td>a</td>
-									 							<td>b</td>
-									 							<td>c</td>
-									 							<td><button id="deleteBtn" type="button">삭제</button></td>
+																<th>${status.count }</th>
+									 							<td>${dealVO.deal_date }</td>
+									 							<td>${dealVO.deal_name}</td>
+									 							<td>${dealVO.deal_price}</td>
+									 							<td>${dealVO.deal_kind}</td>
+									 							<td><button id="deleteBtn" type="button" value="${dealVO.deal_no }" onclick="deletebtn(${dealVO.deal_no })">삭제</button></td>
 									                        </tr>        
-															<tr>
-																<td> </td>
-																<td>a</td>
-									 							<td>a</td>
-									 							<td>b</td>
-									 							<td>c</td>
-									 							<td><button id="deleteBtn" type="button">삭제</button></td>
-									                        </tr>        
-															<tr>
-																<td> </td>
-																<td>a</td>
-									 							<td>a</td>
-									 							<td>b</td>
-									 							<td>c</td>
-									 							<td><button id="deleteBtn" type="button">삭제</button></td>
-									                        </tr>        
-															<tr>
-																<td> </td>
-																<td>a</td>
-									 							<td>a</td>
-									 							<td>b</td>
-									 							<td>c</td>
-									 							<td><button id="deleteBtn" type="button">삭제</button></td>
-									                        </tr>        
-															<tr>
-																<td> </td>
-																<td>a</td>
-									 							<td>a</td>
-									 							<td>b</td>
-									 							<td>c</td>
-									 							<td><button id="deleteBtn" type="button">삭제</button></td>
-									                        </tr>        
+														</c:forEach>
 													</tbody>	
 												</table>
                                                 

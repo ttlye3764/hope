@@ -32,6 +32,12 @@
                )
          
    </insert>
+   
+   <select id="dealList" resultType="dealVO" parameterType="String">
+		SELECT *
+		FROM deal
+		WHERE MEM_NO = #{mem_no}
+	</select>
 
 </mapper>    
 
