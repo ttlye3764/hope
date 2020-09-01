@@ -138,6 +138,9 @@ public class MedicalController {
 	@RequestMapping("medicalList")
 	public void medicalList() {
 	}
+	@RequestMapping("corona")
+	public void corona() {
+	}
 
 	@RequestMapping("insertMedicalInfo")
 	public ModelAndView insertMedicalInfo(ModelAndView andView, MypillVO mypillInfo,

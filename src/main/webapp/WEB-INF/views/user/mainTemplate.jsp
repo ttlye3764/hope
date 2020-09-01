@@ -90,6 +90,46 @@ function LogOut(){
 	<!-- dietSide javascript -->
 	<script type="text/javascript" src="${pageContext.request.contextPath }/script/dietSide.js"></script>
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<link
+	href='${pageContext.request.contextPath }/resources/timepicker/jquery.datetimepicker.min.css'
+	rel='stylesheet' />
+	<!-- 캘린더 -->
+	<link
+	href='${pageContext.request.contextPath }/resources/fullcalendar-5.3.0/lib/main.css'
+	rel='stylesheet' />
+	<link
+	href='${pageContext.request.contextPath }/resources/fullcalendar-5.3.0/lib/main.min.css'
+	rel='stylesheet' />
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 용춘 css -->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/styles/yc.css" />
+	
 </head>
 
 <body>

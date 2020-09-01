@@ -1,272 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<style>
-#searchTable td, #searchTable th {
-	border: 1px solid #dddddd;
-	text-align: left;
-	padding: 8px;
-}
-
-#searchTable ul {
-	list-style: none outside none;
-}
-
-.idty {
-	margin: 0;
-	padding: 0;
-}
-
-.idty input {
-	display: none;
-}
-
-.idty li {
-	margin-left: 10px;
-	margin-top: 5px;
-	padding: 0 0 0 0;
-	border: 1px solid #d8d6d6;
-	float: left;
-	width: 50px;
-	text-align: center;
-	border-radius: 4px;
-}
-
-#searchTable th {
-	width: 100px;
-	text-align: center;
-}
-
-#searchTable td {
-	width: 300px;
-	text-align: center;
-}
-
-.idty span {
-	width: 100%;
-	height: 30px;
-	display: block;
-}
-
-.li_style:hover {
-	cursor: pointer;
-	border: 1px solid rgb(74, 186, 238);
-}
-
-#searchForm {
-	margin-left: 15%;
-	margin-right: 15%;
-}
-
-#pname, #cname {
-	margin-top: 20px;
-	width: 100%;
-}
-
-#searchTable {
-	width: 100%;
-}
-
-<!--
-리스트-------------------------------------------------------------------------------------------->#table-list-tr th ul li
-	{
-	text-align: center;
-}
-
-#list tr {
-	text-align: center;
-}
-
-#list-ul {
-	list-style: none;
-	text-align: center;
-}
-
-.table-list-container {
-	max-width: 800px;
-	margin: 20px auto;
-	background-color: #ffffff;
-	border: 1px solid #d2d2d2;
-	position: relative;
-	z-index: 0;
-}
-
-@media ( max-width : 640px ) {
-	.table-list-container {
-		border-width: 1px 0;
-	}
-}
-
-.table-list {
-	min-height: 176px;
-}
-
-.table-list th {
-	border-bottom: .6px solid #d2d2d2;
-}
-
-.table-list td {
-	white-space: nowrap;
-	height: 1.75rem;
-	vertical-align: top;
-	padding: 10px;
-	border-bottom: 1px solid #d2d2d2;
-}
-
-.table-list tr:last-child td {
-	height: auto;
-}
-
-th button.sort {
-	text-align: left;
-	padding: 0 10px;
-	line-height: 1.75rem;
-	border: none;
-	background: none;
-	display: block;
-	width: 100%;
-	font-size: 12px;
-	color: #888;
-	border-bottom: 1px solid transparent;
-}
-
-th button.sort.textcenter, th button.sort.text-center {
-	text-align: center;
-}
-
-th button.sort.textright, th button.sort.text-right {
-	text-align: right;
-}
-
-button.sort .bullet {
-	margin-top: 13px;
-}
-
-.table-list .caret:after {
-	content: "";
-}
-
-.asc .caret:after {
-	width: 0;
-	height: 0;
-	border-left: 3px solid transparent;
-	border-right: 3px solid transparent;
-	border-top: 3px solid #808080;
-	content: "";
-	position: relative;
-	top: -3px;
-	right: -4px;
-	font-size: 0;
-}
-
-.desc .caret:after {
-	width: 0;
-	height: 0;
-	border-left: 3px solid transparent;
-	border-right: 3px solid transparent;
-	border-bottom: 3px solid #808080;
-	content: "";
-	position: relative;
-	top: -4px;
-	right: -4px;
-	font-size: 0;
-}
-
-button.sort .caret {
-	display: none;
-}
-
-button.sort.asc .caret {
-	display: inline-block;
-}
-
-button.sort.desc .caret {
-	display: inline-block;
-}
-
-.table-footer {
-	background-color: #fff;
-	margin-top: -1px;
-	position: relative;
-	z-index: -1;
-}
-
-.table-search {
-	width: 310px;
-	border-left: 1px solid #d2d2d2;
-}
-
-.table-search .search {
-	width: 100%;
-	border: none;
-	background: transparent;
-	box-shadow: none;
-}
-
-.table-pagination {
-	white-space: nowrap;
-}
-
-.table-pagination:after {
-	display: block;
-	content: "";
-	clear: both;
-}
-
-.jPaginateBack, .jPaginateNext, .table-list-container .pagination {
-	float: left;
-}
-
-.jPaginateBack, .jPaginateNext {
-	line-height: 1.75rem;
-	width: 1.75rem;
-	text-align: center;
-	user-select: none;
-}
-
-.jPaginateBack .material-icons, .jPaginateNext .material-icons {
-	display: block;
-	font-size: 16px;
-	line-height: inherit;
-}
-
-.li_selected {
-	border: 1px solid rgb(110, 63, 219) !important;
-}
-
-.clickPagination {
-	color: rgb(177, 113, 236);
-}
-
-.infotable {
-	border: 1px solid black !important;
-}
-
-.infotable tr, .infotable td, .infotable th {
-	border: 1px solid #d2d2d2 !important;
-	height: auto;
-}
-
-.infotable li {
-	list-style: none;
-}
-
-.infotable tbody tr th {
-	width: 230px;
-}
-#infotable td{
-	width: 380px;
-}
-</style>
-<script>
 
 
-  
-	
+<script>	
 	function callAjax(i){
 		/* $('.pagination li').click(function(){
 			$(this).find('font').addClass('clickPagination');
@@ -645,20 +382,34 @@ button.sort.desc .caret {
 			});
 		}
 	
-
+	
 	$(function() {
-		$('.list tr').on('click', function(){
+		$('#cancleBTN').on('click',function(){
+			$('#pname').val('');
+			$('#cname').val('');
+			$("input:checkbox[name='shapes']").prop("checked", false);
+			$("input:checkbox[name='colors']").prop("checked", false);
+			$("input:checkbox[name='lines']").prop("checked", false);
+			$("input[name='shapes']").removeClass('li_selected');
+			$("input[name='colors']").removeClass('li_selected');
+			$("input[name='lines']").removeClass('li_selected');
+
+			var div = document.getElementByName('shapes');
+			for(i in div){ i.removeClass('li_selected'); }
+			
+
+		});
+
+		$('.list tr').on('click', function() {
 			var pi_no = $(this).find('input').val();
 			getpillAPI(pi_no);
-		 });
+		});
 		/* $('.list tr').click(function(){
 			var pi_no = $(this).find('input').val();
 			alert(pi_no);
 			//$(location).attr('href', '${pageContext.request.contextPath}/user/freeboard/freeboardView.do?bo_no=' + bo_no + '&rnum=' + rnum);
 		}); */
 
-		
-		
 		$('.idty li').click(function() {
 			if ($(this).hasClass('li_selected')) {
 				$(this).removeClass('li_selected');
@@ -668,73 +419,115 @@ button.sort.desc .caret {
 				$(this).find('input[type="checkbox"]').prop("checked", true);
 			}
 		})
-       
 
-		$('#searchBTN').click(function(){
-			/* $('.pagination li').click(function(){
-				$(this).find('font').addClass('clickPagination');
+		$('#searchBTN')
+				.click(
+						function() {
+							/* $('.pagination li').click(function(){
+								$(this).find('font').addClass('clickPagination');
 
-			}); */
-			var shapes = [];
-			var colors = [];
-			var lines = [];
-			var pname = $("input[id='pname']").val();
-			var	cname = $("input[id='cname']").val();
-	        $('input[name="shapes"]:checked').each(function(i){
-	        	shapes.push($(this).val());
-	        });
-	        $('input[name="colors"]:checked').each(function(i){
-	        	colors.push($(this).val());
-	        });
-	        $('input[name="lines"]:checked').each(function(i){
-	        	lines.push($(this).val());
-	        });
-			
-			 $.ajax({
-	             url     : '${pageContext.request.contextPath}/user/medical/searchPillJson.do',
-	             type    : 'post',
-	             dataType: 'json',
-	             data : {'shapes':shapes, 'colors':colors, 'pname':pname,'cname':cname, 'lines':lines },
-	             success : function(result) { 
-	            	  $('.list').empty();
-	            	  $('#paginationDIV').empty();
-	            	  $('#paginationDIV').append(result.pagination);
-			
-					  $.each(result.list, function(index, item){						 
-						  var newTr = $('<tr data-timestamp="1509426000" data-status="3" style="height: 60px;"></tr>');			 
-						  newTr.append('<input type="hidden" value="'+item.pi_no+'"/>');
-						  newTr.append('<td class="" style="height: 60px;"><img alt="" src="'+item.pi_bigimg+'" style="width: 96px; height: 71px;"></td>');
-						  var fmark = item.pi_f_mark;
-						  var bmark = item.pi_b_mark;
-						  if(fmark == null){
-						  	fmark = " ";
-						  }
-						  if(bmark == null){
-						  	bmark = " ";
-						  }
-						  var mark = fmark.concat("/");
-						  mark = mark.concat(bmark);
-						  newTr.append('<td class="" style="height: 60px; text-align:center; ">'+mark+'</td>');						 
-						  newTr.append('<td class="" style="height: 60px;">'+item.pi_shape_name+'</td>');
-						  newTr.append('<td class="" style="height: 60px;">'+item.pi_x_size+'</td>');
-						  newTr.append('<td class="" style="height: 60px;">'+item.pi_y_size+'</td>');
-						  newTr.append('<td class="" style="height: 60px;">'+item.pi_z_size+'</td>');
-						  newTr.append('<td class="" style="height: 60px;">'+item.pi_name+'</td>');
-						  newTr.append('<td class="" style="height: 60px;">'+item.pi_b_name+'</td>');
+							}); */
+							var shapes = [];
+							var colors = [];
+							var lines = [];
+							var pname = $("input[id='pname']").val();
+							var cname = $("input[id='cname']").val();
+							$('input[name="shapes"]:checked').each(function(i) {
+								shapes.push($(this).val());
+							});
+							$('input[name="colors"]:checked').each(function(i) {
+								colors.push($(this).val());
+							});
+							$('input[name="lines"]:checked').each(function(i) {
+								lines.push($(this).val());
+							});
 
-						  $('.list').append(newTr);
-					  })
-					  $('.list tr').on('click', function(){
-							var pi_no = $(this).find('input').val();
-							getpillAPI(pi_no);
-					  });
-	  			}
-	  		});
-		})
+							$
+									.ajax({
+										url : '${pageContext.request.contextPath}/user/medical/searchPillJson.do',
+										type : 'post',
+										dataType : 'json',
+										data : {
+											'shapes' : shapes,
+											'colors' : colors,
+											'pname' : pname,
+											'cname' : cname,
+											'lines' : lines
+										},
+										success : function(result) {
+											$('.list').empty();
+											$('#paginationDIV').empty();
+											$('#paginationDIV').append(
+													result.pagination);
+
+											$
+													.each(
+															result.list,
+															function(index,
+																	item) {
+																var newTr = $('<tr data-timestamp="1509426000" data-status="3" style="height: 60px;"></tr>');
+																newTr
+																		.append('<input type="hidden" value="'+item.pi_no+'"/>');
+																newTr
+																		.append('<td class="" style="height: 60px;"><img alt="" src="'+item.pi_bigimg+'" style="width: 96px; height: 71px;"></td>');
+																var fmark = item.pi_f_mark;
+																var bmark = item.pi_b_mark;
+																if (fmark == null) {
+																	fmark = " ";
+																}
+																if (bmark == null) {
+																	bmark = " ";
+																}
+																var mark = fmark
+																		.concat("/");
+																mark = mark
+																		.concat(bmark);
+																newTr
+																		.append('<td class="" style="height: 60px; text-align:center; ">'
+																				+ mark
+																				+ '</td>');
+																newTr
+																		.append('<td class="" style="height: 60px;">'
+																				+ item.pi_shape_name
+																				+ '</td>');
+																newTr
+																		.append('<td class="" style="height: 60px;">'
+																				+ item.pi_x_size
+																				+ '</td>');
+																newTr
+																		.append('<td class="" style="height: 60px;">'
+																				+ item.pi_y_size
+																				+ '</td>');
+																newTr
+																		.append('<td class="" style="height: 60px;">'
+																				+ item.pi_z_size
+																				+ '</td>');
+																newTr
+																		.append('<td class="" style="height: 60px;">'
+																				+ item.pi_name
+																				+ '</td>');
+																newTr
+																		.append('<td class="" style="height: 60px;">'
+																				+ item.pi_b_name
+																				+ '</td>');
+
+																$('.list')
+																		.append(
+																				newTr);
+															})
+											$('.list tr').on(
+													'click',
+													function() {
+														var pi_no = $(this)
+																.find('input')
+																.val();
+														getpillAPI(pi_no);
+													});
+										}
+									});
+						})
 	});
 </script>
-</head>
-<body>
 
 	<div>
 		<form id="searchForm" style="margin-bottom: 50px;">
@@ -742,16 +535,16 @@ button.sort.desc .caret {
 				<tbody>
 					<tr>
 						<th>제품명</th>
-						<td><input type="text" id="pname" name=""></td>
+						<td><input type="text" id="pname" name="" style="border: 1px solid #d2d2d2 !important;"></td>
 						<th style="width: 100px;">회사명</th>
-						<td><input type="text" id="cname" name=""></td>
+						<td><input type="text" id="cname" name="" style="border: 1px solid #d2d2d2 !important;"></td>
 					</tr>
 					<tr>
 						<th>모양</th>
 						<td colspan="3" class="shape">
 							<ul id="shapeids" class="idty">
-								<li id="" class="li_style"><img
-									src="${pageContext.request.contextPath }/images/pills/shape01.jpg"
+								<li id="" class="li_style">
+								<img src="${pageContext.request.contextPath }/images/pills/shape01.jpg"
 									alt="원형"><input type="checkbox" name="shapes" value="원형"></li>
 								<li id="" class="li_style"><img
 									src="${pageContext.request.contextPath }/images/pills/shape02.jpg"
@@ -878,42 +671,42 @@ button.sort.desc .caret {
 
 	<div class="card" style="margin-left: 15%; margin-right: 15%;">
 		<div class="card-body" style="">
-			<div id="" class="" style="width: auto;">
+			<div id="" class="" >
 				<table class="table-list" data-currentpage="1">
 
 					<thead>
 						<tr id="table-list-tr">
-							<th rowspan="2" style="border: 1px solid #d2d2d2; width: 10%;">
+							<th rowspan="2" style="border: 1px solid #d2d2d2; width: 10% !important;">
 								<ul id="list-ul">
 									<li>식별이미지</li>
 								</ul>
 								<i class="caret"></i>
 							</th>
-							<th rowspan="2" style="border: 1px solid #d2d2d2; width: 10%;">
+							<th rowspan="2" style="border: 1px solid #d2d2d2; width: 10% !important;">
 								<ul id="list-ul">
 									<li>식별표시(앞/뒤)</li>
 								</ul>
 								<i class="caret"></i>
 							</th>
-							<th rowspan="2" style="border: 1px solid #d2d2d2; width: 10%;">
+							<th rowspan="2" style="border: 1px solid #d2d2d2; width: 10% !important;">
 								<ul id="list-ul">
 									<li>제형</li>
 								</ul>
 								<i class="caret"></i>
 							</th>
-							<th colspan="3" style="border: 1px solid #d2d2d2; width: 15%;">
+							<th colspan="3" style="border: 1px solid #d2d2d2; width: 15% !important;">
 								<ul id="list-ul">
 									<li>크기(mm)</li>
 								</ul>
 								<i class="caret"></i>
 							</th>
-							<th rowspan="2" style="border: 1px solid #d2d2d2; width: 40%;">
+							<th rowspan="2" style="border: 1px solid #d2d2d2; width: 40% !important;">
 								<ul id="list-ul">
 									<li>제품명/성분명</li>
 								</ul>
 								<i class="caret"></i>
 							</th>
-							<th rowspan="2" style="border: 1px solid #d2d2d2; width: 15%;">
+							<th rowspan="2" style="border: 1px solid #d2d2d2; width: 15% !important;">
 								<ul id="list-ul">
 									<li>회사명</li>
 								</ul>
@@ -1004,6 +797,3 @@ button.sort.desc .caret {
 			</div>
 		</div>
 	</div>
-
-</body>
-</html>

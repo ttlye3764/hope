@@ -16,7 +16,7 @@ public class pillInfo {
     }
     public static String pillAPI(String pname,String cname) throws Exception{
         StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductItem"); /*URL*/
-        urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=xtfWJX5gNhHAq58L71pggeF%2BSd87eikAS3GgqrFuLNbL1BUFE1R06Z2lXuOUHss1JNxFu8NXjg%2Bb1UWRXFPq0w%3D%3D"); /*Service Key*/
+        urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=nW3GvpTmCEpCb8c2UDWooyK%2FA7qFs5Hx9g6eV7blIFZBxcv2bcZh9eiPxnqErQ36e5SnwrNqXNfXRrsGoPi9ng%3D%3D"); /*Service Key*/
         urlBuilder.append("&" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + URLEncoder.encode("-", "UTF-8")); /*공공데이터포털에서 받은 인증키*/
         //urlBuilder.append("&" + URLEncoder.encode("item_name","UTF-8") + "=" + URLEncoder.encode("아스코푸정(히벤즈산티페피딘)", "UTF-8")); /*품목명1*/
         urlBuilder.append("&" + URLEncoder.encode("item_name","UTF-8") + "=" + URLEncoder.encode(pname, "UTF-8")); /*품목명1*/
