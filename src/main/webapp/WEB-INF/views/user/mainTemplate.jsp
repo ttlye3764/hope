@@ -41,6 +41,9 @@ function LogOut(){
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/fancybox/css/jquery.fancybox.min.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/owlcarousel/css/owl.carousel.min.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/swiper/css/swiper.min.css" />
+	<!--한별추가  -->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/styles/bis.css"/>
+	
 	
 	<!-- chat CSS -->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/chat.css">
