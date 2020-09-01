@@ -32,25 +32,36 @@
 <!-- Theme CSS -->
 <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 
-<script
-	src="${pageContext.request.contextPath }/resources/template/assets/vendor/fitvids/jquery.fitvids.js"></script>
-<script
-	src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
+<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+<script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
+<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/fitvids/jquery.fitvids.js"></script>
 <script type="text/javascript">
 	$(function() {
 
-		$('#boardTBY tr').on(
-				'click',
-				function() {
+		$('#boardTBY tr').on('click', function() {
 
-					var bd_no = $(this).find('td:eq(0) input').val();
-					var rnum = $(this).find('td:eq(0)').text();
-					$(location).attr(
-							'href',
-							'${pageContext.request.contextPath}/user/board/boardView.do?bd_no='
-									+ bd_no + '&rnum=' + rnum
-									+ "&bd_division=${bd_division}");
-				});
+			var bd_no = $(this).find('td:eq(0) input').val();
+			var rnum = $(this).find('td:eq(0)').text();
+			$(location).attr('href', '${pageContext.request.contextPath}/user/board/boardView.do?bd_no=' + bd_no + '&rnum=' + rnum + "&bd_division=${bd_division}");
+		});
+
+
+		$('#searchBTN').on('click', function(){
+			var search_keyword = $("input[id='search_keyword']").val();
+			var search_keycode = $("#search_keycode option:selected").val();			
+			
+			 $.ajax({
+	             url     : '${pageContext.request.contextPath}/user/board/boardList.do?bd_division=${bd_division}',
+	             type    : 'post',
+	             dataType: 'json',
+	             data : {'search_keyword':search_keyword, 'search_keycode':search_keycode },
+	             success : function(result) {      
+	            	
+	          	  
+	  			}
+	  		});
+		  		
+		});
 
 	});
 </script>
@@ -103,7 +114,7 @@ Banner innerpage -->
 								<form>
 									<div class="input-group mb-0">
 										<div style="width: 110px; margin: 0px 5px 0px 0px; display: flex; justify-content: center; align-items: center;">
-											<select class="custom-select select-big">
+											<select id="search_keycode" class="custom-select select-big">
 												<option selected="TOTAL">전체</option>
 												<option value="TOTAL">제목</option>
 												<option value="CONTENT">내용</option>
@@ -111,13 +122,13 @@ Banner innerpage -->
 											</select>
 										</div>
 										<div class=>
-											<input
+											<input id="search_keyword"
 												class="form-control border-radius-right-0 border-right-0 mb-0"
 												style="height: 45px; display: inline-block;" type="text" name="search"
 												placeholder="Search" size="35px">
 										</div>
 										<span class="input-group-btn">
-											<button type="button"
+											<button type="button" id="searchBTN" 
 												class="btn btn-grad border-radius-left-0 mb-0">
 												<i class="ti-search m-0" style="font-size: 1.5em;"></i>
 											</button>
@@ -154,8 +165,7 @@ Banner innerpage -->
 							<tbody id="boardTBY">
 								<c:if test="${empty boardList }">
 									<tr align="center">
-										<td colspan="5"><font color="red">등록된 게시글이
-												존재하지않습니다</font></td>
+										<td colspan="5"><font color="red">등록된 게시글이 존재하지않습니다</font></td>
 									</tr>
 								</c:if>
 								<c:if test="${!empty boardList }">
@@ -180,23 +190,8 @@ Banner innerpage -->
 				</div>
 
 				<!-- pagination -->
-				<div class="container mb-6">
-					<div class="row justify-content-center">
-						<div class="col-md-8">
-							<nav>
-								<ul class="pagination justify-content-center">
-									<li class="page-item disabled"><span class="page-link">Prev</span>
-									</li>
-									<li class="page-item active"><span
-										class="page-link bg-grad"> 1 </span></li>
-									<li class="page-item"><a class="page-link" href="#">2</a></li>
-									<li class="page-item"><a class="page-link" href="#">3</a></li>
-									<li class="page-item"><a class="page-link" href="#">Next</a>
-									</li>
-								</ul>
-							</nav>
-						</div>
-					</div>
+				<div id="paginationDIV" class="container mb-6">
+						<div>${pagination }</div>
 				</div>
 				<!-- pagination -->
 				<!-- Table -->
