@@ -91,6 +91,9 @@ public class MemberController {
 
 		return "redirect:/user/main/mainForm.do";
 	}
+	
+	@RequestMapping("deleteMemberForm")
+	public void deleteMemberForm() {}
 
 	// /user/member/deleteMemberInfo.do?user_id=a001
 	@RequestMapping("deleteMemberInfo/{user_id}")

@@ -123,7 +123,7 @@ $(function(){
 	}
 	
 	$('input[value=탈퇴]').click(function(){
-		$(location).attr('href', '${pageContext.request.contextPath}/user/member/deleteMemberInfo/${memberInfo.mem_id}.do');
+		$(location).attr('href', '${pageContext.request.contextPath}/user/member/deleteMemberForm.do');
 	});
 	
 	$('#cancel').click(function(){

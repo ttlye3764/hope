@@ -68,6 +68,28 @@
 		<!-- etc -->
 		<hibernate.validator-version>4.0.2.GA</hibernate.validator-version>
 	</properties>
+	
+	<dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>com.google.cloud</groupId>
+      <artifactId>libraries-bom</artifactId>
+      <version>8.1.0</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+    
+     <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-gcp-dependencies</artifactId>
+      <version>1.2.4.RELEASE</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+  </dependencies>
+</dependencyManagement>
+
+
 
 	<repositories>
 		<repository>
@@ -316,7 +338,28 @@
 		<version>${org.springframework-version}</version>
 		</dependency>
 		
-
+		<!-- goole -->
+		
+	 <dependency>
+    <groupId>com.google.cloud</groupId>
+    <artifactId>google-cloud-dialogflow</artifactId>
+  </dependency>
+  
+    <dependency>
+      <groupId>com.google.cloud</groupId>
+      <artifactId>google-cloud-storage</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+    </dependency>
+    
+    <dependency>
+  		<groupId>org.springframework.cloud</groupId>
+		<artifactId>spring-cloud-gcp-starter-vision</artifactId>
+	</dependency>
+		
+		
 		<!-- dbcp -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>

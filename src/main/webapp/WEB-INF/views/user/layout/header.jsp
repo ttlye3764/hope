@@ -1,12 +1,3 @@
-<%@ page language="JAVA" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!doctype html>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<html>
-<head>
-<meta charset="UTF-8">
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
 function LogOut(){
 	$.ajax({
@@ -19,35 +10,10 @@ function LogOut(){
 			location.reload(true);
 		}
 	});
-}
+
 </script>
-	<title>Wizixo | Creative Multipurpose Bootstrap Template</title>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="author" content="Webestica.com">
-	<meta name="description" content="Creative Multipurpose Bootstrap Template">
 
-	<!-- Favicon -->
-	<link rel="shortcut icon" href="${pageContext.request.contextPath }/resources/template/assets/images/favicon.ico">
 
-	<!-- Google Font -->
-	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900%7CPlayfair+Display:400,400i,700,700i%7CRoboto:400,400i,500,700" rel="stylesheet">
-
-	<!-- Plugins CSS -->
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/font-awesome/css/font-awesome.min.css" />
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/themify-icons/css/themify-icons.css" />
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/animate/animate.min.css" />
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/fancybox/css/jquery.fancybox.min.css" />
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/owlcarousel/css/owl.carousel.min.css" />
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/swiper/css/swiper.min.css" />
-
-	<!-- Theme CSS -->
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/css/style.css" />
-
-</head>
-
-<body>
 	<div class="preloader">
 		<img src="${pageContext.request.contextPath }/resources/template/assets/images/preloader.svg" alt="Pre-loader">
 	</div>
@@ -107,14 +73,15 @@ function LogOut(){
 						<!-- Top Account -->
 						<div class="dropdown">
 							<c:if test="${LOGIN_MEMBERINFO==null}">
-								<a class="dropdown-item" href="${pageContext.request.contextPath}/user/join/loginForm.do" role="button" aria-haspopup="true" aria-expanded="false"><i class="ti-user mr-2"></i>Log In </a>
+								<a class="dropdown-item" href="${pageContext.request.contextPath}/user/join/loginForm.do" role="button" aria-haspopup="true" aria-expanded="false"><i class="ti-user mr-2"></i>로그인</a>
 							</c:if>
 							<c:if test="${LOGIN_MEMBERINFO!=null}">
 							    <a class="dropdown-toggle" href="#" role="button" id="dropdownAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ti-user mr-2"></i>${LOGIN_MEMBERINFO.mem_nickname } </a>
 							</c:if>
 						  <div class="dropdown-menu mt-2 shadow" aria-labelledby="dropdownAccount">
-						  	<a class="dropdown-item" href="${pageContext.request.contextPath}/user/member/myPage.do">My Page</a>
-							    <a class="dropdown-item" href="javascript:LogOut();">Log Out</a>
+						  		<a class="dropdown-item" href="${pageContext.request.contextPath}/user/member/myPage.do">나의 정보 관리</a>
+						  	<a class="dropdown-item" href="${pageContext.request.contextPath}/user/member/">내가 작성한 게시글</a>
+							<a class="dropdown-item" href="javascript:LogOut();">로그아웃</a>
 						  </div>
 						</div>
 						<!-- top link -->
@@ -205,7 +172,7 @@ function LogOut(){
 							<a class="nav-link dropdown-toggle" href="#" id="blogMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Medical</a>
 							<ul class="dropdown-menu" aria-labelledby="blogMenu">
 								<li class="dropdown-submenu">
-
+								
 									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalList.do">복용관리</a>
 
 								</li>
@@ -248,9 +215,9 @@ function LogOut(){
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="portfolioMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Schedule</a>
 							<ul class="dropdown-menu" aria-labelledby="portfolioMenu">
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/schedule.do">scheduleList</a> </li>
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/dday.do">dday</a> </li>
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/bis.do">bis</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/schedule.do">일정관리</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/dday.do">D-day</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/bis.do">자주타는 버스</a> </li>
 								<li> <a class="dropdown-item" href="portfolio-grid-column-4.html">Portfolio Column 4</a> </li>
 								<li> <a class="dropdown-item" href="portfolio-grid-column-5.html">Portfolio Column 5</a> </li>
 								<li> <a class="dropdown-item" href="portfolio-grid-column-6.html">Portfolio Column 6</a> </li>
@@ -309,9 +276,9 @@ function LogOut(){
 						</li>
 						<!-- Menu item 6 Docs-->
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="docMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Docs</a>
+							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath }/user/diet/dietMain" id="docMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">diet</a>
 							<ul class="dropdown-menu" aria-labelledby="docMenu">
-								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/">Introduction</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/dietMain">dietMain</a> </li>
 								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/#getting-started-section">Directory structure</a> </li>
 								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/#installation-section">Gulp</a> </li>
 								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/#edit-section">Customization</a> </li>
@@ -325,14 +292,16 @@ function LogOut(){
 							<a class="nav-link dropdown-toggle" href="#" id="blogMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">board</a>
 							<ul class="dropdown-menu" aria-labelledby="blogMenu">
 								<li class="dropdown-submenu">
-									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=2">notice</a>
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=2">공지사항</a>
 								</li>
 								<li class="dropdown-submenu">
-									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=3">aaa</a>
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=3">건의사항</a>
 								</li>
-								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=1">freeboard</a></li>
 								<li class="dropdown-submenu">
-									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=4">QNA board</a>
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=1">자유게시판</a>
+								</li>
+								<li class="dropdown-submenu">
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=4">QNA</a>
 								</li>
 							</ul>
 						</li>
@@ -340,7 +309,7 @@ function LogOut(){
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/user/chat/chat.do" id="docMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">chat</a>
 							<ul class="dropdown-menu" aria-labelledby="docMenu">
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/chat/chat.do">chat</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/chat/chat">chat</a> </li>
 								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/">Introduction</a> </li>
 								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/#getting-started-section">Directory structure</a> </li>
 								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/#installation-section">Gulp</a> </li>
@@ -376,20 +345,4 @@ function LogOut(){
 
 	<div> <a href="#" class="back-top btn btn-grad"><i class="ti-angle-up"></i></a> </div>
 
-	<!--Global JS-->
-	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/jquery/jquery.min.js"></script>
-	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/popper.js/umd/popper.min.js"></script>
-	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-	<!--Vendors-->
-	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/fancybox/js/jquery.fancybox.min.js"></script>
-	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/owlcarousel/js/owl.carousel.min.js"></script>
-	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/swiper/js/swiper.js"></script>
-	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/wow/wow.min.js"></script>
-
-	<!--Template Functions-->
-	<script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
-
-</body>
-</html>
+	
