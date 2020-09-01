@@ -9,7 +9,6 @@
 	</settings>
 
 	<typeAliases>
-		<typeAlias alias="freeboardVO" type="kr.or.ddit.vo.FreeboardVO" />
 		
 		<!-- 재호  -->
 		<typeAlias alias="friendVO" type="kr.or.ddit.vo.FriendVO"/>
@@ -17,6 +16,8 @@
 		<typeAlias alias="messageVO" type="kr.or.ddit.vo.MessageVO"/>
 		<typeAlias alias="participationVO" type="kr.or.ddit.vo.ParticipationVO"/>
 		<typeAlias alias="dietVO" type="kr.or.ddit.vo.DietVO"/>
+		<typeAlias alias="diet_memVO" type="kr.or.ddit.vo.Diet_memVO"/>
+		<typeAlias alias="menuVO" type="kr.or.ddit.vo.MenuVO"/>
 		
 		<!-- 용춘 -->
 		<typeAlias alias="mypillVO" type="kr.or.ddit.vo.MypillVO" />

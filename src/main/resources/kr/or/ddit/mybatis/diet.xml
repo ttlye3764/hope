@@ -1,7 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="diet">
-
+	<insert id="insertMenu" parameterType="Map">
+		INSERT INTO MENU(MENU_NO
+						,MENU_NAME
+						,MENU_KCAL)
+						VALUES(
+						MENU_SEQ.NEXTVAL,
+						#{menu_name},
+						#{menu_kcal}
+						)
+	</insert>
+	
+	<insert id="insertDietMem" parameterType="diet_memVO">
+		INSERT INTO DIET_MEM(DM_NO,
+							HEIGHT,
+	 						DATE,
+	 						CURRENT_WEIGHT,
+	 						PURPOSE_WEIGHT, 
+	 						BMI,
+							DAY_KCAL,
+	 						MEM_NO)
+	 						VALUES(DIET_MEM_SEQ.NEXTVAL,
+	 								#{height},
+	 								#{date},
+	 								#{current_weight},
+	 								#{purpose_weight},
+	 								#{bmi},
+	 								#{day_kcal},
+	 								#{mem_no}
+	 								)
+	</insert>
+	
+	<select id="menuList" resultType="menuVO" parameterType="Map">
+		SELECT *
+		FROM MENU
+		<if test="rownum != null">
+		 <![CDATA[ 
+		  WHERE ROWNUM < #{rownum}
+    	]]>
+		</if>
+	</select>
 </mapper>
 	
 

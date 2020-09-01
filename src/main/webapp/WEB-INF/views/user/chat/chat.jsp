@@ -1,15 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Chat</title>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/chat.css">
-<!-- <script type='text/javascript' src='http://code.jquery.com/jquery-latest.js'></script> -->
-</head>
-<body>
+	
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	
 	<div class="wrapper">
 		<div class="chat">
 			<div class="chat-left">
@@ -97,8 +94,6 @@
 						<form class="contact-form" id="contact-form" name="contactform" action="${pageContext.request.contextPath}/user/chat/addFriend.do" method="post" enctype="multipart/form-data">			
 							<!-- Start main form -->
 							<div class="row">
-							
-							
 							<c:if test="${empty friendList }">
 								<tr align="center">
 									<td colspan="5"><font color="blue">친구가 없네요 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</font></td>
@@ -119,7 +114,6 @@
 										</thead>
 										<tbody id="friend_tbody">
 							<c:forEach items="${friendList }" var="friendInfo">
-								
 								<tr>
 									<th scope="row" >1</th>
 									<td><input type="hidden" value="${friendInfo.fri_mem_no }"/>${friendInfo.fri_mem_no }</td>
@@ -171,7 +165,7 @@
 				<!-- contact form -->
 				<div class="col-md-6">
 					<div class="h-100">
-						<form class="contact-form" id="contact-form" name="contactform" action="${pageContext.request.contextPath}/user/chat/addFriend" method="post" enctype="multipart/form-data">			
+						<form class="contact-form" name="contactform" action="${pageContext.request.contextPath}/user/chat/addFriend" method="post" enctype="multipart/form-data">			
 							<!-- Start main form -->
 							<div class="row">
 							
@@ -204,7 +198,16 @@
 		<!-- /.modal-dialog -->
 	</div>
 	
-</body>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js'></script>
 <script type="text/javascript">
 //var ws;
@@ -392,4 +395,3 @@ $(function(){
 	});
 });
 </script>
-</html>

@@ -33,6 +33,7 @@
 	     	}
 	     }
 	 -->
+	 
 	<definition name="user/*/*" extends="user/main">
 		<put-attribute name="content" value="/WEB-INF/views/user/{1}/{2}.jsp"></put-attribute>
 	</definition>

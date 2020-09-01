@@ -1,11 +1,4 @@
-<%@ page language="JAVA" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-</head>
-<body>
+
 	<footer class="footer bg-light pt-6">
 		<div class="footer-content pb-3">
 			<div class="container">
@@ -100,5 +93,3 @@
 		<a href="http://themifycloud.com">대덕인재개발원</a>
 	</div>
 </div>
-</body>
-</html>
