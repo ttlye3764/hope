@@ -122,10 +122,6 @@
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=695a00dbf1560fd30746e2be14b3f633"></script>
 <script>
-
-
-
-
 var citycode;
 var positions = [];
 var startx;
