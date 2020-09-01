@@ -54,11 +54,13 @@
                                             		<i class="mdi mdi-plus-circle mr-2"></i>등록하기</button>
                                             </div>
                                             <div class="col-sm-8">
-                                                <div class="text-sm-right">
-                                                    <button type="button" class="btn btn-success mb-2 mr-1"><i class="mdi mdi-settings"></i></button>
-                                                    <button type="button" class="btn btn-light mb-2 mr-1">Import</button>
-                                                    <button type="button" class="btn btn-light mb-2">Export</button>
-                                                </div>
+                                            	<form id="form1" name="form1" method="post" enctype="multipart/form-data">
+	                                                <div class="text-sm-right">
+	                                                    <button type="button" class="btn btn-success mb-2 mr-1"><i class="mdi mdi-settings"></i></button>
+	                                                    <button type="button" class="btn btn-light mb-2 mr-1" id="excel">Excel</button>
+	                                                    <button type="button" class="btn btn-light mb-2">Export</button>
+	                                                </div>
+                                            	</form>
                                             </div><!-- end col-->
                                         </div>
                 
@@ -209,6 +211,11 @@
 					var healthImage_no = $(this).find('td:eq(0) input').val();
 					$(location).attr('href','${pageContext.request.contextPath}/admin/healthImage/healthImageView.do?healthImage_no=' + healthImage_no);
 				});
+
+				// 엑셀
+				$('#excel').click(function(){
+					$(location).attr('href','${pageContext.request.contextPath}/admin/healthImage/excelDown.do');
+				}); 
 			});
 
 
