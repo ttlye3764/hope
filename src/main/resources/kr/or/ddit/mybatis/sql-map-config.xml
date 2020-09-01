@@ -26,6 +26,7 @@
 		<!-- 한별 -->
 		<typeAlias alias="scheduleVO" type="kr.or.ddit.vo.ScheduleVO" />
 		<typeAlias alias="busVO" type="kr.or.ddit.vo.BusVO" />
+		<typeAlias alias="dealVO" type="kr.or.ddit.vo.DealVO" />
 		<!-- 승민 -->	
 		<typeAlias alias="memberVO" type="kr.or.ddit.vo.MemberVO" />
 			
@@ -55,6 +56,7 @@
 		<mapper resource="kr/or/ddit/mybatis/pill.xml" />
 	<!-- 한별 -->
 	    <mapper resource="kr/or/ddit/mybatis/schedule.xml" />
+	    <mapper resource="kr/or/ddit/mybatis/deal.xml" />
 	<!-- 승민 -->	
 		<mapper resource="kr/or/ddit/mybatis/member.xml" />
 	<!-- 윤희 -->
