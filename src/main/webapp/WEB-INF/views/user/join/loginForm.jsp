@@ -154,11 +154,8 @@
   				+ $('input[name=mem_hp3_pw]').val();
   		$('input[name=mem_hp_pw]').val(mem_hp);
 
-  		hp = $('input[name=mem_hp2_pw]').val();
-  		hp1 = $('input[name=mem_hp3_pw]').val();
-
-  		if(hp=='' || hp1==''){
-  			alert('올바른 휴대전화 번호를 입력해주세요.');
+  		if (!mem_hp.validationHP()) {
+  			alert('휴대전화번호를 바르게 입력해주세요.');
   			return false;
   		}
   		
@@ -180,41 +177,30 @@
   	};
   	
   	function checksms() {
-  		var mem_hp = $('select[name=mem_hp1_pw]').val() + '-'
-  				+ $('input[name=mem_hp2_pw]').val() + '-'
-  				+ $('input[name=mem_hp3_pw]').val();
-  		$('input[name=mem_hp_pw]').val(mem_hp);
+		var mem_hp = $('select[name=mem_hp1_pw]').val() + '-'
+				+ $('input[name=mem_hp2_pw]').val() + '-'
+				+ $('input[name=mem_hp3_pw]').val();
+		$('input[name=mem_hp_pw]').val(mem_hp);
 
-  		hp_num = $('input[name=hp_num_pw]').val();
-  		if(hp_num==''){
-  			alert('인증번호를 입력해주세요.');
-  			return false;
-  		}
-  		
-  		$.ajax({
-  			type : 'POST',
-  			url : '${pageContext.request.contextPath}/sms/checkSms.do',
-  			dataType : 'json',
-  			data : {
-  				mem_hp : $('input[name=mem_hp_pw]').val(),
-  				hp_num : $('input[name=hp_num_pw]').val()
-  			},
-  			error : function(result) {
-  				alert(result.json);
-  			},
-  			success : function(result) {
-  				//{ flag : true | false}
-  				alert(result.json);
-  				if(result.json == '인증이 완료되었습니다.'){
-  					$('select[name=mem_hp1_pw]').attr("disabled", true)
-  					$('input[name=mem_hp2_pw]').attr("disabled", true)
-  					$('input[name=mem_hp3_pw]').attr("disabled", true)
-  					$('input[name=hp_num_pw]').attr("hidden",true)
-  					$('input[name=hp_btn]').attr("hidden",true)
-  				}
-  			}
-  		});
-  	};
+		hp_num = $('input[name=hp_num]').val();
+		
+		$.ajax({
+			type : 'POST',
+			url : '${pageContext.request.contextPath}/sms/checkSms.do',
+			dataType : 'json',
+			data : {
+				mem_hp : $('input[name=mem_hp_pw]').val(),
+				hp_num : $('input[name=hp_num]').val()
+			},
+			success : function(result) {
+				//{ flag : true | false}
+				if(result.json == '인증이 완료되었습니다.'){
+					$('#hplabel').text(result.json);
+					$('input[name=hp_num]').attr("disabled",true);
+				}
+			}
+		});
+	};
       
       function searchID(){
     	  var mem_birth = $('input[name=mem_bir1]').val() + '-'
@@ -270,6 +256,11 @@
 		+ $('input[name=mem_hp2_pw]').val() + '-'
 		+ $('input[name=mem_hp3_pw]').val();
 		$('input[name=mem_hp_pw]').val(mem_hp);
+
+		if($('#mem_id_pw').val()==''){
+			alert('아이디를 입력해주세요.');
+			return false;
+		}
 		
 		if($('#mem_name_pw').val()==''){
 			alert('이름을 입력해주세요');
@@ -278,6 +269,12 @@
 
 		if(bir1=='' || bir2=='' || bir3==''){
 			alert('생년월일을 정확하게 입력해주세요');
+			return false;
+		}
+
+		var hp = $('#hplabel').text();
+		if(hp == ''){
+			alert('휴대전화 인증을 해주세요.');
 			return false;
 		}
 
@@ -311,6 +308,11 @@
 	function searchPWResult(){
 		$("#search_pw_modal_result").modal("show");
 		$('#PWresult').text(big_mem_id);
+	}
+
+	function smschange(){
+		$('#hplabel').text("");
+		$('input[name=hp_num]').removeAttr("disabled");
 	}
 </script>
 
@@ -480,20 +482,19 @@
 					name="mem_bir3_pw" size="2" value="" />일
                   </div>
                   
-                  <div class="form-group">
-	                  	휴대전화<input type="hidden" name="mem_hp_pw" id="mem_hp_pw" /> <select
-						name="mem_hp1_pw">
+                 <div class="form-group">
+                 		휴대전화<input type="hidden" name="mem_hp_pw" id="mem_hp_pw"/> <select
+						name="mem_hp1_pw" onchange="smschange()">
 							<option value="010">010</option>
 							<option value="011">011</option>
 							<option value="016">016</option>
 							<option value="017">017</option>
 							<option value="019">019</option>
-					</select> - <input type="text" name="mem_hp2_pw" size="4" value="" /> - 
-					<input	type="text" name="mem_hp3_pw" size="4" value="" />
+					</select> - <input type="text" name="mem_hp2_pw" size="4" onchange="smschange()"/> - 
+					<input	type="text" name="mem_hp3_pw" size="4" onchange="smschange()" />
 					<a href="javascript:sendsms();">[인증번호 전송]</a><br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="text" name="hp_num_pw"/>
-					<input type="button" name="hp_btn" onClick="checksms()" class="btn" value="[인증번호 확인]">
+					<input type="text" name="hp_num" onkeyup="checksms()"/>
+					<label id="hplabel"></label>
                   </div>
 
                   <div class="form-group text-center">

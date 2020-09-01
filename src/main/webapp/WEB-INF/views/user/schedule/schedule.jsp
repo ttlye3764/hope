@@ -2,22 +2,6 @@
    pageEncoding="UTF-8"%>
 
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-<!-- timepicker -->
-<link
-   href='${pageContext.request.contextPath }/resources/timepicker/jquery.datetimepicker.min.css'
-   rel='stylesheet' />
-<!-- 캘린더 -->
-<link
-   href='${pageContext.request.contextPath }/resources/fullcalendar-5.3.0/lib/main.css'
-   rel='stylesheet' />
-<link
-   href='${pageContext.request.contextPath }/resources/fullcalendar-5.3.0/lib/main.min.css'
-   rel='stylesheet' />
 <!-- 캘린더 -->
 <script
    src='${pageContext.request.contextPath }/resources/fullcalendar-5.3.0/lib/main.js'></script>
@@ -33,8 +17,7 @@
 <!-- Moment -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
-</head>
-<body>
+
 <div style=" height: auto; width: 1500px; margin: auto; ">
    <div id='calendar'></div>
 </div>
@@ -179,8 +162,6 @@
 
 
 
-
-</body>
 
 <script>
 
@@ -409,5 +390,3 @@ function setCalendar(data){
    $('#regist-modal [name="s_enddate"]').datetimepicker();
    
 </script>
-
-</html>

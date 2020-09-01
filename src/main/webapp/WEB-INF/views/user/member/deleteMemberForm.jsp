@@ -5,6 +5,8 @@
  Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
 	function chk() {
 		var req = document.form.req.checked;
@@ -13,10 +15,33 @@
 			num = 1;
 		}
 		if (num == 1) {
-			document.form.submit();
+			$.ajax({
+				type : 'POST',
+				url : '${pageContext.request.contextPath}/user/member/deleteMember.do',
+				dataType : 'json',
+				data : {
+					mem_id : '${LOGIN_MEMBERINFO.mem_id}'
+				},
+				success : function(result) {
+					alert(result.json);
+					LogOut();
+				}
+	       	});
 		} else {
 			alert("개인정보 약관에 동의하셔야 합니다.");
 		}
+	}
+	function LogOut(){
+		$.ajax({
+			type : 'POST',
+			url : '${pageContext.request.contextPath}/user/join/logout.do',
+			dataType : 'JSON',
+			data : {
+			},
+			success : function(result) {
+				location.href="${pageContext.request.contextPath}/user/main/mainForm.do";
+			}
+		});
 	}
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">

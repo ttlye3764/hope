@@ -1,5 +1,6 @@
 <%@ page language="JAVA" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script>
 function LogOut(){
 	$.ajax({
@@ -183,7 +184,7 @@ function LogOut(){
 								</li>
 								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/searchPill.do">알약 정보보기</a></li>
 								<li class="dropdown-submenu">
-									<a class="dropdown-item" href="#">Blog Single</a>
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/corona.do">코로나</a>
 								</li>
 							</ul>
 						</li>

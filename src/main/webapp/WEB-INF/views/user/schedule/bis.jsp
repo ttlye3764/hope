@@ -3,49 +3,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html>
 
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-   <title>버스</title>
-   
-<style>
-button[type=button], input[type=submit], input[type=reset] {
-  background-color: #4CAF50;
-  border: none;
-  color: white;
-  padding: 5px 32px;
-  text-decoration: none;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-.main_left_btn {
-width:50%;
-height:1300px;
-float:left;
-padding-left: 50px;}
 
-.main_right_btn {
-width:50%;
-height:1300px;
-float:left;
-padding-right: 50px;}
-
-table {
-width: 100%;
-}
-table, th, td {
-border: 1px solid #bcbcbc;
-}
-     
-      
-</style>
-
-</head>
-
-<body>
 	<div class="main_left_btn">
 		<h4>지역 : <select name="citycode" id="citycode">
 					<option value="">지역선택</option>
@@ -96,7 +55,9 @@ border: 1px solid #bcbcbc;
 	<br>
 	<br>
 	<br>
-		
+	
+	
+			
 			<table id="busTable" class="table table-striped dt-responsive nowrap w-100">
 				<thead>
 					<tr>
@@ -145,6 +106,8 @@ border: 1px solid #bcbcbc;
 			</table>
 					
 		
+			
+			
 			
 		
 			
@@ -533,8 +496,3 @@ navigator.geolocation.getCurrentPosition(function(pos) {
    
 
 </script>
-</body>
-
-
-
-</html>

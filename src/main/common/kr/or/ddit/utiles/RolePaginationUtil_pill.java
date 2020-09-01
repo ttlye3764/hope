@@ -11,7 +11,7 @@ public class RolePaginationUtil_pill {
 	private int currentPage; 		// 현재 페이지
 	private int totalCount;			// 전체 게시글 갯수
 	private int totalPage;			// 전체 페이지 갯수
-	private int blockCount = 10;    // 페이지별 출력될 게시글 갯수
+	private int blockCount = 5;    // 페이지별 출력될 게시글 갯수
 	private int blockPage = 10;		// 페이지네이션 메뉴 갯수
 	private int startPage;			// 페이지네이션 메뉴 시작 페이지 번호
 	private int endPage;			// 페이지네이션 메뉴 끝 페이지 번호
