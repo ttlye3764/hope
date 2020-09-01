@@ -2,28 +2,6 @@
    pageEncoding="UTF-8"%>
 
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-<link
-   href='${pageContext.request.contextPath }/resources/fullcalendar-5.3.0/lib/main.css'
-   rel='stylesheet' />
-<link
-   href='${pageContext.request.contextPath }/resources/fullcalendar-5.3.0/lib/main.min.css'
-   rel='stylesheet' />
-<!-- 캘린더 -->
-<script
-   src='${pageContext.request.contextPath }/resources/fullcalendar-5.3.0/lib/main.js'></script>
-<script
-   src='${pageContext.request.contextPath }/resources/fullcalendar-5.3.0/lib/main.min.js'></script>
-<script
-   src='${pageContext.request.contextPath }/resources/fullcalendar-5.3.0/lib/locales-all.js'></script>
-<script
-   src='${pageContext.request.contextPath }/resources/fullcalendar-5.3.0/lib/locales-all.min.js'></script>
-</head>
-
 <script type="text/javascript">
 
 var event = [];
@@ -93,7 +71,21 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 
-<body>
+<!-- 캘린더 -->
+<script
+   src='${pageContext.request.contextPath }/resources/fullcalendar-5.3.0/lib/main.js'></script>
+<script
+   src='${pageContext.request.contextPath }/resources/fullcalendar-5.3.0/lib/main.min.js'></script>
+<script
+   src='${pageContext.request.contextPath }/resources/fullcalendar-5.3.0/lib/locales-all.js'></script>
+<script
+   src='${pageContext.request.contextPath }/resources/fullcalendar-5.3.0/lib/locales-all.min.js'></script>
+<!-- timepicker -->
+<script
+   src='${pageContext.request.contextPath }/resources/timepicker/jquery.datetimepicker.full.js'></script>
+<!-- Moment -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
       
 <div style=" height: auto; width: 1500px; margin: auto; ">
 
@@ -101,12 +93,8 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 
-</body>
 
 
-<script>
 
-
-</script>
 
 </html>

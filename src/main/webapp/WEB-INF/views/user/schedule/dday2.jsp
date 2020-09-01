@@ -5,17 +5,7 @@
 
 
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-</head>
-
-
-
-
-<body class="loading">
       
 <div style=" height: auto; width: 1500px; margin: auto; ">
 ${fn:length(scheduleList)}
@@ -80,9 +70,3 @@ ${fn:length(scheduleList)}
 
 </div>
 
-
-</body>
-
-
-
-</html>
