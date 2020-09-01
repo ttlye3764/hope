@@ -196,7 +196,7 @@
 	</section>
 						</div>
 						<div class="tab-pane" id="tab-1-3">
-							Wizixo; an innovative Internet marketing solutions company that offers comprehensive web development, SMO services, SEO strategies and various other types of Internet marketing related services. With us at your side, you will find the IT solution to achieve your strategic and financial goals.
+							화이팅
 						</div>
 					</div>
 				</div>
@@ -213,6 +213,9 @@ $(function(){
 		var stairs = $('#kcal_kcal').val() / 7
 
 		$('#kcal_walking').text(walking);
+		$('#kcal_jump').text(jump);
+		$('#kcal_swimming').text(swimming);
+		$('#kcal_stairs').text(stairs);
 	})
 })
 </script>

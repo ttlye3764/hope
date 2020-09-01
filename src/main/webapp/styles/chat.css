@@ -50,7 +50,7 @@
 	display: flex;
 	margin-top: 15px;
 }
-img {
+.chat_img {
 	width: 55px;
 	height: 55px;
 	border-radius: 50%;
