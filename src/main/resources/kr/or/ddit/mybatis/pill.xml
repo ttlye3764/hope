@@ -80,7 +80,7 @@
 	</select>
 	
 	<select id="pillInfo" parameterType="String" resultType="pillVO">
-			select pi_name, pi_b_name
+			select *
 			from pill_info
 			where pi_no = #{pi_no}
 	</select>

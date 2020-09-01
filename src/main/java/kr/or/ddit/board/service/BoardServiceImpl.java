@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddit.board.dao.IBoardDao;
+import kr.or.ddit.domain.Criteria;
 import kr.or.ddit.utiles.AttachFileMapper;
 import kr.or.ddit.vo.BoardVO;
 import kr.or.ddit.vo.Board_FileVO;
@@ -22,6 +23,8 @@ public class BoardServiceImpl implements IBoardService{
 	
 	@Autowired
 	private IBoardDao boardDao;
+	@Autowired
+	private kr.or.ddit.boardfile.dao.IBoardFileDao boardfileDao;
 
 	
 	// 조회
@@ -29,6 +32,10 @@ public class BoardServiceImpl implements IBoardService{
 	public List<BoardVO> boardList(Map<String, String> params) throws Exception {
 		return boardDao.boardList(params);
 	}
+//	@Override
+//	public List<BoardVO> getboardList(Criteria cri) throws Exception{
+//		return boardDao.getboardList(cri);
+//	}
 	
 	// 삭제
 	@Override
@@ -39,19 +46,14 @@ public class BoardServiceImpl implements IBoardService{
 	// 등록
 	@Override            
 	public int insertBoard(BoardVO boardVO, MultipartFile[] items) throws Exception {
-		
-//		String fileSequence = boardDao.fileSequence();
-//		List<FileItemVO> boardfileList = AttachFileMapper.mapper(items, fileSequence);
-		
-//		board_fileDao.insertBoard_File(boardfileList);
-		
+			
 		String bd_no = String.valueOf(boardDao.insertBoard(boardVO));
 		  
 		System.out.println(bd_no);
 		
 	    List<Board_FileVO> fileItemList =AttachFileMapper.boardMapper(items, bd_no);
 	      
-	     //medicalFileDAO.insertFileItem(fileItemList);
+	    boardfileDao.insertFileItem(fileItemList);
 		
 		return boardDao.insertBoard(boardVO);
 		
@@ -59,11 +61,11 @@ public class BoardServiceImpl implements IBoardService{
 	
 	// 수정
 	@Override         
-	public void updateBoard(BoardVO boardVO ) throws Exception {
+	public void updateBoard(BoardVO boardVO, MultipartFile[] items) throws Exception {
 		boardDao.updateBoard(boardVO);
 		
-	//	List<Board_FileVO> fileItemList = AttachFileMapper.boardMapper(items, boardVO.getBd_no());
-	//	board_fileDao.updateBoard_File(fileItemList);
+		List<Board_FileVO> fileItemList = AttachFileMapper.boardMapper(items, boardVO.getBd_no());
+		boardfileDao.updateFileItem(fileItemList);
 	}
 	
 	@Override
@@ -81,5 +83,15 @@ public class BoardServiceImpl implements IBoardService{
 		boardDao.countHit(bd_no);
 		
 	}
+
+	
+	
+	
+//	@Override
+//	public List<BoardVO> getListWithPaging(Criteria cri) throws Exception{
+//		return boardDao.getListWithPaging(cri);
+//	}
+
+
 
 }

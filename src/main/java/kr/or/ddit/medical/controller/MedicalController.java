@@ -54,6 +54,15 @@ public class MedicalController {
 		andView.setViewName("jsonConvertView");
 		return andView;
 	}
+	@RequestMapping("pillInfo")
+	public ModelAndView pillInfo(String pi_no) throws Exception {
+		System.out.println("pillInfo 아작스 들어옴============================================================================================");
+		PillVO pillInfo = pillService.pillInfo(pi_no);
+		ModelAndView andView = new ModelAndView();
+		andView.addObject("pillInfo", pillInfo);
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
 
 	@RequestMapping("viewJson2")
 	public ModelAndView medicalInfo(String pill_no) throws Exception {

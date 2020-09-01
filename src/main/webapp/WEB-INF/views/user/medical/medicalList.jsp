@@ -305,7 +305,7 @@ function setCalendar(data){
 			<div class="row">
 				<div class="col-12 col-lg-8 mx-auto">
 					<div class="title text-center">
-						<h2>약 복용정보 등록</h2>
+						<h2 style="border-bottom: 1px solid #d2d2d2; ">약 복용정보 등록</h2>
 					</div>
 				</div>
 			</div>
@@ -334,7 +334,7 @@ function setCalendar(data){
 									<div style="width: 230px; height: 150px;" >
 									<img id="img" style="width: 100%; height: 100%; margin-left: 15px; margin-top: 30px;">
 									</div>
-									<div class="col-md-12 text-center"><button class="btn btn-outline-primary btn-block" style="margin-top: 60px;">약 상세보기</button></div>
+									<div class="col-md-12 text-center" style="margin-top: 60px;"><!-- <button class="btn btn-outline-primary btn-block" style="margin-top: 60px;">약 상세보기</button> --></div>
 									<label style="margin-top: 30px; margin-left: 15px;">달력 표시 색 설정</label><div><input type="color" id="pill_color" name="pill_color" style="margin-left: 15px;"></div>
 								
 								</div>																													
@@ -366,7 +366,7 @@ function setCalendar(data){
 			<div class="row">
 				<div class="col-12 col-lg-8 mx-auto">
 					<div class="title text-center">
-						<h2>약 복용정보</h2>
+						<h2 style="border-bottom: 1px solid #d2d2d2; ">약 복용정보</h2>
 					</div>
 				</div>
 			</div>
@@ -394,7 +394,7 @@ function setCalendar(data){
 									<div style="width: 230px; height: 150px;" >
 									<img id="img2" style="width: 100%; height: 100%; margin-left: 15px; margin-top: 30px;">
 									</div>
-									<div class="col-md-12 text-center"><button class="btn btn-outline-primary btn-block" style="margin-top: 60px;">약 상세보기</button></div>
+									<div class="col-md-12 text-center" style="margin-top: 60px;"><!-- <button class="btn btn-outline-primary btn-block" style="margin-top: 60px;">약 상세보기</button> --></div>
 									<label style="margin-top: 30px; margin-left: 15px;">달력 표시 색 설정</label><div><input type="color" id="pill_color" name="pill_color" style="margin-left: 15px;"></div>
 								</div>																							
 								<!-- submit button -->

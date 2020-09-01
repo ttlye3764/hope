@@ -369,7 +369,6 @@
 										<div class="col-6 col-md-8"><label id="label"></label></div>
 										<div class="col-6 col-md-8"><span class="text-muted">회원이 아니신가요?  
 										<a href="${pageContext.request.contextPath}/user/join/joinChoiceForm.do">Signup</a></span></div>
-<%-- 										<a href="${pageContext.request.contextPath}/user/join/joinChoiceForm.do">Signup</a></span></div> --%>
 										<div class="col-6 col-md-8">
 											<input type="button" name="hp_btn" onClick="search_id_modal()" class="btn" value="아이디찾기"> / 
 											<input type="button" name="hp_btn" onClick="search_pw_modal()" class="btn" value="비밀번호찾기">
@@ -530,6 +529,5 @@
       <!-- /.modal-dialog -->
    </div>
    <!-- /.modal -->
-
 </body>
 </html>
