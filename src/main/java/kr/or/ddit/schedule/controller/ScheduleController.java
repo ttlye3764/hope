@@ -5,8 +5,10 @@ import java.util.Map;
 
 import kr.or.ddit.bis.Bis;
 import kr.or.ddit.bis.Bis_location;
+import kr.or.ddit.bis.BusStop;
 import kr.or.ddit.member.service.IMemberService;
 import kr.or.ddit.schedule.service.IScheduleService;
+import kr.or.ddit.vo.BusVO;
 import kr.or.ddit.vo.MemberVO;
 import kr.or.ddit.vo.MypillVO;
 import kr.or.ddit.vo.ScheduleListVO;
@@ -60,11 +62,11 @@ public class ScheduleController {
 
 	}
 	
-		
-	@RequestMapping("bis")
-	public void bis() {
-		
-	}
+	/*
+	 * @RequestMapping("bis") public void bis() {
+	 * 
+	 * }
+	 */
 	
 	@RequestMapping("dday")
 	public void dday() {
@@ -199,6 +201,7 @@ public class ScheduleController {
 	@RequestMapping("bisSearch")
 	public String bisSearch(String citycode, String routeid) throws Exception {
 		String bisResult = Bis.bisSearch(citycode, routeid);
+		System.out.println(bisResult);
 		return bisResult;
 	}
 	
@@ -208,6 +211,45 @@ public class ScheduleController {
 		String bisLocationResult = Bis_location.location(citycode, res_routeid);
 		return bisLocationResult;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="busStop",produces="text/plain; charset=UTF-8")
+	public String busStop(String gpsLati, String gpsLong) throws Exception {
+		String busStopResult = BusStop.location(gpsLati, gpsLong);
+		return busStopResult;
+	}
+	@ResponseBody
+	@RequestMapping(value="busStopInfo",produces="text/plain; charset=UTF-8")
+	public String busStopInfo(String cityCode, String nodeId) throws Exception {
+		String busStopResult = BusStop.busStopInfo(cityCode, nodeId);
+		return busStopResult;
+	}
+	
+	@RequestMapping("registBus")
+	public String registBus(String routeid, String citycode, String mem_no, BusVO busInfo) throws Exception {
+		busInfo.setBus_no(routeid);
+		busInfo.setCity_code(citycode);
+		busInfo.setMem_no(mem_no);
+		this.service.registBus(busInfo);
+		return "redirect:/user/schedule/bis.do";
+	}
+	
+	
+	@RequestMapping("bis")
+	public ModelAndView bisList(String mem_no) throws Exception {
+		List<BusVO> busList = this.service.bisList("2");  /////////////////mem_no 불러와야되는데..
+		ModelAndView andView = new ModelAndView();
+		andView.addObject("busList", busList);
+		andView.setViewName("user/schedule/bis");
+		return andView;
+	}
+
+	@RequestMapping("deleteBus")
+	public String deleteBus(String bus_index) throws Exception {
+		this.service.deleteBus(bus_index);
+		return "redirect:/user/schedule/bis.do";
+	}
+	
 	
 
 }

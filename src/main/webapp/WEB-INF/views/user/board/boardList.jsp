@@ -32,20 +32,27 @@
 <!-- Theme CSS -->
 <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 
-<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/fitvids/jquery.fitvids.js"></script>
-<script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
-<script type="text/javascript">	
-$(function() {
+<script
+	src="${pageContext.request.contextPath }/resources/template/assets/vendor/fitvids/jquery.fitvids.js"></script>
+<script
+	src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
+<script type="text/javascript">
+	$(function() {
 
-	$('#boardTBY tr').on('click', function(){
-		
-		var bd_no = $(this).find('td:eq(0) input').val();
-		var rnum = $(this).find('td:eq(0)').text();
-		$(location).attr('href', '${pageContext.request.contextPath}/user/board/boardView.do?bd_no=' + bd_no + '&rnum=' + rnum);
-		});
-	
+		$('#boardTBY tr').on(
+				'click',
+				function() {
+
+					var bd_no = $(this).find('td:eq(0) input').val();
+					var rnum = $(this).find('td:eq(0)').text();
+					$(location).attr(
+							'href',
+							'${pageContext.request.contextPath}/user/board/boardView.do?bd_no='
+									+ bd_no + '&rnum=' + rnum
+									+ "&bd_division=${bd_division}");
+				});
+
 	});
-
 </script>
 
 </head>
@@ -64,8 +71,9 @@ Banner innerpage -->
 		<div class="container">
 			<div class="row all-text-white">
 				<div class="col-md-12 align-self-center">
-					<h1 class="innerpage-title">${board_division_name} </h1>
-					<h6 class="subtitle">We transform your perception into an excellent website</h6>
+					<h1 class="innerpage-title">${board_division_name}</h1>
+					<h6 class="subtitle">We transform your perception into an
+						excellent website</h6>
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item active"><a href="index.html"><i
@@ -93,31 +101,41 @@ Banner innerpage -->
 							style="display: flex; justify-content: space-between;">
 							<div>
 								<form>
-									<div class="input-group mb-1">
-										<select class="custom-select select-big">
-											<option selected="TOTAL">전체</option>
-											<option value="TOTAL">제목</option>
-											<option value="CONTENT">내용</option>
-											<option value="WRITER">작성자</option>
-										</select> 
-										<input class="form-control border-radius-right-0 border-right-0 mb-1"
-											   type="text" name="search" placeholder="Search">
-									    <span class="input-group-btn">
-										     <button type="button" class="btn btn-grad border-radius-left-0 mb-0">
-											 	<i class="ti-search m-0"></i>
-										     </button>
+									<div class="input-group mb-0">
+										<div style="width: 110px; margin: 0px 5px 0px 0px; display: flex; justify-content: center; align-items: center;">
+											<select class="custom-select select-big">
+												<option selected="TOTAL">전체</option>
+												<option value="TOTAL">제목</option>
+												<option value="CONTENT">내용</option>
+												<option value="WRITER">작성자</option>
+											</select>
+										</div>
+										<div class=>
+											<input
+												class="form-control border-radius-right-0 border-right-0 mb-0"
+												style="height: 45px; display: inline-block;" type="text" name="search"
+												placeholder="Search" size="35px">
+										</div>
+										<span class="input-group-btn">
+											<button type="button"
+												class="btn btn-grad border-radius-left-0 mb-0">
+												<i class="ti-search m-0" style="font-size: 1.5em;"></i>
+											</button>
 										</span>
-									</div>
-								</form>
-							</div>
 							<!-- 등록버튼 시작-->
-							<div class="nav-item border-0 d-none d-lg-inline-block align-self-center">
+							<div style="padding-left: 20px; margin-bottom: 10px;"
+								class="nav-item border-0 d-none d-lg-inline-block align-self-center">
 								<a
-									href="${pageContext.request.contextPath}/user/board/boardForm.do?bd_division=${bd_division }" 
+									href="${pageContext.request.contextPath}/user/board/boardForm.do?bd_division=${bd_division }"
 									class=" btn btn-sm btn-grad text-white mb-0"
 									style="float: right">등록</a>
 							</div>
 							<!-- 등록버튼 끝 -->
+									</div>
+								</form>
+							</div>
+
+
 						</div>
 					</div>
 					<!-- Sidebar end-->
@@ -136,7 +154,8 @@ Banner innerpage -->
 							<tbody id="boardTBY">
 								<c:if test="${empty boardList }">
 									<tr align="center">
-										<td colspan="5"><font color="red">등록된 게시글이 존재하지않습니다</font></td>
+										<td colspan="5"><font color="red">등록된 게시글이
+												존재하지않습니다</font></td>
 									</tr>
 								</c:if>
 								<c:if test="${!empty boardList }">
@@ -148,13 +167,12 @@ Banner innerpage -->
 													<c:forEach begin="1" end="${boardInfo.bd_depth }">
                                             		&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;
                                         			</c:forEach>
-												</c:if> 
-												${boardInfo.bd_title }</td>
+												</c:if> ${boardInfo.bd_title }</td>
 											<td>${boardInfo.bd_writer }</td>
 											<td>${boardInfo.bd_date }</td>
 											<td>${boardInfo.bd_hit }</td>
 										</tr>
-											</c:forEach>
+									</c:forEach>
 								</c:if>
 							</tbody>
 						</table>

@@ -44,9 +44,13 @@
 	height : 40px;
 	width : 110px;
 }
+.di{
+	width : 200px;
+}
 
 </style>
 	
+<script type='text/javascript' src='<%=request.getContextPath()%>/js/validation.js'></script>
 <script type='text/javascript'>
 	var big_mem_id;
       $(function(){
@@ -54,49 +58,64 @@
                alert('${param.message}');
             }
 
-            $('#loginBtn').click(function(){
-          	  	var mem_id = $('#mem_id').val();
-                var mem_pass = $('#mem_pass').val();
-
-                if(mem_id==''){
-             	   	$('#label').text("아이디를 입력해주세요.");
-             	  	$('#label').css('color', 'red');
-             	  	return false;
-                }
-                if(mem_pass==''){
-      				$('#label').text("비밀번호를 입력해주세요.");
-      				$('#label').css('color', 'red');
-      				return false;
-                }    
-                
-                $.ajax({
-        			type : 'POST',
-        			url : '${pageContext.request.contextPath}/user/join/loginCheck.do',
-        			dataType : 'json',
-        			data : {
-        				mem_id : $('#mem_id').val(),
-        				mem_pass : $('#mem_pass').val()
-        			},
-        			error : function(result) {
-        				$('#label').text(result.json);
-        				$('#label').css('color', 'red');
-        			},
-        			success : function(result) {
-        				//{ flag : true | false}
-        				if(result.json==1){
-        					$(location).attr('href', '${pageContext.request.contextPath}/user/main/mainForm.do');
-        				}else if(result.json==2){
-        					alert('임시비밀번호로 로그인하셨습니다. \n비밀번호 변경창으로 이동합니다.');
-        					$(location).attr('href', '${pageContext.request.contextPath}/user/join/passChangeForm.do');
-                		}else{
-                			$('#label').text(result.json);
-        					$('#label').css('color', 'red');
-                        }
-        			}
-        		});
-        	});
+            $("#mem_id").keyup(function(e){if(e.keyCode == 13) login();});
+            $("#mem_pass").keyup(function(e){if(e.keyCode == 13) login();});
       });
 
+      function login(){
+          var mem_id = $('#mem_id').val();
+          var mem_pass = $('#mem_pass').val();
+
+          if(mem_id==''){
+          	   	$('#label').text("아이디를 입력해주세요.");
+            	$('#label').css('color', 'red');
+          	  	return false;
+          }
+          if(mem_pass==''){
+      			$('#label').text("비밀번호를 입력해주세요.");
+      			$('#label').css('color', 'red');
+      			return false;
+          }  
+
+          if (!mem_id.validationID()) {
+	  			$('#label').text("아이디를 확인해주세요.");
+	  			$('#label').css('color', 'red');
+	  			return false;
+	  	  }  
+
+	  	  if(mem_pass.length < 4){
+		  		$('#label').text("비밀번호는 최소 4자리 이상 입력해주세요.");
+	  			$('#label').css('color', 'red');
+	  			return false;
+		  }
+                
+          $.ajax({
+        	type : 'POST',
+        	url : '${pageContext.request.contextPath}/user/join/loginCheck.do',
+        	dataType : 'json',
+        	data : {
+        		mem_id : $('#mem_id').val(),
+        		mem_pass : $('#mem_pass').val()
+        	},
+        	error : function(result) {
+        		$('#label').text(result.json);
+        		$('#label').css('color', 'red');
+        	},
+        	success : function(result) {
+        		//{ flag : true | false}
+        		if(result.json==1){
+        			$(location).attr('href', '${pageContext.request.contextPath}/user/main/mainForm.do');
+        		}else if(result.json==2){
+        			alert('임시비밀번호로 로그인하셨습니다. \n비밀번호 변경창으로 이동합니다.');
+        			$(location).attr('href', '${pageContext.request.contextPath}/user/join/passChangeForm.do');
+            	}else{
+            		$('#label').text(result.json);
+        			$('#label').css('color', 'red');
+                }
+        	}
+       	});
+      };
+      
       function caps_lock(e) {
               var keyCode = 0;
               var shiftKey = false;
@@ -349,13 +368,12 @@
 									<div class="row align-items-center no-gutters m-0">
 										<div class="col-6 col-md-8"><label id="label"></label></div>
 										<div class="col-6 col-md-8"><span class="text-muted">회원이 아니신가요?  
-										<a href="${pageContext.request.contextPath}/user/member/memberForm.do">Signup</a></span></div>
-<%-- 										<a href="${pageContext.request.contextPath}/user/join/joinChoiceForm.do">Signup</a></span></div> --%>
+										<a href="${pageContext.request.contextPath}/user/join/joinChoiceForm.do">Signup</a></span></div>
 										<div class="col-6 col-md-8">
 											<input type="button" name="hp_btn" onClick="search_id_modal()" class="btn" value="아이디찾기"> / 
 											<input type="button" name="hp_btn" onClick="search_pw_modal()" class="btn" value="비밀번호찾기">
 										</div>
-										<div class="col-6 col-md-4 text-right"><button class="btn btn-dark" id="loginBtn">로그인</button></div>
+										<div class="col-6 col-md-4 text-right"><button class="btn btn-dark" id="loginBtn" onclick="login()">로그인</button></div>
 										<div id="naver_id_login" style="text-align: center">
 										<a href="${url}"> <img width="223"
 											src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
@@ -388,7 +406,7 @@
             <div class="modal-body">
                <h5>아이디찾기</h5><br>
 
-               <form name="searchUserId"   class="pl-3 pr-3">
+               <form name="searchUserId" class="pl-3 pr-3">
                   <div class="form-group">
                      	이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름 <input type="text" id="mem_name" name="mem_name" >
                   </div>
@@ -511,6 +529,5 @@
       <!-- /.modal-dialog -->
    </div>
    <!-- /.modal -->
-
 </body>
 </html>

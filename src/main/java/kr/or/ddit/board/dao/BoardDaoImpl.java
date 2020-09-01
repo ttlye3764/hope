@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.ddit.domain.Criteria;
 import kr.or.ddit.vo.BoardVO;
 
 @Repository("boardDao")
@@ -22,6 +23,10 @@ public class BoardDaoImpl implements IBoardDao{
 	public List<BoardVO> boardList(Map<String, String> params) throws Exception{
 		return client.selectList("board.boardList", params);
 	}
+//	@Override
+//	public List<BoardVO> getboardList(Criteria cri) throws Exception{
+//		return client.selectList("board.getListWithPaging", cri);
+//	}
 	
 	// 삭제 
 	@Override
@@ -54,19 +59,25 @@ public class BoardDaoImpl implements IBoardDao{
 
 	@Override
 	public String totalCount(Map<String, String> params) throws Exception {
+		System.out.println(params);
 		return (String)client.selectOne("board.totalCount", params);
 	}
 
-//	@Override
-//	public String fileSequence() throws Exception {
-//		return client.selectOne("board.fileSequence");
-//	}
-	
+
+	// 조회수 
 	@Override
 	public void countHit(String bd_no) throws Exception {
-		client.update("board.countHit", bd_no);
-		
+		client.update("board.countHit", bd_no);	
 	}
+
+	
+	// 페이징 처리 
+//	@Override
+//	public List<BoardVO> getListWithPaging(Criteria cri) throws Exception {
+//		return client.selectOne("board.getListWithPaging", cri);
+//	}
+
+
 
 
 

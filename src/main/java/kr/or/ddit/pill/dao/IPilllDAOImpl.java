@@ -37,6 +37,12 @@ public class IPilllDAOImpl implements IPillDAO {
 		return client.selectList("pill.pillList", params);
 	}
 
+
+	@Override
+	public PillVO pillInfo(String pi_no) throws Exception {
+		return client.selectOne("pill.pillInfo", pi_no);
+	}
+
 	
 		
 	

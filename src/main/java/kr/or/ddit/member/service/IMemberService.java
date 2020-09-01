@@ -20,4 +20,5 @@ public interface IMemberService {
 	public void makePass(Map<String,String>params) throws Exception;
 	public void deletePass(String mem_id) throws Exception;
 	public void updatePass(Map<String,String>params) throws Exception;
+	public String selectNick(String mem_nick) throws Exception;
 }

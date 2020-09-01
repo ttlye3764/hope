@@ -25,6 +25,7 @@
 		<typeAlias alias="mypillfileVO" type="kr.or.ddit.vo.MypillFileVO" />
 		<!-- 한별 -->
 		<typeAlias alias="scheduleVO" type="kr.or.ddit.vo.ScheduleVO" />
+		<typeAlias alias="busVO" type="kr.or.ddit.vo.BusVO" />
 		<!-- 승민 -->	
 		<typeAlias alias="memberVO" type="kr.or.ddit.vo.MemberVO" />
 			

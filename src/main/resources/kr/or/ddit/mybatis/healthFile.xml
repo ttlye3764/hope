@@ -22,8 +22,7 @@
 		)
 	</insert>
 
-	<select resultType="healthFileVO" id="healthFileInfo"
-		parameterType="map">
+	<select resultType="healthFileVO" id="healthFileInfo" parameterType="map">
 		SELECT *
 		FROM HEALTHFILE
 		WHERE FILE_HEALTHIMAGE_NO = #{file_healthImage_no}

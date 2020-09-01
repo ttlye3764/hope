@@ -78,6 +78,14 @@
 						  		</foreach>
 						  		</if>
 	</select>
+	
+	<select id="pillInfo" parameterType="String" resultType="pillVO">
+			select *
+			from pill_info
+			where pi_no = #{pi_no}
+	</select>
+	
+	
 </mapper>
 	
 

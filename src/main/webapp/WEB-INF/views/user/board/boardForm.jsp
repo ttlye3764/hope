@@ -8,28 +8,13 @@
 <script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
 <script>
 $(function(){
-	// 섬머노트를 div를 활용한 textarea에 추가.
-	// http://summernote.org 활용
-//     $('#bd_content').summernote({
-//     		lang: 'ko-KR',
-// 			height: 150,
-// 			codemirror: {
-// 			theme: 'monokai'
-// 		}
-//     });
-// 	// 등록버튼기능
-// 	$('#regBtn').on('click', function(){
-		
-// 		 $('form[name=boardForm]').attr('action','${pageContext.request.contextPath}/user/board/insertBoardInfo.do');
-
-// 		 $('form[name=boardForm]').submit();
-// 		});
-
+	
 	$("#files").on("change", handleImgFileSelect);
 
+ 	// 등록버튼기능
     $('form[name=boardForm]').on('submit', function(){
 
-    	$(this).attr('action','${pageContext.request.contextPath}/user/board/insertBoardInfo.do');
+    	$(this).attr('action','${pageContext.request.contextPath}/user/board/insertBoardInfo.do?bd_division=${bd_division }');
      
         return true;
      });
@@ -37,7 +22,7 @@ $(function(){
 
     // 목록버튼기능
     $('#listBtn').on('click', function(){	
-		$(location).attr('href','${pageContext.request.contextPath}/user/board/boardList.do');	
+		$(location).attr('href','${pageContext.request.contextPath}/user/board/boardList.do?bd_division=${bd_division }');	
 	});
 
 

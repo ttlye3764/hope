@@ -13,9 +13,11 @@ import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.or.ddit.bis.Bis;
 import kr.or.ddit.medical.service.IMedicalService;
 import kr.or.ddit.medicalfile.service.IMedicalFileService;
 import kr.or.ddit.pill.service.IPillService;
@@ -49,6 +51,15 @@ public class MedicalController {
 		List<MypillVO> medicalList = this.medicalService.medicalList(mem_no);
 		ModelAndView andView = new ModelAndView();
 		andView.addObject("json", medicalList);
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
+	@RequestMapping("pillInfo")
+	public ModelAndView pillInfo(String pi_no) throws Exception {
+		System.out.println("pillInfo 아작스 들어옴============================================================================================");
+		PillVO pillInfo = pillService.pillInfo(pi_no);
+		ModelAndView andView = new ModelAndView();
+		andView.addObject("pillInfo", pillInfo);
 		andView.setViewName("jsonConvertView");
 		return andView;
 	}
@@ -230,5 +241,21 @@ public class MedicalController {
 		andView.setViewName("user/medical/searchPill");
 		return andView;
 	}
+
+	
+	@ResponseBody
+	@RequestMapping(value="pillAPI",produces="text/plain;charset=UTF-8")
+	public String pillAPI(String pi_no) throws Exception {
+		
+		PillVO vo = pillService.pillInfo(pi_no);
+		String pname = vo.getPi_name();
+		String cname = vo.getPi_b_name();
+		
+		String pillResult = pillInfo.pillAPI(pname, cname); //json으로 옴
+		return pillResult;
+	}
+
+
+
 
 }

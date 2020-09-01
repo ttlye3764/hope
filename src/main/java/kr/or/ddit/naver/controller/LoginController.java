@@ -1,6 +1,5 @@
 package kr.or.ddit.naver.controller;
 
-import java.io.IOException;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -72,30 +71,39 @@ public class LoginController {
 		JSONObject response_obj = (JSONObject) jsonObj.get("response");
 //response의 nickname값 파싱
 		String nickname = (String) response_obj.get("nickname");
-		System.out.println(nickname);
+		
+		String gender = (String) response_obj.get("gender");
 		
 		String name = (String) response_obj.get("name");
-		System.out.println(name);
 		
 		String email = (String) response_obj.get("email");
-		System.out.println(email);
 		
 		String [] id = email.split("@");
-		System.out.println(id[0]);
 //4.파싱 닉네임 세션으로 저장
 		params.put("mem_id", id[0]);
-		params.put("mem_join_addr", "1");
+		params.put("mem_join_addr", "n");
 		MemberVO memberInfo1 = this.service.memberInfo(params);
 		MemberVO memberInfo = new MemberVO();
 		
+		memberInfo.setMem_id(id[0]);
+		memberInfo.setMem_nickname(nickname);
+		memberInfo.setMem_name(name);
+		memberInfo.setMem_email(email);
+		memberInfo.setMem_addr1("주소1");
+		memberInfo.setMem_addr2("주소2");
+		memberInfo.setMem_birth("2020-01-01");
+		memberInfo.setMem_division("0");
+		memberInfo.setMem_gender(gender);
+		memberInfo.setMem_hp("010-0000-0000");
+		memberInfo.setMem_join_addr("n");
+		memberInfo.setMem_pass("a");
+		memberInfo.setMem_zip1("123");
+		memberInfo.setMem_zip2("123");
+		
 		if(memberInfo1 == null) {
-			memberInfo.setMem_id(id[0]);
-			memberInfo.setMem_nickname(nickname);
-			memberInfo.setMem_name(name);
-			session.setAttribute("LOGIN_MEMBERINFO", memberInfo); // 세션 생성
-		}else {
-			session.setAttribute("LOGIN_MEMBERINFO", memberInfo); // 세션 생성
+			this.service.insertMember(memberInfo);
 		}
+		session.setAttribute("LOGIN_MEMBERINFO", memberInfo); // 세션 생성
 		
 		model.addAttribute("result", apiResult);
 		return "redirect:mainForm";

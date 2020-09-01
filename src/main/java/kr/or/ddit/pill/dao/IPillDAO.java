@@ -14,4 +14,6 @@ public interface IPillDAO {
 	public String totalCount(HashMap params) throws Exception;
 
 	public List<PillVO> pillList(HashMap params) throws Exception;
+
+	public PillVO pillInfo(String pi_no) throws Exception;
 }

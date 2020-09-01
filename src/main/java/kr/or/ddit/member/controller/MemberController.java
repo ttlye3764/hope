@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import edu.emory.mathcs.backport.java.util.concurrent.ExecutionException;
 import kr.or.ddit.member.service.IMemberService;
 import kr.or.ddit.vo.MemberVO;
 
@@ -77,13 +78,22 @@ public class MemberController {
 		this.service.updateMemberInfo(memberInfo);		
 		
 		params.put("mem_id", memberInfo.getMem_id());
-		params.put("mem_pass", memberInfo.getMem_pass());
+		
+		if(!(memberInfo.getMem_pass().length()>0)) {
+			MemberVO memberInfo2 = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+			params.put("mem_pass", memberInfo2.getMem_pass());
+		}else {
+			params.put("mem_pass", memberInfo.getMem_pass());
+		}
 		
 		memberInfo = this.service.memberInfo(params);
 		session.setAttribute("LOGIN_MEMBERINFO", memberInfo);
 
 		return "redirect:/user/main/mainForm.do";
 	}
+	
+	@RequestMapping("deleteMemberForm")
+	public void deleteMemberForm() {}
 
 	// /user/member/deleteMemberInfo.do?user_id=a001
 	@RequestMapping("deleteMemberInfo/{user_id}")
@@ -150,6 +160,25 @@ public class MemberController {
 		andView.addObject("json", result);
 		andView.setViewName("jsonConvertView");
 
+		return andView;
+	}
+	
+	@RequestMapping("nickCheck")
+	public ModelAndView nickCheck(@RequestParam String mem_nickname) throws Exception{
+		String nick = this.service.selectNick(mem_nickname);
+		
+		ModelAndView andView = new ModelAndView();
+		
+		String result;
+		if(nick == null) {
+			result = "사용가능한 닉네임입니다.";
+		}else {
+			result = "이미 존재하는 닉네임입니다.";
+		}
+		
+		andView.addObject("json", result);
+		andView.setViewName("jsonConvertView");
+		
 		return andView;
 	}
 	
