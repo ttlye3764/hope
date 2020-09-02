@@ -18,6 +18,8 @@
 		<typeAlias alias="dietVO" type="kr.or.ddit.vo.DietVO"/>
 		<typeAlias alias="dietMemVO" type="kr.or.ddit.vo.Diet_memVO"/>
 		<typeAlias alias="menuVO" type="kr.or.ddit.vo.MenuVO"/>
+		<typeAlias alias="dietDayVO" type="kr.or.ddit.vo.Diet_dayVO"/>
+		<typeAlias alias="dietDayInfoVO" type="kr.or.ddit.vo.Diet_day_infoVO"/>
 		
 		<!-- 용춘 -->
 		<typeAlias alias="mypillVO" type="kr.or.ddit.vo.MypillVO" />

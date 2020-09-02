@@ -47,6 +47,43 @@
 		FROM DIET_MEM
 		WHERE MEM_NO = #{mem_no}
 	</select>
+	
+	<select id="menuSearch" parameterType="Map" resultType="menuVO">
+		SELECT *
+		FROM MENU
+		<if test='menu_search != null'>
+			WHERE MENU_NAME LIKE '%'||#{menu_search}||'%'
+		</if>
+	</select>
+	
+	<insert id="insertDietDay" parameterType="dietDayVO" useGeneratedKeys="true" keyColumn="DD_NO" keyProperty="dd_no">
+		INSERT INTO DIET_DAY(DD_NO,
+						MEM_NO,
+						DD_KCAL,
+						DD_DATE)
+						VALUES(
+						diet_day_seq.nextval,
+						#{mem_no},
+						0,
+						#{dd_date}
+						)
+	</insert>
+	
+	<insert id="insertDietDayInfo" parameterType="dietDayInfoVO">
+		INSERT INTO DIET_DAY_INFO(DD_NO,
+								MENU_NO,
+								DD_INFO_DIVISION)VALUES(
+									#{dd_no}
+									#{menu_no},
+									#{dd_info_division}
+									)
+								
+	</insert>
+	<update id="updateDietKcal" parameterType="Map">
+		UPDATE DIET_DAY SET DD_KCAL = #{dd_kcal} WHERE DD_NO = #{dd_no}
+	</update>
+	
+	
 </mapper>
 
 

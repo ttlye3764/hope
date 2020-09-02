@@ -1,6 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<link href="https://fonts.googleapis.com/css?family=Baloo|Ubuntu" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/myCSS/dietMy.css" />
+<style>
+/* body { */
+/* 	display: flex; */
+/* 	align-items: center; */
+/* 	justify-content: center; */
+/* 	flex-direction: column; */
+/* 	font-family:  "Baloo"; */
+/* } */
+
+</style>
     <div class="innerpage-banner center bg-overlay-dark-7 py-7" style="background:url(${pageContext.request.contextPath}/image/food1.jpg) no-repeat; background-size:cover; background-position: center center;">
 		<div class="container">
 			<div class="row all-text-white">
@@ -107,12 +120,66 @@
 				
 				<h5 class="mb-2 mt-5">나의 식단표 </h5>
 				<div class="divider divider-bold"></div>
+				<br>
+				<br>
+				<!-- 달력 시작 -->
+				
+				
+
+<div id="calender-wrapper" style=" margin-left: 50px; width:750px; !important ">
+	<div id="calender-title" class="disable-select flex row center-v around">
+		<div id="left" class="flex row center-vh"><span><</span></div>
+		<p class="flex row center-vh"></p>
+		<div id="right" class="flex row center-vh"><span>></span></div>
+	</div>
+	<div id="days" class="flex row center-vh colorRed disable-select">
+		<p>MON</p>
+		<p>TUE</p>
+		<p>WEDS</p>
+		<p>THURS</p>
+		<p>FRI</p>
+		<p>SAT</p>
+		<p>SUN</p>
+	</div>
+	<div id="calender-content" class="flex row wrap disable-select">
+	</div>
+	<div id="calender-panel" class="flex row center-v end">
+		<div id="info" class="flex column center-vh bgColorDarkRed">
+			<div id="info-titles" class="flex row center-vh">
+				<p class="flex column center-vh">Start Date</p>
+				<p class="flex column center-vh">End Date</p>
+			</div>
+			<div class="flex row center-vh bgColorRed">
+				<p class="flex column center-vh" id="startdate"></p>
+				<p class="flex column center-vh" id="enddate"></p>
+			</div>
+		</div>
+		<div id="clear" class="flex column center-vh bgColorDarkRed">
+			<p>CLEAR SELECTION</p>
+		</div>
+	</div>
+</div>
+	
+<div id="calender-buttons" class="flex row center-vh wrap" style=" margin-left: 50px; width:750px; !important ">
+	<div id="make-booking" class="flex column center-vh width-half">
+		<p>MARK AVAILABLE</p>
+	</div>
+	<div id="remove-booking" class="flex column center-vh width-half">
+		<p>MARK UNAVAILABLE</p>
+	</div>
+</div>
+				
+				<!-- 달력 끝 -->
 				
 				<h5 class="mb-2 mt-5">체중 차트 </h5>
 				<div class="divider divider-bold"></div>
 				
 				<!-- timeLine start -->
 					<div class="container">
+					<!-- 모달버튼 -->
+						<button type="button" id="calendarModal" style="opacity:0" class="btn btn-grad" data-toggle="modal" data-target="#exampleModalCenter">	
+					Launch demo modal
+					</button>
 			<div class="row">
 				<div class="col-md-8 text-center mx-auto">
 					<h2 class="mb-2">Best solutions for your business!</h2>
@@ -236,8 +303,162 @@
 			</div>
 		</div>
 	</section>
+	
+	
+	
+	
+	
+	<!-- 모달 시작 -->
+	<div class="modal fade text-left show" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" style="display: none; padding-right: 15px;" aria-modal="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content" style="width:1000px; height:900px; !important">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLongTitle">식단</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">×</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<h3>아침</h3>
+									
+									<!-- 테이블 시작 -->
+									<c:if test="${empty myMenuList1 }">
+									등록된 메뉴가 없습니다.
+									</c:if>
+									<c:if test="${!empty myMenuList1 }">
+								<div class="table-responsive-sm">
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th scope="col">#</th>
+												<th scope="col">메뉴</th>
+												<th scope="col">칼로리</th>
+											</tr>
+										</thead>
+										<tbody id="myMenu_tbody">
+							<c:forEach items="${myMenuList1 }" var="myMenuInfo">
+								<tr>
+									<th scope="row" >1</th>
+									<td>${myMenuInfo.menu_name }</td>
+									<td>${myMenuInfo.menu_kcal }</td> 									
+								</tr>
+							</c:forEach>
+										</tbody>
+									</table>
+								</div>
+							</c:if>
+							<!-- 테이블 종료 -->
+									<!--  등록 --> 
+									<div class="col-md-6 mb-5" style="width:400px; !important">
+				
+					<div class="accordion accordion-line toggle-icon-left toggle-icon-round" id="accordion4">
+						<!-- item -->
+						<div class="accordion-item" style="width:400px; !important">
+							<div class="accordion-title" style="width:400px; !important">
+								<a class="h6 mb-0" data-toggle="collapse" href="#collapse-10" aria-expanded="true">등록</a>
+							</div>
+							<div class="collapse hide" id="collapse-10" data-parent="#accordion4" style="">
+								<div class="accordion-content"> 
+									<input type="text" placeholder="메뉴를 입력해주세요" id="menu_search" onchange="menu_search()">
+									<button type="button" class="btn btn-primary" id="insert_diet_day1">등록</button>
+									<table id="menu_search_result"></table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+									<div class="divider divider-dotted"></div>
+									
+									
+									<h3>점심</h3>
+									<button type="button" class="btn btn-primary">등록</button>
+									<div class="divider divider-dotted"></div>
+									
+									
+									<h3>저녁</h3>
+									<button type="button" class="btn btn-primary">등록</button>
+									<div class="divider divider-dotted"></div>
+									
+									총 열량 : 
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-primary">확인</button>
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+								</div>
+							</div>
+						</div>
+					</div>
+	<!-- 모달 끝 -->			
+				
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
+
+var selectMenuName;
+var selectMenuNo;
+var year;
+var month;
+var day;
+$(function() {
+	displayCalender(currentMonth)
+	$("#date").append(new Date);
+
+	$('#insert_diet_day1').on('click', function(){
+		$.ajax({
+	 		url : '${pageContext.request.contextPath}/user/diet/insertAllDietDay',
+	 		dataType : 'JSON',
+	 		data : {
+	 			dd_date : year + '-' + month + '-' + day,
+	 			dd_info_division : "1",
+		 		menu_no : selectMenuNo
+	 		},
+	 		error : function(result) {
+	 			alert(result.status);
+	 		},
+	 		success : function(result) {
+
+	 		}
+	 	});
+	})
+});
+
+function menu_select(e){
+	selectMenuName = $(e).text();
+	selectMenuNo = $(e).find('input').val();
+	$('#menu_search').val(selectMenuName);
+}
+
+function menu_search(){
+
+	var menu_search
+	$.ajax({
+ 		url : '${pageContext.request.contextPath}/user/diet/menuSearch',
+ 		dataType : 'JSON',
+ 		data : {
+ 			menu_search : $('#menu_search').val()
+ 		},
+ 		error : function(result) {
+ 			alert(result.status);
+ 		},
+ 		success : function(result) {
+ 			$('#menu_saerch_result').empty();
+ 			alert("성공");
+
+ 			$('#menu_search_result').append('<tr>')
+ 			$('#menu_search_result').append('<th>메뉴</td>');
+ 			$('#menu_search_result').append('<th>칼로리</td>');
+ 			$('#menu_search_result').append('</tr>');
+ 			
+ 			$.each(result.menuSearchList, function(index, item){
+ 				$('#menu_search_result').append('<tr>');
+ 				$('#menu_search_result').append('<td onclick="menu_select(this)"><input type="hidden" value="'+item.menu_no+'">'+item.menu_name+'</td>');
+ 				$('#menu_search_result').append('<td><input type="hidden" value="'+item.menu_no+'">'+item.menu_kcal+'</td>');
+ 				$('#menu_search_result').append('</tr>');	 
+ 			 });
+
+ 			
+ 		}
+ 	});
+}
 google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
 
@@ -260,4 +481,227 @@ google.charts.load('current', {'packages':['corechart']});
 
         chart.draw(data, options);
       }
+
+//       달력
+var currentMonth = new Date().getMonth();
+var currentYear = new Date().getFullYear();
+var clickedDays = 0;
+var bookingSteps = 0;
+var lastClickedDay;
+var startDate = "";
+var endDate = "";
+var monthNames = ["1월", "2월", "3월", "4월", "5월", "6월",
+	"7월", "8월", "9월", "10월", "11월", "12월"
+];
+var monthShortNames = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+var dayNames = ["일", "월", "화", "수", "목", "금", "토"];
+var bookedDates = [];
+var selectedDates = [];
+
+Date.prototype.addDays = function(days) {
+	var dat = new Date(this.valueOf())
+	dat.setDate(dat.getDate() + days);
+	return dat;
+}
+function clearCalender() {
+	clickedDays = 0;
+	$(".month div").removeClass("clicked");
+	$("#startdate").html("");
+	$("#enddate").html("");
+
+	startDate = "";
+	endDate = "";
+	selectedDates = [];
+	bookingSteps = 0;
+}
+function clearBooking() {
+	$("#booking-form input").val("");
+	$("#booking-form textarea").val("");
+	
+	$("#booking-wrapper").removeClass("opened");
+	$("#make-booking").html("MAKE BOOKING ENQUIRY");
+	
+	
+}
+function daysInMonth(month) {
+	return new Date(currentYear, month, 0).getDate();
+}
+function displayCalender() {
+	var days = daysInMonth(currentMonth + 1);
+
+	$("#calender-title p").html(monthNames[currentMonth].toUpperCase());
+	$("#calender-content").html("");
+
+	for (var i = 1; i < firstDayOffset(new Date()); i++) {
+		$("#calender-content").append("<div class='month flex center-vh'></div>");
+	}
+	for (var i = 1; i <= days; i++) {
+		var day = new Date(currentYear, currentMonth, i).getDay();
+		var string = "<div class='month'><div id='" + dayNames[day] + "-" + i + "-" + monthNames[currentMonth] + "-" + currentYear + "'class='month-selector flex center-vh clickable' onclick='calendarModal(this.id)' ><p>" + i + "</p></div></div>";
+		$("#calender-content").append(string);
+	}
+
+	checkSelected();
+	checkBookings();
+}
+// function monthClick(e) {
+// 		clickedDays += 1;
+		
+// 		if (clickedDays == 1) {
+// 			$(e).toggleClass("clicked");
+// 			startDateIndex = parseInt($(e).attr('id').split('-')[1]);
+// 			startDate = new Date(currentYear, currentMonth, startDateIndex);
+// 		}
+// 		if (clickedDays > 1) {
+// 			endDateIndex = parseInt($(e).attr('id').split('-')[1]);
+// 			endDate = new Date(currentYear, currentMonth, endDateIndex);
+// 		}
+// 		if (endDate > startDate) {
+// 			var clicked = $(".clicked");
+// 			$(clicked).not(clicked[0]).removeClass("clicked");
+// 			$(e).toggleClass("clicked");
+
+// 			dateArray = getDates(startDate, endDate);
+// 			dateArray = formatDates(dateArray)
+// 			selectedDates = dateArray;
+
+// 			for (var i = 0; i < dateArray.length; i++) {
+// 				$("#" + dateArray[i]).addClass("clicked");
+// 			}
+// 		}
+// 		$("#startdate").html(startDate.toString().split(' ').slice(0, 4).join(' '));
+// 		$("#enddate").html(endDate.toString().split(' ').slice(0, 4).join(' '));
+// }
+function firstDayOffset(date) {
+	return new Date(currentYear, currentMonth, 1).getDay();
+}
+function checkBookings() {
+		
+	if (bookedDates != null) {
+		for (var i = 0; i < bookedDates.length; i++) {
+			var inner = bookedDates[i];
+			for (var j = 0; j < inner.length; j++) {
+				$("#" + inner[j]).removeClass("clickable").delay(400).addClass("booked");
+			}
+		}
+	}
+}
+function checkSelected() {
+	selectedDates = getDates(startDate, endDate);
+	selectedDates = formatDates(selectedDates);
+	if (selectedDates != null) {
+		for (var i = 0; i < selectedDates.length; i++) {
+			$("#" + selectedDates[i]).addClass("clicked");
+		}
+	}
+}
+function addBooking() {
+	bookedDates.push(dateArray);
+	clearCalender();
+	displayCalender();
+}
+function formatDates(dates) {
+	if (dates != null) {
+		var newDateArray = [];
+		for (var i = 0; i < dates.length; i++) {
+			var date = "";
+			date += dayNames[dates[i].getDay()] + "-";
+			date += dates[i].getDate() + "-";
+			date += monthNames[dates[i].getMonth()] + "-";
+			date += dates[i].getFullYear();
+			newDateArray.push(date);
+		}
+		return newDateArray;
+	}
+	return null;
+}
+function getDates(startDate, stopDate) {
+	if (startDate != "" && endDate != "") {
+		var dateArray = new Array();
+		var currentDate = startDate;
+		while (currentDate <= stopDate) {
+			dateArray.push(new Date(currentDate))
+			currentDate = currentDate.addDays(1);
+		}
+		return dateArray;
+	}
+	return null;
+}
+
+
+
+function calendarModal(e){
+
+	var id = e;
+
+	year = id.split('-')[3];
+	month = id.split('-')[2].substring(0,1);
+	day = id.split('-')[1];
+	
+	if ( ( id != '') && (id != null))  
+	console.log(id)
+	
+// 	$.ajax({
+// 		type : 'POST',
+// 		url : '${pageContext.request.contextPath}/user/diet/calendarModal',
+// 		dataType : 'JSON',
+// 		data : {
+// 			calendarDate : $('#mem_name').val()
+// 		},
+// 		error : function(result) {
+// 			alert(result.memberInfo.mem_name);
+// 		},
+// 		success : function(result) {
+// 			alert(result.memberInfo.mem_name);
+// 			$('#search_mem_name').val(result.memberInfo.mem_name);
+// 		}
+// 	});
+
+	$('#calendarModal').trigger("click");
+
+}
+
+$("#left").on("click", function() {
+	
+	if (currentMonth > 0)
+		currentMonth -= 1;
+	else {
+		currentMonth = 11;
+		currentYear -= 1;
+	}
+	displayCalender();
+});
+$("#right").on("click", function() {
+	if (currentMonth < 11)
+		currentMonth += 1;
+	else {
+		currentMonth = 0;
+		currentYear += 1;
+	}
+	displayCalender();
+});
+$("#clear").on("click", function() {
+	clearCalender();
+	clearBooking();
+});
+$("#make-booking").on("click", function() {
+	if(selectedDates != null && selectedDates.length > 0) {
+		bookingSteps += 1;
+		
+		if(bookingSteps == 1) {
+			clearBooking();
+			addBooking();
+		}
+	}
+});
+$("#remove-booking").on("click", function() {
+	if(selectedDates != null && selectedDates.length > 0) {
+		bookingSteps += 1;
+		
+		if(bookingSteps == 1) {
+			clearBooking();
+			addBooking();
+		}
+	}
+});
     </script>

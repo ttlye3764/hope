@@ -3,6 +3,9 @@ package kr.or.ddit.diet.service;
 import java.util.List;
 import java.util.Map;
 
+import kr.or.ddit.vo.DietVO;
+import kr.or.ddit.vo.Diet_dayVO;
+import kr.or.ddit.vo.Diet_day_infoVO;
 import kr.or.ddit.vo.Diet_infoVO;
 import kr.or.ddit.vo.Diet_memVO;
 import kr.or.ddit.vo.MenuVO;
@@ -23,4 +26,13 @@ public interface IDietService {
 		
 		// diet_mem 테이블 조회
 		public List<Diet_memVO> dietMemList(Map<String, String> params) throws Exception;
+		
+		// menu_search
+		public List<MenuVO> menuSearch(Map<String, String> params) throws Exception;
+		
+		//dietDay 테이블 생성
+		public int insertDietDay(Diet_dayVO dietDay) throws Exception;
+		
+		//diet_day_Info 테이블 삽입
+		public void InsertDietDayInfo(Diet_day_infoVO dietDayInfo) throws Exception;
 }
