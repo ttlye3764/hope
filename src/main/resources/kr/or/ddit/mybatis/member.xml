@@ -8,32 +8,37 @@
 		FROM MEMBER
 		WHERE MEM_DELETE = 'n'
 	</sql>
-	
-	
-<!-- 	<sql id="searchCondition"> -->
-<!-- 		<dynamic prepend="AND"> -->
-<!-- 			<isNotEmpty property="search_keyword" open="(" close=")"> -->
-<!-- 				<isEqual property="search_keycode" compareValue="ALL"> -->
-<!-- 					MEM_ID LIKE '%'||#search_keyword#||'%' -->
-<!-- 					OR MEM_NAME '%'||#search_keyword#||'%' -->
-<!-- 					OR MEM_ADDR '%'||#search_keyword#||'%'		 -->
-<!-- 				</isEqual> -->
-<!-- 				<isEqual property="search_keycode" compareValue="MEMID"> -->
-<!-- 					MEM_ID LIKE '%'||#search_keyword#||'%' -->
-<!-- 				</isEqual> -->
-<!-- 				<isEqual property="search_keycode" compareValue="MEMNAME"> -->
-<!-- 					MEM_NAME LIKE '%'||#search_keyword#||'%' -->
-<!-- 				</isEqual> -->
-<!-- 				<isEqual property="search_keycode" compareValue="MEMADDR"> -->
-<!-- 					MEM_ADD1 LIKE '%'||#search_keyword#||'%' -->
-<!-- 					OR MEM_ADD2 LIKE '%'||#search_keyword#||'%' -->
-<!-- 				</isEqual> -->
-<!-- 			</isNotEmpty> -->
-<!-- 		</dynamic> -->
-<!-- 	</sql> -->
 
-	<select id="memberInfo" parameterType="map" resultType="memberVO">
-		<include refid="selectAll"/>
+	<select id="totalCount" parameterType="map" resultType="String">
+		SELECT COUNT(MEM_NO)
+		FROM MEMBER
+		WHERE MEM_DELETE = 'n'
+		<if test="search_keycode != null">
+			<if test='search_keycode.equals("TOTAL")'>
+				AND
+				(MEM_NAME LIKE '%' || #{search_keyword} || '%'
+				OR MEM_ID LIKE '%'|| #{search_keyword} || '%'
+				OR MEM_HP LIKE '%' || #{search_keyword} || '%')
+			</if>
+			<if test='search_keycode.equals("NAME")'>
+				AND
+				MEM_NAME LIKE '%' || #{search_keyword} || '%'
+			</if>
+			<if test='search_keycode.equals("ID")'>
+				AND
+				MEM_ID LIKE '%' || #{search_keyword} || '%'
+			</if>
+			<if test='search_keycode.equals("PHONE")'>
+				AND
+				MEM_HP LIKE '%' ||
+				#{search_keyword} || '%'
+			</if>
+		</if>
+	</select>
+
+	<select id="memberInfo" parameterType="map"
+		resultType="memberVO">
+		<include refid="selectAll" />
 		<if test="mem_id != null">
 			AND MEM_ID = #{mem_id}
 		</if>
@@ -42,21 +47,56 @@
 		</if>
 		<if test="mem_pass != null">
 			AND (MEM_PASS = #{mem_pass}
-			OR MEM_TEMPORARY_PASS = #{mem_pass})
+			OR MEM_TEMPORARY_PASS =
+			#{mem_pass})
 		</if>
 		<if test="mem_join_addr != null">
 			AND MEM_JOIN_ADDR IS NOT NULL
 		</if>
 	</select>
 
-	<select id="memberList" resultType="memberVO" parameterType="map">
-		<include refid="selectAll" />
-<!-- 		<include refid="searchCondition"/> -->
+	<select id="memberList" resultType="memberVO"
+		parameterType="map">
+		SELECT B.*
+		FROM(SELECT A.*
+		FROM (SELECT ROWNUM RNUM, MEMBER.*
+		FROM MEMBER
+		WHERE MEM_DELETE = 'n'
+		<if test="search_keycode != null">
+			<if test='search_keycode.equals("TOTAL")'>
+				AND
+				(MEM_NAME LIKE '%' || #{search_keyword} || '%'
+				OR MEM_ID LIKE '%'|| #{search_keyword} || '%'
+				OR MEM_HP LIKE '%' || #{search_keyword} || '%')
+			</if>
+			<if test='search_keycode.equals("NAME")'>
+				AND
+				MEM_NAME LIKE '%' || #{search_keyword} || '%'
+			</if>
+			<if test='search_keycode.equals("ID")'>
+				AND
+				MEM_ID LIKE '%' || #{search_keyword} || '%'
+			</if>
+			<if test='search_keycode.equals("PHONE")'>
+				AND
+				MEM_HP LIKE '%' ||
+				#{search_keyword} || '%'
+			</if>
+		</if>
+		ORDER BY MEM_NO
+		)A
+		)B
+		<![CDATA[
+			WHERE B.RNUM <= #{startCount}
+			  AND B.RNUM >= #{endCount}
+        ]]>
+		ORDER BY B.rnum
 	</select>
 
 	<update id="deleteMember" parameterType="map">
 		UPDATE MEMBER
-		SET MEM_DELETE = 'y'
+		SET
+		MEM_DELETE = 'y'
 		WHERE MEM_ID = #{mem_id}
 	</update>
 
@@ -67,7 +107,8 @@
 		,MEM_ZIP1 = #{mem_zip1}
 		,MEM_ZIP2 = #{mem_zip2}
 		,MEM_ADDR1 = #{mem_addr1}
-		,MEM_ADDR2 = #{mem_addr2}
+		,MEM_ADDR2 =
+		#{mem_addr2}
 		,MEM_HP = #{mem_hp}
 		,MEM_EMAIL = #{mem_email}
 		<if test="mem_pass != null and mem_pass != ''">
@@ -84,75 +125,87 @@
 
 
 	<insert id="insertMember" parameterType="map">
-		INSERT INTO MEMBER(MEM_NO,MEM_ID,MEM_PASS,MEM_NAME,MEM_GENDER,MEM_NICKNAME,MEM_BIRTH,MEM_EMAIL,MEM_HP,MEM_ADDR1,MEM_ADDR2,MEM_DIVISION,MEM_ZIP1,MEM_ZIP2,MEM_JOIN_ADDR)
+		INSERT INTO
+		MEMBER(MEM_NO,MEM_ID,MEM_PASS,MEM_NAME,MEM_GENDER,MEM_NICKNAME,MEM_BIRTH,MEM_EMAIL,MEM_HP,MEM_ADDR1,MEM_ADDR2,MEM_DIVISION,MEM_ZIP1,MEM_ZIP2,MEM_JOIN_ADDR)
 		values(
 		member_seq.nextval,#{mem_id},#{mem_pass},#{mem_name},#{mem_gender},#{mem_nickname},
 		#{mem_birth},#{mem_email},#{mem_hp},#{mem_addr1},#{mem_addr2},#{mem_division},#{mem_zip1},#{mem_zip2},#{mem_join_addr}
 		)
 	</insert>
-	
+
 	<select id="selectSeq" resultType="String">
-		SELECT MEMBER_SEQ.NEXTVAL FROM DUAL
+		SELECT MEMBER_SEQ.NEXTVAL FROM
+		DUAL
 	</select>
-	
-	<select id="friendMemberList" parameterType="map" resultType="friendVO">
+
+	<select id="friendMemberList" parameterType="map"
+		resultType="friendVO">
 		SELECT *
 		FROM FRIEND
 		WHERE MEM_NO = #{mem_no}
 	</select>
-	
+
 	<insert id="addFriend" parameterType="friendVO">
-		INSERT INTO FRIEND(FRI_NO, 
-						MEM_NO,
-						FRI_MEM_NO,
-						MEM_NAME,
-						FRI_MEM_NAME)
-					 values(FRIEND_SEQ.NEXTVAL,
-					 		#{mem_no},
-					 		#{fri_mem_no},
-					 		#{mem_name},
-					 		#{fri_mem_name})
-		
+		INSERT INTO FRIEND(FRI_NO,
+		MEM_NO,
+		FRI_MEM_NO,
+		MEM_NAME,
+		FRI_MEM_NAME)
+		values(FRIEND_SEQ.NEXTVAL,
+		#{mem_no},
+		#{fri_mem_no},
+		#{mem_name},
+		#{fri_mem_name})
+
 	</insert>
-	
+
 	<select id="searchID" resultType="String" parameterType="map">
-		SELECT MEM_ID
+		SELECT
+		MEM_ID
 		FROM MEMBER
 		WHERE MEM_NAME = #{mem_name}
-		AND MEM_BIRTH = #{mem_birth}
+		AND MEM_BIRTH =
+		#{mem_birth}
 	</select>
-	
+
 	<select id="searchPW" resultType="String" parameterType="map">
-		SELECT MEM_PASS
+		SELECT
+		MEM_PASS
 		FROM MEMBER
 		WHERE MEM_NAME = #{mem_name}
-		AND MEM_BIRTH = #{mem_birth}
+		AND MEM_BIRTH =
+		#{mem_birth}
 		AND MEM_ID = #{mem_id}
 		AND MEM_hp = #{mem_hp}
 	</select>
-	
+
 	<update id="makePass" parameterType="map">
 		UPDATE MEMBER
-		SET MEM_TEMPORARY_PASS = #{mem_temporary_pass}
+		SET
+		MEM_TEMPORARY_PASS = #{mem_temporary_pass}
 		WHERE MEM_ID = #{mem_id}
 	</update>
-	
+
 	<update id="deletePass" parameterType="String">
 		UPDATE MEMBER
-		SET MEM_TEMPORARY_PASS = null
+		SET
+		MEM_TEMPORARY_PASS = null
 		WHERE MEM_ID = #{mem_id}
 	</update>
-	
+
 	<update id="updatePass" parameterType="map">
 		UPDATE MEMBER
-		SET MEM_PASS = #{mem_pass}
+		SET MEM_PASS
+		= #{mem_pass}
 		WHERE MEM_ID = #{mem_id}
 	</update>
-	
-	<select id="selectNick" parameterType="String" resultType="String">
+
+	<select id="selectNick" parameterType="String"
+		resultType="String">
 		SELECT MEM_NICKNAME
 		FROM MEMBER
 		WHERE MEM_DELETE = 'n'
-		AND MEM_NICKNAME = #{mem_nick}
+		AND
+		MEM_NICKNAME = #{mem_nick}
 	</select>
 </mapper>    

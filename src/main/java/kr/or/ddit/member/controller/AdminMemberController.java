@@ -3,20 +3,20 @@ package kr.or.ddit.member.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ExtendedModelMap;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddit.member.service.IMemberService;
+import kr.or.ddit.utiles.RolePaginationUtil;
 import kr.or.ddit.vo.MemberVO;
 
 @Controller
@@ -30,18 +30,38 @@ public class AdminMemberController {
 	private IMemberService service;
 	
 	@RequestMapping("memberList")
-	public Model memberList(String search_keycode, String search_keyword, Map<String, String> params) throws Exception {
+	public ModelAndView memberList(String search_keycode
+							,String search_keyword
+							, ModelAndView andView
+							,Map<String, String> params
+							,String currentPage
+							,RolePaginationUtil pagination
+							,HttpServletRequest request) throws Exception {
+		
+		if(currentPage == null){
+	         currentPage = "1";
+	      }
 
-//		Map<String, String> params = new HashMap<String, String>();
 		params.put("search_keycode", search_keycode);
 		params.put("search_keyword", search_keyword);
+		String totalCount = this.service.totalCount(params);
+		
+		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount));
+	    String startCount = String.valueOf(pagination.getStartCount());
+	    String endCount = String.valueOf(pagination.getEndCount());
+	    params.put("startCount", startCount);
+	    params.put("endCount", endCount);
+		
 
 		List<MemberVO> memberList = this.service.memberList(params);
+		
+		andView.addObject("param",search_keycode);
+		andView.addObject("param",search_keyword);
+		andView.addObject("memberList", memberList);
+		andView.setViewName("admin/member/memberList");
+		andView.addObject("pagination", pagination.getPagingHtmls());
 
-		// memberList => view resolver => memberList.jsp
-		Model model = new ExtendedModelMap();
-		model.addAttribute("memberList", memberList);
-		return model;
+		return andView;
 	}
 	
 	@RequestMapping("memberView")

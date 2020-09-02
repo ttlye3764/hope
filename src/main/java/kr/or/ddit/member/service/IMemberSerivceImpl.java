@@ -94,4 +94,9 @@ public class IMemberSerivceImpl implements IMemberService {
 	public String selectNick(String mem_nick) throws Exception {
 		return dao.selectNick(mem_nick);
 	}
+
+	@Override
+	public String totalCount(Map<String, String> params) throws Exception {
+		return dao.totalCount(params);
+	}
 }

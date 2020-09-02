@@ -103,4 +103,9 @@ public class IMemberDAOImpl implements IMemberDAO {
 		String nick = client.selectOne("member.selectNick",mem_nick);
 		return nick;
 	}
+
+	@Override
+	public String totalCount(Map<String, String> params) throws Exception {
+		return (String)client.selectOne("member.totalCount", params);
+	}
 }
