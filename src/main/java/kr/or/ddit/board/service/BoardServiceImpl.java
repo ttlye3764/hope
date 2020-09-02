@@ -74,6 +74,7 @@ public class BoardServiceImpl implements IBoardService{
 		return boardDao.totalCount(params);
 	}
 	
+	// 조회수 
 	@Override
 	public void countHit(String bd_no) throws Exception {
 		boardDao.countHit(bd_no);

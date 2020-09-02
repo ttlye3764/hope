@@ -32,21 +32,21 @@
 		SELECT COUNT(BD_NO)
 		FROM BOARD
 		WHERE BD_DIVISION = #{bd_division}
-				<if test="search_keycode == TOTAL">
+				<if test="search_keycode == 'TOTAL'">
 					AND
 					(BD_TITLE LIKE '%' || #{search_keyword} || '%'
 			    	OR BD_CONTENT LIKE '%'|| #{search_keyword} || '%'
 			    	OR BD_WRITER LIKE '%' || #{search_keyword} || '%')
 				</if>
-				<if test="search_keycode == TITLE">
+				<if test="search_keycode == 'TITLE'">
 					AND
 					BD_TITLE LIKE '%' || #{search_keyword} || '%'
 				</if>
-				<if test="search_keycode == CONTENT">
+				<if test="search_keycode == 'CONTENT'">
 				    AND
 			        BD_CONTENT LIKE '%' || #{search_keyword} || '%'	
 				</if>
-				<if test="search_keycode == WRITER">
+				<if test="search_keycode == 'WRITER'">
 					AND
 					BD_WRITER LIKE '%' || #{search_keyword} || '%'
 				</if>
@@ -58,21 +58,21 @@
 						 FROM (SELECT ROWNUM RNUM, BOARD.*
                               FROM BOARD
                               WHERE BD_DIVISION = #{bd_division}
-                              		<if test="search_keycode == TOTAL">
+                              		<if test="search_keycode == 'TOTAL'">
 										AND
 										(BD_TITLE LIKE '%' || #{search_keyword} || '%'
 								    	OR BD_CONTENT LIKE '%'|| #{search_keyword} || '%'
 								    	OR BD_WRITER LIKE '%' || #{search_keyword} || '%')
 									</if>
-									<if test="search_keycode == TITLE">
+									<if test="search_keycode == 'TITLE'">
 										AND
 										BD_TITLE LIKE '%' || #{search_keyword} || '%'
 									</if>
-									<if test="search_keycode == CONTENT">
+									<if test="search_keycode == 'CONTENT'">
 									    AND
 								        BD_CONTENT LIKE '%' || #{search_keyword} || '%'	
 									</if>
-									<if test="search_keycode == WRITER">
+									<if test="search_keycode == 'WRITER'">
 										AND
 										BD_WRITER LIKE '%' || #{search_keyword} || '%'
 									</if>

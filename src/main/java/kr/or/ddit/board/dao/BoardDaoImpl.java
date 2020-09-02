@@ -23,10 +23,6 @@ public class BoardDaoImpl implements IBoardDao{
 	public List<BoardVO> boardList(Map<String, String> params) throws Exception{
 		return client.selectList("board.boardList", params);
 	}
-//	@Override
-//	public List<BoardVO> getboardList(Criteria cri) throws Exception{
-//		return client.selectList("board.getListWithPaging", cri);
-//	}
 	
 	// 삭제 
 	@Override
@@ -69,16 +65,6 @@ public class BoardDaoImpl implements IBoardDao{
 	public void countHit(String bd_no) throws Exception {
 		client.update("board.countHit", bd_no);	
 	}
-
-	
-	// 페이징 처리 
-//	@Override
-//	public List<BoardVO> getListWithPaging(Criteria cri) throws Exception {
-//		return client.selectOne("board.getListWithPaging", cri);
-//	}
-
-
-
 
 
 }
