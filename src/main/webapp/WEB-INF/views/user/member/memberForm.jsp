@@ -8,36 +8,6 @@
 <title>회원가입</title>
 </head>
 <style>
-.fieldName {
-	text-align: center;
-	background-color: #f4f4f4;
-	margin-top : 10px;
-}
-
-.tLine {
-	background-color: #d2d2d2;
-	height: 1px;
-}
-
-td {
-	text-align: left;
-}
-.btn{
-	color : #4CBD94;
-}
-.addr{
-	width : 250px;
-}
-.endbtn{
-	background-color: #4CBD94; 
-	color : white;
-	height : 40px;
-	width : 150px;
-}
-table{
-	margin-left: 40%;
-}
-
 .wrap-loading{ /*화면 전체를 어둡게 합니다.*/
     position: fixed;
     left:0;
@@ -54,9 +24,14 @@ table{
         left:50%;
         margin-left: -21px;
         margin-top: -21px;
+        z-index : 2;
     }
     .display-none{ /*감추기*/
         display:none;
+    }
+    .input-group mb-3{
+    	position : relative;
+    	z-index : 1;
     }
 
 </style>
@@ -67,6 +42,21 @@ table{
 <script src="/resources/js/addressapi.js"></script>
 <script type="text/javascript">
 $(function(){
+	$("#mem_hp").keyup(function(e){
+		if(e.keyCode == 8){
+			var code = $('input[name=mem_hp]').val();
+			var lastChar = code.charAt(code.length-1);
+			if(lastChar == '-'){
+				code = code.substr(0,code.length-1);
+				$('input[name=mem_hp]').val(code);
+			}
+		}else{
+			var hp = $('input[name=mem_hp]').val();
+			if(hp.length == 3 || hp.length == 8){
+				$('input[name=mem_hp]').val(hp + "-");
+			}
+		}
+	});
 	$('form[name=memberForm]').submit(function() {
 		var idcheck = $('#idlabel').text();
 		var emailcheck = $('#emaillabel').text();
@@ -101,15 +91,12 @@ $(function(){
 				return false;
 			}
 
-			var name = $('#mem_name').val();
-			if (!name.validationNAME()) {
-				alert('올바른 이름을 입력해주세요.')
-				return false;
-			}
-			var mem_birth = $('input[name=mem_bir1]').val() + '-'
-							+ $('input[name=mem_bir2]').val() + '-'
-							+ $('input[name=mem_bir3]').val();
-			$('input[name=mem_birth]').val(mem_birth);
+// 			var name = $('#mem_name').val();
+// 			if (!name.validationNAME()) {
+// 				alert('올바른 이름을 입력해주세요.')
+// 				return false;
+// 			}
+			var mem_birth =	$('input[name=mem_birth]').val();
 			
 			if (!mem_birth.validationBIR()) {
 				alert('올바른 생년월일을 입력해주세요.')
@@ -139,20 +126,11 @@ $(function(){
 		
 			$(this).attr('action','${pageContext.request.contextPath}/user/member/insertMemberInfo.do');
 
-			var mem_hp = $('select[name=mem_hp1]').val() + '-'
-								+ $('input[name=mem_hp2]').val() + '-'
-								+ $('input[name=mem_hp3]').val();
-						$('input[name=mem_hp]').val(mem_hp);
-
-			var mem_email = $('input[name=mem_mail1]').val()
-								+ '@' + $('select[name=mem_mail2]').val();
-						$('input[name=mem_email]').val(mem_email);
-
 			var mem_zip = $('input[name=mem_zip1]').val();
 				$('input[name=mem_zip1]').val(mem_zip);
 				$('input[name=mem_zip2]').val(mem_zip);
 
-				var mem_addr = $('#mem_addr1').val();
+			var mem_addr = $('#mem_addr1').val();
 				$('input[name=mem_addr1]').val(mem_addr);
 
 				return true;
@@ -192,6 +170,11 @@ $(function(){
 	function nickCheck() {
 		var nick = $('#nickname').val();
 
+		if(nick==''){
+			$('#nicklb').text("");
+			return false;
+		}
+
 		if (!nick.validationNICKNAME()) {
 			$('#nicklb').text("형식에 맞지 않는 닉네임입니다.");
 			$('#nicklb').css('color', 'red');
@@ -225,11 +208,8 @@ $(function(){
 	};
 
 	function sendsms() {
-		var mem_hp = $('select[name=mem_hp1]').val() + '-'
-				+ $('input[name=mem_hp2]').val() + '-'
-				+ $('input[name=mem_hp3]').val();
-		$('input[name=mem_hp]').val(mem_hp);
-
+		var mem_hp = $('input[name=mem_hp]').val();
+		
 		if (!mem_hp.validationHP()) {
 			alert('휴대전화번호를 바르게 입력해주세요.');
 			return false;
@@ -253,10 +233,7 @@ $(function(){
 	};
 	
 	function checksms() {
-		var mem_hp = $('select[name=mem_hp1]').val() + '-'
-				+ $('input[name=mem_hp2]').val() + '-'
-				+ $('input[name=mem_hp3]').val();
-		$('input[name=mem_hp]').val(mem_hp);
+		var mem_hp = $('input[name=mem_hp]').val();
 
 		hp_num = $('input[name=hp_num]').val();
 		
@@ -279,8 +256,7 @@ $(function(){
 	};
 
 	function mailSending() {
-		var mem_email = $('input[name=mem_mail1]').val() + '@' + $('select[name=mem_mail2]').val();		
-		$('input[name=mem_email]').val(mem_email);
+		var mem_email = $('input[name=mem_email]').val();	
 
 		if (!mem_email.validationMAIL()) {
 			alert('이메일을 바르게 입력해주세요.');
@@ -310,8 +286,7 @@ $(function(){
 	};
 
 	function mailCheck() {
-		var mem_email = $('input[name=mem_mail1]').val() + '@' + $('select[name=mem_mail2]').val();		
-		$('input[name=mem_email]').val(mem_email);
+		var mem_email = $('input[name=mem_email]').val();
 		
 		$.ajax({
 			type : 'POST',
@@ -334,6 +309,11 @@ $(function(){
 	function pwcheck(){
 		var pw = $('#pass').val();
 		var pw2 = $('#pass2').val();
+		
+		if(pw=='' || pw2==''){
+			$('#passchecklb').text("");
+			return false;
+		}
 
 		if(pw==pw2){
 			$('#passchecklb').text("비밀번호가 일치합니다.");
@@ -390,95 +370,86 @@ $(function(){
 </div> 
 	<form name="memberForm" method="post">
 	<input type="hidden" name="mem_division" value="0"> 
-		<table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
+		<table style="border: none" align="center">
 			<tr>
-				<td colspan="2"><h2>회원가입</h2></td>
+				<td colspan="3" align="center"><h3>회원가입</h3></td>
 			</tr>
 			<tr>				
-				<td class="fieldName" width="100px" height="25">아이디</td>
+				<td width="150px" height="25" class="idright">아이디</td>
 				<td>
-				<input type="text" id="mem_id" name="mem_id" onkeyup="idCheck()"/>&nbsp;<label id="idlabel"></label>
+				<input type="text" class="form-control" id="mem_id" name="mem_id" onkeyup="idCheck()"/>&nbsp;<label id="idlabel"></label>
 				</td>
+				<td width="150px"></td>
 			</tr>
 			<tr>
-				<td class="fieldName" width="100px" height="25">비밀번호</td>
-				<td><input type="password" name="mem_pass" id="pass" value="" onkeyup="pwcheck()"/> 
+				<td width="150px" height="25" class="idright">비밀번호</td>
+				<td><input type="password" class="form-control" name="mem_pass" id="pass" value="" onkeyup="pwcheck()"/> 
 				<label>8 ~ 20 자리 영문자 및 숫자 사용</label></td>
 			</tr>
 			
 			<tr>
-				<td class="fieldName" width="100px" height="25">비밀번호확인</td>
-				<td><input type="password" name="mem_pass_confirm" id="pass2" value="" onkeyup="pwcheck()"/> 
+				<td width="150px" height="25" class="idright">비밀번호확인</td>
+				<td><input type="password" name="mem_pass_confirm" class="form-control"  id="pass2" value="" onkeyup="pwcheck()"/> 
 				<label id="passchecklb"></label></td>
 			</tr>
 			
 			<tr>
-				<td class="fieldName" width="100px" height="25">성 별</td>
-				<td><input type="radio" name="mem_gender" value="m">남              
-				<input type="radio" name="mem_gender" value="w">여
+				<td width="150px" height="25" class="idright">성 별</td>
+				<td>
+					<input type="radio" id="man" name="mem_gender" value="m">남              
+					<input type="radio" id="woman" name="mem_gender" value="w">여<br>
 				</td>
 			</tr>
 			
 			<tr>
-				<td class="fieldName" width="100px" height="25">이 름</td>
-				<td><input type="text" name="mem_name" id="mem_name" value="" /></td>
+				<td width="150px" height="25" class="idright">이 름</td>
+				<td><input type="text" class="form-control" name="mem_name" id="mem_name" value="" /><br></td>
 			</tr>
 			
 			<tr>
-				<td class="fieldName" width="100px" height="25">닉네임</td>
-				<td><input type="text" name="mem_nickname" onkeyup="nickCheck()" id="nickname" />&nbsp;<label id="nicklb"></label></td>
+				<td width="150px" height="25" class="idright">닉네임</td>
+				<td><input type="text" class="form-control" name="mem_nickname" onkeyup="nickCheck()" id="nickname" />&nbsp;<label id="nicklb"></label></td>
 			</tr>
 			
 			<tr>
-				<td class="fieldName" width="100px" height="25">생년월일</td>
-				<td><input type="hidden" name="mem_birth" /> <input type="text"
-					name="mem_bir1" size="4" value="" />년 <input type="text"
-					name="mem_bir2" size="2" value="" />월 <input type="text"
-					name="mem_bir3" size="2" value="" />일</td>
+				<td width="150px" height="25" class="idright">생년월일</td>
+				<td><input type="text" name="mem_birth" class="form-control" placeholder="YYYY-MM-DD"/><br>
 			</tr>
 			
 			<tr>
-				<td class="fieldName" width="100px" height="25">이메일</td>
-				<td><input type="hidden" name="mem_email"  /> <input type="text"
-					name="mem_mail1" onkeydown="mailchange()" /> @ <select name="mem_mail2" onchange="mailchange()">
-						<option value="naver.com">naver.com</option>
-						<option value="daum.net">daum.net</option>
-						<option value="hanmail.net">hanmail.net</option>
-						<option value="nate.com">nate.com</option>
-						<option value="gmail.com">gmail.com</option>
-				</select> <a href="javascript:mailSending();">[인증번호 전송]</a><br>
-				<input type="text" name="mail_num" onkeyup="mailCheck()">
+				<td width="150px" height="25" class="idright">이메일</td>
+				<td>
+				<div class="input-group mb-3" style="width:350px">
+				<input type="text" name="mem_email" class="form-control" onkeydown="mailchange()" placeholder="exam@jabis.com"/> 
+				<a href="javascript:mailSending();">[인증번호 전송]</a></div>
+				<input type="text" name="mail_num" class="form-control" onkeyup="mailCheck()"/>
 				<label id="emaillabel"></label>
 				</td>
 			</tr>
 			
 			<tr>
-				<td class="fieldName" width="100px" height="25">휴대전화</td>
-				<td><input type="hidden" name="mem_hp"/> <select
-					name="mem_hp1" onchange="smschange()">
-						<option value="010">010</option>
-						<option value="011">011</option>
-						<option value="016">016</option>
-						<option value="017">017</option>
-						<option value="019">019</option>
-				</select> - <input type="text" name="mem_hp2" size="4" onchange="smschange()"/> - 
-				<input	type="text" name="mem_hp3" size="4" onchange="smschange()" />
-				<a href="javascript:sendsms();">[인증번호 전송]</a><br>
-				<input type="text" name="hp_num" onkeyup="checksms()"/>
+				<td width="150px" height="25" class="idright">휴대전화</td>
+				<td>
+				<div class="input-group mb-3" style="width:350px">
+				<input type="text" name="mem_hp" id="mem_hp" class="form-control" placeholder="- 빼고 입력" onchange="smschange()"/> 
+				<a href="javascript:sendsms();">[인증번호 전송]</a></div>
+				<input type="text" class="form-control" name="hp_num" onkeyup="checksms()"/>
 				<label id="hplabel"></label>
 				</td>
 			</tr>
 			
 			<tr>
-				<td class="fieldName" width="100px" height="25">주소</td>
-				<td>
+				<td width="150px" height="25" class="idright">주소</td>
+				<td width="300px">
 				<input type="hidden" name="mem_zip1" /> 
 				<input type="hidden" name="mem_zip2" /> 
-				<input placeholder="우편번호" id="mem_zip1" type="text" disabled="disabled">
-   				 <button type="button" class="btn btn-default" onclick="execPostCode();"><i class="fa fa-search"></i> 우편번호 찾기</button><br>
+				<div class="input-group mb-3" style="width:200px">
+				<input placeholder="우편번호" class="form-control" id="mem_zip1" type="text" disabled="disabled" style="width:100px">
+   				 <button type="button" class="btn btn-default" onclick="execPostCode();"><i class="fa fa-search"></i></button>
+   				 </div>
    				 <input type="hidden" name="mem_addr1"/>
-   				 <input style="width:350px" placeholder="도로명 주소" id="mem_addr1" type="text" disabled="disabled" /><br>
-   				 <input style="width:350px" placeholder="상세주소" name="mem_addr2" id="mem_addr2" type="text"  />
+   				 <input style="width:350px" class="form-control" placeholder="도로명 주소" id="mem_addr1" type="text" disabled="disabled" /><br>
+   				 <input style="width:350px" class="form-control" placeholder="상세주소" name="mem_addr2" id="mem_addr2" type="text"  />
     			</td>
 			</tr>
 			
@@ -486,13 +457,10 @@ $(function(){
 				<td colspan="2" height="20"></td>
 			</tr>
 			<tr>
-				<td class="btnGroup" colspan="2">
-					<button	class="endbtn"
-						id="btn1" type="submit">가입하기
-					</button>
+				<td class="btnGroup" colspan="3" align="center">
+					<input id="btn1" type="submit" value="가입"/>					
 					&nbsp;&nbsp;&nbsp;&nbsp;
-					<button	class="endbtn"
-						id="btn3" type="reset">취소
+					<button	id="btn3" type="button">취소
 					</button>
 				</td>
 			</tr>

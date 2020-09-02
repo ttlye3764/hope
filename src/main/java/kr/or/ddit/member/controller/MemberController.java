@@ -13,14 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import edu.emory.mathcs.backport.java.util.concurrent.ExecutionException;
 import kr.or.ddit.member.service.IMemberService;
 import kr.or.ddit.vo.MemberVO;
 
@@ -37,20 +35,6 @@ public class MemberController {
 	@Autowired
 	private IMemberService service;
 
-	@RequestMapping("memberList")
-	public Model memberList(String search_keycode, String search_keyword, Map<String, String> params) throws Exception {
-
-//		Map<String, String> params = new HashMap<String, String>();
-		params.put("search_keycode", search_keycode);
-		params.put("search_keyword", search_keyword);
-
-		List<MemberVO> memberList = this.service.memberList(params);
-
-		// memberList => view resolver => memberList.jsp
-		Model model = new ExtendedModelMap();
-		model.addAttribute("memberList", memberList);
-		return model;
-	}
 
 	@RequestMapping("memberView")
 	public ModelMap memberView(String mem_id, Map<String, String> params, ModelMap modelMap) throws Exception {

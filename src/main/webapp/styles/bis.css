@@ -24,8 +24,9 @@ padding-right: 50px;}
 #busTable{
 width: 100%;
 }
-#busTable, th, td {
+#busTable th,#busTable td {
 border: 1px solid #bcbcbc;
 }
      
-      
+     
+

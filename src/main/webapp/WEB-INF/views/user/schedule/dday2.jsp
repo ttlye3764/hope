@@ -7,7 +7,7 @@
 
 
       
-<div style=" height: auto; width: 1500px; margin: auto; ">
+<div style=" height: auto; width: 1200px; margin: auto; ">
 ${fn:length(scheduleList)}
 <%-- <c:forEach var="scheduleVO" items="${scheduleList }" varStatus="status"> --%>
 	<br><br>

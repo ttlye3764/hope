@@ -10,21 +10,22 @@ public class RolePaginationUtil_yun {
 	private int totalCount;			// 전체 게시글 갯수
 	private int totalPage;			// 전체 페이지 갯수
 	private int blockCount = 10;    // 페이지별 출력될 게시글 갯수
-	private int blockPage = 10;		// 페이지네이션 메뉴 갯수
+	private int blockPage = 5;		// 페이지네이션 메뉴 갯수
 	private int startPage;			// 페이지네이션 메뉴 시작 페이지 번호
 	private int endPage;			// 페이지네이션 메뉴 끝 페이지 번호
 	private int startCount;			// 해당 페이지 내 게시글 시작번호
 	private int endCount;			// 해당 페이지 내 게시글 끝번호
 	private HttpServletRequest request;
 	private StringBuffer pagingHtmls;
-	
+	private String bd_division;
 	public void RolePaginationUtil(HttpServletRequest request,
 							  int currentPage,
-							  int totalCount){
+							  int totalCount,
+							  String bd_division){
 		this.request = request;
 		this.currentPage = currentPage;
 		this.totalCount = totalCount;
-		
+		this.bd_division = bd_division;
 		pagingHtmls = new StringBuffer();
 		
 		makePagination();
@@ -55,26 +56,26 @@ public class RolePaginationUtil_yun {
 		this.pagingHtmls.append("<div class='text-center'>");
 		this.pagingHtmls.append("<ul class='pagination justify-content-center'>");
 		
-		String requestURI = "/lastProject/user/medical/paginationPill.do";
+		String requestURI = request.getRequestURI();
 		// 이전|1|2|3|4|5|다음
 		// 이전
 		if((this.currentPage - 1) == 0){
 			this.pagingHtmls.append("<li class='page-item disabled'><span class='page-link' style='height:43 !important;'>&laquo;</span></li>");
-		}else{
-			this.pagingHtmls.append("<li class='page-item disabled'><a href='#' onclick='callAjax("+(currentPage -1)+")'	 ><span class='page-link' style='height:43 !important;'>&laquo;</span></a></li>");
+		}else{                 
+			this.pagingHtmls.append("<li class='page-item disabled'><a href='" + requestURI + "?currentPage="+ (this.currentPage -1) +"&bd_division="+bd_division+"' ><span class='page-link' style='height:43 !important;'>&laquo;</span></a></li>");
 		}
 		//|1|2|3|4|5|
 		for(int i=this.startPage; i<=this.endPage; i++){
 			if(this.currentPage == i){
 				this.pagingHtmls.append("<li class='page-item active'><a href='#'><span class='page-link bg-grad' style='height:43 !important;'>"+ i +"</span></a></li>");
 			}else{
-				this.pagingHtmls.append("<li class='page-item'><a href='#' class='page-link' onclick='callAjax("+i+")'>"+ i +"</a></li>");
+				this.pagingHtmls.append("<li class='page-item'><a  class='page-link' href='" + requestURI + "?currentPage="+ i +"&bd_division="+bd_division+"'>"+ i +"</a></li>");
 			}
 		}
 		// 다음
 		if(this.currentPage < this.totalPage){
 //			this.pagingHtmls.append("<li><a href='" + requestURI + "?currentPage="+ (this.currentPage +1) +"'>&raquo;</a></li>");
-			this.pagingHtmls.append("<li class='page-item disabled'><a href='#' onclick='callAjax("+(currentPage +1)+")'><span class='page-link' style='height:43 !important;'>&raquo;</span></a></li>");
+			this.pagingHtmls.append("<li class='page-item disabled'><a href='" + requestURI + "?currentPage="+ (this.currentPage +1) +"&bd_division="+bd_division+"'><span class='page-link' style='height:43 !important;'>&raquo;</span></a></li>");
 		}else{
 			this.pagingHtmls.append("<li class='page-item disabled'><span class='page-link' style='height:43 !important;'>&raquo;</span></li>");
 		}
