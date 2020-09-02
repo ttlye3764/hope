@@ -37,7 +37,7 @@
 <script src="${pageContext.request.contextPath }/resources/template/assets/vendor/fitvids/jquery.fitvids.js"></script>
 <script type="text/javascript">
 	$(function() {
-
+        // 상세보기 기능
 		$('#boardTBY tr').on('click', function() {
 
 			var bd_no = $(this).find('td:eq(0) input').val();
@@ -45,17 +45,31 @@
 			$(location).attr('href', '${pageContext.request.contextPath}/user/board/boardView.do?bd_no=' + bd_no + '&rnum=' + rnum + "&bd_division=${bd_division}");
 		});
 
-
+        // 검색 버튼 기능 
 		$('#searchBTN').on('click', function(){
 			var search_keyword = $("input[id='search_keyword']").val();
-			var search_keycode = $("#search_keycode option:selected").val();			
-			
+			var search_keycode = $("#search_keycode option:selected").val();		
+	
 			 $.ajax({
-	             url     : '${pageContext.request.contextPath}/user/board/boardList.do?bd_division=${bd_division}',
+	             url     : '${pageContext.request.contextPath}/user/board/list.do?bd_division=${bd_division}',
 	             type    : 'post',
 	             dataType: 'json',
 	             data : {'search_keyword':search_keyword, 'search_keycode':search_keycode },
 	             success : function(result) {      
+	            	console.log(result.boardList);
+					
+					$('#boardTBY').empty();
+					$('#paginationDIV').empty();
+		           	$('#paginationDIV').append(result.pagination);
+
+		           	  
+				
+
+
+
+
+
+
 	            	
 	          	  
 	  			}
