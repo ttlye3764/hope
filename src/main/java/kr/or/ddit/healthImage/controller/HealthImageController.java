@@ -40,6 +40,7 @@ public class HealthImageController {
 		List<HealthImageVO> healthImageList = this.healthImageService.healthList(params);
 		
 		andView.addObject("healthImageList", healthImageList);
+		System.out.println(healthImageList.get(0).getItems());
 		andView.setViewName("admin/healthImage/healthImageList");
 
 		return andView;

@@ -306,7 +306,7 @@
 					            <div>
 					                <form onsubmit="searchPlaces(); return false;">
 					                    키워드 : <input type="text" value="헬스장" id="keyword" size="15"> 
-					                    <button type="submit">검색하기</button> 
+					                    <input type="submit">검색하기</button> 
 					                </form>
 					            </div>
 					        </div>
