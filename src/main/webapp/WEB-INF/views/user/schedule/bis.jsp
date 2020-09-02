@@ -15,7 +15,7 @@
 				<!-- portfolio details -->
 				<div class="col-md-4">
 					<div class="sticky-element">
-						<h2>Regist my Bus </h2>
+						<h2>Register my Bus </h2>
 						<p>내가 즐겨타는 버스를 등록해주세요~! </p>
 						       Region : <select name="citycode" id="citycode">
 									<option value="">지역선택</option>
