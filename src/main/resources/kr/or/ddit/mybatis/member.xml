@@ -49,10 +49,10 @@
 		</if>
 	</select>
 
-<!-- 	<select id="memberList" resultClass="memberVO" parameterClass="map"> -->
-<!-- 		<include refid="selectAll" /> -->
+	<select id="memberList" resultType="memberVO" parameterType="map">
+		<include refid="selectAll" />
 <!-- 		<include refid="searchCondition"/> -->
-<!-- 	</select> -->
+	</select>
 
 	<update id="deleteMember" parameterType="map">
 		UPDATE MEMBER
@@ -72,6 +72,12 @@
 		,MEM_EMAIL = #{mem_email}
 		<if test="mem_pass != null and mem_pass != ''">
 			,MEM_PASS = #{mem_pass}
+		</if>
+		<if test="mem_name != null and mem_name != ''">
+			,MEM_NAME = #{mem_name}
+		</if>
+		<if test="mem_birth != null and mem_birth != ''">
+			,MEM_BIRTH = #{mem_birth}
 		</if>
 		WHERE MEM_ID = #{mem_id}
 	</update>

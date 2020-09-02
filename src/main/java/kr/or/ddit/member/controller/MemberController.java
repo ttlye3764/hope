@@ -35,20 +35,6 @@ public class MemberController {
 	@Autowired
 	private IMemberService service;
 
-	@RequestMapping("memberList")
-	public Model memberList(String search_keycode, String search_keyword, Map<String, String> params) throws Exception {
-
-//		Map<String, String> params = new HashMap<String, String>();
-		params.put("search_keycode", search_keycode);
-		params.put("search_keyword", search_keyword);
-
-		List<MemberVO> memberList = this.service.memberList(params);
-
-		// memberList => view resolver => memberList.jsp
-		Model model = new ExtendedModelMap();
-		model.addAttribute("memberList", memberList);
-		return model;
-	}
 
 	@RequestMapping("memberView")
 	public ModelMap memberView(String mem_id, Map<String, String> params, ModelMap modelMap) throws Exception {

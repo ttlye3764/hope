@@ -8,43 +8,6 @@
 <title>회원가입</title>
 </head>
 <style>
-td {
-	text-align: left;
-	border-right:none;
-	border-left:none;
-	border-top:none;
-	border-bottom:none;
-	margin : 10px;
-	padding : 10px;
-}
-
-.idright{
-	text-align:right;
-}
-
-tr {
-	border-right:none;
-	border-left:none;
-	border-top:none;
-	border-bottom:none;
-	margin : 10px;
-	padding : 10px;
-}
-.btn{
-	color : #4CBD94;
-}
-.addr{
-	width : 250px;
-}
-
-table{
-	margin-left: 40%;
-	border-right:none;
-	border-left:none;
-	border-top:none;
-	border-bottom:none;
-}
-
 .wrap-loading{ /*화면 전체를 어둡게 합니다.*/
     position: fixed;
     left:0;
@@ -61,9 +24,14 @@ table{
         left:50%;
         margin-left: -21px;
         margin-top: -21px;
+        z-index : 2;
     }
     .display-none{ /*감추기*/
         display:none;
+    }
+    .input-group mb-3{
+    	position : relative;
+    	z-index : 1;
     }
 
 </style>
@@ -427,14 +395,15 @@ $(function(){
 			
 			<tr>
 				<td width="150px" height="25" class="idright">성 별</td>
-				<td><input type="radio" name="mem_gender" value="m">남              
-				<input type="radio" name="mem_gender" value="w">여
+				<td>
+					<input type="radio" id="man" name="mem_gender" value="m">남              
+					<input type="radio" id="woman" name="mem_gender" value="w">여<br>
 				</td>
 			</tr>
 			
 			<tr>
 				<td width="150px" height="25" class="idright">이 름</td>
-				<td><input type="text" class="form-control" name="mem_name" id="mem_name" value="" /></td>
+				<td><input type="text" class="form-control" name="mem_name" id="mem_name" value="" /><br></td>
 			</tr>
 			
 			<tr>
@@ -444,7 +413,7 @@ $(function(){
 			
 			<tr>
 				<td width="150px" height="25" class="idright">생년월일</td>
-				<td><input type="text" name="mem_birth" class="form-control" placeholder="YYYY-MM-DD"/>
+				<td><input type="text" name="mem_birth" class="form-control" placeholder="YYYY-MM-DD"/><br>
 			</tr>
 			
 			<tr>
@@ -488,7 +457,7 @@ $(function(){
 				<td colspan="2" height="20"></td>
 			</tr>
 			<tr>
-				<td class="btnGroup" colspan="2">
+				<td class="btnGroup" colspan="3" align="center">
 					<input id="btn1" type="submit" value="가입"/>					
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<button	id="btn3" type="button">취소

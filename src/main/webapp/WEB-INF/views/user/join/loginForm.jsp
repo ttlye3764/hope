@@ -60,6 +60,22 @@
 
             $("#mem_id").keyup(function(e){if(e.keyCode == 13) login();});
             $("#mem_pass").keyup(function(e){if(e.keyCode == 13) login();});
+
+            $("#mem_hp_pw").keyup(function(e){
+        		if(e.keyCode == 8){
+        			var code = $('input[name=mem_hp_pw]').val();
+        			var lastChar = code.charAt(code.length-1);
+        			if(lastChar == '-'){
+        				code = code.substr(0,code.length-1);
+        				$('input[name=mem_hp_pw]').val(code);
+        			}
+        		}else{
+        			var hp = $('input[name=mem_hp_pw]').val();
+        			if(hp.length == 3 || hp.length == 8){
+        				$('input[name=mem_hp_pw]').val(hp + "-");
+        			}
+        		}
+        	});
       });
 
       function login(){
@@ -450,7 +466,7 @@
 					</div>
 					<div class="input-group mb-3" style="width:400px" align="center">
 						휴대전화&nbsp;&nbsp;&nbsp;
-						<input type="text" class="form-control" id="mem_hp_pw" name="mem_hp_pw" placeholder="010-1234-5678" onchange="smschange()" ><a href="javascript:sendsms();">[인증번호 전송]</a>
+						<input type="text" class="form-control" id="mem_hp_pw" name="mem_hp_pw" placeholder="-빼고 입력" onchange="smschange()" ><a href="javascript:sendsms();">[인증번호 전송]</a>
 					</div>
 					<div class="input-group mb-3" style="width:400px" align="center">
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
