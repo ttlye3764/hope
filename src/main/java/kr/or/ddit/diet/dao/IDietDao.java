@@ -33,4 +33,11 @@ public interface IDietDao {
 	
 	//diet_day_Info 테이블 삽입
 	public void InsertDietDayInfo(Diet_day_infoVO dietDayInfo) throws Exception;
+	
+	//diet_day_info 테이블 조회
+	public List<Diet_day_infoVO> dietDayInfoList(Map<String, String> params) throws Exception;
+	
+	// diet_day 테이블 날짜로 조회
+	public Diet_dayVO selectDietDay(Map<String, String> params) throws Exception;
+	
 }

@@ -310,84 +310,128 @@
 	
 	<!-- 모달 시작 -->
 	<div class="modal fade text-left show" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" style="display: none; padding-right: 15px;" aria-modal="true">
-						<div class="modal-dialog modal-dialog-centered" role="document">
-							<div class="modal-content" style="width:1000px; height:900px; !important">
-								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLongTitle">식단</h5>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">×</span>
-									</button>
-								</div>
-								<div class="modal-body">
-									<h3>아침</h3>
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content" style="width:1000px; height:900px; !important">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">식단</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+				</div>
+				<div class="modal-body">
+					<h3>아침</h3>		
+						<!-- 테이블 시작 -->
+						<div class="table-responsive-sm">
+							<table class="table table-hover" id="dietDayInfoTable">
+								<thead id="dietDayInfo_thead1">
 									
-									<!-- 테이블 시작 -->
-									<c:if test="${empty myMenuList1 }">
-									등록된 메뉴가 없습니다.
-									</c:if>
-									<c:if test="${!empty myMenuList1 }">
-								<div class="table-responsive-sm">
-									<table class="table table-hover">
-										<thead>
-											<tr>
-												<th scope="col">#</th>
-												<th scope="col">메뉴</th>
-												<th scope="col">칼로리</th>
-											</tr>
-										</thead>
-										<tbody id="myMenu_tbody">
-							<c:forEach items="${myMenuList1 }" var="myMenuInfo">
-								<tr>
-									<th scope="row" >1</th>
-									<td>${myMenuInfo.menu_name }</td>
-									<td>${myMenuInfo.menu_kcal }</td> 									
-								</tr>
-							</c:forEach>
-										</tbody>
-									</table>
+								</thead>
+								<tbody id="dietDayInfo_tbody1">					
+								</tbody>
+							</table>
+						</div>
+						<!-- 테이블 종료 -->
+						
+					<!--  등록 --> 
+					<div class="col-md-6 mb-5" style="width:400px; !important">
+						<div class="accordion accordion-line toggle-icon-left toggle-icon-round" id="accordion4">
+							<!-- item -->
+							<div class="accordion-item" style="width:400px; !important">
+								<div class="accordion-title" style="width:400px; !important">
+									<a class="h6 mb-0" data-toggle="collapse" href="#collapse-10" aria-expanded="true">등록</a>
 								</div>
-							</c:if>
-							<!-- 테이블 종료 -->
-									<!--  등록 --> 
-									<div class="col-md-6 mb-5" style="width:400px; !important">
-				
-					<div class="accordion accordion-line toggle-icon-left toggle-icon-round" id="accordion4">
-						<!-- item -->
-						<div class="accordion-item" style="width:400px; !important">
-							<div class="accordion-title" style="width:400px; !important">
-								<a class="h6 mb-0" data-toggle="collapse" href="#collapse-10" aria-expanded="true">등록</a>
-							</div>
-							<div class="collapse hide" id="collapse-10" data-parent="#accordion4" style="">
-								<div class="accordion-content"> 
-									<input type="text" placeholder="메뉴를 입력해주세요" id="menu_search" onchange="menu_search()">
-									<button type="button" class="btn btn-primary" id="insert_diet_day1">등록</button>
-									<table id="menu_search_result"></table>
+								<div class="collapse hide" id="collapse-10" data-parent="#accordion4" style="">
+									<div class="accordion-content"> 
+										<input type="text" placeholder="메뉴를 입력해주세요" id="menu_search1" onchange="menu_search()">
+										<button type="button" class="btn btn-primary" id="insert_diet_day1">등록</button>
+										<table id="menu_search_result1"></table>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-									<div class="divider divider-dotted"></div>
+					
+					<div class="divider divider-dotted"></div>
 									
 									
-									<h3>점심</h3>
-									<button type="button" class="btn btn-primary">등록</button>
-									<div class="divider divider-dotted"></div>
+					<h3>점심</h3>
+					<!-- 테이블 시작 -->
+						<div class="table-responsive-sm">
+							<table class="table table-hover" id="dietDayInfoTable2">
+								<thead id="dietDayInfo_thead2">
+									
+								</thead>
+								<tbody id="dietDayInfo_tbody2">					
+								</tbody>
+							</table>
+						</div>
+						<!-- 테이블 종료 -->
+						
+					<!--  등록 --> 
+					<div class="col-md-6 mb-5" style="width:400px; !important">
+						<div class="accordion accordion-line toggle-icon-left toggle-icon-round" id="accordion4">
+							<!-- item -->
+							<div class="accordion-item" style="width:400px; !important">
+								<div class="accordion-title" style="width:400px; !important">
+									<a class="h6 mb-0" data-toggle="collapse" href="#collapse-10" aria-expanded="true">등록</a>
+								</div>
+								<div class="collapse hide" id="collapse-10" data-parent="#accordion4" style="">
+									<div class="accordion-content"> 
+										<input type="text" placeholder="메뉴를 입력해주세요" id="menu_search2" onchange="menu_search2()">
+										<button type="button" class="btn btn-primary" id="insert_diet_day2">등록</button>
+										<table id="menu_search_result2"></table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="divider divider-dotted"></div>
 									
 									
-									<h3>저녁</h3>
-									<button type="button" class="btn btn-primary">등록</button>
-									<div class="divider divider-dotted"></div>
+					<h3>저녁</h3>
+					<!-- 테이블 시작 -->
+						<div class="table-responsive-sm">
+							<table class="table table-hover" id="dietDayInfoTable">
+								<thead id="dietDayInfo_thead3">
+									
+								</thead>
+								<tbody id="dietDayInfo_tbody3">					
+								</tbody>
+							</table>
+						</div>
+						<!-- 테이블 종료 -->
+						
+					<!--  등록 --> 
+					<div class="col-md-6 mb-5" style="width:400px; !important">
+						<div class="accordion accordion-line toggle-icon-left toggle-icon-round" id="accordion4">
+							<!-- item -->
+							<div class="accordion-item" style="width:400px; !important">
+								<div class="accordion-title" style="width:400px; !important">
+									<a class="h6 mb-0" data-toggle="collapse" href="#collapse-10" aria-expanded="true">등록</a>
+								</div>
+								<div class="collapse hide" id="collapse-10" data-parent="#accordion4" style="">
+									<div class="accordion-content"> 
+										<input type="text" placeholder="메뉴를 입력해주세요" id="menu_search3" onchange="menu_search3()">
+										<button type="button" class="btn btn-primary" id="insert_diet_day3">등록</button>
+										<table id="menu_search_result3"></table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="divider divider-dotted"></div>
 									
 									총 열량 : 
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-primary">확인</button>
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-								</div>
-							</div>
-						</div>
+				</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary">확인</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 					</div>
+			</div>
+		</div>
+	</div>
 	<!-- 모달 끝 -->			
 				
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -398,6 +442,8 @@ var selectMenuNo;
 var year;
 var month;
 var day;
+var dd_date;
+var dd_no;
 $(function() {
 	displayCalender(currentMonth)
 	$("#date").append(new Date);
@@ -409,56 +455,303 @@ $(function() {
 	 		data : {
 	 			dd_date : year + '-' + month + '-' + day,
 	 			dd_info_division : "1",
-		 		menu_no : selectMenuNo
+		 		menu_no : selectMenuNo,
+		 		dd_no : dd_no
 	 		},
 	 		error : function(result) {
 	 			alert(result.status);
 	 		},
 	 		success : function(result) {
-
+ 	 			$('#menu_search1').val("");
+ 	 			$('#menu_search_result1').empty();
+ 	 			dietDayInfoList1();
 	 		}
 	 	});
+		
+	})
+
+	$('#insert_diet_day2').on('click', function(){
+		$.ajax({
+	 		url : '${pageContext.request.contextPath}/user/diet/insertAllDietDay',
+	 		dataType : 'JSON',
+	 		data : {
+	 			dd_date : year + '-' + month + '-' + day,
+	 			dd_info_division : "2",
+		 		menu_no : selectMenuNo,
+		 		dd_no : dd_no
+	 		},
+	 		error : function(result) {
+	 			alert(result.status);
+	 		},
+	 		success : function(result) {
+	 			$('#menu_search2').val("");
+ 	 			$('#menu_search_result2').empty();
+ 	 			dietDayInfoList2();
+	 		}
+	 	});	
+	})
+
+	$('#insert_diet_day3').on('click', function(){
+		$.ajax({
+	 		url : '${pageContext.request.contextPath}/user/diet/insertAllDietDay',
+	 		dataType : 'JSON',
+	 		data : {
+	 			dd_date : year + '-' + month + '-' + day,
+	 			dd_info_division : "3",
+		 		menu_no : selectMenuNo,
+		 		dd_no : dd_no
+	 		},
+	 		error : function(result) {
+	 			alert(result.status);
+	 		},
+	 		success : function(result) {
+	 			$('#menu_search3').val("");
+ 	 			$('#menu_search_result3').empty();
+ 	 			dietDayInfoList3();
+	 		}
+	 	});	
 	})
 });
 
-function menu_select(e){
+function menu_select1(e){
 	selectMenuName = $(e).text();
 	selectMenuNo = $(e).find('input').val();
-	$('#menu_search').val(selectMenuName);
+	$('#menu_search1').val(selectMenuName);
 }
 
-function menu_search(){
+function menu_select2(e){
+	selectMenuName = $(e).text();
+	selectMenuNo = $(e).find('input').val();
+	$('#menu_search2').val(selectMenuName);
+}
 
-	var menu_search
+function menu_select3(e){
+	selectMenuName = $(e).text();
+	selectMenuNo = $(e).find('input').val();
+	$('#menu_search3').val(selectMenuName);
+}
+
+
+function calendarModal(e){
+
+	var id = e;
+
+	year = id.split('-')[3];
+	month = id.split('-')[2].substring(0,1);
+	day = id.split('-')[1];
+	
+	dd_date = year + '-' + month + '-' + day;
+	
+	dietDayInfoList1();
+	dietDayInfoList2();
+	dietDayInfoList3();
+
+	$('#calendarModal').trigger("click");
+
+}
+
+function menu_search1(){
+	var menu_search;
 	$.ajax({
  		url : '${pageContext.request.contextPath}/user/diet/menuSearch',
  		dataType : 'JSON',
  		data : {
- 			menu_search : $('#menu_search').val()
+ 			menu_search : $('#menu_search1').val()
  		},
  		error : function(result) {
  			alert(result.status);
  		},
  		success : function(result) {
- 			$('#menu_saerch_result').empty();
- 			alert("성공");
+ 			$('#menu_saerch_result1').empty();
 
- 			$('#menu_search_result').append('<tr>')
- 			$('#menu_search_result').append('<th>메뉴</td>');
- 			$('#menu_search_result').append('<th>칼로리</td>');
- 			$('#menu_search_result').append('</tr>');
+ 			$('#menu_search_result1').append('<tr>')
+ 			$('#menu_search_result1').append('<th>메뉴</td>');
+ 			$('#menu_search_result1').append('<th>칼로리</td>');
+ 			$('#menu_search_result1').append('</tr>');
  			
  			$.each(result.menuSearchList, function(index, item){
- 				$('#menu_search_result').append('<tr>');
- 				$('#menu_search_result').append('<td onclick="menu_select(this)"><input type="hidden" value="'+item.menu_no+'">'+item.menu_name+'</td>');
- 				$('#menu_search_result').append('<td><input type="hidden" value="'+item.menu_no+'">'+item.menu_kcal+'</td>');
- 				$('#menu_search_result').append('</tr>');	 
+ 				$('#menu_search_result1').append('<tr>');
+ 				$('#menu_search_result1').append('<td onclick="menu_select1(this)"><input type="hidden" value="'+item.menu_no+'">'+item.menu_name+'</td>');
+ 				$('#menu_search_result1').append('<td><input type="hidden" value="'+item.menu_no+'">'+item.menu_kcal+'</td>');
+ 				$('#menu_search_result1').append('</tr>');	 
  			 });
 
  			
  		}
- 	});
+ 	});	
 }
+function menu_search2(){
+	var menu_search;
+	$.ajax({
+ 		url : '${pageContext.request.contextPath}/user/diet/menuSearch',
+ 		dataType : 'JSON',
+ 		data : {
+ 			menu_search : $('#menu_search2').val()
+ 		},
+ 		error : function(result) {
+ 			alert(result.status);
+ 		},
+ 		success : function(result) {
+ 			$('#menu_saerch_result2').empty();
+
+ 			$('#menu_search_result2').append('<tr>')
+ 			$('#menu_search_result2').append('<th>메뉴</td>');
+ 			$('#menu_search_result2').append('<th>칼로리</td>');
+ 			$('#menu_search_result2').append('</tr>');
+ 			
+ 			$.each(result.menuSearchList, function(index, item){
+ 				$('#menu_search_result2').append('<tr>');
+ 				$('#menu_search_result2').append('<td onclick="menu_select2(this)"><input type="hidden" value="'+item.menu_no+'">'+item.menu_name+'</td>');
+ 				$('#menu_search_result2').append('<td><input type="hidden" value="'+item.menu_no+'">'+item.menu_kcal+'</td>');
+ 				$('#menu_search_result2').append('</tr>');	 
+ 			 });
+
+ 			
+ 		}
+ 	});	
+}
+function menu_search3(){
+	var menu_search;
+	$.ajax({
+ 		url : '${pageContext.request.contextPath}/user/diet/menuSearch',
+ 		dataType : 'JSON',
+ 		data : {
+ 			menu_search : $('#menu_search3').val()
+ 		},
+ 		error : function(result) {
+ 			alert(result.status);
+ 		},
+ 		success : function(result) {
+ 			$('#menu_saerch_result3').empty();
+
+ 			$('#menu_search_result3').append('<tr>')
+ 			$('#menu_search_result3').append('<th>메뉴</td>');
+ 			$('#menu_search_result3').append('<th>칼로리</td>');
+ 			$('#menu_search_result3').append('</tr>');
+ 			
+ 			$.each(result.menuSearchList, function(index, item){
+ 				$('#menu_search_result3').append('<tr>');
+ 				$('#menu_search_result3').append('<td onclick="menu_select3(this)"><input type="hidden" value="'+item.menu_no+'">'+item.menu_name+'</td>');
+ 				$('#menu_search_result3').append('<td><input type="hidden" value="'+item.menu_no+'">'+item.menu_kcal+'</td>');
+ 				$('#menu_search_result3').append('</tr>');	 
+ 			 });
+
+ 			
+ 		}
+ 	});	
+}
+
+
+function dietDayInfoList1(){
+	
+	$('#dietDayInfo_thead1').empty();
+	$('#dietDayInfo_tbody1').empty();
+	
+	$.ajax({
+		type : 'POST',
+		url : '${pageContext.request.contextPath}/user/diet/calendarModal',
+		dataType : 'JSON',
+		data : {
+			dd_date : dd_date
+		},
+		error : function(result) {
+			alert(result.memberInfo.mem_name);
+		},
+		success : function(result) {
+
+			var itemIndex = 1;
+ 			dd_no = result.dietDayInfoList1[0].dd_no;
+
+			$('#dietDayInfo_thead1').append('<tr>');
+			$('#dietDayInfo_thead1').append('<th scope="col">#</th>');
+			$('#dietDayInfo_thead1').append('<th scope="col">메뉴</th>');
+			$('#dietDayInfo_thead1').append('<th scope="col">칼로리</th>');
+			
+ 			$.each(result.dietDayInfoList1, function(index, item){
+ 				$('#dietDayInfo_tbody1').append('<tr>')
+ 				$('#dietDayInfo_tbody1').append('<td><input type="hidden" value="'+item.dd_no +'">'+itemIndex++ +'</td>'); 				
+ 				$('#dietDayInfo_tbody1').append('<td>'+item.menu_name+'</td>');
+ 				$('#dietDayInfo_tbody1').append('<td>'+item.menu_kcal+'</td>');
+ 				$('#dietDayInfo_tbody1').append('</tr>');	 
+ 			 });
+		}
+	});
+}
+
+function dietDayInfoList2(){
+	
+	$('#dietDayInfo_thead2').empty();
+	$('#dietDayInfo_tbody2').empty();
+	
+	$.ajax({
+		type : 'POST',
+		url : '${pageContext.request.contextPath}/user/diet/calendarModal',
+		dataType : 'JSON',
+		data : {
+			dd_date : dd_date
+		},
+		error : function(result) {
+			alert(result.memberInfo.mem_name);
+		},
+		success : function(result) {
+
+			var itemIndex = 1;
+
+			$('#dietDayInfo_thead2').append('<tr>');
+			$('#dietDayInfo_thead2').append('<th scope="col">#</th>');
+			$('#dietDayInfo_thead2').append('<th scope="col">메뉴</th>');
+			$('#dietDayInfo_thead2').append('<th scope="col">칼로리</th>');
+			
+ 			$.each(result.dietDayInfoList2, function(index, item){
+ 				$('#dietDayInfo_tbody2').append('<tr>')
+ 				$('#dietDayInfo_tbody2').append('<td><input type="hidden" value="'+item.dd_no +'">'+itemIndex++ +'</td>'); 				
+ 				$('#dietDayInfo_tbody2').append('<td>'+item.menu_name+'</td>');
+ 				$('#dietDayInfo_tbody2').append('<td>'+item.menu_kcal+'</td>');
+ 				$('#dietDayInfo_tbody2').append('</tr>');	 
+ 			 });
+		}
+	});
+	
+}
+
+function dietDayInfoList3(){
+	
+	$('#dietDayInfo_thead3').empty();
+	$('#dietDayInfo_tbody3').empty();
+	
+	$.ajax({
+		type : 'POST',
+		url : '${pageContext.request.contextPath}/user/diet/calendarModal',
+		dataType : 'JSON',
+		data : {
+			dd_date : dd_date
+		},
+		error : function(result) {
+			alert(result.memberInfo.mem_name);
+		},
+		success : function(result) {
+
+			var itemIndex = 1;
+
+			$('#dietDayInfo_thead3').append('<tr>');
+			$('#dietDayInfo_thead3').append('<th scope="col">#</th>');
+			$('#dietDayInfo_thead3').append('<th scope="col">메뉴</th>');
+			$('#dietDayInfo_thead3').append('<th scope="col">칼로리</th>');
+			
+ 			$.each(result.dietDayInfoList1, function(index, item){
+ 				$('#dietDayInfo_tbody3').append('<tr>')
+ 				$('#dietDayInfo_tbody3').append('<td><input type="hidden" value="'+item.dd_no +'">'+itemIndex++ +'</td>'); 				
+ 				$('#dietDayInfo_tbody3').append('<td>'+item.menu_name+'</td>');
+ 				$('#dietDayInfo_tbody3').append('<td>'+item.menu_kcal+'</td>');
+ 				$('#dietDayInfo_tbody3').append('</tr>');	 
+ 			 });
+		}
+	});
+	
+}
+
+
+
 google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
 
@@ -630,36 +923,6 @@ function getDates(startDate, stopDate) {
 
 
 
-function calendarModal(e){
-
-	var id = e;
-
-	year = id.split('-')[3];
-	month = id.split('-')[2].substring(0,1);
-	day = id.split('-')[1];
-	
-	if ( ( id != '') && (id != null))  
-	console.log(id)
-	
-// 	$.ajax({
-// 		type : 'POST',
-// 		url : '${pageContext.request.contextPath}/user/diet/calendarModal',
-// 		dataType : 'JSON',
-// 		data : {
-// 			calendarDate : $('#mem_name').val()
-// 		},
-// 		error : function(result) {
-// 			alert(result.memberInfo.mem_name);
-// 		},
-// 		success : function(result) {
-// 			alert(result.memberInfo.mem_name);
-// 			$('#search_mem_name').val(result.memberInfo.mem_name);
-// 		}
-// 	});
-
-	$('#calendarModal').trigger("click");
-
-}
 
 $("#left").on("click", function() {
 	

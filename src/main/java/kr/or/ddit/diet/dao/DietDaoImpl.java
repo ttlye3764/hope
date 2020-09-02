@@ -58,7 +58,16 @@ public class DietDaoImpl implements IDietDao {
 	
 	@Override
 	public void InsertDietDayInfo(Diet_day_infoVO dietDayInfo) throws Exception {
-		client.insert("diet.insertDietDayInfo", dietDayInfo);
-		
+		client.insert("diet.insertDietDayInfo", dietDayInfo);	
+	}
+	
+	@Override
+	public List<Diet_day_infoVO> dietDayInfoList(Map<String, String> params) throws Exception {
+		return client.selectList("diet.dietDayInfoList", params);
+	}
+	
+	@Override
+	public Diet_dayVO selectDietDay(Map<String, String> params) throws Exception {
+		return client.selectOne("diet.selectDietDay", params);
 	}
 }

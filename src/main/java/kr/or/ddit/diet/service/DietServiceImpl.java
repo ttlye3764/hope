@@ -60,4 +60,14 @@ public class DietServiceImpl implements IDietService {
 	public void InsertDietDayInfo(Diet_day_infoVO dietDayInfo) throws Exception {
 		dietDao.InsertDietDayInfo(dietDayInfo);		
 	}
+	
+	@Override
+	public Diet_dayVO selectDietDay(Map<String, String> params) throws Exception {
+		return dietDao.selectDietDay(params);
+	}
+	
+	@Override
+	public List<Diet_day_infoVO> dietDayInfoList(Map<String, String> params) throws Exception {
+		return dietDao.dietDayInfoList(params);
+	}
 }

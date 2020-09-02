@@ -209,17 +209,74 @@ public class DietController {
 										 Diet_day_infoVO dietDayInfo,
 										 HttpServletRequest request,
 										 HttpSession session,
-										 String dd_date) throws Exception{
+										 String dd_date,
+										 Map<String, String> params,
+										 int dd_no) throws Exception{
+		
+		
 		session = request.getSession();
 		
 		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
 		
 		dietDay.setMem_no(memberInfo.getMem_no());
 		
-		int dd_no = dietService.insertDietDay(dietDay);
+		params.put("dd_date",dd_date);
+		params.put("mem_no", memberInfo.getMem_no());
 		
+		if(dietService.selectDietDay(params) == null) {
+			dd_no = dietService.insertDietDay(dietDay);	
+		}
+		dietDayInfo.setDd_no(dd_no+"");
 		dietService.InsertDietDayInfo(dietDayInfo);
 		
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
+	
+	@RequestMapping("calendarModal")
+	public ModelAndView calendarModal(ModelAndView andView,
+										String dd_date,
+										HttpServletRequest request,
+										HttpSession session,
+										Map<String, String> params) throws Exception{
+		
+		session = request.getSession();
+		
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		
+		params.put("dd_date", dd_date);
+		params.put("mem_no", memberInfo.getMem_no());
+		
+		// 일별 식단 내용 가져오기
+		Diet_dayVO dietDay = dietService.selectDietDay(params);
+		
+		
+		// 일별 식단을 등록한 적이 있으면~
+		if(dietDay != null) {
+			// 일별 식단의 식단 번호 가져오기
+			params.put("dd_no", dietDay.getDd_no());
+			
+			
+			// 일별 식단 상세 가져오기
+			// 1 -> 아침꺼 
+			params.put("dd_info_division","1");
+			List<Diet_day_infoVO> dietDayInfoList1 = dietService.dietDayInfoList(params);
+			
+			//2 -> 점심꺼
+			params.put("dd_info_division","2");
+			List<Diet_day_infoVO> dietDayInfoList2 = dietService.dietDayInfoList(params);
+			
+			//3 -> 저녁
+			params.put("dd_info_division","3");
+			List<Diet_day_infoVO> dietDayInfoList3 = dietService.dietDayInfoList(params);
+			
+			andView.addObject("dietDayInfoList1", dietDayInfoList1);
+			andView.addObject("dietDayInfoList2", dietDayInfoList2);
+			andView.addObject("dietDayInfoList3", dietDayInfoList3);
+		}
+		
+		
+		andView.setViewName("jsonConvertView");
 		return andView;
 	}
 }

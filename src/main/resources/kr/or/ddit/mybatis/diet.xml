@@ -73,15 +73,35 @@
 		INSERT INTO DIET_DAY_INFO(DD_NO,
 								MENU_NO,
 								DD_INFO_DIVISION)VALUES(
-									#{dd_no}
+									#{dd_no},
 									#{menu_no},
 									#{dd_info_division}
 									)
 								
 	</insert>
 	<update id="updateDietKcal" parameterType="Map">
-		UPDATE DIET_DAY SET DD_KCAL = #{dd_kcal} WHERE DD_NO = #{dd_no}
+		UPDATE DIET_DAY SET (DD_KCAL = #{dd_kcal}) WHERE DD_NO = #{dd_no}
 	</update>
+	
+	<select id="selectDietDay" parameterType="Map" resultType="dietDayVO">
+		SELECT *
+		FROM DIET_DAY
+		WHERE DD_DATE = #{dd_date}
+		AND MEM_NO = #{mem_no}
+	</select>
+	
+	<select id="dietDayInfoList" parameterType="Map" resultType="dietDayInfoVO">
+	
+		SELECT b.*, a.MENU_NAME MENU_NAME, a.menu_kcal MENU_KCAL
+		FROM MENU a, (SELECT *
+					FROM DIET_DAY_INFO
+					where DD_NO = #{dd_no}
+					<if test="dd_info_division != null">
+						AND DD_INFO_DIVISION = #{dd_info_division}
+					</if>) b
+		WHERE b.MENU_NO = a.MENU_NO
+	</select>
+	
 	
 	
 </mapper>
