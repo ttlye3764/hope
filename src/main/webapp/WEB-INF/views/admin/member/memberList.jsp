@@ -21,6 +21,9 @@
 
 		var keycode = '${param.search_keycode}';
 		var keyword = '${param.search_keyword}';
+		if(keycode == '' || keycode == null){
+			keycode = 'TOTAL';
+		}
 		$('select[name=search_keycode]').val(keycode);
 		$('input[name=search_keyword]').val(keyword);
 	});
