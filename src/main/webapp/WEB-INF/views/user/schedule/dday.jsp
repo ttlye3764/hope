@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
       
-<div style=" height: auto; width: 1500px; margin: auto; ">
+<div style=" height: auto; width: 1200px; margin: auto; ">
 
 	<div id='calendar' ></div>
 </div>

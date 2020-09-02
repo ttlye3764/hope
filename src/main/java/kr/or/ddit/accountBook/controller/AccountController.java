@@ -59,10 +59,10 @@ public class AccountController {
 		
 		int cnt = this.service.insertDeal(dealInfo);
 		ModelAndView andView = new ModelAndView();
-
-		andView.addObject("cnt", cnt);
+		List<DealVO> list = service.dealList(mem_no);
+		andView.addObject("list", list);
 		// <bean id="jsonConvertView" class="..MappingJackson2JsonView>
-		andView.setViewName("/user/accountBook/setting");
+		andView.setViewName("jsonConvertView");
 		return andView;
 	}
 }

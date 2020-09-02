@@ -3,10 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
 $(function(){
-		 alert($("#accountTable > tbody > tr:nth-last-child(n) > th").textContent);
-		
-	
-			
 	$('#registBtn').click(function(){
 		paymentOption = $('#paymentOption option:selected').val();
 		paymentMethod = $('#paymentMethod option:selected').val();
@@ -18,11 +14,10 @@ $(function(){
 	   	 	async    : false,
 	        url     : '${pageContext.request.contextPath}/user/accountBook/registTrace.do',
 	        type    : 'post',
+	        dataType : 'json',
 	        data : {'deal_option':paymentOption,'deal_kind':paymentMethod,'deal_date':date,'deal_name':item,'deal_price':price, 'mem_no':2},
 	        success : function(Result) {
-		        alert(count);
-	          $('#accountTable').append('<tr><td></td><td>'+date+'</td><td>'+item+'</td><td>'+price+'</td><td>'+paymentMethod+'</td><td><button id="deleteBtn" type="button">삭제</button></td></tr>');
-	           
+	          $('#accountTable').append('<tr><td>'+Result.list.length+'</td><td>'+Result.list[Result.list.length-1].deal_date+'</td><td>'+item+'</td><td>'+price+'</td><td>'+paymentMethod+'</td><td><button id="deleteBtn" type="button">삭제</button></td></tr>');
 	        }
 	
 	   	});  //내가자주타는 버스 등록 
@@ -81,8 +76,9 @@ $(function(){
                                                 <hr color="lightgray">
                                                 <br>
                                                 <br>
-                                                
-                                                <table id="accountTable" class="table table-sm table-centered mb-0">
+
+
+                                                <table id="accountTable" class="table table-sm table-centered mb-0" style="margin: auto; text-align: center;" >
 													<thead>
 														<tr>
 															<th></th>

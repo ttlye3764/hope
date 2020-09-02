@@ -18,7 +18,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
 
-<div style=" height: auto; width: 1500px; margin: auto; ">
+<div style=" height: auto; width: 1200px; margin: auto; ">
    <div id='calendar'></div>
 </div>
 
@@ -173,6 +173,59 @@ const id = document.querySelector('#id');
 var name;
 
 
+$(function(){
+	$('#regist').click(function(){
+	         var shareId = $("#list option:selected").text(); 
+         var array = shareId.split(" "); //배열로 담기
+         var memNo = [];//memNo를 담을 배열 선언
+         array.pop(); // 뒤에 하나 지우기
+         array.push('user'); // 작성자 mem_id
+         var schedule = new Object();
+		   var arrSchedule = new Array();
+			 for(var i=0; i<array.length; i++){ //아이디 갯수만큼 반복
+				$.ajax({
+				   	   url     : '${pageContext.request.contextPath}/user/schedule/searchId.do',
+				   	   async : false,
+				        type    : 'post',
+				        dataType: 'json',
+				        data : {'mem_id':array[i]},
+				        success : function(result) {
+					      
+				        	memNo.push(result.memberInfo.mem_no); //memNo라는 배열에 담았다.
+
+								schedule = new Object();
+								schedule.mem_no = memNo[i];
+								schedule.s_memo = $('#regist-modal [name="s_memo"]').val();
+								schedule.s_startdate = $('#regist-modal [name="s_startdate"]').val();
+								schedule.s_enddate = $('#regist-modal [name="s_enddate"]').val();
+								if($("input:checkbox[name=regist-Check]").is(":checked") == true){ //알람 체크시 알람시간에 시작시간 추가
+									schedule.s_alerttime = $('#regist-modal [name="s_startdate"]').val();
+						         }
+						        schedule.s_color = $('#regist-modal [name="s_color"]').val();
+						        arrSchedule.push(schedule);
+						        $('#regist-modal [name="mem_no"]').val(arrSchedule[i].mem_no);
+				        }
+				  	}); 
+			  }
+
+			 $.ajax({
+			   	    url     : '${pageContext.request.contextPath}/user/schedule/insertScheduleInfo.do',
+			        type    : 'POST',
+			        dataType: 'json',
+			        contentType : 'application/json; charset=UTF-8',
+			        async: false,
+			        data :JSON.stringify(arrSchedule),
+			        success : function(result) {
+			        	
+			        }, 
+			        error : function(e){
+				        console.log(e);
+				    }	        
+			 });
+			location.reload();
+       return true;
+   });  //서브밋
+})
 //add selected option
 btnAdd.onclick = (e) => {
     e.preventDefault();
@@ -242,8 +295,6 @@ var sJson;
                   });
                 });                
                  setCalendar(event);
-                console.log(result);
-                console.log(event);  
            }
         });
 });
@@ -254,7 +305,6 @@ function setCalendar(data){
     var alerttime;
     var calendarEl = document.getElementById('calendar');
      var calendar = new FullCalendar.Calendar(calendarEl, {
-        
         eventClick: function(info) {
            var eventObj = info.event;
 
@@ -291,13 +341,11 @@ function setCalendar(data){
 		            	 $('#change-modal [name="s_alerttime"]').val(""); 
 			   }
                 $(this).attr('action','${pageContext.request.contextPath }/user/schedule/updateScheduleInfo.do');
-                return true;
               });  //서브밋 
 
               
             $('#delete').click(function(){
                location.href='${pageContext.request.contextPath}/user/schedule/deleteSchedule.do?s_no='+eventObj.id;
-                return true;
               });  //버튼 클릭
              
          },
@@ -313,73 +361,13 @@ function setCalendar(data){
              right: 'dayGridMonth,timeGridWeek,timeGridDay'
           },
           aspectRatio: 2,
-          /* themeSystem: 'bootstrap', */
-          
-          
           dateClick: function(info) {
           $("#regist-modal").modal("show"); //모달창 띄우기
-
-//           $('form[name=scheduleForm]').submit(function(e){
-//         	  e.preventDefault();
         	  
-        	  $('#regist').click(function(){
-		           var shareId = $("#list option:selected").text(); 
-		           var array = shareId.split(" "); //배열로 담기
-		           var memNo = [];//memNo를 담을 배열 선언
-		           array.pop(); // 뒤에 하나 지우기
-		           array.push('user'); // 작성자 mem_id
-		           var schedule = new Object();
-				   var arrSchedule = new Array();
-
-
-					 for(var i=0; i<array.length; i++){ //아이디 갯수만큼 반복
-						$.ajax({
-						   	   url     : '${pageContext.request.contextPath}/user/schedule/searchId.do',
-						   	   async : false,
-						        type    : 'post',
-						        dataType: 'json',
-						        data : {'mem_id':array[i]},
-						        success : function(result) {
-							      
-						        	memNo.push(result.memberInfo.mem_no); //memNo라는 배열에 담았다.
-
-										schedule = new Object();
-										schedule.mem_no = memNo[i];
-										schedule.s_memo = $('#regist-modal [name="s_memo"]').val();
-										schedule.s_startdate = $('#regist-modal [name="s_startdate"]').val();
-										schedule.s_enddate = $('#regist-modal [name="s_enddate"]').val();
-										if($("input:checkbox[name=regist-Check]").is(":checked") == true){ //알람 체크시 알람시간에 시작시간 추가
-											schedule.s_alerttime = $('#regist-modal [name="s_startdate"]').val();
-								         }
-								        schedule.s_color = $('#regist-modal [name="s_color"]').val();
-								        arrSchedule.push(schedule);
-								        $('#regist-modal [name="mem_no"]').val(arrSchedule[i].mem_no);
-						        }
-						  	}); 
-					  }
-
-					 $.ajax({
-					   	    url     : '${pageContext.request.contextPath}/user/schedule/insertScheduleInfo.do',
-					        type    : 'POST',
-					        dataType: 'json',
-					        contentType : 'application/json; charset=UTF-8',
-					        async: false,
-					        data :JSON.stringify(arrSchedule),
-					        success : function(result) {
-					        	
-					        }, 
-					        error : function(e){
-	 					        console.log(e);
-	 					    }	        
-					 });
-					 $("#regist-modal").modal("hide"); 
-					location.reload();
-					        				 
-                 return true;
-
-             });  //서브밋
+        	 
        },//클릭
        events:(jsonData)
+       
      });//캘린더
      calendar.render();
 }
