@@ -32,10 +32,6 @@ public class BoardServiceImpl implements IBoardService{
 	public List<BoardVO> boardList(Map<String, String> params) throws Exception {
 		return boardDao.boardList(params);
 	}
-//	@Override
-//	public List<BoardVO> getboardList(Criteria cri) throws Exception{
-//		return boardDao.getboardList(cri);
-//	}
 	
 	// 삭제
 	@Override
@@ -78,20 +74,12 @@ public class BoardServiceImpl implements IBoardService{
 		return boardDao.totalCount(params);
 	}
 	
+	// 조회수 
 	@Override
 	public void countHit(String bd_no) throws Exception {
 		boardDao.countHit(bd_no);
 		
 	}
-
-	
-	
-	
-//	@Override
-//	public List<BoardVO> getListWithPaging(Criteria cri) throws Exception{
-//		return boardDao.getListWithPaging(cri);
-//	}
-
 
 
 }

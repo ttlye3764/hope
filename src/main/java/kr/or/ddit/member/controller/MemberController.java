@@ -1,6 +1,5 @@
 package kr.or.ddit.member.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,18 +9,15 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ExtendedModelMap;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import edu.emory.mathcs.backport.java.util.concurrent.ExecutionException;
 import kr.or.ddit.member.service.IMemberService;
+import kr.or.ddit.utiles.UserSha256;
 import kr.or.ddit.vo.MemberVO;
 
 // /SpringToddler/user/member/memberList.do
@@ -37,20 +33,6 @@ public class MemberController {
 	@Autowired
 	private IMemberService service;
 
-	@RequestMapping("memberList")
-	public Model memberList(String search_keycode, String search_keyword, Map<String, String> params) throws Exception {
-
-//		Map<String, String> params = new HashMap<String, String>();
-		params.put("search_keycode", search_keycode);
-		params.put("search_keyword", search_keyword);
-
-		List<MemberVO> memberList = this.service.memberList(params);
-
-		// memberList => view resolver => memberList.jsp
-		Model model = new ExtendedModelMap();
-		model.addAttribute("memberList", memberList);
-		return model;
-	}
 
 	@RequestMapping("memberView")
 	public ModelMap memberView(String mem_id, Map<String, String> params, ModelMap modelMap) throws Exception {
@@ -75,16 +57,17 @@ public class MemberController {
 
 	@RequestMapping("updateMemberInfo")
 	public String updateMember(MemberVO memberInfo, HttpSession session, Map<String, String> params) throws Exception {
-		this.service.updateMemberInfo(memberInfo);		
-		
 		params.put("mem_id", memberInfo.getMem_id());
 		
 		if(!(memberInfo.getMem_pass().length()>0)) {
 			MemberVO memberInfo2 = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
 			params.put("mem_pass", memberInfo2.getMem_pass());
 		}else {
+			String pass = UserSha256.encrypt(memberInfo.getMem_pass());
+			memberInfo.setMem_pass(pass);
 			params.put("mem_pass", memberInfo.getMem_pass());
 		}
+		this.service.updateMemberInfo(memberInfo);		
 		
 		memberInfo = this.service.memberInfo(params);
 		session.setAttribute("LOGIN_MEMBERINFO", memberInfo);
@@ -95,51 +78,40 @@ public class MemberController {
 	@RequestMapping("deleteMemberForm")
 	public void deleteMemberForm() {}
 
-	// /user/member/deleteMemberInfo.do?user_id=a001
-	@RequestMapping("deleteMemberInfo/{user_id}")
-//	  public String deleteMember(@RequestParam(required=false, defaultValue="널 대체값") String mem_id,
-//			  					Map<String, String> params) throws Exception{
-// 			/user/member/deleteMemberInfo/a001.do
-	public String deleteMember(@PathVariable("user_id") String mem_id, Map<String, String> params) throws Exception {
-
+	@RequestMapping("deleteMember")
+	public ModelAndView deleteMember(@RequestParam String mem_id, Map<String, String> params, ModelAndView andView) throws Exception {
 		params.put("mem_id", mem_id);
 		this.service.deleteMemberInfo(params);
-
-		return "redirect:/user/member/memberList.do";
+		
+		String result = "성공적으로 처리되었습니다.";
+		
+		andView.addObject("json", result);
+		andView.setViewName("jsonConvertView");
+		
+		return andView;
 	}
 
 	@RequestMapping("memberForm")
 	public void memberForm() {
 	}
+	
+	@RequestMapping("checkPassForm")
+	public void checkPassForm() {
+	}
 
 	@RequestMapping("insertMemberInfo")
 	public String insertMember(MemberVO memberInfo, @RequestBody String totalparams,
 			RedirectAttributes redirectAttributes) throws Exception {
-
+		
+		String pass = UserSha256.encrypt(memberInfo.getMem_pass());
+		memberInfo.setMem_pass(pass);
+		
 		this.service.insertMember(memberInfo);
 		
 		redirectAttributes.addFlashAttribute("message", "회원가입이 완료되었습니다");
 		return "redirect:/user/join/loginForm.do";
 	}
 
-//	  @RequestMapping("idCheck")
-//	  @ResponseBody
-//	  public String idCheck(@RequestParam String mem_id,
-//			  				Map<String, String> params,
-//			  				Map<String, String> jsonMap)throws Exception{
-//		  params.put("mem_id", mem_id);
-//		  
-//		  MemberVO memberInfo = this.service.memberInfo(params);
-//		  
-//		  if(memberInfo == null){
-//			  jsonMap.put("flag", "true");
-//		  }else{
-//			  jsonMap.put("flag", "false");
-//		  }
-//		  String jsonData = this.mapper.writeValueAsString(jsonMap);
-//		  
-//		  return jsonData;
-//	  }
 	@RequestMapping("idCheck")
 	public ModelAndView idCheck(@RequestParam String mem_id, Map<String, String> params) throws Exception {
 		params.put("mem_id", mem_id);
@@ -191,6 +163,9 @@ public class MemberController {
 
 		ModelAndView andView = new ModelAndView();
 		andView.addObject("memberInfo", memberInfo);
+		
+		String pass = UserSha256.encrypt(mem_pass);
+		mem_pass = pass;
 
 		String result;
 		if (session_mem_pass.equals(mem_pass)) {
@@ -235,7 +210,9 @@ public class MemberController {
 		if (result == null) {
 		} else {
 			mem_temporary_pass = random();
-			params.put("mem_temporary_pass", mem_temporary_pass);
+			String pass = UserSha256.encrypt(mem_temporary_pass);
+			String t_pass = pass;
+			params.put("mem_temporary_pass", t_pass);
 			service.makePass(params);
 		}
 

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="deal">
+
+	<insert id="insertDeal" parameterType="dealVO">
+      INSERT 
+         INTO deal
+            (
+               deal_no,
+               deal_name,
+               deal_price,
+               deal_kind,
+               deal_img,
+               deal_date,
+               deal_fix_revenue,
+               deal_fix_expenditure,
+               mem_no,
+               deal_option)
+         VALUES
+             (
+               deal_seq.nextval,      
+               #{deal_name},   
+               #{deal_price},
+               #{deal_kind},
+               #{deal_img},
+               #{deal_date},
+               #{deal_fix_revenue},
+               #{deal_fix_expenditure},
+               #{mem_no},
+               #{deal_option}
+               )
+         
+   </insert>
+   
+   <select id="dealList" resultType="dealVO" parameterType="String">
+		SELECT *
+		FROM deal
+		WHERE MEM_NO = #{mem_no}
+	</select>
+
+</mapper>    
+

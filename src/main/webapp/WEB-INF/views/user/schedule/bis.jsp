@@ -3,101 +3,42 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html>
 
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-   <title>버스</title>
-   
-<style>
-button[type=button], input[type=submit], input[type=reset] {
-  background-color: #4CAF50;
-  border: none;
-  color: white;
-  padding: 5px 32px;
-  text-decoration: none;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-.main_left_btn {
-width:50%;
-height:1300px;
-float:left;
-padding-left: 50px;}
 
-.main_right_btn {
-width:50%;
-height:1300px;
-float:left;
-padding-right: 50px;}
-
-table {
-width: 100%;
-}
-table, th, td {
-border: 1px solid #bcbcbc;
-}
-     
-      
-</style>
-
-</head>
-
-<body>
-	<div class="main_left_btn">
-		<h4>지역 : <select name="citycode" id="citycode">
-					<option value="">지역선택</option>
-					<option value="25">대전광역시</option>
-					<option value="12">세종특별시</option>
-					<option value="22">대구광역시</option>
-					<option value="23">인천광역시</option>
-					<option value="24">광주광역시</option>
-					<option value="26">울산광역시</option>
-<!-- 					<option value="31010">수원시</option>
-					<option value="31020">성남시</option>
-					<option value="31030">의정부시</option>
-					<option value="31040">안양시</option>
-					<option value="31050">부천시</option>
-					<option value="31060">광명시</option>
-					<option value="31070">평택시</option>
-					<option value="31080">동두천시</option>
-					<option value="31090">안산시</option>
-					<option value="31100">고양시</option>
-					<option value="31110">과천시</option>
-					<option value="31120">구리시</option>
-					<option value="31130">남양주시</option>
-					<option value="31140">오산시</option>
-					<option value="31150">시흥시</option>
-					<option value="31160">군포시</option>
-					<option value="31170">의왕시</option>
-					<option value="31180">하남시</option>
-					<option value="31190">용인시</option>
-					<option value="31200">파주시</option>
-					<option value="31210">이천시</option>
-					<option value="31220">안성시</option>
-					<option value="31230">김포시</option>
-					<option value="31240">화성시</option> -->
-					<option value="39">제주도</option>
-			   </select>
-			버스 번호 : <input type="text" id="routeid" class="routeid" name="routeid" >
-			<button type ="button" id="searchbtn">검색</button>
-			<button type ="button" id="registbtn">등록</button>
-			<div id="map" style=" width:80%;height:700px; margin: 20px 20px 20px 30px; "></div>
-				<button type="button" id="searchBusStop" onclick="searchBusStop()">정류소 정보 보기</button> 지도위의 정류소를 클릭한 후 버튼을 클릭해주세요.
-			
-			<div id="information" style="overflow:scroll; width: 800px; height:200px;"></div>
-		</h4>
-	</div>
-	
-	
-	<div class="main_right_btn">
-	<br>
-	<br>
-	<br>
-		
-			<table id="busTable" class="table table-striped dt-responsive nowrap w-100">
+	<section>
+		<div class="container">
+			<div class="row mb-4">
+				<!-- portfolio images -->
+				<div class="col-md-8">
+					<div id="map" style=" width:80%;height:700px; margin: 20px 20px 20px 30px; "></div>
+				</div>
+				<!-- portfolio details -->
+				<div class="col-md-4">
+					<div class="sticky-element">
+						<h2>Register my Bus </h2>
+						<p>내가 즐겨타는 버스를 등록해주세요~! </p>
+						       Region : <select name="citycode" id="citycode">
+									<option value="">지역선택</option>
+									<option value="25">대전광역시</option>
+									<option value="12">세종특별시</option>
+									<option value="22">대구광역시</option>
+									<option value="23">인천광역시</option>
+									<option value="24">광주광역시</option>
+									<option value="26">울산광역시</option>
+									<option value="39">제주도</option>
+					   			   </select>
+					   			   <br>
+					   			   <br>
+					Bus.No : <input type="text" id="routeid" class="routeid" name="routeid" >
+					
+					&nbsp;<button type ="button" id="searchbtn">검색</button>
+					<br>
+					<br>
+					<button type ="button" id="registbtn">등록</button>
+					<br>
+				
+				<div id="busList" style="overflow: auto; overflow-x:hidden; width: 500px; height:500px;">
+				<table id="busTable" class="table table-striped dt-responsive nowrap w-100">
 				<thead>
 					<tr>
 						<th></th>
@@ -143,13 +84,25 @@ border: 1px solid #bcbcbc;
 					</c:forEach>
 				</tbody>	
 			</table>
-					
-		
+			</div>
+					</div>
+				</div>
+				<!-- portfolio details End -->
+			</div>
+
+			<div class="row mt-4">
+				<!-- portfolio testimonial -->
+				<div class="col-md-6">
+					<h4 class="mb-4">Bus System Information</h4>버스 정류장을 클릭해 보세요!
+						<div id="information" style="overflow: auto; overflow-x:hidden;; width: 800px; height:200px;"></div>
+				</div>
+				
+			</div>
+
 			
-		
-			
-	
-	</div>
+		</div>
+		<!-- portfolio End -->
+	</section>
 
 
 
@@ -159,10 +112,6 @@ border: 1px solid #bcbcbc;
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=695a00dbf1560fd30746e2be14b3f633"></script>
 <script>
-
-
-
-
 var citycode;
 var positions = [];
 var startx;
@@ -180,6 +129,8 @@ navigator.geolocation.getCurrentPosition(function(pos) {
 
 
    $(function(){
+
+	   
 		   var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 	       mapOption = { 
 	           center: new kakao.maps.LatLng(latitude,longitude), // 지도의 중심좌표
@@ -188,6 +139,12 @@ navigator.geolocation.getCurrentPosition(function(pos) {
 
 	   	   var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
+		   	var marker = new kakao.maps.Marker({ 
+		   	    // 지도 중심좌표에 마커를 생성합니다 
+		   	    position: map.getCenter() 
+		   	}); 
+		   	// 지도에 마커를 표시합니다
+		   	marker.setMap(map);
 
 	   		kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
 
@@ -197,6 +154,12 @@ navigator.geolocation.getCurrentPosition(function(pos) {
 			console.log(latlng.getLat()+"_"+latlng.getLng());
 			gpsLati = latlng.getLat();
 			gpsLong = latlng.getLng();
+			
+			// 마커 위치를 클릭한 위치로 옮깁니다
+		    marker.setPosition(latlng);
+			searchBusStop();
+			
+			
 	   		});
 
 
@@ -270,13 +233,17 @@ navigator.geolocation.getCurrentPosition(function(pos) {
 			
 			     	 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
+			     	 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {     
 
-			     	 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
 					   	    // 클릭한 위도, 경도 정보를 가져옵니다 
 					   	    var latlng = mouseEvent.latLng; 
 							console.log(latlng.getLat()+"_"+latlng.getLng());
 							gpsLati = latlng.getLat();
 							gpsLong = latlng.getLng();
+
+									
+							searchBusStop();
+							
 					 }); //클릭한 위치의 위도, 경도 정보를 가져온다.
 
 			      
@@ -445,6 +412,8 @@ navigator.geolocation.getCurrentPosition(function(pos) {
 						console.log(latlng.getLat()+"_"+latlng.getLng());
 						gpsLati = latlng.getLat();
 						gpsLong = latlng.getLng();
+
+						searchBusStop();
 				 }); //클릭한 위치의 위도, 경도 정보를 가져온다.
 
 
@@ -515,13 +484,13 @@ navigator.geolocation.getCurrentPosition(function(pos) {
 			        success : function(Result) {
 			            console.log(Result)
 			            if(Result.response.body.totalCount==1){
-			            	html = "<h3>"+Result.response.body.items.item.routeno+"번 버스가 "+parseInt(Result.response.body.items.item.arrtime/60)+"분 "+Result.response.body.items.item.arrtime%60+"초 뒤에 진입예정입니다.</h3>";
+			            	html = "<h5><b>"+Result.response.body.items.item.routeno+"</b>번 버스가 <b>"+parseInt(Result.response.body.items.item.arrtime/60)+"</b>분 <b>"+Result.response.body.items.item.arrtime%60+"</b>초 뒤에 진입예정입니다.</h3>";
 							$('#information').append(html);
 					    }
 				        for(var i=0; i<Result.response.body.totalCount; i++){
 							console.log(Result.response.body.items.item[i].routeno);
 							console.log(Result.response.body.items.item[i].arrtime);
-							html = "<h3>"+Result.response.body.items.item[i].routeno+"번 버스가 "+parseInt(Result.response.body.items.item[i].arrtime/60)+"분 "+Result.response.body.items.item[i].arrtime%60+"초 뒤에 진입예정입니다.</h3>";
+							html = "<h5><b>"+Result.response.body.items.item[i].routeno+"</b>번 버스가 <b>"+parseInt(Result.response.body.items.item[i].arrtime/60)+"</b>분<b> "+Result.response.body.items.item[i].arrtime%60+"</b>초 뒤에 진입예정입니다.</h3>";
 							$('#information').append(html);
 					    }
 			        },
@@ -533,8 +502,3 @@ navigator.geolocation.getCurrentPosition(function(pos) {
    
 
 </script>
-</body>
-
-
-
-</html>

@@ -1,5 +1,7 @@
 <%@ page language="JAVA" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <script>
 function LogOut(){
 	$.ajax({
@@ -12,7 +14,6 @@ function LogOut(){
 			location.reload(true);
 		}
 	});
-
 </script>
 
 
@@ -81,7 +82,7 @@ function LogOut(){
 							    <a class="dropdown-toggle" href="#" role="button" id="dropdownAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ti-user mr-2"></i>${LOGIN_MEMBERINFO.mem_nickname } </a>
 							</c:if>
 						  <div class="dropdown-menu mt-2 shadow" aria-labelledby="dropdownAccount">
-						  		<a class="dropdown-item" href="${pageContext.request.contextPath}/user/member/myPage.do">나의 정보 관리</a>
+						  		<a class="dropdown-item" href="${pageContext.request.contextPath}/user/member/checkPassForm.do">나의 정보 관리</a>
 						  	<a class="dropdown-item" href="${pageContext.request.contextPath}/user/member/">내가 작성한 게시글</a>
 							<a class="dropdown-item" href="javascript:LogOut();">로그아웃</a>
 						  </div>
@@ -187,30 +188,21 @@ function LogOut(){
 								</li>
 							</ul>
 						</li>
-						<!-- Menu item 3 Pages-->
+						<!-- 건강관리 -->
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
+							<a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Health</a>
 							<ul class="dropdown-menu" aria-labelledby="pagesMenu">
-								<li> <a class="dropdown-item" href="about-classic.html">About Classic</a></li>
-								<li> <a class="dropdown-item" href="about-advance.html">About Advance</a> </li>
-								<li> <a class="dropdown-item" href="service.html">Service</a> </li>
-								<li> <a class="dropdown-item" href="contact.html">Contact</a> </li>
-								<li> <a class="dropdown-item" href="team.html">Team</a> </li>
-								<li> <a class="dropdown-item" href="careers.html">Careers</a> </li>
-								<li> <a class="dropdown-item" href="careers-single.html">Careers single</a> </li>
-								<li class="dropdown-submenu">
-									<a class="dropdown-item dropdown-toggle" href="#">Login & Signup</a>
-									<ul class="dropdown-menu">
-										<li> <a class="dropdown-item" href="sign-in.html">Sign in</a> </li>
-										<li> <a class="dropdown-item" href="sign-up.html">Sign up</a> </li>
-										<li> <a class="dropdown-item" href="password-recovery.html">Password recovery</a> </li>
-									</ul>
-								</li>
-								<li> <a class="dropdown-item" href="pricing.html">Pricing</a> </li>
-								<li> <a class="dropdown-item" href="timeline.html">Timeline</a> </li>
-								<li> <a class="dropdown-item" href="faq.html">FAQs</a> </li>
-								<li> <a class="dropdown-item" href="maintenance-mode.html">Maintenance mode</a> </li>
-								<li> <a class="dropdown-item" href="error-404.html">Error 404</a> </li>
+								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/healthImage/healthImageList.do'>운동법 리스트</a></li>
+								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/healthImage/healthImageWeight.do'>표준몸무게</a></li>
+								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/healthImage/healthImageMap.do'>내 주변 헬스장</a></li>
+							</ul>
+						</li>
+						
+						<!-- 지식 관리 -->
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Knowledge</a>
+							<ul class="dropdown-menu" aria-labelledby="pagesMenu">
+								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/knowledge/knowledgeList.do'>퀴즈 풀이</a></li>
 							</ul>
 						</li>
 						<!-- Menu item 4 Portfolio-->
@@ -218,25 +210,20 @@ function LogOut(){
 							<a class="nav-link dropdown-toggle" href="#" id="portfolioMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Schedule</a>
 							<ul class="dropdown-menu" aria-labelledby="portfolioMenu">
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/schedule.do">일정관리</a> </li>
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/dday.do">D-day</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/dday.do">일정리스트</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/bis.do">자주타는 버스</a> </li>
-								<li> <a class="dropdown-item" href="portfolio-grid-column-4.html">Portfolio Column 4</a> </li>
-								<li> <a class="dropdown-item" href="portfolio-grid-column-5.html">Portfolio Column 5</a> </li>
-								<li> <a class="dropdown-item" href="portfolio-grid-column-6.html">Portfolio Column 6</a> </li>
-								<li> <a class="dropdown-item" href="portfolio-single.html">Portfolio Single</a> </li>
-								<li> <a class="dropdown-item" href="portfolio-single-02.html">Portfolio Single 2</a> </li>
-								<li> <a class="dropdown-item" href="portfolio-case-studies.html">Portfolio case studies <span class="badge badge-success ml-2">Hot</span></a> </li>
+								
 							</ul>
 						</li>
 						<!-- Menu item 5 Elements-->
 						<li class="nav-item dropdown megamenu">
-							<a class="nav-link dropdown-toggle" href="#" id="elementsMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Elements</a>
+							<a class="nav-link dropdown-toggle" href="#" id="elementsMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Asset management</a>
 							<div class="dropdown-menu" aria-labelledby="elementsMenu" style="background-image:url(assets/images/menu-bg.jpg); background-position: right bottom; background-repeat: no-repeat;">
 								<div class="container">
 									<div class="row w-100">
 										<div class="col-sm-6 col-lg-3">
 											<ul class="list-unstyled">
-												<li> <a class="dropdown-item" href="elements-accordion.html">Accordion</a> </li>
+												<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/accountBook/setting.do">자산관리</a> </li>
 												<li> <a class="dropdown-item" href="elements-action-box.html">Action box</a> </li>
 												<li> <a class="dropdown-item" href="elements-alerts.html">Alerts</a> </li>
 												<li> <a class="dropdown-item" href="elements-animated-headlines.html">Animated Headlines</a> </li>
@@ -281,7 +268,7 @@ function LogOut(){
 							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath }/user/diet/dietMain" id="docMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">diet</a>
 							<ul class="dropdown-menu" aria-labelledby="docMenu">
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/dietMain">dietMain</a> </li>
-								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/#getting-started-section">Directory structure</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/diet_my">내꺼</a> </li>
 								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/#installation-section">Gulp</a> </li>
 								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/#edit-section">Customization</a> </li>
 								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/#faqs">FAQs</a> </li>

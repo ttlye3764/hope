@@ -5,19 +5,9 @@
 
 
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-</head>
-
-
-
-
-<body class="loading">
       
-<div style=" height: auto; width: 1500px; margin: auto; ">
+<div style=" height: auto; width: 1200px; margin: auto; ">
 ${fn:length(scheduleList)}
 <%-- <c:forEach var="scheduleVO" items="${scheduleList }" varStatus="status"> --%>
 	<br><br>
@@ -80,9 +70,3 @@ ${fn:length(scheduleList)}
 
 </div>
 
-
-</body>
-
-
-
-</html>

@@ -1,0 +1,32 @@
+
+button[type=button], input[type=submit], input[type=reset] {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 5px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.main_left_btn {
+width:50%;
+height:1300px;
+float:left;
+padding-left: 50px;}
+
+.main_right_btn {
+width:50%;
+height:1300px;
+float:left;
+padding-right: 50px;}
+
+#busTable{
+width: 100%;
+}
+#busTable th,#busTable td {
+border: 1px solid #bcbcbc;
+}
+     
+     
+

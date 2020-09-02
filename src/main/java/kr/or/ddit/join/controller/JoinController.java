@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import kr.or.ddit.aop.Loggable;
 import kr.or.ddit.member.service.IMemberService;
+import kr.or.ddit.utiles.UserSha256;
 import kr.or.ddit.vo.MemberVO;
 
 import org.slf4j.Logger;
@@ -61,6 +62,9 @@ public class JoinController {
 
 //		Map<String, String> params = new HashMap<String, String>();
 		params.put("mem_id", mem_id);
+		
+		String pass = UserSha256.encrypt(mem_pass);
+		mem_pass = pass;
 		params.put("mem_pass", mem_pass);
 
 		MemberVO memberInfo = this.service.memberInfo(params);
@@ -75,6 +79,11 @@ public class JoinController {
 			return andView;
 		} else {
 			session.setAttribute("LOGIN_MEMBERINFO", memberInfo);
+			if(memberInfo.getMem_division().equals("1")) {
+				andView.addObject("json", 0);
+				andView.setViewName("jsonConvertView");
+				return andView;
+			}
 			if (memberInfo.getMem_temporary_pass() == null) {
 				andView.addObject("json", 1);
 				andView.setViewName("jsonConvertView");
@@ -83,7 +92,7 @@ public class JoinController {
 				// 포워드(컨텍스트 루트 | 패스 생략)
 				if (memberInfo.getMem_pass().equals(mem_pass)) { // 만약 임시비밀번호칸이 채워져있는데 본인비밀번호로 로그인 했을 경우
 					andView.addObject("json", 1);
-				} else {
+				} else { // 임시비밀번호로 로그인했을 경우
 					andView.addObject("json", 2);
 				}
 				this.service.deletePass(mem_id);
@@ -105,6 +114,9 @@ public class JoinController {
 		String mem_id = memberInfo.getMem_id();
 		
 		params.put("mem_id", mem_id);
+		
+		String pass = UserSha256.encrypt(mem_pass);
+		mem_pass = pass;
 		params.put("mem_pass", mem_pass);
 		
 		this.service.updatePass(params);
@@ -128,6 +140,9 @@ public class JoinController {
 	public String freeboardloginCheck(String mem_id, String mem_pass, HttpServletRequest request, HttpSession session,
 			HttpServletResponse response, Map<String, String> params) throws Exception {
 		params.put("mem_id", mem_id);
+		
+		String pass = UserSha256.encrypt(mem_pass);
+		mem_pass = pass;
 		params.put("mem_pass", mem_pass);
 
 		MemberVO memberInfo = this.service.memberInfo(params);

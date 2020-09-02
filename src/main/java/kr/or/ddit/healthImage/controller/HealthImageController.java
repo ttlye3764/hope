@@ -1,8 +1,16 @@
 package kr.or.ddit.healthImage.controller;
 
+import java.io.FileOutputStream;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -98,4 +106,72 @@ public class HealthImageController {
 
 			return "redirect:/admin/healthImage/healthImageList.do";
 		}
+		
+		// 엑셀 출력
+		@RequestMapping("excelDown")
+		public void excelDown(HttpServletResponse response, Map<String, String> params) throws Exception {
+			
+			// 게시판 목록조회
+			List<HealthImageVO> list = healthImageService.healthList(params);
+			
+			// 워크북 생성
+			Workbook wb = new HSSFWorkbook();
+			Sheet sheet = wb.createSheet("게시판");
+			Row row = null;
+			Cell cell = null;
+			int rowNo = 0;
+
+			// 헤더 생성
+			row = sheet.createRow(rowNo++);
+			cell = row.createCell(0);
+			cell.setCellValue("추천 운동");
+			
+			cell = row.createCell(1);
+			cell.setCellValue("카테고리");
+			
+			cell = row.createCell(2);
+			cell.setCellValue("추천 연령");
+			
+			cell = row.createCell(3);
+			cell.setCellValue("운동 방법(유/무)");
+			
+			cell = row.createCell(4);
+			cell.setCellValue("시간");
+			
+			cell = row.createCell(5);
+			cell.setCellValue("난이도");
+			
+			// 데이터 부분 생성
+			for(HealthImageVO vo : list) {
+				row = sheet.createRow(rowNo++);
+				cell = row.createCell(0);
+				cell.setCellValue(vo.getHealthImage_title());
+				
+				cell = row.createCell(1);
+				cell.setCellValue(vo.getHealthImage_category());
+				
+				cell = row.createCell(2);
+				cell.setCellValue(vo.getHealthImage_age());
+				
+				cell = row.createCell(3);
+				cell.setCellValue(vo.getHealthImage_diet());
+				
+				cell = row.createCell(4);
+				cell.setCellValue(vo.getHealthImage_time());
+				
+				cell = row.createCell(5);
+				cell.setCellValue(vo.getHealthImage_difficulty());
+			}
+			
+			// 엑셀 출력
+			response.setContentType("application/vnd.ms-excel");
+			response.setHeader("Content-Disposition", "attachment;filename=test.xls");
+			
+			wb.write(response.getOutputStream());
+
+			FileOutputStream fileOut = new FileOutputStream("excel.xlsx");
+			wb.write(fileOut);
+			fileOut.close();
+		}
+			
 }

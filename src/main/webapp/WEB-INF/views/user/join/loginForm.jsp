@@ -60,6 +60,22 @@
 
             $("#mem_id").keyup(function(e){if(e.keyCode == 13) login();});
             $("#mem_pass").keyup(function(e){if(e.keyCode == 13) login();});
+
+            $("#mem_hp_pw").keyup(function(e){
+        		if(e.keyCode == 8){
+        			var code = $('input[name=mem_hp_pw]').val();
+        			var lastChar = code.charAt(code.length-1);
+        			if(lastChar == '-'){
+        				code = code.substr(0,code.length-1);
+        				$('input[name=mem_hp_pw]').val(code);
+        			}
+        		}else{
+        			var hp = $('input[name=mem_hp_pw]').val();
+        			if(hp.length == 3 || hp.length == 8){
+        				$('input[name=mem_hp_pw]').val(hp + "-");
+        			}
+        		}
+        	});
       });
 
       function login(){
@@ -108,7 +124,11 @@
         		}else if(result.json==2){
         			alert('임시비밀번호로 로그인하셨습니다. \n비밀번호 변경창으로 이동합니다.');
         			$(location).attr('href', '${pageContext.request.contextPath}/user/join/passChangeForm.do');
-            	}else{
+            	}else if(result.json==0){
+					alert('관리자님 환영합니다!');
+					$(location).attr('href', '${pageContext.request.contextPath}/admin/main/mainForm.do');
+                }
+            	else{
             		$('#label').text(result.json);
         			$('#label').css('color', 'red');
                 }
@@ -149,16 +169,10 @@
       }
 
       function sendsms() {
-  		var mem_hp = $('select[name=mem_hp1_pw]').val() + '-'
-  				+ $('input[name=mem_hp2_pw]').val() + '-'
-  				+ $('input[name=mem_hp3_pw]').val();
-  		$('input[name=mem_hp_pw]').val(mem_hp);
+    	var mem_hp = $('input[name=mem_hp_pw]').val();
 
-  		hp = $('input[name=mem_hp2_pw]').val();
-  		hp1 = $('input[name=mem_hp3_pw]').val();
-
-  		if(hp=='' || hp1==''){
-  			alert('올바른 휴대전화 번호를 입력해주세요.');
+  		if (!mem_hp.validationHP()) {
+  			alert('휴대전화번호를 바르게 입력해주세요.');
   			return false;
   		}
   		
@@ -180,59 +194,37 @@
   	};
   	
   	function checksms() {
-  		var mem_hp = $('select[name=mem_hp1_pw]').val() + '-'
-  				+ $('input[name=mem_hp2_pw]').val() + '-'
-  				+ $('input[name=mem_hp3_pw]').val();
-  		$('input[name=mem_hp_pw]').val(mem_hp);
-
-  		hp_num = $('input[name=hp_num_pw]').val();
-  		if(hp_num==''){
-  			alert('인증번호를 입력해주세요.');
-  			return false;
-  		}
-  		
-  		$.ajax({
-  			type : 'POST',
-  			url : '${pageContext.request.contextPath}/sms/checkSms.do',
-  			dataType : 'json',
-  			data : {
-  				mem_hp : $('input[name=mem_hp_pw]').val(),
-  				hp_num : $('input[name=hp_num_pw]').val()
-  			},
-  			error : function(result) {
-  				alert(result.json);
-  			},
-  			success : function(result) {
-  				//{ flag : true | false}
-  				alert(result.json);
-  				if(result.json == '인증이 완료되었습니다.'){
-  					$('select[name=mem_hp1_pw]').attr("disabled", true)
-  					$('input[name=mem_hp2_pw]').attr("disabled", true)
-  					$('input[name=mem_hp3_pw]').attr("disabled", true)
-  					$('input[name=hp_num_pw]').attr("hidden",true)
-  					$('input[name=hp_btn]').attr("hidden",true)
-  				}
-  			}
-  		});
-  	};
+		var mem_hp = $('input[name=mem_hp_pw]').val();
+		hp_num = $('input[name=hp_num]').val();
+		
+		$.ajax({
+			type : 'POST',
+			url : '${pageContext.request.contextPath}/sms/checkSms.do',
+			dataType : 'json',
+			data : {
+				mem_hp : $('input[name=mem_hp_pw]').val(),
+				hp_num : $('input[name=hp_num]').val()
+			},
+			success : function(result) {
+				//{ flag : true | false}
+				if(result.json == '인증이 완료되었습니다.'){
+					$('#hplabel').text(result.json);
+					$('input[name=hp_num]').attr("disabled",true);
+				}
+			}
+		});
+	};
       
-      function searchID(){
-    	  var mem_birth = $('input[name=mem_bir1]').val() + '-'
-			+ $('input[name=mem_bir2]').val() + '-'
-			+ $('input[name=mem_bir3]').val();
-		$('#mem_birth').val(mem_birth);
-
-		var bir1 = $('input[name=mem_bir1]').val();
-		var bir2 = $('input[name=mem_bir2]').val();
-		var bir3 = $('input[name=mem_bir3]').val();
-
+    function searchID(){
 		if($('#mem_name').val()==''){
 			alert('이름을 입력해주세요');
 			return false;
 		}
+		
+    	var mem_birth = $('#mem_birth').val();
 
-		if(bir1=='' || bir2=='' || bir3==''){
-			alert('생년월일을 정확하게 입력해주세요');
+    	if (!mem_birth.validationBIR()) {
+			alert('올바른 생년월일을 입력해주세요.')
 			return false;
 		}
 
@@ -257,27 +249,28 @@
 	};
 
 	function searchPW(){
-  	  var mem_birth = $('input[name=mem_bir1_pw]').val() + '-'
-			+ $('input[name=mem_bir2_pw]').val() + '-'
-			+ $('input[name=mem_bir3_pw]').val();
-		$('#mem_birth_pw').val(mem_birth);
+		var mem_hp = $('input[name=mem_hp_pw]').val();
 
-		var bir1 = $('input[name=mem_bir1_pw]').val();
-		var bir2 = $('input[name=mem_bir2_pw]').val();
-		var bir3 = $('input[name=mem_bir3_pw]').val();
-
-		var mem_hp = $('select[name=mem_hp1_pw]').val() + '-'
-		+ $('input[name=mem_hp2_pw]').val() + '-'
-		+ $('input[name=mem_hp3_pw]').val();
-		$('input[name=mem_hp_pw]').val(mem_hp);
+		if($('#mem_id_pw').val()==''){
+			alert('아이디를 입력해주세요.');
+			return false;
+		}
 		
 		if($('#mem_name_pw').val()==''){
 			alert('이름을 입력해주세요');
 			return false;
 		}
 
-		if(bir1=='' || bir2=='' || bir3==''){
-			alert('생년월일을 정확하게 입력해주세요');
+		var mem_birth = $('#mem_birth_pw').val();
+
+    	if (!mem_birth.validationBIR()) {
+			alert('올바른 생년월일을 입력해주세요.')
+			return false;
+		}
+
+		var hp = $('#hplabel').text();
+		if(hp == ''){
+			alert('휴대전화 인증을 해주세요.');
 			return false;
 		}
 
@@ -311,6 +304,11 @@
 	function searchPWResult(){
 		$("#search_pw_modal_result").modal("show");
 		$('#PWresult').text(big_mem_id);
+	}
+
+	function smschange(){
+		$('#hplabel').text("");
+		$('input[name=hp_num]').removeAttr("disabled");
 	}
 </script>
 
@@ -399,135 +397,109 @@
 	<!--Template Functions-->
 	<script src="assets/js/functions.js"></script>
 	
-	<div id="search_id_modal" class="modal fade" tabindex="-1" role="dialog"
-      aria-hidden="true">
-      <div class="modal-dialog">
-         <div class="modal-content">
-            <div class="modal-body">
-               <h5>아이디찾기</h5><br>
-
-               <form name="searchUserId" class="pl-3 pr-3">
-                  <div class="form-group">
-                     	이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름 <input type="text" id="mem_name" name="mem_name" >
-                  </div>
-				
-                  <div class="form-group">
-                     	생년월일 <input type="hidden" name="mem_birth" id="mem_birth"/> <input type="text"
-					name="mem_bir1" size="4" value="" />년 <input type="text"
-					name="mem_bir2" size="2" value="" />월 <input type="text"
-					name="mem_bir3" size="2" value="" />일
-                  </div>
-
-                  <div class="form-group text-center">
-                     <button class="endbtn"
-						id="searchUserID" type="button" onclick="searchID()">찾기
+	<!-- Modal -->
+	<div class="modal fade text-left" id="search_id_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">아이디찾기</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
 					</button>
-                  </div>
-               </form>
-            </div>
-         </div>
-         <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
-   </div>
-   <!-- /.modal -->
-   
-   <div id="search_id_modal_result" class="modal fade" tabindex="-1" role="dialog"
-      aria-hidden="true">
-      <div class="modal-dialog">
-         <div class="modal-content">
-            <div class="modal-body">
-               <h5>아이디찾기</h5><br>
-               <form name="searchUserIdResult"   class="pl-3 pr-3">
-                  <div class="form-group">
-                  	<label id="IDresult"></label>
-                  </div>
-
-                  <div class="form-group text-center">
-                     <button class="endbtn"
-						type="button" onclick="search_pw_modal()">비밀번호 찾기
+				</div>
+				<div class="modal-body">
+					<div class="input-group mb-3" style="width:400px" align="center">
+						이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름&nbsp;&nbsp;&nbsp;<input type="text" class="form-control" placeholder="홍길동" id="mem_name" name="mem_name" >
+					</div>
+					<div class="input-group mb-3" style="width:400px" align="center">
+						생년월일&nbsp;&nbsp;&nbsp;<input type="text" class="form-control" id="mem_birth" name="mem_birth" placeholder="YYYY-MM-DD" >
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" onclick="searchID()">찾기</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Modal -->
+	<div class="modal fade text-left" id="search_id_modal_result" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">아이디찾기</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
 					</button>
-                  </div>
-               </form>
-            </div>
-         </div>
-         <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
-   </div>
-   <!-- /.modal -->
-   
-<div id="search_pw_modal" class="modal fade" tabindex="-1" role="dialog"
-      aria-hidden="true">
-      <div class="modal-dialog">
-         <div class="modal-content">
-            <div class="modal-body">
-               <h5>비밀번호찾기</h5><br>
-
-               <form name="searchUserPW"   class="pl-3 pr-3">
-              	 <div class="form-group">
-                     	아&nbsp;&nbsp;이&nbsp;&nbsp;디 <input type="text" id="mem_id_pw" name="mem_id_pw" >
-                  </div>
-                  
-                  <div class="form-group">
-                     	이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름 <input type="text" id="mem_name_pw" name="mem_name_pw" >
-                  </div>
-
-                  <div class="form-group">
-                     	생년월일 <input type="hidden" name="mem_birth_pw" id="mem_birth_pw"/> <input type="text"
-					name="mem_bir1_pw" size="4" value="" />년 <input type="text"
-					name="mem_bir2_pw" size="2" value="" />월 <input type="text"
-					name="mem_bir3_pw" size="2" value="" />일
-                  </div>
-                  
-                  <div class="form-group">
-	                  	휴대전화<input type="hidden" name="mem_hp_pw" id="mem_hp_pw" /> <select
-						name="mem_hp1_pw">
-							<option value="010">010</option>
-							<option value="011">011</option>
-							<option value="016">016</option>
-							<option value="017">017</option>
-							<option value="019">019</option>
-					</select> - <input type="text" name="mem_hp2_pw" size="4" value="" /> - 
-					<input	type="text" name="mem_hp3_pw" size="4" value="" />
-					<a href="javascript:sendsms();">[인증번호 전송]</a><br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="text" name="hp_num_pw"/>
-					<input type="button" name="hp_btn" onClick="checksms()" class="btn" value="[인증번호 확인]">
-                  </div>
-
-                  <div class="form-group text-center">
-                     <button class="endbtn"
-						id="searchUserPW" type="button" onclick="searchPW()">
+				</div>
+				<div class="modal-body">
+					<label id="IDresult"></label>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" onclick="search_pw_modal()">비밀번호 찾기</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Modal -->
+	<div class="modal fade text-left" id="search_pw_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">비밀번호찾기</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
 					</button>
-                  </div>
-               </form>
-            </div>
-         </div>
-         <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
-   </div>
-   <!-- /.modal -->
-   
-   <div id="search_pw_modal_result" class="modal fade" tabindex="-1" role="dialog"
-      aria-hidden="true">
-      <div class="modal-dialog">
-         <div class="modal-content">
-            <div class="modal-body">
-               <h5>비밀번호 찾기</h5><br>
-               <form name="searchUserPWResult"   class="pl-3 pr-3">
-                  <div class="form-group">
-                  	<label id="PWresult"></label>
-                  </div>
-                  
-               </form>
-            </div>
-         </div>
-         <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
-   </div>
-   <!-- /.modal -->
+				</div>
+				<div class="modal-body">
+					<div class="input-group mb-3" style="width:400px" align="center">
+						아&nbsp;&nbsp;이&nbsp;&nbsp;디&nbsp;&nbsp;&nbsp; <input type="text" id="mem_id_pw" name="mem_id_pw" class="form-control">
+					</div>
+					<div class="input-group mb-3" style="width:400px" align="center">
+						이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름&nbsp;&nbsp;&nbsp;<input type="text" class="form-control" placeholder="홍길동" id="mem_name_pw" name="mem_name_pw" >
+					</div>
+					<div class="input-group mb-3" style="width:400px" align="center">
+						생년월일&nbsp;&nbsp;&nbsp;<input type="text" class="form-control" id="mem_birth_pw" name="mem_birth_pw" placeholder="YYYY-MM-DD" >
+					</div>
+					<div class="input-group mb-3" style="width:400px" align="center">
+						휴대전화&nbsp;&nbsp;&nbsp;
+						<input type="text" class="form-control" id="mem_hp_pw" name="mem_hp_pw" placeholder="-빼고 입력" onchange="smschange()" ><a href="javascript:sendsms();">[인증번호 전송]</a>
+					</div>
+					<div class="input-group mb-3" style="width:400px" align="center">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="text" class="form-control" name="hp_num" onkeyup="checksms()"/>
+						<label id="hplabel"></label>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" onclick="searchPW()">찾기</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Modal -->
+	<div class="modal fade text-left" id="search_pw_modal_result" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">비밀번호찾기</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<label id="PWresult"></label>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

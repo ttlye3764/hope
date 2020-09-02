@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddit.diet.service.IDietService;
+import kr.or.ddit.vo.Diet_dayVO;
+import kr.or.ddit.vo.Diet_day_infoVO;
 import kr.or.ddit.vo.Diet_memVO;
 import kr.or.ddit.vo.MemberVO;
 import kr.or.ddit.vo.MenuVO;
@@ -76,7 +78,19 @@ public class DietController {
 	} 
 	
 	@RequestMapping("diet_my")
-	public void diet_my(){}
+	public ModelAndView diet_my(ModelAndView andView,
+								Map<String, String> params) throws Exception{
+		params.put("mem_no", "1");
+		
+		List<Diet_memVO> dietMemList = dietService.dietMemList(params);
+		
+		Diet_memVO dietMemLast = dietMemList.get(dietMemList.size()-1);
+		
+		andView.addObject("dietMemLast", dietMemLast);
+		andView.addObject("dietMemList", dietMemList);
+		andView.setViewName("user/diet/diet_my");
+		return andView;
+	}
 	
 	@RequestMapping("recommendDiet")
 	public void recommendDiet() {}
@@ -175,4 +189,37 @@ public class DietController {
 		return andView;
 	}
 	
+	
+	@RequestMapping("menuSearch")
+	public ModelAndView menuSearch(ModelAndView andView,
+									String menu_search,
+									Map<String, String> params) throws Exception{
+		
+		params.put("menu_search", menu_search);
+		List<MenuVO> menuSearchList = dietService.menuSearch(params);
+		
+		andView.addObject("menuSearchList", menuSearchList);
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
+	
+	@RequestMapping("insertAllDietDay")
+	public ModelAndView insertAllDietDay(ModelAndView andView,
+										 Diet_dayVO dietDay,
+										 Diet_day_infoVO dietDayInfo,
+										 HttpServletRequest request,
+										 HttpSession session,
+										 String dd_date) throws Exception{
+		session = request.getSession();
+		
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		
+		dietDay.setMem_no(memberInfo.getMem_no());
+		
+		int dd_no = dietService.insertDietDay(dietDay);
+		
+		dietService.InsertDietDayInfo(dietDayInfo);
+		
+		return andView;
+	}
 }

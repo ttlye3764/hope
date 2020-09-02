@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.ddit.diet.dao.IDietDao;
+import kr.or.ddit.vo.DietVO;
+import kr.or.ddit.vo.Diet_dayVO;
+import kr.or.ddit.vo.Diet_day_infoVO;
 import kr.or.ddit.vo.Diet_infoVO;
 import kr.or.ddit.vo.Diet_memVO;
 import kr.or.ddit.vo.MenuVO;
@@ -36,5 +39,25 @@ public class DietServiceImpl implements IDietService {
 	@Override
 	public List<MenuVO> menuList(Map<String, String> params) throws Exception {
 		return dietDao.menuList(params);
+	}
+	
+	@Override
+	public List<Diet_memVO> dietMemList(Map<String, String> params) throws Exception {
+		return dietDao.dietMemList(params);
+	}
+	
+	@Override
+	public List<MenuVO> menuSearch(Map<String, String> params) throws Exception {
+		return dietDao.menuSearch(params);
+	}
+	
+	@Override
+	public int insertDietDay(Diet_dayVO dietDay) throws Exception {
+		return dietDao.insertDietDay(dietDay);
+	}
+	
+	@Override
+	public void InsertDietDayInfo(Diet_day_infoVO dietDayInfo) throws Exception {
+		dietDao.InsertDietDayInfo(dietDayInfo);		
 	}
 }

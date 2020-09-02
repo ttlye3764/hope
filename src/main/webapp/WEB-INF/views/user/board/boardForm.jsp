@@ -19,10 +19,10 @@ $(function(){
         return true;
      });
 
-
+    '${pageContext.request.contextPath}/user/board/boardView.do?bd_no=' + bd_no + '&rnum=' + rnum + "&bd_division=${bd_division}"
     // 목록버튼기능
     $('#listBtn').on('click', function(){	
-		$(location).attr('href','${pageContext.request.contextPath}/user/board/boardList.do?bd_division=${bd_division }');	
+		$(location).attr('href','${pageContext.request.contextPath}/user/board/boardList.do?bd_division=${bd_division}');	
 	});
 
 
@@ -70,6 +70,8 @@ function alertPrint(msg){
 						<div class="col-md-9"><span class="form-group">
 						<input type="text" class="form-control" placeholder="제목" id="bd_title" name="bd_title"></span></div>
 						<input type="hidden" id="bd_division" name="bd_division" value="${bd_division }">
+						<input type="hidden" name="bd_writer" value='${LOGIN_MEMBERINFO.mem_nickname }'>
+						<input type="hidden" name="mem_no" value='${LOGIN_MEMBERINFO.mem_no }'>
 <!-- 						<div class="col-md-9"><span class="form-group"><input type="text" class="form-control" placeholder="writer" id="bd_writer" name="bd_writer"></span></div> -->
 						<div class="col-md-9 input-group mb-4">
 							<div class="custom-file">

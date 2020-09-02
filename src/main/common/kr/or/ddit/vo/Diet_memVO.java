@@ -4,7 +4,7 @@ public class Diet_memVO {
 	
 	private String dm_no;
 	private String height;
-	private String date;
+	private String dm_date;
 	private String current_weight;
 	private String purpose_weight; 
 	private String bmi;
@@ -23,11 +23,12 @@ public class Diet_memVO {
 	public void setHeight(String height) {
 		this.height = height;
 	}
-	public String getDate() {
-		return date;
+	
+	public String getDm_date() {
+		return dm_date;
 	}
-	public void setDate(String date) {
-		this.date = date;
+	public void setDm_date(String dm_date) {
+		this.dm_date = dm_date;
 	}
 	public String getCurrent_weight() {
 		return current_weight;
