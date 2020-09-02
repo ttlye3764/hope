@@ -189,32 +189,24 @@ function LogOut(){
 								</li>
 							</ul>
 						</li>
-						<!-- Menu item 3 Pages-->
+						<!-- 건강관리 -->
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
+							<a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Health</a>
 							<ul class="dropdown-menu" aria-labelledby="pagesMenu">
-								<li> <a class="dropdown-item" href="about-classic.html">About Classic</a></li>
-								<li> <a class="dropdown-item" href="about-advance.html">About Advance</a> </li>
-								<li> <a class="dropdown-item" href="service.html">Service</a> </li>
-								<li> <a class="dropdown-item" href="contact.html">Contact</a> </li>
-								<li> <a class="dropdown-item" href="team.html">Team</a> </li>
-								<li> <a class="dropdown-item" href="careers.html">Careers</a> </li>
-								<li> <a class="dropdown-item" href="careers-single.html">Careers single</a> </li>
-								<li class="dropdown-submenu">
-									<a class="dropdown-item dropdown-toggle" href="#">Login & Signup</a>
-									<ul class="dropdown-menu">
-										<li> <a class="dropdown-item" href="sign-in.html">Sign in</a> </li>
-										<li> <a class="dropdown-item" href="sign-up.html">Sign up</a> </li>
-										<li> <a class="dropdown-item" href="password-recovery.html">Password recovery</a> </li>
-									</ul>
-								</li>
-								<li> <a class="dropdown-item" href="pricing.html">Pricing</a> </li>
-								<li> <a class="dropdown-item" href="timeline.html">Timeline</a> </li>
-								<li> <a class="dropdown-item" href="faq.html">FAQs</a> </li>
-								<li> <a class="dropdown-item" href="maintenance-mode.html">Maintenance mode</a> </li>
-								<li> <a class="dropdown-item" href="error-404.html">Error 404</a> </li>
+								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/healthImage/healthImageList.do'>운동법 리스트</a></li>
+								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/healthImage/healthImageWeight.do'>표준몸무게</a></li>
+								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/healthImage/healthImageMap.do'>내 주변 헬스장</a></li>
 							</ul>
 						</li>
+						
+						<!-- 지식 관리 -->
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Knowledge</a>
+							<ul class="dropdown-menu" aria-labelledby="pagesMenu">
+								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/knowledge/knowledgeList.do'>퀴즈 풀이</a></li>
+							</ul>
+						</li>
+						
 						<!-- Menu item 4 Portfolio-->
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="portfolioMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Schedule</a>

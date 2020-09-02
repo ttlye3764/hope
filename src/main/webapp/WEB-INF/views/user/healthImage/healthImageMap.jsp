@@ -300,13 +300,17 @@
 				<div class="col-md-8">
 					<div class="map_wrap">
 					    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-					
-					    <div id="menu_wrap" class="bg_white">
+					</div>				
+				</div>
+				<!-- portfolio details -->
+				<div class="col-md-4">
+				
+				<div id="menu_wrap" class="p-3 mb-2 bg-light text-dark">
 					        <div class="option">
 					            <div>
 					                <form onsubmit="searchPlaces(); return false;">
 					                    키워드 : <input type="text" value="헬스장" id="keyword" size="15"> 
-					                    <input type="submit">검색하기</button> 
+					                    <input type="submit" style="margin: 5px 0px 0px 70px;"></button> 
 					                </form>
 					            </div>
 					        </div>
@@ -314,50 +318,9 @@
 					        <ul id="placesList"></ul>
 					        <div id="pagination"></div>
 					    </div>
-					</div>				
-				</div>
-				<!-- portfolio details -->
-				<div class="col-md-4">
-				<a class="mb-4 d-block" href="assets/images/portfolio/big/01.jpg" data-fancybox="portfolio" 
-					data-caption="Perfect planning"><img src="${pageContext.request.contextPath }/resources/template/assets/images/diet.jpg" alt=""></a>
-					<!-- <div class="sticky-element">
-						<h2>Interior architecture </h2>
-						<p>Two assure Edward whence the was. Who worthy yet ten boy denote wonder. Weeks views her sight old tears sorry. Additions can suspected its concealed put furnished. Met the why particular Devonshire decisively considered partiality. Certain it waiting no entered is.</p>
-						<p> Passed her indeed uneasy shy polite appear denied. Oh less girl no walk. At he spot with five of view. </p>
-						<ul class="list-unstyled">
-							<li class="media mt-2">
-								<div class="d-flex w-40">
-									<h6>Client:</h6> </div>
-								<div class="media-body"> <span>Allen Smith</span> </div>
-							</li>
-							<li class="media mt-2">
-								<div class="d-flex w-40">
-									<h6>Manager:</h6> </div>
-								<div class="media-body">
-									<span>Emma Watson,</span>
-									<span>Maria Smith</span>
-								</div>
-							</li>
-
-							<li class="media mt-2">
-								<div class="d-flex w-40">
-									<h6>Category:</h6> </div>
-								<div class="media-body">
-									<span>Interior design</span>
-								</div>
-							</li>
-
-							<li class="media mt-2">
-								<div class="d-flex w-40">
-									<h6>Awards:</h6> </div>
-								<div class="media-body">
-									<span class="d-block"> Pineapple Award Design</span>
-									<span class="d-block mt-2"> Project of the Year </span>
-									<span class="d-block mt-2"> Designer of the Year</span>
-								</div>
-							</li>
-						</ul>
-					</div> -->
+				<%-- <a class="mb-4 d-block" href="assets/images/portfolio/big/01.jpg" data-fancybox="portfolio" 
+					data-caption="Perfect planning"><img src="${pageContext.request.contextPath }/resources/template/assets/images/diet.jpg" alt=""></a> --%>
+					
 				</div>
 				<!-- portfolio details End -->
 			</div>

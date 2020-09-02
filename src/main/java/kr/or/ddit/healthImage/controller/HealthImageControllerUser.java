@@ -40,7 +40,6 @@ public class HealthImageControllerUser {
 		List<HealthImageVO> healthImageList = this.healthImageService.healthList(params);
 		
 		andView.addObject("healthImageList", healthImageList);
-		System.out.println(healthImageList.get(0).getItems());
 		andView.setViewName("user/healthImage/healthImageList");
 
 		return andView;
@@ -69,6 +68,12 @@ public class HealthImageControllerUser {
 	// 지도
 	@RequestMapping("healthImageMap")
 	public void healthImageMap() {
+		
+	}
+	
+	// 표준몸무게
+	@RequestMapping("healthImageWeight")
+	public void healthImageWeight() {
 		
 	}
 		
