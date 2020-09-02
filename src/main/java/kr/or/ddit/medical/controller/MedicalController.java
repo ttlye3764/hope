@@ -56,7 +56,6 @@ public class MedicalController {
 	}
 	@RequestMapping("pillInfo")
 	public ModelAndView pillInfo(String pi_no) throws Exception {
-		System.out.println("pillInfo 아작스 들어옴============================================================================================");
 		PillVO pillInfo = pillService.pillInfo(pi_no);
 		ModelAndView andView = new ModelAndView();
 		andView.addObject("pillInfo", pillInfo);
@@ -138,15 +137,15 @@ public class MedicalController {
 	@RequestMapping("medicalList")
 	public void medicalList() {
 	}
-	@RequestMapping("corona")
-	public void corona() {
+	@RequestMapping("coronaMain")
+	public void coronaMain() {
 	}
 
 	@RequestMapping("insertMedicalInfo")
 	public ModelAndView insertMedicalInfo(ModelAndView andView, MypillVO mypillInfo,
 			@RequestParam("files") MultipartFile[] items) throws Exception {
 
-		andView.setViewName("user/medical/medicalList");
+		andView.setViewName("user/medical/medicalListMain");
 		String start = mypillInfo.getPill_start().concat("T");
 		start = start.concat(mypillInfo.getPill_alerttime());
 		mypillInfo.setPill_start(start);
@@ -165,7 +164,7 @@ public class MedicalController {
 	public ModelAndView updateMedicalInfo(ModelAndView andView, MypillVO mypillInfo,
 			@RequestParam("files") MultipartFile[] items) throws Exception {
 
-		andView.setViewName("user/medical/medicalList");
+		andView.setViewName("user/medical/medicalListMain");
 		String start = mypillInfo.getPill_start().concat("T");
 		start = start.concat(mypillInfo.getPill_alerttime());
 		mypillInfo.setPill_start(start);
@@ -182,17 +181,21 @@ public class MedicalController {
 
 	@RequestMapping("deleteMedicalInfo")
 	public ModelAndView deleteMedicalInfo(ModelAndView andView, String pill_no) throws Exception {
-		andView.setViewName("user/medical/medicalList");
+		andView.setViewName("user/medical/medicalListMain");
 		medicalService.deleteMedicalInfo(pill_no);
 		return andView;
 	}
 
-	@RequestMapping("medicalMap")
-	public void medicalMap() {
+	@RequestMapping("medicalMapMain")
+	public void medicalMapMain() {
 	}
+	@RequestMapping("medicalListMain")
+	public void medicalListMain() {
+	}
+	
 
 	@RequestMapping("searchPill")
-	public ModelAndView searchPill(HttpServletRequest request, String currentPage, HashMap params,
+	public ModelAndView medicalPill(HttpServletRequest request, String currentPage, HashMap params,
 			RolePaginationUtil_pill pagination) throws Exception {
 		if (currentPage == null) {
 			currentPage = "1";
