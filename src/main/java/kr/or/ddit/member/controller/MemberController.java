@@ -57,20 +57,17 @@ public class MemberController {
 
 	@RequestMapping("updateMemberInfo")
 	public String updateMember(MemberVO memberInfo, HttpSession session, Map<String, String> params) throws Exception {
-		this.service.updateMemberInfo(memberInfo);		
-		
 		params.put("mem_id", memberInfo.getMem_id());
 		
 		if(!(memberInfo.getMem_pass().length()>0)) {
 			MemberVO memberInfo2 = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
-			String pass = UserSha256.encrypt(memberInfo2.getMem_pass());
-			memberInfo2.setMem_pass(pass);
 			params.put("mem_pass", memberInfo2.getMem_pass());
 		}else {
 			String pass = UserSha256.encrypt(memberInfo.getMem_pass());
 			memberInfo.setMem_pass(pass);
 			params.put("mem_pass", memberInfo.getMem_pass());
 		}
+		this.service.updateMemberInfo(memberInfo);		
 		
 		memberInfo = this.service.memberInfo(params);
 		session.setAttribute("LOGIN_MEMBERINFO", memberInfo);
