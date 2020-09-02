@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import kr.or.ddit.aop.Loggable;
 import kr.or.ddit.member.service.IMemberService;
+import kr.or.ddit.utiles.UserSha256;
 import kr.or.ddit.vo.MemberVO;
 
 import org.slf4j.Logger;
@@ -61,6 +62,9 @@ public class JoinController {
 
 //		Map<String, String> params = new HashMap<String, String>();
 		params.put("mem_id", mem_id);
+		
+		String pass = UserSha256.encrypt(mem_pass);
+		mem_pass = pass;
 		params.put("mem_pass", mem_pass);
 
 		MemberVO memberInfo = this.service.memberInfo(params);
@@ -110,6 +114,9 @@ public class JoinController {
 		String mem_id = memberInfo.getMem_id();
 		
 		params.put("mem_id", mem_id);
+		
+		String pass = UserSha256.encrypt(mem_pass);
+		mem_pass = pass;
 		params.put("mem_pass", mem_pass);
 		
 		this.service.updatePass(params);
@@ -133,6 +140,9 @@ public class JoinController {
 	public String freeboardloginCheck(String mem_id, String mem_pass, HttpServletRequest request, HttpSession session,
 			HttpServletResponse response, Map<String, String> params) throws Exception {
 		params.put("mem_id", mem_id);
+		
+		String pass = UserSha256.encrypt(mem_pass);
+		mem_pass = pass;
 		params.put("mem_pass", mem_pass);
 
 		MemberVO memberInfo = this.service.memberInfo(params);

@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddit.member.service.IMemberService;
 import kr.or.ddit.utiles.RolePaginationUtil;
+import kr.or.ddit.utiles.UserSha256;
 import kr.or.ddit.vo.MemberVO;
 
 @Controller
@@ -77,9 +78,12 @@ public class AdminMemberController {
 	
 	@RequestMapping("updateMemberInfo")
 	public String updateMember(MemberVO memberInfo, HttpSession session, Map<String, String> params) throws Exception {
-		this.service.updateMemberInfo(memberInfo);		
-		
 		params.put("mem_id", memberInfo.getMem_id());
+		
+		String pass = UserSha256.encrypt(memberInfo.getMem_pass());
+		memberInfo.setMem_pass(pass);
+		
+		this.service.updateMemberInfo(memberInfo);
 		
 		memberInfo = this.service.memberInfo(params);
 

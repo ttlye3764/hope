@@ -1,6 +1,5 @@
 package kr.or.ddit.member.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,8 +9,6 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ExtendedModelMap;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.or.ddit.member.service.IMemberService;
+import kr.or.ddit.utiles.UserSha256;
 import kr.or.ddit.vo.MemberVO;
 
 // /SpringToddler/user/member/memberList.do
@@ -65,8 +63,12 @@ public class MemberController {
 		
 		if(!(memberInfo.getMem_pass().length()>0)) {
 			MemberVO memberInfo2 = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+			String pass = UserSha256.encrypt(memberInfo2.getMem_pass());
+			memberInfo2.setMem_pass(pass);
 			params.put("mem_pass", memberInfo2.getMem_pass());
 		}else {
+			String pass = UserSha256.encrypt(memberInfo.getMem_pass());
+			memberInfo.setMem_pass(pass);
 			params.put("mem_pass", memberInfo.getMem_pass());
 		}
 		
@@ -95,11 +97,18 @@ public class MemberController {
 	@RequestMapping("memberForm")
 	public void memberForm() {
 	}
+	
+	@RequestMapping("checkPassForm")
+	public void checkPassForm() {
+	}
 
 	@RequestMapping("insertMemberInfo")
 	public String insertMember(MemberVO memberInfo, @RequestBody String totalparams,
 			RedirectAttributes redirectAttributes) throws Exception {
-
+		
+		String pass = UserSha256.encrypt(memberInfo.getMem_pass());
+		memberInfo.setMem_pass(pass);
+		
 		this.service.insertMember(memberInfo);
 		
 		redirectAttributes.addFlashAttribute("message", "회원가입이 완료되었습니다");
@@ -157,6 +166,9 @@ public class MemberController {
 
 		ModelAndView andView = new ModelAndView();
 		andView.addObject("memberInfo", memberInfo);
+		
+		String pass = UserSha256.encrypt(mem_pass);
+		mem_pass = pass;
 
 		String result;
 		if (session_mem_pass.equals(mem_pass)) {
@@ -201,7 +213,9 @@ public class MemberController {
 		if (result == null) {
 		} else {
 			mem_temporary_pass = random();
-			params.put("mem_temporary_pass", mem_temporary_pass);
+			String pass = UserSha256.encrypt(mem_temporary_pass);
+			String t_pass = pass;
+			params.put("mem_temporary_pass", t_pass);
 			service.makePass(params);
 		}
 
