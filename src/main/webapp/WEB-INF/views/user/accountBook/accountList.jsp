@@ -41,7 +41,7 @@
 															<th>날짜</th>
 															<th>아이템</th>
 															<th>금액</th>
-															<th>거래종류</th>
+															<th>입/출</th>
 															<th>잔액</th>
 														</tr>
 													</thead>
@@ -52,7 +52,7 @@
 									 							<td>${dealVO.deal_date }</td>
 									 							<td>${dealVO.deal_name}</td>
 									 							<td>${dealVO.deal_price}</td>
-									 							<td>${dealVO.deal_kind}</td>
+									 							<td>${dealVO.deal_option}</td>
 									 							<td>잔액</td>
 									 							<%-- <c:if test="${dealVO.deal_method eq '출금'}">
 																    <td>-</td>
