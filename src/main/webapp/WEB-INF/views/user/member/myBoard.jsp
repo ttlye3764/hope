@@ -17,10 +17,9 @@
 					<table class="table table-lg table-bordered table-striped">
 						<thead>
 							<tr>
-								<th scope="col" width="5%">No</th>
-								<th scope="col" width="65%">제목</th>
+								<th scope="col" width="60%">제목</th>
 								<th scope="col" width="10%">작성자</th>
-								<th scope="col" width="10%">작성일</th>
+								<th scope="col" width="20%">작성일</th>
 								<th scope="col" width="10%">조회수</th>
 							</tr>
 						</thead>
@@ -33,8 +32,6 @@
 							<c:if test="${!empty fboardList }">
 								<c:forEach items="${fboardList}" var="fboardInfo">
 									<tr>
-										<td>${fboardInfo.rnum}<input type="hidden" class="bd_no"
-											value="${fboardInfo.bd_no}" /></td>
 										<td><c:if test="${fboardInfo.bd_depth != 0 }">
 												<c:forEach begin="1" end="${fboardInfo.bd_depth }">
                                             		&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;
@@ -55,10 +52,9 @@
 					<table class="table table-lg table-bordered table-striped">
 						<thead>
 							<tr>
-								<th scope="col" width="5%">No</th>
-								<th scope="col" width="65%">제목</th>
+								<th scope="col" width="60%">제목</th>
 								<th scope="col" width="10%">작성자</th>
-								<th scope="col" width="10%">작성일</th>
+								<th scope="col" width="20%">작성일</th>
 								<th scope="col" width="10%">조회수</th>
 							</tr>
 						</thead>
@@ -71,8 +67,6 @@
 							<c:if test="${!empty boardList }">
 								<c:forEach items="${boardList}" var="boardInfo">
 									<tr>
-										<td>${boardInfo.rnum}<input type="hidden" class="bd_no"
-											value="${boardInfo.bd_no}" /></td>
 										<td><c:if test="${boardInfo.bd_depth != 0 }">
 												<c:forEach begin="1" end="${boardInfo.bd_depth }">
                                             		&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;
@@ -92,10 +86,9 @@
 					<table class="table table-lg table-bordered table-striped">
 						<thead>
 							<tr>
-								<th scope="col" width="5%">No</th>
-								<th scope="col" width="65%">제목</th>
+								<th scope="col" width="60%">제목</th>
 								<th scope="col" width="10%">작성자</th>
-								<th scope="col" width="10%">작성일</th>
+								<th scope="col" width="20%">작성일</th>
 								<th scope="col" width="10%">조회수</th>
 							</tr>
 						</thead>
@@ -108,8 +101,6 @@
 							<c:if test="${!empty qboardList }">
 								<c:forEach items="${qboardList}" var="qboardInfo">
 									<tr>
-										<td>${qboardInfo.rnum}<input type="hidden" class="bd_no"
-											value="${qboardInfo.bd_no}" /></td>
 										<td><c:if test="${qboardInfo.bd_depth != 0 }">
 												<c:forEach begin="1" end="${qboardInfo.bd_depth }">
                                             		&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;

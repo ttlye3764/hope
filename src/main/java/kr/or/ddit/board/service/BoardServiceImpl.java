@@ -81,5 +81,10 @@ public class BoardServiceImpl implements IBoardService{
 		
 	}
 
+	@Override
+	public List<BoardVO> myboardList(Map<String, String> params) throws Exception {
+		return boardDao.myboardList(params);
+	}
+
 
 }

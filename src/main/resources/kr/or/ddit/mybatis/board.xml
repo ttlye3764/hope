@@ -55,7 +55,7 @@
 	<select id="myboardList" resultType="boardVO" parameterType="map">
 		SELECT *
 		FROM BOARD
-		WHERE BD_DIVISION = #{BD_DIVISION}
+		WHERE BD_DIVISION = #{bd_division}
 		AND MEM_NO = #{mem_no}
 	</select>
 
