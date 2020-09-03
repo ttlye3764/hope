@@ -65,7 +65,8 @@ function checkpass(){
 			if(result.json == '1'){
 				$(location).attr('href','${pageContext.request.contextPath}/user/member/myPage.do');
 			}else{
-				alert('잘못된 비밀번호입니다.');
+				$('#lb').css('color', 'red');
+		        $("#lb").text("잘못된 비밀번호 입니다.");
 			}
 		}
 	});
@@ -116,8 +117,8 @@ td {
 								<td width="280px"><input type="password" name="mem_pass" id="mem_pass"
 									class="form-control" /></td>
 							</tr>
+							<tr><td><label id="lb"></label></td></tr>
 						</table>
-						<br><br>
 						<button id="btn1" type="button" onclick="checkpass()">확인</button>
 						&nbsp;&nbsp;&nbsp;&nbsp;
 						<button id="btn3" type="button">취소</button>
