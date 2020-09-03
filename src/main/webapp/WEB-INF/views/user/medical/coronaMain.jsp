@@ -453,12 +453,121 @@
 							    <div class="item-image">
 							   		<img id="imgTag" border="0" src="${pageContext.request.contextPath }/images/korea.PNG" style="width: 100%; height:700px; z-index: -1;">
 							    </div>
-							    <div class="item-info-box" style="position: absolute; width: 50px; height: 50px; background-color:yellow; left: 100px; bottom: 300px;">
-								    <div class="item-info" style="display: inline-block;">
-									    <h3><small style="display: block;">남은 수량: 3박스</small>오레오 쿠키</h3>
-									    <p><span class="status in-progress">진행중</span>직접배송</p>
+							    <div class="item-info-box" id="click1" style="position: absolute; width: 55px; height: 70px; border-radius:5px 5px 5px 5px; z-index: 1; background-color:white; left: 213px; top: 145px;">
+								    <div class="item-info" style="display: inline-block; width: 55px; height: 70px; text-align: center; ">
+									   <small style="display: block; font-size:11px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">인천</small>
+									    <span class="status in-progress" style="display: block; font-size:15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">751</span>
+									    <span class="status in-progress" style="display: block; font-size:10px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">(+11)</span>
 								    </div>
 							    </div>
+							    <div class="item-info-box" style="position: absolute; width: 58px; height: 66px; border-radius:5px 5px 5px 5px; background-color:white; left: 325px; top: 144px;">
+								    <div class="item-info" style="display: inline-block; width: 58px; height: 66px;">
+									   <small style="display: block;">서울</small>
+									    <p><span class="status in-progress">진행중</span>2</p>
+								    </div>
+							    </div>
+							    <div class="item-info-box" style="position: absolute; width: 60px; height: 68px; border-radius:5px 5px 5px 5px; background-color:white; left: 322px; top: 60px;">
+								    <div class="item-info" style="display: inline-block; width: 60px; height: 68px;">
+									   <small style="display: block;">남은 수</small>
+									    <p><span class="status in-progress">진행중</span>3</p>
+								    </div>
+							    </div>
+							    <div class="item-info-box" style="position: absolute; width: 50px; height: 67px; border-radius:5px 5px 5px 5px; background-color:white; left: 430px; top: 108px;">
+								    <div class="item-info" style="display: inline-block; width: 50px; height: 67px;">
+									   <small style="display: block;">남은 수</small>
+									    <p><span class="status in-progress">진행중</span>4</p>
+								    </div>
+							    </div>
+							    <div class="item-info-box" style="position: absolute; width: 50px; height: 67px; border-radius:5px 5px 5px 5px; background-color:white; left: 380px; top: 202px;">
+								    <div class="item-info" style="display: inline-block; width: 50px; height: 67px;">
+									   <small style="display: block;">남은 수</small>
+									    <p><span class="status in-progress">진행중</span>5</p>
+								    </div>	
+							    </div>
+							    <div class="item-info-box" style="position: absolute; width: 50px; height: 67px; border-radius:5px 5px 5px 5px; background-color:white; left: 352px; top: 288px;">
+								    <div class="item-info" style="display: inline-block; width: 50px; height: 67px;">
+									   <small style="display: block;">남은 수</small>
+									    <p><span class="status in-progress">진행중</span>6</p>
+								    </div>
+							    </div>
+							    <div class="item-info-box" style="position: absolute; width: 50px; height: 67px; border-radius:5px 5px 5px 5px; background-color:white; left: 296px; top: 234px;">
+								    <div class="item-info" style="display: inline-block; width: 50px; height: 67px;">
+									   <small style="display: block;">남은 수</small>
+									    <p><span class="status in-progress">진행중</span>7</p>
+								    </div>
+							    </div>
+							       <div class="item-info-box" style="position: absolute; width: 50px; height: 67px; border-radius:5px 5px 5px 5px; background-color:white; left: 228px; top: 293px;">
+								    <div class="item-info" style="display: inline-block; width: 50px; height: 67px;">
+									   <small style="display: block;">남은 수</small>
+									    <p><span class="status in-progress">진행중</span>8</p>
+								    </div>
+							    </div>
+							      <div class="item-info-box" style="position: absolute; width: 43px; height: 68px; border-radius:5px 5px 5px 5px; background-color:white; left: 296px; top: 374px;">
+								    <div class="item-info" style="display: inline-block; width: 43px; height: 68px;">
+									   <small style="display: block;">남은 수</small>
+									    <p><span class="status in-progress">진행중</span>9</p>
+								    </div>
+							    </div>
+							      <div class="item-info-box" style="position: absolute; width: 53px; height: 68px; border-radius:5px 5px 5px 5px; background-color:white; left: 286px; top: 473px;">
+								    <div class="item-info" style="display: inline-block; width: 53px; height: 68px;">
+									   <small style="display: block;">남은 수</small>
+									    <p><span class="status in-progress">진행중</span>10</p>
+								    </div>
+							    </div>
+							      <div class="item-info-box" style="position: absolute; width: 53px; height: 68px; border-radius:5px 5px 5px 5px; background-color:white; left: 211px; top: 501px;">
+								    <div class="item-info" style="display: inline-block; width: 53px; height: 68px;">
+									   <small style="display: block;">남은 수</small>
+									    <p><span class="status in-progress">진행중</span>11</p>
+								    </div>
+							    </div>
+							      <div class="item-info-box" style="position: absolute; width: 53px; height: 68px; border-radius:5px 5px 5px 5px; background-color:white; left: 233px; top: 622px;">
+								    <div class="item-info" style="display: inline-block; width: 53px; height: 68px;">
+									   <small style="display: block;">남은 수</small>
+									    <p><span class="status in-progress">진행중</span>11</p>
+								    </div>
+							    </div>
+							       <div class="item-info-box" style="position: absolute; width: 60px; height: 67px; border-radius:5px 5px 5px 5px; background-color:white; left: 458px; top: 266px;">
+								    <div class="item-info" style="display: inline-block; width: 60px; height: 67px;">
+									   <small style="display: block;">남은 수</small>
+									    <p><span class="status in-progress">진행중</span>12</p>
+								    </div>
+							    </div>
+							       <div class="item-info-box" style="position: absolute; width: 60px; height: 67px; border-radius:5px 5px 5px 5px; background-color:white; left: 481px; top: 348px;">
+								    <div class="item-info" style="display: inline-block; width: 60px; height: 67px;">
+									   <small style="display: block;">남은 수</small>
+									    <p><span class="status in-progress">진행중</span>13</p>
+								    </div>
+							    </div>
+							      <div class="item-info-box" style="position: absolute; width: 53px; height: 68px; border-radius:5px 5px 5px 5px; background-color:white; left: 400px; top: 451px;">
+								    <div class="item-info" style="display: inline-block; width: 53px; height: 68px;">
+									   <small style="display: block;">남은 수</small>
+									    <p><span class="status in-progress">진행중</span>14</p>
+								    </div>
+							    </div>
+							      <div class="item-info-box" style="position: absolute; width: 53px; height: 72px; border-radius:5px 5px 5px 5px; background-color:white; left: 548px; top: 454px;">
+								    <div class="item-info" style="display: inline-block; width: 53px; height: 72px;">
+									   <small style="display: block;">남은 수</small>
+									    <p><span class="status in-progress">진행중</span>15</p>
+								    </div>
+							    </div>
+							    <div class="item-info-box" style="position: absolute; width: 55px; height: 70px; border-radius:5px 5px 5px 5px; background-color:white; left: 492px; top: 511px;">
+								    <div class="item-info" style="display: inline-block; width: 55px; height: 70px;">
+									   <small style="display: block;">남은 수</small>
+									    <p><span class="status in-progress">진행중</span>16</p>
+								    </div>
+							    </div>							    
+							    <div class="item-info-box" style="position: absolute; width: 62px; height: 70px; border-radius:5px 5px 5px 5px; background-color:white; left: 515px; top: 583px;">
+								    <div class="item-info" style="display: inline-block; width: 62px; height: 70px;">
+									   <small style="display: block;">남은 수</small>
+									    <p><span class="status in-progress">진행중</span>17</p>
+								    </div>
+							    </div>
+							    
+							    
+							    
+							    
+							    
+							    
 						    </div>	
 						</div>
 						
@@ -493,7 +602,16 @@
 	
 <script>
 
+
+
+
 $(function(){
+	$('#click1').on('click',function(){
+		alert('click');
+	});
+
+
+	
 });
 
 	function sliceSize(dataNum, dataTotal) {
