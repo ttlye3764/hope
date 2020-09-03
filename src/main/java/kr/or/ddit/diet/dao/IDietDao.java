@@ -40,4 +40,7 @@ public interface IDietDao {
 	// diet_day 테이블 날짜로 조회
 	public Diet_dayVO selectDietDay(Map<String, String> params) throws Exception;
 	
+	// 총 칼로리 업데이트
+	public void updateDietDayKcal(Map<String, String> params) throws Exception;
+	
 }

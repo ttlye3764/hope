@@ -311,7 +311,7 @@
 	<!-- 모달 시작 -->
 	<div class="modal fade text-left show" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" style="display: none; padding-right: 15px;" aria-modal="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content" style="width:1000px; height:900px; !important">
+			<div class="modal-content" style="width:1000px; height:900px; overflow: auto; !important">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLongTitle">식단</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -334,15 +334,15 @@
 						
 					<!--  등록 --> 
 					<div class="col-md-6 mb-5" style="width:400px; !important">
-						<div class="accordion accordion-line toggle-icon-left toggle-icon-round" id="accordion4">
+						<div class="accordion accordion-line toggle-icon-left toggle-icon-round" id="accordion3">
 							<!-- item -->
 							<div class="accordion-item" style="width:400px; !important">
 								<div class="accordion-title" style="width:400px; !important">
-									<a class="h6 mb-0" data-toggle="collapse" href="#collapse-10" aria-expanded="true">등록</a>
+									<a class="h6 mb-0" data-toggle="collapse" href="#collapse-1" aria-expanded="true">등록</a>
 								</div>
-								<div class="collapse hide" id="collapse-10" data-parent="#accordion4" style="">
+								<div class="collapse hide" id="collapse-1" data-parent="#accordion3" style="">
 									<div class="accordion-content"> 
-										<input type="text" placeholder="메뉴를 입력해주세요" id="menu_search1" onchange="menu_search()">
+										<input type="text" placeholder="메뉴를 입력해주세요" id="menu_search1" onchange="menu_search1()">
 										<button type="button" class="btn btn-primary" id="insert_diet_day1">등록</button>
 										<table id="menu_search_result1"></table>
 									</div>
@@ -373,9 +373,9 @@
 							<!-- item -->
 							<div class="accordion-item" style="width:400px; !important">
 								<div class="accordion-title" style="width:400px; !important">
-									<a class="h6 mb-0" data-toggle="collapse" href="#collapse-10" aria-expanded="true">등록</a>
+									<a class="h6 mb-0" data-toggle="collapse" href="#collapse-2" aria-expanded="true">등록</a>
 								</div>
-								<div class="collapse hide" id="collapse-10" data-parent="#accordion4" style="">
+								<div class="collapse hide" id="collapse-2" data-parent="#accordion4" style="">
 									<div class="accordion-content"> 
 										<input type="text" placeholder="메뉴를 입력해주세요" id="menu_search2" onchange="menu_search2()">
 										<button type="button" class="btn btn-primary" id="insert_diet_day2">등록</button>
@@ -392,7 +392,7 @@
 					<h3>저녁</h3>
 					<!-- 테이블 시작 -->
 						<div class="table-responsive-sm">
-							<table class="table table-hover" id="dietDayInfoTable">
+							<table class="table table-hover" id="dietDayInfoTable3">
 								<thead id="dietDayInfo_thead3">
 									
 								</thead>
@@ -404,13 +404,13 @@
 						
 					<!--  등록 --> 
 					<div class="col-md-6 mb-5" style="width:400px; !important">
-						<div class="accordion accordion-line toggle-icon-left toggle-icon-round" id="accordion4">
+						<div class="accordion accordion-line toggle-icon-left toggle-icon-round" id="accordion5">
 							<!-- item -->
 							<div class="accordion-item" style="width:400px; !important">
 								<div class="accordion-title" style="width:400px; !important">
-									<a class="h6 mb-0" data-toggle="collapse" href="#collapse-10" aria-expanded="true">등록</a>
+									<a class="h6 mb-0" data-toggle="collapse" href="#collapse-3" aria-expanded="true">등록</a>
 								</div>
-								<div class="collapse hide" id="collapse-10" data-parent="#accordion4" style="">
+								<div class="collapse hide" id="collapse-3" data-parent="#accordion5" style="">
 									<div class="accordion-content"> 
 										<input type="text" placeholder="메뉴를 입력해주세요" id="menu_search3" onchange="menu_search3()">
 										<button type="button" class="btn btn-primary" id="insert_diet_day3">등록</button>
@@ -644,8 +644,7 @@ function menu_search3(){
 
 function dietDayInfoList1(){
 	
-	$('#dietDayInfo_thead1').empty();
-	$('#dietDayInfo_tbody1').empty();
+	
 	
 	$.ajax({
 		type : 'POST',
@@ -659,6 +658,9 @@ function dietDayInfoList1(){
 		},
 		success : function(result) {
 
+			$('#dietDayInfo_thead1').empty();
+			$('#dietDayInfo_tbody1').empty();
+			
 			var itemIndex = 1;
  			dd_no = result.dietDayInfoList1[0].dd_no;
 
@@ -680,8 +682,7 @@ function dietDayInfoList1(){
 
 function dietDayInfoList2(){
 	
-	$('#dietDayInfo_thead2').empty();
-	$('#dietDayInfo_tbody2').empty();
+	
 	
 	$.ajax({
 		type : 'POST',
@@ -694,6 +695,9 @@ function dietDayInfoList2(){
 			alert(result.memberInfo.mem_name);
 		},
 		success : function(result) {
+
+			$('#dietDayInfo_thead2').empty();
+			$('#dietDayInfo_tbody2').empty();
 
 			var itemIndex = 1;
 
@@ -716,8 +720,7 @@ function dietDayInfoList2(){
 
 function dietDayInfoList3(){
 	
-	$('#dietDayInfo_thead3').empty();
-	$('#dietDayInfo_tbody3').empty();
+
 	
 	$.ajax({
 		type : 'POST',
@@ -731,6 +734,9 @@ function dietDayInfoList3(){
 		},
 		success : function(result) {
 
+			$('#dietDayInfo_thead3').empty();
+			$('#dietDayInfo_tbody3').empty();
+				
 			var itemIndex = 1;
 
 			$('#dietDayInfo_thead3').append('<tr>');
@@ -738,7 +744,7 @@ function dietDayInfoList3(){
 			$('#dietDayInfo_thead3').append('<th scope="col">메뉴</th>');
 			$('#dietDayInfo_thead3').append('<th scope="col">칼로리</th>');
 			
- 			$.each(result.dietDayInfoList1, function(index, item){
+ 			$.each(result.dietDayInfoList3, function(index, item){
  				$('#dietDayInfo_tbody3').append('<tr>')
  				$('#dietDayInfo_tbody3').append('<td><input type="hidden" value="'+item.dd_no +'">'+itemIndex++ +'</td>'); 				
  				$('#dietDayInfo_tbody3').append('<td>'+item.menu_name+'</td>');

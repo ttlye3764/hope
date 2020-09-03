@@ -79,8 +79,17 @@
 									)
 								
 	</insert>
-	<update id="updateDietKcal" parameterType="Map">
-		UPDATE DIET_DAY SET (DD_KCAL = #{dd_kcal}) WHERE DD_NO = #{dd_no}
+	
+	<update id="updateDietDayKcal" parameterType="Map">
+		<selectKey keyProperty="dd_kcal" resultType="java.lang.String" order="BEFORE">
+    		select sum(a.menu_kcal) dd_kcal
+			from menu a,
+				(select *
+				from diet_day_info
+				where dd_no = #{dd_no}) b
+				where b.MENU_NO = a.MENU_NO
+    	</selectKey>
+  		UPDATE DIET_DAY SET DD_KCAL = #{dd_kcal} WHERE DD_NO = #{dd_no}  
 	</update>
 	
 	<select id="selectDietDay" parameterType="Map" resultType="dietDayVO">

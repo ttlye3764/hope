@@ -70,4 +70,9 @@ public class DietServiceImpl implements IDietService {
 	public List<Diet_day_infoVO> dietDayInfoList(Map<String, String> params) throws Exception {
 		return dietDao.dietDayInfoList(params);
 	}
+	
+	@Override
+	public void updateDietDayKcal(Map<String, String> params) throws Exception {
+		dietDao.updateDietDayKcal(params);
+	}
 }

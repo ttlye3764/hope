@@ -70,4 +70,9 @@ public class DietDaoImpl implements IDietDao {
 	public Diet_dayVO selectDietDay(Map<String, String> params) throws Exception {
 		return client.selectOne("diet.selectDietDay", params);
 	}
+	
+	@Override	
+	public void updateDietDayKcal(Map<String, String> params) throws Exception {
+		client.update("diet.updateDietDayKcal", params);
+	}
 }

@@ -16,6 +16,7 @@ import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddit.diet.service.IDietService;
@@ -228,6 +229,9 @@ public class DietController {
 		}
 		dietDayInfo.setDd_no(dd_no+"");
 		dietService.InsertDietDayInfo(dietDayInfo);
+		
+		params.put("dd_no", dd_no+"");
+		dietService.updateDietDayKcal(params);
 		
 		andView.setViewName("jsonConvertView");
 		return andView;
