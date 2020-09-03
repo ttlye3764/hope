@@ -24,14 +24,13 @@
         left:50%;
         margin-left: -21px;
         margin-top: -21px;
-        z-index : 2;
     }
     .display-none{ /*감추기*/
         display:none;
     }
-    .input-group mb-3{
-       position : relative;
-       z-index : 1;
+    
+    #loading{
+    	z-index : 900;
     }
 
 </style>
@@ -365,7 +364,7 @@ $(function(){
 
 </script>
 <body>
-<div class="wrap-loading display-none">
+<div id="loading" class="wrap-loading display-none">
     <div><img src="../../image/Progress_Loading.gif"/></div>
 </div> 
    <form name="memberForm" method="post">
