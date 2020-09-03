@@ -86,8 +86,6 @@ function handleImgFileSelect(e){
 
                                     <div class="card-body">
 
-                                        <h4 class="header-title mb-3">자산관리</h4>
-
                                         <ul class="nav nav-tabs nav-bordered mb-3">
                                             
                                             <li class="nav-item">

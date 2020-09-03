@@ -1,3 +1,5 @@
+<%@ page language="JAVA" contentType="text/html; charset=UTF-8"
+   pageEncoding="UTF-8"%>
 <div class="preloader">
 		<img src="assets/images/preloader.svg" alt="Pre-loader">
 	</div>
@@ -61,7 +63,7 @@
 						<div class="col-7 px-2 mb-3">
 							<div class="border-radius-3 wow fadeInLeft bg-grad p-2 p-sm-3 p-lg-4 p-xl-5 all-text-white" data-wow-duration="0.8s" data-wow-delay="0s">
 								<span>Our goal:</span>
-								<h3 class="font-weight-bold">"If we build it, they will come"</h3>
+								<h3 class="font-weight-bold">"System that provides comfort"</h3>
 							</div>
 						</div>
 						<div class="col-5 align-self-start pl-2 mb-3">
@@ -71,9 +73,9 @@
 				</div>
 				<!-- right -->
 				<div class="col-md-6 pl-lg-5">
-					<h2 class="h1">Get it done with the Wizixo HTML5 template </h2>
-					<p class="lead">Partnering with 500+ Fortune companies and mid-sized firms across enterprises, uniquely customized and <abbr title="title">scalable workforce solutions.</abbr></p>
-					<p>There is nothing that can stop you from achieving what you want, except yourself. If you devote yourself to it you will achieve your goal.</p>
+					<h2 class="h1">자비스를 시작하세요! </h2>
+					<p class="lead">1인 개인 맞춤 서비스를 제공합니다. <br>언제나 당신에게 편안함을 제공합니다. <abbr title="title">Are you Ready? </abbr></p>
+					<p>우리는 항상 당신을 위해 준비되어 있습니다. 당신의, 당신에 의한, 당신을 위한 서비스를 시작하세요! 환영합니다</p>
 					<div>
 						<a href="#" class="btn btn-dark">Contact us</a>
 						<a href="#" class="btn btn-link">View Portfolio</a>
