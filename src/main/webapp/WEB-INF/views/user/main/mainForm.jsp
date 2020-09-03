@@ -73,7 +73,7 @@
 				</div>
 				<!-- right -->
 				<div class="col-md-6 pl-lg-5">
-					<h2 class="h1">자비스를 시작하세요! </h2>
+					<h2 class="h1">자비스를 시작하세요!</h2>
 					<p class="lead">1인 개인 맞춤 서비스를 제공합니다. <br>언제나 당신에게 편안함을 제공합니다. <abbr title="title">Are you Ready? </abbr></p>
 					<p>우리는 항상 당신을 위해 준비되어 있습니다. 당신의, 당신에 의한, 당신을 위한 서비스를 시작하세요! 환영합니다</p>
 					<div>
