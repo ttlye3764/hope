@@ -690,6 +690,7 @@ $(function(){
 					</table> -->
 				</div>
 				
+				<!-- 모달 -->
 				<div class="modal fade text-left" id="exampleModalCenter" tabindex="-1" role="dialog" 
 							aria-labelledby="exampleModalCenter" aria-hidden="true">
 					<div class="modal-dialog modal-dialog-centered" role="document">
