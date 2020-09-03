@@ -32,8 +32,13 @@ $(function(){
 
   	
     // 목록버튼
-    $('#listBtn').on('click', function(){	
-		$(location).attr('href','${pageContext.request.contextPath}/user/board/boardList.do?bd_division=${bd_division }');
+    $('#listBtn').on('click', function(){
+        var rnum = '${rnum}';
+        if(rnum == 'nu'){
+			$(location).attr('href','${pageContext.request.contextPath}/user/member/myBoard.do');
+        }else{
+			$(location).attr('href','${pageContext.request.contextPath}/user/board/boardList.do?bd_division=${bd_division }');
+        }
 		
 	});
     

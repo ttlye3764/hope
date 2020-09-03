@@ -182,6 +182,7 @@ public class BoardController {
 	@RequestMapping("boardView")
 		public BoardVO boardView(String bd_division,
 								 String bd_no,
+								 String rnum,
 							     Map<String, String> params,
 							     ModelMap modelMap,
 							     BoardVO boardInfo)throws Exception{
@@ -192,6 +193,10 @@ public class BoardController {
 		boardService.countHit(bd_no);
 		modelMap.addAttribute("bd_division", bd_division);
 		modelMap.addAttribute("boardInfo", boardInfo);
+		if(rnum==null) {
+			rnum = "nu";
+		}
+		modelMap.addAttribute("rnum", rnum);
 		
 		return boardInfo;
 	}
