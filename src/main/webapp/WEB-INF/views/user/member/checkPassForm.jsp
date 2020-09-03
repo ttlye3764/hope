@@ -38,7 +38,11 @@ $(function(){
 		$(location).attr('href','${pageContext.request.contextPath}/user/main/mainForm.do');
 	});
 	var id = '${LOGIN_MEMBERINFO.mem_id}';
-	if(id==''){
+	var social = '${LOGIN_MEMBERINFO.mem_join_addr}';
+	if(social=='n'){
+	   alert('소셜 로그인 사용자는 이용할 수 없습니다.');
+	   window.history.back();
+	}else if(id==''){
 	   alert('로그인 후 이용해주세요.');
 	   $(location).attr('href','${pageContext.request.contextPath}/user/main/mainForm.do');
 	}
