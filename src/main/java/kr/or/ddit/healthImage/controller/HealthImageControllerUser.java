@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -16,13 +17,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddit.healthImage.service.IHealthImageService;
 import kr.or.ddit.healthImageFile.service.IHealthImageFileService;
+import kr.or.ddit.utiles.RolePaginationUtil;
 import kr.or.ddit.vo.HealthImageVO;
-import kr.or.ddit.vo.KnowledgeVO;
 
 @Controller
 @RequestMapping("/user/healthImage/")
@@ -35,16 +35,37 @@ public class HealthImageControllerUser {
 	
 	// 운동법 리스트
 	@RequestMapping("healthImageList")
-	public ModelAndView healthImageList(ModelAndView andView, Map<String, String> params) throws Exception {
+	public ModelAndView healthImageList(ModelAndView andView
+										,Map<String, String> params
+										
+										,HttpServletRequest request) throws Exception {
+//	
+//		if(currentPage == null){
+//	         currentPage = "1";
+//	      }
 
+		String totalCount = this.healthImageService.totalCount(params);
+		
+//		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount));
+//	    
+//		String startCount = String.valueOf(pagination.getStartCount());
+//	    String endCount = String.valueOf(pagination.getEndCount());
+//	    
+//	    params.put("startCount", startCount);
+//	    params.put("endCount", endCount);
+		
 		List<HealthImageVO> healthImageList = this.healthImageService.healthList(params);
 		
 		andView.addObject("healthImageList", healthImageList);
+//		andView.addObject("pagination", pagination.getPagingHtmls());
+
 		andView.setViewName("user/healthImage/healthImageList");
 
 		return andView;
 	}
 	
+	
+	// 카테고리
 	@RequestMapping("chooseList")
 	public ModelAndView chooseList(ModelAndView andView, Map<String, String> params, @RequestParam(value = "choose") String choose) throws Exception{
 		System.out.println(choose);
@@ -71,31 +92,12 @@ public class HealthImageControllerUser {
 		
 	}
 	
-	// 표준몸무게
+	// 표준몸무게 BMI
 	@RequestMapping("healthImageWeight")
 	public void healthImageWeight() {
 		
 	}
 		
-	// 운동법  등록
-	@RequestMapping("inserthealthImageInfo")
-	public String inserthealthImageInfo(HealthImageVO healthInfo, @RequestParam("files") MultipartFile[] items)
-			throws Exception {
-		this.healthImageService.insertHealth(healthInfo, items);
-
-		return "redirect:/user/healthImage/healthImageList.do";
-	}
-	
-	// 운동법 삭제
-		@RequestMapping("deleteHealthImageInfo")
-		public String deleteHealthImageInfo(@RequestParam(value = "healthImage_no") String healthImage_no) throws Exception {
-
-			this.healthImageService.deleteHealth(healthImage_no);
-
-			return "redirect:/user/healthImage/healthImageList.do";
-		}
-
-	
 	// 운동법 상세
 	@RequestMapping("healthImageView")
 	public HealthImageVO healthImageView(@RequestParam(value = "healthImage_no") String healthImage_no, 
@@ -110,15 +112,6 @@ public class HealthImageControllerUser {
 		return healthInfo;
 	}
 	
-	// 운동법 수정
-		@RequestMapping("updateHealthImageInfo")
-		public String updateKnowledge(HealthImageVO healthInfo, @RequestParam("files") MultipartFile[] items)
-				throws Exception {
-			this.healthImageService.updateHealth(healthInfo, items);
-
-			return "redirect:/user/healthImage/healthImageList.do";
-		}
-		
 		// 엑셀 출력
 		@RequestMapping("excelDown")
 		public void excelDown(HttpServletResponse response, Map<String, String> params) throws Exception {
@@ -177,7 +170,7 @@ public class HealthImageControllerUser {
 			
 			// 엑셀 출력
 			response.setContentType("application/vnd.ms-excel");
-			response.setHeader("Content-Disposition", "attachment;filename=test.xls");
+			response.setHeader("Content-Disposition", "attachment;filename=excel.xls");
 			
 			wb.write(response.getOutputStream());
 

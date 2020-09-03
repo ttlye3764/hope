@@ -5,6 +5,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Webestica.com">
+<meta name="description" content="Creative Multipurpose Bootstrap Template">
+<link rel="shortcut icon" href="${pageContext.request.contextPath }/resources/template/assets/images/favicon.ico">
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900%7CPlayfair+Display:400,400i,700,700i%7CRoboto:400,400i,500,700" rel="stylesheet">
+
+<!-- Plugins CSS -->
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/font-awesome/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/themify-icons/css/themify-icons.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/animate/animate.min.css" />
+
+<!-- Theme CSS -->
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/css/style.css" />
 <title>Insert title here</title>
 </head>
 <body>
@@ -34,7 +50,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 p-0">
-					<div class="nav justify-content-center">
+					<!-- <div class="nav justify-content-center">
 						<ul class="nav-tabs nav-tabs-style-3 text-center px-2 p-md-0 m-0 mb-4">
 							<li class="nav-filter active" data-filter="all" onclick="all();">전체</li>
 							<li class="nav-filter" data-filter="shoulder" onclick="shoulder();"><input type="hidden" value="어깨" id="shoulder"/>어깨</li>
@@ -43,21 +59,56 @@
 							<li class="nav-filter" data-filter="arm" onclick="arm();"><input type="hidden" value="팔" id="arm"/>팔</li>
 							<li class="nav-filter" data-filter="leg" onclick="leg();"><input type="hidden" value="다리" id="leg"/>다리</li>
 						</ul>
-					</div>
-					 <div class="col-sm-8" style="float: right;">
-                     	<form id="form1" name="form1" method="post" enctype="multipart/form-data">
-                          <div class="text-sm-right">
-                              <button type="button" class="btn btn-light mb-2 mr-1" id="excel">Excel</button>
-                          </div>
-                     	</form>
-                     </div><!-- end col-->
-                                            
-					<div class="form-group" style="margin: auto">
+					</div> -->
+						<div class="col-sm-12 col-md-12">
+							<h5 class="mb-4">Tab line</h5>
+							<ul class="nav nav-tabs tab-line">
+								<li class="nav-item"> 
+									<a class="nav-link" href="#tab-3-1" data-toggle="tab" id="all">
+										전체
+									</a>
+								</li>
+								<li class="nav-item"> 
+									<a class="nav-link" data-toggle="tab" href="#tab-3-1" onclick="shoulder();">
+										<input type="hidden" value="어깨" id="shoulder"/>어깨
+									</a>
+								</li>
+								<li class="nav-item"> 
+									<a class="nav-link" data-toggle="tab" href="#tab-3-1" onclick="back();">
+										<input type="hidden" value="등" id="back"/>등
+									</a>
+								</li>
+								<li class="nav-item"> 
+									<a class="nav-link" data-toggle="tab" href="#tab-3-1" onclick="chest();">
+										<input type="hidden" value="가슴" id="chest"/>가슴
+									</a>
+								</li>
+								<li class="nav-item"> 
+									<a class="nav-link" data-toggle="tab" href="#tab-3-1" onclick="arm();">
+										<input type="hidden" value="팔" id="arm"/>팔
+									</a>
+								</li>
+								<li class="nav-item"> 
+									<a class="nav-link" data-toggle="tab" href="#tab-3-1" onclick="leg();">
+										<input type="hidden" value="다리" id="leg"/>다리
+									</a>
+								</li>
+								 <div class="col-sm-8" style="float: right;">
+			                     	<form id="form1" name="form1" method="post" enctype="multipart/form-data">
+			                          <div class="text-sm-right">
+			                              <button type="button" class="btn btn-light mb-2 mr-1" id="excel">Excel</button>
+			                          </div>
+			                     	</form>
+			                     </div><!-- end col-->
+							</ul>
+						</div>
+                        <br>              
+					
+					<!-- <div class="form-group" style="margin: auto">
 							<label for="exampleFormControlFile1">File input</label>
 							<input type="file" class="form-control-file" id="exampleFormControlFile1">
-						</div>
-						
-					
+						</div> -->
+
 					<div class="portfolio-wrap grid items-4 items-padding">
 					<c:forEach items= "${healthImageList }" var= "healthInfo" varStatus="status">
 						<!-- portfolio-card -->
@@ -72,42 +123,15 @@
 								 </c:if>  
 								
 								<div class="portfolio-card-footer" id="healthCard">
-									<a class="full-screen" data-toggle="modal" data-target="#exampleModalCenter"
+									<a class="full-screen" data-toggle="modal" data-target="#exampleModalCenter${status.index}"
 										 data-fancybox="portfolio" data-caption="title">
-									<i class="ti-fullscreen"></i></a>
-										<h6 class="info-title">
+										<i class="ti-fullscreen"></i>
+									</a>
+										<h6 class="mb-4">
 											<a id="title">
 												<input type="hidden" value="${healthInfo.healthImage_no}" id="healthImage_no"/>
 													${healthInfo.healthImage_title}
 											</a>
-											
-											<!-- 모달 -->
-											<div class="modal fade text-left" id="exampleModalCenter" 
-												tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
-												<div class="modal-dialog modal-dialog-centered" role="document">
-											  		<div class="modal-content" id="modals" style="text-align: center;">
-														<div class="modal-header" style="text-align: center;">
-															<h5 class="modal-title" id="exampleModalLongTitle" style="margin-left: 185px;">
-															<p>${healthInfo.healthImage_title}</p>
-															</h5>
-															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-															<span aria-hidden="true">&times;</span>
-															</button>
-														</div>
-														<div class="modal-body" style="text-align: center;">
-															<p>카테고리 : ${healthInfo.healthImage_category}</p>
-															<p>추천 연령 : ${healthInfo.healthImage_age}</p>
-															<p>운동법 : ${healthInfo.healthImage_diet}</p>
-															<p>적정 시간 : ${healthInfo.healthImage_time}분</p>
-															<c:if test="${!empty healthInfo.healthImage_content}">  
-																<p>설명 : ${healthInfo.healthImage_content}</p>
-											 				</c:if>
-														</div>
-													</div>
-												</div>
-											</div>
-											
-						
 										</h6>
 									
 									<c:if test="${healthInfo.healthImage_difficulty eq '상'}">
@@ -122,16 +146,46 @@
                                          <span class="badge badge-success">${healthInfo.healthImage_difficulty}</span>
                                      </c:if>
 								</div>
+								
+									<!-- 모달 -->
+									<div class="modal fade text-left" id="exampleModalCenter${status.index}"
+										tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered" role="document">
+									  		<div class="modal-content" id="modals" style="text-align: center;">
+												<div class="modal-header" style="text-align: center;">
+													<h5 class="mb-4" id="exampleModalLongTitle" style="margin-left: 185px;">
+													<p>${healthInfo.healthImage_title}</p>
+													</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body" style="text-align: center;">
+													<p>카테고리 : ${healthInfo.healthImage_category}</p>
+													<p>추천 연령 : ${healthInfo.healthImage_age}</p>
+													<p>운동법 : ${healthInfo.healthImage_diet}</p>
+													<p>적정 시간 : ${healthInfo.healthImage_time}분</p>
+													<c:if test="${!empty healthInfo.healthImage_content}">  
+														<p>설명 : ${healthInfo.healthImage_content}</p>
+									 				</c:if>
+												</div>
+											</div>
+										</div>
+									</div>
 							</div>
 						</div>
 						<!-- portfolio-card -->
 					</c:forEach>
 					</div>
-					
+						<div id="paginationDIV" style="margin-left: 40%; margin-bottom: 20px;">
+							<div>${pagination }</div>
+						</div>
 				</div>
 			</div>
 		</div>
 	</section>
+	
+
 	<!-- =======================
 	Portfolio -->
 	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/jquery/jquery.min.js"></script>
@@ -165,6 +219,11 @@
 					$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/excelDown.do');
 				}); 
 
+				// 전체
+				$('#all').click(function(){
+					$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/healthImageList.do');
+				}); 
+
 			});
 
 			
@@ -193,11 +252,6 @@
 				  location.href = '${pageContext.request.contextPath}/user/healthImage/chooseList.do?choose=' + choose;
 			}
 
-			function all() {
-				  location.href = '${pageContext.request.contextPath}/user/healthImage/healthImageList.do';
-			}
-
-			
 			
 		</script>
 </body>
