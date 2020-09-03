@@ -5,7 +5,7 @@
 	<select resultType="healthFileVO" id="healthFileList">
 		SELECT *
 		FROM HEALTHFILE
-		ORDER BY FILE_NO
+		ORDER BY FILE_NO DESC
 	</select>
 
 	<insert id="inserthealthFile" parameterType="healthFileVO">

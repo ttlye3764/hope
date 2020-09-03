@@ -58,7 +58,6 @@
 	                                                <div class="text-sm-right">
 	                                                    <button type="button" class="btn btn-success mb-2 mr-1"><i class="mdi mdi-settings"></i></button>
 	                                                    <button type="button" class="btn btn-light mb-2 mr-1" id="excel">Excel</button>
-	                                                    <button type="button" class="btn btn-light mb-2">Export</button>
 	                                                </div>
                                             	</form>
                                             </div><!-- end col-->
@@ -103,7 +102,7 @@
 		                                                </a>
 		                                            </li>
 		                                            <li class="nav-item">
-		                                                <a href="#home" onclick="all();" data-toggle="tab" aria-expanded="true" class="nav-link">
+		                                                <a href="#home" id="all" data-toggle="tab" aria-expanded="true" class="nav-link">
 		                                                    <i class="mdi mdi-home-variant d-lg-none d-block mr-1"></i>
 		                                                    <span class="d-none d-lg-block">전체</span>
 		                                                </a>
@@ -162,12 +161,14 @@
                                                 </tbody>
                                                 </c:forEach>
                                             </table>
+												<div style="margin: auto;">${pagination }</div>
+											
                                         </div>
                                     </div> <!-- end card-body-->
                                 </div> <!-- end card-->
                             </div> <!-- end col -->
                         </div>
-                        <!-- end row -->        
+                        <!-- end row -->      
                         
                     </div> <!-- container -->
 
@@ -216,6 +217,11 @@
 				$('#excel').click(function(){
 					$(location).attr('href','${pageContext.request.contextPath}/admin/healthImage/excelDown.do');
 				}); 
+
+				// 전체
+				$('#all').click(function(){
+					$(location).attr('href','${pageContext.request.contextPath}/admin/healthImage/healthImageList.do');
+				});
 			});
 
 
@@ -244,9 +250,6 @@
 				  location.href = '${pageContext.request.contextPath}/admin/healthImage/chooseList.do?choose=' + choose;
 			}
 
-			function all() {
-				  location.href = '${pageContext.request.contextPath}/admin/healthImage/healthImageList.do';
-			}
 			
 			
 		</script>

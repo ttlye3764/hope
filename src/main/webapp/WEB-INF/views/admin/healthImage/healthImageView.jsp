@@ -126,8 +126,8 @@
                                              <!-- 파일 -->
 											 <c:if test="${!empty healthInfo.items }">  
 												<div id="image_container" style="width: 300px; height: 200px;">
-													<c:forEach items="${healthInfo.items }" var="fileitemInfo">
-														<img src="/files/${fileitemInfo.file_save_name }" alt="pic1">
+													<c:forEach items="${healthInfo.items }" var="fileitemInfo" varStatus="status">
+														<img src="/files/${fileitemInfo.file_save_name }" alt="pic1" style="width: 300px; height: 200px;">
 													</c:forEach>
 												</div>
 											 </c:if>
