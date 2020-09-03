@@ -30,8 +30,11 @@
 			where healthImage_category = #{healthImage_category}
 		</if>
 		ORDER BY healthImage_no desc)A) B
+<!-- 		<![CDATA[ -->
+<!-- 			WHERE B.RNUM <= #{startCount} -->
+<!-- 			  AND B.RNUM >= #{endCount} -->
+<!-- 		]]> -->
 		ORDER BY B.RNUM
-		
 	</select>
 
 	<select id="healthImageInfo" parameterType="map" resultMap="healthResultMap">
@@ -85,5 +88,10 @@
 		,healthImage_difficulty = #{healthImage_difficulty}
 		WHERE healthImage_no = #{healthImage_no}
 	</update>
+	
+	<select id="totalCount" parameterType="map" resultType="String">
+		select count(healthImage_no)
+		from HEALTHIMAGE				
+	</select>
 
 </mapper>

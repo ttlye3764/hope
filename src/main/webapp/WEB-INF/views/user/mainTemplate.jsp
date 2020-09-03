@@ -127,9 +127,9 @@ function LogOut(){
 	
 	
 	
-	<!-- 용춘 css -->
+	<!-- 용춘 css / script -->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/styles/yc.css" />
-	
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
 </head>
 
 <body>

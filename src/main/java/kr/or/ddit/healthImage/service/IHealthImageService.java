@@ -1,5 +1,6 @@
 package kr.or.ddit.healthImage.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,4 +24,8 @@ public interface IHealthImageService {
 
 	// 운동법 삭제
 	public void deleteHealth(String healthImage_no) throws Exception;
+	
+	// 페이지
+	public String totalCount(Map<String, String> params) throws Exception;
+
 }

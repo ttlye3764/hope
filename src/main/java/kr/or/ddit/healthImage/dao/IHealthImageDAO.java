@@ -1,5 +1,6 @@
 package kr.or.ddit.healthImage.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,4 +25,7 @@ public interface IHealthImageDAO {
 
 	// 파일 시퀀스
 	public String fileSequence() throws Exception;
+	
+	// 페이지
+	public String totalCount(Map<String, String> params) throws Exception;
 }
