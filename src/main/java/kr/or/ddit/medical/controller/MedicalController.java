@@ -267,6 +267,15 @@ public class MedicalController {
 		String coronaSidoResult = Corona_sido.corona_sido(date);
 		return coronaSidoResult;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="coronaAPI",produces="text/plain;charset=UTF-8")
+	public String coronaAPI(String startdate, String enddate) throws Exception {
+		System.out.println(startdate);
+		System.out.println(enddate);
+		String coronaSidoResult = Corona.corona(startdate,enddate);
+		return coronaSidoResult;
+	}
 
 
 
