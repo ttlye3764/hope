@@ -15,7 +15,7 @@
 				<!-- portfolio details -->
 				<div class="col-md-4">
 					<div class="sticky-element">
-						<h2>Register my Bus </h2>
+						<h2>Register my Bus</h2>
 						<p>내가 즐겨타는 버스를 등록해주세요~! </p>
 						       Region : <select name="citycode" id="citycode">
 									<option value="">지역선택</option>
@@ -309,7 +309,7 @@ navigator.geolocation.getCurrentPosition(function(pos) {
 			        	 async    : false,
 			             url     : '${pageContext.request.contextPath}/user/schedule/registBus.do',
 			             type    : 'post',
-			             data : {'routeid':routeid,'citycode':citycode,'mem_no':2},
+			             data : {'routeid':routeid,'citycode':citycode,'mem_no':${LOGIN_MEMBERINFO.mem_no}},
 			             success : function(Result) {
 			                alert('등록되었습니다.');
 			             }

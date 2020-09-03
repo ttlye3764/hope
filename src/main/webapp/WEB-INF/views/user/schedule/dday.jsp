@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
         url     : '${pageContext.request.contextPath}/user/schedule/viewJson.do',
         type    : 'post',
         dataType: 'json',
-        data : {'mem_no':2},
+        data : {'mem_no':${LOGIN_MEMBERINFO.mem_no}},
         success : function(result) {                      
            $.each(result.json,function(i,v){
              event.push({

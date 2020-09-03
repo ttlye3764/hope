@@ -14,6 +14,7 @@ function LogOut(){
 			location.reload(true);
 		}
 	});
+}
 </script>
 
 
@@ -217,52 +218,15 @@ function LogOut(){
 							</ul>
 						</li>
 						<!-- Menu item 5 Elements-->
-						<li class="nav-item dropdown megamenu">
+						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="elementsMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Asset management</a>
-							<div class="dropdown-menu" aria-labelledby="elementsMenu" style="background-image:url(assets/images/menu-bg.jpg); background-position: right bottom; background-repeat: no-repeat;">
-								<div class="container">
-									<div class="row w-100">
-										<div class="col-sm-6 col-lg-3">
-											<ul class="list-unstyled">
-												<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/accountBook/setting.do">자산관리</a> </li>
-												<li> <a class="dropdown-item" href="elements-action-box.html">Action box</a> </li>
-												<li> <a class="dropdown-item" href="elements-alerts.html">Alerts</a> </li>
-												<li> <a class="dropdown-item" href="elements-animated-headlines.html">Animated Headlines</a> </li>
-												<li> <a class="dropdown-item" href="elements-blockquote.html">Blockquote</a> </li>
-												<li> <a class="dropdown-item" href="elements-buttons.html">Buttons</a> </li>
-											</ul>
-										</div>
-										<div class="col-sm-6 col-lg-3">
-											<ul class="list-unstyled">
-												<li> <a class="dropdown-item" href="elements-clients.html">Clients</a> </li>
-												<li> <a class="dropdown-item" href="elements-counter.html">Counter</a> </li>
-												<li> <a class="dropdown-item" href="elements-divider.html">Divider</a> </li>
-												<li> <a class="dropdown-item" href="elements-feature-box.html">Feature box</a> </li>
-												<li> <a class="dropdown-item" href="elements-forms.html">Forms</a> </li>
-												<li> <a class="dropdown-item" href="elements-grid.html">Grid</a> </li>
-											</ul>
-										</div>
-										<div class="col-sm-6 col-lg-3">
-											<ul class="list-unstyled">
-												<li> <a class="dropdown-item" href="elements-list-styles.html">list styles</a> </li>
-												<li> <a class="dropdown-item" href="elements-map.html">Map</a> </li>
-												<li> <a class="dropdown-item" href="elements-modal.html">Modal</a> </li>
-												<li> <a class="dropdown-item" href="elements-skill.html">skill</a> </li>
-												<li> <a class="dropdown-item" href="elements-social-icon.html">social icon</a> </li>
-												<li> <a class="dropdown-item" href="elements-tab.html">Tab</a> </li>
-											</ul>
-										</div>
-										<div class="col-sm-6 col-lg-3">
-											<ul class="list-unstyled">
-												<li> <a class="dropdown-item" href="elements-table.html">Table</a> </li>
-												<li> <a class="dropdown-item" href="elements-team.html">Team</a> </li>
-												<li> <a class="dropdown-item" href="elements-typography.html">Typography</a> </li>
-												<li> <a class="dropdown-item" href="elements-video.html">Video</a> </li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
+							<ul class="dropdown-menu" aria-labelledby="portfolioMenu">
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/accountBook/setting.do">거래 등록</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/accountBook/accountList.do">거래 내역 보기</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/">거래 내역 통계</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/">가까운 은행보기</a> </li>
+								
+							</ul>
 						</li>
 						<!-- Menu item 6 Docs-->
 						<li class="nav-item dropdown">

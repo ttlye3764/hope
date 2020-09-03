@@ -3,6 +3,9 @@ package kr.or.ddit.schedule.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import kr.or.ddit.bis.Bis;
 import kr.or.ddit.bis.Bis_location;
 import kr.or.ddit.bis.BusStop;
@@ -74,8 +77,9 @@ public class ScheduleController {
 	}
 	
 	@RequestMapping("dday2")
-	public ModelAndView dday2(String mem_no) throws Exception {
-		List<ScheduleVO> scheduleList = this.service.scheduleList("2"); //mem_no가 들어가야하는데,,,,,,,,,, 
+	public ModelAndView dday2(HttpServletRequest request,HttpSession session) throws Exception {
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		List<ScheduleVO> scheduleList = this.service.scheduleList(memberInfo.getMem_no()); //mem_no가 들어가야하는데,,,,,,,,,, 
 		ModelAndView andView = new ModelAndView();
 		andView.addObject("scheduleList", scheduleList);
 		andView.setViewName("user/schedule/dday2");
@@ -236,8 +240,9 @@ public class ScheduleController {
 	
 	
 	@RequestMapping("bis")
-	public ModelAndView bisList(String mem_no) throws Exception {
-		List<BusVO> busList = this.service.bisList("2");  /////////////////mem_no 불러와야되는데..
+	public ModelAndView bisList(HttpServletRequest request,HttpSession session) throws Exception {
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		List<BusVO> busList = this.service.bisList(memberInfo.getMem_no());  /////////////////mem_no 불러와야되는데..
 		ModelAndView andView = new ModelAndView();
 		andView.addObject("busList", busList);
 		andView.setViewName("user/schedule/bis");

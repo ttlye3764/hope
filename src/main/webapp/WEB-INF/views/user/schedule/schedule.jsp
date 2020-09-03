@@ -31,7 +31,8 @@
             <div class="modal-body">
                <div class="text-center mt-2 mb-4">
                   <a href="index.html" class="text-success"> <span><img
-                        src="${pageContext.request.contextPath }/resources/html/dist/assets/images/logo-dark.png"
+                        src="${pageContext.request.contextPath }/resources/html/
+                        dist/assets/images/logo-dark.png"
                         alt="" height="18"></span>
                   </a>
                </div>
@@ -179,7 +180,7 @@ $(function(){
          var array = shareId.split(" "); //배열로 담기
          var memNo = [];//memNo를 담을 배열 선언
          array.pop(); // 뒤에 하나 지우기
-         array.push('user'); // 작성자 mem_id
+         array.push('${LOGIN_MEMBERINFO.mem_id}'); // 작성자 mem_id
          var schedule = new Object();
 		   var arrSchedule = new Array();
 			 for(var i=0; i<array.length; i++){ //아이디 갯수만큼 반복
@@ -283,7 +284,7 @@ var sJson;
              url     : '${pageContext.request.contextPath}/user/schedule/viewJson.do',
              type    : 'post',
              dataType: 'json',
-             data : {'mem_no':2},
+             data : {'mem_no':${LOGIN_MEMBERINFO.mem_no}},
              success : function(result) {                      
                 $.each(result.json,function(i,v){
                   event.push({
