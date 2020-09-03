@@ -3,6 +3,10 @@
 
 
 <style>
+
+
+
+
 	#fix1{
 		width:300px;
 		height:300px;
@@ -209,7 +213,30 @@
 }
 
 
-<!-- pie차트------------------------------------------------------------------------------------------------------------------------------------------ -->
+
+    
+    
+    
+    
+    
+    
+    
+#item_small{
+	display: block; margin-top:10px; margin-bottom:5px; font-size:11px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;
+}    
+    
+#item-info{
+	display: inline-block; text-align: center;  
+}    
+#item_span1{
+	display: block; margin-bottom:1px; font-size:15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;
+} 
+#item_span2{
+	display: block; font-size:10px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;
+}
+#item-info-box{
+ 	position: absolute;  border-radius:5px 5px 5px 5px; z-index: 1; background-color:white; 
+}
     
 </style>
 
@@ -228,7 +255,7 @@
 <section class="blog-page pb-0">
 		<div class="container">
 			<div class="row">
-				<aside class="col-md-3 sidebar order-last order-md-first" style="margin-top: 5px;">
+				<aside class="col-md-3 sidebar order-last order-md-first" style="margin-top: 5px; width:330px;">
 					<div style="height: 400px; width:280px; border: 1px solid black;">
 					<!-- sidebar start -->
 						<!-- Text Widget -->
@@ -237,8 +264,10 @@
 							<p class="mb-0">Resources exquisite set arranging moonlight sex him household had. Months had too ham cousin remove far spirit. She procuring the why performed continual improving. Civil songs so large shade in cause.</p>
 						</div>
 					</div>
-					<div style="border: 1px solid black; margin-top: 8px; height: 705px; width:280px;">
-					
+					<div style="margin-top: 7px; height: 705px; width:280px;  border-top: 3px solid #164068; background-color: rgb(233,233,233);">
+						<strong id="strongID1" style="display:block; margin-top: 18px; margin-left:12px; color: #174069; font-family: 'Spoqa Han Sans'; font-size:20px;">인천</strong>
+						<div style="background-color: white; height: 310px;"></div>
+						<div style="background-color: gray;  height: 342px;"></div>
 					</div>
 					
 					
@@ -453,140 +482,140 @@
 							    <div class="item-image">
 							   		<img id="imgTag" border="0" src="${pageContext.request.contextPath }/images/korea.PNG" style="width: 100%; height:700px; z-index: -1;">
 							    </div>
-							    <div class="item-info-box" id="click1" style="position: absolute; width: 55px; height: 70px; border-radius:5px 5px 5px 5px; z-index: 1; background-color:white; left: 213px; top: 145px;">
-								    <div class="item-info" style="display: inline-block; width: 55px; height: 70px; text-align: center; ">
-									   <small style="display: block; font-size:11px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">인천</small>
-									    <span class="status in-progress" style="display: block; font-size:15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">751</span>
-									    <span class="status in-progress" style="display: block; font-size:10px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">(+11)</span>
+							    <div class="item-info-box" id="item-info-box" style="width: 55px; height: 70px;left: 213px; top: 145px;">
+								    <div class="item-info" id="item-info" style="width: 55px; height: 70px;">
+									    <small id="item_small">인천</small>
+									    <span class="status in-progress" id="item_span1">751</span>
+									    <span class="status in-progress" id="item_span2">(+11)</span>
 								    </div>
 							    </div>
-							    <div class="item-info-box" style="position: absolute; width: 58px; height: 66px; border-radius:5px 5px 5px 5px; background-color:white; left: 325px; top: 144px;">
-								    <div class="item-info" style="display: inline-block; width: 58px; height: 66px;">
-									   <small style="display: block;">서울</small>
-									    <p><span class="status in-progress">진행중</span>2</p>
+							    <div class="item-info-box" id="item-info-box" style="width: 58px; height: 66px; left: 325px; top: 144px;">
+								    <div class="item-info" id="item-info" style=" width: 58px; height: 66px;">
+									    <small id="item_small">서울</small>
+									    <span class="status in-progress" id="item_span1">3751</span>
+									    <span class="status in-progress" id="item_span2">(+311)</span>
 								    </div>
 							    </div>
-							    <div class="item-info-box" style="position: absolute; width: 60px; height: 68px; border-radius:5px 5px 5px 5px; background-color:white; left: 322px; top: 60px;">
-								    <div class="item-info" style="display: inline-block; width: 60px; height: 68px;">
-									   <small style="display: block;">남은 수</small>
-									    <p><span class="status in-progress">진행중</span>3</p>
+							    <div class="item-info-box" id="item-info-box" style="width: 60px; height: 68px; left: 322px; top: 60px;">
+								    <div class="item-info" id="item-info" style="width: 60px; height: 68px;">
+									   <small id="item_small">경기</small>
+									   <span class="status in-progress" id="item_span1">3751</span>
+									   <span class="status in-progress" id="item_span2">(+311)</span>
 								    </div>
 							    </div>
-							    <div class="item-info-box" style="position: absolute; width: 50px; height: 67px; border-radius:5px 5px 5px 5px; background-color:white; left: 430px; top: 108px;">
-								    <div class="item-info" style="display: inline-block; width: 50px; height: 67px;">
-									   <small style="display: block;">남은 수</small>
-									    <p><span class="status in-progress">진행중</span>4</p>
+							    <div class="item-info-box" id="item-info-box" style="width: 50px; height: 67px; left: 430px; top: 108px;">
+								    <div class="item-info" id="item-info" style=" width: 50px; height: 67px;">
+									   <small id="item_small">강원</small>
+									     <span class="status in-progress" id="item_span1">3751</span>
+									    <span class="status in-progress" id="item_span2">(+311)</span>
 								    </div>
 							    </div>
-							    <div class="item-info-box" style="position: absolute; width: 50px; height: 67px; border-radius:5px 5px 5px 5px; background-color:white; left: 380px; top: 202px;">
-								    <div class="item-info" style="display: inline-block; width: 50px; height: 67px;">
-									   <small style="display: block;">남은 수</small>
-									    <p><span class="status in-progress">진행중</span>5</p>
+							    <div class="item-info-box" id="item-info-box" style="width: 50px; height: 67px;left: 380px; top: 202px;">
+								    <div class="item-info" id="item-info" style=" width: 50px; height: 67px;">
+									   <small id="item_small">충북</small>
+									     <span class="status in-progress" id="item_span1">3751</span>
+									    <span class="status in-progress" id="item_span2">(+311)</span>
 								    </div>	
 							    </div>
-							    <div class="item-info-box" style="position: absolute; width: 50px; height: 67px; border-radius:5px 5px 5px 5px; background-color:white; left: 352px; top: 288px;">
-								    <div class="item-info" style="display: inline-block; width: 50px; height: 67px;">
-									   <small style="display: block;">남은 수</small>
-									    <p><span class="status in-progress">진행중</span>6</p>
+							    <div class="item-info-box" id="item-info-box" style="width: 50px; height: 67px;left: 352px; top: 288px;">
+								    <div class="item-info" id="item-info" style=" width: 50px; height: 67px;">
+									   <small id="item_small">대전</small>
+									     <span class="status in-progress" id="item_span1">3751</span>
+									    <span class="status in-progress" id="item_span2">(+311)</span>
 								    </div>
 							    </div>
-							    <div class="item-info-box" style="position: absolute; width: 50px; height: 67px; border-radius:5px 5px 5px 5px; background-color:white; left: 296px; top: 234px;">
-								    <div class="item-info" style="display: inline-block; width: 50px; height: 67px;">
-									   <small style="display: block;">남은 수</small>
-									    <p><span class="status in-progress">진행중</span>7</p>
+							    <div class="item-info-box" id="item-info-box" style="width: 50px; height: 67px;left: 296px; top: 234px;">
+								    <div class="item-info" id="item-info" style="width: 50px; height: 67px;">
+									   <small id="item_small">세종</small>
+									     <span class="status in-progress" id="item_span1">3751</span>
+									    <span class="status in-progress" id="item_span2">(+311)</span>
 								    </div>
 							    </div>
-							       <div class="item-info-box" style="position: absolute; width: 50px; height: 67px; border-radius:5px 5px 5px 5px; background-color:white; left: 228px; top: 293px;">
-								    <div class="item-info" style="display: inline-block; width: 50px; height: 67px;">
-									   <small style="display: block;">남은 수</small>
-									    <p><span class="status in-progress">진행중</span>8</p>
+							       <div class="item-info-box" id="item-info-box" style="width: 50px; height: 67px; left: 228px; top: 293px;">
+								    <div class="item-info" id="item-info" style=" width: 50px; height: 67px;">
+									   <small id="item_small">충남</small>
+									     <span class="status in-progress" id="item_span1">3751</span>
+									    <span class="status in-progress" id="item_span2">(+311)</span>
 								    </div>
 							    </div>
-							      <div class="item-info-box" style="position: absolute; width: 43px; height: 68px; border-radius:5px 5px 5px 5px; background-color:white; left: 296px; top: 374px;">
-								    <div class="item-info" style="display: inline-block; width: 43px; height: 68px;">
-									   <small style="display: block;">남은 수</small>
-									    <p><span class="status in-progress">진행중</span>9</p>
+							      <div class="item-info-box" id="item-info-box" style="width: 43px; height: 68px; left: 296px; top: 374px;">
+								    <div class="item-info" id="item-info" style=" width: 43px; height: 68px;">
+									   <small id="item_small">전북</small>
+									    <span class="status in-progress" id="item_span1">3751</span>
+									    <span class="status in-progress" id="item_span2">(+311)</span>
 								    </div>
 							    </div>
-							      <div class="item-info-box" style="position: absolute; width: 53px; height: 68px; border-radius:5px 5px 5px 5px; background-color:white; left: 286px; top: 473px;">
-								    <div class="item-info" style="display: inline-block; width: 53px; height: 68px;">
-									   <small style="display: block;">남은 수</small>
-									    <p><span class="status in-progress">진행중</span>10</p>
+							      <div class="item-info-box" id="item-info-box" style="width: 53px; height: 68px;left: 286px; top: 473px;">
+								    <div class="item-info" id="item-info" style=" width: 53px; height: 68px;">
+									   <small id="item_small">광주</small>
+									     <span class="status in-progress" id="item_span1">3751</span>
+									    <span class="status in-progress" id="item_span2">(+311)</span>
 								    </div>
 							    </div>
-							      <div class="item-info-box" style="position: absolute; width: 53px; height: 68px; border-radius:5px 5px 5px 5px; background-color:white; left: 211px; top: 501px;">
-								    <div class="item-info" style="display: inline-block; width: 53px; height: 68px;">
-									   <small style="display: block;">남은 수</small>
-									    <p><span class="status in-progress">진행중</span>11</p>
+							      <div class="item-info-box" id="item-info-box" style="width: 53px; height: 68px;left: 211px; top: 501px;">
+								    <div class="item-info" id="item-info" style=" width: 53px; height: 68px;">
+									   <small id="item_small">전남</small>
+									     <span class="status in-progress" id="item_span1">3751</span>
+									    <span class="status in-progress" id="item_span2">(+311)</span>
 								    </div>
 							    </div>
-							      <div class="item-info-box" style="position: absolute; width: 53px; height: 68px; border-radius:5px 5px 5px 5px; background-color:white; left: 233px; top: 622px;">
-								    <div class="item-info" style="display: inline-block; width: 53px; height: 68px;">
-									   <small style="display: block;">남은 수</small>
-									    <p><span class="status in-progress">진행중</span>11</p>
+							      <div class="item-info-box" id="item-info-box" style="width: 53px; height: 68px; left: 233px; top: 622px;">
+								    <div class="item-info" id="item-info" style=" width: 53px; height: 68px;">
+									   <small id="item_small">제주</small>
+									     <span class="status in-progress" id="item_span1">3751</span>
+									    <span class="status in-progress" id="item_span2">(+311)</span>
 								    </div>
 							    </div>
-							       <div class="item-info-box" style="position: absolute; width: 60px; height: 67px; border-radius:5px 5px 5px 5px; background-color:white; left: 458px; top: 266px;">
-								    <div class="item-info" style="display: inline-block; width: 60px; height: 67px;">
-									   <small style="display: block;">남은 수</small>
-									    <p><span class="status in-progress">진행중</span>12</p>
+							       <div class="item-info-box" id="item-info-box" style="width: 60px; height: 67px;left: 458px; top: 266px;">
+								    <div class="item-info" id="item-info" style=" width: 60px; height: 67px;">
+									   <small id="item_small">경북</small>
+									     <span class="status in-progress" id="item_span1">3751</span>
+									    <span class="status in-progress" id="item_span2">(+311)</span>
 								    </div>
 							    </div>
-							       <div class="item-info-box" style="position: absolute; width: 60px; height: 67px; border-radius:5px 5px 5px 5px; background-color:white; left: 481px; top: 348px;">
-								    <div class="item-info" style="display: inline-block; width: 60px; height: 67px;">
-									   <small style="display: block;">남은 수</small>
-									    <p><span class="status in-progress">진행중</span>13</p>
+							       <div class="item-info-box" id="item-info-box" style="width: 60px; height: 67px; left: 481px; top: 348px;">
+								    <div class="item-info" id="item-info" style=" width: 60px; height: 67px;">
+									   <small id="item_small">대구</small>
+									     <span class="status in-progress" id="item_span1">3751</span>
+									    <span class="status in-progress" id="item_span2">(+311)</span>
 								    </div>
 							    </div>
-							      <div class="item-info-box" style="position: absolute; width: 53px; height: 68px; border-radius:5px 5px 5px 5px; background-color:white; left: 400px; top: 451px;">
-								    <div class="item-info" style="display: inline-block; width: 53px; height: 68px;">
-									   <small style="display: block;">남은 수</small>
-									    <p><span class="status in-progress">진행중</span>14</p>
+							      <div class="item-info-box" id="item-info-box" style="width: 53px; height: 68px; left: 400px; top: 451px;">
+								    <div class="item-info" id="item-info" style=" width: 53px; height: 68px;">
+									   <small id="item_small">경남</small>
+									     <span class="status in-progress" id="item_span1">3751</span>
+									    <span class="status in-progress" id="item_span2">(+311)</span>
 								    </div>
 							    </div>
-							      <div class="item-info-box" style="position: absolute; width: 53px; height: 72px; border-radius:5px 5px 5px 5px; background-color:white; left: 548px; top: 454px;">
-								    <div class="item-info" style="display: inline-block; width: 53px; height: 72px;">
-									   <small style="display: block;">남은 수</small>
-									    <p><span class="status in-progress">진행중</span>15</p>
+							      <div class="item-info-box" id="item-info-box" style="width: 53px; height: 72px; left: 548px; top: 454px;">
+								    <div class="item-info" id="item-info" style=" width: 53px; height: 72px;">
+									   <small id="item_small">울산</small>
+									     <span class="status in-progress" id="item_span1">3751</span>
+									    <span class="status in-progress" id="item_span2">(+311)</span>
 								    </div>
 							    </div>
-							    <div class="item-info-box" style="position: absolute; width: 55px; height: 70px; border-radius:5px 5px 5px 5px; background-color:white; left: 492px; top: 511px;">
-								    <div class="item-info" style="display: inline-block; width: 55px; height: 70px;">
-									   <small style="display: block;">남은 수</small>
-									    <p><span class="status in-progress">진행중</span>16</p>
+							    <div class="item-info-box" id="item-info-box" style="width: 55px; height: 70px; left: 492px; top: 511px;">
+								    <div class="item-info" id="item-info" style="width: 55px; height: 70px;">
+									   <small id="item_small">부산</small>
+									     <span class="status in-progress" id="item_span1">3751</span>
+									    <span class="status in-progress" id="item_span2">(+311)</span>
 								    </div>
 							    </div>							    
-							    <div class="item-info-box" style="position: absolute; width: 62px; height: 70px; border-radius:5px 5px 5px 5px; background-color:white; left: 515px; top: 583px;">
-								    <div class="item-info" style="display: inline-block; width: 62px; height: 70px;">
-									   <small style="display: block;">남은 수</small>
-									    <p><span class="status in-progress">진행중</span>17</p>
+							    <div class="item-info-box" id="item-info-box" style="width: 67px; height: 70px; left: 515px; top: 583px;">
+								    <div class="item-info" id="item-info" style=" width: 67px; height: 70px;">
+									   <small id="item_small">검역</small>
+									     <span class="status in-progress" id="item_span1">3751</span>
+									    <span class="status in-progress" id="item_span2">(+311)</span>
 								    </div>
 							    </div>
-							    
-							    
-							    
-							    
-							    
-							    
 						    </div>	
 						</div>
-						
-						
-						
-						
-						
-						
-						
 				</div>
 			</div>
 		</div>	
 
 		<div> <a href="#" class="back-top btn btn-grad"><i class="ti-angle-up"></i></a> </div>
 	
-
-
-					
-
 
 					
 
@@ -606,10 +635,12 @@
 
 
 $(function(){
-	$('#click1').on('click',function(){
-		alert('click');
+	$('.item-info-box').click(function(){		
+		var name = $(this).find('small').text();
+		var value1 = $(this).find('span:eq(0)').text();
+		var value2 = $(this).find('span:eq(1)').text();
+		$('#strongID1').text(name);
 	});
-
 
 	
 });
