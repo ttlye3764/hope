@@ -83,7 +83,7 @@ function LogOut(){
 							</c:if>
 						  <div class="dropdown-menu mt-2 shadow" aria-labelledby="dropdownAccount">
 						  		<a class="dropdown-item" href="${pageContext.request.contextPath}/user/member/checkPassForm.do">나의 정보 관리</a>
-						  	<a class="dropdown-item" href="${pageContext.request.contextPath}/user/member/">내가 작성한 게시글</a>
+						  	<a class="dropdown-item" href="${pageContext.request.contextPath}/user/member/myBoard.do">내가 작성한 게시글</a>
 							<a class="dropdown-item" href="javascript:LogOut();">로그아웃</a>
 						  </div>
 						</div>

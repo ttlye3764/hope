@@ -51,6 +51,13 @@
 					BD_WRITER LIKE '%' || #{search_keyword} || '%'
 				</if>
 	</select>
+	
+	<select id="myboardList" resultType="boardVO" parameterType="map">
+		SELECT *
+		FROM BOARD
+		WHERE BD_DIVISION = #{BD_DIVISION}
+		AND MEM_NO = #{mem_no}
+	</select>
 
 	<select id="boardList" resultType="boardVO" parameterType="map" >
 		SELECT B.*

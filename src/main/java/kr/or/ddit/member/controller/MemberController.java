@@ -1,5 +1,6 @@
 package kr.or.ddit.member.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kr.or.ddit.board.service.IBoardService;
 import kr.or.ddit.member.service.IMemberService;
 import kr.or.ddit.utiles.UserSha256;
+import kr.or.ddit.vo.BoardVO;
 import kr.or.ddit.vo.MemberVO;
 
 // /SpringToddler/user/member/memberList.do
@@ -32,6 +35,8 @@ public class MemberController {
 	private ObjectMapper mapper;
 	@Autowired
 	private IMemberService service;
+	@Autowired
+	private IBoardService boardService;
 
 
 	@RequestMapping("memberView")
@@ -43,6 +48,24 @@ public class MemberController {
 		modelMap.addAttribute("memberInfo", memberInfo);
 
 		return modelMap;
+	}
+	
+	@RequestMapping("myBoard")
+	public ModelAndView myBoard(ModelAndView andView
+								,Map<String,String>params
+								,HttpServletRequest request) throws Exception{
+		HttpSession session = request.getSession();
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		String mem_no = memberInfo.getMem_no();
+		
+		params.put("bd_division","3");
+		params.put("mem_no",mem_no);
+		List<BoardVO> boardList = this.boardService.boardList(params);
+		
+		andView.addObject("boardList", boardList);
+		andView.setViewName("user/member/myBoard");	
+		
+		return andView;
 	}
 	
 	@RequestMapping("myPage")
