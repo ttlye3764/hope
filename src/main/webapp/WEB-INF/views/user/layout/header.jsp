@@ -88,12 +88,6 @@ function LogOut(){
 							<a class="dropdown-item" href="javascript:LogOut();">로그아웃</a>
 						  </div>
 						</div>
-						<!-- top link -->
-						<ul class="nav">
-              <li class="nav-item">
-                  <a class="nav-link" href="contact.html">Contact</a>
-              </li>
-            </ul>
 						<!-- top social -->
 						<ul class="social-icons">
 							<li class="social-icons-item social-facebook m-0">

@@ -35,9 +35,26 @@ $(function(){
 </script>
 </head>
 <body>
+<div class="innerpage-banner center bg-overlay-dark-7 py-7" style="background:url(assets/images/bg/04.jpg) no-repeat; background-size:cover; background-position: center center;">
+      <div class="container">
+         <div class="row all-text-white">
+            <div class="col-md-12 align-self-center">
+               <h1 class="innerpage-title">내가 작성한 게시글</h1>
+               <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                     <li class="breadcrumb-item active"><a href="${pageContext.request.contextPath}/user/main/mainForm.do"><i class="ti-home"></i> Home</a></li>
+                     <li class="breadcrumb-item">Timeline</li>
+                  </ol>
+               </nav>
+            </div>
+         </div>
+      </div>
+   </div>
+      <br>
+      <br>
+      <br>
 	<div style="width: 100%">
 		<div id="freeboardList_content" style="width: 50%; margin: auto;">
-		<h4>내가 작성한 게시글</h4>
 			<div class="panel panel-blue">
 				<div class="panel-heading">자유게시판</div>
 				<div class="table-responsive-sm">
