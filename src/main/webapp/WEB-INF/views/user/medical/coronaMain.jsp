@@ -465,7 +465,7 @@
 									</div>
 									<div style="display: flex; flex-direction: column; height: 190px;">
 										  	<!-- line chart canvas element -->
-										<canvas id="buyers"  style="height: 190px; width: 100%; margin-left: 5px;"></canvas>					       
+										<canvas id="buyers"  style="height: 190px; width: 100%; margin-left: 5px;"></canvas>		<!-- height: 190px; width: 100%; -->			       
 									</div>
 									
 									<div style="height:28px; display: flex; justify-content: center; align-items: center;">
@@ -602,7 +602,9 @@
 				</div>
 			</div>
 		</div>	
-
+		
+		
+		
 		<div> <a href="#" class="back-top btn btn-grad"><i class="ti-angle-up"></i></a> </div>
 	
 
@@ -631,7 +633,7 @@ var list = new Array();
 
 function getToday(){
 	var date = new Date();
-	return date.getFullYear()+("0"+(date.getMonth()+1)).slice(-2)+("0"+(date.getDate())).slice(-2);
+	return date.getFullYear()+("0"+(date.getMonth()+1)).slice(-2)+("0"+(date.getDate()-1)).slice(-2);
 }
 function endday(){
 	var date = new Date();
@@ -704,7 +706,6 @@ function getCorona(name1){
 };
 
 var dateList = new Array();
-var dataset = new Array();
 var deathList = new Array();
 var clearList = new Array();
 var decideList = new Array();
@@ -730,10 +731,11 @@ $(function(){
 
 			$.each(result.response.body.items.item,function(i,v){
 				var str = v.stateDt+"";
-
-				str = str.substring(4,6) + "-" + str.substring(6,8);
-				dateList.push(str);
-				dateList.reverse();
+				if(i!=6){
+					str = str.substring(4,6) + "-" + str.substring(6,8);
+					dateList.push(str);
+				}
+				
 				str = v.clearCnt
 				clearList.push(str);
 				str = v.deathCnt
@@ -741,11 +743,49 @@ $(function(){
 				str = v.decideCnt
 				decideList.push(str);
 			});
+			dateList.reverse();
+			var clear = clearList.reverse();
+			clearList = [];
+			var death = deathList.reverse();
+			deathList = [];
+			var decide = decideList.reverse();
+			decideList = [];
+			/* $.each(clear,function(ind,val){
+				if(ind != 0){
+					var value = parseInt(val[ind]) - parseInt(val[ind-1]);
+					console.log(typeof val[ind]);
+					clearList.push(value);
+				}
+			}); */
+
+
+			for(var i=0;i<clear.length;i++){
+				if(i != 0){
+					var value = clear[i] - clear[i-1];
+					console.log(typeof value);
+					clearList.push(value);
+				}
+			}
+			for(var i=0;i<death.length;i++){
+				if(i != 0){
+					var value = death[i] - death[i-1];
+					deathList.push(value);
+					console.log(typeof value);
+				}
+			}
+			for(var i=0;i<decide.length;i++){
+				if(i != 0){
+					var value = decide[i] - decide[i-1];
+					decideList.push(value);
+					console.log(typeof value);
+				}
+			}
+			
 			console.log(dateList);
 			console.log(clearList);
 			console.log(deathList);
 			console.log(decideList);
-
+			
 			
 			/*var date = result.response.body.items.item[0].stateDt + "";
 			 
@@ -1053,7 +1093,7 @@ $(function(){
 
 
 	
-	 // line chart data
+	  // line chart data
     var buyerData = {
         labels : dateList ,
         datasets : [
@@ -1062,26 +1102,65 @@ $(function(){
 	            strokeColor : "#e2e2e2",
 	            pointColor : "skyblue",
 	            pointStrokeColor : "#e2e2e2",
-	            data : [99,251,305,247,356,786,234]
+	            data : clearList
 	        },
 	          {
 	            fillColor : "rgba(100,194,132,0.4)",
 	            strokeColor : "#FFC26D",
 	            pointColor : "red",
 	            pointStrokeColor : "#FFC26D",
-	            data : [120,150,291,251,353,224,500]
+	            data : [323, 299, 248, 235, 267, 195]
 	        },
 	          {
 	            fillColor : "rgba(0,0,0,0.4)",
 	            strokeColor : "#ffffff",
 	            pointColor : "gray",
 	            pointStrokeColor : "#ffffff",
-	            data : [205,108,91,201,35,15,500]
+	            data : [5, 2, 1, 0, 2, 3]
 	        }
     	]
     }
-    // get line chart canvas
+    // get line chart canvas 
     var buyers = document.getElementById('buyers').getContext('2d');
-    // draw line chart
-    new Chart(buyers).Line(buyerData);   
+    new Chart(buyers).Line(buyerData); 
+    
+    
+   /*  var myChart = new Chart(buyers, {
+    type: 'line',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }
+
+       ]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+}); */
 </script>
