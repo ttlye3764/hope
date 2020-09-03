@@ -12,8 +12,6 @@ import kr.or.ddit.vo.BoardVO;
 public interface IBoardDao {
 	//테이블 조회
 	public List<BoardVO> boardList(Map<String, String> params) throws Exception;
-//	public List<BoardVO> getboardList(Criteria cri) throws Exception;
-	
 	//테이블 수정
 	public void updateBoard(BoardVO boardVO) throws Exception;
 	//테이블 삭제
@@ -27,8 +25,5 @@ public interface IBoardDao {
 		
 	// 조회수 증가
 	public void countHit(String bd_no) throws Exception;
-	
-	// 페이징 처리
-//	public List<BoardVO> getListWithPaging(Criteria cri) throws Exception; 
 	
 }

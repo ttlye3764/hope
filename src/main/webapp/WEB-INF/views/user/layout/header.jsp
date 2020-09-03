@@ -83,7 +83,7 @@ function LogOut(){
 							</c:if>
 						  <div class="dropdown-menu mt-2 shadow" aria-labelledby="dropdownAccount">
 						  		<a class="dropdown-item" href="${pageContext.request.contextPath}/user/member/checkPassForm.do">나의 정보 관리</a>
-						  	<a class="dropdown-item" href="${pageContext.request.contextPath}/user/member/">내가 작성한 게시글</a>
+						  	<a class="dropdown-item" href="${pageContext.request.contextPath}/user/member/myBoard.do">내가 작성한 게시글</a>
 							<a class="dropdown-item" href="javascript:LogOut();">로그아웃</a>
 						  </div>
 						</div>
@@ -176,15 +176,15 @@ function LogOut(){
 							<ul class="dropdown-menu" aria-labelledby="blogMenu">
 								<li class="dropdown-submenu">
 								
-									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalList.do">복용관리</a>
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalListMain.do">복용관리</a>
 
 								</li>
 								<li class="dropdown-submenu">
-									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalMap.do">내 주변 병원/약국 위치보기</a>
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalMapMain.do">내 주변 병원/약국 위치보기</a>
 								</li>
 								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/searchPill.do">알약 정보보기</a></li>
 								<li class="dropdown-submenu">
-									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/corona.do">코로나</a>
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/coronaMain.do">코로나</a>
 								</li>
 							</ul>
 						</li>

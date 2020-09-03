@@ -95,10 +95,11 @@ public class BoardController {
 		
 		
 	    
-		
+		System.out.println(search_keyword);
+		System.out.println(search_keycode);
 	    String totalCount = this.boardService.totalCount(params);
 	    
-	    pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount),bd_division);
+	    pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount),bd_division, search_keyword, search_keycode);
 	    String startCount = String.valueOf(pagination.getStartCount());
 	    String endCount = String.valueOf(pagination.getEndCount());
 	    params.put("startCount", startCount);
@@ -157,7 +158,7 @@ public class BoardController {
 		    		
 		    String totalCount = this.boardService.totalCount(params);
 		    
-		    pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount),bd_division);
+		    pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount),bd_division, search_keyword, search_keycode);
 		    String startCount = String.valueOf(pagination.getStartCount());
 		    String endCount = String.valueOf(pagination.getEndCount());
 		    params.put("startCount", startCount);

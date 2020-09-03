@@ -1,5 +1,6 @@
 package kr.or.ddit.healthImage.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -54,6 +55,11 @@ public class IHealthImageServiceImpl implements IHealthImageService{
 	@Override
 	public void deleteHealth(String healthImage_no) throws Exception {
 		healthImageDAO.deleteHealth(healthImage_no);
+	}
+
+	@Override
+	public String totalCount(Map<String, String> params) throws Exception {
+		return healthImageDAO.totalCount(params);
 	}
 
 }

@@ -19,10 +19,10 @@ $(function(){
         return true;
      });
 
-
+    '${pageContext.request.contextPath}/user/board/boardView.do?bd_no=' + bd_no + '&rnum=' + rnum + "&bd_division=${bd_division}"
     // 목록버튼기능
     $('#listBtn').on('click', function(){	
-		$(location).attr('href','${pageContext.request.contextPath}/user/board/boardList.do?bd_division=${bd_division }');	
+		$(location).attr('href','${pageContext.request.contextPath}/user/board/boardList.do?bd_division=${bd_division}');	
 	});
 
 

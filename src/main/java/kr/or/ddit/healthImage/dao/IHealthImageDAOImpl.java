@@ -1,5 +1,6 @@
 package kr.or.ddit.healthImage.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -46,5 +47,11 @@ public class IHealthImageDAOImpl implements IHealthImageDAO{
 	public String fileSequence() throws Exception {
 		return client.selectOne("healthImage.fileSequence");
 	}
+
+	@Override
+	public String totalCount(Map<String, String> params) throws Exception {
+		return (String)client.selectOne("healthImage.totalCount", params);
+	}
+
 
 }
