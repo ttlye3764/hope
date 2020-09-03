@@ -9,6 +9,12 @@
 <script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
 <script type="text/javascript">
 $(function(){
+	var id = '${LOGIN_MEMBERINFO.mem_id}';
+	if(id==''){
+	   alert('로그인 후 이용해주세요.');
+	   $(location).attr('href','${pageContext.request.contextPath}/user/main/mainForm.do');
+	}
+	
 	$('#fboardTBY tr').on('click', function() {
         var bd_no = $(this).find('td:eq(0) input').val();
         var rnum = $(this).find('td:eq(0)').text();

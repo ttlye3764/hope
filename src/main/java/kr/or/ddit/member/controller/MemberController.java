@@ -56,21 +56,24 @@ public class MemberController {
 								,HttpServletRequest request) throws Exception{
 		HttpSession session = request.getSession();
 		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
-		String mem_no = memberInfo.getMem_no();
-		
-		params.put("bd_division","1");
-		params.put("mem_no",mem_no);
-		List<BoardVO> fboardList = this.boardService.myboardList(params);
-		
-		params.put("bd_division","3");
-		List<BoardVO> boardList = this.boardService.myboardList(params);
-		
-		params.put("bd_division","4");
-		List<BoardVO> qboardList = this.boardService.myboardList(params);
-		
-		andView.addObject("fboardList", fboardList);
-		andView.addObject("boardList", boardList);
-		andView.addObject("qboardList", qboardList);
+		if(memberInfo==null) {
+		}else {
+			String mem_no = memberInfo.getMem_no();
+			
+			params.put("bd_division","1");
+			params.put("mem_no",mem_no);
+			List<BoardVO> fboardList = this.boardService.myboardList(params);
+			
+			params.put("bd_division","3");
+			List<BoardVO> boardList = this.boardService.myboardList(params);
+			
+			params.put("bd_division","4");
+			List<BoardVO> qboardList = this.boardService.myboardList(params);
+			
+			andView.addObject("fboardList", fboardList);
+			andView.addObject("boardList", boardList);
+			andView.addObject("qboardList", qboardList);
+		}
 		andView.setViewName("user/member/myBoard");	
 		
 		return andView;

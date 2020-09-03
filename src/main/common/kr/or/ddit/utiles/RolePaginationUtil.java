@@ -52,35 +52,43 @@ public class RolePaginationUtil {
 		if(this.endPage > this.totalPage){
 			this.endPage = this.totalPage;
 		}
-		this.pagingHtmls.append("<div class='text-center'>");
-		this.pagingHtmls.append("<ul class='pagination mtm mbm'>");
+		this.pagingHtmls.append("<section class=\"pt-0\">");
+		this.pagingHtmls.append("<div class=\"container\">");
+		this.pagingHtmls.append("<div class=\"row justify-content-center\">");
+		this.pagingHtmls.append("<div class=\"col-md-8\">");
+		this.pagingHtmls.append("<nav>");
+		this.pagingHtmls.append("<ul class=\"pagination justify-content-center\">");
 		
 		String requestURI = request.getRequestURI();
 		System.out.println(requestURI);
 		// 이전|1|2|3|4|5|다음
 		// 이전
 		if((this.currentPage - 1) == 0){
-			this.pagingHtmls.append("<li class='disabled'><a href='#'>&laquo;</a></li>");
+			this.pagingHtmls.append("<li class=\"page-item disabled\"> <span class=\"page-link\">Prev</span> </li>");
 		}else{
-			this.pagingHtmls.append("<li><a href='" + requestURI + "?currentPage="+ (this.currentPage -1) +"'>&laquo;</a></li>");
+			this.pagingHtmls.append("<li class=\\\"page-item disabled\\\"><a class=\"page-link\" href='" + requestURI + "?currentPage="+ (this.currentPage -1) +"'>Prev</a></li>");
 		}
 		//|1|2|3|4|5|
 		for(int i=this.startPage; i<=this.endPage; i++){
 			if(this.currentPage == i){
-				this.pagingHtmls.append("<li class='active'><a href='#'>"+ i +"</a></li>");
+				this.pagingHtmls.append("<li class=\"page-item active\"><a class=\"page-link\" href='#'>"+ i +"</a></li>");
 			}else{
-				this.pagingHtmls.append("<li><a href='" + requestURI + "?currentPage="+ i +"'>"+ i +"</a></li>");
+				this.pagingHtmls.append("<li class=\"page-item\"><a class=\"page-link\" href='" + requestURI + "?currentPage="+ i +"'>"+ i +"</a></li>");
 
 			}
 		}
 		// 다음
 		if(this.currentPage < this.totalPage){
-			this.pagingHtmls.append("<li><a href='" + requestURI + "?currentPage="+ (this.currentPage +1) +"'>&raquo;</a></li>");
+			this.pagingHtmls.append("<li class=\\\"page-item\\\"><a class=\"page-link\" href=\"#\">Next</a> </li>");
 		}else{
-			this.pagingHtmls.append("<li class='disabled'><a href='#'>&raquo;</a></li>");
+			this.pagingHtmls.append("<li class=\"page-item\"><a class=\"page-link\" href='" + requestURI + "?currentPage="+ (this.currentPage +1) +"'>Next</a></li>");
 		}
 		this.pagingHtmls.append("</ul>");
+		this.pagingHtmls.append("</nav>");
 		this.pagingHtmls.append("</div>");
+		this.pagingHtmls.append("</div>");
+		this.pagingHtmls.append("</div>");
+		this.pagingHtmls.append("</section>");
 	}
 
 	public int getStartCount() {
