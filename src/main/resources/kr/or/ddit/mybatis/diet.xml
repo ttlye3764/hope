@@ -70,9 +70,11 @@
 	</insert>
 	
 	<insert id="insertDietDayInfo" parameterType="dietDayInfoVO">
-		INSERT INTO DIET_DAY_INFO(DD_NO,
+		INSERT INTO DIET_DAY_INFO(DDI_NO,
+								DD_NO,
 								MENU_NO,
 								DD_INFO_DIVISION)VALUES(
+									diet_day_info_seq.nextval,
 									#{dd_no},
 									#{menu_no},
 									#{dd_info_division}
@@ -111,7 +113,11 @@
 		WHERE b.MENU_NO = a.MENU_NO
 	</select>
 	
-	
+	<delete id="deleteDietDayInfo" parameterType="Map">
+		DELETE DIETDAYINFO
+		WHERE DDI_NO = #{ddi_no}
+		AND DD_INFO_DIVISION = #{dd_info_division}
+	</delete>
 	
 </mapper>
 

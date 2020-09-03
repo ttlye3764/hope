@@ -16,7 +16,6 @@ import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddit.diet.service.IDietService;
@@ -215,18 +214,7 @@ public class DietController {
 										 int dd_no) throws Exception{
 		
 		
-		session = request.getSession();
 		
-		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
-		
-		dietDay.setMem_no(memberInfo.getMem_no());
-		
-		params.put("dd_date",dd_date);
-		params.put("mem_no", memberInfo.getMem_no());
-		
-		if(dietService.selectDietDay(params) == null) {
-			dd_no = dietService.insertDietDay(dietDay);	
-		}
 		dietDayInfo.setDd_no(dd_no+"");
 		dietService.InsertDietDayInfo(dietDayInfo);
 		
@@ -242,24 +230,32 @@ public class DietController {
 										String dd_date,
 										HttpServletRequest request,
 										HttpSession session,
-										Map<String, String> params) throws Exception{
+										Map<String, String> params,
+										Diet_dayVO dietDay,
+										String dd_no) throws Exception{
+		
+		//일별 식단 등록
 		
 		session = request.getSession();
 		
 		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
 		
-		params.put("dd_date", dd_date);
+		dietDay.setMem_no(memberInfo.getMem_no());
+		
+		params.put("dd_date",dd_date);
 		params.put("mem_no", memberInfo.getMem_no());
 		
+		if(dietService.selectDietDay(params) == null) {
+			dd_no = dietService.insertDietDay(dietDay)+"";	
+		}else {
+			dietDay = dietService.selectDietDay(params);
+		}
+		
+		
 		// 일별 식단 내용 가져오기
-		Diet_dayVO dietDay = dietService.selectDietDay(params);
-		
-		
-		// 일별 식단을 등록한 적이 있으면~
-		if(dietDay != null) {
+				
 			// 일별 식단의 식단 번호 가져오기
 			params.put("dd_no", dietDay.getDd_no());
-			
 			
 			// 일별 식단 상세 가져오기
 			// 1 -> 아침꺼 
@@ -274,11 +270,24 @@ public class DietController {
 			params.put("dd_info_division","3");
 			List<Diet_day_infoVO> dietDayInfoList3 = dietService.dietDayInfoList(params);
 			
+			andView.addObject("dietDay", dietDay);
 			andView.addObject("dietDayInfoList1", dietDayInfoList1);
 			andView.addObject("dietDayInfoList2", dietDayInfoList2);
 			andView.addObject("dietDayInfoList3", dietDayInfoList3);
-		}
 		
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
+	
+	@RequestMapping("deleteDietDayInfo")
+	public ModelAndView deleteDietDayInfo(ModelAndView andView,
+											Map<String, String> params,
+											String ddi_no,
+											String dd_info_division) throws Exception{
+		params.put("ddi_no", ddi_no);
+		params.put("dd_info_division", dd_info_division);
+		
+		dietService.deleteDietDayInfo(params);
 		
 		andView.setViewName("jsonConvertView");
 		return andView;

@@ -44,4 +44,7 @@ public interface IDietService {
 		
 		// 총 칼로리 업데이트
 		public void updateDietDayKcal(Map<String, String> params) throws Exception;
+		
+		// diet_day_info 삭제
+		public void deleteDietDayInfo(Map<String, String> params) throws Exception;
 }

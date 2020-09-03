@@ -75,4 +75,8 @@ public class DietServiceImpl implements IDietService {
 	public void updateDietDayKcal(Map<String, String> params) throws Exception {
 		dietDao.updateDietDayKcal(params);
 	}
+	@Override
+	public void deleteDietDayInfo(Map<String, String> params) throws Exception {
+		dietDao.deleteDietDayInfo(params);
+	}
 }

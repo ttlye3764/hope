@@ -423,7 +423,7 @@
 					
 					<div class="divider divider-dotted"></div>
 									
-									총 열량 : 
+									총 열량 : <div id="dd_kcal"></div>
 				</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary">확인</button>
@@ -444,6 +444,7 @@ var month;
 var day;
 var dd_date;
 var dd_no;
+
 $(function() {
 	displayCalender(currentMonth)
 	$("#date").append(new Date);
@@ -643,9 +644,6 @@ function menu_search3(){
 
 
 function dietDayInfoList1(){
-	
-	
-	
 	$.ajax({
 		type : 'POST',
 		url : '${pageContext.request.contextPath}/user/diet/calendarModal',
@@ -654,7 +652,7 @@ function dietDayInfoList1(){
 			dd_date : dd_date
 		},
 		error : function(result) {
-			alert(result.memberInfo.mem_name);
+			alert("실패");
 		},
 		success : function(result) {
 
@@ -662,28 +660,30 @@ function dietDayInfoList1(){
 			$('#dietDayInfo_tbody1').empty();
 			
 			var itemIndex = 1;
- 			dd_no = result.dietDayInfoList1[0].dd_no;
+ 			dd_no = result.dietDay.dd_no;
 
 			$('#dietDayInfo_thead1').append('<tr>');
 			$('#dietDayInfo_thead1').append('<th scope="col">#</th>');
 			$('#dietDayInfo_thead1').append('<th scope="col">메뉴</th>');
 			$('#dietDayInfo_thead1').append('<th scope="col">칼로리</th>');
+			$('#dietDayInfo_thead1').append('<th scope="col"></th>');
 			
  			$.each(result.dietDayInfoList1, function(index, item){
  				$('#dietDayInfo_tbody1').append('<tr>')
  				$('#dietDayInfo_tbody1').append('<td><input type="hidden" value="'+item.dd_no +'">'+itemIndex++ +'</td>'); 				
  				$('#dietDayInfo_tbody1').append('<td>'+item.menu_name+'</td>');
  				$('#dietDayInfo_tbody1').append('<td>'+item.menu_kcal+'</td>');
- 				$('#dietDayInfo_tbody1').append('</tr>');	 
+ 				$('#dietDayInfo_tbody1').append('<td><button class="btn btn-success" onclick="menu_delete1(this)"><input type="hidden" value="'+item.ddi_no +'">삭제</button></td>');
+ 				$('#dietDayInfo_tbody1').append('</tr>');
  			 });
+			 
+ 			$('#dd_kcal').empty();
+// 			$('#dd_kcal').append('<div>'+result.dietDay.dd_kcal+'</div>');
 		}
 	});
 }
 
-function dietDayInfoList2(){
-	
-	
-	
+function dietDayInfoList2(){	
 	$.ajax({
 		type : 'POST',
 		url : '${pageContext.request.contextPath}/user/diet/calendarModal',
@@ -711,17 +711,16 @@ function dietDayInfoList2(){
  				$('#dietDayInfo_tbody2').append('<td><input type="hidden" value="'+item.dd_no +'">'+itemIndex++ +'</td>'); 				
  				$('#dietDayInfo_tbody2').append('<td>'+item.menu_name+'</td>');
  				$('#dietDayInfo_tbody2').append('<td>'+item.menu_kcal+'</td>');
- 				$('#dietDayInfo_tbody2').append('</tr>');	 
+ 				$('#dietDayInfo_tbody2').append('</tr>')	 
  			 });
+			$('#dd_kcal').empty();
+// 			$('#dd_kcal').append('<div>'+result.dietDay.dd_kcal+'</div>');
 		}
 	});
 	
 }
 
 function dietDayInfoList3(){
-	
-
-	
 	$.ajax({
 		type : 'POST',
 		url : '${pageContext.request.contextPath}/user/diet/calendarModal',
@@ -751,9 +750,71 @@ function dietDayInfoList3(){
  				$('#dietDayInfo_tbody3').append('<td>'+item.menu_kcal+'</td>');
  				$('#dietDayInfo_tbody3').append('</tr>');	 
  			 });
+ 			$('#dd_kcal').empty();
+// 			$('#dd_kcal').append('<div>'+result.dietDay.dd_kcal+'</div>');
 		}
 	});
 	
+}
+
+function menu_delete1(e){
+	ddi_no = $(e).find('input').val();
+	
+	$.ajax({
+		type : 'POST',
+		url : '${pageContext.request.contextPath}/user/diet/deleteDietDayInfo',
+		dataType : 'JSON',
+		data : {
+			ddi_no : ddi_no,
+			dd_Info_division : "1"
+		},
+		error : function(result) {
+			alert("실패");
+		},
+		success : function(result) {
+			dietDayInfoList1();
+		}
+	});
+}
+
+function menu_delete2(e){
+	ddi_no = $('e').find('input').val();
+	
+	$.ajax({
+		type : 'POST',
+		url : '${pageContext.request.contextPath}/user/diet/deleteDietDayInfo',
+		dataType : 'JSON',
+		data : {
+			ddi_no : ddi_no,
+			dd_Info_division : "2"
+		},
+		error : function(result) {
+			alert("실패");
+		},
+		success : function(result) {
+			dietDayInfoList2();
+		}
+	});
+}
+
+function menu_delete3(e){
+	ddi_no = $('e').find('input').val();
+	
+	$.ajax({
+		type : 'POST',
+		url : '${pageContext.request.contextPath}/user/diet/deleteDietDayInfo',
+		dataType : 'JSON',
+		data : {
+			ddi_no : ddi_no,
+			dd_Info_division : "3"
+		},
+		error : function(result) {
+			alert("실패");
+		},
+		success : function(result) {
+			dietDayInfoList3();
+		}
+	});
 }
 
 

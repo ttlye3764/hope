@@ -2,6 +2,7 @@ package kr.or.ddit.vo;
 
 public class Diet_day_infoVO {
 	
+	private String ddi_no;
 	private String dd_no;
 	private String menu_no;
 	private String dd_info_division;
@@ -10,6 +11,12 @@ public class Diet_day_infoVO {
 	
 	
 	
+	public String getDdi_no() {
+		return ddi_no;
+	}
+	public void setDdi_no(String ddi_no) {
+		this.ddi_no = ddi_no;
+	}
 	public String getMenu_name() {
 		return menu_name;
 	}

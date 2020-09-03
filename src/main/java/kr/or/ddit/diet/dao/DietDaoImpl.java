@@ -75,4 +75,9 @@ public class DietDaoImpl implements IDietDao {
 	public void updateDietDayKcal(Map<String, String> params) throws Exception {
 		client.update("diet.updateDietDayKcal", params);
 	}
+	
+	@Override
+	public void deleteDietDayInfo(Map<String, String> params) throws Exception {
+		client.delete("diet.deleteDietDayInfo", params);
+	}
 }
