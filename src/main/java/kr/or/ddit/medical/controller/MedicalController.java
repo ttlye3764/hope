@@ -260,6 +260,13 @@ public class MedicalController {
 		String pillResult = pillInfo.pillAPI(pname, cname); //json으로 옴
 		return pillResult;
 	}
+	@ResponseBody
+	@RequestMapping(value="coronaSidoAPI",produces="text/plain;charset=UTF-8")
+	public String coronaSidoAPI(String date) throws Exception {
+		System.out.println(date);
+		String coronaSidoResult = Corona_sido.corona_sido(date);
+		return coronaSidoResult;
+	}
 
 
 

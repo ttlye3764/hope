@@ -211,16 +211,6 @@
 .legend span {
   float: right;
 }
-
-
-
-    
-    
-    
-    
-    
-    
-    
 #item_small{
 	display: block; margin-top:10px; margin-bottom:5px; font-size:11px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;
 }    
@@ -266,8 +256,65 @@
 					</div>
 					<div style="margin-top: 7px; height: 705px; width:280px;  border-top: 3px solid #164068; background-color: rgb(233,233,233);">
 						<strong id="strongID1" style="display:block; margin-top: 18px; margin-left:12px; color: #174069; font-family: 'Spoqa Han Sans'; font-size:20px;">인천</strong>
-						<div style="background-color: white; height: 310px;"></div>
-						<div style="background-color: gray;  height: 342px;"></div>
+						<div style="background-color: white; height: 310px;">
+						
+						</div>
+						<div style="background-color: rgb(233,233,233);  height: 342px; display: flex; flex-direction: column;">
+							<div style="display: flex; justify-content: space-between;">
+								<div style="margin-left: 5px; height: 13px;">
+									<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">누적 확진환자</span>
+								</div>
+								<div style="margin-right: 5px; height: 13px;">
+									<p style="font-size: 14px;"><span class="num chart_span1" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">751</span>명</p>
+								</div>
+							</div>
+							
+							<div style="display: flex; justify-content: space-between;">
+								<div style="margin-left: 5px;">
+									<span class="tit" style="margin-top:1px; font-size: 11px; font-family: 'Spoqa Han Sans'; color: rgb(235, 33, 77);">전일 대비 증감</span>
+								</div>
+								<div style="margin-right: 5px;">
+									<span class="num chart_span2" style="font-size: 11px; font-family: 'Spoqa Han Sans'; color: rgb(235, 33, 77);">(+11)</span>
+								</div>
+							</div>
+							
+							<div style="display: flex; justify-content: space-between; margin-top: 5px;">
+								<div style="margin-left: 5px;">
+									<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">격리중</span>
+								</div>
+								<div style="margin-right: 5px;">
+									<p style="font-size: 14px;"><span class="num chart_span1" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">321</span>명</p>
+								</div>
+							</div>
+							
+							<div style="display: flex; justify-content: space-between;">
+								<div style="margin-left: 5px;">
+									<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">누적 격리해제</span>
+								</div>
+								<div style="margin-right: 5px;">
+									<p style="font-size: 14px;"><span class="num chart_span1" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">427</span>명</p>
+								</div>
+							</div>
+							
+							<div style="display: flex; justify-content: space-between;">
+								<div style="margin-left: 5px;">
+									<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">사망자</span>
+								</div>
+								<div style="margin-right: 5px;">
+									<p style="font-size: 14px;"><span class="num chart_span1" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">3</span>명</p>
+								</div>
+							</div>
+							
+							<div style="display: flex; justify-content: space-between;">
+								<div style="margin-left: 5px;">
+									<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">10만명당 발생률</span>
+								</div>
+								<div style="margin-right: 5px;">
+									<p style="font-size: 10px;"><span class="num chart_span2" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">25.4</span>명</p>
+								</div>
+							</div>
+							
+						</div>
 					</div>
 					
 					
@@ -631,16 +678,40 @@
 	
 <script>
 
+function getToday(){
+	var date = new Date();
+	return date.getFullYear()+("0"+(date.getMonth()+1)).slice(-2)+("0"+(date.getDate()-1)).slice(-2);
+}
 
-
-
+var date = getToday();
+alert(date);
 $(function(){
-	$('.item-info-box').click(function(){		
+
+	$('.item-info-box').click(function(){	//지도 클릭	
 		var name = $(this).find('small').text();
 		var value1 = $(this).find('span:eq(0)').text();
 		var value2 = $(this).find('span:eq(1)').text();
 		$('#strongID1').text(name);
+		$('.chart_span1').text(value1);
+		$('.chart_span2').text(value2);
 	});
+
+
+	$.ajax({
+        url     : '${pageContext.request.contextPath}/user/medical/coronaSidoAPI.do',
+        type    : 'post',
+        dataType: 'json',
+        data : {'date':date },
+        success : function(result) {
+			console.log(result);
+        }
+	});
+
+
+
+
+
+	
 
 	
 });
