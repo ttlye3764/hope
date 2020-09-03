@@ -13,7 +13,7 @@
 		<result property="healthImage_time" column="healthImage_time" />
 		<result property="healthImage_difficulty" column="healthImage_difficulty" />
 		<result property="mem_no" column="mem_no" />
-		<collection property="items" column="file_healthImage_no" select="healthFile.healthFileList" ofType="healthFileVO" javaType="java.util.List"></collection>
+		<collection property="items" column="healthImage_no" select="healthFile.healthFileList" ofType="healthFileVO" javaType="java.util.List"></collection>
 	</resultMap>
 
 	<sql id="selectAll">
@@ -29,12 +29,12 @@
 		<if test="healthImage_category != null">
 			where healthImage_category = #{healthImage_category}
 		</if>
-		ORDER BY healthImage_no desc)A) B
-<!-- 		<![CDATA[ -->
-<!-- 			WHERE B.RNUM <= #{startCount} -->
-<!-- 			  AND B.RNUM >= #{endCount} -->
-<!-- 		]]> -->
-		ORDER BY B.RNUM
+		ORDER BY healthImage_no)A) B
+		<![CDATA[
+			WHERE B.RNUM <= #{startCount}
+			  AND B.RNUM >= #{endCount}
+		]]>
+		ORDER BY B.RNUM DESC
 	</select>
 
 	<select id="healthImageInfo" parameterType="map" resultMap="healthResultMap">

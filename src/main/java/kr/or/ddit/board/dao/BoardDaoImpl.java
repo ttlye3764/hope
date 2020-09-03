@@ -66,5 +66,10 @@ public class BoardDaoImpl implements IBoardDao{
 		client.update("board.countHit", bd_no);	
 	}
 
+	@Override
+	public List<BoardVO> myboardList(Map<String, String> params) throws Exception {
+		return client.selectList("board.myboardList", params);
+	}
+
 
 }

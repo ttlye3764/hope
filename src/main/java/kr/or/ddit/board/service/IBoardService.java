@@ -10,6 +10,7 @@ import kr.or.ddit.vo.BoardVO;
 public interface IBoardService {
 		//테이블 조회
 		public List<BoardVO> boardList(Map<String, String> params) throws Exception;
+		public List<BoardVO> myboardList(Map<String, String> params) throws Exception;
 		//테이블 수정                                                             
 		public void updateBoard(BoardVO boardVO, MultipartFile[] items) throws Exception;
 		//테이블 삭제

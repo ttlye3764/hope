@@ -47,7 +47,7 @@
 		SELECT mypill_SEQ.CURRVAL FROM DUAL
 	</select>
 	
-	<update id="updateMedicalInfo" parameterType="mypillVO">
+	<update id="updateMedicalInfo" parameterType="mypillVO" >
 		update mypill 
 		set 
 			pill_no = #{pill_no},

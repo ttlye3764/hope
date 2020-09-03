@@ -37,6 +37,11 @@ $(function(){
 	$('#btn3').click(function() {
 		$(location).attr('href','${pageContext.request.contextPath}/user/main/mainForm.do');
 	});
+	var id = '${LOGIN_MEMBERINFO.mem_id}';
+	if(id==''){
+	   alert('로그인 후 이용해주세요.');
+	   $(location).attr('href','${pageContext.request.contextPath}/user/main/mainForm.do');
+	}
 });
 function checkpass(){
 	$.ajax({

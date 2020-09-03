@@ -104,11 +104,6 @@
 						</div>
                         <br>              
 					
-					<!-- <div class="form-group" style="margin: auto">
-							<label for="exampleFormControlFile1">File input</label>
-							<input type="file" class="form-control-file" id="exampleFormControlFile1">
-						</div> -->
-
 					<div class="portfolio-wrap grid items-4 items-padding">
 					<c:forEach items= "${healthImageList }" var= "healthInfo" varStatus="status">
 						<!-- portfolio-card -->
@@ -117,33 +112,30 @@
 							
 								<!-- 파일 -->
 								 <c:if test="${!empty healthInfo.items[status.index].file_save_name }">  
-									<div class="portfolio-card-header" id="image_container" style="width: 300px; height: 230px;">
-										<img src="/files/${healthInfo.items[status.index].file_save_name}" alt="pic1" style="width: 300px; height: 230px;">
+									<div class="portfolio-card-header" id="image_container" style="width: 235px; height: 160px;">
+										<img src="/files/${healthInfo.items[status.index].file_save_name}" alt="pic1" style="width: 233px; height: 160px;">
 				 					</div> 
 								 </c:if>  
 								
-								<div class="portfolio-card-footer" id="healthCard">
+								<div class="portfolio-card-footer">
 									<a class="full-screen" data-toggle="modal" data-target="#exampleModalCenter${status.index}"
 										 data-fancybox="portfolio" data-caption="title">
 										<i class="ti-fullscreen"></i>
 									</a>
-										<h6 class="mb-4">
-											<a id="title">
-												<input type="hidden" value="${healthInfo.healthImage_no}" id="healthImage_no"/>
-													${healthInfo.healthImage_title}
-											</a>
+										<h6 class="info-title" style="font-size: 15px;">
+											<a title="">${healthInfo.healthImage_title}</a>
 										</h6>
 									
 									<c:if test="${healthInfo.healthImage_difficulty eq '상'}">
-                                         <span class="badge badge-danger">${healthInfo.healthImage_difficulty}</span>
+                                         <span class="badge badge-danger" >${healthInfo.healthImage_difficulty}</span>
                                      </c:if>
                                      
                                      <c:if test="${healthInfo.healthImage_difficulty eq '중'}">
-                                         <span class="badge badge-warning">${healthInfo.healthImage_difficulty}</span>
+                                         <span class="badge badge-warning" >${healthInfo.healthImage_difficulty}</span>
                                      </c:if>
                                      
                                      <c:if test="${healthInfo.healthImage_difficulty eq '하'}">
-                                         <span class="badge badge-success">${healthInfo.healthImage_difficulty}</span>
+                                         <span class="badge badge-success" >${healthInfo.healthImage_difficulty}</span>
                                      </c:if>
 								</div>
 								
@@ -153,14 +145,19 @@
 										<div class="modal-dialog modal-dialog-centered" role="document">
 									  		<div class="modal-content" id="modals" style="text-align: center;">
 												<div class="modal-header" style="text-align: center;">
-													<h5 class="mb-4" id="exampleModalLongTitle" style="margin-left: 185px;">
-													<p>${healthInfo.healthImage_title}</p>
-													</h5>
+												<!-- 파일 -->
+													 <c:if test="${!empty healthInfo.items[status.index].file_save_name }">  
+														<div class="portfolio-card-header" id="image_container" style="width: 235px; height: 160px;margin-left: 25%">
+															<img src="/files/${healthInfo.items[status.index].file_save_name}" 
+															alt="pic1" style="width: 233px; height: 160px;margin: auto;">
+									 					</div> 
+													 </c:if>  
 													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 													<span aria-hidden="true">&times;</span>
 													</button>
 												</div>
 												<div class="modal-body" style="text-align: center;">
+													<p>운동명 : ${healthInfo.healthImage_title}</p>
 													<p>카테고리 : ${healthInfo.healthImage_category}</p>
 													<p>추천 연령 : ${healthInfo.healthImage_age}</p>
 													<p>운동법 : ${healthInfo.healthImage_diet}</p>
@@ -177,9 +174,7 @@
 						<!-- portfolio-card -->
 					</c:forEach>
 					</div>
-						<div id="paginationDIV" style="margin-left: 40%; margin-bottom: 20px;">
-							<div>${pagination }</div>
-						</div>
+						<div style="margin: auto;">${pagination }</div>
 				</div>
 			</div>
 		</div>
@@ -202,17 +197,6 @@
 <script type="text/javascript">
 
 			$(function(){
-				// 등록
-				$('#regBtn').click(function(){	
-					$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/healthImageForm.do');
-					
-				});
-
-				// 수정
-				$('#list tr').click(function(){
-					var healthImage_no = $(this).find('td:eq(0) input').val();
-					$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/healthImageView.do?healthImage_no=' + healthImage_no);
-				});
 
 				// 엑셀
 				$('#excel').click(function(){

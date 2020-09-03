@@ -8,6 +8,13 @@
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
+$(function(){
+	var id = '${LOGIN_MEMBERINFO.mem_id}';
+	if(id==''){
+	   alert('로그인 후 이용해주세요.');
+	   $(location).attr('href','${pageContext.request.contextPath}/user/main/mainForm.do');
+	}
+});
 	function chk() {
 		var req = document.form.req.checked;
 		var num = 0;

@@ -88,7 +88,7 @@
 		</table>
 	</div>
 </div>
-<div id="paginationDIV" style="margin-left: 40%; margin-bottom: 20px;">
+<div id="paginationDIV" style="margin-left: auto; margin-bottom: 20px;">
 		<div>${pagination }</div>
 </div>
 </body>

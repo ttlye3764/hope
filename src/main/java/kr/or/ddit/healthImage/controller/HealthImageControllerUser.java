@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.or.ddit.healthImage.service.IHealthImageService;
 import kr.or.ddit.healthImageFile.service.IHealthImageFileService;
 import kr.or.ddit.utiles.RolePaginationUtil;
+import kr.or.ddit.utiles.RolePaginationUtil_su;
 import kr.or.ddit.vo.HealthImageVO;
 
 @Controller
@@ -35,29 +36,31 @@ public class HealthImageControllerUser {
 	
 	// 운동법 리스트
 	@RequestMapping("healthImageList")
-	public ModelAndView healthImageList(ModelAndView andView
+	public ModelAndView healthImageList(ModelAndView andView 
 										,Map<String, String> params
-										
-										,HttpServletRequest request) throws Exception {
-//	
-//		if(currentPage == null){
-//	         currentPage = "1";
-//	      }
+										,RolePaginationUtil_su pagination
+										,HttpServletRequest request
+										,@RequestParam(value = "currentPage", required = false) String currentPage) throws Exception {
+		
+		
+		if(currentPage == null){
+	         currentPage = "1";
+	      }
 
 		String totalCount = this.healthImageService.totalCount(params);
 		
-//		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount));
-//	    
-//		String startCount = String.valueOf(pagination.getStartCount());
-//	    String endCount = String.valueOf(pagination.getEndCount());
-//	    
-//	    params.put("startCount", startCount);
-//	    params.put("endCount", endCount);
+		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount), totalCount);
+	    
+		String startCount = String.valueOf(pagination.getStartCount());
+	    String endCount = String.valueOf(pagination.getEndCount());
+	    
+	    params.put("startCount", startCount);
+	    params.put("endCount", endCount);
 		
 		List<HealthImageVO> healthImageList = this.healthImageService.healthList(params);
 		
 		andView.addObject("healthImageList", healthImageList);
-//		andView.addObject("pagination", pagination.getPagingHtmls());
+		andView.addObject("pagination", pagination.getPagingHtmls());
 
 		andView.setViewName("user/healthImage/healthImageList");
 
@@ -67,14 +70,34 @@ public class HealthImageControllerUser {
 	
 	// 카테고리
 	@RequestMapping("chooseList")
-	public ModelAndView chooseList(ModelAndView andView, Map<String, String> params, @RequestParam(value = "choose") String choose) throws Exception{
-		System.out.println(choose);
+	public ModelAndView chooseList(ModelAndView andView, 
+									Map<String, String> params, 
+									@RequestParam(value = "choose") String choose
+									,RolePaginationUtil_su pagination
+									,HttpServletRequest request
+									,@RequestParam(value = "currentPage", required = false) String currentPage) throws Exception{
 		
+		if(currentPage == null){
+	         currentPage = "1";
+	      }
+
+		String totalCount = this.healthImageService.totalCount(params);
+		
+		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount), totalCount);
+	    
+		String startCount = String.valueOf(pagination.getStartCount());
+	    String endCount = String.valueOf(pagination.getEndCount());
+	    
+	    params.put("startCount", startCount);
+	    params.put("endCount", endCount);
+	    
 		params.put("healthImage_category", choose);
 		
 		List<HealthImageVO> healthImageList = this.healthImageService.healthList(params);
 		
 		andView.addObject("healthImageList", healthImageList);
+		andView.addObject("pagination", pagination.getPagingHtmls());
+		
 		andView.setViewName("user/healthImage/healthImageList");
 		
 		return andView;

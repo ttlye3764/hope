@@ -5,11 +5,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Component;
 
 
-public class RolePaginationUtil {
+public class RolePaginationUtil_su {
 	private int currentPage; 		// 현재 페이지
 	private int totalCount;			// 전체 게시글 갯수
 	private int totalPage;			// 전체 페이지 갯수
-	private int blockCount = 10;    // 페이지별 출력될 게시글 갯수
+	private int blockCount = 12;    // 페이지별 출력될 게시글 갯수
 	private int blockPage = 5;		// 페이지네이션 메뉴 갯수
 	private int startPage;			// 페이지네이션 메뉴 시작 페이지 번호
 	private int endPage;			// 페이지네이션 메뉴 끝 페이지 번호
@@ -17,13 +17,16 @@ public class RolePaginationUtil {
 	private int endCount;			// 해당 페이지 내 게시글 끝번호
 	private HttpServletRequest request;
 	private StringBuffer pagingHtmls;
+	private String choose;
 	
 	public void RolePaginationUtil(HttpServletRequest request,
 							  int currentPage,
-							  int totalCount){
+							  int totalCount,
+							  String choose){
 		this.request = request;
 		this.currentPage = currentPage;
 		this.totalCount = totalCount;
+		this.choose = choose;
 		
 		pagingHtmls = new StringBuffer();
 		
