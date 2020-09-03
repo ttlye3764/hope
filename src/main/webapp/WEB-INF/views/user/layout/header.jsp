@@ -268,9 +268,6 @@ function LogOut(){
 						<a class="nav-link" data-toggle="collapse" href="#search-open"><i class="ti-search"> </i></a>
 					</div>
 					<!-- extra item Btn-->
-					<div class="nav-item border-0 d-none d-lg-inline-block align-self-center">
-						<a href="#" class=" btn btn-sm btn-grad text-white mb-0">Buy Now!</a>
-					</div>
 				</div>
 				<!-- Header Extras End-->
 			</div>
