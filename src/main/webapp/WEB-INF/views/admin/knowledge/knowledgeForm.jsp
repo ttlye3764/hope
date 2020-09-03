@@ -20,6 +20,30 @@
 <script type="text/javascript">
 $(function(){
 	$('form[name=knowledgeForm]').on('submit', function(){	
+
+		var k_title = $('#k_title').val();
+		var k_answer1 = $('#k_answer1').val();
+		var k_answer2 = $('#k_answer2').val();
+		var k_answer3 = $('#k_answer3').val();
+		var k_answer4 = $('#k_answer4').val();
+		
+		var radio1 = $('input:radio[name=customRadio1]').is(':checked');
+		var radio2 = $('input:radio[name=customRadio2]').is(':checked');
+		var radio3 = $('input:radio[name=customRadio3]').is(':checked');
+		var radio4 = $('input:radio[name=customRadio4]').is(':checked');
+
+		if (k_title == "" || k_answer1 == "" || k_answer2 == "" || k_answer3 == "" || k_answer4 == "") {
+			alert("빈 칸을 모두 입력해주세요.(내용 제외)");
+
+			return false;
+		} 
+
+		if (!radio1) {
+			alert("버튼을 체크해주세요.")
+
+			return false;
+		}
+
 		alert("등록 완료");
 	    var k_answer = $('input[name="k_answer"]:checked').val();
 		 $(this).attr('action','${pageContext.request.contextPath}/admin/knowledge/insertKnowledgeInfo.do?k_answer=' + k_answer);

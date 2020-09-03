@@ -216,7 +216,7 @@ $(function(){
 							src="${pageContext.request.contextPath }/resources/template/assets/images/diet.jpg" alt="">
 					</a> 
 					
-					<table class="tg" style="width: 650px;margin: auto;">
+					<!-- <table class="tg" style="width: 650px;margin: auto;">
 						<thead>
 						  <tr>
 						    <th class="tg-6ykz" colspan="4">여성</th>
@@ -687,7 +687,7 @@ $(function(){
 						    <td class="tg-0pky"></td>
 						  </tr>
 						</tbody>
-					</table>
+					</table> -->
 				</div>
 				
 				<div class="modal fade text-left" id="exampleModalCenter" tabindex="-1" role="dialog" 

@@ -64,15 +64,15 @@
 		list.push("${knowledgeInfo.k_answer}");
 
 		var Chk = $('input:radio[name=radio${status.count }]').is(':checked');
-		if (!Chk) {
-			document.getElementById("allChk").innerHTML = "체크 되지 않은 것이 있습니다.";
-			$('#answer').hide();
-			$('#return').hide();
-			$('#statistic').hide();
+// 		if (!Chk) {
+// 			document.getElementById("allChk").innerHTML = "체크 되지 않은 것이 있습니다.";
+// 			$('#answer').hide();
+// 			$('#return').hide();
+// 			$('#statistic').hide();
 
-			return;
+// 			return;
+// 		} 
 
-		}
 		// 사용자가 선택한 값
 		var radioChk = $('input[name="radio${status.count }"]:checked').val();
 		hap.push(radioChk);
@@ -145,6 +145,7 @@
 
        	 	if (i == 300) {
 				clearInterval(timer);
+				$("input[type=radio]").attr("disabled", "disabled");  
 	       	 }
 
           }, 1000);

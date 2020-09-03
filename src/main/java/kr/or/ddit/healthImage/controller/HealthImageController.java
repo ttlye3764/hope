@@ -44,7 +44,6 @@ public class HealthImageController {
 										,HttpServletRequest request
 										,@RequestParam(value = "currentPage", required = false) String currentPage) throws Exception {
 		
-		
 		if(currentPage == null){
 	         currentPage = "1";
 	      }
@@ -154,8 +153,28 @@ public class HealthImageController {
 		
 		// 엑셀 출력
 		@RequestMapping("excelDown")
-		public void excelDown(HttpServletResponse response, Map<String, String> params) throws Exception {
+		public void excelDown(HttpServletResponse response
+								,Map<String, String> params
+								,@RequestParam(value = "choose", required = false) String choose
+								,RolePaginationUtil_su pagination
+								,HttpServletRequest request
+								,@RequestParam(value = "currentPage", required = false) String currentPage) throws Exception {
 			
+			if(currentPage == null){
+		         currentPage = "1";
+		      }
+
+			String totalCount = this.healthImageService.totalCount(params);
+			
+			pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount), totalCount);
+		    
+			String startCount = String.valueOf(pagination.getStartCount());
+		    String endCount = String.valueOf(pagination.getEndCount());
+		    
+		    params.put("startCount", startCount);
+		    params.put("endCount", endCount);
+		    params.put("healthImage_category", choose);
+		    
 			// 게시판 목록조회
 			List<HealthImageVO> list = healthImageService.healthList(params);
 			
@@ -210,7 +229,7 @@ public class HealthImageController {
 			
 			// 엑셀 출력
 			response.setContentType("application/vnd.ms-excel");
-			response.setHeader("Content-Disposition", "attachment;filename=test.xls");
+			response.setHeader("Content-Disposition", "attachment;filename=excel.xls");
 			
 			wb.write(response.getOutputStream());
 

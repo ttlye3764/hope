@@ -66,6 +66,12 @@
                                         <div class="table-responsive">
                                             <table class="table table-centered w-100 dt-responsive nowrap" id="products-datatable" style="text-align: center;">
                                                 <ul class="nav nav-tabs mb-3">
+                                                 <li class="nav-item">
+		                                                <a href="#home" id="all" data-toggle="tab" aria-expanded="true" class="nav-link">
+		                                                    <i class="mdi mdi-home-variant d-lg-none d-block mr-1"></i>
+		                                                    <span class="d-none d-lg-block">전체</span>
+		                                                </a>
+		                                            </li>
 		                                            <li class="nav-item">
 		                                                <a href="#home" onclick="shoulder();" data-toggle="tab" aria-expanded="true" class="nav-link">
 		                                                    <i class="mdi mdi-home-variant d-lg-none d-block mr-1"></i>
@@ -101,12 +107,7 @@
 		                                                    <span class="d-none d-lg-block">다리</span>
 		                                                </a>
 		                                            </li>
-		                                            <li class="nav-item">
-		                                                <a href="#home" id="all" data-toggle="tab" aria-expanded="true" class="nav-link">
-		                                                    <i class="mdi mdi-home-variant d-lg-none d-block mr-1"></i>
-		                                                    <span class="d-none d-lg-block">전체</span>
-		                                                </a>
-		                                            </li>
+		                                           
 		                                        </ul>
                                                 <thead class="thead-light">
                                                     <tr>
@@ -120,7 +121,7 @@
                                                 </thead>
 												
 												<c:forEach items="${healthImageList }" var="healthInfo" varStatus="status">
-                                                <tbody>
+                                                <tbody >
                                                      <tbody id="list">
                                                     <tr>
                                                         <td>
