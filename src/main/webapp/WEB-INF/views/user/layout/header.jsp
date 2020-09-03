@@ -113,7 +113,7 @@ function LogOut(){
 				<a class="navbar-brand" href="${pageContext.request.contextPath}/user/main/mainForm.do">
 					<!-- SVG Logo Start -->
 					
-						<img src="../../image/logo.png" style="width: 100%; height: 100%;"/>
+						<img src="../../image/logo.png" style="width: 180px; height: 90px;"/>
 					
 					<!-- SVG Logo End -->
 				</a>
