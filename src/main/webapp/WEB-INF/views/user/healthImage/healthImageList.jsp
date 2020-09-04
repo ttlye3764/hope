@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -114,7 +115,9 @@
 								<!-- 파일 -->
 								 <c:if test="${!empty healthInfo.items[status.index].file_save_name }">  
 									<div class="portfolio-card-header" id="image_container" style="width: 235px; height: 160px;">
-										<img src="/files/${healthInfo.items[status.index].file_save_name}" alt="pic1" style="width: 233px; height: 160px;">
+										<img src="/files/${healthInfo.items[status.index].file_save_name}" alt="pic1" 
+										onError="this.src='${pageContext.request.contextPath }/resources/template/assets/images/character.PNG';"
+										style="width: 233px; height: 160px;">
 				 					</div> 
 								 </c:if>  
 								
@@ -146,27 +149,24 @@
 										<div class="modal-dialog modal-dialog-centered" role="document">
 									  		<div class="modal-content" id="modals" style="text-align: center;">
 												<div class="modal-header" style="text-align: center;vertical-align: middle">
-												<!-- 파일 -->
-												 	 <%-- <c:if test="${!empty healthInfo.items[status.index].file_save_name }">  
-														<div class="portfolio-card-header" id="image_container" style="width: 235px; height: 160px;margin-left: 25%">
-															<img src="/files/${healthInfo.items[status.index].file_save_name}" 
-															alt="pic1" style="width: 233px; height: 160px;margin: auto;">
-									 					</div> 
-													 </c:if> --%>
-													  
-													  <c:if test="${!empty healthInfo.items[status.index].file_save_name }">  
+													
+													<!-- 동영상일 떄 -->
+													<c:set var="fileName" value="${fn:split(healthInfo.items[status.index].file_save_name,'.') }" />
+													  <c:if test="${fileName[1] eq 'mp4'}">  
 															  <video id="myVideo" oncontextmenu="return false;" width="640" controls autoplay="autoplay">
 															    <source src="/files/${healthInfo.items[status.index].file_save_name}" type="video/mp4">
 															</video>
 													 </c:if> 
+													 
+													<!-- 파일일 떄 --> 
+													<c:set var="fileName" value="${fn:split(healthInfo.items[status.index].file_save_name,'.') }" />
+													  <c:if test="${fileName[1] eq 'jpg' || fileName[1] eq 'png'}">    
+														<div class="portfolio-card-header" id="image_container" style="width: 235px; height: 160px;margin-left: 25%">
+															<img src="/files/${healthInfo.items[status.index].file_save_name}" 
+															alt="pic1" style="width: 233px; height: 160px;margin: auto;">
+									 					</div> 
+													 </c:if>
 													
-												 <!-- 	<video oncontextmenu="return false;" id="myVideo" width="640" controls autoplay style="margin: 0px 0px 0px 80px;">
-													  <source src="movie.mp4" type="video/mp4">
-													</video> -->
-
-													<button type="button" class="btn btn-light mb-2 mr-1" id="playBtn">재생</button>
-													<button type="button" class="btn btn-light mb-2 mr-1" id="fullBtn">전체화면</button> 
-
 													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 													<span aria-hidden="true">&times;</span>
 													</button>
@@ -200,7 +200,8 @@
 													<form name="file" method="post" enctype="multipart/form-data">
 														<div class="form-group">
 															<label for="exampleFormControlFile1">인바디 파일을 넣어주세요.</label>
-															<input type="file" name="files" class="form-control-file" id="file" onchange="setThumbnail(event);">
+															<input type="file" name="files" 
+															class="form-control-file" id="file" onchange="setThumbnail(event);">
 														</div>
 													</form>
 <!-- 												    <div id="image_container" style="width: 230px;height: 160px;"></div> -->
@@ -324,28 +325,6 @@
 				  var choose = $('#leg').val();	
 				  location.href = '${pageContext.request.contextPath}/user/healthImage/chooseList.do?choose=' + choose;
 			}
-			$("#playBtn").on("click", function() {
-		        $("#myVideo").trigger("play");
-
-		    });
-
-		    $("#fullBtn").on("click", function() {
-		        var elem = document.getElementById("myVideo");
-
-		        if(elem.requestFullscreen) {
-		            elem.requestFullscreen();
-
-		        } else if(elem.mozRequestFullScreen) {
-		            elem.mozRequestFullScreen();
-
-		        } else if (elem.webkitRequestFullscreen) {
-		            elem.webkitRequestFullscreen();
-
-		        } else if (elem.msRequestFullscreen) {
-		            elem.msRequestFullscreen();
-		        }
-
-		    });
 
 		    $("#myVideo").on("ended", function() {
 		         console.log("Video Finished");
