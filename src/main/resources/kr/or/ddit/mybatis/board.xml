@@ -22,7 +22,7 @@
     </resultMap>
 
 	
-	<select id="boardInfo" parameterType="map" resultType="boardVO">
+	<select id="boardInfo" parameterType="map" resultType="boardVO" resultMap="boardResultMap">
 		SELECT *
 		FROM BOARD
 		WHERE BD_NO = #{bd_no}
@@ -52,7 +52,7 @@
 				</if>
 	</select>
 	
-	<select id="myboardList" resultType="boardVO" parameterType="map">
+	<select id="myboardList" resultType="boardVO" parameterType="map" resultMap="boardResultMap">
 		SELECT *
 		FROM BOARD
 		WHERE BD_DIVISION = #{bd_division}
