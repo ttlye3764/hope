@@ -3,10 +3,6 @@
 
 
 <style>
-
-
-
-
 	#fix1{
 		width:300px;
 		height:300px;
@@ -232,6 +228,7 @@
 
 
 
+	
 
 
 
@@ -255,35 +252,11 @@
 					<div style="margin-top: 7px; height: 705px; width:280px;  border-top: 3px solid #164068; background-color: rgb(233,233,233);">
 						<strong id="strongID1" style="display:block; margin-top: 18px; margin-left:12px; color: #174069; font-family: 'Spoqa Han Sans'; font-size:20px;"></strong>
 						
-						<div style="background-color: white; height: 400px; margin-top: 10px;">
+						<div style="background-color: rgb(233, 233, 233); height: 400px; margin-top: 10px;">
 						<div class="chart_d" style="height: 400px;" >
 								<div style="height: 400px;">
-									<div class="cc_graph"  style="display: flex; flex-direction : column; height: 400px;">
-										   <div class="pieID pie" style="margin-left: 15%; margin-top: 10%;">
-										    </div>
-										    <div class="pieChartLeft">
-											    <ul class="pieID legend leftUl" style="box-shadow: 0px 0px;">
-												      <li>
-												        <em id="em1">대구</em>
-												        <span id="span01">7072</span>
-												      </li>
-												      <li>
-												        <em id="em2">서울</em>
-												        <span id="span02">4201</span>
-												      </li>
-												      <li id="pieLi1">
-												        <em id="em3">경기</em>
-												        <span id="span03">3527</span>
-												      </li>      
-												      <li id="pieLi2">
-												        <em id="em4">기타</em>
-												        <span id="span04">10000</span>
-												      </li>
-											    </ul>
-										   </div>
-										   
-										  <!--  <canvas id="pie" style="height: 400px;" ></canvas> -->
-										   
+									<div class="cc_graph"  style="display: flex; flex-direction : column; height: 400px; border-bottom:3px solid #164068; ">
+									<canvas id="myPieChart"  style="height: 400px; width: 400px; margin-left: 5px;"></canvas>		<!-- height: 190px; width: 100%; -->
 									</div>
 								</div>
 							</div>						
@@ -496,19 +469,19 @@
 											<span class="title" style=" margin-top:10px;  margin-bottom: 0px; font-family: 'Spoqa Han Sans'; font-size: 16px; color: #174069;">일별 확진환자 발생 및 완치 추세</span>
 										</div>
 									</div>
-									<div style="display: flex; flex-direction: column; height: 190px;">
+									<div style="display: flex; flex-direction: column; height: 220px;">
 										  	<!-- line chart canvas element -->
-										<canvas id="buyers"  style="height: 190px; width: 100%; margin-left: 5px;"></canvas>		<!-- height: 190px; width: 100%; -->			       
+										<canvas id="myChart"  style="height: 220px; width: 100%; margin-left: 5px;"></canvas>		<!-- height: 190px; width: 100%; -->			       
 									</div>
 									
-									<div style="height:28px; display: flex; justify-content: center; align-items: center;">
+									<!-- <div style="height:28px; display: flex; justify-content: center; align-items: center;">
 										<div style="width: 15px; height: 15px; background-color: gray;  margin-top:10px;"></div>
 										<span class="title" style=" margin-left:3px; margin-top:10px;">사망</span>
 										<div style="width: 15px; height: 15px; background-color: red;  margin-top:10px;"></div>
 										<span class="title" style=" margin-left:3px; margin-top:10px;">확진</span>
 										<div style="width: 15px; height: 15px; background-color: skyblue;  margin-top:10px;"></div>
 										<span class="title" style=" margin-left:3px; margin-top:10px;">격리해제</span>
-									</div>
+									</div> -->
 							</div>
 							
 						</div> <!-- 차트쪽 div -->
@@ -625,11 +598,14 @@
 	</section>
 	
 	
-	
-	
-	
 <script>
 
+	var dateList = [];
+	var dataList = [];
+	var deathList = [];
+	var clearList = [];
+	var decideList = [];
+	
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
@@ -674,7 +650,6 @@ var startdate = startday();
 var enddate = endday();
 
 function getCorona(name1){
-	
 	$.ajax({
         url     : '${pageContext.request.contextPath}/user/medical/coronaSidoAPI.do',
         type    : 'post',
@@ -711,17 +686,23 @@ function getCorona(name1){
 						}
 				}
 	        });
-			$('#em1').text('전체');
-			$('#span01').text(all);
-			$('#em2').text(name1);
-			$('#span02').text(target);
-			$('#pieLi1').empty();
-			$('#pieLi2').empty();
+
+			dataList[0] = all;
+			dataList[1] = target;
+			var label = [];
+			label[0] = '전체';
+			label[1] = name1;
+			PieChart(label,dataList);
+
+
+
+
+
+			
         }
 	});
 
-	
-	
+
 	/*<li>
       <em>대구</em>
       <span>7072</span>
@@ -733,10 +714,6 @@ function getCorona(name1){
 	
 };
 
-var dateList = new Array();
-var deathList = new Array();
-var clearList = new Array();
-var decideList = new Array();
 
 $(function(){
 
@@ -790,7 +767,6 @@ $(function(){
 			for(var i=0;i<clear.length;i++){
 				if(i != 0){
 					var value = clear[i] - clear[i-1];
-					console.log(typeof value);
 					clearList.push(value);
 				}
 			}
@@ -798,21 +774,15 @@ $(function(){
 				if(i != 0){
 					var value = death[i] - death[i-1];
 					deathList.push(value);
-					console.log(typeof value);
 				}
 			}
 			for(var i=0;i<decide.length;i++){
 				if(i != 0){
 					var value = decide[i] - decide[i-1];
 					decideList.push(value);
-					console.log(typeof value);
 				}
 			}
-			
-			/* console.log(dateList);
-			console.log(clearList);
-			console.log(deathList);
-			console.log(decideList); */
+			drawChart(dateList,clearList,deathList,decideList);
 			
 			
 			/*var date = result.response.body.items.item[0].stateDt + "";
@@ -882,15 +852,14 @@ $(function(){
 			<seq>247				감연현황 고유값
 			<stateDt>20200831			기준일
 			<stateTime>00:00			기준시간 */
-
-
-	
-
-			
 		}
 	});
 
-
+	console.log("dd");
+	console.log(dateList);
+	console.log(clearList);
+	console.log(deathList);
+	console.log(decideList);
 	
 	$.ajax({
         url     : '${pageContext.request.contextPath}/user/medical/coronaSidoAPI.do',
@@ -904,37 +873,12 @@ $(function(){
 			var n2;
 			var n3;
 			var n4;
+			var labels = [];
+			labels.push('전체');
+			dataList.push(result.response.body.items.item[18].defCnt);
 			
-		/* 	$.each(result.response.body.items.item,function(i,v){
-				if(i <19){
-					
-				}
-
-				
-				
-
-			})
- */
+			PieChart(labels, dataList);
 			
-/* 
-			 <li>
-		        <em>대구</em>
-		        <span>7072</span>
-		      </li>
-		      <li>
-		        <em>서울</em>
-		        <span>4201</span>
-		      </li>
-		      <li>
-		        <em>경기</em>
-		        <span>3527</span>
-		      </li>      
-		      <li>
-		        <em>기타</em>
-		        <span>10000</span>
-		      </li>     
- */
-
 
 
 
@@ -1090,141 +1034,136 @@ $(function(){
 			
         }
 	});
-
-
-
-
-
 	
+}); //$(function())
 
-	
-});
+function drawChart(dateList,clearList,deathList,decideList){
 
-	function sliceSize(dataNum, dataTotal) {
-	  return (dataNum / dataTotal) * 360;
-	}
-	function addSlice(sliceSize, pieElement, offset, sliceID, color) {
-	  $(pieElement).append("<div class='slice "+sliceID+"'><span></span></div>");
-	  var offset = offset - 1;
-	  var sizeRotation = -179 + sliceSize;
-	  $("."+sliceID).css({
-	    "transform": "rotate("+offset+"deg) translate3d(0,0,0)"
-	  });
-	  $("."+sliceID+" span").css({
-	    "transform"       : "rotate("+sizeRotation+"deg) translate3d(0,0,0)",
-	    "background-color": color
-	  });
-	}
-	function iterateSlices(sliceSize, pieElement, offset, dataCount, sliceCount, color) {
-	  var sliceID = "s"+dataCount+"-"+sliceCount;
-	  var maxSize = 179;
-	  if(sliceSize<=maxSize) {
-	    addSlice(sliceSize, pieElement, offset, sliceID, color);
-	  } else {
-	    addSlice(maxSize, pieElement, offset, sliceID, color);
-	    iterateSlices(sliceSize-maxSize, pieElement, offset+maxSize, dataCount, sliceCount+1, color);
-	  }
-	}
-	function createPie(dataElement, pieElement) {
-	  var listData = [];
-	  $(dataElement+" span").each(function() {
-	    listData.push(Number($(this).html()));
-	  });
-	  var listTotal = 0;
-	  for(var i=0; i<listData.length; i++) {
-	    listTotal += listData[i];
-	  }
-	  var offset = 0;
-	  var color = [
-	    "cornflowerblue", 
-	    "olivedrab", 
-	    "orange", 
-	    "tomato", 
-	    "crimson", 
-	    "purple", 
-	    "turquoise", 
-	    "forestgreen", 
-	    "navy", 
-	    "gray"
-	  ];
-	  for(var i=0; i<listData.length; i++) {
-	    var size = sliceSize(listData[i], listTotal);
-	    iterateSlices(size, pieElement, offset, i, 0, color[i]);
-	    $(dataElement+" li:nth-child("+(i+1)+")").css("border-color", color[i]);
-	    offset += size;
-	  }
-	}
-	createPie(".pieID.legend", ".pieID.pie");
+	console.log('차트 데이터');
+	console.log(dateList);
+	console.log(clearList);
+	console.log(deathList);
+	console.log(decideList); 	
 
-
-	
-	  // line chart data
-    var buyerData = {
-        labels : dateList ,
-        datasets : [
-	        {
-	            fillColor : "rgba(172,194,132,0.4)",
-	            strokeColor : "#e2e2e2",
-	            pointColor : "skyblue",
-	            pointStrokeColor : "#e2e2e2",
-	            data : clearList
-	        },
-	          {
-	            fillColor : "rgba(100,194,132,0.4)",
-	            strokeColor : "#FFC26D",
-	            pointColor : "red",
-	            pointStrokeColor : "#FFC26D",
-	            data : [323, 299, 248, 235, 267, 195]
-	        },
-	          {
-	            fillColor : "rgba(0,0,0,0.4)",
-	            strokeColor : "#ffffff",
-	            pointColor : "gray",
-	            pointStrokeColor : "#ffffff",
-	            data : [5, 2, 1, 0, 2, 3]
-	        }
-    	]
-    }
-    // get line chart canvas 
-    var buyers = document.getElementById('buyers').getContext('2d');
-    new Chart(buyers).Line(buyerData); 
+    var ctx = document.getElementById('myChart').getContext('2d');
     
-  	//var ctx = document.getElementById('pie');
-    
-   /* var myChart = new Chart(ctx, {
-	   type: 'bar',
-	    data: {
-	        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-	        datasets: [{
-	            label: '# of Votes',
-	            data: [12, 19, 3, 5, 2, 3],
-	            backgroundColor: [
-	                'rgba(255, 99, 132, 0.2)',
-	                'rgba(54, 162, 235, 0.2)',
-	                'rgba(255, 206, 86, 0.2)',
-	                'rgba(75, 192, 192, 0.2)',
-	                'rgba(153, 102, 255, 0.2)',
-	                'rgba(255, 159, 64, 0.2)'
-	            ],
-	            borderColor: [
-	                'rgba(255, 99, 132, 1)',
-	                'rgba(54, 162, 235, 1)',
-	                'rgba(255, 206, 86, 1)',
-	                'rgba(75, 192, 192, 1)',
-	                'rgba(153, 102, 255, 1)',
-	                'rgba(255, 159, 64, 1)'
-	            ],
-	            borderWidth: 1
-	        }]
-	    },
-	    options: {
-	        scales: {
-	            yAxes: [{
-	                ticks: {
-	                    beginAtZero: true
-	                }
-	            }]
-	        }
-	    }
-	}); */
+    	
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: dateList,
+            datasets: [
+                {
+                label : '사망',
+                backgroundColor: 'rgba(0,0,0,0.3)',
+                borderColor: 'rgba(0,0,0,100)',
+                pointBackgroundColor:"rgba(255,255,255,100)",
+                pointBorderColor : 'rgba(0,0,0,100)',
+                pointBorderWidth : 2,
+                data:deathList
+            	},
+            	{
+            		label : '확진',
+                    backgroundColor: 'rgba(237, 58, 38,0)',
+                    borderColor: 'rgba(237, 58, 38,100)',	
+                    pointBackgroundColor:"rgba(255,255,255,100)",
+                    pointBorderColor : 'rgba(237, 58, 38,100)',
+                    pointBorderWidth : 2,
+                    data:decideList
+            	},
+                {
+            		label : '격리해제',
+                    backgroundColor: 'rgba(65, 232, 84,0)',
+                    borderColor: 'rgba(65, 232, 84,100)',	
+                    pointBackgroundColor:"rgba(255,255,255,100)",
+                    pointBorderColor : 'rgba(65, 232, 84,100)',
+                    pointBorderWidth : 2,
+                    data:clearList
+                 }
+            ]
+        },
+        options: {}
+    });
+}
+
+function drawPieChart(labels,dataList){
+	 var ctx = document.getElementById('myPieChart').getContext('2d');
+	 var chart = new Chart(ctx, {
+		    // The type of chart we want to create
+		    type: 'doughnut',
+
+		    // The data for our dataset
+		    data: {
+		        labels: labels,
+		        datasets: [
+			        {
+		            label: 'My First dataset',
+		            backgroundColor: 'rgb(255, 99, 132)',
+		            borderColor: 'rgb(255, 99, 132)',
+		            data: dataList[0]
+		        },
+		        {
+		            label: 'My First dataset',
+		            backgroundColor: 'rgb(255, 99, 132)',
+		            borderColor: 'rgb(255, 99, 132)',
+		            data: dataList[1]
+		        }
+		        
+			    ]
+		    },
+		    options: {}
+		});
+	
+}
+function PieChart(labels,dataList){
+	
+	 var ctx = document.getElementById('myPieChart').getContext('2d');
+	 var data = [{
+		 backgroundColor : [ '#0095ff', '#fdaf4b' ],   
+         data: dataList
+		 }];
+
+
+	 var options = {
+			   plugins: {
+			     datalabels: {
+			       formatter: (value, ctx) => {
+
+			         let datasets = ctx.chart.data.datasets;
+
+			         if (datasets.indexOf(ctx.dataset) === datasets.length - 1) {
+			           let sum = datasets[0].data.reduce((a, b) => a + b, 0);
+			           let percentage = Math.round((value / sum) * 100) + '%';
+			           return percentage;
+			         } else {
+			           return percentage;
+			         }
+			       },
+			       color: '#fff',
+			     }
+			   }
+			 };
+
+		
+		 var chart = new Chart(ctx, {
+		    type: 'doughnut',
+
+		    data: {
+		        labels: labels,
+		       
+		        datasets:data
+		    },
+		    options: options
+		});
+
+
+		 chart.update();	
+}
+
+
+	
 </script>
+	
