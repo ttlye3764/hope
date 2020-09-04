@@ -253,65 +253,98 @@
 						</div>
 					</div>
 					<div style="margin-top: 7px; height: 705px; width:280px;  border-top: 3px solid #164068; background-color: rgb(233,233,233);">
-						<strong id="strongID1" style="display:block; margin-top: 18px; margin-left:12px; color: #174069; font-family: 'Spoqa Han Sans'; font-size:20px;">인천</strong>
-						<div style="background-color: white; height: 310px;">
+						<strong id="strongID1" style="display:block; margin-top: 18px; margin-left:12px; color: #174069; font-family: 'Spoqa Han Sans'; font-size:20px;"></strong>
 						
+						<div style="background-color: white; height: 400px; margin-top: 10px;">
+						<div class="chart_d" style="height: 400px;" >
+								<div style="height: 400px;">
+									<div class="cc_graph"  style="display: flex; flex-direction : column; height: 400px;">
+										   <div class="pieID pie" style="margin-left: 15%; margin-top: 10%;">
+										    </div>
+										    <div class="pieChartLeft">
+											    <ul class="pieID legend leftUl" style="box-shadow: 0px 0px;">
+												      <li>
+												        <em id="em1">대구</em>
+												        <span id="span01">7072</span>
+												      </li>
+												      <li>
+												        <em id="em2">서울</em>
+												        <span id="span02">4201</span>
+												      </li>
+												      <li id="pieLi1">
+												        <em id="em3">경기</em>
+												        <span id="span03">3527</span>
+												      </li>      
+												      <li id="pieLi2">
+												        <em id="em4">기타</em>
+												        <span id="span04">10000</span>
+												      </li>
+											    </ul>
+										   </div>
+										   
+										  <!--  <canvas id="pie" style="height: 400px;" ></canvas> -->
+										   
+									</div>
+								</div>
+							</div>						
 						</div>
-						<div style="background-color: rgb(233,233,233);  height: 342px; display: flex; flex-direction: column;">
-							<div style="display: flex; justify-content: space-between;">
-								<div style="margin-left: 5px; height: 13px;">
-									<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">누적 확진환자</span>
+
+						<div style="background-color: rgb(233,233,233);  height: 239px; display: flex; align-items:center ">
+							<div style="display: flex; flex-direction: column; width: 300px;">
+								<div style="display: flex; justify-content: space-between;">
+									<div style="margin-left: 5px; height: 13px;">
+										<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">누적 확진환자</span>
+									</div>
+									<div style="margin-right: 5px; height: 13px;">
+										<p style="font-size: 14px;"><span class="num chart_span1" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">751</span>명</p>
+									</div>
 								</div>
-								<div style="margin-right: 5px; height: 13px;">
-									<p style="font-size: 14px;"><span class="num chart_span1" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">751</span>명</p>
+								
+								<div style="display: flex; justify-content: space-between;">
+									<div style="margin-left: 5px;">
+										<span class="tit" style="margin-top:1px; font-size: 11px; font-family: 'Spoqa Han Sans'; color: rgb(235, 33, 77);">전일 대비 증감</span>
+									</div>
+									<div style="margin-right: 5px;">
+										<span class="num chart_span2" style="font-size: 11px; font-family: 'Spoqa Han Sans'; color: rgb(235, 33, 77);">(+11)</span>
+									</div>
+								</div>
+								
+								<div style="display: flex; justify-content: space-between; margin-top: 5px;">
+									<div style="margin-left: 5px;">
+										<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">격리중</span>
+									</div>
+									<div style="margin-right: 5px;">
+										<p style="font-size: 14px;"><span class="num chart_span3" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">321</span>명</p>
+									</div>
+								</div>
+								
+								<div style="display: flex; justify-content: space-between;">
+									<div style="margin-left: 5px;">
+										<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">누적 격리해제</span>
+									</div>
+									<div style="margin-right: 5px;">
+										<p style="font-size: 14px;"><span class="num chart_span4" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">427</span>명</p>
+									</div>
+								</div>
+								
+								<div style="display: flex; justify-content: space-between;">
+									<div style="margin-left: 5px;">
+										<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">사망자</span>
+									</div>
+									<div style="margin-right: 5px;">
+										<p style="font-size: 14px;"><span class="num chart_span5" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">3</span>명</p>
+									</div>
+								</div>
+								
+								<div style="display: flex; justify-content: space-between;">
+									<div style="margin-left: 5px;">
+										<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">10만명당 발생률</span>
+									</div>
+									<div style="margin-right: 5px;">
+										<p style="font-size: 10px;"><span class="num chart_span6" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">25.4</span>명</p>
+									</div>
 								</div>
 							</div>
-							
-							<div style="display: flex; justify-content: space-between;">
-								<div style="margin-left: 5px;">
-									<span class="tit" style="margin-top:1px; font-size: 11px; font-family: 'Spoqa Han Sans'; color: rgb(235, 33, 77);">전일 대비 증감</span>
-								</div>
-								<div style="margin-right: 5px;">
-									<span class="num chart_span2" style="font-size: 11px; font-family: 'Spoqa Han Sans'; color: rgb(235, 33, 77);">(+11)</span>
-								</div>
-							</div>
-							
-							<div style="display: flex; justify-content: space-between; margin-top: 5px;">
-								<div style="margin-left: 5px;">
-									<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">격리중</span>
-								</div>
-								<div style="margin-right: 5px;">
-									<p style="font-size: 14px;"><span class="num chart_span3" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">321</span>명</p>
-								</div>
-							</div>
-							
-							<div style="display: flex; justify-content: space-between;">
-								<div style="margin-left: 5px;">
-									<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">누적 격리해제</span>
-								</div>
-								<div style="margin-right: 5px;">
-									<p style="font-size: 14px;"><span class="num chart_span4" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">427</span>명</p>
-								</div>
-							</div>
-							
-							<div style="display: flex; justify-content: space-between;">
-								<div style="margin-left: 5px;">
-									<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">사망자</span>
-								</div>
-								<div style="margin-right: 5px;">
-									<p style="font-size: 14px;"><span class="num chart_span5" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">3</span>명</p>
-								</div>
-							</div>
-							
-							<div style="display: flex; justify-content: space-between;">
-								<div style="margin-left: 5px;">
-									<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">10만명당 발생률</span>
-								</div>
-								<div style="margin-right: 5px;">
-									<p style="font-size: 10px;"><span class="num chart_span6" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">25.4</span>명</p>
-								</div>
-							</div>
-							
 						</div>
 					</div>
 					
@@ -477,32 +510,7 @@
 										<span class="title" style=" margin-left:3px; margin-top:10px;">격리해제</span>
 									</div>
 							</div>
-							<!-- <div class="chart_d" style="height: 200px; width: 75%;" >
-								<div style="height: 200px;">
-									<div class="cc_graph"  style="display: flex; justify-content: center; align-items: center; height: 200px;">
-										pie
-										 <section style="margin-top: 5px; height: 200px; display: flex; justify-content: center; align-items: center;">
-										    <div class="pieID pie">     
-										    </div>
-										    <ul class="pieID legend">
-											      <li>
-											        <em>결과양성(확진)</em>
-											        <span>20182</span>
-											      </li>
-											      <li>
-											        <em>검사중</em>
-											        <span>56743</span>
-											      </li>
-											      <li>
-											        <em>결과음성</em>
-											        <span>1882155</span>
-											      </li>      
-										    </ul>
-		  								</section>
-										pie
-									</div>
-								</div>
-							</div> -->
+							
 						</div> <!-- 차트쪽 div -->
 						<%-- <img id="imgTag" usemap="#Map" border="0" src="${pageContext.request.contextPath }/images/korea.PNG" style="width: 980px; height:747px; z-index: -1;">
 							<map name="Map" id="Map">
@@ -666,7 +674,7 @@ var startdate = startday();
 var enddate = endday();
 
 function getCorona(name1){
-
+	
 	$.ajax({
         url     : '${pageContext.request.contextPath}/user/medical/coronaSidoAPI.do',
         type    : 'post',
@@ -674,34 +682,54 @@ function getCorona(name1){
         data : {'date':date },
         success : function(result) {
 			//console.log(result.response.body.items.item);
-			
+			var target = 0;
+			var all = 0;
+			all = result.response.body.items.item[18].defCnt;
 			
 			$.each(result.response.body.items.item, function(key,value){//인덱스, 벨류
-				if(value.gubun == name1){
-					$('#strongID1').text(name1);
-					var data = numberWithCommas(value.defCnt);
-					$('.chart_span1').text(data);
-					
-					data = numberWithCommas(value.incDec);
-					$('.chart_span2').text('(+'+data+')');
-
-					data = numberWithCommas(value.isolIngCnt);
-					$('.chart_span3').text(data);
-					
-					data = numberWithCommas(value.isolClearCnt);
-					$('.chart_span4').text(data);
-					
-					data = numberWithCommas(value.deathCnt);					
-					$('.chart_span5').text(data);
-
-					data = numberWithCommas(value.qurRate);	
-					$('.chart_span6').text(data);
+				if(key < 19){
+					if(value.gubun == name1){
+						$('#strongID1').text(name1);
+						var data = numberWithCommas(value.defCnt);
+						$('.chart_span1').text(data);
+						
+						data = numberWithCommas(value.incDec);
+						$('.chart_span2').text('(+'+data+')');
+	
+						data = numberWithCommas(value.isolIngCnt);
+						$('.chart_span3').text(data);
+						
+						data = numberWithCommas(value.isolClearCnt);
+						$('.chart_span4').text(data);
+						
+						data = numberWithCommas(value.deathCnt);					
+						$('.chart_span5').text(data);
+	
+						data = numberWithCommas(value.qurRate);	
+						$('.chart_span6').text(data);
+							target = value.defCnt;
+						}
 				}
 	        });
+			$('#em1').text('전체');
+			$('#span01').text(all);
+			$('#em2').text(name1);
+			$('#span02').text(target);
+			$('#pieLi1').empty();
+			$('#pieLi2').empty();
         }
 	});
 
-
+	
+	
+	/*<li>
+      <em>대구</em>
+      <span>7072</span>
+   	 </li>
+  	 <li>
+      <em>서울</em>
+      <span>4201</span>
+     </li> */
 	
 };
 
@@ -781,10 +809,10 @@ $(function(){
 				}
 			}
 			
-			console.log(dateList);
+			/* console.log(dateList);
 			console.log(clearList);
 			console.log(deathList);
-			console.log(decideList);
+			console.log(decideList); */
 			
 			
 			/*var date = result.response.body.items.item[0].stateDt + "";
@@ -807,22 +835,22 @@ $(function(){
 			var clear = result.response.body.items.item[0].clearCnt; //누적 격리해제 
 			var care = result.response.body.items.item[0].careCnt; //누적 격리중
 
-			str = '<span class="counter-item-digit text-center"  style="color: white;" data-from="0" data-to="'+decide+'" data-speed="3000" data-refresh-interval="10" style="font-size:30px;"></span><br>';
+			str = '<span class="counter-item-digit text-center"  style="color: white;" data-from="0" data-to="'+decide+'" data-speed="3000" data-refresh-interval="10" style="font-size:30px;">'+decide+'</span><br>';
 			$('#decideDiv').append(str);
 			str = '<span class="before"  style="font-size:14px; color: white; margin-top: 2px; ">전일대비 (+ '+todayDecide+')</span>';
-			$('#toDayDecideDiv').append(str);
+			$('#toDayDecideDiv').append(str); 
 
-			str = '<span class="counter-item-digit text-center"  style="color: white;" data-from="0" data-to="'+clear+'" data-speed="3000" data-refresh-interval="10" style="font-size:30px;"></span><br>';
+			str = '<span class="counter-item-digit text-center"  style="color: white;" data-from="0" data-to="'+clear+'" data-speed="3000" data-refresh-interval="10" style="font-size:30px;">'+clear+'</span><br>';
 			$('#clearDiv').append(str);
 			str = '<span class="before"  style="font-size:14px; color: white; margin-top: 2px; ">(+ '+todayClear+')</span>';
 			$('#toDayClearDiv').append(str);
 
-			str= '<span class="counter-item-digit text-center"  style="color: white;" data-from="0" data-to="'+care+'" data-speed="3000" data-refresh-interval="10" style="font-size:30px;"></span><br>';
+			str= '<span class="counter-item-digit text-center"  style="color: white;" data-from="0" data-to="'+care+'" data-speed="3000" data-refresh-interval="10" style="font-size:30px;">'+care+'</span><br>';
 			$('#careDiv').append(str);
 			str = '<span class="before"  style="font-size:14px; color: white; margin-top: 2px; ">(+ '+todayCare+')</span>';
 			$('#toDayCareDiv').append(str);
 
-			str = '<span class="counter-item-digit text-center"  style="color: white;" data-from="0" data-to="'+death+'" data-speed="3000" data-refresh-interval="10" style="font-size:30px;"></span><br>';
+			str = '<span class="counter-item-digit text-center"  style="color: white;" data-from="0" data-to="'+death+'" data-speed="3000" data-refresh-interval="10" style="font-size:30px;">'+death+'</span><br>';
 			$('#deathDiv').append(str);
 			str = '<span class="before"  style="font-size:14px; color: white; margin-top: 2px; ">(+ '+todayDeath+')</span>';
 			$('#toDayDeathDiv').append(str);
@@ -856,8 +884,7 @@ $(function(){
 			<stateTime>00:00			기준시간 */
 
 
-
-
+	
 
 			
 		}
@@ -873,7 +900,45 @@ $(function(){
         success : function(result) {
 			console.log(result.response.body.items.item);
 			
+			var n1;
+			var n2;
+			var n3;
+			var n4;
+			
+		/* 	$.each(result.response.body.items.item,function(i,v){
+				if(i <19){
+					
+				}
 
+				
+				
+
+			})
+ */
+			
+/* 
+			 <li>
+		        <em>대구</em>
+		        <span>7072</span>
+		      </li>
+		      <li>
+		        <em>서울</em>
+		        <span>4201</span>
+		      </li>
+		      <li>
+		        <em>경기</em>
+		        <span>3527</span>
+		      </li>      
+		      <li>
+		        <em>기타</em>
+		        <span>10000</span>
+		      </li>     
+ */
+
+
+
+
+			
 			/* <deathCnt>0			사망자 수       
 			<defCnt>45		확진자 수
 			<gubun>제주			시도명			
@@ -1124,43 +1189,42 @@ $(function(){
     var buyers = document.getElementById('buyers').getContext('2d');
     new Chart(buyers).Line(buyerData); 
     
+  	//var ctx = document.getElementById('pie');
     
-   /*  var myChart = new Chart(buyers, {
-    type: 'line',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }
-
-       ]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
-}); */
+   /* var myChart = new Chart(ctx, {
+	   type: 'bar',
+	    data: {
+	        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+	        datasets: [{
+	            label: '# of Votes',
+	            data: [12, 19, 3, 5, 2, 3],
+	            backgroundColor: [
+	                'rgba(255, 99, 132, 0.2)',
+	                'rgba(54, 162, 235, 0.2)',
+	                'rgba(255, 206, 86, 0.2)',
+	                'rgba(75, 192, 192, 0.2)',
+	                'rgba(153, 102, 255, 0.2)',
+	                'rgba(255, 159, 64, 0.2)'
+	            ],
+	            borderColor: [
+	                'rgba(255, 99, 132, 1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)',
+	                'rgba(75, 192, 192, 1)',
+	                'rgba(153, 102, 255, 1)',
+	                'rgba(255, 159, 64, 1)'
+	            ],
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            yAxes: [{
+	                ticks: {
+	                    beginAtZero: true
+	                }
+	            }]
+	        }
+	    }
+	}); */
 </script>
