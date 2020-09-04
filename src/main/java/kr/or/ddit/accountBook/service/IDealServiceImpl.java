@@ -2,6 +2,7 @@ package kr.or.ddit.accountBook.service;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,11 @@ public class IDealServiceImpl implements IDealService{
 	public List<DealVO> dealList(String mem_no) throws Exception {
 		List<DealVO> dealList = dao.dealList(mem_no);
 		return dealList;
+	}
+
+	@Override
+	public List<DealVO> dealListView(Map<String, String> params) throws Exception {
+		return dao.dealListView(params); 
 	}
 
 	

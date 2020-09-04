@@ -2,8 +2,10 @@ package kr.or.ddit.accountBook.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +16,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddit.accountBook.service.IDealService;
 import kr.or.ddit.schedule.service.IScheduleService;
+import kr.or.ddit.utiles.RolePaginationUtil;
+import kr.or.ddit.utiles.RolePaginationUtil_BYEOL;
 import kr.or.ddit.utiles.RolePaginationUtil_pill;
+import kr.or.ddit.utiles.RolePaginationUtil_yun;
 import kr.or.ddit.vo.DealVO;
+import kr.or.ddit.vo.MemberVO;
 import kr.or.ddit.vo.PillVO;
 import kr.or.ddit.vo.ScheduleVO;
 
@@ -35,13 +41,58 @@ public class AccountController {
 	
 	
 	@RequestMapping("setting")
-	public ModelAndView setting() throws Exception {
+	public ModelAndView setting(String mem_no, HttpServletRequest request,HttpSession session,
+								Map<String, String> params,ModelAndView andView,String currentPage, RolePaginationUtil_BYEOL pagination) throws Exception {
+		 
+		if(currentPage == null){
+	         currentPage = "1";
+	      }
 		
-		List<DealVO> list = service.dealList("2");
-
-		ModelAndView andView = new ModelAndView();
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		List<DealVO> list4Size = service.dealList(memberInfo.getMem_no());
+		String totalCount = Integer.toString(list4Size.size());
+	    
+		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount));
+	    String startCount = String.valueOf(pagination.getStartCount());
+	    String endCount = String.valueOf(pagination.getEndCount());
+	    
+	    params.put("startCount", startCount);
+	    params.put("endCount", endCount);
+	    params.put("mem_no", memberInfo.getMem_no());
+	    
+	    List<DealVO> list = service.dealListView(params);
+	    
 		andView.addObject("dealList", list);
+		andView.addObject("pagination",pagination.getPagingHtmls());
 		andView.setViewName("user/accountBook/setting");
+		return andView;
+	}
+	
+	@RequestMapping("accountList")
+	public ModelAndView accountList(String mem_no, HttpServletRequest request,HttpSession session,
+			Map<String, String> params,ModelAndView andView,String currentPage, RolePaginationUtil_BYEOL pagination) throws Exception {
+		
+		if(currentPage == null){
+			currentPage = "1";
+		}
+		
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		List<DealVO> list4Size = service.dealList(memberInfo.getMem_no());
+		String totalCount = Integer.toString(list4Size.size());
+		
+		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount));
+		String startCount = String.valueOf(pagination.getStartCount());
+		String endCount = String.valueOf(pagination.getEndCount());
+		
+		params.put("startCount", startCount);
+		params.put("endCount", endCount);
+		params.put("mem_no", memberInfo.getMem_no());
+		
+		List<DealVO> list = service.dealListView(params);
+		
+		andView.addObject("dealList", list);
+		andView.addObject("pagination",pagination.getPagingHtmls());
+		andView.setViewName("user/accountBook/accountList");
 		return andView;
 	}
 	

@@ -247,8 +247,6 @@
 			<div class="row">
 				<aside class="col-md-3 sidebar order-last order-md-first" style="margin-top: 5px; width:330px;">
 					<div style="height: 400px; width:280px; border: 1px solid black;">
-					<!-- sidebar start -->
-						<!-- Text Widget -->
 						<div class="widget" style="width:280px;">
 							<h5 class="widget-title">Text Widget</h5>
 							<p class="mb-0">Resources exquisite set arranging moonlight sex him household had. Months had too ham cousin remove far spirit. She procuring the why performed continual improving. Civil songs so large shade in cause.</p>
@@ -283,7 +281,7 @@
 									<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">격리중</span>
 								</div>
 								<div style="margin-right: 5px;">
-									<p style="font-size: 14px;"><span class="num chart_span1" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">321</span>명</p>
+									<p style="font-size: 14px;"><span class="num chart_span3" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">321</span>명</p>
 								</div>
 							</div>
 							
@@ -292,7 +290,7 @@
 									<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">누적 격리해제</span>
 								</div>
 								<div style="margin-right: 5px;">
-									<p style="font-size: 14px;"><span class="num chart_span1" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">427</span>명</p>
+									<p style="font-size: 14px;"><span class="num chart_span4" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">427</span>명</p>
 								</div>
 							</div>
 							
@@ -301,7 +299,7 @@
 									<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">사망자</span>
 								</div>
 								<div style="margin-right: 5px;">
-									<p style="font-size: 14px;"><span class="num chart_span1" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">3</span>명</p>
+									<p style="font-size: 14px;"><span class="num chart_span5" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">3</span>명</p>
 								</div>
 							</div>
 							
@@ -310,7 +308,7 @@
 									<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">10만명당 발생률</span>
 								</div>
 								<div style="margin-right: 5px;">
-									<p style="font-size: 10px;"><span class="num chart_span2" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">25.4</span>명</p>
+									<p style="font-size: 10px;"><span class="num chart_span6" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">25.4</span>명</p>
 								</div>
 							</div>
 							
@@ -338,13 +336,13 @@
 					<div class="liveNumOuter">				
 						<div style="display: flex; justify-content: space-between;">
 							<div class="liveNum1">
-								<strong class="tit">일일확진자</strong>
+								<strong class="tit">일일현황</strong>
 							</div>
 							<div class="liveNum2">						
-								<span class="subtit" style="font-size:14px;">국내발생  </span><span class="data" style="color: yellow; font-size:19px;">238</span>
+								<!-- <span class="subtit" style="font-size:14px;">국내발생  </span><span class="data" style="color: yellow; font-size:19px;">238</span> -->
 							</div>
 							<div class="liveNum3">	
-								<span class="subtit" style="font-size:14px;">해외유입  </span><span class="data" style="color: yellow; font-size:19px;">10</span>
+								<!-- <span class="subtit" style="font-size:14px;">해외유입  </span><span class="data" style="color: yellow; font-size:19px;">10</span> -->
 			                </div>
 						</div>
 		                <div style="margin: 5px 0px 0px 0px;">
@@ -355,13 +353,12 @@
 												<div style="display: flex; justify-content: center;">
 													<strong class="tit"  style="color: white; font-size:19px; margin-bottom: 2px;">확진환자</strong>
 												</div>
-												<div>
-												<span class="mini" style="font-size:14px; color: white;">(누적)</span>
-													<span class="counter-item-digit text-center"  style="color: white;" data-from="0" data-to="20182" data-speed="3000" data-refresh-interval="10" style="font-size:30px;"></span><br>
-													
-												</div>
-												<div style="display: flex; justify-content: center;">
-													<span class="before"  style="font-size:14px; color: white; margin-top: 2px; ">전일대비 (+ 235)</span>
+												<div id="decideDiv">
+													<span class="mini" style="font-size:14px; color: white;">(누적)</span>
+													<!-- <span class="counter-item-digit text-center"  style="color: white;" data-from="0" data-to="20182" data-speed="3000" data-refresh-interval="10" style="font-size:30px;"></span><br> -->
+												</div>	
+												<div id="toDayDecideDiv" style="display: flex; justify-content: center;">
+													<!-- <span class="before"  style="font-size:14px; color: white; margin-top: 2px; ">전일대비 (+ 235)</span> -->
 												</div>
 											</div>
 										</div>					
@@ -372,12 +369,12 @@
 												<div style="display: flex; justify-content: center;">
 													<strong class="tit"  style="color: white; font-size:19px; margin-bottom: 2px;">격리해제</strong>
 												</div>
-												<div>
-													<span class="counter-item-digit text-center"  style="color: white;" data-from="0" data-to="15198" data-speed="3000" data-refresh-interval="10" style="font-size:30px;"></span><br>
+												<div id="clearDiv">
+													<!-- <span class="counter-item-digit text-center"  style="color: white;" data-from="0" data-to="15198" data-speed="3000" data-refresh-interval="10" style="font-size:30px;"></span><br> -->
 													
 												</div>
-												<div style="display: flex; justify-content: center;">
-													<span class="before"  style="font-size:14px; color: white; margin-top: 2px; ">(+ 225)</span>
+												<div id="toDayClearDiv" style="display: flex; justify-content: center;">
+													<!-- <span class="before"  style="font-size:14px; color: white; margin-top: 2px; ">(+ 225)</span> -->
 												</div>
 											</div>
 										</div>					
@@ -388,12 +385,12 @@
 												<div style="display: flex; justify-content: center;">
 													<strong class="tit"  style="color: white; font-size:19px; margin-bottom: 2px;">격리중</strong>
 												</div>
-												<div>
-													<span class="counter-item-digit text-center"  style="color: white;" data-from="0" data-to="4660" data-speed="3000" data-refresh-interval="10" style="font-size:30px;"></span><br>
+												<div id="careDiv">
+													<!-- <span class="counter-item-digit text-center"  style="color: white;" data-from="0" data-to="4660" data-speed="3000" data-refresh-interval="10" style="font-size:30px;"></span><br> -->
 													
 												</div>
-												<div style="display: flex; justify-content: center;">
-													<span class="before"  style="font-size:14px; color: white; margin-top: 2px; ">(+ 10)</span>
+												<div id="toDayCareDiv" style="display: flex; justify-content: center;">
+													<!-- <span class="before"  style="font-size:14px; color: white; margin-top: 2px; ">(+ 10)</span> -->
 												</div>
 											</div>
 										</div>					
@@ -405,12 +402,11 @@
 												<div style="display: flex; justify-content: center;">
 													<strong class="tit"  style="color: white; font-size:19px;">사망자수</strong>
 												</div>
-												<div style="align-items: center;">
-													<span class="counter-item-digit text-center"  style="color: white;" data-from="0" data-to="324" data-speed="3000" data-refresh-interval="10" style="font-size:30px;"></span><br>
-													
+												<div id="deathDiv" style="align-items: center;">
+													<!-- <span class="counter-item-digit text-center"  style="color: white;" data-from="0" data-to="324" data-speed="3000" data-refresh-interval="10" style="font-size:30px;"></span><br> -->
 												</div>
-												<div style="display: flex; justify-content: center;">
-													<span class="before"  style="font-size:14px; color: white; margin-top: 2px; ">(+ 0)</span>
+												<div id="toDayDeathDiv" style="display: flex; justify-content: center;">
+													<!-- <span class="before"  style="font-size:14px; color: white; margin-top: 2px; ">(+ 0)</span> -->
 												</div>
 											</div>
 										</div>					
@@ -430,8 +426,8 @@
 											<div style="margin-left: 5px;">
 												<span class="tit" style="font-size:14px; ">누적 검사수</span>
 											</div>
-											<div style="margin-right: 5px;">
-												<span class="num" style="font-size:14px;">1,959,080건</span>
+											<div id="examDiv" style="margin-right: 5px;">
+												<!-- <span class="num" style="font-size:14px;">1,959,080건</span> -->
 											</div>
 										</div>
 									</li>
@@ -440,8 +436,8 @@
 											<div style="margin-left: 5px;">
 												<span class="tit" style="font-size:14px;">누적 검사완료수</span>
 											</div>
-											<div style="margin-right: 5px;">
-												<span class="num" style="font-size:14px;">1,902,337건</span>
+											<div id="examCompDiv" style="margin-right: 5px;">
+												<!-- <span class="num" style="font-size:14px;">1,902,337건</span> -->
 											</div>
 										</div>
 									</li>
@@ -450,8 +446,8 @@
 											<div style="margin-left: 5px;">
 											<span class="tit" style="font-size:14px;">누적 확진율</span>
 											</div>
-											<div style="margin-right: 5px;">
-											<span class="num" style="font-size:14px;">1.1%</span>
+											<div id="defRateDiv" style="margin-right: 5px;">
+												<!-- <span class="num" style="font-size:14px;">1.1%</span> -->
 											</div>	
 										</div>
 										<div style="margin-left: 5px;">
@@ -469,14 +465,14 @@
 									</div>
 									<div style="display: flex; flex-direction: column; height: 190px;">
 										  	<!-- line chart canvas element -->
-										<canvas id="buyers"  style="height: 190px; width: 100%; margin-left: 5px;"></canvas>					       
+										<canvas id="buyers"  style="height: 190px; width: 100%; margin-left: 5px;"></canvas>		<!-- height: 190px; width: 100%; -->			       
 									</div>
 									
 									<div style="height:28px; display: flex; justify-content: center; align-items: center;">
 										<div style="width: 15px; height: 15px; background-color: gray;  margin-top:10px;"></div>
-										<span class="title" style=" margin-left:3px; margin-top:10px;">사망자</span>
+										<span class="title" style=" margin-left:3px; margin-top:10px;">사망</span>
 										<div style="width: 15px; height: 15px; background-color: red;  margin-top:10px;"></div>
-										<span class="title" style=" margin-left:3px; margin-top:10px;">확진자</span>
+										<span class="title" style=" margin-left:3px; margin-top:10px;">확진</span>
 										<div style="width: 15px; height: 15px; background-color: skyblue;  margin-top:10px;"></div>
 										<span class="title" style=" margin-left:3px; margin-top:10px;">격리해제</span>
 									</div>
@@ -530,129 +526,75 @@
 							   		<img id="imgTag" border="0" src="${pageContext.request.contextPath }/images/korea.PNG" style="width: 100%; height:700px; z-index: -1;">
 							    </div>
 							    <div class="item-info-box" id="item-info-box" style="width: 55px; height: 70px;left: 213px; top: 145px;">
-								    <div class="item-info" id="item-info" style="width: 55px; height: 70px;">
-									    <small id="item_small">인천</small>
-									    <span class="status in-progress" id="item_span1">751</span>
-									    <span class="status in-progress" id="item_span2">(+11)</span>
+								    <div class="item-info" id="item-inchun" onclick="getCorona('인천');" style="width: 55px; height: 70px; text-align: center;">
 								    </div>
 							    </div>
 							    <div class="item-info-box" id="item-info-box" style="width: 58px; height: 66px; left: 325px; top: 144px;">
-								    <div class="item-info" id="item-info" style=" width: 58px; height: 66px;">
-									    <small id="item_small">서울</small>
-									    <span class="status in-progress" id="item_span1">3751</span>
-									    <span class="status in-progress" id="item_span2">(+311)</span>
+								    <div class="item-info" id="item-seoul" onclick="getCorona('서울');" style=" width: 58px; height: 66px;  text-align: center;">
 								    </div>
 							    </div>
 							    <div class="item-info-box" id="item-info-box" style="width: 60px; height: 68px; left: 322px; top: 60px;">
-								    <div class="item-info" id="item-info" style="width: 60px; height: 68px;">
-									   <small id="item_small">경기</small>
-									   <span class="status in-progress" id="item_span1">3751</span>
-									   <span class="status in-progress" id="item_span2">(+311)</span>
+								    <div class="item-info" id="item-kyenggi" onclick="getCorona('경기');" style="width: 60px; height: 68px;  text-align: center;">
 								    </div>
 							    </div>
 							    <div class="item-info-box" id="item-info-box" style="width: 50px; height: 67px; left: 430px; top: 108px;">
-								    <div class="item-info" id="item-info" style=" width: 50px; height: 67px;">
-									   <small id="item_small">강원</small>
-									     <span class="status in-progress" id="item_span1">3751</span>
-									    <span class="status in-progress" id="item_span2">(+311)</span>
+								    <div class="item-info" id="item-kangwon" onclick="getCorona('강원');" style=" width: 50px; height: 67px;  text-align: center;">
 								    </div>
 							    </div>
 							    <div class="item-info-box" id="item-info-box" style="width: 50px; height: 67px;left: 380px; top: 202px;">
-								    <div class="item-info" id="item-info" style=" width: 50px; height: 67px;">
-									   <small id="item_small">충북</small>
-									     <span class="status in-progress" id="item_span1">3751</span>
-									    <span class="status in-progress" id="item_span2">(+311)</span>
+								    <div class="item-info" id="item-chungbuk" onclick="getCorona('충북');" style=" width: 50px; height: 67px;  text-align: center;">
 								    </div>	
 							    </div>
 							    <div class="item-info-box" id="item-info-box" style="width: 50px; height: 67px;left: 352px; top: 288px;">
-								    <div class="item-info" id="item-info" style=" width: 50px; height: 67px;">
-									   <small id="item_small">대전</small>
-									     <span class="status in-progress" id="item_span1">3751</span>
-									    <span class="status in-progress" id="item_span2">(+311)</span>
+								    <div class="item-info" id="item-daejeon" onclick="getCorona('대전');" style=" width: 50px; height: 67px;  text-align: center;">
 								    </div>
 							    </div>
 							    <div class="item-info-box" id="item-info-box" style="width: 50px; height: 67px;left: 296px; top: 234px;">
-								    <div class="item-info" id="item-info" style="width: 50px; height: 67px;">
-									   <small id="item_small">세종</small>
-									     <span class="status in-progress" id="item_span1">3751</span>
-									    <span class="status in-progress" id="item_span2">(+311)</span>
+								    <div class="item-info" id="item-seyjong" onclick="getCorona('세종');" style="width: 50px; height: 67px;  text-align: center;">
 								    </div>
 							    </div>
 							       <div class="item-info-box" id="item-info-box" style="width: 50px; height: 67px; left: 228px; top: 293px;">
-								    <div class="item-info" id="item-info" style=" width: 50px; height: 67px;">
-									   <small id="item_small">충남</small>
-									     <span class="status in-progress" id="item_span1">3751</span>
-									    <span class="status in-progress" id="item_span2">(+311)</span>
+								    <div class="item-info" id="item-chungnam" onclick="getCorona('충남');" style=" width: 50px; height: 67px;  text-align: center;">
 								    </div>
 							    </div>
 							      <div class="item-info-box" id="item-info-box" style="width: 43px; height: 68px; left: 296px; top: 374px;">
-								    <div class="item-info" id="item-info" style=" width: 43px; height: 68px;">
-									   <small id="item_small">전북</small>
-									    <span class="status in-progress" id="item_span1">3751</span>
-									    <span class="status in-progress" id="item_span2">(+311)</span>
+								    <div class="item-info" id="item-junbook" onclick="getCorona('전북');" style=" width: 43px; height: 68px;  text-align: center;">
 								    </div>
 							    </div>
 							      <div class="item-info-box" id="item-info-box" style="width: 53px; height: 68px;left: 286px; top: 473px;">
-								    <div class="item-info" id="item-info" style=" width: 53px; height: 68px;">
-									   <small id="item_small">광주</small>
-									     <span class="status in-progress" id="item_span1">3751</span>
-									    <span class="status in-progress" id="item_span2">(+311)</span>
+								    <div class="item-info" id="item-gwangju" onclick="getCorona('광주');" style=" width: 53px; height: 68px;  text-align: center;">
 								    </div>
 							    </div>
 							      <div class="item-info-box" id="item-info-box" style="width: 53px; height: 68px;left: 211px; top: 501px;">
-								    <div class="item-info" id="item-info" style=" width: 53px; height: 68px;">
-									   <small id="item_small">전남</small>
-									     <span class="status in-progress" id="item_span1">3751</span>
-									    <span class="status in-progress" id="item_span2">(+311)</span>
+								    <div class="item-info" id="item-junnam" onclick="getCorona('전남');" style=" width: 53px; height: 68px;  text-align: center;">
 								    </div>
 							    </div>
 							      <div class="item-info-box" id="item-info-box" style="width: 53px; height: 68px; left: 233px; top: 622px;">
-								    <div class="item-info" id="item-info" style=" width: 53px; height: 68px;">
-									   <small id="item_small">제주</small>
-									     <span class="status in-progress" id="item_span1">3751</span>
-									    <span class="status in-progress" id="item_span2">(+311)</span>
+								    <div class="item-info" id="item-jeju" onclick="getCorona('제주');" style=" width: 53px; height: 68px;  text-align: center;">
 								    </div>
 							    </div>
 							       <div class="item-info-box" id="item-info-box" style="width: 60px; height: 67px;left: 458px; top: 266px;">
-								    <div class="item-info" id="item-info" style=" width: 60px; height: 67px;">
-									   <small id="item_small">경북</small>
-									     <span class="status in-progress" id="item_span1">3751</span>
-									    <span class="status in-progress" id="item_span2">(+311)</span>
+								    <div class="item-info" id="item-kyengbook" onclick="getCorona('경북');" style=" width: 60px; height: 67px;  text-align: center;">
 								    </div>
 							    </div>
 							       <div class="item-info-box" id="item-info-box" style="width: 60px; height: 67px; left: 481px; top: 348px;">
-								    <div class="item-info" id="item-info" style=" width: 60px; height: 67px;">
-									   <small id="item_small">대구</small>
-									     <span class="status in-progress" id="item_span1">3751</span>
-									    <span class="status in-progress" id="item_span2">(+311)</span>
+								    <div class="item-info" id="item-daegu" onclick="getCorona('대구');" style=" width: 60px; height: 67px;  text-align: center;">
 								    </div>
 							    </div>
 							      <div class="item-info-box" id="item-info-box" style="width: 53px; height: 68px; left: 400px; top: 451px;">
-								    <div class="item-info" id="item-info" style=" width: 53px; height: 68px;">
-									   <small id="item_small">경남</small>
-									     <span class="status in-progress" id="item_span1">3751</span>
-									    <span class="status in-progress" id="item_span2">(+311)</span>
+								    <div class="item-info" id="item-kyengnam" onclick="getCorona('경남');" style=" width: 53px; height: 68px;  text-align: center;">
 								    </div>
 							    </div>
 							      <div class="item-info-box" id="item-info-box" style="width: 53px; height: 72px; left: 548px; top: 454px;">
-								    <div class="item-info" id="item-info" style=" width: 53px; height: 72px;">
-									   <small id="item_small">울산</small>
-									     <span class="status in-progress" id="item_span1">3751</span>
-									    <span class="status in-progress" id="item_span2">(+311)</span>
+								    <div class="item-info" id="item-ulsan" onclick="getCorona('울산');" style=" width: 53px; height: 72px;  text-align: center;">
 								    </div>
 							    </div>
 							    <div class="item-info-box" id="item-info-box" style="width: 55px; height: 70px; left: 492px; top: 511px;">
-								    <div class="item-info" id="item-info" style="width: 55px; height: 70px;">
-									   <small id="item_small">부산</small>
-									     <span class="status in-progress" id="item_span1">3751</span>
-									    <span class="status in-progress" id="item_span2">(+311)</span>
+								    <div class="item-info" id="item-busan" onclick="getCorona('부산');" style="width: 55px; height: 70px;  text-align: center;">
 								    </div>
 							    </div>							    
 							    <div class="item-info-box" id="item-info-box" style="width: 67px; height: 70px; left: 515px; top: 583px;">
-								    <div class="item-info" id="item-info" style=" width: 67px; height: 70px;">
-									   <small id="item_small">검역</small>
-									     <span class="status in-progress" id="item_span1">3751</span>
-									    <span class="status in-progress" id="item_span2">(+311)</span>
+								    <div class="item-info" id="item-gumyoc" onclick="getCorona('검역');" style=" width: 67px; height: 70px;  text-align: center;">
 								    </div>
 							    </div>
 						    </div>	
@@ -660,7 +602,9 @@
 				</div>
 			</div>
 		</div>	
-
+		
+		
+		
 		<div> <a href="#" class="back-top btn btn-grad"><i class="ti-angle-up"></i></a> </div>
 	
 
@@ -678,24 +622,50 @@
 	
 <script>
 
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+
+
+
+var list = new Array();
+
 function getToday(){
 	var date = new Date();
 	return date.getFullYear()+("0"+(date.getMonth()+1)).slice(-2)+("0"+(date.getDate()-1)).slice(-2);
 }
+function endday(){
+	var date = new Date();
+	return date.getFullYear()+("0"+(date.getMonth()+1)).slice(-2)+("0"+(date.getDate())).slice(-2);
+}
+function startday(){
+
+	var caledmonth, caledday, caledYear;
+	var loadDt = new Date();
+	var date = new Date(Date.parse(loadDt) - 7 * 1000 * 60 * 60 * 24);
+
+	caledYear = date.getFullYear();
+
+	if( date.getMonth() < 9 ){
+		  caledmonth = '0'+(date.getMonth()+1);
+	}else{
+		  caledmonth = date.getMonth()+1;
+	}
+	if( date.getDate() < 9 ){
+		  caledday = '0'+date.getDate();
+	}else{
+		  caledday = date.getDate();
+	}
+	var result =  caledYear+caledmonth+caledday;
+	return result;
+}
 
 var date = getToday();
-alert(date);
-$(function(){
+var startdate = startday();
+var enddate = endday();
 
-	$('.item-info-box').click(function(){	//지도 클릭	
-		var name = $(this).find('small').text();
-		var value1 = $(this).find('span:eq(0)').text();
-		var value2 = $(this).find('span:eq(1)').text();
-		$('#strongID1').text(name);
-		$('.chart_span1').text(value1);
-		$('.chart_span2').text(value2);
-	});
-
+function getCorona(name1){
 
 	$.ajax({
         url     : '${pageContext.request.contextPath}/user/medical/coronaSidoAPI.do',
@@ -703,7 +673,356 @@ $(function(){
         dataType: 'json',
         data : {'date':date },
         success : function(result) {
-			console.log(result);
+			//console.log(result.response.body.items.item);
+			
+			
+			$.each(result.response.body.items.item, function(key,value){//인덱스, 벨류
+				if(value.gubun == name1){
+					$('#strongID1').text(name1);
+					var data = numberWithCommas(value.defCnt);
+					$('.chart_span1').text(data);
+					
+					data = numberWithCommas(value.incDec);
+					$('.chart_span2').text('(+'+data+')');
+
+					data = numberWithCommas(value.isolIngCnt);
+					$('.chart_span3').text(data);
+					
+					data = numberWithCommas(value.isolClearCnt);
+					$('.chart_span4').text(data);
+					
+					data = numberWithCommas(value.deathCnt);					
+					$('.chart_span5').text(data);
+
+					data = numberWithCommas(value.qurRate);	
+					$('.chart_span6').text(data);
+				}
+	        });
+        }
+	});
+
+
+	
+};
+
+var dateList = new Array();
+var deathList = new Array();
+var clearList = new Array();
+var decideList = new Array();
+
+$(function(){
+
+/* 	$('.item-info-box').on('click',function(){
+		var name = $(this).find('small').text();
+		var value1 = $(this).find('span:eq(0)').text();
+		var value2 = $(this).find('span:eq(1)').text();
+		$('#strongID1').text(name);
+		$('.chart_span1').text(value1);
+		$('.chart_span2').text(value2);
+	}) */
+	
+	$.ajax({
+        url     : '${pageContext.request.contextPath}/user/medical/coronaAPI.do',  //총 코로나
+        type    : 'post',
+        dataType: 'json',
+        data : {'startdate':startdate,'enddate':enddate },
+        success : function(result) {
+			console.log(result.response.body.items.item);
+
+			$.each(result.response.body.items.item,function(i,v){
+				var str = v.stateDt+"";
+				if(i!=6){
+					str = str.substring(4,6) + "-" + str.substring(6,8);
+					dateList.push(str);
+				}
+				
+				str = v.clearCnt
+				clearList.push(str);
+				str = v.deathCnt
+				deathList.push(str);
+				str = v.decideCnt
+				decideList.push(str);
+			});
+			dateList.reverse();
+			var clear = clearList.reverse();
+			clearList = [];
+			var death = deathList.reverse();
+			deathList = [];
+			var decide = decideList.reverse();
+			decideList = [];
+			/* $.each(clear,function(ind,val){
+				if(ind != 0){
+					var value = parseInt(val[ind]) - parseInt(val[ind-1]);
+					console.log(typeof val[ind]);
+					clearList.push(value);
+				}
+			}); */
+
+
+			for(var i=0;i<clear.length;i++){
+				if(i != 0){
+					var value = clear[i] - clear[i-1];
+					console.log(typeof value);
+					clearList.push(value);
+				}
+			}
+			for(var i=0;i<death.length;i++){
+				if(i != 0){
+					var value = death[i] - death[i-1];
+					deathList.push(value);
+					console.log(typeof value);
+				}
+			}
+			for(var i=0;i<decide.length;i++){
+				if(i != 0){
+					var value = decide[i] - decide[i-1];
+					decideList.push(value);
+					console.log(typeof value);
+				}
+			}
+			
+			console.log(dateList);
+			console.log(clearList);
+			console.log(deathList);
+			console.log(decideList);
+			
+			
+			/*var date = result.response.body.items.item[0].stateDt + "";
+			 
+			date = date.substring(4,8);
+			date = (date*1)-7;
+			alert(date);
+			 */
+			var todayDecide = result.response.body.items.item[0].decideCnt - result.response.body.items.item[1].decideCnt;
+			var todayClear = result.response.body.items.item[0].clearCnt - result.response.body.items.item[1].clearCnt;
+			var todayCare = result.response.body.items.item[0].careCnt - result.response.body.items.item[1].careCnt;
+			var todayDeath = result.response.body.items.item[0].deathCnt - result.response.body.items.item[1].deathCnt;
+			var str = '<span class="subtit" style="font-size:14px;">확진 </span><span class="data" style="color: yellow; font-size:19px;">'+todayDecide+'</span>';
+			$('.liveNum2').append(str);
+			str = '<span class="subtit" style="font-size:14px;">격리해제</span><span class="data" style="color: yellow; font-size:19px;">'+todayClear+'</span>';
+			$('.liveNum3').append(str);
+			
+			var decide = result.response.body.items.item[0].decideCnt; //누적 확진자수
+			var death = result.response.body.items.item[0].deathCnt; //누적 사망자수
+			var clear = result.response.body.items.item[0].clearCnt; //누적 격리해제 
+			var care = result.response.body.items.item[0].careCnt; //누적 격리중
+
+			str = '<span class="counter-item-digit text-center"  style="color: white;" data-from="0" data-to="'+decide+'" data-speed="3000" data-refresh-interval="10" style="font-size:30px;"></span><br>';
+			$('#decideDiv').append(str);
+			str = '<span class="before"  style="font-size:14px; color: white; margin-top: 2px; ">전일대비 (+ '+todayDecide+')</span>';
+			$('#toDayDecideDiv').append(str);
+
+			str = '<span class="counter-item-digit text-center"  style="color: white;" data-from="0" data-to="'+clear+'" data-speed="3000" data-refresh-interval="10" style="font-size:30px;"></span><br>';
+			$('#clearDiv').append(str);
+			str = '<span class="before"  style="font-size:14px; color: white; margin-top: 2px; ">(+ '+todayClear+')</span>';
+			$('#toDayClearDiv').append(str);
+
+			str= '<span class="counter-item-digit text-center"  style="color: white;" data-from="0" data-to="'+care+'" data-speed="3000" data-refresh-interval="10" style="font-size:30px;"></span><br>';
+			$('#careDiv').append(str);
+			str = '<span class="before"  style="font-size:14px; color: white; margin-top: 2px; ">(+ '+todayCare+')</span>';
+			$('#toDayCareDiv').append(str);
+
+			str = '<span class="counter-item-digit text-center"  style="color: white;" data-from="0" data-to="'+death+'" data-speed="3000" data-refresh-interval="10" style="font-size:30px;"></span><br>';
+			$('#deathDiv').append(str);
+			str = '<span class="before"  style="font-size:14px; color: white; margin-top: 2px; ">(+ '+todayDeath+')</span>';
+			$('#toDayDeathDiv').append(str);
+
+
+			var examCnt = result.response.body.items.item[0].accExamCnt;		//누적 검사수
+			var examCompCnt = result.response.body.items.item[0].accExamCompCnt; //누적 검사 완료 수
+			var defRate = result.response.body.items.item[0].accDefRate; //누적 확진률
+			defRate = defRate.toFixed(2);
+
+			examCnt = numberWithCommas(examCnt);
+			str = '<span class="num" style="font-size:14px;">'+examCnt+'건</span>';
+			$('#examDiv').append(str);
+
+			examCompCnt = numberWithCommas(examCompCnt);
+			str = '<span class="num" style="font-size:14px;">'+examCompCnt+'건</span>';
+			$('#examCompDiv').append(str);
+			str = '<span class="num" style="font-size:14px;">'+defRate+'%</span>';
+			$('#defRateDiv').append(str);
+			/* <accDefRate>1.0611161854	누적 확진률
+			<accExamCnt>1937689			누적 검사 수
+			<accExamCompCnt>1879813	누적 검사 완료 수
+			<careCnt>4650			치료중 환자 수
+			<clearCnt>14973			격리해제 수				
+			<deathCnt>324				사망자 수
+			<decideCnt>19947			확진자 수
+			<examCnt>57876			검사진행 수
+			<resutlNegCnt>1859866		결과 음성 수
+			<seq>247				감연현황 고유값
+			<stateDt>20200831			기준일
+			<stateTime>00:00			기준시간 */
+
+
+
+
+
+			
+		}
+	});
+
+
+	
+	$.ajax({
+        url     : '${pageContext.request.contextPath}/user/medical/coronaSidoAPI.do',
+        type    : 'post',
+        dataType: 'json',
+        data : {'date':date },
+        success : function(result) {
+			console.log(result.response.body.items.item);
+			
+
+			/* <deathCnt>0			사망자 수       
+			<defCnt>45		확진자 수
+			<gubun>제주			시도명			
+			<incDec>6			전일대비 증감 수
+			<isolClearCnt>26		격리 해제 수
+			<isolIngCnt>19			격리중 환자 수
+			<localOccCnt>5		지역발생 수
+			<overFlowCnt>1		해외유입 수
+			<qurRate>6.71		10만명당 발생률
+			<seq>4072				국내 시도별 발생현황
+			<stdDay>2020년 08월 31일 00시	기준일시 */
+
+			//result.response.body.items.item[0] - 검역
+			//result.response.body.items.item[1] - 제주
+			//result.response.body.items.item[2] - 경남
+			//result.response.body.items.item[3] - 경북
+			//result.response.body.items.item[4] - 전남
+			//result.response.body.items.item[5] - 전북
+			//result.response.body.items.item[6] - 충남
+			//result.response.body.items.item[7] - 충북
+			//result.response.body.items.item[8] - 강원
+			//result.response.body.items.item[9] - 경기
+			//result.response.body.items.item[10] - 세종
+			//result.response.body.items.item[11] - 울산
+			//result.response.body.items.item[12] - 대전
+			//result.response.body.items.item[13] - 광주
+			//result.response.body.items.item[14] - 인천
+			//result.response.body.items.item[15] - 대구
+			//result.response.body.items.item[16] - 부산
+			//result.response.body.items.item[17] - 서울
+			//result.response.body.items.item[18] - 합계
+
+			$('#strongID1').text("전국");
+			
+			var data = numberWithCommas(result.response.body.items.item[18].defCnt);
+			$('.chart_span1').text(data);
+			
+			data = numberWithCommas(result.response.body.items.item[18].incDec);
+			$('.chart_span2').text('(+'+data+')');
+			
+			data = numberWithCommas(result.response.body.items.item[18].isolIngCnt);
+			$('.chart_span3').text(data);
+			
+			data = numberWithCommas(result.response.body.items.item[18].isolClearCnt);
+			$('.chart_span4').text(data);
+
+			data = numberWithCommas(result.response.body.items.item[18].deathCnt);
+			$('.chart_span5').text(data);
+
+			data = numberWithCommas(result.response.body.items.item[18].qurRate);
+			$('.chart_span6').text(data);
+
+
+	    	
+	    	
+			var str = '<small id="item_small">'+result.response.body.items.item[0].gubun+'</small>';
+			str += '<span class="status in-progress" id="item_span1">'+result.response.body.items.item[0].defCnt+'</span>';
+			str += '<span class="status in-progress" id="item_span2">(+'+result.response.body.items.item[0].incDec+')</span>';
+	    	$('#item-gumyoc').append(str);
+			
+	    	
+			var str = '<small id="item_small">'+result.response.body.items.item[1].gubun+'</small>';
+			str += '<span class="status in-progress" id="item_span1">'+result.response.body.items.item[1].defCnt+'</span>';
+			str += '<span class="status in-progress" id="item_span2">(+'+result.response.body.items.item[1].incDec+')</span>';
+	    	$('#item-jeju').append(str);
+			
+	    	
+			var str = '<small id="item_small">'+result.response.body.items.item[2].gubun+'</small>';
+			str += '<span class="status in-progress" id="item_span1">'+result.response.body.items.item[2].defCnt+'</span>';
+			str += '<span class="status in-progress" id="item_span2">(+'+result.response.body.items.item[2].incDec+')</span>';
+	    	$('#item-kyengnam').append(str);
+			
+	    	
+			var str = '<small id="item_small">'+result.response.body.items.item[3].gubun+'</small>';
+			str += '<span class="status in-progress" id="item_span1">'+result.response.body.items.item[3].defCnt+'</span>';
+			str += '<span class="status in-progress" id="item_span2">(+'+result.response.body.items.item[3].incDec+')</span>';
+	    	$('#item-kyengbook').append(str);
+			
+	    	
+			var str = '<small id="item_small">'+result.response.body.items.item[4].gubun+'</small>';
+			str += '<span class="status in-progress" id="item_span1">'+result.response.body.items.item[4].defCnt+'</span>';
+			str += '<span class="status in-progress" id="item_span2">(+'+result.response.body.items.item[4].incDec+')</span>';
+	    	$('#item-junnam').append(str);
+	    	
+			var str = '<small id="item_small">'+result.response.body.items.item[5].gubun+'</small>';
+			str += '<span class="status in-progress" id="item_span1">'+result.response.body.items.item[5].defCnt+'</span>';
+			str += '<span class="status in-progress" id="item_span2">(+'+result.response.body.items.item[5].incDec+')</span>';
+	    	$('#item-junbook').append(str);
+	    	
+			var str = '<small id="item_small">'+result.response.body.items.item[6].gubun+'</small>';
+			str += '<span class="status in-progress" id="item_span1">'+result.response.body.items.item[6].defCnt+'</span>';
+			str += '<span class="status in-progress" id="item_span2">(+'+result.response.body.items.item[6].incDec+')</span>';
+	    	$('#item-chungnam').append(str);
+	    	
+			var str = '<small id="item_small">'+result.response.body.items.item[7].gubun+'</small>';
+			str += '<span class="status in-progress" id="item_span1">'+result.response.body.items.item[7].defCnt+'</span>';
+			str += '<span class="status in-progress" id="item_span2">(+'+result.response.body.items.item[7].incDec+')</span>';
+	    	$('#item-chungbuk').append(str);
+	    	
+			var str = '<small id="item_small">'+result.response.body.items.item[8].gubun+'</small>';
+			str += '<span class="status in-progress" id="item_span1">'+result.response.body.items.item[8].defCnt+'</span>';
+			str += '<span class="status in-progress" id="item_span2">(+'+result.response.body.items.item[8].incDec+')</span>';
+	    	$('#item-kangwon').append(str);
+	    	
+			var str = '<small id="item_small">'+result.response.body.items.item[9].gubun+'</small>';
+			str += '<span class="status in-progress" id="item_span1">'+result.response.body.items.item[9].defCnt+'</span>';
+			str += '<span class="status in-progress" id="item_span2">(+'+result.response.body.items.item[9].incDec+')</span>';
+	    	$('#item-kyenggi').append(str);
+	    	
+			var str = '<small id="item_small">'+result.response.body.items.item[10].gubun+'</small>';
+			str += '<span class="status in-progress" id="item_span1">'+result.response.body.items.item[10].defCnt+'</span>';
+			str += '<span class="status in-progress" id="item_span2">(+'+result.response.body.items.item[10].incDec+')</span>';
+	    	$('#item-seyjong').append(str);
+	    	
+			var str = '<small id="item_small">'+result.response.body.items.item[11].gubun+'</small>';
+			str += '<span class="status in-progress" id="item_span1">'+result.response.body.items.item[11].defCnt+'</span>';
+			str += '<span class="status in-progress" id="item_span2">(+'+result.response.body.items.item[11].incDec+')</span>';
+	    	$('#item-ulsan').append(str);
+	    	
+			var str = '<small id="item_small">'+result.response.body.items.item[12].gubun+'</small>';
+			str += '<span class="status in-progress" id="item_span1">'+result.response.body.items.item[12].defCnt+'</span>';
+			str += '<span class="status in-progress" id="item_span2">(+'+result.response.body.items.item[12].incDec+')</span>';
+	    	$('#item-daejeon').append(str);
+	    	
+			var str = '<small id="item_small">'+result.response.body.items.item[13].gubun+'</small>';
+			str += '<span class="status in-progress" id="item_span1">'+result.response.body.items.item[13].defCnt+'</span>';
+			str += '<span class="status in-progress" id="item_span2">(+'+result.response.body.items.item[13].incDec+')</span>';
+	    	$('#item-gwangju').append(str);
+	    	
+			var str = '<small id="item_small">'+result.response.body.items.item[14].gubun+'</small>';
+			str += '<span class="status in-progress" id="item_span1">'+result.response.body.items.item[14].defCnt+'</span>';
+			str += '<span class="status in-progress" id="item_span2">(+'+result.response.body.items.item[14].incDec+')</span>';
+	    	$('#item-inchun').append(str);
+	    	
+			var str = '<small id="item_small">'+result.response.body.items.item[15].gubun+'</small>';
+			str += '<span class="status in-progress" id="item_span1">'+result.response.body.items.item[15].defCnt+'</span>';
+			str += '<span class="status in-progress" id="item_span2">(+'+result.response.body.items.item[15].incDec+')</span>';
+	    	$('#item-daegu').append(str);
+	    	
+			var str = '<small id="item_small">'+result.response.body.items.item[16].gubun+'</small>';
+			str += '<span class="status in-progress" id="item_span1">'+result.response.body.items.item[16].defCnt+'</span>';
+			str += '<span class="status in-progress" id="item_span2">(+'+result.response.body.items.item[16].incDec+')</span>';
+	    	$('#item-busan').append(str);
+	    	
+			var str = '<small id="item_small">'+result.response.body.items.item[17].gubun+'</small>';
+			str += '<span class="status in-progress" id="item_span1">'+result.response.body.items.item[17].defCnt+'</span>';
+			str += '<span class="status in-progress" id="item_span2">(+'+result.response.body.items.item[17].incDec+')</span>';
+	    	$('#item-seoul').append(str);
+			
         }
 	});
 
@@ -773,35 +1092,75 @@ $(function(){
 	createPie(".pieID.legend", ".pieID.pie");
 
 
-	 // line chart data
+	
+	  // line chart data
     var buyerData = {
-        labels : ["08-27","08-28","08-29","08-30","08-31","09-01","09-02"],
+        labels : dateList ,
         datasets : [
-        {
-            fillColor : "rgba(172,194,132,0.4)",
-            strokeColor : "#e2e2e2",
-            pointColor : "skyblue",
-            pointStrokeColor : "#e2e2e2",
-            data : [99,251,305,247,356,786,234]
-        },
-          {
-            fillColor : "rgba(100,194,132,0.4)",
-            strokeColor : "#FFC26D",
-            pointColor : "red",
-            pointStrokeColor : "#FFC26D",
-            data : [120,150,291,251,353,224,500]
-        },
-          {
-            fillColor : "rgba(0,0,0,0.4)",
-            strokeColor : "#ffffff",
-            pointColor : "gray",
-            pointStrokeColor : "#ffffff",
-            data : [205,108,91,201,35,15,500]
-        }
-    ]
+	        {
+	            fillColor : "rgba(172,194,132,0.4)",
+	            strokeColor : "#e2e2e2",
+	            pointColor : "skyblue",
+	            pointStrokeColor : "#e2e2e2",
+	            data : clearList
+	        },
+	          {
+	            fillColor : "rgba(100,194,132,0.4)",
+	            strokeColor : "#FFC26D",
+	            pointColor : "red",
+	            pointStrokeColor : "#FFC26D",
+	            data : [323, 299, 248, 235, 267, 195]
+	        },
+	          {
+	            fillColor : "rgba(0,0,0,0.4)",
+	            strokeColor : "#ffffff",
+	            pointColor : "gray",
+	            pointStrokeColor : "#ffffff",
+	            data : [5, 2, 1, 0, 2, 3]
+	        }
+    	]
     }
-    // get line chart canvas
+    // get line chart canvas 
     var buyers = document.getElementById('buyers').getContext('2d');
-    // draw line chart
-    new Chart(buyers).Line(buyerData);   
+    new Chart(buyers).Line(buyerData); 
+    
+    
+   /*  var myChart = new Chart(buyers, {
+    type: 'line',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }
+
+       ]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+}); */
 </script>

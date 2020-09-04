@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
 import kr.or.ddit.member.service.IMemberService;
+import kr.or.ddit.utiles.UserSha256;
 import kr.or.ddit.vo.MemberVO;
 
 /**
@@ -96,13 +97,21 @@ public class LoginController {
 		memberInfo.setMem_gender(gender);
 		memberInfo.setMem_hp("010-0000-0000");
 		memberInfo.setMem_join_addr("n");
-		memberInfo.setMem_pass("a");
+		String pass = UserSha256.encrypt("a");
+		memberInfo.setMem_pass(pass);
 		memberInfo.setMem_zip1("123");
 		memberInfo.setMem_zip2("123");
 		
 		if(memberInfo1 == null) {
 			this.service.insertMember(memberInfo);
+		}else {
+			this.service.updateMemberInfo(memberInfo);
 		}
+		
+		params.put("mem_id", memberInfo.getMem_id());
+		params.put("mem_pass", memberInfo.getMem_pass());
+		
+		memberInfo = this.service.memberInfo(params);
 		session.setAttribute("LOGIN_MEMBERINFO", memberInfo); // 세션 생성
 		
 		model.addAttribute("result", apiResult);

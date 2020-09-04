@@ -39,5 +39,20 @@
 		WHERE MEM_NO = #{mem_no}
 	</select>
 
+	<select id="dealListView" resultType="dealVO" parameterType="map">
+		SELECT B.*
+			FROM(SELECT A.*
+					FROM(SELECT ROWNUM RNUM, DEAL.*
+					FROM DEAL
+					WHERE MEM_NO = #{mem_no}
+				ORDER BY DEAL_NO DESC
+				)A
+			)B
+			<![CDATA[
+				WHERE B.RNUM <= #{startCount}
+				AND B.RNUM >= #{endCount}
+	        ]]>	
+	      ORDER BY B.rnum  DESC
+	</select>
 </mapper>    
 

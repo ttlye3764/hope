@@ -163,18 +163,24 @@ function setThumbnail(event) {
 			var title = $('#title').val();
 			var age = $('#age').val();
 			var time = $('#time').val();
-			var category = $('#category option:selected').val();
-			var diet = $('#diet option:selected').val();
 			var file = $('#inputGroupFile04').val();
 
-			if (title == "" || age == "" || tile == "" || category == "" || diet == "" || file == "") {
-				alert("빈 칸을 입력해주세요.");
+			if (title == "" || age == "" || time == "") {
+				alert("빈 칸을 모두 입력해주세요.(내용 제외)");
+
+				return false;
+			}
+
+			if (file == "") {
+				alert("파일을 넣어주세요.")
 
 				return false;
 			}
 
 			alert("등록 완료");
 
+			var category = $('#category option:selected').val();
+			var diet = $('#diet option:selected').val();
 			$(this).attr('action','${pageContext.request.contextPath}/admin/healthImage/inserthealthImageInfo.do?category=' + category + '&diet=' + diet);
 		        
 		        return true;

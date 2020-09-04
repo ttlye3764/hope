@@ -23,6 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
@@ -57,7 +58,7 @@ public class JoinController {
 	}
 
 	@RequestMapping(value = "loginCheck")
-	public ModelAndView loginCheck(HttpServletRequest request, String mem_id, String mem_pass, HttpSession session,
+	public ModelAndView loginCheck(HttpServletRequest request,@RequestParam(value="mem_id") String mem_id,@RequestParam(value="mem_pass") String mem_pass, HttpSession session,
 			HttpServletResponse response, Map<String, String> params, ModelAndView andView) throws Exception {
 
 //		Map<String, String> params = new HashMap<String, String>();

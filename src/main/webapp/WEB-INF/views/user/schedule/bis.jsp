@@ -3,7 +3,25 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
+<div class="innerpage-banner center bg-overlay-dark-7 py-7" style="background:url(assets/images/bg/04.jpg) no-repeat; background-size:cover; background-position: center center;">
+		<div class="container">
+			<div class="row all-text-white">
+				<div class="col-md-12 align-self-center">
+					<h1 class="innerpage-title">Bus Information System</h1>
+					<h6 class="subtitle"> Register your favorite bus! </h6>
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item active"><a href="index.html"><i class="ti-home"></i> Home</a></li>
+							<li class="breadcrumb-item">Timeline</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+		<br>
+		<br>
+		<br>
 
 	<section>
 		<div class="container">
@@ -15,7 +33,7 @@
 				<!-- portfolio details -->
 				<div class="col-md-4">
 					<div class="sticky-element">
-						<h2>Register my Bus </h2>
+						<h2>Register my Bus</h2>
 						<p>내가 즐겨타는 버스를 등록해주세요~! </p>
 						       Region : <select name="citycode" id="citycode">
 									<option value="">지역선택</option>
@@ -309,7 +327,7 @@ navigator.geolocation.getCurrentPosition(function(pos) {
 			        	 async    : false,
 			             url     : '${pageContext.request.contextPath}/user/schedule/registBus.do',
 			             type    : 'post',
-			             data : {'routeid':routeid,'citycode':citycode,'mem_no':2},
+			             data : {'routeid':routeid,'citycode':citycode,'mem_no':${LOGIN_MEMBERINFO.mem_no}},
 			             success : function(Result) {
 			                alert('등록되었습니다.');
 			             }

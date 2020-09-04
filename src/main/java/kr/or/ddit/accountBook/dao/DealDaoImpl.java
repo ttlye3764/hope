@@ -2,6 +2,7 @@ package kr.or.ddit.accountBook.dao;
 
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -34,6 +35,11 @@ public class DealDaoImpl implements IDealDao{
 	@Override
 	public List<DealVO> dealList(String mem_no) throws Exception {
 		return client.selectList("deal.dealList",mem_no);
+	}
+
+	@Override
+	public List<DealVO> dealListView(Map<String, String> params) throws Exception {
+		return client.selectList("deal.dealListView",params);
 	}
 	
 

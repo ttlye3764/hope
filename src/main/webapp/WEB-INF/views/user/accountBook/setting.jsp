@@ -20,12 +20,13 @@ $(function(){
 	        url     : '${pageContext.request.contextPath}/user/accountBook/registTrace.do',
 	        type    : 'post',
 	        dataType : 'json',
-	        data : {'deal_option':paymentOption,'deal_kind':paymentMethod,'deal_date':date,'deal_name':item,'deal_price':price, 'mem_no':2},
+	        data : {'deal_option':paymentOption,'deal_kind':paymentMethod,'deal_date':date,'deal_name':item,'deal_price':price, 'mem_no':${LOGIN_MEMBERINFO.mem_no}},
 	        success : function(Result) {
-	          $('#accountTable').append('<tr><td>'+Result.list.length+'</td><td>'+Result.list[Result.list.length-1].deal_date+'</td><td>'+item+'</td><td>'+price+'</td><td>'+paymentMethod+'</td><td><button id="deleteBtn" type="button">삭제</button></td></tr>');
+	        //  $('#accountTable').append('<tr><td>'+Result.list.length+'</td><td>'+Result.list[Result.list.length-1].deal_date+'</td><td>'+item+'</td><td>'+price+'</td><td>'+paymentMethod+'</td><td><button id="deleteBtn" type="button">삭제</button></td></tr>');
 	        }
 	
-	   	});  //내가자주타는 버스 등록 
+	   	});  // 등록 
+		   	location.reload();
 	});
 
 
@@ -59,39 +60,50 @@ function handleImgFileSelect(e){
 }
 
 </script>
+<div class="innerpage-banner center bg-overlay-dark-7 py-7" style="background:url(assets/images/bg/04.jpg) no-repeat; background-size:cover; background-position: center center;">
+		<div class="container">
+			<div class="row all-text-white">
+				<div class="col-md-12 align-self-center">
+					<h1 class="innerpage-title">Asset management system</h1>
+					<h6 class="subtitle"> Please enter an asset! </h6>
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item active"><a href="index.html"><i class="ti-home"></i> Home</a></li>
+							<li class="breadcrumb-item">Timeline</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+		<br>
+		<br>
+		<br>
+		
 <div align="center" style="height: auto; margin: auto; ">
 
                             <div class="col-lg-6">
 
                                     <div class="card-body">
 
-                                        <h4 class="header-title mb-3">자산관리</h4>
-
                                         <ul class="nav nav-tabs nav-bordered mb-3">
-                                            <li class="nav-item">
-                                                <a href="#home-b1" data-toggle="tab" aria-expanded="false" class="nav-link">
-                                                    <i class="mdi mdi-home-variant d-lg-none d-block mr-1"></i>
-                                                    <span class="d-none d-lg-block">거래 입력</span>
-                                                </a>
-                                            </li>
+                                            
                                             <li class="nav-item">
                                                 <a href="#profile-b1" data-toggle="tab" aria-expanded="true" class="nav-link active">
                                                     <i class="mdi mdi-account-circle d-lg-none d-block mr-1"></i>
-                                                    <span class="d-none d-lg-block">거래 내역</span>
+                                                    <span class="d-none d-lg-block">거래 등록</span>
                                                 </a>
                                             </li>
-                                            <li class="nav-item">
-                                                <a href="#settings-b1" data-toggle="tab" aria-expanded="false" class="nav-link">
-                                                    <i class="mdi mdi-settings-outline d-lg-none d-block mr-1"></i>
-                                                    <span class="d-none d-lg-block">고정 수익/지출 등록</span>
-                                                </a>
-                                            </li>
+                                            
                                            
                                         </ul>
 
                                         <div class="tab-content">
                                             <div class="tab-pane" id="home-b1">
-                                                	<div>
+                                                	
+                                            </div>
+                                            <div class="tab-pane show active" id="profile-b1">
+                                               <div>
                                                 	날짜  <input type="text" id="date"> 아이템 <input type="text" id="item"> 
                                                 	<br><br>
                                                 	금액 <input type="text" id="price"> 
@@ -140,17 +152,9 @@ function handleImgFileSelect(e){
 														</c:forEach>
 													</tbody>	
 												</table>
-                                                
+                                               ${pagination } 
                                                 	
                                              </div>
-                                            </div>
-                                            <div class="tab-pane show active" id="profile-b1">
-                                                <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
-                                                <p class="mb-0">Leggings occaecat dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
-                                            </div>
-                                            <div class="tab-pane" id="settings-b1">
-                                                <p>Food truck quinoa dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
-                                                <p class="mb-0">Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
                                             </div>
                                         </div>
 
