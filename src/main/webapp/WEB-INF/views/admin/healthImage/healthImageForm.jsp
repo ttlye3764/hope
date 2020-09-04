@@ -111,7 +111,7 @@
                                                 <label>파일 업로드</label>
                                                 <div class="input-group">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="inputGroupFile04" 
+                                                        <input type="file" class="custom-file-input" id="inputGroupFile04" accept="video/mp4"
                                                         	name="files" onchange="setThumbnail(event);"> 
                                                         <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
                                                     </div>

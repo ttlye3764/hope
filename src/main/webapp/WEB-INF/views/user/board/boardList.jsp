@@ -157,7 +157,7 @@ Banner innerpage -->
                            <div class="input-group mb-40">
                               <div style="width: 110px; margin: 0px 5px 0px 0px; display: flex; justify-content: center; align-items: center; height: 50px;">
                                  <select id="search_keycode" name="search_keycode" class="custom-select select-big">
-                                    <option selected="TOTAL">전체</option>
+                                    <option value="TOTAL" selected="selected">전체</option>
                                     <option value="TITLE">제목</option>
                                     <option value="CONTENT">내용</option>
                                     <option value="WRITER">작성자</option>

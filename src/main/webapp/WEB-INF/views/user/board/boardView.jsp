@@ -71,10 +71,19 @@ function alertPrint(msg){
 						<div class="col-md-9 mb-2"><span class="form-group"><input type="text" class="form-control" placeholder="writer" id="bd_writer" name="bd_writer" value="${boardInfo.bd_writer}"></span></div>
 						<div class="col-md-9"><span class="form-group"><input type="text" class="form-control" id="bd_date" name="bd_date" value="${boardInfo.bd_date}"></span></div>
 						<div class="col-md-9 input-group mb-4">
-							<div class="custom-file">
-								<input type="file" class="custom-file-input" id="inputGroupFile01">
-								<label class="custom-file-label" for="inputGroupFile01">Upload your CV</label>
-							</div>
+<!-- 							<div class="custom-file"> -->
+<!-- 								<input type="file" class="custom-file-input" id="inputGroupFile01"> -->
+<!-- 								<label class="custom-file-label" for="inputGroupFile01">Upload your CV</label> -->
+<!-- 							</div> -->
+							
+							<!-- 파일  -->
+					 <c:if test="${!empty boardInfo.items[status.index].file_save_name }">  
+						<div id="image_container" style="width: 300px; height: 230px;">
+								<img src="/files/${boardInfo.items[status.index].file_save_name}" alt="pic1" style="width: 300px; height: 230px;">
+	 					</div> 
+					 </c:if>
+					 
+					 
 						</div>
 						<div class="col-md-12">
 							<span class="form-group"><textarea cols="25" rows="20" class="form-control" placeholder="내용" name="bd_content" >${boardInfo.bd_content}</textarea></span>

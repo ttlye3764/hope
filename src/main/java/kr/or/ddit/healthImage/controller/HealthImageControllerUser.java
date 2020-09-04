@@ -49,7 +49,7 @@ public class HealthImageControllerUser {
 
 		String totalCount = this.healthImageService.totalCount(params);
 		
-		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount), totalCount);
+		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount));
 	    
 		String startCount = String.valueOf(pagination.getStartCount());
 	    String endCount = String.valueOf(pagination.getEndCount());
@@ -72,7 +72,7 @@ public class HealthImageControllerUser {
 	@RequestMapping("chooseList")
 	public ModelAndView chooseList(ModelAndView andView, 
 									Map<String, String> params, 
-									@RequestParam(value = "choose") String choose
+									@RequestParam(value = "choose", required = false) String choose
 									,RolePaginationUtil_su pagination
 									,HttpServletRequest request
 									,@RequestParam(value = "currentPage", required = false) String currentPage) throws Exception{
@@ -83,7 +83,7 @@ public class HealthImageControllerUser {
 
 		String totalCount = this.healthImageService.totalCount(params);
 		
-		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount), totalCount);
+		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount), choose);
 	    
 		String startCount = String.valueOf(pagination.getStartCount());
 	    String endCount = String.valueOf(pagination.getEndCount());
@@ -97,6 +97,7 @@ public class HealthImageControllerUser {
 		
 		andView.addObject("healthImageList", healthImageList);
 		andView.addObject("pagination", pagination.getPagingHtmls());
+		
 		
 		andView.setViewName("user/healthImage/healthImageList");
 		

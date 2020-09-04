@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Component;
 
-
+@Component
 public class RolePaginationUtil_yun {
 	private int currentPage; 		// 현재 페이지
 	private int totalCount;			// 전체 게시글 갯수
@@ -68,20 +68,20 @@ public class RolePaginationUtil_yun {
 		if((this.currentPage - 1) == 0){
 			this.pagingHtmls.append("<li class='page-item disabled'><span class='page-link' style='height:43 !important;'>&laquo;</span></li>");
 		}else{                 
-			this.pagingHtmls.append("<li class='page-item disabled'><a href='" + requestURI + "?currentPage="+ (this.currentPage -1) +"&bd_division="+bd_division+" &search_keycode= "+search_keycode+" &search_keyword= "+search_keyword+" '><span class='page-link' style='height:43 !important;'>&laquo;</span></a></li>");
+			this.pagingHtmls.append("<li class='page-item disabled'><a href='" + requestURI + "?currentPage="+ (this.currentPage -1) +"&bd_division="+bd_division+"&search_keycode= "+search_keycode+"&search_keyword="+search_keyword+" '><span class='page-link' style='height:43 !important;'>&laquo;</span></a></li>");
 		}
 		//|1|2|3|4|5|
 		for(int i=this.startPage; i<=this.endPage; i++){
 			if(this.currentPage == i){
 				this.pagingHtmls.append("<li class='page-item active'><a href='#'><span class='page-link bg-grad' style='height:43 !important;'>"+ i +"</span></a></li>");
 			}else{
-				this.pagingHtmls.append("<li class='page-item'><a  class='page-link' href='" + requestURI + "?currentPage="+ i +"&bd_division="+bd_division+" &search_keycode= "+search_keycode+" &search_keyword= "+search_keyword+" '>"+ i +"</a></li>");
+				this.pagingHtmls.append("<li class='page-item'><a  class='page-link' href='" + requestURI + "?currentPage="+ i +"&bd_division="+bd_division+"&search_keycode="+search_keycode+"&search_keyword="+search_keyword+"'>"+ i +"</a></li>");
 			}
 		}
 		// 다음
 		if(this.currentPage < this.totalPage){
 //			this.pagingHtmls.append("<li><a href='" + requestURI + "?currentPage="+ (this.currentPage +1) +"'>&raquo;</a></li>");
-			this.pagingHtmls.append("<li class='page-item disabled'><a href='" + requestURI + "?currentPage="+ (this.currentPage +1) +"&bd_division="+bd_division+" &search_keycode= "+search_keycode+" &search_keyword= "+search_keyword+" '><span class='page-link' style='height:43 !important;'>&raquo;</span></a></li>");
+			this.pagingHtmls.append("<li class='page-item disabled'><a href='" + requestURI + "?currentPage="+ (this.currentPage +1) +"&bd_division="+bd_division+"&search_keycode="+search_keycode+"&search_keyword="+search_keyword+"'><span class='page-link' style='height:43 !important;'>&raquo;</span></a></li>");
 		}else{
 			this.pagingHtmls.append("<li class='page-item disabled'><span class='page-link' style='height:43 !important;'>&raquo;</span></li>");
 		}

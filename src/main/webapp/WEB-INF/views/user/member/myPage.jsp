@@ -49,20 +49,47 @@ $(function(){
    }
 
    $("#mem_hp").keyup(function(e){
-      if(e.keyCode == 8){
-         var code = $('input[name=mem_hp]').val();
-         var lastChar = code.charAt(code.length-1);
-         if(lastChar == '-'){
-            code = code.substr(0,code.length-1);
-            $('input[name=mem_hp]').val(code);
-         }
-      }else{
-         var hp = $('input[name=mem_hp]').val();
-         if(hp.length == 3 || hp.length == 8){
-            $('input[name=mem_hp]').val(hp + "-");
-         }
-      }
-   });
+	      if(e.keyCode == 8){
+	         var code = $('input[name=mem_hp]').val();
+	         var lastChar = code.charAt(code.length-1);
+	         if(lastChar == '-'){
+	            code = code.substr(0,code.length-1);
+	            $('input[name=mem_hp]').val(code);
+	         }
+	      }else{
+	         var hp = $('input[name=mem_hp]').val();
+	         var lastChar = hp.charAt(hp.length-1);
+	         if(lastChar == '-'){
+	             hp = hp.substr(0,hp.length-1);
+	             $('input[name=mem_hp]').val(hp);
+	         }else{
+	         	if(hp.length == 3 || hp.length == 8){
+	         	   $('input[name=mem_hp]').val(hp + "-");
+	        	 }
+	         }     
+	      }
+	   });
+	   $("#mem_birth").keyup(function(e){
+		      if(e.keyCode == 8){
+		         var code = $('input[name=mem_birth]').val();
+		         var lastChar = code.charAt(code.length-1);
+		         if(lastChar == '-'){
+		            code = code.substr(0,code.length-1);
+		            $('input[name=mem_birth]').val(code);
+		         }
+		      }else{
+		         var birth = $('input[name=mem_birth]').val();
+		         var lastChar = birth.charAt(birth.length-1);
+		         if(lastChar == '-'){
+		        	 birth = birth.substr(0,birth.length-1);
+			         $('input[name=mem_birth]').val(birth);
+			     }else{
+			         if(birth.length == 4 || birth.length == 7){
+			            $('input[name=mem_birth]').val(birth + "-");
+			         }
+			     }
+		      }
+		   });
    
    $('form[name=myPage]').submit(function(){
          var emailcheck = $('#emaillabel').text();

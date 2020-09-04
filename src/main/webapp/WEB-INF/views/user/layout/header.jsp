@@ -189,7 +189,7 @@ function LogOut(){
 							<a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Knowledge</a>
 							<ul class="dropdown-menu" aria-labelledby="pagesMenu">
 								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/knowledge/knowledgeList.do'>퀴즈 풀이</a></li>
-								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/knowledge/knowledgeList.do'>최신 뉴스</a></li>
+								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/knowledge/news.do'>최신 뉴스</a></li>
 							</ul>
 						</li>
 						<!-- Menu item 4 Portfolio-->

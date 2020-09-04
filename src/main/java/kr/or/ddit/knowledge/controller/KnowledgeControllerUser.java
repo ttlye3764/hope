@@ -49,6 +49,9 @@ public class KnowledgeControllerUser {
 		return andView;
 	
 	}
+	
+	@RequestMapping("news")
+	public void news() {}
 
 	@RequestMapping("chart")
 	public void chart() {

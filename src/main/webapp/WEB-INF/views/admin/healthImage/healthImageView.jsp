@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -131,6 +132,8 @@
 													</c:forEach>
 												</div>
 											 </c:if>
+											 
+													 
 
                                             <button type="button" id="delBtn" class="btn btn-danger" style="float: right; margin: 0px 0px 0px 10px;">삭제</button>
                                             <button type="button" id="cancel" class="btn btn-light" style="float: right; margin: 0px 0px 0px 10px;">취소</button>
