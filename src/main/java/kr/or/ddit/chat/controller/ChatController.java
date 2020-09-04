@@ -92,7 +92,7 @@ public class ChatController {
 		
 		andView.addObject("chatingRoomList", chatingRoomList);
 		andView.addObject("friendList",friendList);
-		andView.setViewName("user/chat/chat");
+		andView.setViewName("user/chat/chatpage");
 		return andView;
 	};
 	
@@ -105,9 +105,8 @@ public class ChatController {
 		
 		MemberVO memberInfo = memberService.memberInfo(params);
 		
-		  andView.addObject("memberInfo", memberInfo);
-		  andView.setViewName("jsonConvertView");
-				
+		andView.addObject("memberInfo", memberInfo);
+		andView.setViewName("jsonConvertView");
 		
 		return andView;
 	}
