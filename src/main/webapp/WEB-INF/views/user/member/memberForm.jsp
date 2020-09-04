@@ -51,11 +51,38 @@ $(function(){
          }
       }else{
          var hp = $('input[name=mem_hp]').val();
-         if(hp.length == 3 || hp.length == 8){
-            $('input[name=mem_hp]').val(hp + "-");
-         }
+         var lastChar = hp.charAt(hp.length-1);
+         if(lastChar == '-'){
+             hp = hp.substr(0,hp.length-1);
+             $('input[name=mem_hp]').val(hp);
+         }else{
+         	if(hp.length == 3 || hp.length == 8){
+         	   $('input[name=mem_hp]').val(hp + "-");
+        	 }
+         }     
       }
    });
+   $("#mem_birth").keyup(function(e){
+	      if(e.keyCode == 8){
+	         var code = $('input[name=mem_birth]').val();
+	         var lastChar = code.charAt(code.length-1);
+	         if(lastChar == '-'){
+	            code = code.substr(0,code.length-1);
+	            $('input[name=mem_birth]').val(code);
+	         }
+	      }else{
+	         var birth = $('input[name=mem_birth]').val();
+	         var lastChar = birth.charAt(birth.length-1);
+	         if(lastChar == '-'){
+	        	 birth = birth.substr(0,birth.length-1);
+		         $('input[name=mem_birth]').val(birth);
+		     }else{
+		         if(birth.length == 4 || birth.length == 7){
+		            $('input[name=mem_birth]').val(birth + "-");
+		         }
+		     }
+	      }
+	   });
    $('form[name=memberForm]').submit(function() {
       var idcheck = $('#idlabel').text();
       var emailcheck = $('#emaillabel').text();
@@ -412,7 +439,7 @@ $(function(){
          
          <tr>
             <td width="150px" height="25" class="idright">생년월일</td>
-            <td><input type="text" name="mem_birth" class="form-control" placeholder="YYYY-MM-DD"/><br>
+            <td><input type="text" name="mem_birth" id="mem_birth" class="form-control" placeholder="YYYY-MM-DD"/><br>
          </tr>
          
          <tr>
