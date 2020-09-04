@@ -67,8 +67,8 @@ function alertPrint(msg){
 							<h2 class="mb-3">게시판 상세보기</h2></div>
 							                                           <input type="hidden" id="bd_division" name="bd_division" value="${bd_division }">
 																	   <input type="hidden" name="bd_no" value="${boardInfo.bd_no}"/>
-						<div class="col-md-9"><span class="form-group"><input type="text" class="form-control" placeholder="title"  id="bd_title" name="bd_title" value="${boardInfo.bd_title}"></span></div>
-						<div class="col-md-9"><span class="form-group"><input type="text" class="form-control" placeholder="writer" id="bd_writer" name="bd_writer" value="${boardInfo.bd_writer}"></span></div>
+						<div class="col-md-9 "><span class="form-group"><input type="text" class="form-control" placeholder="title"  id="bd_title" name="bd_title" value="${boardInfo.bd_title}"></span></div>
+						<div class="col-md-9 mb-2"><span class="form-group"><input type="text" class="form-control" placeholder="writer" id="bd_writer" name="bd_writer" value="${boardInfo.bd_writer}"></span></div>
 						<div class="col-md-9"><span class="form-group"><input type="text" class="form-control" id="bd_date" name="bd_date" value="${boardInfo.bd_date}"></span></div>
 						<div class="col-md-9 input-group mb-4">
 							<div class="custom-file">
