@@ -147,24 +147,25 @@
 									  		<div class="modal-content" id="modals" style="text-align: center;">
 												<div class="modal-header" style="text-align: center;vertical-align: middle">
 												<!-- 파일 -->
-												<%-- 	 <c:if test="${!empty healthInfo.items[status.index].file_save_name }">  
+												 	 <%-- <c:if test="${!empty healthInfo.items[status.index].file_save_name }">  
 														<div class="portfolio-card-header" id="image_container" style="width: 235px; height: 160px;margin-left: 25%">
 															<img src="/files/${healthInfo.items[status.index].file_save_name}" 
 															alt="pic1" style="width: 233px; height: 160px;margin: auto;">
 									 					</div> 
-													 </c:if>
-													  --%>
-													 <!-- <video id="myVideo" oncontextmenu="return false;" width="640" >
-													    <source src="./movie/tool.mp4" type="video/mp4">
-													    브라우저가 비디오 태그를 지원하지 않습니다.
-													</video>  -->
+													 </c:if> --%>
+													  
+													  <c:if test="${!empty healthInfo.items[status.index].file_save_name }">  
+															  <video id="myVideo" oncontextmenu="return false;" width="640" controls autoplay="autoplay">
+															    <source src="/files/${healthInfo.items[status.index].file_save_name}" type="video/mp4">
+															</video>
+													 </c:if> 
 													
-													<video oncontextmenu="return false;" id="myVideo" width="640" controls autoplay style="margin: 0px 0px 0px 80px;">
+												 <!-- 	<video oncontextmenu="return false;" id="myVideo" width="640" controls autoplay style="margin: 0px 0px 0px 80px;">
 													  <source src="movie.mp4" type="video/mp4">
-													</video>
+													</video> -->
 
 													<button type="button" class="btn btn-light mb-2 mr-1" id="playBtn">재생</button>
-													<button type="button" class="btn btn-light mb-2 mr-1" id="fullBtn">전체화면</button>
+													<button type="button" class="btn btn-light mb-2 mr-1" id="fullBtn">전체화면</button> 
 
 													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 													<span aria-hidden="true">&times;</span>
