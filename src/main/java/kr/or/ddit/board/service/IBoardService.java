@@ -16,7 +16,7 @@ public interface IBoardService {
 		//테이블 삭제
 		public void deleteBoard(String bd_no) throws Exception;
 		//테이블 등록                                                             
-		public int insertBoard(BoardVO boardVO, MultipartFile[] items) throws Exception;
+		public void insertBoard(BoardVO boardVO, MultipartFile[] items) throws Exception;
 		
 		public BoardVO boardInfo(Map<String, String> params) throws Exception;
 		

@@ -18,7 +18,7 @@ public class BoardFileDaoImpl implements IBoardFileDao {
 	@Override
 	public void insertFileItem(List<Board_FileVO> fileItemList) throws Exception {
 		for(Board_FileVO fileItemInfo : fileItemList) {
-			client.insert("boardfile.insertFileItem", fileItemInfo);
+			client.insert("boardfile.insertFile", fileItemInfo);
 		}
 	}
 
@@ -31,7 +31,7 @@ public class BoardFileDaoImpl implements IBoardFileDao {
 	@Override
 	public void updateFileItem(List<Board_FileVO> fileItemList) throws Exception {
 		for(Board_FileVO fileItemInfo : fileItemList) {
-			client.update("boardfile.updateFileItem", fileItemInfo);
+			client.update("boardfile.updateFile", fileItemInfo);
 		}
 	}
 }

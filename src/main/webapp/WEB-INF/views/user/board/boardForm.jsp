@@ -9,7 +9,7 @@
 <script>
 $(function(){
 	
-	$("#files").on("change", handleImgFileSelect);
+//	$("#files").on("change", handleImgFileSelect);
 
  	// 등록버튼기능
     $('form[name=boardForm]').on('submit', function(){
@@ -26,24 +26,24 @@ $(function(){
 	});
 
 
-    function handleImgFileSelect(e){
-		var files = e.target.files;
-		var filesArr = Array.prototype.slice.call(files);
+//    function handleImgFileSelect(e){
+//		var files = e.target.files;
+//		var filesArr = Array.prototype.slice.call(files);
 		
-		filesArr.forEach(function(f){
-			if(!f.type.match("image.*")){
-				alert("이미지만 업로드 가능합니다.");
-				return;
-			}
+// 		filesArr.forEach(function(f){
+// 			if(!f.type.match("image.*")){
+// 				alert("이미지만 업로드 가능합니다.");
+// 				return;
+// 			}
 			
-			sel_file = f;
-			var reader = new FileReader();
-			reader.onload = function(e)	{
-					$("#img").attr("src", e.target.result);
-			}
-			reader.readAsDataURL(f);
-		});
-	}
+//			sel_file = f;
+//			var reader = new FileReader();
+//			reader.onload = function(e)	{
+//					$("#img").attr("src", e.target.result);
+//			}
+//			reader.readAsDataURL(f);
+//		});
+//	}
     
 });
 function alertPrint(msg){
@@ -73,7 +73,7 @@ function alertPrint(msg){
 						<input type="hidden" name="bd_writer" value='${LOGIN_MEMBERINFO.mem_nickname }'>
 						<input type="hidden" name="mem_no" value='${LOGIN_MEMBERINFO.mem_no }'>
 <!-- 						<div class="col-md-9"><span class="form-group"><input type="text" class="form-control" placeholder="writer" id="bd_writer" name="bd_writer"></span></div> -->
-						<div class="col-md-9 input-group mb-4">
+						<div class="col-md-9 input-group mb-">
 							<div class="custom-file">
 								<input type="file" class="custom-file-input" id="files" name="files">
 								<label class="custom-file-label" for="inputGroupFile01">Upload your CV</label>

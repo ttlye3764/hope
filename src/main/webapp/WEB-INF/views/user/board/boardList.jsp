@@ -48,10 +48,10 @@
       $('#searchBTN').on('click', function(){
          var search_keyword = $("input[id='search_keyword']").val();
          var search_keycode = $("#search_keycode option:selected").val();      
-   		 alert(search_keyword);
-   		 alert(search_keycode);
+//   		 alert(search_keyword);
+//   		 alert(search_keycode);
           $.ajax({
-                url     : "${pageContext.request.contextPath}/user/board/list.do?bd_division=${bd_division}&search_keyword="+search_keyword+"&search_keycode="+search_keycode+"}",
+                url     : "${pageContext.request.contextPath}/user/board/list.do?bd_division=${bd_division}&search_keyword="+search_keyword+"&search_keycode="+search_keycode,
                 type    : 'get',
                 dataType: 'json',
                 success : function(result) {      
@@ -126,8 +126,7 @@ Banner innerpage -->
          <div class="row all-text-white">
             <div class="col-md-12 align-self-center">
                <h1 class="innerpage-title">${board_division_name}</h1>
-               <h6 class="subtitle">We transform your perception into an
-                  excellent website</h6>
+               <h6 class="subtitle">We transform your perception into an excellent website</h6>
                <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
                      <li class="breadcrumb-item active"><a href="index.html"><i
@@ -155,9 +154,9 @@ Banner innerpage -->
                      style="display: flex; justify-content: space-between;">
                      <div>
                         <form>
-                           <div class="input-group mb-0">
-                              <div style="width: 110px; margin: 0px 5px 0px 0px; display: flex; justify-content: center; align-items: center;">
-                                 <select id="search_keycode" class="custom-select select-big">
+                           <div class="input-group mb-40">
+                              <div style="width: 110px; margin: 0px 5px 0px 0px; display: flex; justify-content: center; align-items: center; height: 50px;">
+                                 <select id="search_keycode" name="search_keycode" class="custom-select select-big">
                                     <option selected="TOTAL">전체</option>
                                     <option value="TITLE">제목</option>
                                     <option value="CONTENT">내용</option>
@@ -167,25 +166,26 @@ Banner innerpage -->
                               <div class=>
                                  <input id="search_keyword"
                                     class="form-control border-radius-right-0 border-right-0 mb-0"
-                                    style="height: 45px; display: inline-block;" type="text" name="search"
+                                    style="height: 40px; display: inline-block;" type="text" name="search_keyword"
                                     placeholder="Search" size="35px">
                               </div>
                               <span class="input-group-btn">
                                  <button type="button" id="searchBTN" 
                                     class="btn btn-grad border-radius-left-0 mb-0">
-                                    <i class="ti-search m-0" style="font-size: 1.5em;"></i>
+                                    <i class="ti-search m-0" style="font-size: 2.0em; height:45px; width:20px;"></i>
                                  </button>
                               </span>
+                              
                      <!-- 등록버튼 시작-->
-                     <div style="padding-left: 20px; margin-bottom: 10px;"
+                     <div style="padding-left: 10px; margin-bottom: 20px; height: 50px;"
                         class="nav-item border-0 d-none d-lg-inline-block align-self-center">
                         <a
                            href="${pageContext.request.contextPath}/user/board/boardForm.do?bd_division=${bd_division }"
                            class=" btn btn-sm btn-grad text-white mb-0"
-                           style="float: right">등록</a>
+                           style="float: right; height: 40px;">등록</a>
                      </div>
                      <!-- 등록버튼 끝 -->
-                           </div>
+                         </div>  
                         </form>
                      </div>
 

@@ -20,13 +20,16 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddit.board.service.IBoardService;
+import kr.or.ddit.boardfile.service.IBoardFileService;
 import kr.or.ddit.domain.Criteria;
 import kr.or.ddit.domain.PageDTO;
 import kr.or.ddit.utiles.CryptoGenerator;
 import kr.or.ddit.utiles.RolePaginationUtil_pill;
 import kr.or.ddit.utiles.RolePaginationUtil_yun;
 import kr.or.ddit.vo.BoardVO;
+import kr.or.ddit.vo.Board_FileVO;
 import kr.or.ddit.vo.ChatingRoomVO;
+import kr.or.ddit.vo.FileItemVO;
 
 @Controller
 @RequestMapping("/user/board/")
@@ -34,7 +37,7 @@ public class BoardController {
 	@Autowired
 	private IBoardService boardService;
 	@Autowired
-	private IBoardService boardfileService;
+	private IBoardFileService boardfileService;
 
 	@Autowired
 	private ObjectMapper mapper;
@@ -256,7 +259,19 @@ public class BoardController {
 		return andView;
 	}
 	
-	
+	// 파일 다운로드
+		@RequestMapping("fileDownload")
+		public ModelAndView fileDownload(Map<String, String> params, ModelAndView andView)
+				throws Exception {
+			
+			Board_FileVO fileitemInfo = this.boardfileService.fileitemInfo(params);
+
+			andView.addObject("fileitemInfo", fileitemInfo);
+			andView.setViewName("fileDownloadView");
+
+			return andView;
+
+		}
 	
 }
 

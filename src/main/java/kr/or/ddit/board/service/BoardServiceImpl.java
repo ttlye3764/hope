@@ -2,21 +2,17 @@ package kr.or.ddit.board.service;
 
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
 import kr.or.ddit.board.dao.IBoardDao;
-import kr.or.ddit.domain.Criteria;
+import kr.or.ddit.boardfile.dao.IBoardFileDao;
 import kr.or.ddit.utiles.AttachFileMapper;
 import kr.or.ddit.vo.BoardVO;
 import kr.or.ddit.vo.Board_FileVO;
-import kr.or.ddit.vo.FileItemVO;
-import kr.or.ddit.vo.MypillFileVO;
 
 @Service("boardService")
 public class BoardServiceImpl implements IBoardService{
@@ -24,7 +20,7 @@ public class BoardServiceImpl implements IBoardService{
 	@Autowired
 	private IBoardDao boardDao;
 	@Autowired
-	private kr.or.ddit.boardfile.dao.IBoardFileDao boardfileDao;
+	private IBoardFileDao boardfileDao;
 
 	
 	// 조회
@@ -41,18 +37,12 @@ public class BoardServiceImpl implements IBoardService{
 	}
 	// 등록
 	@Override            
-	public int insertBoard(BoardVO boardVO, MultipartFile[] items) throws Exception {
-			
-		String bd_no = String.valueOf(boardDao.insertBoard(boardVO));
-		  
-		System.out.println(bd_no);
-		
-	    List<Board_FileVO> fileItemList =AttachFileMapper.boardMapper(items, bd_no);
+	public void insertBoard(BoardVO boardVO, MultipartFile[] items) throws Exception {
+		boardDao.insertBoard(boardVO);
+		  		
+	    List<Board_FileVO> fileItemList =AttachFileMapper.boardMapper(items, boardVO.getBd_no());
 	      
 	    boardfileDao.insertFileItem(fileItemList);
-		
-		return boardDao.insertBoard(boardVO);
-		
 	}
 	
 	// 수정

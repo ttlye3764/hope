@@ -4,22 +4,22 @@
 
 <mapper namespace="board">
 
-<!-- 	<resultMap id="boardResultMap" type="boardVO"> -->
-<!--     		<id property="bd_no" column="bd_no"/> -->
-<!-- 			<result property="bd_title" column="bd_title"/> -->
-<!-- 			<result property="bd_content" column="bd_content"/> -->
-<!-- 			<result property="bd_date" column="bd_date"/> -->
-<!-- 			<result property="bd_hit" column="bd_hit"/> -->
-<!-- 			<result property="bd_pass" column="bd_pass"/> -->
-<!-- 			<result property="bd_sequence" column="bd_sequence"/> -->
-<!-- 			<result property="bd_group" column="bd_group"/> -->
-<!-- 			<result property="bd_depth" column="bd_depth"/> -->
-<!-- 			<result property="bd_division" column="bd_division"/> -->
-<!-- 			<result property="mem_no" column="mem_no"/> -->
-<!-- 			<result property="rnum" column="rnum"/> -->
-<!-- 			<result property="bd_writer" column="bd_writer"/> -->
-<!-- 			<collection property="items" column="bd_no" select="board_file.board_fileList" ofType="board_fileVO" javaType="java.util.List"></collection> -->
-<!--     </resultMap> -->
+	<resultMap id="boardResultMap" type="boardVO">
+    		<id property="bd_no" column="bd_no"/>
+			<result property="bd_title" column="bd_title"/>
+			<result property="bd_content" column="bd_content"/>
+			<result property="bd_date" column="bd_date"/>
+			<result property="bd_hit" column="bd_hit"/>
+			<result property="bd_pass" column="bd_pass"/>
+			<result property="bd_sequence" column="bd_sequence"/>
+			<result property="bd_group" column="bd_group"/>
+			<result property="bd_depth" column="bd_depth"/>
+			<result property="bd_division" column="bd_division"/>
+			<result property="mem_no" column="mem_no"/>
+			<result property="rnum" column="rnum"/>
+			<result property="bd_writer" column="bd_writer"/>
+			<collection property="items" column="bd_no" select="board_file.board_fileList" ofType="board_fileVO" javaType="java.util.List"></collection>
+    </resultMap>
 
 	
 	<select id="boardInfo" parameterType="map" resultType="boardVO">
@@ -61,8 +61,8 @@
 
 	<select id="boardList" resultType="boardVO" parameterType="map" >
 		SELECT B.*
-					FROM(SELECT A.*
-						 FROM (SELECT ROWNUM RNUM, BOARD.*
+					FROM(SELECT ROWNUM RNUM, A.*
+						 FROM (SELECT BOARD.*
                               FROM BOARD
                               WHERE BD_DIVISION = #{bd_division}
                               		<if test="search_keycode == 'TOTAL'">
@@ -83,7 +83,7 @@
 										AND
 										BD_WRITER LIKE '%' || #{search_keyword} || '%'
 									</if>
-                              ORDER BY BD_NO DESC
+                              ORDER BY BD_NO
                               )A
                            )B
 				<![CDATA[

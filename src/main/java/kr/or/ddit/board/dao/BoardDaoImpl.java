@@ -70,6 +70,11 @@ public class BoardDaoImpl implements IBoardDao{
 	public List<BoardVO> myboardList(Map<String, String> params) throws Exception {
 		return client.selectList("board.myboardList", params);
 	}
+	
+	@Override
+	public String fileSequence() throws Exception{
+		return client.selectOne("board.fileSequence");
+	}
 
 
 }

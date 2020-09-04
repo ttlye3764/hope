@@ -18,14 +18,14 @@ public class BoardVO {
 	private String rnum;
 	private String bd_writer;
 
-//	private List<Board_FileVO> items;
+	private List<Board_FileVO> items;
 
-//	public List<Board_FileVO> getItems() {
-//		return items;
-//	}
-//	public void setItems(List<Board_FileVO> items) {
-//		this.items = items;
-//	}
+	public List<Board_FileVO> getItems() {
+		return items;
+	}
+	public void setItems(List<Board_FileVO> items) {
+		this.items = items;
+	}
 
 	public String getBd_writer() {
 		return bd_writer;

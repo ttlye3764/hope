@@ -27,4 +27,7 @@ public interface IBoardDao {
 	// 조회수 증가
 	public void countHit(String bd_no) throws Exception;
 	
+	// 파일 시퀀스 
+	public String fileSequence() throws Exception;
+	
 }
