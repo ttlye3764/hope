@@ -50,11 +50,11 @@
 						<p class="mb-0">R shade in cause.</p>
 					</div>
 					<div class="widget">
-						<h5 class="widget-title" id="dietSied_h5_recommendDiet">추천 식단 리스트</h5>
+						<h5 class="widget-title" id="dietSide_h5_recommendDiet">추천 식단 리스트</h5>
 						<p class="mb-0"> procuring the why performed continual improving. Civil songs so large shade in cause.</p>
 					</div>
 					<div class="widget">
-						<h5 class="widget-title" id="dietSied_h5_bmi">BMI 계산기</h5>
+						<h5 class="widget-title" id="dietSide_h5_bmi">BMI 계산기</h5>
 						<p class="mb-0">. She procuring the why performed continual improving. Civil songs so large shade in cause.</p>
 					</div>
 				</aside>
@@ -870,17 +870,19 @@ function menu_delete3(e){
           data.addColumn('datetime' , '날짜');
           data.addColumn('number'   , '섭취 열량');
           data.addColumn('number'   , '목표 열량');
+          data.addColumn('number'   , '토탈');
           
  
           //그래프에 표시할 데이터
           var dataRow = [];
  
           for(var i = 0; i <= 29; i++){ //랜덤 데이터 생성
-            var eat_kcal     = Math.floor(Math.random() * 1) + 1;
-            var purpose_kcal   = eat_kcal;
- 
-            dataRow = [new Date('2017', '09', i , '10'), eat_kcal, purpose_kcal ];
-            data.addRow(dataRow);
+        	  var total   = Math.floor(Math.random() * 300) + 1;
+              var man     = Math.floor(Math.random() * total) + 1;
+              var woman   = total - man;
+   
+              dataRow = [new Date('2017', '09', i , '10'), man, woman , total];
+              data.addRow(dataRow);
           }
  
  

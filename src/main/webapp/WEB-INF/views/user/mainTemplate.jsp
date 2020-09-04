@@ -88,7 +88,7 @@ function LogOut(){
 	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/documentation/assets/js/main.js"></script>
 
 	<!-- dietSide javascript -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/script/dietSide.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/myScript/dietSide.js"></script>
 	
 	
 	

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -191,8 +192,9 @@ public class ChatController {
 	  public ModelAndView detectIntentTexts(
 	      String projectId,  String sessionId, String languageCode, ModelAndView andView)
 	      throws IOException, ApiException {
+		  String result=null;
 		  List<String> texts = new ArrayList<>();
-		  texts.add("재호");
+		  texts.add("수아");
 		  projectId = "testagent-crvsfc";
 		  sessionId="testAgent";
 		  languageCode="ko";
@@ -225,11 +227,13 @@ public class ChatController {
 	            "Detected Intent: %s (confidence: %f)\n",
 	            queryResult.getIntent().getDisplayName(), queryResult.getIntentDetectionConfidence());
 	        System.out.format("Fulfillment Text: '%s'\n", queryResult.getFulfillmentText());
-
+	        result = queryResult.getFulfillmentText();
 	        queryResults.put(text, queryResult);
 	      }
 	    }
 	    System.out.println("queryREsults : " + queryResults);
+	    andView.addObject("result", result);
+	    andView.setViewName("user/chat/chatBot");
 	    return andView;
 	  }
 	
