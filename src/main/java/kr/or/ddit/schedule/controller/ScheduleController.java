@@ -255,6 +255,10 @@ public class ScheduleController {
 		return "redirect:/user/schedule/bis.do";
 	}
 	
+	@RequestMapping("subway")
+	public void subway() throws Exception {
+	}
+	
 	
 
 }
