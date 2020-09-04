@@ -242,92 +242,7 @@
 <section class="blog-page pb-0">
 		<div class="container">
 			<div class="row">
-				<aside class="col-md-3 sidebar order-last order-md-first" style="margin-top: 5px; width:330px;">
-					<div style="height: 400px; width:280px; border: 1px solid black;">
-						<div class="widget" style="width:280px;">
-							<h5 class="widget-title">Text Widget</h5>
-							<p class="mb-0">Resources exquisite set arranging moonlight sex him household had. Months had too ham cousin remove far spirit. She procuring the why performed continual improving. Civil songs so large shade in cause.</p>
-						</div>
-					</div>
-					<div style="margin-top: 7px; height: 705px; width:280px;  border-top: 3px solid #164068; background-color: rgb(233,233,233);">
-						<strong id="strongID1" style="display:block; margin-top: 18px; margin-left:12px; color: #174069; font-family: 'Spoqa Han Sans'; font-size:20px;"></strong>
-						
-						<div style="background-color: rgb(233, 233, 233); height: 400px; margin-top: 10px;">
-						<div class="chart_d" style="height: 400px;" >
-								<div style="height: 400px;">
-									<div class="cc_graph"  style="display: flex; flex-direction : column; height: 400px; border-bottom:3px solid #164068; ">
-									<canvas id="myPieChart"  style="height: 400px; width: 400px; margin-left: 5px;"></canvas>		<!-- height: 190px; width: 100%; -->
-									</div>
-								</div>
-							</div>						
-						</div>
-
-						<div style="background-color: rgb(233,233,233);  height: 239px; display: flex; align-items:center ">
-							<div style="display: flex; flex-direction: column; width: 300px;">
-								<div style="display: flex; justify-content: space-between;">
-									<div style="margin-left: 5px; height: 13px;">
-										<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">누적 확진환자</span>
-									</div>
-									<div style="margin-right: 5px; height: 13px;">
-										<p style="font-size: 14px;"><span class="num chart_span1" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">751</span>명</p>
-									</div>
-								</div>
-								
-								<div style="display: flex; justify-content: space-between;">
-									<div style="margin-left: 5px;">
-										<span class="tit" style="margin-top:1px; font-size: 11px; font-family: 'Spoqa Han Sans'; color: rgb(235, 33, 77);">전일 대비 증감</span>
-									</div>
-									<div style="margin-right: 5px;">
-										<span class="num chart_span2" style="font-size: 11px; font-family: 'Spoqa Han Sans'; color: rgb(235, 33, 77);">(+11)</span>
-									</div>
-								</div>
-								
-								<div style="display: flex; justify-content: space-between; margin-top: 5px;">
-									<div style="margin-left: 5px;">
-										<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">격리중</span>
-									</div>
-									<div style="margin-right: 5px;">
-										<p style="font-size: 14px;"><span class="num chart_span3" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">321</span>명</p>
-									</div>
-								</div>
-								
-								<div style="display: flex; justify-content: space-between;">
-									<div style="margin-left: 5px;">
-										<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">누적 격리해제</span>
-									</div>
-									<div style="margin-right: 5px;">
-										<p style="font-size: 14px;"><span class="num chart_span4" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">427</span>명</p>
-									</div>
-								</div>
-								
-								<div style="display: flex; justify-content: space-between;">
-									<div style="margin-left: 5px;">
-										<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">사망자</span>
-									</div>
-									<div style="margin-right: 5px;">
-										<p style="font-size: 14px;"><span class="num chart_span5" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">3</span>명</p>
-									</div>
-								</div>
-								
-								<div style="display: flex; justify-content: space-between;">
-									<div style="margin-left: 5px;">
-										<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">10만명당 발생률</span>
-									</div>
-									<div style="margin-right: 5px;">
-										<p style="font-size: 10px;"><span class="num chart_span6" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">25.4</span>명</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					
-					
-					
-					
-					
-					
-				</aside>
+				
 				<!-- sidebar end -->
 
 				<!-- blog start -->
@@ -406,9 +321,9 @@
 										<div style="display: flex; justify-content: center; align-items: center; height: 100px;">
 											<div>
 												<div style="display: flex; justify-content: center;">
-													<strong class="tit"  style="color: white; font-size:19px;">사망자수</strong>
+													<strong class="tit"  style="color: white; font-size:19px;">사망자</strong>
 												</div>
-												<div id="deathDiv" style="align-items: center;">
+												<div id="deathDiv">
 													<!-- <span class="counter-item-digit text-center"  style="color: white;" data-from="0" data-to="324" data-speed="3000" data-refresh-interval="10" style="font-size:30px;"></span><br> -->
 												</div>
 												<div id="toDayDeathDiv" style="display: flex; justify-content: center;">
@@ -506,6 +421,9 @@
 							    <div class="item-image">
 							   		<img id="imgTag" border="0" src="${pageContext.request.contextPath }/images/korea.PNG" style="width: 100%; height:700px; z-index: -1;">
 							    </div>
+							    <div class="item-info-box" id="item-info-box" style="height: 40px; right: 0px; top: 0px; background-color: rgb(233,233,233);">
+							   		<small id="item_small">시도를 클릭하시면 상세 현황을 확인할 수 있습니다.</small> 
+							    </div>
 							    <div class="item-info-box" id="item-info-box" style="width: 55px; height: 70px;left: 213px; top: 145px;">
 								    <div class="item-info" id="item-inchun" onclick="getCorona('인천');" style="width: 55px; height: 70px; text-align: center;">
 								    </div>
@@ -589,17 +507,125 @@
 		<div> <a href="#" class="back-top btn btn-grad"><i class="ti-angle-up"></i></a> </div>
 	
 
-					
+								
 
 				</div>
 				<!-- blog End -->
+				<aside class="col-md-3 sidebar order-last order-md-first" style="margin-top: 5px; width:330px;">
+					<div style="height: 400px; width:280px; border: 1px solid black;">
+						<div style="background-color: #174069;    height: 50px; font-family: 'Spoqa Han Sans'; color: white; text-align: center;">
+							<div style="">
+								<strong class="tit" style="color: white; font-size:19px; ">연령 별 확진자 현황</strong>
+							</div>
+						</div>
+						<div class="cc_graph"  style="display: flex; flex-direction : column; height: 200px; border-bottom:3px solid #164068; ">
+							<canvas id="AgePieChart"  style="height: 200px; width: 200px; margin-left: 5px;"></canvas>		<!-- height: 190px; width: 100%; -->
+						</div>
+						<div class="cc_graph"  style="display: flex; flex-direction : column; height: 200px; border-bottom:3px solid #164068; ">
+							<canvas id="AgeBarChart"  style="height: 200px; width: 200px; margin-left: 5px;"></canvas>		<!-- height: 190px; width: 100%; -->
+						</div>
+
+
+
+
+
+
+					</div>
+					<div style="margin-top: 7px; height: 705px; width:280px;  border-top: 3px solid #164068; background-color: rgb(233,233,233);">
+						<strong id="strongID1" style="display:block; margin-top: 18px; margin-left:12px; color: #174069; font-family: 'Spoqa Han Sans'; font-size:20px;"></strong>
+						
+						<div style="background-color: rgb(233, 233, 233); height: 400px; margin-top: 10px;">
+						<div class="chart_d" style="height: 400px;" >
+								<div style="height: 400px;">
+									<div class="cc_graph"  style="display: flex; flex-direction : column; height: 400px; border-bottom:3px solid #164068; ">
+									<canvas id="myPieChart"  style="height: 400px; width: 400px; margin-left: 5px;"></canvas>		<!-- height: 190px; width: 100%; -->
+									</div>
+								</div>
+							</div>						
+						</div>
+
+						<div style="background-color: rgb(233,233,233);  height: 239px; display: flex; align-items:center ">
+							<div style="display: flex; flex-direction: column; width: 300px;">
+								<div style="display: flex; justify-content: space-between;">
+									<div style="margin-left: 5px; height: 13px;">
+										<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">누적 확진환자</span>
+									</div>
+									<div style="margin-right: 5px; height: 13px;">
+										<p style="font-size: 14px;"><span class="num chart_span1" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">751</span>명</p>
+									</div>
+								</div>
+								
+								<div style="display: flex; justify-content: space-between;">
+									<div style="margin-left: 5px;">
+										<span class="tit" style="margin-top:1px; font-size: 11px; font-family: 'Spoqa Han Sans'; color: rgb(235, 33, 77);">전일 대비 증감</span>
+									</div>
+									<div style="margin-right: 5px;">
+										<span class="num chart_span2" style="font-size: 11px; font-family: 'Spoqa Han Sans'; color: rgb(235, 33, 77);">(+11)</span>
+									</div>
+								</div>
+								
+								<div style="display: flex; justify-content: space-between; margin-top: 5px;">
+									<div style="margin-left: 5px;">
+										<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">격리중</span>
+									</div>
+									<div style="margin-right: 5px;">
+										<p style="font-size: 14px;"><span class="num chart_span3" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">321</span>명</p>
+									</div>
+								</div>
+								
+								<div style="display: flex; justify-content: space-between;">
+									<div style="margin-left: 5px;">
+										<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">누적 격리해제</span>
+									</div>
+									<div style="margin-right: 5px;">
+										<p style="font-size: 14px;"><span class="num chart_span4" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">427</span>명</p>
+									</div>
+								</div>
+								
+								<div style="display: flex; justify-content: space-between;">
+									<div style="margin-left: 5px;">
+										<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">사망자</span>
+									</div>
+									<div style="margin-right: 5px;">
+										<p style="font-size: 14px;"><span class="num chart_span5" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">3</span>명</p>
+									</div>
+								</div>
+								
+								<div style="display: flex; justify-content: space-between;">
+									<div style="margin-left: 5px;">
+										<span class="tit" style="font-size: 14px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">10만명당 발생률</span>
+									</div>
+									<div style="margin-right: 5px;">
+										<p style="font-size: 10px;"><span class="num chart_span6" style="font-size: 15px; font-family: 'Spoqa Han Sans'; font-weight: 600; color: #174069;">25.4</span>명</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					
+					
+					
+					
+					
+					
+				</aside>
+				
+				
+				
 			</div>
 		</div>
 	</section>
 	
 	
 <script>
-
+var pieChart;
+var ageBarChart;
+var agePieChart;
+var ctxAgePie = document.getElementById('AgePieChart').getContext('2d');
+var ctxAgeBar = document.getElementById('AgeBarChart').getContext('2d');
+var ctxLine = document.getElementById('myChart').getContext('2d');
+var ctxPie = document.getElementById('myPieChart').getContext('2d');
 	var dateList = [];
 	var dataList = [];
 	var deathList = [];
@@ -686,14 +712,14 @@ function getCorona(name1){
 						}
 				}
 	        });
-
+			resetPieChart();
 			dataList[0] = all;
 			dataList[1] = target;
 			var label = [];
 			label[0] = '전체';
 			label[1] = name1;
 			PieChart(label,dataList);
-
+			
 
 
 
@@ -725,6 +751,52 @@ $(function(){
 		$('.chart_span1').text(value1);
 		$('.chart_span2').text(value2);
 	}) */
+
+	$.ajax({
+		 url     : '${pageContext.request.contextPath}/user/medical/coronaAgeAPI.do',  //총 코로나
+	        type    : 'post',
+	        dataType: 'json',
+	        data : {'startdate':startdate,'enddate':startdate },
+	        success : function(result) {
+				var list = [];
+				var la = [];
+				console.log('연령별');
+				console.log(result.response.body.items.item);
+				$.each(result.response.body.items.item,function(i,v){
+					list.push(v.confCase);
+					la.push(v.gubun);
+				})
+				console.log(list);
+				console.log(la);
+				
+				AgeBarChart(la,list);
+
+			/* 	0: {criticalRate: 0, death: 0, deathRate: 0, confCaseRate: 2.13, updateDt: null, …}
+				1: {criticalRate: 0, death: 0, deathRate: 0, confCaseRate: 5.79, updateDt: null, …}
+				2: {criticalRate: 0, death: 0, deathRate: 0, confCaseRate: 22.03, updateDt: null, …}
+				3: {criticalRate: 0.08, death: 2, deathRate: 0.63, confCaseRate: 12.59, updateDt: null, …}
+				4: {criticalRate: 0.16, death: 4, deathRate: 1.27, confCaseRate: 13.52, updateDt: null, …}
+				5: {criticalRate: 0.46, death: 16, deathRate: 5.06, confCaseRate: 18.25, updateDt: null, …}
+				6: {criticalRate: 1.48, death: 41, deathRate: 12.97, confCaseRate: 14.54, updateDt: null, …}
+				7: {criticalRate: 6.81, death: 94, deathRate: 29.75, confCaseRate: 7.24, updateDt: null, …}
+				8: {criticalRate: 21.23, death: 159, deathRate: 50.32, confCaseRate: 3.93, updateDt: null, …}
+				9: {criticalRate: 1.42, death: 149, deathRate: 47.15, confCaseRate: 54.84, updateDt: null, …}
+				10: */
+
+
+
+				
+		    }
+	})
+
+
+
+
+
+
+
+
+
 	
 	$.ajax({
         url     : '${pageContext.request.contextPath}/user/medical/coronaAPI.do',  //총 코로나
@@ -797,7 +869,7 @@ $(function(){
 			var todayDeath = result.response.body.items.item[0].deathCnt - result.response.body.items.item[1].deathCnt;
 			var str = '<span class="subtit" style="font-size:14px;">확진 </span><span class="data" style="color: yellow; font-size:19px;">'+todayDecide+'</span>';
 			$('.liveNum2').append(str);
-			str = '<span class="subtit" style="font-size:14px;">격리해제</span><span class="data" style="color: yellow; font-size:19px;">'+todayClear+'</span>';
+			str = '<span class="subtit" style="font-size:14px;">격리해제 </span><span class="data" style="color: yellow; font-size:19px;">'+todayClear+'</span>';
 			$('.liveNum3').append(str);
 			
 			var decide = result.response.body.items.item[0].decideCnt; //누적 확진자수
@@ -805,24 +877,37 @@ $(function(){
 			var clear = result.response.body.items.item[0].clearCnt; //누적 격리해제 
 			var care = result.response.body.items.item[0].careCnt; //누적 격리중
 
+			if(todayDecide > 0){
+				todayDecide = "+ " + todayDecide;
+			}
+			if(todayClear > 0){
+				todayClear = "+ " + todayClear;
+			}
+			if(todayCare > 0){
+				todayCare = "+ " + todayCare;
+			}
+			if(todayDeath > 0){
+				todayDeath = "+ " + todayDeath;
+			}
+			
 			str = '<span class="counter-item-digit text-center"  style="color: white;" data-from="0" data-to="'+decide+'" data-speed="3000" data-refresh-interval="10" style="font-size:30px;">'+decide+'</span><br>';
 			$('#decideDiv').append(str);
-			str = '<span class="before"  style="font-size:14px; color: white; margin-top: 2px; ">전일대비 (+ '+todayDecide+')</span>';
+			str = '<span class="before"  style="font-size:14px; color: white; margin-top: 2px; ">전일대비 ('+todayDecide+')</span>';
 			$('#toDayDecideDiv').append(str); 
 
 			str = '<span class="counter-item-digit text-center"  style="color: white;" data-from="0" data-to="'+clear+'" data-speed="3000" data-refresh-interval="10" style="font-size:30px;">'+clear+'</span><br>';
 			$('#clearDiv').append(str);
-			str = '<span class="before"  style="font-size:14px; color: white; margin-top: 2px; ">(+ '+todayClear+')</span>';
+			str = '<span class="before"  style="font-size:14px; color: white; margin-top: 2px; ">('+todayClear+')</span>';
 			$('#toDayClearDiv').append(str);
 
 			str= '<span class="counter-item-digit text-center"  style="color: white;" data-from="0" data-to="'+care+'" data-speed="3000" data-refresh-interval="10" style="font-size:30px;">'+care+'</span><br>';
 			$('#careDiv').append(str);
-			str = '<span class="before"  style="font-size:14px; color: white; margin-top: 2px; ">(+ '+todayCare+')</span>';
+			str = '<span class="before"  style="font-size:14px; color: white; margin-top: 2px; ">('+todayCare+')</span>';
 			$('#toDayCareDiv').append(str);
 
 			str = '<span class="counter-item-digit text-center"  style="color: white;" data-from="0" data-to="'+death+'" data-speed="3000" data-refresh-interval="10" style="font-size:30px;">'+death+'</span><br>';
 			$('#deathDiv').append(str);
-			str = '<span class="before"  style="font-size:14px; color: white; margin-top: 2px; ">(+ '+todayDeath+')</span>';
+			str = '<span class="before"  style="font-size:14px; color: white; margin-top: 2px; ">('+todayDeath+')</span>';
 			$('#toDayDeathDiv').append(str);
 
 
@@ -830,7 +915,11 @@ $(function(){
 			var examCompCnt = result.response.body.items.item[0].accExamCompCnt; //누적 검사 완료 수
 			var defRate = result.response.body.items.item[0].accDefRate; //누적 확진률
 			defRate = defRate.toFixed(2);
+			
 
+
+
+			
 			examCnt = numberWithCommas(examCnt);
 			str = '<span class="num" style="font-size:14px;">'+examCnt+'건</span>';
 			$('#examDiv').append(str);
@@ -1045,10 +1134,10 @@ function drawChart(dateList,clearList,deathList,decideList){
 	console.log(deathList);
 	console.log(decideList); 	
 
-    var ctx = document.getElementById('myChart').getContext('2d');
+   
     
     	
-    var chart = new Chart(ctx, {
+    var chart = new Chart(ctxLine, {
         // The type of chart we want to create
         type: 'line',
 
@@ -1089,38 +1178,8 @@ function drawChart(dateList,clearList,deathList,decideList){
     });
 }
 
-function drawPieChart(labels,dataList){
-	 var ctx = document.getElementById('myPieChart').getContext('2d');
-	 var chart = new Chart(ctx, {
-		    // The type of chart we want to create
-		    type: 'doughnut',
 
-		    // The data for our dataset
-		    data: {
-		        labels: labels,
-		        datasets: [
-			        {
-		            label: 'My First dataset',
-		            backgroundColor: 'rgb(255, 99, 132)',
-		            borderColor: 'rgb(255, 99, 132)',
-		            data: dataList[0]
-		        },
-		        {
-		            label: 'My First dataset',
-		            backgroundColor: 'rgb(255, 99, 132)',
-		            borderColor: 'rgb(255, 99, 132)',
-		            data: dataList[1]
-		        }
-		        
-			    ]
-		    },
-		    options: {}
-		});
-	
-}
 function PieChart(labels,dataList){
-	
-	 var ctx = document.getElementById('myPieChart').getContext('2d');
 	 var data = [{
 		 backgroundColor : [ '#0095ff', '#fdaf4b' ],   
          data: dataList
@@ -1130,9 +1189,9 @@ function PieChart(labels,dataList){
 	 var options = {
 			   plugins: {
 			     datalabels: {
-			       formatter: (value, ctx) => {
+			       formatter: (value, ctxPie) => {
 
-			         let datasets = ctx.chart.data.datasets;
+			         let datasets = ctxPie.chart.data.datasets;
 
 			         if (datasets.indexOf(ctx.dataset) === datasets.length - 1) {
 			           let sum = datasets[0].data.reduce((a, b) => a + b, 0);
@@ -1148,7 +1207,7 @@ function PieChart(labels,dataList){
 			 };
 
 		
-		 var chart = new Chart(ctx, {
+		 pieChart = new Chart(ctxPie, {
 		    type: 'doughnut',
 
 		    data: {
@@ -1158,12 +1217,101 @@ function PieChart(labels,dataList){
 		    },
 		    options: options
 		});
-
-
-		 chart.update();	
 }
 
+function resetPieChart(){
+	 pieChart.update();	
+	 pieChart.clear();
+	
+}
+function AgePieChart(label,data){
+	 var data = [{
+		 backgroundColor : ['#0095ff', '#fdaf4b'],   
+         data: data
+		 }];
 
+
+	 var options = {
+			   plugins: {
+			     datalabels: {
+			       formatter: (value, ctxPie) => {
+
+			         let datasets = ctxPie.chart.data.datasets;
+
+			         if (datasets.indexOf(ctx.dataset) === datasets.length - 1) {
+			           let sum = datasets[0].data.reduce((a, b) => a + b, 0);
+			           let percentage = Math.round((value / sum) * 100) + '%';
+			           return percentage;
+			         } else {
+			           return percentage;
+			         }
+			       },
+			       color: '#fff',
+			     }
+			   }
+			 };
+
+		
+		 agePieChart = new Chart(ctxAgePie, {
+		    type: 'pie',
+
+		    data: {
+		        labels: label,
+		       
+		        datasets:data
+		    },
+		    options: options
+		});
+}
+
+function resetAgePieChart(){
+	agePieChart.update();	
+	agePieChart.clear();
+}
+function AgeBarChart(label,data){
+	 var data = [{
+		 backgroundColor : [ '#f3545d','#fdaf4b','#0095ff', '#fdaf4b' ],   
+         data: data
+		 }];
+
+
+	 var options = {
+			   plugins: {
+			     datalabels: {
+			       formatter: (value, ctxPie) => {
+
+			         let datasets = ctxPie.chart.data.datasets;
+
+			         if (datasets.indexOf(ctx.dataset) === datasets.length - 1) {
+			           let sum = datasets[0].data.reduce((a, b) => a + b, 0);
+			           let percentage = Math.round((value / sum) * 100) + '%';
+			           return percentage;
+			         } else {
+			           return percentage;
+			         }
+			       },
+			       color: '#fff',
+			     }
+			   }
+			 };
+
+		
+	 	ageBarChart = new Chart(ctxAgeBar, {
+		    type: 'bar',
+
+		    data: {
+		        labels: label,
+		       
+		        datasets:data
+		    },
+		    options: options
+		});
+}
+
+function resetAgeBarChart(){
+	ageBarChart.update();	
+	ageBarChart.clear();
+}
 	
 </script>
 	

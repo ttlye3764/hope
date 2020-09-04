@@ -276,6 +276,13 @@ public class MedicalController {
 		String coronaSidoResult = Corona.corona(startdate,enddate);
 		return coronaSidoResult;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="coronaAgeAPI",produces="text/plain;charset=UTF-8")
+	public String coronaAgeAPI(String startdate, String enddate) throws Exception {
+		String coronaSidoResult = Corona_age.Corona_age(startdate, enddate);
+		return coronaSidoResult;
+	}
 
 
 
