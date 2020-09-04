@@ -4,6 +4,7 @@
 
 <link href="https://fonts.googleapis.com/css?family=Baloo|Ubuntu" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/myCSS/dietMy.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/myCSS/dietMem.css" />
 <style>
 /* body { */
 /* 	display: flex; */
@@ -72,7 +73,9 @@
 				<br>
 				<br>
 				
-				<div class="col-md-6 mb-4">
+			<div id="div_dietMem">
+				<div id="div_dietMem_left">
+				<div class="col-md-6 mb-4" style="width:390px; !important">
 					<h5>최신 등록 내 정보</h5>
 					<ul class="list-group list-group-borderless ">
 						<li class="list-group-item">내 키 : ${dietMemLast.height }</li>
@@ -84,8 +87,8 @@
 				</div>
 				
 				<!-- 내 정보 상세 시작-->
-				<div class="col-md-6 mb-5">
-					<div class="accordion accordion-primary" id="accordion2">
+				<div class="col-md-6 mb-5" style="width:390px; !important">
+					<div class="accordion accordion-primary" id="accordion2" style="width:390px; !important">
 						<!-- item -->
 						
 						<c:forEach items="${dietMemList }" var="dietMemInfo" varStatus="status">
@@ -101,11 +104,20 @@
 								BMI : <a>${dietMemInfo.bmi}</a><br>
 								일일 목표 열량 : <a>${dietMemInfo.day_kcal}</a><br>
 								</div>
+								<div>
+									<button id="updateDietMem" class="btn btn-grad" onclick="updateDietMem(this);">수정</button>
+									<button id="deleteDietMem" class="btn btn-grad" onclick="deleteDietMem(this);">삭제</button>
+								</div>
 							</div>
 						</div>
 						</c:forEach>
 					</div>
 				</div>
+				</div>
+				<div id="div_dietMem_right">
+					<button id="insertDietMem" class="btn btn-grad" onclick="insertDietMemBTN();">등록</button>
+				</div>
+			</div>
 				<!-- 내 정보 상세 끝 -->
 				<h5 class="mb-2 mt-5">체중 통계 </h5>
 				<div class="divider divider-bold"></div>
@@ -114,8 +126,16 @@
 				<h5 class="mb-2 mt-5">체중 차트 </h5>
 				<div class="divider divider-bold"></div>
 				
-				<!-- goole chart start-->
-				 <div id="curve_chart" style="width: 900px; height: 500px"></div>
+				<!-- goole chart star 구글차트-->
+				    <div id="Line_Controls_Chart">
+      <!-- 라인 차트 생성할 영역 -->
+          <div id="lineChartArea" style="padding:0px 20px 0px 0px;"></div>
+      <!-- 컨트롤바를 생성할 영역 -->
+          <div id="controlsArea" style="padding:0px 20px 0px 0px;"></div>
+        </div>
+
+
+
 				<!-- goole chart end -->
 				
 				<h5 class="mb-2 mt-5">나의 식단표 </h5>
@@ -433,9 +453,14 @@
 		</div>
 	</div>
 	<!-- 모달 끝 -->			
-				
+
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/myScript/dietMem.js"></script>
 <script type="text/javascript">
+
+function dietMemList(){
+
+}
 
 var selectMenuName;
 var selectMenuNo;
@@ -446,6 +471,9 @@ var dd_date;
 var dd_no;
 
 $(function() {
+	 google.charts.load('current', {'packages':['line','controls']});
+	  chartDrowFun.chartDrow(); //chartDrow() 실행
+	
 	displayCalender(currentMonth)
 	$("#date").append(new Date);
 
@@ -711,6 +739,7 @@ function dietDayInfoList2(){
  				$('#dietDayInfo_tbody2').append('<td><input type="hidden" value="'+item.dd_no +'">'+itemIndex++ +'</td>'); 				
  				$('#dietDayInfo_tbody2').append('<td>'+item.menu_name+'</td>');
  				$('#dietDayInfo_tbody2').append('<td>'+item.menu_kcal+'</td>');
+ 				$('#dietDayInfo_tbody1').append('<td><button class="btn btn-success" onclick="menu_delete2(this)"><input type="hidden" value="'+item.ddi_no +'">삭제</button></td>');
  				$('#dietDayInfo_tbody2').append('</tr>')	 
  			 });
 			$('#dd_kcal').empty();
@@ -748,6 +777,7 @@ function dietDayInfoList3(){
  				$('#dietDayInfo_tbody3').append('<td><input type="hidden" value="'+item.dd_no +'">'+itemIndex++ +'</td>'); 				
  				$('#dietDayInfo_tbody3').append('<td>'+item.menu_name+'</td>');
  				$('#dietDayInfo_tbody3').append('<td>'+item.menu_kcal+'</td>');
+ 				$('#dietDayInfo_tbody1').append('<td><button class="btn btn-success" onclick="menu_delete3(this)"><input type="hidden" value="'+item.ddi_no +'">삭제</button></td>');
  				$('#dietDayInfo_tbody3').append('</tr>');	 
  			 });
  			$('#dd_kcal').empty();
@@ -766,7 +796,7 @@ function menu_delete1(e){
 		dataType : 'JSON',
 		data : {
 			ddi_no : ddi_no,
-			dd_Info_division : "1"
+			dd_info_division : "1"
 		},
 		error : function(result) {
 			alert("실패");
@@ -778,7 +808,7 @@ function menu_delete1(e){
 }
 
 function menu_delete2(e){
-	ddi_no = $('e').find('input').val();
+	ddi_no = $(e).find('input').val();
 	
 	$.ajax({
 		type : 'POST',
@@ -786,7 +816,7 @@ function menu_delete2(e){
 		dataType : 'JSON',
 		data : {
 			ddi_no : ddi_no,
-			dd_Info_division : "2"
+			dd_info_division : "2"
 		},
 		error : function(result) {
 			alert("실패");
@@ -798,7 +828,7 @@ function menu_delete2(e){
 }
 
 function menu_delete3(e){
-	ddi_no = $('e').find('input').val();
+	ddi_no = $(e).find('input').val();
 	
 	$.ajax({
 		type : 'POST',
@@ -806,7 +836,7 @@ function menu_delete3(e){
 		dataType : 'JSON',
 		data : {
 			ddi_no : ddi_no,
-			dd_Info_division : "3"
+			dd_info_division : "3"
 		},
 		error : function(result) {
 			alert("실패");
@@ -819,28 +849,112 @@ function menu_delete3(e){
 
 
 
-google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses'],
-          ['2004',  1000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540]
-        ]);
-
-        var options = {
-          title: 'Company Performance',
-          curveType: 'function',
-          legend: { position: 'bottom' }
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-        chart.draw(data, options);
+// 차트
+ var chartDrowFun = {
+ 
+    chartDrow : function(){
+        var chartData = '';
+ 
+        //날짜형식 변경하고 싶으시면 이 부분 수정하세요.
+        var chartDateformat     = 'MM월dd일';
+        //라인차트의 라인 수
+        var chartLineCount    = 10;
+        //컨트롤러 바 차트의 라인 수
+        var controlLineCount    = 10;
+ 
+ 
+        function drawDashboard() {
+ 
+          var data = new google.visualization.DataTable();
+          //그래프에 표시할 컬럼 추가
+          data.addColumn('datetime' , '날짜');
+          data.addColumn('number'   , '섭취 열량');
+          data.addColumn('number'   , '목표 열량');
+          
+ 
+          //그래프에 표시할 데이터
+          var dataRow = [];
+ 
+          for(var i = 0; i <= 29; i++){ //랜덤 데이터 생성
+            var eat_kcal     = Math.floor(Math.random() * 1) + 1;
+            var purpose_kcal   = eat_kcal;
+ 
+            dataRow = [new Date('2017', '09', i , '10'), eat_kcal, purpose_kcal ];
+            data.addRow(dataRow);
+          }
+ 
+ 
+            var chart = new google.visualization.ChartWrapper({
+              chartType   : 'LineChart',
+              containerId : 'lineChartArea', //라인 차트 생성할 영역
+              options     : {
+                              isStacked   : 'percent',
+                              focusTarget : 'category',
+                              height          : 500,
+                              width           : 1150,
+ 							  chartArea: {left:30,top:20, bottom:50, top : 100},
+                              legend          : { position: "top", textStyle: {fontSize: 13}},
+                              pointSize        : 5,
+                              tooltip          : {textStyle : {fontSize:12}, showColorCode : true,trigger: 'both'},
+                              hAxis              : {format: chartDateformat, gridlines:{count:chartLineCount,units: {
+                                                                  years : {format: ['yyyy년']},
+                                                                  months: {format: ['MM월']},
+                                                                  days  : {format: ['dd일']},
+                                                                  hours : {format: ['HH시']}}
+                                                                },textStyle: {fontSize:12}},
+                vAxis              : {minValue: 100,viewWindow:{min:0},gridlines:{count:-1},textStyle:{fontSize:12}},
+                animation        : {startup: true,duration: 1000,easing: 'in' },
+                annotations    : {pattern: chartDateformat,
+                                textStyle: {
+                                fontSize: 15,
+                                bold: true,
+                                italic: true,
+                                color: '#871b47',
+                                auraColor: '#d799ae',
+                                opacity: 0.8,
+                                pattern: chartDateformat
+                              }
+                            }
+              }
+            });
+ 
+            var control = new google.visualization.ControlWrapper({
+              controlType: 'ChartRangeFilter',
+              containerId: 'controlsArea',  //control bar를 생성할 영역
+              options: {
+                  ui:{
+                        chartType: 'LineChart',
+                        chartOptions: {
+                        chartArea: {'width': '70%','height' : 130},
+                          hAxis: {'baselineColor': 'none', format: chartDateformat, textStyle: {fontSize:12},
+                            gridlines:{count:controlLineCount,units: {
+                                  years : {format: ['yyyy년']},
+                                  months: {format: ['MM월']},
+                                  days  : {format: ['dd일']},
+                                  hours : {format: ['HH시']}}
+                            }}
+                        }
+                  },
+                    filterColumnIndex: 0
+                }
+            });
+ 
+            var date_formatter = new google.visualization.DateFormat({ pattern: chartDateformat});
+            date_formatter.format(data, 0);
+ 
+            var dashboard = new google.visualization.Dashboard(document.getElementById('Line_Controls_Chart'));
+            window.addEventListener('resize', function() { dashboard.draw(data); }, false); //화면 크기에 따라 그래프 크기 변경
+            dashboard.bind([control], [chart]);
+            dashboard.draw(data);
+ 
+        }
+          google.charts.setOnLoadCallback(drawDashboard);
+ 
       }
+    }
+
+
+
 
 //       달력
 var currentMonth = new Date().getMonth();

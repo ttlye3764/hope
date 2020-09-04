@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	
 	<br>
 	<br>
@@ -24,7 +25,7 @@
 
 						<div class="user" onclick="">
 							<img
-								src="https://media1.popsugar-assets.com/files/thumbor/WjFR-_7dQ3eGnp_oHtDor3Au1gI/fit-in/550x550/filters:format_auto-!!-:strip_icc-!!-/2017/08/18/840/n/1922398/d06222d559973b8d6550b9.76731985_edit_img_image_43907487_1503079245/i/Leonardo-DiCaprio-Halloween-Costume-Ideas.jpg"
+								class="chat_img" class="chat_img" src=""
 								alt="" class="icon-user">
 							<div class="user-status">
 								<div class="name">${chatingRoomInfo.ch_no }</div>
@@ -40,16 +41,18 @@
 			<div class="chat-right">
 				<div class="chating">
 					<img
-						src="https://yt3.ggpht.com/-W8COuePR0sU/AAAAAAAAAAI/AAAAAAAAAAA/iAbnzA42vvY/s900-c-k-no-mo-rj-c0xffffff/photo.jpg">
+						class="chat_img" class="chat_img" src="">
 					<div class="chating-with">
 						<div class="name-chat">
-							<b> Chat with Sorax </b>
+							<b>${LOGIN_MEMBERINFO.mem_name}</b>
 						</div>
-						<span class="status">already 1 902 messages</span>
+						<span class="status"> 상태 메세지 </span>
 					</div>
 					<div class="like">
-					<i class="fa fa-thumbs-up" onclick="addFriend();"></i>
-						<i class="fa fa-thumbs-up" onclick="friendList();"></i>
+						<button onclick="addFriend();">친구 등록</button>
+						<button onclick="friendList();">친구 목록</button>
+<!-- 					<i class="fa fa-thumbs-up" onclick="addFriend();"></i> -->
+<!-- 					<i class="fa fa-thumbs-up" onclick="friendList();"></i> -->
 					</div>
 
 				</div>
@@ -78,12 +81,12 @@
 		aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<div class="modal-body">
+				<div class="modal-body" style="height:800px; !important; overflow:auto" >
 					<div class="container" style="">
 			<div class="row">
 				<div class="col-12 col-lg-8 mx-auto">
 					<div class="title text-center">
-						<h2>친구목록</h2>
+						<h2>친구 목록</h2>
 					</div>
 				</div>
 			</div>
@@ -152,12 +155,12 @@
 		aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<div class="modal-body">
+				<div class="modal-body"  style="height:800px; !important; overflow:auto">
 					<div class="container" style="">
 			<div class="row">
 				<div class="col-12 col-lg-8 mx-auto">
 					<div class="title text-center">
-						<h2>친구목록</h2>
+						<h2>친구 등록</h2>
 					</div>
 				</div>
 			</div>
@@ -170,14 +173,34 @@
 							<div class="row">
 							
 								<div class="col-md-6">
-									<!-- name -->
-										<input id="pill_no" name="pill_no" type="hidden" class="form-control">
-										<label>친구 이름 </label><input id="mem_name" name="mem_name" type="text" class="form-control" placeholder="친구이름">
-										<button type="button" id="search_fri">검색</button>			
-										<label>검색 내용 - 친구 이름 </label><input id="search_mem_name" name="search_mem_name" type="text" class="form-control" placeholder="친구이름">
+									<label>친구 이름 </label>
 								</div>
-							<br><br>	
-																												
+								<!-- name -->
+								<input id="mem_name" name="mem_name" type="text" class="form-control" placeholder="친구이름">
+								<button type="button" id="search_fri">검색</button>
+								
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<div class="divider divider-dotted"></div>
+								
+											
+								<label>검색 내용 - 친구 이름 </label><br>
+								<input id="search_mem_name" name="search_mem_name" type="text" class="form-control" placeholder="친구이름">
+								<br>
+								<br>			
+								<br>
+								<br>
+								<br>
+								<div class="divider divider-dotted"></div>
+								
+								<br>
+								<br>
+								<br>
+								
+																							
 								<!-- submit button -->
 								<div class="col-md-12 text-center">
 								<button class="btn btn-outline-grad " type="button" id="insertBtn">추가</button>

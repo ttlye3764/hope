@@ -114,7 +114,7 @@
 	</select>
 	
 	<delete id="deleteDietDayInfo" parameterType="Map">
-		DELETE DIETDAYINFO
+		DELETE DIET_DAY_INFO
 		WHERE DDI_NO = #{ddi_no}
 		AND DD_INFO_DIVISION = #{dd_info_division}
 	</delete>

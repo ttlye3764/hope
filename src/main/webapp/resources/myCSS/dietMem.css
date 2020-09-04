@@ -1,0 +1,21 @@
+#div_dietMem{
+	display : flex;
+	justify-content : space-between;
+    height: 500px;
+        
+}
+
+#div_dietMem_right{
+	width : 50%;
+	
+}
+
+#div_dietMem_left{
+	width : 50%;
+	
+}
+
+#insertDietMem{
+	
+	justify-content : center;
+}
