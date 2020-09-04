@@ -113,6 +113,8 @@ public class BoardController {
 		andView.addObject("boardList", boardList);
 		andView.addObject("board_division_name", board_division_name);
 		andView.addObject("bd_division", bd_division);
+		andView.addObject("search_keycode", search_keycode);
+		andView.addObject("search_keyword", search_keyword);
 		andView.setViewName("user/board/boardList");		
 		andView.addObject("pagination", pagination.getPagingHtmls());
 
@@ -172,6 +174,8 @@ public class BoardController {
 			andView.addObject("boardList", boardList);
 			andView.addObject("board_division_name", board_division_name);
 			andView.addObject("bd_division", bd_division);
+			andView.addObject("search_keycode", search_keycode);
+			andView.addObject("search_keyword", search_keyword);
 			andView.setViewName("jsonConvertView");		
 			andView.addObject("pagination", pagination.getPagingHtmls());
 

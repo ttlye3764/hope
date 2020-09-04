@@ -19,9 +19,9 @@ $(function(){
         return true;
      });
 
-    '${pageContext.request.contextPath}/user/board/boardView.do?bd_no=' + bd_no + '&rnum=' + rnum + "&bd_division=${bd_division}"
     // 목록버튼기능
     $('#listBtn').on('click', function(){	
+    	//'${pageContext.request.contextPath}/user/board/boardView.do?bd_no=' + bd_no + '&rnum=' + rnum + "&bd_division=${bd_division}"
 		$(location).attr('href','${pageContext.request.contextPath}/user/board/boardList.do?bd_division=${bd_division}');	
 	});
 
@@ -30,11 +30,11 @@ $(function(){
 		var files = e.target.files;
 		var filesArr = Array.prototype.slice.call(files);
 		
-		filesArr.forEach(function(f){
-			if(!f.type.match("image.*")){
-				alert("이미지만 업로드 가능합니다.");
-				return;
-			}
+// 		filesArr.forEach(function(f){
+// 			if(!f.type.match("image.*")){
+// 				alert("이미지만 업로드 가능합니다.");
+// 				return;
+// 			}
 			
 			sel_file = f;
 			var reader = new FileReader();
@@ -42,7 +42,7 @@ $(function(){
 					$("#img").attr("src", e.target.result);
 			}
 			reader.readAsDataURL(f);
-		});
+// 		});
 	}
     
 });
