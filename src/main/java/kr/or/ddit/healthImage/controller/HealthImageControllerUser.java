@@ -136,70 +136,90 @@ public class HealthImageControllerUser {
 	}
 	
 		// 엑셀 출력
-		@RequestMapping("excelDown")
-		public void excelDown(HttpServletResponse response, Map<String, String> params) throws Exception {
-			
-			// 게시판 목록조회
-			List<HealthImageVO> list = healthImageService.healthList(params);
-			
-			// 워크북 생성
-			Workbook wb = new HSSFWorkbook();
-			Sheet sheet = wb.createSheet("게시판");
-			Row row = null;
-			Cell cell = null;
-			int rowNo = 0;
+	@RequestMapping("excelDown")
+	public void excelDown(HttpServletResponse response
+							,Map<String, String> params
+							,@RequestParam(value = "choose", required = false) String choose
+							,RolePaginationUtil_su pagination
+							,HttpServletRequest request
+							,@RequestParam(value = "currentPage", required = false) String currentPage) throws Exception {
+		
+		if(currentPage == null){
+	         currentPage = "1";
+	      }
 
-			// 헤더 생성
+		String totalCount = this.healthImageService.totalCount(params);
+		
+		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount), totalCount);
+	    
+		String startCount = String.valueOf(pagination.getStartCount());
+	    String endCount = String.valueOf(pagination.getEndCount());
+	    
+	    params.put("startCount", startCount);
+	    params.put("endCount", endCount);
+	    params.put("healthImage_category", choose);
+	    
+		// 게시판 목록조회
+		List<HealthImageVO> list = healthImageService.healthList(params);
+		
+		// 워크북 생성
+		Workbook wb = new HSSFWorkbook();
+		Sheet sheet = wb.createSheet("게시판");
+		Row row = null;
+		Cell cell = null;
+		int rowNo = 0;
+
+		// 헤더 생성
+		row = sheet.createRow(rowNo++);
+		cell = row.createCell(0);
+		cell.setCellValue("추천 운동");
+		
+		cell = row.createCell(1);
+		cell.setCellValue("카테고리");
+		
+		cell = row.createCell(2);
+		cell.setCellValue("추천 연령");
+		
+		cell = row.createCell(3);
+		cell.setCellValue("운동 방법(유/무)");
+		
+		cell = row.createCell(4);
+		cell.setCellValue("시간");
+		
+		cell = row.createCell(5);
+		cell.setCellValue("난이도");
+		
+		// 데이터 부분 생성
+		for(HealthImageVO vo : list) {
 			row = sheet.createRow(rowNo++);
 			cell = row.createCell(0);
-			cell.setCellValue("추천 운동");
+			cell.setCellValue(vo.getHealthImage_title());
 			
 			cell = row.createCell(1);
-			cell.setCellValue("카테고리");
+			cell.setCellValue(vo.getHealthImage_category());
 			
 			cell = row.createCell(2);
-			cell.setCellValue("추천 연령");
+			cell.setCellValue(vo.getHealthImage_age());
 			
 			cell = row.createCell(3);
-			cell.setCellValue("운동 방법(유/무)");
+			cell.setCellValue(vo.getHealthImage_diet());
 			
 			cell = row.createCell(4);
-			cell.setCellValue("시간");
+			cell.setCellValue(vo.getHealthImage_time());
 			
 			cell = row.createCell(5);
-			cell.setCellValue("난이도");
-			
-			// 데이터 부분 생성
-			for(HealthImageVO vo : list) {
-				row = sheet.createRow(rowNo++);
-				cell = row.createCell(0);
-				cell.setCellValue(vo.getHealthImage_title());
-				
-				cell = row.createCell(1);
-				cell.setCellValue(vo.getHealthImage_category());
-				
-				cell = row.createCell(2);
-				cell.setCellValue(vo.getHealthImage_age());
-				
-				cell = row.createCell(3);
-				cell.setCellValue(vo.getHealthImage_diet());
-				
-				cell = row.createCell(4);
-				cell.setCellValue(vo.getHealthImage_time());
-				
-				cell = row.createCell(5);
-				cell.setCellValue(vo.getHealthImage_difficulty());
-			}
-			
-			// 엑셀 출력
-			response.setContentType("application/vnd.ms-excel");
-			response.setHeader("Content-Disposition", "attachment;filename=excel.xls");
-			
-			wb.write(response.getOutputStream());
-
-			FileOutputStream fileOut = new FileOutputStream("excel.xlsx");
-			wb.write(fileOut);
-			fileOut.close();
+			cell.setCellValue(vo.getHealthImage_difficulty());
 		}
+		
+		// 엑셀 출력
+		response.setContentType("application/vnd.ms-excel");
+		response.setHeader("Content-Disposition", "attachment;filename=excel.xls");
+		
+		wb.write(response.getOutputStream());
+
+		FileOutputStream fileOut = new FileOutputStream("excel.xlsx");
+		wb.write(fileOut);
+		fileOut.close();
+	}
 			
 }
