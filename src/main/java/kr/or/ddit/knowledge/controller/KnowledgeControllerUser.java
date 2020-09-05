@@ -31,6 +31,7 @@ public class KnowledgeControllerUser {
 	private ObjectMapper mapper;
 	@Autowired
 	private IKnowledgeService knowledgeService;
+	@Autowired
 	private ICategoryService categoryService;
 
 	// 문제리스트
@@ -67,7 +68,7 @@ public class KnowledgeControllerUser {
 	}
 	
 	@RequestMapping("insertcategory")
-	public String category(String [] checkBoxArr, HttpServletRequest request, Map<String,String>params) {
+	public String category(String [] checkBoxArr, HttpServletRequest request, Map<String,String> params) throws Exception {
 		String checkBox = "";
 		
 		for(int i = 0 ; i < checkBoxArr.length ; i++) {
@@ -78,14 +79,20 @@ public class KnowledgeControllerUser {
 		
 		HttpSession session = request.getSession();
 		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
-		String mem_no = memberInfo.getMem_no();
 		
 		if(memberInfo==null) {}
 		else {
+			String mem_no = memberInfo.getMem_no();
+			
 			params.put("mem_no", mem_no);
 			params.put("ct_name", checkBox);
 			
-			categoryService.insertCategory(params);
+			String cate_no = categoryService.selectCategory(mem_no);
+			if(cate_no == null) {
+				categoryService.insertCategory(params) ;
+			}else {
+				categoryService.updateCategory(params);
+			}
 		}
 		
 		return "redirect:/user/knowledge/news.do";
