@@ -75,7 +75,6 @@ function alertPrint(msg){
 						<input type="hidden" id="bd_division" name="bd_division" value="${bd_division }">
 						<input type="hidden" name="bd_writer" value='${LOGIN_MEMBERINFO.mem_nickname }'>
 						<input type="hidden" name="mem_no" value='${LOGIN_MEMBERINFO.mem_no }'>
-<!-- 						<div class="col-md-9"><span class="form-group"><input type="text" class="form-control" placeholder="writer" id="bd_writer" name="bd_writer"></span></div> -->
 						<div class="col-md-9 input-group mb-2">
 							<div class="custom-file">
 								<input type="file" class="custom-file-input" id="files" name="files">

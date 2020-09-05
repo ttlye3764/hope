@@ -19,10 +19,20 @@ public class BoardVO {
 	private String bd_writer;
 
 	private List<Board_FileVO> items;
+	private List<Board_FileVO> items2;
+
+	public List<Board_FileVO> getItems2() {
+		return items2;
+	}
+
+	public void setItems2(List<Board_FileVO> items2) {
+		this.items2 = items2;
+	}
 
 	public List<Board_FileVO> getItems() {
 		return items;
 	}
+
 	public void setItems(List<Board_FileVO> items) {
 		this.items = items;
 	}

@@ -18,7 +18,8 @@
 			<result property="mem_no" column="mem_no"/>
 			<result property="rnum" column="rnum"/>
 			<result property="bd_writer" column="bd_writer"/>
-			<collection property="items" column="bd_no" select="board_file.board_fileList" ofType="board_fileVO" javaType="java.util.List"></collection>
+			<collection property="items" column="bd_no" select="boardfile.boardfileList" ofType="board_fileVO" javaType="java.util.List"></collection>
+			<collection property="items2" column="bd_no" select="boardfile.boardfileList2" ofType="board_fileVO" javaType="java.util.List"></collection>
     </resultMap>
 
 	
