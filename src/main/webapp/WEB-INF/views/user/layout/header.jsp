@@ -162,7 +162,7 @@ function LogOut(){
 							<ul class="dropdown-menu" aria-labelledby="blogMenu">
 								<li class="dropdown-submenu">
 								
-									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalListMain.do">복용관리</a>
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalMain.do">복용관리</a>
 
 								</li>
 								<li class="dropdown-submenu">

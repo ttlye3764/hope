@@ -33,6 +33,19 @@
 		FROM mypill
 		WHERE MEM_NO = #{mem_no}
 	</select>
+	<select id="todayMedical" resultType="mypillVO" parameterType="String">
+		SELECT *
+		FROM mypill
+		WHERE MEM_NO = #{mem_no}
+        and sysdate between to_date(replace(SUBSTRB(pill_start,0,10),'-',''),'yyyymmdd') and to_date(replace(SUBSTRB(pill_end,0,10),'-',''),'yyyymmdd')
+	</select>
+	<select id="weekMedical" resultType="mypillVO" parameterType="String">
+		SELECT *
+		FROM mypill
+		WHERE MEM_NO = #{mem_no}
+        and (to_date(replace(SUBSTRB(pill_start,0,10),'-',''),'yyyymmdd') between TO_CHAR(TRUNC(sysdate,'d'),'yyyymmdd') and TO_CHAR(TRUNC(sysdate,'d')+6,'yyyymmdd')) 
+        or (to_date(replace(SUBSTRB(pill_end,0,10),'-',''),'yyyymmdd') between TO_CHAR(TRUNC(sysdate,'d'),'yyyymmdd') and TO_CHAR(TRUNC(sysdate,'d')+6,'yyyymmdd'))   
+	</select>
 	<select id="medicalInfo" parameterType="String" resultType="mypillVO">
 		select *
 		from mypill

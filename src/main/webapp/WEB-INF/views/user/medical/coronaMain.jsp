@@ -515,14 +515,14 @@
 					<div style="height: 400px; width:280px; border: 1px solid black;">
 						<div style="background-color: #174069;    height: 50px; font-family: 'Spoqa Han Sans'; color: white; text-align: center;">
 							<div style="">
-								<strong class="tit" style="color: white; font-size:19px; ">연령 별 확진자 현황</strong>
+								<strong class="tit" style="color: white; font-size:19px; ">연령/성별 확진자 현황</strong>
 							</div>
 						</div>
 						<div class="cc_graph"  style="display: flex; flex-direction : column; height: 200px; border-bottom:3px solid #164068; ">
-							<canvas id="AgePieChart"  style="height: 200px; width: 200px; margin-left: 5px;"></canvas>		<!-- height: 190px; width: 100%; -->
+							<canvas id="AgePieChart"  style="height: 200px; width: 278px; "></canvas>		<!-- height: 190px; width: 100%; -->
 						</div>
-						<div class="cc_graph"  style="display: flex; flex-direction : column; height: 200px; border-bottom:3px solid #164068; ">
-							<canvas id="AgeBarChart"  style="height: 200px; width: 200px; margin-left: 5px;"></canvas>		<!-- height: 190px; width: 100%; -->
+						<div class="cc_graph"  style="display: flex; flex-direction : column; height: 200px;">
+							<canvas id="AgeBarChart"  style="height: 150px; width: 278px; margin-top: 5px;"></canvas>		<!-- height: 190px; width: 100%; -->
 						</div>
 
 
@@ -753,7 +753,7 @@ $(function(){
 	}) */
 
 	$.ajax({
-		 url     : '${pageContext.request.contextPath}/user/medical/coronaAgeAPI.do',  //총 코로나
+		 url     : '${pageContext.request.contextPath}/user/medical/coronaAgeAPI.do',  //나이/성별
 	        type    : 'post',
 	        dataType: 'json',
 	        data : {'startdate':startdate,'enddate':startdate },
@@ -763,13 +763,27 @@ $(function(){
 				console.log('연령별');
 				console.log(result.response.body.items.item);
 				$.each(result.response.body.items.item,function(i,v){
+					if(i<9){
 					list.push(v.confCase);
 					la.push(v.gubun);
+						}
 				})
-				console.log(list);
-				console.log(la);
+				
 				
 				AgeBarChart(la,list);
+				
+				list = [];
+				la = [];
+				
+				$.each(result.response.body.items.item,function(i,v){
+					if(i>8 && i<11){
+					list.push(v.confCase);
+					la.push(v.gubun);
+						}
+				})
+
+				
+				AgePieChart(la,list);
 
 			/* 	0: {criticalRate: 0, death: 0, deathRate: 0, confCaseRate: 2.13, updateDt: null, …}
 				1: {criticalRate: 0, death: 0, deathRate: 0, confCaseRate: 5.79, updateDt: null, …}
@@ -1133,9 +1147,6 @@ function drawChart(dateList,clearList,deathList,decideList){
 	console.log(clearList);
 	console.log(deathList);
 	console.log(decideList); 	
-
-   
-    
     	
     var chart = new Chart(ctxLine, {
         // The type of chart we want to create
@@ -1217,6 +1228,7 @@ function PieChart(labels,dataList){
 		    },
 		    options: options
 		});
+		 pieChart.update();	
 }
 
 function resetPieChart(){
@@ -1226,11 +1238,9 @@ function resetPieChart(){
 }
 function AgePieChart(label,data){
 	 var data = [{
-		 backgroundColor : ['#0095ff', '#fdaf4b'],   
+		 backgroundColor : ['#eb4034','#009dff'],   
          data: data
 		 }];
-
-
 	 var options = {
 			   plugins: {
 			     datalabels: {
@@ -1249,8 +1259,7 @@ function AgePieChart(label,data){
 			       color: '#fff',
 			     }
 			   }
-			 };
-
+	 };
 		
 		 agePieChart = new Chart(ctxAgePie, {
 		    type: 'pie',
@@ -1270,12 +1279,16 @@ function resetAgePieChart(){
 }
 function AgeBarChart(label,data){
 	 var data = [{
-		 backgroundColor : [ '#f3545d','#fdaf4b','#0095ff', '#fdaf4b' ],   
+		 backgroundColor : [ '#f3545d','#fdaf4b','#0095ff', '#32a852', '#ff8400', '#ae00ff','#ff0000','#00ffd9','#eaff00' ],   
          data: data
 		 }];
 
 
 	 var options = {
+			 legend: {
+		            display: false,
+		        },
+		     responsive: false,
 			   plugins: {
 			     datalabels: {
 			       formatter: (value, ctxPie) => {
@@ -1299,9 +1312,8 @@ function AgeBarChart(label,data){
 	 	ageBarChart = new Chart(ctxAgeBar, {
 		    type: 'bar',
 
-		    data: {
-		        labels: label,
-		       
+		    data: {		       
+		    	labels: label,
 		        datasets:data
 		    },
 		    options: options

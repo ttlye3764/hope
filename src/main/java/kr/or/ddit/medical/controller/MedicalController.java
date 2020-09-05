@@ -54,6 +54,24 @@ public class MedicalController {
 		andView.setViewName("jsonConvertView");
 		return andView;
 	}
+	
+	@RequestMapping("todayMedical")
+	public ModelAndView todayMedical(String mem_no) throws Exception {
+		List<MypillVO> medicalList = this.medicalService.todayMedical(mem_no);
+		ModelAndView andView = new ModelAndView();
+		andView.addObject("json", medicalList);
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
+	@RequestMapping("weekMedical")
+	public ModelAndView weekMedical(String mem_no) throws Exception {
+		System.out.println("위크 들어옴");
+		List<MypillVO> medicalList = this.medicalService.weekMedical(mem_no);
+		ModelAndView andView = new ModelAndView();
+		andView.addObject("json", medicalList);
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
 	@RequestMapping("pillInfo")
 	public ModelAndView pillInfo(String pi_no) throws Exception {
 		PillVO pillInfo = pillService.pillInfo(pi_no);
@@ -133,6 +151,9 @@ public class MedicalController {
 	@RequestMapping("medicalForm")
 	public void medicalForm() {
 	}
+	@RequestMapping("medicalMain")
+	public void medicalMain() {
+	}
 
 	@RequestMapping("medicalList")
 	public void medicalList() {
@@ -145,7 +166,7 @@ public class MedicalController {
 	public ModelAndView insertMedicalInfo(ModelAndView andView, MypillVO mypillInfo,
 			@RequestParam("files") MultipartFile[] items) throws Exception {
 
-		andView.setViewName("user/medical/medicalListMain");
+		andView.setViewName("user/medical/medicalMain");
 		String start = mypillInfo.getPill_start().concat("T");
 		start = start.concat(mypillInfo.getPill_alerttime());
 		mypillInfo.setPill_start(start);
@@ -164,7 +185,7 @@ public class MedicalController {
 	public ModelAndView updateMedicalInfo(ModelAndView andView, MypillVO mypillInfo,
 			@RequestParam("files") MultipartFile[] items) throws Exception {
 
-		andView.setViewName("user/medical/medicalListMain");
+		andView.setViewName("user/medical/medicalMain");
 		String start = mypillInfo.getPill_start().concat("T");
 		start = start.concat(mypillInfo.getPill_alerttime());
 		mypillInfo.setPill_start(start);
@@ -181,7 +202,7 @@ public class MedicalController {
 
 	@RequestMapping("deleteMedicalInfo")
 	public ModelAndView deleteMedicalInfo(ModelAndView andView, String pill_no) throws Exception {
-		andView.setViewName("user/medical/medicalListMain");
+		andView.setViewName("user/medical/medicalMain");
 		medicalService.deleteMedicalInfo(pill_no);
 		return andView;
 	}
