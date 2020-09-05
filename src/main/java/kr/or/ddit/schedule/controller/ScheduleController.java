@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import kr.or.ddit.bis.Bis;
 import kr.or.ddit.bis.Bis_location;
 import kr.or.ddit.bis.BusStop;
+import kr.or.ddit.bis.Subway;
 import kr.or.ddit.member.service.IMemberService;
 import kr.or.ddit.schedule.service.IScheduleService;
 import kr.or.ddit.vo.BusVO;
@@ -260,5 +261,35 @@ public class ScheduleController {
 	}
 	
 	
+	@ResponseBody
+	@RequestMapping(value="subwaySearch",produces="text/plain; charset=UTF-8")
+	public String subwaySearch(String name) throws Exception {
+		String subwayResult = Subway.subwayId(name);
+		return subwayResult;
+	}
+	@ResponseBody
+	@RequestMapping(value="subwayTime",produces="text/plain; charset=UTF-8")
+	public String subwayTime(String subwayStationId) throws Exception {
+		String subwayResult = Subway.subwayTime(subwayStationId);
+		return subwayResult;
+	}
+	@ResponseBody
+	@RequestMapping(value="subwayTimeList",produces="text/plain; charset=UTF-8")
+	public String subwayTimeList(String subwayStationId, String numOfRows) throws Exception {
+		String subwayResult = Subway.subwayTimeList(subwayStationId, numOfRows);
+		return subwayResult;
+	}
+	@ResponseBody
+	@RequestMapping(value="subwayTimeU",produces="text/plain; charset=UTF-8")
+	public String subwayTimeU(String subwayStationId) throws Exception {
+		String subwayResult = Subway.subwayTimeU(subwayStationId);
+		return subwayResult;
+	}
+	@ResponseBody
+	@RequestMapping(value="subwayTimeListU",produces="text/plain; charset=UTF-8")
+	public String subwayTimeListU(String subwayStationId, String numOfRows) throws Exception {
+		String subwayResult = Subway.subwayTimeListU(subwayStationId, numOfRows);
+		return subwayResult;
+	}
 
 }

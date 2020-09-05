@@ -198,7 +198,7 @@ function LogOut(){
 							<ul class="dropdown-menu" aria-labelledby="portfolioMenu">
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/schedule.do">일정관리</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/dday.do">일정리스트</a> </li>
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/bis.do">자주타는 버스</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/bis.do">버스&지하철</a> </li>
 								
 							</ul>
 						</li>
