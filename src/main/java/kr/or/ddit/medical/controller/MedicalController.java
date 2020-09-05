@@ -152,7 +152,34 @@ public class MedicalController {
 	public void medicalForm() {
 	}
 	@RequestMapping("medicalMain")
-	public void medicalMain() {
+	public ModelAndView medicalMain(HttpServletRequest request, String currentPage, HashMap params,
+			RolePaginationUtil_pill pagination) throws Exception {
+		if (currentPage == null) {
+			currentPage = "1";
+		}
+
+		String totalCount = pillService.totalCount(params);
+
+		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount));
+
+		String startCount = String.valueOf(pagination.getStartCount());
+
+		String endCount = String.valueOf(pagination.getEndCount());
+
+		params.put("startCount", startCount);
+		params.put("endCount", endCount);
+
+		List<PillVO> list = pillService.pillList(params);
+
+		ModelAndView andView = new ModelAndView();
+		andView.addObject("pillList", list);
+		andView.addObject("pagination", pagination.getPagingHtmls());
+		andView.setViewName("user/medical/medicalMain");
+		return andView;
+		
+		
+		
+		
 	}
 
 	@RequestMapping("medicalList")
