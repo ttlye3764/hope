@@ -91,7 +91,7 @@
 	</update>
 	
 	<select id="totalCount" parameterType="map" resultType="String">
-		select count(healthImage_no)
+		select count(*)
 		from HEALTHIMAGE				
 	</select>
 

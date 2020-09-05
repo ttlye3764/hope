@@ -141,7 +141,6 @@
 													</div>
 												</c:if>
 										</c:forEach>
-													
 
                                             <button type="button" id="delBtn" class="btn btn-danger" style="float: right; margin: 0px 0px 0px 10px;">삭제</button>
                                             <button type="button" id="cancel" class="btn btn-light" style="float: right; margin: 0px 0px 0px 10px;">취소</button>

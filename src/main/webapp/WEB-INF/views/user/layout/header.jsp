@@ -180,6 +180,7 @@ function LogOut(){
 							<ul class="dropdown-menu" aria-labelledby="pagesMenu">
 								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/healthImage/healthImageList.do'>운동법 리스트</a></li>
 								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/healthImage/healthImageWeight.do'>표준몸무게</a></li>
+								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/healthImage/healthImageCal.do'>운동 칼로리 계산기</a></li>
 								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/healthImage/healthImageMap.do'>내 주변 헬스장</a></li>
 							</ul>
 						</li>

@@ -84,7 +84,7 @@ public class HealthImageController {
 
 		String totalCount = this.healthImageService.totalCount(params);
 		
-		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount), totalCount);
+		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount), choose);
 	    
 		String startCount = String.valueOf(pagination.getStartCount());
 	    String endCount = String.valueOf(pagination.getEndCount());
