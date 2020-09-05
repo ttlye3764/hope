@@ -67,7 +67,7 @@ public class KnowledgeControllerUser {
 	public void chart() {
 	}
 	
-	@RequestMapping("insertcategory")
+	@RequestMapping("saveCategory")
 	public String category(String [] checkBoxArr, HttpServletRequest request, Map<String,String> params) throws Exception {
 		String checkBox = "";
 		

@@ -48,7 +48,7 @@
 			checkBoxArr.push($(this).val());
 		});
 
-		$(location).attr('href','${pageContext.request.contextPath}/user/knowledge/insertcategory.do?checkBoxArr='+checkBoxArr);
+		$(location).attr('href','${pageContext.request.contextPath}/user/knowledge/savecategory.do?checkBoxArr='+checkBoxArr);
 	}
 	
 	function settingCategory() {
