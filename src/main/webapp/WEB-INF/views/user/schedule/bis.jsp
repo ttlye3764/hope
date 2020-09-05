@@ -693,6 +693,9 @@ function subwayRouteName(e){
 		        },
 		   }); //정류소목록 불러오기
 
+
+		// var timer = setInterval(function(){
+		  $('#information').html("");
 		   var html;
 		   $.ajax({
 			   	 async    : false,
@@ -714,6 +717,9 @@ function subwayRouteName(e){
 					    }
 			        },
 			   }); //정류소목록 불러오기
+
+
+			// },1000)
 	   
    }
 
