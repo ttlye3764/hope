@@ -124,14 +124,24 @@
                                                 </div>
                                             </div>
                                             
-                                             <!-- 파일 -->
-											 <c:if test="${!empty healthInfo.items }">  
-												<div id="image_container" style="width: 300px; height: 200px;">
-													<c:forEach items="${healthInfo.items }" var="fileitemInfo" varStatus="status">
+										<c:forEach items="${healthInfo.itemsInfo }" var="fileitemInfo" varStatus="status">
+											 <!-- 동영상일 때 -->
+											<c:set var="fileName" value="${fn:split(healthInfo.itemsInfo[status.index].file_save_name,'.') }" />
+											  <c:if test="${fileName[1] eq 'mp4'}">  
+													  <video id="myVideo" oncontextmenu="return false;" width="640" controls autoplay="autoplay">
+													    <source src="/files/${healthInfo.itemsInfo[status.index].file_save_name}" type="video/mp4">
+													</video>
+											 </c:if> 
+											 
+											<!-- 파일일 때 --> 
+											<c:set var="fileName" value="${fn:split(healthInfo.itemsInfo[status.index].file_save_name,'.') }" />
+												<c:if test="${fileName[1] eq 'jpg' || fileName[1] eq 'png'}">  
+													<div id="image_container" style="width: 300px; height: 200px;">
 														<img src="/files/${fileitemInfo.file_save_name }" alt="pic1" style="width: 300px; height: 200px;">
-													</c:forEach>
-												</div>
-											 </c:if>
+													</div>
+												</c:if>
+										</c:forEach>
+													
 
                                             <button type="button" id="delBtn" class="btn btn-danger" style="float: right; margin: 0px 0px 0px 10px;">삭제</button>
                                             <button type="button" id="cancel" class="btn btn-light" style="float: right; margin: 0px 0px 0px 10px;">취소</button>

@@ -15,6 +15,15 @@ public class HealthImageVO {
 	private int rnum; // 순서
 	private String mem_no; // 멤버 번호
 	private List<HealthFileVO> items; // 이미지 리스트
+	private List<HealthFileVO> itemsInfo; // 이미지 뷰
+
+	public List<HealthFileVO> getItemsInfo() {
+		return itemsInfo;
+	}
+
+	public void setItemsInfo(List<HealthFileVO> itemsInfo) {
+		this.itemsInfo = itemsInfo;
+	}
 
 	public String getHealthImage_category() {
 		return healthImage_category;

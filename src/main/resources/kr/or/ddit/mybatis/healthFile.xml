@@ -7,6 +7,13 @@
 		FROM HEALTHFILE
 		ORDER BY FILE_NO DESC
 	</select>
+	
+	<select resultType="healthFileVO" id="healthFileListInfo">
+		SELECT *
+		FROM HEALTHFILE
+		WHERE FILE_HEALTHIMAGE_NO = #{file_healthImage_no}
+		ORDER BY FILE_NO DESC
+	</select>
 
 	<insert id="inserthealthFile" parameterType="healthFileVO">
 		INSERT INTO

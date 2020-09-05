@@ -14,6 +14,7 @@
 		<result property="healthImage_difficulty" column="healthImage_difficulty" />
 		<result property="mem_no" column="mem_no" />
 		<collection property="items" column="healthImage_no" select="healthFile.healthFileList" ofType="healthFileVO" javaType="java.util.List"></collection>
+		<collection property="itemsInfo" column="healthImage_no" select="healthFile.healthFileListInfo" ofType="healthFileVO" javaType="java.util.List"></collection>
 	</resultMap>
 
 	<sql id="selectAll">
