@@ -316,11 +316,8 @@ function pill_info(pill_no){
 					success : function(result) {
 						$('.list').empty();
 						$('#paginationDIV').empty();
-						$('#paginationDIV').append(
-								result.pagination);
-
-						$
-								.each(
+						$('#paginationDIV').append(result.pagination);
+						$.each(
 										result.list,
 										function(index,
 												item) {
