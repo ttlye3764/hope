@@ -113,6 +113,7 @@ li {
 
 <!--Vendors-->
 <script src="${pageContext.request.contextPath }/resources/template/assets/vendor/sticky-kit/sticky-kit.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <!--Template Functions-->
 <script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
@@ -124,7 +125,7 @@ $(function(){
 		var weight = $('#weight').val();
 
 		if (time == "" || weight == "") {
-			alert("몸무게 또는 운동시간을 입력해주세요.");
+			swal("warning","몸무게 또는 운동시간을 입력해주세요.", "warning");
 
 			return false;
 		}
@@ -200,6 +201,26 @@ $(function(){
 </script>
 </head>
 <body>
+
+<div class="innerpage-banner center bg-overlay-dark-7 py-7" 
+	style="background:url(${pageContext.request.contextPath }/resources/template/assets/images/bg/04.jpg) no-repeat; background-size:cover; 
+		background-position: center center;">
+		<div class="container">
+			<div class="row all-text-white">
+				<div class="col-md-12 align-self-center">
+					<h1 class="innerpage-title">Health</h1>
+					<h6 class="subtitle">Show your awesome work in Health style</h6>
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item active">
+							<a href='${pageContext.request.contextPath}/user/healthImage/healthImageCal.do'><i class="ti-home"></i> Home</a></li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 <section>
 		<div class="container">
 			<div class="row">

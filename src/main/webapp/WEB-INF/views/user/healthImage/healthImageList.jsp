@@ -32,7 +32,7 @@
 		<div class="container">
 			<div class="row all-text-white">
 				<div class="col-md-12 align-self-center">
-					<h1 class="innerpage-title">Health Management</h1>
+					<h1 class="innerpage-title">Health</h1>
 					<h6 class="subtitle">Show your awesome work in Health style</h6>
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
@@ -206,7 +206,7 @@
 														</div>
 													</form>
 <!-- 												    <div id="image_container" style="width: 230px;height: 160px;"></div> -->
- 													<button type="button" class="btn btn-light mb-2 mr-1" id="" style="margin: 0px 0px 0px 160px;">추천 운동 확인</button>
+ 													<button type="button" class="btn btn-light mb-2 mr-1" id="inbody" style="margin: 0px 0px 0px 160px;">추천 운동 확인</button>
 												</div>
 											</div>
 										</div>
@@ -239,6 +239,7 @@
 
 	<!--Template Functions-->
 	<script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script type="text/javascript">
 
@@ -252,6 +253,18 @@
 				// 전체
 				$('#all').click(function(){
 					$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/healthImageList.do');
+				}); 
+
+				// 인바디 정보 등록
+				$('#inbody').click(function(){
+					var file = $('#file').val();
+					if(file == ""){
+						swal("FILE","파일을 넣어주세요.", "warning");
+
+						return false;
+					}
+					
+					$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/excelDown.do');
 				}); 
 
 				$("#playBtn").on("click", function() {
