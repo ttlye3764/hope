@@ -129,51 +129,71 @@ $(function(){
 			return false;
 		}
 
-		var bmi = (weight / (tall * tall)) * 10000;
-	
-		document.getElementById("content").innerHTML = "현재 BMI 지수는 " + bmi.toFixed(1) + "입니다.<br/><br/>"; 		
-		document.getElementById("content").innerHTML += "18.5 이하 : 저체중<br/>"; 
-		document.getElementById("content").innerHTML += "18.5~22.9 : 정상<br/>"; 
-		document.getElementById("content").innerHTML += "23~24.9 : 과체중<br/>";
-		document.getElementById("content").innerHTML += "25~30 : 비만<br/>"; 
-		document.getElementById("content").innerHTML += "31 이상 : 고도비만<br/>";
+		// 몸무게 * 시간 * 3.5 * met * 5 
+		var select  = $("#exercise option:selected").val();
+		
+			if(select == 'TV시청') {
+			var cal = ((weight * time * 3.5) * 1.0 * 5) * 0.001;
 
-		if (bmi <= 18.5) {
-			$('#1').show();
-			$('#2').hide();
-			$('#3').hide();
-			$('#4').hide();
-			$('#5').hide();
+			} else if (select == '걷기') {
+			var cal = ((weight * time * 3.5) * 3.3 * 5) * 0.001;
 
-		} else if (18.5 < bmi && bmi < 23) {
-			$('#1').hide();
-			$('#2').show();
-			$('#3').hide();
-			$('#4').hide();
-			$('#5').hide();
+			} else if (select == '체조') {
+			var cal = ((weight * time * 3.5) * 3.5 * 5) * 0.001;
 
-		} else if (23 <= bmi && bmi < 25) {
-			$('#1').hide();
-			$('#2').hide();
-			$('#3').show();
-			$('#4').hide();
-			$('#5').hide();
+			} else if (select == '배드민턴') {
+			var cal = ((weight * time * 3.5) * 4.5 * 5) * 0.001;
 
-		} else if (25 <= bmi && bmi < 31) {
-			$('#1').hide();
-			$('#2').hide();
-			$('#3').hide();
-			$('#4').show();
-			$('#5').hide();
+			} else if (select == '골프') {
+			var cal = ((weight * time * 3.5) * 4.5 * 5) * 0.001;
 
-		} else if (31 <= bmi) {
-			$('#1').hide();
-			$('#2').hide();
-			$('#3').hide();
-			$('#4').hide();
-			$('#5').show();
+			} else if (select == '농구') {
+			var cal = ((weight * time * 3.5) * 6.5 * 5) * 0.001;
 
-		} 
+			} else if (select == '에어로빅') {
+			var cal = ((weight * time * 3.5) * 6.0 * 5) * 0.001;
+
+			} else if (select == '책벅지') {
+			var cal = ((weight * time * 3.5) * 7 * 5) * 0.001;
+
+			} else if (select == '줌바') {
+			var cal = ((weight * time * 3.5) * 7 * 5) * 0.001;
+
+			} else if (select == '조깅') {
+			var cal = ((weight * time * 3.5) * 7 * 5) * 0.001;
+
+			} else if (select == '등산') {
+			var cal = ((weight * time * 3.5) * 7.5 * 5) * 0.001;
+
+			} else if (select == '실내 자전거') {
+			var cal = ((weight * time * 3.5) * 8 * 5) * 0.001;
+
+			} else if (select == '축구') {
+			var cal = ((weight * time * 3.5) * 8 * 5) * 0.001;
+
+			} else if (select == '스피닝') {
+			var cal = ((weight * time * 3.5) * 8 * 5) * 0.001;
+
+			} else if (select == '줄넘기') {
+			var cal = ((weight * time * 3.5) * 10 * 5) * 0.001;
+
+			} else if (select == '킥복싱') {
+			var cal = ((weight * time * 3.5) * 10 * 5) * 0.001;
+
+			}  else if (select == '수영') {
+			var cal = ((weight * time * 3.5) * 11 * 5) * 0.001;
+
+			} else if (select == '런닝') {
+			var cal = ((weight * time * 3.5) * 15 * 5) * 0.001;
+
+			} else if (select == '계단오르기') {
+			var cal = ((weight * time * 3.5) * 15 * 5) * 0.001;
+
+			} 
+		
+		document.getElementById("content").innerHTML = cal.toFixed(1) + "Kcal"; 		
+
+		
 	});
 });
 
@@ -190,6 +210,28 @@ $(function(){
 						<div class="col-md-12" style="margin: auto">
 							<h2 class="mb-3" style="padding-left: 55px;">칼로리 계산기</h2></div>
 						<div class="col-md-3" style="margin: auto">
+							<select class="custom-select select-big mb-3" id="exercise">
+								<option selected="운동">운동 선택</option>
+								<option value="TV시청">TV시청</option>
+								<option value="걷기">걷기</option>
+								<option value="체조">체조</option>
+								<option value="배드민턴">배드민턴</option>
+								<option value="골프">골프</option>
+								<option value="농구">농구</option>
+								<option value="에어로빅">에어로빅</option>
+								<option value="책벅지">책벅지</option>
+								<option value="줌바">줌바</option>
+								<option value="조깅">조깅(빠른걸음)</option>
+								<option value="등산">등산</option>
+								<option value="실내 자전거">실내 자전거</option>
+								<option value="축구">축구</option>
+								<option value="스피닝">스피닝</option>
+								<option value="줄넘기">줄넘기</option>
+								<option value="킥복싱">킥복싱</option>
+								<option value="수영">수영</option>
+								<option value="런닝">런닝</option>
+								<option value="계단오르기">계단오르기</option>
+							</select>
 							 몸무게 <span class="form-group"> 
 							 <input style="margin-top: 10px;" type="text" id="weight" class="form-control" placeholder="kg">
 							 </span>
@@ -200,8 +242,10 @@ $(function(){
 						</div>
 						
 						<div class="col-md-5" style="margin: auto">
-						<p>소모되는 칼로리는 운동강도에 따라 달라질 수 있습니다. <br><br>
+						<p>* 소모되는 칼로리는 운동강도에 따라 달라질 수 있습니다.
 						</p>
+						<p>* 운동별 소모에너지는 평균적인 값으로 계산됩니다.</p>
+						<strong><h5 id="content" style="text-align: center;"></h5></strong>
 						</div>
 					</div>
 				</div>
@@ -215,18 +259,24 @@ $(function(){
 			<div class="row">
 				<!-- Job positions -->
 				<div class="col-md-8">
-					<h2 class="mb-2">Job positions</h2>
-					<p>like what you saw? If you're ready to test your earning potential, join us today and become the latest member of team Wizixo.</p>
+					<h2 class="mb-2">소모에너지</h2>
+					<p>운동의 종류와 시간에 따른 체중별 칼로리 소모량입니다. 평균적인 값에 의해 계산되는 표이므로 개인의 차이에 따라 달라 질 수 있습니다. <br> 
+					(* 50kg - 60kg - 70kg 순으로 소모되는 칼로리)</p>
 					<div class="accordion accordion-line toggle-icon-left toggle-icon-round" id="accordion1">
 						<!-- item -->
 						<div class="accordion-item">
 							<div class="accordion-title">
-								<h6><a data-toggle="collapse" href="#collapse-1">Account manager - technologies</a></h6></div>
+								<h6><a data-toggle="collapse" href="#collapse-1">가벼운 운동</a></h6></div>
 							<div class="collapse show" id="collapse-1" data-parent="#accordion1">
 								<div class="accordion-content">
-									<p class="pt-2"> We are excited about an opportunity we have within the Technologies team in London. We’re on the lookout for an Account Manager to join wizixo top performing team for 2 years in a row! We want to hear from talented and ambitious sales professionals who have a passion for work.</p>
-									<h6 class="mb-2">Location: London</h6>
-									<a class="d-block" href="careers-single.html">Read More</a>
+									<p class="pt-2">
+									산책하기 : 22, 26, 30<br>
+									스트레칭 체조 : 31, 34, 43<br>
+									춤추기 : 34, 41, 48<br>
+									요가 : 21, 25, 29<br>
+									볼링 : 25, 33, 35<br>
+									</p>
+									<h6 class="mb-2">운동 소요 시간 : 10분</h6>
 								</div>
 							</div>
 						</div>
@@ -234,13 +284,20 @@ $(function(){
 						<!-- item -->
 						<div class="accordion-item">
 							<div class="accordion-title">
-								<a class="collapsed" data-toggle="collapse" href="#collapse-2">Recruitment consultant education Sydney</a>
+								<a class="collapsed" data-toggle="collapse" href="#collapse-2">중간정도의 운동</a>
 							</div>
 							<div class="collapse" id="collapse-2" data-parent="#accordion1">
 								<div class="accordion-content">
-									<p class="pt-2"> Do you enjoy a sales environment with little administration? Enjoy using the latest recruitment technology without losing the ‘Human Touch’? Do you want to work for a company who believes in supporting your career and personal growth? Want to work for a division that has a boutique feel. </p>
-									<h6 class="mb-2">Location: Sydney</h6>
-									<a class="d-block" href="careers-single.html">Read More</a>
+									<p class="pt-2">
+									에어로빅 : 42, 52, 59<br>
+									계단 오르내리기 : 48, 58, 68<br>
+									팔 굽혀 펴기 : 32, 42, 49<br>
+									자전거타기 : 37, 44, 52<br>
+									테니스 : 60, 72, 84<br>
+									배드민턴 : 59, 70, 82<br>
+									배구 : 59, 70, 82<br>
+									</p>
+									<h6 class="mb-2">운동 소요 시간 : 10분</h6>
 								</div>
 							</div>
 						</div>
@@ -248,94 +305,24 @@ $(function(){
 						<!-- item -->
 						<div class="accordion-item">
 							<div class="accordion-title">
-								<a class="collapsed" data-toggle="collapse" href="#collapse-3">Senior PHP software developer</a>
+								<a class="collapsed" data-toggle="collapse" href="#collapse-3">힘든 운동</a>
 							</div>
 							<div class="collapse" id="collapse-3" data-parent="#accordion1">
 								<div class="accordion-content">
-									<p class="pt-2"> This is a great opportunity to join a Wizixo start up in the IT industry. We provide a number of services to our clients in both England and Australia. Our services ensures our clients achieves energy efficiencies, accurate reporting whilst saving time. </p>
-									<h6 class="mb-2">Location: Melbourne</h6>
-									<a class="d-block" href="careers-single.html">Read More</a>
-								</div>
-							</div>
-						</div>
-
-						<!-- item -->
-						<div class="accordion-item">
-							<div class="accordion-title">
-								<a class="collapsed" data-toggle="collapse" href="#collapse-4">Digital Marketing Executive</a>
-							</div>
-							<div class="collapse" id="collapse-4" data-parent="#accordion1">
-								<div class="accordion-content">
-									<p class="pt-2"> We provide a number of services to our clients in both England and Australia. Our services ensures our clients achieves energy efficiencies, accurate reporting whilst saving time. This is a great opportunity to join a Wizixo start up in the IT industry.</p>
-									<h6 class="mb-2">Location: New York</h6>
-									<a class="d-block" href="careers-single.html">Read More</a>
-								</div>
-							</div>
-						</div>
-
-						<!-- item -->
-						<div class="accordion-item">
-							<div class="accordion-title">
-								<a class="collapsed" data-toggle="collapse" href="#collapse-6">Engineering Manager - Android Application Infrastructure</a>
-							</div>
-							<div class="collapse" id="collapse-6" data-parent="#accordion1">
-								<div class="accordion-content">
-									<p class="pt-2">Join a Wizixo start up in the IT industry. We provide a number of services to our clients in both England and Australia. Our services ensures our clients achieves energy efficiencies, accurate reporting whilst saving time. </p>
-									<h6 class="mb-2">Location: Los Angeles</h6>
-									<a class="d-block" href="careers-single.html">Read More</a>
+									<p class="pt-2">
+									수영(자유형) : 145, 174, 204<br>
+									수영(접형) : 184, 220, 258<br>
+									농구 : 67, 80, 93<br>
+									윗몸 일으키기 : 72, 86, 101<br>
+									줄넘기 : 75, 89, 104<br>
+									</p>
+									<h6 class="mb-2">운동 소요 시간 : 10분</h6>
 								</div>
 							</div>
 						</div>
 
 					</div>
 				</div>
-				<!-- Sidebar -->
-				<div class="col-md-4 sidebar">
-					<h2>Refine your search</h2>
-					<div class="widget widget-newsletter border-0 p-0">
-						<ul class="list-group border-0 mb-4">
-							<li class="d-flex align-items-center font-weight-bold text-light-gray">Available jobs <span class="badge bg-light badge-pill ml-2">14</span>
-							</li>
-						</ul>
-						<form>
-							<div class="input-group mb-3">
-								<input class="form-control border-radius-right-0 border-right-0" type="text" name="search" placeholder="Search">
-								<span class="input-group-btn">
-								<button type="button" class="btn btn-grad border-radius-left-0 mb-0"><i class="ti-search m-0"></i></button>
-							</span>
-							</div>
-						</form>
-						<select class="custom-select select-big mb-3">
-						<option selected="">All locations</option>
-						<option value="location1">Chicago, US</option>
-						<option value="location2">New York, US</option>
-						<option value="location3">Seattle/Kirkland, US</option>
-						<option value="location4">Los Angles, US</option>
-						<option value="location5">Moscow, Russia</option>
-						<option value="location6">Sydney, Australia</option>
-						<option value="location7">Birmingham, UK</option>
-						<option value="location7">Manchester, UK</option>
-						<option value="location8">Beijing, China</option>
-					</select>
-						<select class="custom-select select-big">
-						<option selected="">All locations</option>
-						<option value="location1">Chicago, US</option>
-						<option value="location2">New York, US</option>
-						<option value="location3">Seattle/Kirkland, US</option>
-						<option value="location4">Los Angles, US</option>
-						<option value="location5">Moscow, Russia</option>
-						<option value="location6">Sydney, Australia</option>
-						<option value="location7">Birmingham, UK</option>
-						<option value="location7">Manchester, UK</option>
-						<option value="location8">Beijing, China</option>
-					</select>
-					</div>
-					<div class="widget bg-light border-0 p-3 border-radius-3">
-						<h4>Have any question? </h4>
-						<p>If you need to send us mail regarding job opportunities, please write to us at <a class="text-primary" href="mailto:contact@example.com">career@wizixo.com</a> for more information.</p> or call us <a class="display-8 text-dark primary-hover" href="#">@(251) 854-6308</a>
-					</div>
-				</div>
-				<!-- Sidebar end-->
 
 			</div>
 		</div>
