@@ -13,6 +13,7 @@ import kr.or.ddit.bis.Subway;
 import kr.or.ddit.member.service.IMemberService;
 import kr.or.ddit.schedule.service.IScheduleService;
 import kr.or.ddit.vo.BusVO;
+import kr.or.ddit.vo.FriendVO;
 import kr.or.ddit.vo.MemberVO;
 import kr.or.ddit.vo.MypillVO;
 import kr.or.ddit.vo.ScheduleListVO;
@@ -126,6 +127,19 @@ public class ScheduleController {
 	
 
 
+	  @RequestMapping("searchFriends")
+	  public ModelAndView searchFriends(String mem_no) throws Exception {
+		  
+		  List<MemberVO> friendsList =  this.service.searchFriends(mem_no);
+		  ModelAndView andView = new ModelAndView();
+		  
+		  andView.addObject("json", friendsList);
+		  // <bean id="jsonConvertView" class="..MappingJackson2JsonView>
+		  andView.setViewName("jsonConvertView");
+		  return andView;
+	  }
+	  
+	  
 	@RequestMapping("viewJson")
 	public ModelAndView idCheck(String mem_no) throws Exception {
 

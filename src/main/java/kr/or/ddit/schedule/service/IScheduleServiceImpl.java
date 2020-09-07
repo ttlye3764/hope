@@ -12,6 +12,7 @@ import kr.or.ddit.member.dao.IMemberDAO;
 import kr.or.ddit.member.dao.IMemberDAOImpl;
 import kr.or.ddit.schedule.dao.IScheduleDAO;
 import kr.or.ddit.vo.BusVO;
+import kr.or.ddit.vo.FriendVO;
 import kr.or.ddit.vo.MemberVO;
 import kr.or.ddit.vo.ScheduleVO;
 
@@ -70,6 +71,11 @@ public class IScheduleServiceImpl implements IScheduleService {
 	@Override
 	public void deleteBus(String bus_index) throws Exception {
 		dao.deleteBus(bus_index);
+	}
+
+	@Override
+	public List<MemberVO> searchFriends(String mem_no) throws Exception {
+		return dao.searchFriends(mem_no);
 	}
 
    /*@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
