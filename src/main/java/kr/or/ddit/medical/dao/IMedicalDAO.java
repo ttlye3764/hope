@@ -18,4 +18,8 @@ public interface IMedicalDAO {
 	public String selectPill_no() throws Exception;
 
 	public void updateMedicalInfo(MypillVO mypillInfo) throws Exception;
+
+	public List<MypillVO> todayMedical(String mem_no)  throws Exception;
+
+	public List<MypillVO> weekMedical(String mem_no) throws Exception;
 }

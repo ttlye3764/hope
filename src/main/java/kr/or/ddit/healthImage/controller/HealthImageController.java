@@ -24,6 +24,7 @@ import kr.or.ddit.healthImage.service.IHealthImageService;
 import kr.or.ddit.healthImageFile.service.IHealthImageFileService;
 import kr.or.ddit.utiles.RolePaginationUtil;
 import kr.or.ddit.utiles.RolePaginationUtil_su;
+import kr.or.ddit.vo.HealthFileVO;
 import kr.or.ddit.vo.HealthImageVO;
 import kr.or.ddit.vo.KnowledgeVO;
 
@@ -83,7 +84,7 @@ public class HealthImageController {
 
 		String totalCount = this.healthImageService.totalCount(params);
 		
-		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount), totalCount);
+		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount), choose);
 	    
 		String startCount = String.valueOf(pagination.getStartCount());
 	    String endCount = String.valueOf(pagination.getEndCount());
@@ -137,8 +138,9 @@ public class HealthImageController {
 		params.put("healthImage_no", healthImage_no);
 		
 		healthInfo = this.healthImageService.healthInfo(params);
+		
 		model.addAttribute("healthInfo", healthInfo);
-
+		
 		return healthInfo;
 	}
 	

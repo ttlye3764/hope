@@ -1,19 +1,21 @@
 package kr.or.ddit.board.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.border.Border;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,15 +23,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddit.board.service.IBoardService;
 import kr.or.ddit.boardfile.service.IBoardFileService;
-import kr.or.ddit.domain.Criteria;
-import kr.or.ddit.domain.PageDTO;
 import kr.or.ddit.utiles.CryptoGenerator;
-import kr.or.ddit.utiles.RolePaginationUtil_pill;
 import kr.or.ddit.utiles.RolePaginationUtil_yun;
 import kr.or.ddit.vo.BoardVO;
 import kr.or.ddit.vo.Board_FileVO;
-import kr.or.ddit.vo.ChatingRoomVO;
-import kr.or.ddit.vo.FileItemVO;
+import kr.or.ddit.vo.Board_ReplyVO;
+import kr.or.ddit.vo.MemberVO;
 
 @Controller
 @RequestMapping("/user/board/")
@@ -43,6 +42,10 @@ public class BoardController {
 	private ObjectMapper mapper;
 	@Autowired
 	private CryptoGenerator cryptoGen;
+	
+	//파일경로
+	public String FILE_PATH = "D:\\temp\\files\\";
+	
 	
 	//컨트롤러에서의 리턴타입
 	
@@ -73,7 +76,7 @@ public class BoardController {
 	      }
 		
 		System.out.println(bd_division);
-		
+
 		String board_division_name = "";
 
 		switch(bd_division){
@@ -96,13 +99,13 @@ public class BoardController {
 		params.put("search_keyword",search_keyword);
 		params.put("search_keycode",search_keycode);
 		
-		
-	    
 		System.out.println(search_keyword);
 		System.out.println(search_keycode);
 	    String totalCount = this.boardService.totalCount(params);
 	    
-	    pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount),bd_division, search_keyword, search_keycode);
+	    pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount),bd_division, search_keycode, search_keyword);
+	    
+
 	    String startCount = String.valueOf(pagination.getStartCount());
 	    String endCount = String.valueOf(pagination.getEndCount());
 	    params.put("startCount", startCount);
@@ -140,6 +143,8 @@ public class BoardController {
 			
 			System.out.println(bd_division);
 			
+			System.out.println("bd_division : " + bd_division);
+			
 			String board_division_name = "";
 
 			switch(bd_division){
@@ -166,7 +171,8 @@ public class BoardController {
 		    		
 		    String totalCount = this.boardService.totalCount(params);
 		    
-		    pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount),bd_division, search_keyword, search_keycode);
+		    pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount),bd_division, search_keycode, search_keyword);
+		    
 		    String startCount = String.valueOf(pagination.getStartCount());
 		    String endCount = String.valueOf(pagination.getEndCount());
 		    params.put("startCount", startCount);
@@ -199,9 +205,15 @@ public class BoardController {
 		
 		params.put("bd_no", bd_no);
 		boardInfo = this.boardService.boardInfo(params);
+		List<Board_ReplyVO> replyList = new ArrayList<Board_ReplyVO>();
+		replyList = boardService.selectBoardReply(bd_no);
+		modelMap.addAttribute("replyList", replyList);
+		
+		System.out.println(boardInfo);
 		
 		boardService.countHit(bd_no);
 		modelMap.addAttribute("bd_division", bd_division);
+		//JSP...에
 		modelMap.addAttribute("boardInfo", boardInfo);
 		if(rnum==null) {
 			rnum = "nu";
@@ -266,19 +278,73 @@ public class BoardController {
 		return andView;
 	}
 	
+	
+	
+	
 	// 파일 다운로드
-		@RequestMapping("fileDownload")
-		public ModelAndView fileDownload(Map<String, String> params, ModelAndView andView)
-				throws Exception {
-			
-			Board_FileVO fileitemInfo = this.boardfileService.fileitemInfo(params);
+	@RequestMapping("fileDownload")
+	public void  fileDownload(String fileName, String fileNo, String fileBdNo,
+			ModelAndView andView, HttpServletResponse response, HttpServletRequest request)
+			throws Exception {
+		
+		// 다운받는 실제 경로
+		String filePath = FILE_PATH + fileName;
+						// D:\temp\files + 0901 저녁fec211c71a844ab0904bce919e027d96.zip
+						// D:\temp\files\8a4244942ee04f618a2413952fce0509.jpg
+		String downFileName = "";
+		
+		Board_FileVO boardFileVO = boardService.selectBoardFileInfo(fileNo, fileBdNo);
 
-			andView.addObject("fileitemInfo", fileitemInfo);
-			andView.setViewName("fileDownloadView");
+		downFileName = boardFileVO.getFile_name();
+		response.setContentType("application/octet-stream");
+		response.setHeader("Accept-Ranges", "bytes");
 
-			return andView;
+		// 다운로드 시 파일명 브라우저 별 한글 깨침 처리
+		String userAgent = request.getHeader("User-Agent");
 
+		boolean ie = (userAgent.indexOf("MSIE") > -1 || userAgent.indexOf("Trident") > -1);
+
+		if(ie) {
+			downFileName = URLEncoder.encode( downFileName, "utf-8" ).replaceAll("\\+", "%20");
+		} else {
+			downFileName = new String( String.valueOf(downFileName).getBytes("utf-8"), "iso-8859-1");
 		}
+
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + downFileName + "\";");
+		response.setHeader("Content-Transfer-Encoding", "binary");
+		
+		
+		// 파일다운로드 
+		File file = new File(filePath);
+		FileInputStream fileIn = new FileInputStream(file);
+		ServletOutputStream out = response.getOutputStream();
+		 
+		byte[] outputByte = new byte[4096];
+		while(fileIn.read(outputByte, 0, 4096) != -1)
+		{
+			out.write(outputByte, 0, 4096);
+		}
+		fileIn.close();
+		out.flush();
+		out.close();
+	}
+	
+	@RequestMapping("insertBoardReply")
+	public void insertBoardReply(HttpSession session, String reContent, String bdNo) {
+		// 들어온거 콘솔에 확인하기 
+//		System.out.println(reContent);
+//		System.out.println(bdNo);
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		
+		String mem_id = memberInfo.getMem_nickname();
+		
+		
+		boardService.insertBoardReply(reContent, bdNo, mem_id);
+	}
+	
+	
+	
+	
 	
 }
 

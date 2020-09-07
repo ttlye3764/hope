@@ -62,7 +62,7 @@ public class RolePaginationUtil_yun {
 		this.pagingHtmls.append("<div class='text-center'>");
 		this.pagingHtmls.append("<ul class='pagination justify-content-center'>");
 		
-		String requestURI ="/lastProject/user/board/boardList.do";;
+		String requestURI ="/lastProject/user/board/boardList.do";
 		// 이전|1|2|3|4|5|다음
 		// 이전
 		if((this.currentPage - 1) == 0){

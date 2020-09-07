@@ -2,9 +2,6 @@ package kr.or.ddit.utiles;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.stereotype.Component;
-
-
 public class RolePaginationUtil_su {
 	private int currentPage; 		// 현재 페이지
 	private int totalCount;			// 전체 게시글 갯수

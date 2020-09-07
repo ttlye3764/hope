@@ -8,6 +8,13 @@
 		ORDER BY file_no
 	</select>
 	
+	<select id="boardfileList2" resultType="board_fileVO">
+		SELECT *
+		FROM BOARD_FILE
+		WHERE FILE_BD_NO = #{file_bd_no}
+		ORDER BY file_no
+	</select>
+	
 	<insert id="insertFile" parameterType="board_fileVO">
 		INSERT INTO
 		BOARD_FILE( FILE_NO, FILE_BD_NO, FILE_NAME, 
@@ -21,13 +28,13 @@
 	<select id="fileitemInfo" resultType="board_fileVO" parameterType="map">
 		SELECT *
 		FROM BOARD_FILE
-		WHERE BD_NO = #{bd_no}
+		WHERE FILE_BD_NO = #{file_bd_no}
 	</select>
 	
 	<delete id="deleteFile" parameterType="String">
 		DELETE
 		FROM BOARD_FILE
-		WHERE BD_NO = #{BD_NO}
+		WHERE FILE_BD_NO = #{file_bd_no}
 	</delete>
 	
 	<update id="updateFile" parameterType="board_fileVO">
@@ -36,7 +43,7 @@
 		    FILE_SAVE_NAME = #{file_save_name},
 		    FILE_TYPE = #{file_type},
 		    FILE_SIZE = #{file_size}
-		WHERE BD_NO = #{bd_no}    
+		WHERE FILE_BD_NO = #{file_bd_no}    
 	</update>
 	
 	

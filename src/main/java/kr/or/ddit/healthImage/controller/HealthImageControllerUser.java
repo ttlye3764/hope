@@ -121,6 +121,12 @@ public class HealthImageControllerUser {
 	public void healthImageWeight() {
 		
 	}
+	
+	// 칼로리
+	@RequestMapping("healthImageCal")
+	public void healthImageCal() {
+		
+	}
 		
 	// 운동법 상세
 	@RequestMapping("healthImageView")

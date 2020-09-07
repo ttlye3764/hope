@@ -8,6 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.or.ddit.domain.Criteria;
 
 import kr.or.ddit.vo.BoardVO;
+import kr.or.ddit.vo.Board_FileVO;
+import kr.or.ddit.vo.Board_ReplyVO;
 
 public interface IBoardDao {
 	//테이블 조회
@@ -29,5 +31,13 @@ public interface IBoardDao {
 	
 	// 파일 시퀀스 
 	public String fileSequence() throws Exception;
+	
+	// 게시판 파일정보 조회
+	public Board_FileVO selectBoardFileInfo(Map<String, Object> params);
+	
+	// 댓글 등록
+	public void insertBoardReply(Map<String, Object> params);
+	// 댓글 조회 
+	public List<Board_ReplyVO> selectBoardReply(String bd_no);
 	
 }

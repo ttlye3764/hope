@@ -18,11 +18,12 @@
 			<result property="mem_no" column="mem_no"/>
 			<result property="rnum" column="rnum"/>
 			<result property="bd_writer" column="bd_writer"/>
-			<collection property="items" column="bd_no" select="board_file.board_fileList" ofType="board_fileVO" javaType="java.util.List"></collection>
+			<collection property="items" column="bd_no" select="boardfile.boardfileList" ofType="board_fileVO" javaType="java.util.List"></collection>
+			<collection property="items2" column="bd_no" select="boardfile.boardfileList2" ofType="board_fileVO" javaType="java.util.List"></collection>
     </resultMap>
-
-	
-	<select id="boardInfo" parameterType="map" resultType="boardVO">
+    
+ 
+	<select id="boardInfo" parameterType="map" resultType="boardVO" resultMap="boardResultMap">
 		SELECT *
 		FROM BOARD
 		WHERE BD_NO = #{bd_no}
@@ -52,7 +53,7 @@
 				</if>
 	</select>
 	
-	<select id="myboardList" resultType="boardVO" parameterType="map">
+	<select id="myboardList" resultType="boardVO" parameterType="map" resultMap="boardResultMap">
 		SELECT *
 		FROM BOARD
 		WHERE BD_DIVISION = #{bd_division}
@@ -134,6 +135,15 @@
 		UPDATE BOARD SET BD_HIT = BD_HIT+1
 		WHERE BD_NO = #{bd_no}
 	</update>
+	
+	<!-- 게시판 파일정보 조회 -->
+	<select id="selectBoardFileInfo" parameterType="map" resultType="board_fileVO">
+		SELECT * 
+		FROM BOARD_FILE
+		WHERE FILE_NO = #{fileNo}
+		AND FILE_BD_NO = #{fileBdNo}
+	</select>
+	
 	
 	
 

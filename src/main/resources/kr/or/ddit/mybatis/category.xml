@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="category">
+	<insert id="insertCategory" parameterType="map">
+		INSERT INTO CATEGORY(CATEGORY_NO,
+							MEM_NO,
+							CT_NAME
+							)
+							values(FRIEND_SEQ.NEXTVAL,
+							#{mem_no},
+							#{ct_name}
+							)
+	</insert>
+	
+	<select id="selectCategory" parameterType="String" resultType="String">
+		SELECT CATEGORY_NO
+		FROM CATEGORY
+		WHERE MEM_NO = #{mem_no}
+	</select>
+	
+	<update id="updateCategory" parameterType="map">
+		UPDATE CATEGORY
+		SET
+		CT_NAME = #{ct_name}
+		WHERE MEM_NO = #{mem_no}
+	</update>
+</mapper>    

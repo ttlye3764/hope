@@ -41,19 +41,14 @@
 	$(function() {
 		
 	});
-	function chk() {
-			$.ajax({
-						type : 'POST',
-						url : '${pageContext.request.contextPath}/user/member/deleteMember.do',
-						dataType : 'json',
-						data : {
-							mem_id : '${LOGIN_MEMBERINFO.mem_id}'
-						},
-						success : function(result) {
-							alert(result.json);
-							LogOut();
-						}
-					});
+	function save() {
+		var checkBoxArr = [];
+		
+		$("input[name=check]:checked").each(function(i){
+			checkBoxArr.push($(this).val());
+		});
+
+		$(location).attr('href','${pageContext.request.contextPath}/user/knowledge/savecategory.do?checkBoxArr='+checkBoxArr);
 	}
 	
 	function settingCategory() {
@@ -98,8 +93,11 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<input type="checkbox">안녕
-					<input type="checkbox">안녕2
+					<input type="checkbox" name="check" value="안녕1">안녕1
+					<input type="checkbox" name="check" value="안녕2">안녕2
+					<input type="checkbox" name="check" value="안녕3">안녕3
+					<input type="checkbox" name="check" value="안녕4">안녕4
+					<input type="checkbox" name="check" value="안녕5">안녕5
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" onclick="save()">저장</button>

@@ -33,7 +33,7 @@
 				<!-- portfolio details -->
 				<div class="col-md-4">
 					<div class="sticky-element">
-						<h2>Register my Bus</h2>
+						<h2>Register favorite Bus</h2>
 						<p>내가 즐겨타는 버스를 등록해주세요~! </p>
 						       Region : <select name="citycode" id="citycode">
 									<option value="">지역선택</option>
@@ -116,9 +116,41 @@
 				</div>
 				
 			</div>
-
+			<br>
+			<br>
+			<div class="col-md-6">
+					<h4 class="mb-4">Subway stations around me</h4> 내 주변 지하철역
+					<div id="map1" style="width:1100px;height:500px;"></div>
+		    </div>
+			<br>
+			<br>
+			<br>
 			
+			<div class="row mb-4">		
+				<div class="col-md-6">
+						<div class="sticky-element" >
+						<h2>Search your favorite Subway</h2>
+							<p>내가 즐겨타는 지하철을 검색해보세요~! </p>
+							<input type="text" id="subwayname"></input>  <button type="button" id="subwaySearch">검색</button>
+						</div>
+						<div id="subwayList"  style="overflow: auto; overflow-x:hidden; width: 500px; height:500px;">
+							<table id="subwayTable" class="table table-striped dt-responsive nowrap w-100">
+								
+						</table>
+						</div>
+				</div>
+				
+						<div class="col-md-3" style="overflow: auto; overflow-x:hidden; width: 500px; height: 500px;">
+							<table id="timeTable" class="table table-striped dt-responsive nowrap w-100" style="text-align: center;">
+							</table>
+						</div>
+						<div class="col-md-3" style="overflow: auto; overflow-x:hidden; width: 500px; height: 500px;">
+							<table id="timeTableU" class="table table-striped dt-responsive nowrap w-100" style="text-align: center;">
+							</table>
+						</div>
 		</div>
+		
+			
 		<!-- portfolio End -->
 	</section>
 
@@ -128,7 +160,7 @@
 
 
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=695a00dbf1560fd30746e2be14b3f633"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=695a00dbf1560fd30746e2be14b3f633&libraries=services"></script>
 <script>
 var citycode;
 var positions = [];
@@ -337,10 +369,179 @@ navigator.geolocation.getCurrentPosition(function(pos) {
 		 location.reload();
           
       })//등록 이벤트
+
+
+
+
+
+
+
+
+
+
+
+
+
+   /* 지하철역 지도 start*/
+
+
+   // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+      var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+
+      var mapContainer1 = document.getElementById('map1'), // 지도를 표시할 div 
+          mapOption = {
+              center: new kakao.maps.LatLng(latitude, longitude), // 지도의 중심좌표
+              level: 5 // 지도의 확대 레벨
+          };  
+
+      // 지도를 생성합니다    
+      var map1 = new kakao.maps.Map(mapContainer1, mapOption); 
+
+      // 장소 검색 객체를 생성합니다
+      var ps = new kakao.maps.services.Places(map1); 
+
+      // 카테고리로 지하철역을 검색합니다
+      ps.categorySearch('SW8', placesSearchCB, {useMapBounds:true}); 
+
+      // 키워드 검색 완료 시 호출되는 콜백함수 입니다
+      function placesSearchCB (data, status, pagination) {
+          if (status === kakao.maps.services.Status.OK) {
+              for (var i=0; i<data.length; i++) {
+                  displayMarker(data[i]);    
+              }       
+          }
+      }
+
+      // 지도에 마커를 표시하는 함수입니다
+      function displayMarker(place) {
+          // 마커를 생성하고 지도에 표시합니다
+          var marker = new kakao.maps.Marker({
+              map: map1,
+              position: new kakao.maps.LatLng(place.y, place.x) 
+          });
+
+          // 마커에 클릭이벤트를 등록합니다
+          kakao.maps.event.addListener(marker, 'click', function() {
+              // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+              infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+              infowindow.open(map1, marker);
+              
+
+          });
+
+          
+      }
+
+
+
+      /* 지하철역 지도 end*/
+      
+
+      $('#subwaySearch').click(function(){
+    	  $('#subwayTable').empty();
+    	  var count = 1;
+          var subwayname = $('#subwayname').val();
+    	  $.ajax({
+              async    : false,
+              url     : '${pageContext.request.contextPath}/user/schedule/subwaySearch.do',
+              type    : 'post',
+              data : {'name':subwayname},
+              dataType: 'json',
+              success : function(Result) {        
+	              console.log(Result);
+	              if(Result.response.body.totalCount>1){
+		              $('#subwayTable').append('<thead><tr><th>지하철 노선 이름</th><th>지하철 역 이름</th><th style="display: none">지하철아이디</th></tr></thead>');
+		              $('#subwayTable').append('<tbody>');	
+
+		              for(var i=0; i<Result.response.body.totalCount; i++){
+		              	$('#subwayTable').append(
+				              	'<tr><td id="'+Result.response.body.items.item[i].subwayStationId+'"onclick="subwayRouteName(this.id)";>'+Result.response.body.items.item[i].subwayRouteName+'</td><td>'+Result.response.body.items.item[i].subwayStationName+'</td><td style="display: none">'+Result.response.body.items.item[i].subwayStationId+'</td></tr>');
+				      }
+		              $('#subwayTable').append('</tbody>');
+		          }else if(Result.response.body.totalCount==1){
+		              $('#subwayTable').append('<thead><tr><th>지하철 노선 이름</th><th>지하철 역 이름</th><th style="display: none">지하철아이디</th></tr></thead>');
+		              	$('#subwayTable').append('<tbody><tr><td id="'+Result.response.body.items.item.subwayStationId+'"onclick="subwayRouteName(this.id);">'+Result.response.body.items.item.subwayRouteName+'</td><td>'+Result.response.body.items.item.subwayStationName+'</td><td style="display: none">'+Result.response.body.items.item.subwayStationId+'</td></tr></tbody>');
+			      }
+              },
+              
+         }); //지하철아이디 얻어오기(subwayStationId)
+      });
+
       
    });
 
+function subwayRouteName(e){
+	var numOfRows = 10;
+	 $.ajax({
+         async    : false,
+         url     : '${pageContext.request.contextPath}/user/schedule/subwayTime.do',
+         type    : 'post',
+         data : {'subwayStationId':e},
+         dataType: 'json',
+         success : function(Result) {  
+        	 numOfRows = Result.response.body.totalCount;      
+             console.log(numOfRows); // 총 갯수
+         },
+         
+    }); //지하철 시간 알아오기
 
+    
+     $('#timeTable').empty();
+	 $.ajax({
+         async    : false,
+         url     : '${pageContext.request.contextPath}/user/schedule/subwayTimeList.do',
+         type    : 'post',
+         data : {'subwayStationId':e, 'numOfRows':numOfRows},
+         dataType: 'json',
+         success : function(Result) {        
+             console.log(Result);
+            	  $('#timeTable').append('<thead><tr><th>상행도착시간</th></tr></thead>');
+            	 $('#timeTable').append('<tbody>');
+             for(var i=0; i<Result.response.body.totalCount; i++){
+            	 $('#timeTable').append('<tr><td>'+Result.response.body.items.item[i].arrTime+'</td></tr>');
+                 }
+            	 $('#timeTable').append('<tbody>'); 
+            
+         },
+         
+    }); //지하철 시간 알아오기
+    
+	var numOfRows = 10;
+	 $.ajax({
+         async    : false,
+         url     : '${pageContext.request.contextPath}/user/schedule/subwayTimeU.do',
+         type    : 'post',
+         data : {'subwayStationId':e},
+         dataType: 'json',
+         success : function(Result) {  
+        	 numOfRows = Result.response.body.totalCount;      
+             console.log(numOfRows); // 총 갯수
+         },
+         
+    }); //지하철 시간 알아오기(하행)
+    
+     $('#timeTableU').empty();
+	 $.ajax({
+         async    : false,
+         url     : '${pageContext.request.contextPath}/user/schedule/subwayTimeListU.do',
+         type    : 'post',
+         data : {'subwayStationId':e, 'numOfRows':numOfRows},
+         dataType: 'json',
+         success : function(Result) {        
+             console.log(Result);
+            	  $('#timeTableU').append('<thead><tr><th>하행도착시간</th></tr></thead>');
+            	 $('#timeTableU').append('<tbody>');
+             for(var i=0; i<Result.response.body.totalCount; i++){
+            	 $('#timeTableU').append('<tr><td>'+Result.response.body.items.item[i].arrTime+'</td></tr>');
+                 }
+            	 $('#timeTableU').append('<tbody>'); 
+            
+         },
+         
+    }); //지하철 시간 알아오기
+	    
+}
+	
    function deletebtn(n){
 	   var bus_index = n;
 
@@ -492,6 +693,9 @@ navigator.geolocation.getCurrentPosition(function(pos) {
 		        },
 		   }); //정류소목록 불러오기
 
+
+		// var timer = setInterval(function(){
+		  $('#information').html("");
 		   var html;
 		   $.ajax({
 			   	 async    : false,
@@ -513,6 +717,9 @@ navigator.geolocation.getCurrentPosition(function(pos) {
 					    }
 			        },
 			   }); //정류소목록 불러오기
+
+
+			// },1000)
 	   
    }
 

@@ -50,6 +50,18 @@ public class IMedicalDAOImpl implements IMedicalDAO {
 	public void updateMedicalInfo(MypillVO mypillInfo) throws Exception {
 		client.update("medical.updateMedicalInfo", mypillInfo);
 	}
+
+
+	@Override
+	public List<MypillVO> todayMedical(String mem_no) throws Exception {
+		return client.selectList("medical.todayMedical",mem_no); 
+	}
+
+
+	@Override
+	public List<MypillVO> weekMedical(String mem_no) throws Exception {
+		return client.selectList("medical.weekMedical",mem_no); 
+	}
 	
 		
 	

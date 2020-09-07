@@ -53,6 +53,13 @@
       WHERE MEM_NO = #{mem_no}
    </select>
    
+   <select id="searchFriends" resultType="memberVO" parameterType="String">
+   	select A.* from
+	(select * from member)A,
+	(select * from friend where mem_no=#{mem_no})B
+	WHERE A.MEM_NO = B.FRI_MEM_NO
+   </select>
+   
    <select id="bisList" resultType="busVO" parameterType="String">
       SELECT *
       FROM BUS

@@ -47,8 +47,25 @@ public class MedicalController {
 
 	@RequestMapping("viewJson")
 	public ModelAndView medicalList(String mem_no) throws Exception {
-
+System.out.println(mem_no);
 		List<MypillVO> medicalList = this.medicalService.medicalList(mem_no);
+		ModelAndView andView = new ModelAndView();
+		andView.addObject("json", medicalList);
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
+	
+	@RequestMapping("todayMedical")
+	public ModelAndView todayMedical(String mem_no) throws Exception {
+		List<MypillVO> medicalList = this.medicalService.todayMedical(mem_no);
+		ModelAndView andView = new ModelAndView();
+		andView.addObject("json", medicalList);
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
+	@RequestMapping("weekMedical")
+	public ModelAndView weekMedical(String mem_no) throws Exception {
+		List<MypillVO> medicalList = this.medicalService.weekMedical(mem_no);
 		ModelAndView andView = new ModelAndView();
 		andView.addObject("json", medicalList);
 		andView.setViewName("jsonConvertView");
@@ -70,7 +87,11 @@ public class MedicalController {
 		MypillFileVO medicalImg = this.medicalFileService.selectImg(pill_no);
 		ModelAndView andView = new ModelAndView();
 		andView.addObject("json", medicalInfo);
-		andView.addObject("json2", medicalImg);
+		if(medicalImg == null) {
+			andView.addObject("json2", null);
+		}else {
+			andView.addObject("json2", medicalImg);
+		}
 		andView.setViewName("jsonConvertView");
 		return andView;
 	}
@@ -133,6 +154,36 @@ public class MedicalController {
 	@RequestMapping("medicalForm")
 	public void medicalForm() {
 	}
+	@RequestMapping("medicalMain")
+	public ModelAndView medicalMain(HttpServletRequest request, String currentPage, HashMap params,
+			RolePaginationUtil_pill pagination) throws Exception {
+		if (currentPage == null) {
+			currentPage = "1";
+		}
+
+		String totalCount = pillService.totalCount(params);
+
+		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount));
+
+		String startCount = String.valueOf(pagination.getStartCount());
+
+		String endCount = String.valueOf(pagination.getEndCount());
+
+		params.put("startCount", startCount);
+		params.put("endCount", endCount);
+		
+		List<PillVO> list = pillService.pillList(params);
+
+		ModelAndView andView = new ModelAndView();
+		andView.addObject("pillList", list);
+		andView.addObject("pagination", pagination.getPagingHtmls());
+		andView.setViewName("user/medical/medicalMain");
+		return andView;
+		
+		
+		
+		
+	}
 
 	@RequestMapping("medicalList")
 	public void medicalList() {
@@ -140,12 +191,15 @@ public class MedicalController {
 	@RequestMapping("coronaMain")
 	public void coronaMain() {
 	}
+	@RequestMapping("testmap")
+	public void testmap() {
+	}
 
 	@RequestMapping("insertMedicalInfo")
-	public ModelAndView insertMedicalInfo(ModelAndView andView, MypillVO mypillInfo,
+	public ModelAndView insertMedicalInfo(ModelAndView andView, MypillVO mypillInfo, String mem_no,
 			@RequestParam("files") MultipartFile[] items) throws Exception {
 
-		andView.setViewName("user/medical/medicalListMain");
+		andView.setViewName("user/medical/medicalMain");
 		String start = mypillInfo.getPill_start().concat("T");
 		start = start.concat(mypillInfo.getPill_alerttime());
 		mypillInfo.setPill_start(start);
@@ -154,17 +208,17 @@ public class MedicalController {
 		end = end.concat(mypillInfo.getPill_alerttime());
 		mypillInfo.setPill_end(end);
 
-		mypillInfo.setMem_no("1");
+		mypillInfo.setMem_no(mem_no);
 
 		this.medicalService.insertMedicalInfo(mypillInfo, items);
 		return andView;
 	}
 
 	@RequestMapping("updateMedicalInfo")
-	public ModelAndView updateMedicalInfo(ModelAndView andView, MypillVO mypillInfo,
+	public ModelAndView updateMedicalInfo(ModelAndView andView, MypillVO mypillInfo,String mem_no,
 			@RequestParam("files") MultipartFile[] items) throws Exception {
 
-		andView.setViewName("user/medical/medicalListMain");
+		andView.setViewName("user/medical/medicalMain");
 		String start = mypillInfo.getPill_start().concat("T");
 		start = start.concat(mypillInfo.getPill_alerttime());
 		mypillInfo.setPill_start(start);
@@ -173,15 +227,15 @@ public class MedicalController {
 		end = end.concat(mypillInfo.getPill_alerttime());
 		mypillInfo.setPill_end(end);
 
-		mypillInfo.setMem_no("1");
+		mypillInfo.setMem_no(mem_no);
 
 		this.medicalService.updateMedicalInfo(mypillInfo, items);
 		return andView;
 	}
 
 	@RequestMapping("deleteMedicalInfo")
-	public ModelAndView deleteMedicalInfo(ModelAndView andView, String pill_no) throws Exception {
-		andView.setViewName("user/medical/medicalListMain");
+	public ModelAndView deleteMedicalInfo(ModelAndView andView, String pill_no, String mem_no) throws Exception {
+		andView.setViewName("user/medical/medicalMain");
 		medicalService.deleteMedicalInfo(pill_no);
 		return andView;
 	}
@@ -274,6 +328,13 @@ public class MedicalController {
 		System.out.println(startdate);
 		System.out.println(enddate);
 		String coronaSidoResult = Corona.corona(startdate,enddate);
+		return coronaSidoResult;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="coronaAgeAPI",produces="text/plain;charset=UTF-8")
+	public String coronaAgeAPI(String startdate, String enddate) throws Exception {
+		String coronaSidoResult = Corona_age.Corona_age(startdate, enddate);
 		return coronaSidoResult;
 	}
 

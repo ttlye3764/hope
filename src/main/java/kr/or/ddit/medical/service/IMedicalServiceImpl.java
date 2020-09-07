@@ -61,5 +61,15 @@ public class IMedicalServiceImpl implements IMedicalService {
 		medicalFileDAO.updateFileItem(fileItemList);
 	}
 
+	@Override
+	public List<MypillVO> todayMedical(String mem_no) throws Exception {
+		return medicalDAO.todayMedical(mem_no);
+	}
+
+	@Override
+	public List<MypillVO> weekMedical(String mem_no) throws Exception {
+		return medicalDAO.weekMedical(mem_no);
+	}
+
 
 }

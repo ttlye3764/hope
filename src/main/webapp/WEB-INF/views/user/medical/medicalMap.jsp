@@ -16,7 +16,7 @@
 				<!-- Standard Map -->
 				<div class="col-md-6 mb-5">	
 					
-					<input type="text" id="sample5_address" placeholder="주소"> 
+					<!-- <input type="text" id="sample5_address" placeholder="주소"> --> 
 					<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br> 
 				
 					<div id="map" style="border: 1px solid black; width: 800px; height: 800px;">
@@ -122,7 +122,7 @@
 						// 장소 검색 객체를 생성합니다
 						var ps = new kakao.maps.services.Places(map); 
 
-						
+							
 						marker.setMap(map);
 
 						var iwContent ='<div class ="label">내위치</div>';
@@ -197,19 +197,9 @@
 												x = result.x;
 												y = result.y;
 												
-												var circle = new kakao.maps.Circle({
-												    center : new kakao.maps.LatLng(result.y, result.x),  // 원의 중심좌표 입니다 
-												    radius: 1000, // 미터 단위의 원의 반지름입니다 
-												    strokeWeight: 5, // 선의 두께입니다 
-												    strokeColor: '#75B8FA', // 선의 색깔입니다
-												    strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-												    strokeStyle: 'solid', // 선의 스타일 입니다
-												    fillColor: '#CFE7FF', // 채우기 색깔입니다
-												    fillOpacity: 0.3  // 채우기 불투명도 입니다   
-												}); 
+											
 
-												// 지도에 원을 표시합니다 
-												circle.setMap(map); 
+											
 												
 												var coords = new daum.maps.LatLng(result.y, result.x); // 지도를 보여준다.
 												mapContainer.style.display = "block";
@@ -218,9 +208,7 @@
 
 												marker.setPosition(coords);
 
-												// 카테고리로 은행을 검색합니다
-												ps.categorySearch('HP8', placesSearchCB, {useMapBounds:true, useMapCenter:true, radius:1000}); 
-												ps.categorySearch('PM9', placesSearchCB, {useMapBounds:true, useMapCenter:true, radius:1000});
+												
 										}
 									}); 
 							} }).open(); }

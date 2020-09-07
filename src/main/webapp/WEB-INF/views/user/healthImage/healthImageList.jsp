@@ -146,7 +146,7 @@
 									  		<div class="modal-content" id="modals" style="text-align: center;">
 												<div class="modal-header" style="text-align: center;vertical-align: middle">
 													
-													<!-- 동영상일 떄 -->
+													<!-- 동영상일 때 -->
 													<c:set var="fileName" value="${fn:split(healthInfo.items[status.index].file_save_name,'.') }" />
 													  <c:if test="${fileName[1] eq 'mp4'}">  
 															  <video id="myVideo" oncontextmenu="return false;" width="640" controls autoplay="autoplay">
@@ -154,7 +154,7 @@
 															</video>
 													 </c:if> 
 													 
-													<!-- 파일일 떄 --> 
+													<!-- 파일일 때 --> 
 													<c:set var="fileName" value="${fn:split(healthInfo.items[status.index].file_save_name,'.') }" />
 													  <c:if test="${fileName[1] eq 'jpg' || fileName[1] eq 'png'}">    
 														<div class="portfolio-card-header" id="image_container" style="width: 235px; height: 160px;margin-left: 25%">

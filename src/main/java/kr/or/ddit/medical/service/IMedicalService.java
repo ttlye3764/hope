@@ -20,6 +20,10 @@ public interface IMedicalService {
 	public MypillVO medicalInfo(String pill_no) throws Exception;
 
 	public void updateMedicalInfo(MypillVO mypillInfo, MultipartFile[] items) throws Exception;
+
+	public List<MypillVO> todayMedical(String mem_no) throws Exception;
+
+	public List<MypillVO> weekMedical(String mem_no)throws Exception;
 	
 	
 

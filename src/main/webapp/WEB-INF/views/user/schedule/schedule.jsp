@@ -88,17 +88,17 @@
                   <input type="hidden" name="mem_no">
                   				
 				  <div>
-					  <label for="name">공유할 아이디:</label>
-					  <input class="form-control" type="text" id="id" placeholder="Enter a Id" autocomplete="off">
-					  <br> 
-					  <button id="btnAdd">Add</button>
+<!-- 					  <label for="name">공유할 아이디:</label> -->
+<!-- 					    <input class="form-control" type="text" id="id" placeholder="Enter a Id" autocomplete="off"> -->
+<!-- 					  <br>  -->
+<!-- 					   <button id="btnAdd">Add</button>  -->
 			      </div>
 					  <br>
-					  <label for="list">아이디 리스트:</label>
+					  <label for="list">공유할 친구 리스트:</label>
 					  <select class="form-control" id="list" name="list" multiple  style="width:300px;height:100px;">
 					  </select>
 					  <br> 
-					  <button id="btnRemove">삭제</button>
+<!-- 					  <button id="btnRemove">삭제</button> -->
 				  </div>    
 
                   <label>달력 표시 색 설정</label><div><input type="color" id="s_color" name="s_color"></div>
@@ -186,8 +186,8 @@
 <script>
 
 /*---------------------------------- 공유아이디 ----------------------------------- */
-const btnAdd = document.querySelector('#btnAdd');
-const btnRemove = document.querySelector('#btnRemove');
+//const btnAdd = document.querySelector('#btnAdd');
+//const btnRemove = document.querySelector('#btnRemove');
 const sb = document.querySelector('#list');
 const id = document.querySelector('#id');
 var name;
@@ -197,24 +197,22 @@ $(function(){
 	$('#regist').click(function(){
 	         var shareId = $("#list option:selected").text(); 
          var array = shareId.split(" "); //배열로 담기
-         var memNo = [];//memNo를 담을 배열 선언
          array.pop(); // 뒤에 하나 지우기
-         array.push('${LOGIN_MEMBERINFO.mem_id}'); // 작성자 mem_id
+         array.push('${LOGIN_MEMBERINFO.mem_name}'); // 작성자 mem_name
+         array.push('${LOGIN_MEMBERINFO.mem_id}'); // 작성자 mem_no
          var schedule = new Object();
 		   var arrSchedule = new Array();
-			 for(var i=0; i<array.length; i++){ //아이디 갯수만큼 반복
-				$.ajax({
+			 for(var i=1; i<=array.length; i+=2){ //아이디 갯수만큼 반복
+				 $.ajax({
 				   	   url     : '${pageContext.request.contextPath}/user/schedule/searchId.do',
 				   	   async : false,
 				        type    : 'post',
 				        dataType: 'json',
 				        data : {'mem_id':array[i]},
 				        success : function(result) {
-					      
-				        	memNo.push(result.memberInfo.mem_no); //memNo라는 배열에 담았다.
-
-								schedule = new Object();
-								schedule.mem_no = memNo[i];
+					        console.log(result.memberInfo.mem_no); 
+							    schedule = new Object();
+								schedule.mem_no = result.memberInfo.mem_no;
 								schedule.s_memo = $('#regist-modal [name="s_memo"]').val();
 								schedule.s_startdate = $('#regist-modal [name="s_startdate"]').val();
 								schedule.s_enddate = $('#regist-modal [name="s_enddate"]').val();
@@ -223,8 +221,8 @@ $(function(){
 						         }
 						        schedule.s_color = $('#regist-modal [name="s_color"]').val();
 						        arrSchedule.push(schedule);
-						        $('#regist-modal [name="mem_no"]').val(arrSchedule[i].mem_no);
-				        }
+						        $('#regist-modal [name="mem_no"]').val(array[i]); 
+				         }
 				  	}); 
 			  }
 
@@ -246,50 +244,50 @@ $(function(){
        return true;
    });  //서브밋
 })
-//add selected option
-btnAdd.onclick = (e) => {
-    e.preventDefault();
-     $.ajax({
-   	   url     : '${pageContext.request.contextPath}/user/schedule/searchId.do',
-        type    : 'post',
-        dataType: 'json',
-        data : {'mem_id':id.value},
-        success : function(result) {
-	            if(result.memberInfo==null){
-					alert("존재하지 않는 아이디 입니다.");
-	            }
-	            else{
-		            alert(result.memberInfo.mem_name+"님 공유 목록에 추가하였습니다.");
-	   	    		const option = new Option(result.memberInfo.mem_id+' ', result.memberInfo.mem_id+' ');
-	   	    		sb.add(option, undefined);
-		        }
-        },
-        		error : function(request,status,error){
-				alert("에러입니다.");
-        }
- 	}); 
-    name.value = '';
-};
+// //add selected option
+// btnAdd.onclick = (e) => {
+//     e.preventDefault();
+//      $.ajax({
+//    	   url     : '${pageContext.request.contextPath}/user/schedule/searchId.do',
+//         type    : 'post',
+//         dataType: 'json',
+//         data : {'mem_id':id.value},
+//         success : function(result) {
+// 	            if(result.memberInfo==null){
+// 					alert("존재하지 않는 아이디 입니다.");
+// 	            }
+// 	            else{
+// 		            alert(result.memberInfo.mem_name+"님 공유 목록에 추가하였습니다.");
+// 	   	    		const option = new Option(result.memberInfo.mem_id+' ', result.memberInfo.mem_id+' ');
+// 	   	    		sb.add(option, undefined);
+// 		        }
+//         },
+//         		error : function(request,status,error){
+// 				alert("에러입니다.");
+//         }
+//  	}); 
+//     name.value = '';
+// };
 
-// remove selected option
-btnRemove.onclick = (e) => {
-    e.preventDefault();
+// // remove selected option
+// btnRemove.onclick = (e) => {
+//     e.preventDefault();
 
-    // save the selected option
-    let selected = [];
+//     // save the selected option
+//     let selected = [];
 
-    for (let i = 0; i < sb.options.length; i++) {
-        selected[i] = sb.options[i].selected;
-    }
+//     for (let i = 0; i < sb.options.length; i++) {
+//         selected[i] = sb.options[i].selected;
+//     }
 
-    // remove all selected option
-    let index = sb.options.length;
-    while (index--) {
-        if (selected[index]) {
-            sb.remove(index);
-        }
-    }
-};
+//     // remove all selected option
+//     let index = sb.options.length;
+//     while (index--) {
+//         if (selected[index]) {
+//             sb.remove(index);
+//         }
+//     }
+// };
 /*---------------------------------- 공유아이디 ----------------------------------- */
 
 
@@ -382,13 +380,29 @@ function setCalendar(data){
           },
           aspectRatio: 2,
           dateClick: function(info) {
+              
           $("#regist-modal").modal("show"); //모달창 띄우기
-        	  
-        	 
+ 
        },//클릭
        events:(jsonData)
        
      });//캘린더
+
+     $.ajax({
+    	 url     : '${pageContext.request.contextPath}/user/schedule/searchFriends.do',
+         type    : 'post',
+         dataType: 'json',
+         data : {'mem_no':${LOGIN_MEMBERINFO.mem_no}},
+         success : function(result) {
+				console.log(result);
+	    		 for(var i=0; i<result.json.length; i++){
+	    			const option = new Option(result.json[i].mem_name+' '+result.json[i].mem_id+' ');
+	    		    sb.add(option, undefined);
+	 	   	     }
+         }
+	});
+
+  	
      calendar.render();
 }
 

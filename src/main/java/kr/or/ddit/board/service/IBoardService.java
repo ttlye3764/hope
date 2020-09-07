@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.ddit.vo.BoardVO;
+import kr.or.ddit.vo.Board_FileVO;
+import kr.or.ddit.vo.Board_ReplyVO;
 
 public interface IBoardService {
 		//테이블 조회
@@ -24,6 +26,16 @@ public interface IBoardService {
 		
 		// 조회수 증가
 		public void countHit(String bd_no) throws Exception;
+		
+		// 게시판 파일정보 조회
+		public Board_FileVO selectBoardFileInfo(String fileNo, String fileBdNo);
+		
+		// 게시판 댓글 등록
+		public void insertBoardReply(String reContent, String bdNo, String mem_id);
+		// 게시판 댓글 조회
+		public List<Board_ReplyVO> selectBoardReply(String bd_no);
+		
+		
 
 
 
