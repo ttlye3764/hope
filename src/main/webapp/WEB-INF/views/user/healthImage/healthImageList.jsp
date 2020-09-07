@@ -26,11 +26,13 @@
 </head>
 <body>
 
-<div class="innerpage-banner center bg-overlay-dark-7 py-7" style="background:url(assets/images/bg/04.jpg) no-repeat; background-size:cover; background-position: center center;">
+<div class="innerpage-banner center bg-overlay-dark-7 py-7" 
+	style="background:url(${pageContext.request.contextPath }/resources/template/assets/images/bg/04.jpg) no-repeat; background-size:cover; 
+		background-position: center center;">
 		<div class="container">
 			<div class="row all-text-white">
 				<div class="col-md-12 align-self-center">
-					<h1 class="innerpage-title">Health Management</h1>
+					<h1 class="innerpage-title">Health</h1>
 					<h6 class="subtitle">Show your awesome work in Health style</h6>
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
@@ -200,12 +202,11 @@
 													<form name="file" method="post" enctype="multipart/form-data">
 														<div class="form-group">
 															<label for="exampleFormControlFile1">인바디 파일을 넣어주세요.</label>
-															<input type="file" name="files" 
-															class="form-control-file" id="file" onchange="setThumbnail(event);">
+															<input type="file" name="files" class="form-control-file" id="file" onchange="setThumbnail(event);">
 														</div>
 													</form>
 <!-- 												    <div id="image_container" style="width: 230px;height: 160px;"></div> -->
- 													<button type="button" class="btn btn-light mb-2 mr-1" id="" style="margin: 0px 0px 0px 160px;">추천 운동 확인</button>
+ 													<button type="button" class="btn btn-light mb-2 mr-1" id="inbody" style="margin: 0px 0px 0px 160px;">추천 운동 확인</button>
 												</div>
 											</div>
 										</div>
@@ -229,6 +230,7 @@
 	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/jquery/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/popper.js/umd/popper.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 	<!--Vendors-->
 	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/fancybox/js/jquery.fancybox.min.js"></script>
@@ -237,6 +239,7 @@
 
 	<!--Template Functions-->
 	<script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script type="text/javascript">
 
@@ -250,6 +253,18 @@
 				// 전체
 				$('#all').click(function(){
 					$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/healthImageList.do');
+				}); 
+
+				// 인바디 정보 등록
+				$('#inbody').click(function(){
+					var file = $('#file').val();
+					if(file == ""){
+						swal("FILE","파일을 넣어주세요.", "warning");
+
+						return false;
+					}
+					
+					$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/excelDown.do');
 				}); 
 
 				$("#playBtn").on("click", function() {
@@ -303,27 +318,27 @@
 			
 			function shoulder() {
 				  var choose = $('#shoulder').val();	
-				  location.href = '${pageContext.request.contextPath}/user/healthImage/chooseList.do?choose=' + choose;
+				  location.href = '${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose=' + choose;
 			}
 			
 			function back() {
 				  var choose = $('#back').val();	
-				  location.href = '${pageContext.request.contextPath}/user/healthImage/chooseList.do?choose=' + choose;
+				  location.href = '${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose=' + choose;
 			}
 			
 			function chest() {
 				  var choose = $('#chest').val();	
-				  location.href = '${pageContext.request.contextPath}/user/healthImage/chooseList.do?choose=' + choose;
+				  location.href = '${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose=' + choose;
 			}
 			
 			function arm() {
 				  var choose = $('#arm').val();	
-				  location.href = '${pageContext.request.contextPath}/user/healthImage/chooseList.do?choose=' + choose;
+				  location.href = '${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose=' + choose;
 			}
 			
 			function leg() {
 				  var choose = $('#leg').val();	
-				  location.href = '${pageContext.request.contextPath}/user/healthImage/chooseList.do?choose=' + choose;
+				  location.href = '${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose=' + choose;
 			}
 
 		    $("#myVideo").on("ended", function() {

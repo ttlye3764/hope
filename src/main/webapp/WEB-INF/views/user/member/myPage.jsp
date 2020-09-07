@@ -4,6 +4,8 @@
 <%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="radio" value="0"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -368,6 +370,27 @@ function execPostCode() {
        }
     }).open();
 }
+function setThumbnail(event) { 
+	var reader = new FileReader(); 
+	var img;
+	reader.onload = function(event) {
+			document.querySelector("div#image_container").removeChild(img);
+			
+			img = document.createElement("img"); 
+			img.setAttribute("src", event.target.result); 
+			
+			document.querySelector("div#image_container").appendChild(img);
+			
+			img.style.height = '100px';
+		    img.style.width = '100px';
+		}; 
+		reader.readAsDataURL(event.target.files[0]);
+
+		document.querySelector("div#image_container").addEventListener('click', function() {
+			//document.querySelector("div#image_container").style.display = 'none';
+			document.querySelector("div#image_container").removeChild(img);
+		});
+	};
 </script>
 
 </head>
@@ -393,9 +416,24 @@ function execPostCode() {
       <br>
       <br>
       <br>
-<form method='post' name='myPage'>  
+<form method='post' name='myPage' enctype="multipart/form-data">  
 <input type="hidden" name="mem_id" value="${memberInfo.mem_id }">                          
    <table style="border: none" align="center">
+   	  <tr>
+   	  	<td width="150px" height="25">회원사진</td>
+   	  	<td>
+   	  	<c:forEach items="${memberInfo.items2 }" var="fileitemInfo" varStatus="status">
+   	  		<c:if test="${!empty memberInfo.items2[status.index].file_save_name }">  
+				<div id="image_container" style="width: 300px; height: 150px;">
+					<img src="/files/${memberInfo.items2[status.index].file_save_name}" alt="pic1" style="width: 100px; height: 100px;">
+					<input type="file" class="form-control-file" name="files"
+					  id="exampleFormControlFile1" onchange="setThumbnail(event);" />${memberInfo.items2[status.index].file_name }
+				</div>
+			</c:if>
+		</c:forEach>
+   	  	</td>
+   	  </tr>
+   	  <input type="hidden" name="mem_no" value='${memberInfo.mem_no }'/>
       <tr>            
          <td width="150px" height="25" class="idright">아이디</td>
          <td>

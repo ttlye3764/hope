@@ -30,7 +30,7 @@
     }
     
     #loading{
-    	z-index : 900;
+       z-index : 900;
     }
 
 </style>
@@ -56,33 +56,33 @@ $(function(){
              hp = hp.substr(0,hp.length-1);
              $('input[name=mem_hp]').val(hp);
          }else{
-         	if(hp.length == 3 || hp.length == 8){
-         	   $('input[name=mem_hp]').val(hp + "-");
-        	 }
+            if(hp.length == 3 || hp.length == 8){
+               $('input[name=mem_hp]').val(hp + "-");
+            }
          }     
       }
    });
    $("#mem_birth").keyup(function(e){
-	      if(e.keyCode == 8){
-	         var code = $('input[name=mem_birth]').val();
-	         var lastChar = code.charAt(code.length-1);
-	         if(lastChar == '-'){
-	            code = code.substr(0,code.length-1);
-	            $('input[name=mem_birth]').val(code);
-	         }
-	      }else{
-	         var birth = $('input[name=mem_birth]').val();
-	         var lastChar = birth.charAt(birth.length-1);
-	         if(lastChar == '-'){
-	        	 birth = birth.substr(0,birth.length-1);
-		         $('input[name=mem_birth]').val(birth);
-		     }else{
-		         if(birth.length == 4 || birth.length == 7){
-		            $('input[name=mem_birth]').val(birth + "-");
-		         }
-		     }
-	      }
-	   });
+         if(e.keyCode == 8){
+            var code = $('input[name=mem_birth]').val();
+            var lastChar = code.charAt(code.length-1);
+            if(lastChar == '-'){
+               code = code.substr(0,code.length-1);
+               $('input[name=mem_birth]').val(code);
+            }
+         }else{
+            var birth = $('input[name=mem_birth]').val();
+            var lastChar = birth.charAt(birth.length-1);
+            if(lastChar == '-'){
+               birth = birth.substr(0,birth.length-1);
+               $('input[name=mem_birth]').val(birth);
+           }else{
+               if(birth.length == 4 || birth.length == 7){
+                  $('input[name=mem_birth]').val(birth + "-");
+               }
+           }
+         }
+      });
    $('form[name=memberForm]').submit(function() {
       var idcheck = $('#idlabel').text();
       var emailcheck = $('#emaillabel').text();
@@ -388,18 +388,64 @@ $(function(){
            }
         }).open();
     }
+   function setThumbnail(event) { 
+		var reader = new FileReader(); 
+		var img;
+		reader.onload = function(event) {
+				img = document.createElement("img"); 
+				
+				img.setAttribute("src", event.target.result); 
+				
+				document.querySelector("div#image_container").appendChild(img); 
+				
+				img.style.height = '100px';
+			    img.style.width = '100px';
+			}; 
+			reader.readAsDataURL(event.target.files[0]);
+
+			document.querySelector("div#image_container").addEventListener('click', function() {
+				//document.querySelector("div#image_container").style.display = 'none';
+				document.querySelector("div#image_container").removeChild(img);
+			});
+		};
 
 </script>
 <body>
 <div id="loading" class="wrap-loading display-none">
     <div><img src="../../image/Progress_Loading.gif"/></div>
 </div> 
-   <form name="memberForm" method="post">
+<div class="innerpage-banner center bg-overlay-dark-7 py-7" style="background:url(assets/images/bg/04.jpg) no-repeat; background-size:cover; background-position: center center;">
+      <div class="container">
+         <div class="row all-text-white">
+            <div class="col-md-12 align-self-center">
+               <h1 class="innerpage-title">회원 가입</h1>
+               <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                     <li class="breadcrumb-item active"><a href="${pageContext.request.contextPath}/user/main/mainForm.do"><i class="ti-home"></i> Home</a></li>
+                     <li class="breadcrumb-item">Timeline</li>
+                  </ol>
+               </nav>
+            </div>
+         </div>
+      </div>
+   </div>
+      <br>
+      <br>
+      <br>
+   <form name="memberForm" method="post" enctype="multipart/form-data">
    <input type="hidden" name="mem_division" value="0"> 
       <table style="border: none" align="center">
-         <tr>
-            <td colspan="3" align="center"><h3>회원가입</h3></td>
-         </tr>
+      	<tr>
+			<td>사진등록</td>
+			<td>
+				<div id="image_container"></div>
+				<div class="form-group">
+					<label for="exampleFormControlFile1"></label>
+					<input type="file" class="form-control-file" name="files"
+					  id="exampleFormControlFile1" onchange="setThumbnail(event);"/>
+				</div>
+			</td>
+		</tr>
          <tr>            
             <td width="150px" height="25" class="idright">아이디</td>
             <td>

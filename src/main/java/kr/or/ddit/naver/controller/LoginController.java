@@ -103,9 +103,9 @@ public class LoginController {
 		memberInfo.setMem_zip2("123");
 		
 		if(memberInfo1 == null) {
-			this.service.insertMember(memberInfo);
+			this.service.insertMember(memberInfo, null);
 		}else {
-			this.service.updateMemberInfo(memberInfo);
+			this.service.updateMemberInfo(memberInfo, null);
 		}
 		
 		params.put("mem_id", memberInfo.getMem_id());

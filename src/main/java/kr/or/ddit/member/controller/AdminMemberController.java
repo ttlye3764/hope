@@ -83,7 +83,7 @@ public class AdminMemberController {
 		String pass = UserSha256.encrypt(memberInfo.getMem_pass());
 		memberInfo.setMem_pass(pass);
 		
-		this.service.updateMemberInfo(memberInfo);
+//		this.service.updateMemberInfo(memberInfo);
 		
 		memberInfo = this.service.memberInfo(params);
 

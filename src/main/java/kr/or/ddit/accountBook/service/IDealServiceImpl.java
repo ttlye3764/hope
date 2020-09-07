@@ -52,6 +52,11 @@ public class IDealServiceImpl implements IDealService{
 		dao.deleteCard(card_no);
 	}
 
+	@Override
+	public List<DealVO> searchList(Map<String, String> params) throws Exception {
+		return dao.searchList(params);
+	}
+
 	
 
 	

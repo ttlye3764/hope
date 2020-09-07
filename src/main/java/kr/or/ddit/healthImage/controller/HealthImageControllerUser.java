@@ -38,6 +38,7 @@ public class HealthImageControllerUser {
 	@RequestMapping("healthImageList")
 	public ModelAndView healthImageList(ModelAndView andView 
 										,Map<String, String> params
+										,@RequestParam(value = "choose", required = false) String choose
 										,RolePaginationUtil_su pagination
 										,HttpServletRequest request
 										,@RequestParam(value = "currentPage", required = false) String currentPage) throws Exception {
@@ -45,41 +46,10 @@ public class HealthImageControllerUser {
 		
 		if(currentPage == null){
 	         currentPage = "1";
-	      }
-
-		String totalCount = this.healthImageService.totalCount(params);
+	    }
 		
-		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount));
-	    
-		String startCount = String.valueOf(pagination.getStartCount());
-	    String endCount = String.valueOf(pagination.getEndCount());
-	    
-	    params.put("startCount", startCount);
-	    params.put("endCount", endCount);
-		
-		List<HealthImageVO> healthImageList = this.healthImageService.healthList(params);
-		
-		andView.addObject("healthImageList", healthImageList);
-		andView.addObject("pagination", pagination.getPagingHtmls());
-
-		andView.setViewName("user/healthImage/healthImageList");
-
-		return andView;
-	}
-	
-	
-	// 카테고리
-	@RequestMapping("chooseList")
-	public ModelAndView chooseList(ModelAndView andView, 
-									Map<String, String> params, 
-									@RequestParam(value = "choose", required = false) String choose
-									,RolePaginationUtil_su pagination
-									,HttpServletRequest request
-									,@RequestParam(value = "currentPage", required = false) String currentPage) throws Exception{
-		
-		if(currentPage == null){
-	         currentPage = "1";
-	      }
+		// 카테고리 설정 값 params에 넣기
+		params.put("healthImage_category", choose);
 
 		String totalCount = this.healthImageService.totalCount(params);
 		
@@ -90,17 +60,14 @@ public class HealthImageControllerUser {
 	    
 	    params.put("startCount", startCount);
 	    params.put("endCount", endCount);
-	    
-		params.put("healthImage_category", choose);
 		
 		List<HealthImageVO> healthImageList = this.healthImageService.healthList(params);
 		
 		andView.addObject("healthImageList", healthImageList);
 		andView.addObject("pagination", pagination.getPagingHtmls());
-		
-		
+
 		andView.setViewName("user/healthImage/healthImageList");
-		
+
 		return andView;
 	}
 	
