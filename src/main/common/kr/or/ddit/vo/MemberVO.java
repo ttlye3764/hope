@@ -1,5 +1,7 @@
 package kr.or.ddit.vo;
 
+import java.util.List;
+
 public class MemberVO {
 	private String mem_no;
 	private String mem_id;
@@ -18,7 +20,14 @@ public class MemberVO {
 	private String mem_zip1;
 	private String mem_zip2;
 	private String mem_delete;
+	private List<MemberFileVO> items; // 이미지 리스트
 	
+	public List<MemberFileVO> getItems() {
+		return items;
+	}
+	public void setItems(List<MemberFileVO> items) {
+		this.items = items;
+	}
 	public String getMem_no() {
 		return mem_no;
 	}

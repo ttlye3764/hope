@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="memberfile">
+	<select resultType="MemberFileVO" id="fileitemList">
+		SELECT *
+		FROM MEMBERFILE
+		order by file_no
+	</select>
+
+	<insert id="insertFileItem" parameterType="MemberFileVO">
+		INSERT INTO
+		MEMBERFILE(
+		FILE_NO,FILE_NAME,FILE_SAVE_NAME,
+		FILE_TYPE,FILE_SIZE, MEM_NO
+		)
+
+		VALUES(
+		MEMBERFILE_SEQ.NEXTVAL,#{file_name},#{file_save_name},
+		#{file_type},#{file_size}, #{mem_no}
+		)
+	</insert>
+
+	<select resultType="MemberFileVO" id="fileitemInfo" parameterType="map">
+		SELECT *
+		FROM MEMBERFILE
+		WHERE MEM_NO = #{mem_no}
+	</select>
+
+	<delete id="deleteFileItem" parameterType="String">
+			DELETE
+		 	FROM MEMBERFILE
+		 	WHERE MEM_NO = #{mem_no}
+    	</delete>
+    	
+    <update id="updateFileItem" parameterType="MemberFileVO">
+    	update MEMBERFILE
+    	set FILE_NAME = #{file_name}, FILE_SAVE_NAME = #{file_save_name}, FILE_TYPE = #{file_type}, FILE_SIZE = #{file_size}
+    	where MEM_NO = #{mem_no}
+    </update>
+
+</mapper>

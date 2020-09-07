@@ -11,7 +11,7 @@ public interface IMemberDAO {
 	public List<MemberVO> memberList(Map<String, String> params) throws Exception;
 	public void deleteMemberInfo(Map<String, String> params) throws Exception;
 	public void updateMemberInfo(MemberVO memberInfo) throws Exception;
-	public void insertMember (MemberVO memberVO) throws Exception;
+	public String insertMember (MemberVO memberVO) throws Exception;
 	public String selectSeq() throws Exception;
 	public List<FriendVO> friendMemberList(Map<String, String> params) throws Exception;
 	public void addFriend(FriendVO friendInfo) throws Exception;
@@ -22,4 +22,6 @@ public interface IMemberDAO {
 	public void updatePass(Map<String,String>params) throws Exception;
 	public String selectNick(String mem_nick) throws Exception;
 	public String totalCount(Map<String, String> params) throws Exception;
+	public String fileSequence() throws Exception; // 파일 시퀀스
+	public String selectMem_no(String mem_id) throws Exception;
 }

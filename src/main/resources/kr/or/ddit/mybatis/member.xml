@@ -134,8 +134,12 @@
 	</insert>
 
 	<select id="selectSeq" resultType="String">
-		SELECT MEMBER_SEQ.NEXTVAL FROM
-		DUAL
+		SELECT MEMBER_SEQ.CURRVAL FROM DUAL
+	</select>
+	
+	<select id="selectMem_no" resultType="String" parameterType="String">
+		SELECT MEM_NO FROM MEMBER
+		WHERE MEM_ID = #{mem_id}
 	</select>
 
 	<select id="friendMemberList" parameterType="map"
@@ -208,4 +212,8 @@
 		AND
 		MEM_NICKNAME = #{mem_nick}
 	</select>
+	
+	<select id="fileSequence" resultType="String">
+    		SELECT MEMBERFILE_SEQ.NEXTVAL FROM DUAL
+    	</select>
 </mapper>    

@@ -4,9 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.mail.Session;
-
-import org.apache.catalina.util.RequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,7 +14,6 @@ import kr.or.ddit.utiles.AttachFileMapper;
 import kr.or.ddit.vo.BoardVO;
 import kr.or.ddit.vo.Board_FileVO;
 import kr.or.ddit.vo.Board_ReplyVO;
-import kr.or.ddit.vo.MemberVO;
 
 @Service("boardService")
 public class BoardServiceImpl implements IBoardService{

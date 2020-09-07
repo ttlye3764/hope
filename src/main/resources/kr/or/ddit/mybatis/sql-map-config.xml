@@ -31,6 +31,7 @@
 		<typeAlias alias="dealVO" type="kr.or.ddit.vo.DealVO" />
 		<!-- 승민 -->	
 		<typeAlias alias="memberVO" type="kr.or.ddit.vo.MemberVO" />
+		<typeAlias alias="MemberFileVO" type="kr.or.ddit.vo.MemberFileVO" />
 		<typeAlias alias="categoryVO" type="kr.or.ddit.vo.CategoryVO" />
 			
 		<!-- 윤희 -->
@@ -64,6 +65,7 @@
 	<!-- 승민 -->	
 		<mapper resource="kr/or/ddit/mybatis/member.xml" />
 		<mapper resource="kr/or/ddit/mybatis/category.xml" />
+		<mapper resource="kr/or/ddit/mybatis/memberfile.xml" />
 	<!-- 윤희 -->
 		<mapper resource="kr/or/ddit/mybatis/board.xml" />
 		<mapper resource="kr/or/ddit/mybatis/board_file.xml" />
