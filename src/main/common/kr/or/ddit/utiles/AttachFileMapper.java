@@ -77,18 +77,6 @@ public class AttachFileMapper {
 							fileItemInfo = new MemberFileVO();
 							fileItemInfo.setMem_no(mem_no);
 							
-							System.out.println(mem_no);
-							System.out.println();
-							System.out.println();
-							System.out.println();
-							System.out.println();
-							System.out.println();
-							System.out.println();
-							System.out.println();
-							System.out.println();
-							System.out.println();
-							System.out.println();
-
 							// 파일명 취득
 							// 브라우저별 d:\\temp\image\a.png
 							// or a.png

@@ -105,7 +105,7 @@ public class LoginController {
 		if(memberInfo1 == null) {
 			this.service.insertMember(memberInfo, null);
 		}else {
-			this.service.updateMemberInfo(memberInfo);
+			this.service.updateMemberInfo(memberInfo, null);
 		}
 		
 		params.put("mem_id", memberInfo.getMem_id());

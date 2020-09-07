@@ -3,6 +3,8 @@ package kr.or.ddit.member.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -10,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.or.ddit.member.dao.IMemberDAO;
 import kr.or.ddit.memberfile.dao.IMemberFileDAO;
 import kr.or.ddit.utiles.AttachFileMapper;
+import kr.or.ddit.vo.FileItemVO;
 import kr.or.ddit.vo.FriendVO;
 import kr.or.ddit.vo.MemberFileVO;
 import kr.or.ddit.vo.MemberVO;
@@ -44,9 +47,11 @@ public class IMemberSerivceImpl implements IMemberService {
 	}
 
 	@Override
-	public void updateMemberInfo(MemberVO memberInfo) throws Exception {
+	public void updateMemberInfo(MemberVO memberInfo, MultipartFile[] items) throws Exception {
 		dao.updateMemberInfo(memberInfo);
-
+		
+		List<MemberFileVO> fileItemList =AttachFileMapper.memberMapper(items, memberInfo.getMem_no());
+		fdao.updateFileItem(fileItemList);
 	}
 
 	@Override

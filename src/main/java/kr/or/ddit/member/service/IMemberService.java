@@ -3,6 +3,8 @@ package kr.or.ddit.member.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.ddit.vo.FriendVO;
@@ -12,7 +14,7 @@ public interface IMemberService {
 	public MemberVO memberInfo(Map<String, String> params)throws Exception;
 	public List<MemberVO> memberList(Map<String, String> params)throws Exception;
 	public void deleteMemberInfo(Map<String, String> params)throws Exception;
-	public void updateMemberInfo(MemberVO memberInfo)throws Exception;
+	public void updateMemberInfo(MemberVO memberInfo, MultipartFile[] items)throws Exception;
 	public String insertMember (MemberVO memberVO, MultipartFile[] items)throws Exception;
 	public String selectSeq() throws Exception;
 	public List<FriendVO> friendMemberList(Map<String, String> params) throws Exception;

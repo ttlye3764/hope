@@ -91,7 +91,7 @@ public class MemberController {
 	}
 
 	@RequestMapping("updateMemberInfo")
-	public String updateMember(MemberVO memberInfo, HttpSession session, Map<String, String> params) throws Exception {
+	public String updateMember(MemberVO memberInfo, HttpSession session, Map<String, String> params, @RequestParam("files") MultipartFile[] items) throws Exception {
 		params.put("mem_id", memberInfo.getMem_id());
 		
 		if(!(memberInfo.getMem_pass().length()>0)) {
@@ -102,7 +102,7 @@ public class MemberController {
 			memberInfo.setMem_pass(pass);
 			params.put("mem_pass", memberInfo.getMem_pass());
 		}
-		this.service.updateMemberInfo(memberInfo);		
+		this.service.updateMemberInfo(memberInfo, items);
 		
 		memberInfo = this.service.memberInfo(params);
 		session.setAttribute("LOGIN_MEMBERINFO", memberInfo);
