@@ -3,6 +3,28 @@
 
 <mapper namespace="member">
 
+	<resultMap id="MemberResultMap" type="MemberVO">
+    		<id property="mem_no" column="mem_no"/>
+			<result property="mem_id" column="mem_id"/>
+			<result property="mem_pass" column="mem_pass"/>
+			<result property="mem_temporary_pass" column="mem_temporary_pass"/>
+			<result property="mem_name" column="mem_name"/>
+			<result property="mem_gender" column="mem_gender"/>
+			<result property="mem_nickname" column="mem_nickname"/>
+			<result property="mem_birth" column="mem_birth"/>
+			<result property="mem_email" column="mem_email"/>
+			<result property="mem_hp" column="mem_hp"/>
+			<result property="mem_addr1" column="mem_addr1"/>
+			<result property="mem_addr2" column="mem_addr2"/>
+			<result property="mem_division" column="mem_division"/>
+			<result property="mem_join_addr" column="mem_join_addr"/>
+			<result property="mem_zip1" column="mem_zip1"/>
+			<result property="mem_zip2" column="mem_zip2"/>
+			<result property="mem_delete" column="mem_delete"/>
+			<collection property="items" column="mem_no" select="memberfile.fileitemList" ofType="MemberFileVO" javaType="java.util.List"></collection>
+			<collection property="items2" column="mem_no" select="memberfile.fileitemList2" ofType="MemberFileVO" javaType="java.util.List"></collection>
+    	</resultMap>
+
 	<sql id="selectAll">
 		SELECT *
 		FROM MEMBER
@@ -37,7 +59,7 @@
 	</select>
 
 	<select id="memberInfo" parameterType="map"
-		resultType="memberVO">
+		resultType="memberVO" resultMap="MemberResultMap">
 		<include refid="selectAll" />
 		<if test="mem_id != null">
 			AND MEM_ID = #{mem_id}
@@ -56,7 +78,7 @@
 	</select>
 
 	<select id="memberList" resultType="memberVO"
-		parameterType="map">
+		parameterType="map" resultMap="MemberResultMap">
 		SELECT B.*
 		FROM(SELECT A.*
 		FROM (SELECT ROWNUM RNUM, MEMBER.*
