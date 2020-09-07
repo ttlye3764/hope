@@ -39,10 +39,14 @@ $(function(){
     // 목록버튼
     $('#listBtn').on('click', function(){
         var rnum = '${rnum}';
+        var currentPage = currentPage;
+        var search_keyword = search_keyword;
+        var search_keycode = search_keycode;
+
         if(rnum == 'nu'){
 			$(location).attr('href','${pageContext.request.contextPath}/user/member/myBoard.do');
         }else{
-			$(location).attr('href','${pageContext.request.contextPath}/user/board/boardList.do?bd_division=${bd_division }');
+			$(location).attr('href','${pageContext.request.contextPath}/user/board/boardList.do?currentPage'+ currentPage +"&search_keyword"+ search_keyword + "&search_keycode" + search_keycode + "bd_division=${bd_division}");
         }
 		
 	});
@@ -57,21 +61,22 @@ function alertPrint(msg){
 	return false;
 }
 
+// 파일 다운로드기능 
 function fileDown(fileName, fileNo, fileBdNo) {
 	$(location).attr('href','${pageContext.request.contextPath}/user/board/fileDownload.do?fileName='+ fileName + '&fileNo='+ fileNo + '&fileBdNo='+ fileBdNo);
 }
 
+
+// 댓글관련 아이
 function insertReply(bd_no){
 	// 등록
 	var reContent = $('#re_content').val();
 	var bdNo = bd_no;
 
 	if(reContent.length == 0){
-		alert("댓글 내용을 입력 해 주세요.")
+		alert("댓글 내용을 입력해 주세요.")
 		return false;
 	}else{
-
-
 		$.ajax({
             url     : "${pageContext.request.contextPath}/user/board/insertBoardReply.do?reContent="+ reContent +"&bdNo=" + bdNo,
             type    : 'get',
@@ -100,7 +105,7 @@ function insertReply(bd_no){
 							<h2 class="mb-3">게시판 상세보기</h2></div>
 							                                           <input type="hidden" id="bd_division" name="bd_division" value="${bd_division }">
 																	   <input type="hidden" name="bd_no" value="${boardInfo.bd_no}"/>
-						<div class="col-md-9 "><span class="form-group"><input type="text" class="form-control" placeholder="title"  id="bd_title" name="bd_title" value="${boardInfo.bd_title}"></span></div>
+						<div class="col-md-9 mb-2"><span class="form-group"><input type="text" class="form-control" placeholder="title"  id="bd_title" name="bd_title" value="${boardInfo.bd_title}"></span></div>
 						<div class="col-md-9 mb-2"><span class="form-group"><input type="text" class="form-control" placeholder="writer" id="bd_writer" name="bd_writer" value="${boardInfo.bd_writer}"></span></div>
 						<div class="col-md-9"><span class="form-group"><input type="text" class="form-control" id="bd_date" name="bd_date" value="${boardInfo.bd_date}"></span></div>
 						<div class="col-md-9 input-group mb-4">
@@ -116,14 +121,13 @@ function insertReply(bd_no){
 							 </c:forEach>
 					 
 						</div>
-						<div class="col-md-12">
-							<span class="form-group"><textarea cols="25" rows="20" class="form-control" placeholder="내용" name="bd_content" >${boardInfo.bd_content}</textarea></span>
+						<div class="col-md-12 mb-2">
+							<span class="form-group "><textarea cols="25" rows="20" class="form-control" placeholder="내용" name="bd_content" >${boardInfo.bd_content}</textarea></span>
 						</div>
 						<div class="col-md-2 text-center" style="margin-left:650px; float:left; display:inline-block;">
 							<button type="submit" id="updateBtn" value="수정" class="btn-block btn btn-dark">수정</button>
 							<button type="button" id="deleteBtn" value="삭제" class="btn-block btn btn-dark">삭제</button>
 							<button type="button" id="listBtn" value="목록" class="btn-block btn btn-dark">목록</button>
-							<button type="button" id="replyBtn" value="댓글쓰기" class="btn-block btn btn-dark">댓글쓰기</button>
 						</div>
 						
 <!-- 			        ***********************************- 댓글 자리 -*********************************			 -->
@@ -132,8 +136,6 @@ function insertReply(bd_no){
 						<div style="width: 100%;">
 							<h4>댓글</h4>
 							<div class="comment-list">
-							
-							
 							
 							<c:choose>
     								<c:when test="${fn:length(replyList) == 0}">
@@ -167,20 +169,21 @@ function insertReply(bd_no){
 													
 													<div class="comment-content" style="width: 920px;">
 														<p>${vo.re_content}</p>
+														<div align="right">
+															<button type="button" id="updateReply" class="">수정</button>
+															<button type="button" id="updateReply" class="">삭제</button>
+														</div>
 													</div>
 													<!-- <div class="comment-reply"><a class="btn btn-xs btn-light" href="#">Reply</a></div> -->
 												</div>
 											
 												<!-- sub comment end-->
+												
 											</div>
 										</c:forEach>
 		    						</c:otherwise> 
 							</c:choose>
-							
-							
-							
-							
-								
+
 							</div>
 
 							<!-- Comment-respond -->
