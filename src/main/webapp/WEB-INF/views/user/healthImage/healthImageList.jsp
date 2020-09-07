@@ -26,7 +26,9 @@
 </head>
 <body>
 
-<div class="innerpage-banner center bg-overlay-dark-7 py-7" style="background:url(assets/images/bg/04.jpg) no-repeat; background-size:cover; background-position: center center;">
+<div class="innerpage-banner center bg-overlay-dark-7 py-7" 
+	style="background:url(${pageContext.request.contextPath }/resources/template/assets/images/bg/04.jpg) no-repeat; background-size:cover; 
+		background-position: center center;">
 		<div class="container">
 			<div class="row all-text-white">
 				<div class="col-md-12 align-self-center">
@@ -200,8 +202,7 @@
 													<form name="file" method="post" enctype="multipart/form-data">
 														<div class="form-group">
 															<label for="exampleFormControlFile1">인바디 파일을 넣어주세요.</label>
-															<input type="file" name="files" 
-															class="form-control-file" id="file" onchange="setThumbnail(event);">
+															<input type="file" name="files" class="form-control-file" id="file" onchange="setThumbnail(event);">
 														</div>
 													</form>
 <!-- 												    <div id="image_container" style="width: 230px;height: 160px;"></div> -->
@@ -229,6 +230,7 @@
 	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/jquery/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/popper.js/umd/popper.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 	<!--Vendors-->
 	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/fancybox/js/jquery.fancybox.min.js"></script>
@@ -303,27 +305,27 @@
 			
 			function shoulder() {
 				  var choose = $('#shoulder').val();	
-				  location.href = '${pageContext.request.contextPath}/user/healthImage/chooseList.do?choose=' + choose;
+				  location.href = '${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose=' + choose;
 			}
 			
 			function back() {
 				  var choose = $('#back').val();	
-				  location.href = '${pageContext.request.contextPath}/user/healthImage/chooseList.do?choose=' + choose;
+				  location.href = '${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose=' + choose;
 			}
 			
 			function chest() {
 				  var choose = $('#chest').val();	
-				  location.href = '${pageContext.request.contextPath}/user/healthImage/chooseList.do?choose=' + choose;
+				  location.href = '${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose=' + choose;
 			}
 			
 			function arm() {
 				  var choose = $('#arm').val();	
-				  location.href = '${pageContext.request.contextPath}/user/healthImage/chooseList.do?choose=' + choose;
+				  location.href = '${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose=' + choose;
 			}
 			
 			function leg() {
 				  var choose = $('#leg').val();	
-				  location.href = '${pageContext.request.contextPath}/user/healthImage/chooseList.do?choose=' + choose;
+				  location.href = '${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose=' + choose;
 			}
 
 		    $("#myVideo").on("ended", function() {

@@ -176,8 +176,8 @@ function LogOut(){
 						</li>
 						<!-- 건강관리 -->
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Health</a>
-							<ul class="dropdown-menu" aria-labelledby="pagesMenu">
+							<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Health</a>
+							<ul class="dropdown-menu" aria-labelledby="blogMenu">
 								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/healthImage/healthImageList.do'>운동법 리스트</a></li>
 								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/healthImage/healthImageWeight.do'>표준몸무게</a></li>
 								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/healthImage/healthImageCal.do'>운동 칼로리 계산기</a></li>

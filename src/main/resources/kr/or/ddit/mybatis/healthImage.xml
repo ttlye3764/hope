@@ -32,8 +32,8 @@
 		</if>
 		ORDER BY healthImage_no)A) B
 		<![CDATA[
-			WHERE B.RNUM <= #{startCount}
-			  AND B.RNUM >= #{endCount}
+			WHERE B.RNUM BETWEEN #{endCount} AND #{startCount}
+			  
 		]]>
 		ORDER BY B.RNUM DESC
 	</select>
@@ -91,8 +91,11 @@
 	</update>
 	
 	<select id="totalCount" parameterType="map" resultType="String">
-		select count(*)
-		from HEALTHIMAGE				
+		select count(healthImage_no)
+		from HEALTHIMAGE
+		<if test="healthImage_category != null">
+			where healthImage_category = #{healthImage_category}
+		</if>	
 	</select>
 
 </mapper>
