@@ -20,6 +20,7 @@ import kr.or.ddit.utiles.RolePaginationUtil;
 import kr.or.ddit.utiles.RolePaginationUtil_BYEOL;
 import kr.or.ddit.utiles.RolePaginationUtil_pill;
 import kr.or.ddit.utiles.RolePaginationUtil_yun;
+import kr.or.ddit.vo.CardVO;
 import kr.or.ddit.vo.DealVO;
 import kr.or.ddit.vo.MemberVO;
 import kr.or.ddit.vo.PillVO;
@@ -99,13 +100,14 @@ public class AccountController {
 	
 	
 	@RequestMapping("registTrace")
-	public ModelAndView registTrace(String deal_option, String deal_kind, String deal_date, String deal_name, String deal_price, String mem_no) throws Exception {
+	public ModelAndView registTrace(String deal_option, String deal_kind, String deal_date, String deal_name, String deal_price, String mem_no, String deal_division) throws Exception {
 		DealVO dealInfo = new DealVO();
 		dealInfo.setDeal_option(deal_option);
 		dealInfo.setDeal_kind(deal_kind);
 		dealInfo.setDeal_date(deal_date);
 		dealInfo.setDeal_name(deal_name);
 		dealInfo.setDeal_price(deal_price);
+		dealInfo.setDeal_division(deal_division);
 		dealInfo.setMem_no(mem_no);
 		
 		int cnt = this.service.insertDeal(dealInfo);
@@ -113,6 +115,36 @@ public class AccountController {
 		List<DealVO> list = service.dealList(mem_no);
 		andView.addObject("list", list);
 		// <bean id="jsonConvertView" class="..MappingJackson2JsonView>
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
+	
+	@RequestMapping("registCard")
+	public ModelAndView registCard(String card_kind, String mem_no) throws Exception {
+		CardVO cardInfo = new CardVO();
+		cardInfo.setCard_kind(card_kind);
+		cardInfo.setMem_no(mem_no);
+		this.service.registCard(cardInfo);
+		ModelAndView andView = new ModelAndView();
+		List<CardVO> cardlist = service.cardList(mem_no);
+		andView.addObject("cardlist", cardlist);
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
+	@RequestMapping("cardList")
+	public ModelAndView cardList(String card_kind, String mem_no) throws Exception {
+		ModelAndView andView = new ModelAndView();
+		List<CardVO> cardlist = service.cardList(mem_no);
+		andView.addObject("cardlist", cardlist);
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
+	@RequestMapping("deleteCard")
+	public ModelAndView deleteCard(String card_no, String mem_no) throws Exception {
+		ModelAndView andView = new ModelAndView();
+		service.deleteCard(card_no);
+		List<CardVO> cardlist = service.cardList(mem_no);
+		andView.addObject("cardlist", cardlist);
 		andView.setViewName("jsonConvertView");
 		return andView;
 	}

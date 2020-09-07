@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.ddit.accountBook.dao.IDealDao;
 import kr.or.ddit.schedule.dao.IScheduleDAO;
+import kr.or.ddit.vo.CardVO;
 import kr.or.ddit.vo.DealVO;
 import kr.or.ddit.vo.ScheduleVO;
 
@@ -35,6 +36,20 @@ public class IDealServiceImpl implements IDealService{
 	@Override
 	public List<DealVO> dealListView(Map<String, String> params) throws Exception {
 		return dao.dealListView(params); 
+	}
+
+	@Override
+	public List<CardVO> cardList(String mem_no) throws Exception {
+		return dao.cardList(mem_no);
+	}
+
+	@Override
+	public void registCard(CardVO cardInfo) throws Exception {
+		dao.registCard(cardInfo);
+	}
+	@Override
+	public void deleteCard(String card_no) throws Exception {
+		dao.deleteCard(card_no);
 	}
 
 	

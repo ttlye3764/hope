@@ -12,6 +12,7 @@ public class DealVO {
 	private String deal_fix_expenditure;
 	private String mem_no;
 	private String deal_option;
+	private String deal_division;
 	
 	public String getDeal_no() {
 		return deal_no;
@@ -72,6 +73,12 @@ public class DealVO {
 	}
 	public void setDeal_option(String deal_option) {
 		this.deal_option = deal_option;
+	}
+	public String getDeal_division() {
+		return deal_division;
+	}
+	public void setDeal_division(String deal_division) {
+		this.deal_division = deal_division;
 	}
 	
 	

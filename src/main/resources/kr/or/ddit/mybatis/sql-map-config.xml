@@ -29,6 +29,8 @@
 		<typeAlias alias="scheduleVO" type="kr.or.ddit.vo.ScheduleVO" />
 		<typeAlias alias="busVO" type="kr.or.ddit.vo.BusVO" />
 		<typeAlias alias="dealVO" type="kr.or.ddit.vo.DealVO" />
+		<typeAlias alias="cardVO" type="kr.or.ddit.vo.CardVO" />
+		
 		<!-- 승민 -->	
 		<typeAlias alias="memberVO" type="kr.or.ddit.vo.MemberVO" />
 		<typeAlias alias="categoryVO" type="kr.or.ddit.vo.CategoryVO" />

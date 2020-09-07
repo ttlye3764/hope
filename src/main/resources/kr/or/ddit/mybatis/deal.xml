@@ -16,7 +16,8 @@
                deal_fix_revenue,
                deal_fix_expenditure,
                mem_no,
-               deal_option)
+               deal_option,
+               deal_division)
          VALUES
              (
                deal_seq.nextval,      
@@ -28,7 +29,8 @@
                #{deal_fix_revenue},
                #{deal_fix_expenditure},
                #{mem_no},
-               #{deal_option}
+               #{deal_option},
+               #{deal_division}
                )
          
    </insert>
@@ -41,18 +43,52 @@
 
 	<select id="dealListView" resultType="dealVO" parameterType="map">
 		SELECT B.*
-			FROM(SELECT A.*
-					FROM(SELECT ROWNUM RNUM, DEAL.*
+			FROM(SELECT A.*, ROWNUM RNUM
+					FROM(SELECT DEAL.*
 					FROM DEAL
 					WHERE MEM_NO = #{mem_no}
-				ORDER BY DEAL_NO DESC
+				ORDER BY DEAL_NO
 				)A
 			)B
 			<![CDATA[
 				WHERE B.RNUM <= #{startCount}
 				AND B.RNUM >= #{endCount}
 	        ]]>	
-	      ORDER BY B.rnum  DESC
+	      ORDER BY DEAL_NO DESC 
 	</select>
+	
+	
+	 <select id="cardList" resultType="cardVO" parameterType="String">
+		SELECT *
+		FROM card
+		WHERE MEM_NO = #{mem_no}
+		ORDER BY CARD_NO
+		
+	</select>
+	
+	
+	<insert id="registCard" parameterType="cardVO">
+      INSERT 
+         INTO card
+            (
+               card_no,
+               mem_no,
+               card_kind)
+         VALUES
+             (
+               card_seq.nextval,      
+               #{mem_no},
+               #{card_kind}
+               )
+         
+   </insert>
+   
+   <delete id="deleteCard" parameterType="String">
+   	 DELETE 
+      FROM CARD
+      WHERE CARD_NO = #{card_no}
+   </delete>
+	
+	
 </mapper>    
 
