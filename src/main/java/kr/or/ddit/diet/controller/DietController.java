@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import ch.qos.logback.core.joran.action.ParamAction;
 import kr.or.ddit.diet.service.IDietService;
 import kr.or.ddit.vo.Diet_dayVO;
 import kr.or.ddit.vo.Diet_day_infoVO;
@@ -79,8 +80,12 @@ public class DietController {
 	
 	@RequestMapping("diet_my")
 	public ModelAndView diet_my(ModelAndView andView,
-								Map<String, String> params) throws Exception{
-		params.put("mem_no", "1");
+								Map<String, String> params,
+								HttpServletRequest request,
+								HttpSession session) throws Exception{
+		session = request.getSession();
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		params.put("mem_no", memberInfo.getMem_no());
 		
 		List<Diet_memVO> dietMemList = dietService.dietMemList(params);
 		
@@ -89,6 +94,26 @@ public class DietController {
 		andView.addObject("dietMemLast", dietMemLast);
 		andView.addObject("dietMemList", dietMemList);
 		andView.setViewName("user/diet/diet_my");
+		return andView;
+	}
+	
+	@RequestMapping("dietMemListAjax")
+	public ModelAndView dietMemListAjax(ModelAndView andView,
+										Map<String, String> params,
+										HttpServletRequest request,
+										HttpSession session) throws Exception{
+		session = request.getSession();
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO"); 
+		params.put("mem_no", memberInfo.getMem_no());
+		
+		List<Diet_memVO> dietMemList = dietService.dietMemList(params);
+		
+		Diet_memVO dietMemLast = dietMemList.get(dietMemList.size()-1);
+		
+		andView.addObject("dietMemLast", dietMemLast);
+		andView.addObject("dietMemList", dietMemList);
+		
+		andView.setViewName("jsonConvertView");
 		return andView;
 	}
 	
@@ -177,15 +202,45 @@ public class DietController {
 										ModelAndView andView,
 										HttpServletRequest request,
 										HttpSession session,
-										MemberVO memberInfo) throws Exception{
+										MemberVO memberInfo,
+										String activity) throws Exception{
 		session = request.getSession();
 		
 		memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+
 		
+		//bm 계산
+		int height = Integer.parseInt(diet_memInfo.getHeight()); 
+		int current_weight = Integer.parseInt(diet_memInfo.getCurrent_weight());
+		int purpose_weight = Integer.parseInt(diet_memInfo.getPurpose_weight());
+		
+		int int_bmi = (int)((float)current_weight / (height*height) * 10000); 
+		String bmi = int_bmi+"";
+		
+		String day_kcal=null;
+		
+		//일일 추천 열량 계산
+		if(current_weight == purpose_weight) {
+			// 현재 체중 유지
+			int recommendKcal = (int) ((height - 100) / 0.9 * (float)(Integer.parseInt(activity)));
+			day_kcal= recommendKcal+"";
+		}else if(current_weight > purpose_weight) {
+			// 다이어트
+			int recommendKcal = (int) ((height - 100) / 0.9 * (float)(Integer.parseInt(activity))) - 300;
+			day_kcal= recommendKcal+"";
+		}else {
+			// 살 찌우고 싶을 때
+			int recommendKcal = (int) ((height - 100) / 0.9 * (float)(Integer.parseInt(activity))) + 300;
+			day_kcal= recommendKcal+"";
+		}
+		
+		diet_memInfo.setBmi(bmi);
 		diet_memInfo.setMem_no(memberInfo.getMem_no());
+		diet_memInfo.setDay_kcal(day_kcal);
 		
 		dietService.insertDietMem(diet_memInfo);
 		
+		andView.setViewName("jsonConvertView");
 		return andView;
 	}
 	
@@ -288,6 +343,27 @@ public class DietController {
 		params.put("dd_info_division", dd_info_division);
 		
 		dietService.deleteDietDayInfo(params);
+		
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
+	
+	@RequestMapping("dietMemGraphList")
+	public ModelAndView dietMemGraph(ModelAndView andView,
+									Map<String, String> params,
+									HttpServletRequest request,
+									HttpSession session) throws Exception{
+		
+		session = request.getSession();
+		
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		
+		params.put("mem_no", memberInfo.getMem_no());
+		
+		List<Diet_dayVO> dietDayMemList = dietService.dietMemGraphList(params);
+		
+		
+		andView.addObject("dietDayMemList", dietDayMemList);
 		
 		andView.setViewName("jsonConvertView");
 		return andView;

@@ -45,4 +45,7 @@ public interface IDietDao {
 	
 	// diet_day_info 삭제
 	public void deleteDietDayInfo(Map<String, String> params) throws Exception;	
+	
+	// graph
+	public List<Diet_dayVO> dietMemGraphList(Map<String, String> params) throws Exception;
 }

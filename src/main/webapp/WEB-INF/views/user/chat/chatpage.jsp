@@ -2,235 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!--   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+<!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/myCSS/chatPage.css">
 
-<style>
-/*---------chat window---------------*/
-.container{
-    max-width:900px;
-}
-.inbox_people {
-	background: #fff;
-	float: left;
-	overflow: hidden;
-	width: 30%;
-	border-right: 1px solid #ddd;
-}
-
-.inbox_msg {
-	border: 1px solid #ddd;
-	clear: both;
-	overflow: hidden;
-}
-
-.top_spac {
-	margin: 20px 0 0;
-}
-
-.recent_heading {
-	float: left;
-	width: 40%;
-}
-
-.srch_bar {
-	display: inline-block;
-	text-align: right;
-	width: 60%;
-	padding:
-}
-
-.headind_srch {
-	padding: 10px 29px 10px 20px;
-	overflow: hidden;
-	border-bottom: 1px solid #c4c4c4;
-}
-
-.recent_heading h4 {
-	color: #0465ac;
-    font-size: 16px;
-    margin: auto;
-    line-height: 29px;
-}
-
-.srch_bar input {
-	outline: none;
-	border: 1px solid #cdcdcd;
-	border-width: 0 0 1px 0;
-	width: 80%;
-	padding: 2px 0 4px 6px;
-	background: none;
-}
-
-.srch_bar .input-group-addon button {
-	background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-	border: medium none;
-	padding: 0;
-	color: #707070;
-	font-size: 18px;
-}
-
-.srch_bar .input-group-addon {
-	margin: 0 0 0 -27px;
-}
-
-.chat_ib h5 {
-	font-size: 15px;
-	color: #464646;
-	margin: 0 0 8px 0;
-}
-
-.chat_ib h5 span {
-	font-size: 13px;
-	float: right;
-}
-
-.chat_ib p {
-    font-size: 12px;
-    color: #989898;
-    margin: auto;
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.chat_img {
-	float: left;
-	width: 11%;
-}
-
-.chat_img img {
-	width: 100%
-}
-
-.chat_ib {
-	float: left;
-	padding: 0 0 0 15px;
-	width: 88%;
-}
-
-.chat_people {
-	overflow: hidden;
-	clear: both;
-}
-
-.chat_list {
-	border-bottom: 1px solid #ddd;
-	margin: 0;
-	padding: 18px 16px 10px;
-}
-
-.inbox_chat {
-	height: 550px;
-	overflow-y: scroll;
-}
-
-.active_chat {
-	background: #e8f6ff;
-}
-
-.incoming_msg_img {
-	display: inline-block;
-	width: 6%;
-}
-
-.incoming_msg_img img {
-	width: 100%;
-}
-
-.received_msg {
-	display: inline-block;
-	padding: 0 0 0 10px;
-	vertical-align: top;
-	width: 92%;
-}
-
-.received_withd_msg p {
-	background: #ebebeb none repeat scroll 0 0;
-	border-radius: 0 15px 15px 15px;
-	color: #646464;
-	font-size: 14px;
-	margin: 0;
-	padding: 5px 10px 5px 12px;
-	width: 100%;
-}
-
-.time_date {
-	color: #747474;
-	display: block;
-	font-size: 12px;
-	margin: 8px 0 0;
-}
-
-.received_withd_msg {
-	width: 57%;
-}
-
-.mesgs{
-	float: left;
-	padding: 30px 15px 0 25px;
-	width:70%;
-}
-
-.sent_msg p {
-	background:#0465ac;
-	border-radius: 12px 15px 15px 0;
-	font-size: 14px;
-	margin: 0;
-	color: #fff;
-	padding: 5px 10px 5px 12px;
-	width: 100%;
-}
-
-.outgoing_msg {
-	overflow: hidden;
-	margin: 26px 0 26px;
-}
-
-.sent_msg {
-	float: right;
-	width: 46%;
-}
-
-.input_msg_write input {
-	background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-	border: medium none;
-	color: #4c4c4c;
-	font-size: 15px;
-	min-height: 48px;
-	width: 100%;
-	outline:none;
-}
-
-.type_msg {
-	border-top: 1px solid #c4c4c4;
-	position: relative;
-}
-
-.msg_send_btn {
-	background: #05728f none repeat scroll 0 0;
-	border:none;
-	border-radius: 50%;
-	color: #fff;
-	cursor: pointer;
-	font-size: 15px;
-	height: 33px;
-	position: absolute;
-	right: 0;
-	top: 11px;
-	width: 33px;
-}
-
-.messaging {
-	padding: 0 0 50px 0;
-}
-
-.msg_history {
-	height: 516px;
-	overflow-y: auto;
-}
-</style>
 
 <br>
 <br>
@@ -243,8 +18,17 @@
   <div class="inbox_msg">
 	<div class="inbox_people">
 	  <div class="headind_srch">
+	   <ul class="social-icons si-colored-bg si-medium">
+	   		<li class="social-icons-item social-dribbble">
+				<a class="social-icons-link" onclick="searchFriendForm();"><i class="fa fa-dribbble"></i></a>
+			</li>
+			<li class="social-icons-item social-flickr">
+				<a class="social-icons-link" onclick=""><i class="fa fa-flickr"></i></a>
+			</li>
+		</ul>
 		<div class="recent_heading">
 		  <h4>Recent</h4>
+		 
 		</div>
 		<div class="srch_bar">
 		  <div class="stylish-input-group">
@@ -273,56 +57,7 @@
 			</div>
 		  </div>
 		</div>
-		<div class="chat_list">
-		  <div class="chat_people">
-			<div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-			<div class="chat_ib">
-			  <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-			  <p>Test, which is a new approach to have all solutions 
-				astrology under one roof.</p>
-			</div>
-		  </div>
-		</div>
-		<div class="chat_list">
-		  <div class="chat_people">
-			<div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-			<div class="chat_ib">
-			  <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-			  <p>Test, which is a new approach to have all solutions 
-				astrology under one roof.</p>
-			</div>
-		  </div>
-		</div>
-		<div class="chat_list">
-		  <div class="chat_people">
-			<div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-			<div class="chat_ib">
-			  <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-			  <p>Test, which is a new approach to have all solutions 
-				astrology under one roof.</p>
-			</div>
-		  </div>
-		</div>
-		<div class="chat_list">
-		  <div class="chat_people">
-			<div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-			<div class="chat_ib">
-			  <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-			  <p>Test, which is a new approach to have all solutions 
-				astrology under one roof.</p>
-			</div>
-		  </div>
-		</div>
-		<div class="chat_list">
-		  <div class="chat_people">
-			<div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-			<div class="chat_ib">
-			  <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-			  <p>Test, which is a new approach to have all solutions 
-				astrology under one roof.</p>
-			</div>
-		  </div>
-		</div>
+		
 	  </div>
 	</div>
 	<div class="mesgs">
@@ -376,8 +111,170 @@
   </div>
 </div>
 
-</body>
-</html>
+
+
+				  
+					<!-- 친구추가 모달창 -->
+					<div class="modal fade text-left" id="searchFriendForm"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" style="display: none; overflow: auto;" aria-hidden="true" >
+						<div class="modal-dialog modal-dialog-centered" role="document" >
+							<div class="modal-content">
+								<div class="modal-header">
+									친구 추가
+								</div>
+								<div class="modal-body">
+									<h4>친구 아이디로 찾기 </h4>
+									친구 아이디 : <input class="form-control" type="text" id="mem_name" placeholder="이름을 입력해주세요" style="width:200px; !important">
+									
+									<br>
+									<br>
+									<div class="divider divider-grad"></div>
+									<br>
+									<br>
+									
+									<div id="searchFriendId">
+										
+									</div>
+									
+									<h4>친구 이름으로 찾기 </h4>
+									<br>
+									<br>
+									친구 이름 : <input class="form-control" type="text" placeholder="아이디를 입력해주세요" style="width:200px; !important">
+									
+									<br>
+									<br>
+									<div class="divider divider-grad"></div>
+									
+									<table id="searchFriendName">
+									
+									</table>
+									
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-primary">Save changes</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+
+					
+
+<script type="text/javascript">
+
+var socket;
+var messages = document.getElementById("messages");
+var targetMemNo;
+var currentTargetMemNo;
+var mem_no = ${LOGIN_MEMBERINFO.mem_no};
+var chatingRoomNO;
+
+function initSocket(url) {
+	socket = new SockJS(url);
+	
+	socket.onmessage = function(evt) {
+		console.log(evt.data + "<br/>");
+		// 받아온 메세지 넣어주기
+
+		var bot = document.createElement("div");
+		bot.className = "message-text left";
+
+		bot.innerHTML = evt.data;
+		var out = document.querySelector(".message");
+		var innerDiv = document.createElement("div");
+
+		innerDiv.className = "solo-message";
+
+		innerDiv.appendChild(bot);
+		out.appendChild(innerDiv);
+
+		out.scrollBy(0, 1000);
+		document.querySelector(".input input").value = "";
+	};
+	
+	socket.onclose = function(evt) {
+		console.log("연결 종료료");
+	}
+	
+	$("#sendBtn").on("click", function() {
+		var msg = $("#message").val();
+		var text = document.getElementById("messageinput").value + "," + chatingRoomNo;
+		socket.send(text);
+		console.log(text);
+		text = "";
+	});
+}
+
+// 친구추가 모달창 띄우기
+function searchFriendForm(){
+	$("#searchFriendForm").modal("show"); //모달창 띄우기
+}
+
+// 친구목록 모달창 띄우기
+function friendList(){
+	$("#friend_list").modal("show");
+}
+
+// 친구 검색하기
+function searchFriend(){
+	$.ajax({
+		type : 'POST',
+		url : '${pageContext.request.contextPath}/user/chat/searchMember.do',
+		dataType : 'JSON',
+		data : {
+			mem_name : $('#mem_name').val()
+		},
+		error : function(result) {
+			alert("친구검색에 실패했습니다.");
+		},
+		success : function(result) {
+
+			$('#searchFriendName').empty();
+
+ 			$('#searchFriendName').append('<tr>')
+ 			$('#searchFriendName').append('<th>프로필 사진</th>');
+ 			$('#searchFriendName').append('<th>ID</th>');
+ 			$('#searchFriendName').append('<th>이름</th>');
+ 			$('#searchFriendName').append('<th></th>');
+ 			$('#searchFriendName').append('</tr>');
+ 			
+ 			$.each(result.memberList, function(index, item){
+ 				$('#searchFriendName').append('<tr>');
+ 				$('#searchFriendName').append('<td><img src=""></td>');
+ 				$('#searchFriendName').append('<td onclick=""><input type="hidden" id="searchFriendNo" value="'+item.men_no+'">'+item.mem_id+'</td>');
+ 				$('#searchFriendName').append('<td>'+item.mem_name+'</td>');
+ 				$('#searchFriendName').append('<td><button type="button" id="insertFriendBtn">추가</button></td>');
+ 				$('#searchFriendName').append('</tr>');	 
+ 			 });
+		}
+	});
+}	
+		
+
+	})
+	
+//친구 추가
+$("#insertFriendBtn").click(function(){
+		$.ajax({
+			url : '${pageContext.request.contextPath}/user/chat/addFriend',
+			data : mem_no = $('#searchFriendNo').val(),
+			error : function(result) {
+				alert("친구 추가 실패");
+			},
+			success : function(result) {
+				alert("친구 추가 성공");
+			},
+		});
+	});
+
+
+$(function(){
+	initSocket("http://localhost:8080/lastProject/echo?mem_no=" + ${LOGIN_MEMBERINFO.mem_no});
+
+
+		
+})
+</script>
 
 
 

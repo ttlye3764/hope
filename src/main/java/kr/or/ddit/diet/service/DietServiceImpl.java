@@ -79,4 +79,9 @@ public class DietServiceImpl implements IDietService {
 	public void deleteDietDayInfo(Map<String, String> params) throws Exception {
 		dietDao.deleteDietDayInfo(params);
 	}
+	
+	@Override
+	public List<Diet_dayVO> dietMemGraphList(Map<String, String> params) throws Exception {
+		return dietDao.dietMemGraphList(params);
+	}
 }

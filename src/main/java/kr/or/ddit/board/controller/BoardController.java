@@ -160,6 +160,9 @@ public class BoardController {
 			params.put("bd_division",bd_division);
 			params.put("search_keyword",search_keyword);
 			params.put("search_keycode",search_keycode);
+			
+			System.out.println(search_keyword);
+			System.out.println(search_keycode);
 		    		
 		    String totalCount = this.boardService.totalCount(params);
 		    

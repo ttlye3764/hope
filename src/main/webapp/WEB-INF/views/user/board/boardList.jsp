@@ -166,8 +166,10 @@ Banner innerpage -->
                               <div class=>
                                  <input id="search_keyword"
                                     class="form-control border-radius-right-0 border-right-0 mb-0"
-                                    style="height: 40px; display: inline-block;" type="text" name="search_keyword"
-                                    placeholder="Search" size="35px">
+                                    style="height: 40px; display: inline-block;" type="text" name="search_keyword" value=""
+                                    placeholder="Search" size="35px">  ${serach_keycode }
+                                    
+                                  
                               </div>
                               <span class="input-group-btn">
                                  <button type="button" id="searchBTN" 

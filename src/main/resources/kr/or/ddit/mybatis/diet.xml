@@ -15,7 +15,7 @@
 	<insert id="insertDietMem" parameterType="dietMemVO">
 		INSERT INTO DIET_MEM(DM_NO,
 							HEIGHT,
-	 						DATE,
+	 						DM_DATE,
 	 						CURRENT_WEIGHT,
 	 						PURPOSE_WEIGHT, 
 	 						BMI,
@@ -23,7 +23,7 @@
 	 						MEM_NO)
 	 						VALUES(DIET_MEM_SEQ.NEXTVAL,
 	 								#{height},
-	 								#{date},
+	 								sysdate,
 	 								#{current_weight},
 	 								#{purpose_weight},
 	 								#{bmi},
@@ -46,6 +46,7 @@
 		SELECT *
 		FROM DIET_MEM
 		WHERE MEM_NO = #{mem_no}
+		ORDER BY DM_DATE
 	</select>
 	
 	<select id="menuSearch" parameterType="Map" resultType="menuVO">
@@ -119,6 +120,29 @@
 		AND DD_INFO_DIVISION = #{dd_info_division}
 	</delete>
 	
+	<select id="dietMemGraphList" parameterType="Map" resultType="dietDayVO">
+		select c.MEM_NO MEM_NO, d.DD_DATE DD_DATE, d.DD_KCAL DD_KCAL, c.DAY_KCAL DAY_KCAL
+		from (
+        	 select MEM_NO, dm_no, DAY_KCAL, TO_CHAR(DM_DATE, 'YYYY-MM-DD') dm_date
+           	 from diet_mem
+        	 where dm_no IN (
+             	select max(a.dm_no) dm_no
+            	from diet_mem a, diet_day b
+             	where a.MEM_NO = b.MEM_NO
+                AND b.dd_date = TO_CHAR(a.DM_DATE, 'YYYY-MM-DD')
+              	group by dd_date)
+           	 AND TO_CHAR(DM_DATE, 'YYYY-MM-DD') in (
+             	select dd_date
+            	 from diet_mem a, diet_day b
+             	 where a.MEM_NO = b.MEM_NO
+               	 AND b.dd_date = TO_CHAR(a.DM_DATE, 'YYYY-MM-DD')
+             group by dd_date
+        	 )
+     		)c , DIET_DAY d
+		where c.dm_date = d.dd_date
+		AND c.mem_no = #{mem_no}
+		order by dd_date
+	</select>
 </mapper>
 
 

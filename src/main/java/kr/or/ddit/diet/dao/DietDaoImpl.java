@@ -80,4 +80,9 @@ public class DietDaoImpl implements IDietDao {
 	public void deleteDietDayInfo(Map<String, String> params) throws Exception {
 		client.delete("diet.deleteDietDayInfo", params);
 	}
+	
+	@Override
+	public List<Diet_dayVO> dietMemGraphList(Map<String, String> params) throws Exception {
+		return client.selectList("diet.dietMemGraphList", params);
+	}
 }

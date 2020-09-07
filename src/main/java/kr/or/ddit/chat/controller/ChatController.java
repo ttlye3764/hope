@@ -111,17 +111,17 @@ public class ChatController {
 		return andView;
 	}
 	
-	@RequestMapping("addFriend")
+	@RequestMapping("insertFriend")
 	public ModelAndView addFriend(ModelAndView andView,
 								 Map<String, String> params,
-								 @RequestParam String mem_name,
+								 @RequestParam String mem_no,
 								 MemberVO memberInfo,
 								 FriendVO friendInfo,
 								 HttpServletRequest request) throws Exception{
 		
 		HttpSession session = request.getSession();
 		
-		params.put("mem_name",mem_name);
+		params.put("mem_no",mem_no);
 		
 		// 등록할 친구
 		memberInfo = memberService.memberInfo(params);
