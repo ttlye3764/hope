@@ -394,12 +394,27 @@ $(function(){
 <div id="loading" class="wrap-loading display-none">
     <div><img src="../../image/Progress_Loading.gif"/></div>
 </div> 
+<div class="innerpage-banner center bg-overlay-dark-7 py-7" style="background:url(assets/images/bg/04.jpg) no-repeat; background-size:cover; background-position: center center;">
+      <div class="container">
+         <div class="row all-text-white">
+            <div class="col-md-12 align-self-center">
+               <h1 class="innerpage-title">회원 가입</h1>
+               <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                     <li class="breadcrumb-item active"><a href="${pageContext.request.contextPath}/user/main/mainForm.do"><i class="ti-home"></i> Home</a></li>
+                     <li class="breadcrumb-item">Timeline</li>
+                  </ol>
+               </nav>
+            </div>
+         </div>
+      </div>
+   </div>
+      <br>
+      <br>
+      <br>
    <form name="memberForm" method="post">
    <input type="hidden" name="mem_division" value="0"> 
       <table style="border: none" align="center">
-         <tr>
-            <td colspan="3" align="center"><h3>회원가입</h3></td>
-         </tr>
          <tr>            
             <td width="150px" height="25" class="idright">아이디</td>
             <td>
