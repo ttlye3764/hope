@@ -57,6 +57,11 @@ public class IDealServiceImpl implements IDealService{
 		return dao.searchList(params);
 	}
 
+	@Override
+	public String totalCount(Map<String, String> params) throws Exception {
+		return dao.totalCount(params);
+	}
+
 	
 
 	

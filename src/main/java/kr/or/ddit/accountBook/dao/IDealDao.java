@@ -14,5 +14,6 @@ public interface IDealDao {
 	public void registCard(CardVO cardInfo) throws Exception;
 	public void deleteCard(String card_no) throws Exception;
 	public List<DealVO> searchList(Map<String, String> params) throws Exception;
+	public String totalCount(Map<String, String> params) throws Exception;
 
 }

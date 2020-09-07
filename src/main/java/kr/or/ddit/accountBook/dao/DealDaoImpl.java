@@ -62,6 +62,11 @@ public class DealDaoImpl implements IDealDao{
 	public List<DealVO> searchList(Map<String, String> params) throws Exception {
 		return client.selectList("deal.searchList",params);
 	}
+
+	@Override
+	public String totalCount(Map<String, String> params) throws Exception {
+		return client.selectOne("deal.totalCount", params);
+	}
 	
 
 

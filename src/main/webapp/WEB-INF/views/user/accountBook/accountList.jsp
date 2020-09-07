@@ -54,21 +54,66 @@
 		            data : {'startDate':startDate, 'endDate':endDate, 'deal_option':deal_option, 'deal_name':deal_name, 'deal_division':deal_division, 'deal_kind':deal_kind,
 			            		'deal_year':deal_year, 'deal_bungi':deal_bungi, 'deal_month':deal_month, 'mem_no':${LOGIN_MEMBERINFO.mem_no} },
 		            success : function(result) {
-						console.log(result.list);
+			            console.log(result.list);
+			            console.log(result.pagination);
+		            	$('#paginationDIV').empty();
+   	             	    $('#paginationDIV').append(result.pagination);
+			            $('#tbody').empty();
+						var str = "";
+						$.each(result.list,function(i,v){
+							str += '<tr><th>'+(i+1)+'</th>';
+							str += '<td>'+v.deal_date +'</td>';
+							str += '<td>'+v.deal_name +'</td>';
+							str += '<td>'+v.deal_price +'</td>';
+							str += '<td>'+v.deal_option +'</td></tr>';
+						});
+
+						$('#tbody').append(str);
 				    }
-
 			});
-		
 		});
-
-
-
-
-
-
-
-		
 	});
+
+
+
+
+	function callAjax(i){
+		var startDate = $('.startDate').val();
+		var endDate = $('.endDate').val();
+		var deal_option = $('.deal_option option:selected').val();
+		var deal_name = $('.deal_name').val();
+		var deal_division = $('.deal_division option:selected').val();
+		var deal_kind = $('.deal_kind option:selected').val();
+		var deal_year = $('.deal_year option:selected').val();
+		var deal_bungi = $('.deal_bungi option:selected').val();
+		var deal_month = $('.deal_month option:selected').val();
+	
+
+		 $.ajax({
+	            url     : '${pageContext.request.contextPath}/user/accountBook/searchAccountList.do',
+	            type    : 'post',
+	            dataType: 'json',
+	            data : {'startDate':startDate, 'endDate':endDate, 'deal_option':deal_option, 'deal_name':deal_name, 'deal_division':deal_division, 'deal_kind':deal_kind,
+		            		'deal_year':deal_year, 'deal_bungi':deal_bungi, 'deal_month':deal_month, 'mem_no':${LOGIN_MEMBERINFO.mem_no},'currentPage':i },
+	            success : function(result) {
+		            console.log(result.list);
+		            console.log(result.pagination);
+	            	$('#paginationDIV').empty();
+             	    $('#paginationDIV').append(result.pagination);
+		            $('#tbody').empty();
+					var str = "";
+					$.each(result.list,function(i,v){
+						str += '<tr><th>'+(i+1)+'</th>';
+						str += '<td>'+v.deal_date +'</td>';
+						str += '<td>'+v.deal_name +'</td>';
+						str += '<td>'+v.deal_price +'</td>';
+						str += '<td>'+v.deal_option +'</td></tr>';
+					});
+
+					$('#tbody').append(str);
+			    }
+		});
+	}
 </script>
 
 
@@ -195,7 +240,7 @@
 									<th>잔액</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="tbody">
 								<c:forEach var="dealVO" items="${dealList }" varStatus="status">
 									<tr>
 										<th>${status.count }</th>
@@ -203,12 +248,13 @@
 										<td>${dealVO.deal_name}</td>
 										<td>${dealVO.deal_price}</td>
 										<td>${dealVO.deal_option}</td>
-										<td>잔액</td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
+						<div id="paginationDIV">
 						${pagination }
+						</div>
 					</div>
 				</div>
 			</div>
