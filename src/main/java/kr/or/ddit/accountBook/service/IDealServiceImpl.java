@@ -37,6 +37,11 @@ public class IDealServiceImpl implements IDealService{
 		return dao.dealListView(params); 
 	}
 
+	@Override
+	public List<DealVO> searchList(Map<String, String> params) throws Exception {
+		return dao.searchList(params);
+	}
+
 	
 
 	

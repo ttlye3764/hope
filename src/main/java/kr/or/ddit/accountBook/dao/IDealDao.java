@@ -9,5 +9,6 @@ public interface IDealDao {
 	public int insertDeal (DealVO dealInfo) throws Exception;
 	public List<DealVO> dealList (String mem_no) throws Exception;
 	public List<DealVO> dealListView (Map<String, String> params) throws Exception;
+	public List<DealVO> searchList(Map<String, String> params) throws Exception;
 
 }
