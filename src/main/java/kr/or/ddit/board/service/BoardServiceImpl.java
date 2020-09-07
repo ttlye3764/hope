@@ -1,18 +1,23 @@
 package kr.or.ddit.board.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.mail.Session;
+
+import org.apache.catalina.util.RequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
+
 import kr.or.ddit.board.dao.IBoardDao;
 import kr.or.ddit.boardfile.dao.IBoardFileDao;
 import kr.or.ddit.utiles.AttachFileMapper;
 import kr.or.ddit.vo.BoardVO;
 import kr.or.ddit.vo.Board_FileVO;
+import kr.or.ddit.vo.Board_ReplyVO;
+import kr.or.ddit.vo.MemberVO;
 
 @Service("boardService")
 public class BoardServiceImpl implements IBoardService{
@@ -40,7 +45,7 @@ public class BoardServiceImpl implements IBoardService{
 	public void insertBoard(BoardVO boardVO, MultipartFile[] items) throws Exception {
 		boardDao.insertBoard(boardVO);
 		  		
-	    List<Board_FileVO> fileItemList =AttachFileMapper.boardMapper(items, boardVO.getBd_no());
+	    List<Board_FileVO> fileItemList = AttachFileMapper.boardMapper(items, boardVO.getBd_no());
 	      
 	    boardfileDao.insertFileItem(fileItemList);
 	}
@@ -74,6 +79,32 @@ public class BoardServiceImpl implements IBoardService{
 	@Override
 	public List<BoardVO> myboardList(Map<String, String> params) throws Exception {
 		return boardDao.myboardList(params);
+	}
+
+	@Override
+	public Board_FileVO selectBoardFileInfo(String fileNo, String fileBdNo) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("fileNo", fileNo);
+		params.put("fileBdNo", fileBdNo);
+		return boardDao.selectBoardFileInfo(params);
+	}
+
+	// 댓글 등록 
+	@Override
+	public void insertBoardReply(String reContent, String bdNo, String mem_id) {
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("reContent", reContent);
+		params.put("bdNo", bdNo);
+		params.put("memId", mem_id);
+		
+		boardDao.insertBoardReply(params);
+		
+	}
+	
+	@Override
+	public List<Board_ReplyVO> selectBoardReply(String bd_no) {
+		return boardDao.selectBoardReply(bd_no);
 	}
 
 

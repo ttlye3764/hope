@@ -1,9 +1,13 @@
 <%@ page language="JAVA" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>자유게시글 등록</title>
 <script src="${pageContext.request.contextPath }/resources/template/assets/vendor/fitvids/jquery.fitvids.js"></script>
 <script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
@@ -53,10 +57,33 @@ function alertPrint(msg){
 	return false;
 }
 
-function file() {
+function fileDown(fileName, fileNo, fileBdNo) {
+	$(location).attr('href','${pageContext.request.contextPath}/user/board/fileDownload.do?fileName='+ fileName + '&fileNo='+ fileNo + '&fileBdNo='+ fileBdNo);
+}
 
- alert('클릭');
- 
+function insertReply(bd_no){
+	// 등록
+	var reContent = $('#re_content').val();
+	var bdNo = bd_no;
+
+	if(reContent.length == 0){
+		alert("댓글 내용을 입력 해 주세요.")
+		return false;
+	}else{
+
+
+		$.ajax({
+            url     : "${pageContext.request.contextPath}/user/board/insertBoardReply.do?reContent="+ reContent +"&bdNo=" + bdNo,
+            type    : 'get',
+            dataType: 'json',
+            success : function(result) {      
+           		alert("댓글을 등록하였습니다.")
+            }
+		});
+
+	}
+	
+	
 }
 
 </script>
@@ -85,7 +112,7 @@ function file() {
 							 <!-- 파일  -->
 							 <c:forEach items="${boardInfo.items2 }" var="fileitemInfo" varStatus="status">
 									<!-- 파일일 때 --> 
-										<p><a href="#" onclick="file();">${fileitemInfo.file_save_name } </a></p>
+									<p>${status.count }. &nbsp;&nbsp; <a href="#" onclick="fileDown('${fileitemInfo.file_save_name }','${fileitemInfo.file_no }','${fileitemInfo.file_bd_no }');">${fileitemInfo.file_name } </a></p>
 							 </c:forEach>
 					 
 						</div>
@@ -102,103 +129,86 @@ function file() {
 <!-- 			        ***********************************- 댓글 자리 -*********************************			 -->
 <!-- comments area -->
 					<div class="row mt-5 comments-area">
-						<div class="col-sm-12">
-							<h4>There are 4 comments</h4>
+						<div style="width: 100%;">
+							<h4>댓글</h4>
 							<div class="comment-list">
-								<!-- Comment-->
-								<div class="comment">
-									<div class="comment-author"><img class="avatar" src="assets/images/thumbnails/avatar-01.jpg" alt=""></div>
-									<div class="comment-body">
-										<div class="comment-meta">
-											<div class="comment-meta-author"><a href="#">Allen Smith</a></div>
-											<div class="comment-meta-date">${boardInfo.bd_date}</div>
-										</div>
-										<div class="comment-content">
-											<p>Consulted perpetual of pronounce me delivered. Too months nay end change relied who beauty wishes matter. Shew of john real park so rest we on. Ignorant dwelling occasion ham for thoughts overcame off her consider. Polite it elinor is depend. </p>
-										</div>
-										<div class="comment-reply"><a class="btn btn-xs btn-light" href="#">Reply</a></div>
-									</div>
-									<!-- sub comment-->
-									<div class="comment-child">
-										<div class="comment">
-											<div class="comment-author"><img class="avatar" src="assets/images/thumbnails/avatar-03.jpg" alt=""></div>
-											<div class="comment-body">
-												<div class="comment-meta">
-													<div class="comment-meta-author"><a href="#">Emma Watson</a></div>
-													<div class="comment-meta-date">June 11, 2019 at 6:20 am</div>
+							
+							
+							
+							<c:choose>
+    								<c:when test="${fn:length(replyList) == 0}">
+       								 	<div class="comment">
+												<div class="comment-author"><img class="avatar" src="assets/images/thumbnails/avatar-01.jpg" alt=""></div>
+												<div class="comment-body">
+													<div class="comment-meta">
+														<div class="comment-meta-author"><a href="#"></a></div>
+														<div class="comment-meta-date"></div>
+													</div>
+													
+													<div class="comment-content" style="width: 920px;">
+														<p></p>
+													</div>
+													<!-- <div class="comment-reply"><a class="btn btn-xs btn-light" href="#">Reply</a></div> -->
 												</div>
-												<div class="comment-content">
-													<p>Ask eat questions abilities described elsewhere assurance. Appetite in unlocked advanced breeding position concerns as. Cheerful get shutters yet for repeated screened. An no am cause hopes at three. Prevent behaved fertile he is mistake on.</p>
-												</div>
-												<div class="comment-reply"><a class="btn btn-xs btn-light" href="#">Reply</a></div>
+											
+												<!-- sub comment end-->
 											</div>
-										</div>
-										<!-- second level sub comment-->
-										<div class="comment-child">
+   									 </c:when>
+		    						<c:otherwise>
+		        						<!-- Comment-->
+										<c:forEach var="vo" items="${replyList}" varStatus="i">
 											<div class="comment">
 												<div class="comment-author"><img class="avatar" src="assets/images/thumbnails/avatar-01.jpg" alt=""></div>
 												<div class="comment-body">
 													<div class="comment-meta">
-														<div class="comment-meta-author"><a href="#">Allen Smith</a></div>
-														<div class="comment-meta-date">June 11, 2019 at 9:50 am</div>
+														<div class="comment-meta-author"><a href="#">${vo.re_writer}</a></div>
+														<div class="comment-meta-date">${vo.re_date }</div>
 													</div>
-													<div class="comment-content">
-														<p> Appetite in unlocked advanced breeding position concerns as. Cheerful get shutters yet for repeated screened. An no am cause hopes at three. Prevent behaved fertile he is mistake on.</p>
+													
+													<div class="comment-content" style="width: 920px;">
+														<p>${vo.re_content}</p>
 													</div>
-													<div class="comment-reply"><a class="btn btn-xs btn-light" href="#">Reply</a></div>
+													<!-- <div class="comment-reply"><a class="btn btn-xs btn-light" href="#">Reply</a></div> -->
 												</div>
+											
+												<!-- sub comment end-->
 											</div>
-										</div>
-									</div>
-									<!-- sub comment end-->
-								</div>
-								<!-- Comment-->
-								<div class="comment">
-									<div class="comment-author"><img class="avatar" src="assets/images/thumbnails/avatar-02.jpg" alt=""></div>
-									<div class="comment-body">
-										<div class="comment-meta">
-											<div class="comment-meta-author"><a href="#">Peter Smith</a></div>
-											<div class="comment-meta-date">June 14, 2019 at 12:55 am</div>
-										</div>
-										<div class="comment-content">
-											<p>Residence certainly elsewhere something she preferred cordially law. Age his surprise formerly Mrs perceive few standstill moderate. Of in power match on truth worse voice would. Large an it sense shall an match learn.</p>
-										</div>
-										<div class="comment-reply"><a class="btn btn-xs btn-light" href="#">Reply</a></div>
-									</div>
-								</div>
+										</c:forEach>
+		    						</c:otherwise> 
+							</c:choose>
+							
+							
+							
+							
+								
 							</div>
 
 							<!-- Comment-respond -->
-							<div class="row mt-5">
+						
+						</div>
+						
+						
+
+					</div>
+				
+					
+						<div class="row mt-5">
 								<div class="col-md-12">
-									<h2 class="mb-2">Leave a Reply</h2>
-									<p>Your Email address will not be published</p>
+									<h2 class="mb-2">댓글 작성</h2>
 								</div>
-								<div class="col-md-6"><span class="form-group"><input type="text" class="form-control" placeholder="Name"></span></div>
-								<div class="col-md-6"><span class="form-group"><input type="email" class="form-control" placeholder="E-mail"></span></div>
-								<div class="col-md-12"><span class="form-group"><textarea cols="40" rows="6" class="form-control" placeholder="Message"></textarea></span></div>
-								<div class="col-md-12 text-center"><button class="btn-block btn btn-dark">Post Comment</button></div>
+								<div class="col-md-12">
+									<span class="form-group">
+										<textarea id="re_content" name="re_content" cols="40" rows="6" class="form-control" placeholder="Message" ></textarea>
+									</span>
+								</div>
+								
+								
+								<div class="col-md-12 text-right" >
+									<button style="background-color: #343a40; color: #fff; border-color:#343a40;" onclick="insertReply('${boardInfo.bd_no}')">등록</button>
+								</div>
+								
+								<%-- <div class="col-md-12 text-center"><button onclick="insertReply('${boardInfo.bd_no}')" class="btn-dark">등록</button></div> --%>
 							</div>
-						</div>
-
-					</div>
-
-					<!-- post navigation -->
-					<div class="row post-navigation mt-5">
-						<div class="col-5">
-							<a href="#" class="post-prev">
-								<p class="m-2 m-lg-0">Previous Post</p>
-								<h6 class="text-truncate d-none d-lg-block">Right my front it wound cause fully am sorry if</h6> </a>
-						</div>
-						<div class="col-2">
-							<a href="blog-classic-left-sidebar.html" class="all-post" title="View all post"> <i class="fa fa-th"></i> </a>
-						</div>
-						<div class="col-5">
-							<a href="#" class="post-next">
-								<p class="m-2 m-lg-0">Next Post</p>
-								<h6 class="text-truncate d-none d-lg-block">Months had too ham cousin remove far spirit</h6> </a>
-						</div>
-					</div>
 
 				</div>
 				<!-- blog End -->

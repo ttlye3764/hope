@@ -31,10 +31,18 @@
 <!-- Theme CSS -->
 <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 
+
+
+
+
 <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
 <script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
 <script src="${pageContext.request.contextPath }/resources/template/assets/vendor/fitvids/jquery.fitvids.js"></script>
 <script type="text/javascript">
+
+	// 엔터키 이벤트 제거
+   $(document).keypress(function(e) { if (e.keyCode == 13) e.preventDefault(); });
+   
    $(function() {
         // 상세보기 기능
       $('#boardTBY tr').on('click', function() {
@@ -47,7 +55,9 @@
         // 검색 버튼 기능 
       $('#searchBTN').on('click', function(){
          var search_keyword = $("input[id='search_keyword']").val();
-         var search_keycode = $("#search_keycode option:selected").val();      
+         var search_keycode = $("#search_keycode option:selected").val();     
+
+          
 //   		 alert(search_keyword);
 //   		 alert(search_keycode);
           $.ajax({
@@ -107,6 +117,77 @@
       });
 
    });
+
+
+
+// 엔터 버튼 눌렀을때 검색
+function enterkey(){
+
+	  if (window.event.keyCode == 13) {
+
+		var bdDivisionNo = $('#bdDivisionNo').val(); 
+		
+   	 	var search_keyword = $("input[id='search_keyword']").val();
+    	var search_keycode = $("#search_keycode option:selected").val();     
+
+     
+//		 alert(search_keyword);
+//		 alert(search_keycode);
+     $.ajax({
+           url     : "${pageContext.request.contextPath}/user/board/list.do?bd_division="+ bdDivisionNo +"&search_keyword="+search_keyword+"&search_keycode="+search_keycode,
+           type    : 'get',
+           dataType: 'json',
+           success : function(result) {      
+             // 잘 들어오는지 확인하기  
+             console.log(result.boardList);
+
+          // 검색,페이징처리하기전에 기존에 있었던 목록정보 비우는 작업   
+          $('#boardTBY').empty();
+          $('#paginationDIV').empty();
+
+
+          // boardList html 동적으로 생성하기 (밑에 있는 아이 똑같이 가져와야함)
+          
+          var html = "";
+
+          // ajax에서 for문같은 아이
+          $.each(result.boardList, function(index, board){
+
+             html += '<tr>';
+             html += '   <td>' + board.rnum + '<input type="hidden" class="bd_no" value="' + board.bd_no + '"/></td>';
+             html += '   <td>';
+             if(board.bd_depth != 0) {
+                for(var i = 0; i <= board.bd_dept; i++){
+                   html += '&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;';
+                }
+             }
+
+             html += board.bd_title + '</td>';
+             
+             html += '<td>' + board.bd_writer + '</td>';
+             html += '<td>' + board.bd_date + '</td>';
+             html += '<td>' + board.bd_hit + '</td>';
+
+             html += '</tr>';          
+          });
+          
+          // 잘 들어오는지 콘솔에 찍어보기 
+          console.log(html);               
+                         
+          // 비웠던 이 아이들 다시 어팬드해서 가져오기 
+          $('#boardTBY').append(html);
+          $('#paginationDIV').append(result.pagination);
+
+          
+          	$('#boardTBY tr').on('click', function() {
+              var bd_no = $(this).find('td:eq(0) input').val();
+              var rnum = $(this).find('td:eq(0)').text();
+              $(location).attr('href', '${pageContext.request.contextPath}/user/board/boardView.do?bd_no=' + bd_no + '&rnum=' + rnum + "&bd_division="+ bdDivisionNo );
+           });
+        }
+      });
+	}
+}
 </script>
 
 </head>
@@ -142,6 +223,8 @@ Banner innerpage -->
 Banner innerpage -->
 
 
+
+
    <!-- Table -->
    <section>
       <div class="container">
@@ -164,7 +247,7 @@ Banner innerpage -->
                                  </select>
                               </div>
                               <div class=>
-                                 <input id="search_keyword"
+                                 <input id="search_keyword" onkeyup="enterkey();" 
                                     class="form-control border-radius-right-0 border-right-0 mb-0"
                                     style="height: 40px; display: inline-block;" type="text" name="search_keyword"
                                     placeholder="Search" size="35px">
@@ -195,6 +278,7 @@ Banner innerpage -->
                <!-- Sidebar end-->
 
                <div class="table-responsive-sm">
+               <input type="hidden" id="bdDivisionNo" value="${bd_division }" />
                   <table class="table table-lg table-bordered table-striped">
                      <thead>
                         <tr>

@@ -19,8 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class AttachFileMapper {
 	// knowlege file
 	public static List<FileItemVO> mapper(MultipartFile[] items, String k_no) {
-		List<FileItemVO> fileItemList = new ArrayList<FileItemVO>();
-
+		List<FileItemVO> fileItemList = new ArrayList<FileItemVO>();        
+ 
 		if (items != null) {
 			FileItemVO fileItemInfo = null;
 
@@ -33,6 +33,7 @@ public class AttachFileMapper {
 					// 브라우저별 d:\\temp\image\a.png
 					// or a.png
 					// a.png 반환
+					
 					String fileName = FilenameUtils.getName(item.getOriginalFilename());
 					fileItemInfo.setFile_name(fileName);
 
@@ -188,7 +189,7 @@ public class AttachFileMapper {
 						fileItemInfo.setFile_size(String.valueOf(item.getSize()));
 
 						fileItemList.add(fileItemInfo);
-
+						
 						saveFile(saveFileName, item);
 					}
 				}

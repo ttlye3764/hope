@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="boardReply">
+
+<insert id="insertBoardReply" parameterType="map">
+	insert into board_reply (re_no,
+							 bd_no,
+							 re_content,
+							 re_writer,
+							 re_rnum,
+							 re_date
+							)
+					values (re_seq.nextval,
+							#{bdNo},
+							#{reContent},
+							#{memId},
+							(SELECT NVL(MAX(re_rnum),0)+1 FROM board_reply WHERE bd_no = #{bdNo}),
+							SYSDATE
+							)		
+</insert>
+
+<select id="selectBoardReply" parameterType="String" resultType="board_replyVO">
+	select *
+	from board_reply
+	where bd_no = #{bd_no}
+	ORDER BY TO_NUMBER(re_rnum) DESC
+</select>
+
+</mapper>
