@@ -15,5 +15,7 @@ public interface IDealService {
 	public List<CardVO> cardList (String mem_no) throws Exception;
 	public void registCard(CardVO cardInfo) throws Exception;
 	public void deleteCard(String card_no) throws Exception;
+	public void deletedeal(String deal_no) throws Exception;
 	public String totalCount(Map<String, String> params) throws Exception;
+
 }

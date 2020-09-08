@@ -156,6 +156,16 @@ public class AccountController {
 		andView.setViewName("jsonConvertView");
 		return andView;
 	}
+	@RequestMapping("deletedeal")
+	public ModelAndView deletedeal(String deal_no, String mem_no) throws Exception {
+		ModelAndView andView = new ModelAndView();
+		service.deletedeal(deal_no);
+		List<DealVO> list = service.dealList(mem_no);
+		andView.addObject("list", list);
+		// <bean id="jsonConvertView" class="..MappingJackson2JsonView>
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
 	
 	@RequestMapping("searchAccountList")
 	public ModelAndView searchAccountList(@RequestParam(value = "startDate", required = false) String startDate, @RequestParam(value = "endDate", required = false) String endDate, @RequestParam(value = "deal_option", required = false) String deal_option,
