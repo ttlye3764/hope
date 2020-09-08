@@ -33,7 +33,7 @@
 	<select resultType="healthFileVO" id="healthFileInfo" parameterType="map">
 		SELECT *
 		FROM HEALTHFILE
-		WHERE HEALTHIMAGE_SEQ = #{HEALTHIMAGE_SEQ}
+		WHERE HEALTHIMAGE_SEQ = #{healthimage_seq}
 	</select>
 
 	<delete id="deletehealthFile" parameterType="String">

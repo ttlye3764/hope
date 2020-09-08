@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="inbody">
+
+	<select resultType="inbodyVO" id="inbodyList">
+		SELECT *
+		FROM INBODY
+		ORDER BY INBODY_NO DESC
+	</select>
+	
+	<insert id="insertInbody" parameterType="inbodyVO">
+		INSERT INTO
+		INBODY(
+			inbody_no,
+			inbody_weight,
+			inbody_muscle,
+			inbody_fat,
+			inbody_bone,
+			mem_no
+		)
+		VALUES(
+		INBODY_SEQ.NEXTVAL
+		,#{inbody_weight}
+		,#{inbody_muscle}
+		,#{inbody_fat}
+		,#{inbody_bone}
+		,#{mem_no}
+		)
+	</insert>
+	
+	<select resultType="inbodyVO" id="inbodyInfo" parameterType="map">
+		SELECT *
+		FROM INBODY
+		WHERE  inbody_no = #{inbody_no}
+	</select>
+	
+	<delete id="deleteInbody" parameterType="String">
+		DELETE
+		FROM INBODY
+		WHERE inbody_no = #{inbody_no}
+	</delete>
+
+	<update id="updateInbody" parameterType="inbodyVO">
+		UPDATE INBODY
+		SET 
+		inbody_weight = #{inbody_weight}, 
+		inbody_muscle = #{inbody_muscle},
+		inbody_fat = #{inbody_fat},
+		inbody_date = sysdate,
+		inbody_bone = #{inbody_bone}
+		WHERE inbody_no = #{inbody_no}
+	</update>
+	
+</mapper>
