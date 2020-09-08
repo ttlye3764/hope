@@ -247,8 +247,8 @@
 					$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/healthImageList.do');
 				}); 
 
-				/* // 인바디 정보 등록
-				$('#inbody').click(function(){
+				 // 인바디 정보 등록
+				$('form[name=file]').submit(function(){
 					var files = $('#file').val();
 					if(files == ""){
 						swal("FILE","파일을 넣어주세요.", "warning");
@@ -256,8 +256,8 @@
 						return false;
 					}
 					
-					$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/ocr.do?files=' + files);
-				});  */
+					$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/ocr.do');
+				});  
 
 				$("#playBtn").on("click", function() {
 			        $("#myVideo").trigger("play");
