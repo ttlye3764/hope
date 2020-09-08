@@ -228,27 +228,27 @@
 
 			function shoulder() {
 				  var choose = $('#shoulder').val();	
-				  location.href = '${pageContext.request.contextPath}/admin/healthImage/chooseList.do?choose=' + choose;
+				  location.href = '${pageContext.request.contextPath}/admin/healthImage/healthImageList.do?choose=' + choose;
 			}
 			
 			function back() {
 				  var choose = $('#back').val();	
-				  location.href = '${pageContext.request.contextPath}/admin/healthImage/chooseList.do?choose=' + choose;
+				  location.href = '${pageContext.request.contextPath}/admin/healthImage/healthImageList.do?choose=' + choose;
 			}
 			
 			function chest() {
 				  var choose = $('#chest').val();	
-				  location.href = '${pageContext.request.contextPath}/admin/healthImage/chooseList.do?choose=' + choose;
+				  location.href = '${pageContext.request.contextPath}/admin/healthImage/healthImageList.do?choose=' + choose;
 			}
 			
 			function arm() {
 				  var choose = $('#arm').val();	
-				  location.href = '${pageContext.request.contextPath}/admin/healthImage/chooseList.do?choose=' + choose;
+				  location.href = '${pageContext.request.contextPath}/admin/healthImage/healthImageList.do?choose=' + choose;
 			}
 			
 			function leg() {
 				  var choose = $('#leg').val();	
-				  location.href = '${pageContext.request.contextPath}/admin/healthImage/chooseList.do?choose=' + choose;
+				  location.href = '${pageContext.request.contextPath}/admin/healthImage/healthImageList.do?choose=' + choose;
 			}
 
 			

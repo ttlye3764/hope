@@ -7,6 +7,13 @@
 		FROM FileItem
 		order by file_no
 	</select>
+	
+	<select resultType="fileitemVO" id="fileitemListInfo">
+		SELECT *
+		FROM FileItem
+		WHERE K_NO = #{k_no}
+		order by file_no
+	</select>
 
 	<insert id="insertFileItem" parameterType="fileitemVO">
 		INSERT INTO
@@ -24,7 +31,7 @@
 	<select resultType="fileitemVO" id="fileitemInfo" parameterType="map">
 		SELECT *
 		FROM FileItem
-		WHERE K_NO = #{k_no}
+		WHERE FILE_SEQ = #{FILE_SEQ}
 	</select>
 
 	<delete id="deleteFileItem" parameterType="String">

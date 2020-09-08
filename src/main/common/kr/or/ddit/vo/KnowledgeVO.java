@@ -15,6 +15,15 @@ public class KnowledgeVO {
 	private int rnum; // 순서
 	private String mem_no; // 멤버 번호
 	private List<FileItemVO> items; // 이미지 리스트
+	private List<FileItemVO> itemsInfo; // 이미지 리스트
+
+	public List<FileItemVO> getItemsInfo() {
+		return itemsInfo;
+	}
+
+	public void setItemsInfo(List<FileItemVO> itemsInfo) {
+		this.itemsInfo = itemsInfo;
+	}
 
 	public String getMem_no() {
 		return mem_no;
