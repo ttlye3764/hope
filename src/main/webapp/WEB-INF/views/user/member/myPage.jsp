@@ -374,15 +374,7 @@ function setThumbnail(event) {
 	var reader = new FileReader(); 
 	var img;
 	reader.onload = function(event) {
-			document.querySelector("div#image_container").removeChild(img);
-			
-			img = document.createElement("img"); 
-			img.setAttribute("src", event.target.result); 
-			
-			document.querySelector("div#image_container").appendChild(img);
-			
-			img.style.height = '100px';
-		    img.style.width = '100px';
+			$('#imge').attr('src', event.target.result);  
 		}; 
 		reader.readAsDataURL(event.target.files[0]);
 
@@ -425,9 +417,9 @@ function setThumbnail(event) {
    	  	<c:forEach items="${memberInfo.items2 }" var="fileitemInfo" varStatus="status">
    	  		<c:if test="${!empty memberInfo.items2[status.index].file_save_name }">  
 				<div id="image_container" style="width: 300px; height: 150px;">
-					<img src="/files/${memberInfo.items2[status.index].file_save_name}" alt="pic1" style="width: 100px; height: 100px;">
+					<img id="imge" src="/files/${memberInfo.items2[status.index].file_save_name}" alt="pic1" style="width: 100px; height: 100px;">
 					<input type="file" class="form-control-file" name="files"
-					  id="exampleFormControlFile1" onchange="setThumbnail(event);" />${memberInfo.items2[status.index].file_name }
+					  id="exampleFormControlFile1" onchange="setThumbnail(event);"/>
 				</div>
 			</c:if>
 		</c:forEach>
