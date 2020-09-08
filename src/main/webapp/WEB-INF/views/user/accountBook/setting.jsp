@@ -410,7 +410,7 @@ function categoryChange(e){
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h4 class="modal-title" id="myCenterModalLabel">Register Your Card</h4>
+                                                        <h4 class="modal-title" id="myCenterModalLabel">고정 거래 등록</h4>
                                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                                     </div>
                                                     <div class="modal-body">
