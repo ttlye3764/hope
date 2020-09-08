@@ -39,7 +39,7 @@ $(function(){
 	});
 	
 	$('form[name=memView]').submit(function(){
-			$(this).attr('action','${pageContext.request.contextPath}/admin/member/updateMemberInfo.do');
+			$(this).attr('action','${pageContext.request.contextPath}/admin/member/updateMemberInfo.do);
 
 			var mem_birth =	$('input[name=mem_birth]').val();
 			
@@ -78,7 +78,10 @@ $(function(){
 	});
 	
 	$('#cancel').click(function(){
-		$(location).attr('href','${pageContext.request.contextPath}/admin/member/memberList.do');
+		var keycode = '${param.search_keycode}';
+		var keyword = '${param.search_keyword}';
+		var currentPage = '${param.currentPage}';
+		$(location).attr('href','${pageContext.request.contextPath}/admin/member/memberList.do?search_keycode='+keycode+'&search_keyword='+keyword+'&currentPage='+currentPage);
 	});
 
 	var mem_birth = '${memberInfo.mem_birth }';

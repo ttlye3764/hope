@@ -11,7 +11,10 @@
 	$(function(){
 		$('table tr:gt(0)').on('click',function(){
 			var mem_id = $(this).find('td:eq(1)').text();
-			$(location).attr('href','${pageContext.request.contextPath}/admin/member/memberView.do?mem_id='+mem_id);
+			var keycode = '${param.search_keycode}';
+			var keyword = '${param.search_keyword}';
+			var currentPage = '${param.currentPage}';
+			$(location).attr('href','${pageContext.request.contextPath}/admin/member/memberView.do?mem_id='+mem_id+'&search_keycode='+keycode+'&search_keyword='+keyword+'&currentPage='+currentPage);
 		});
 		mem_division = '${LOGIN_MEMBERINFO.mem_division}';
 // 		if(mem_division != 1){

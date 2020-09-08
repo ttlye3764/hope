@@ -358,6 +358,10 @@
 		$('#hplabel').text("");
 		$('input[name=hp_num]').removeAttr("disabled");
 	}
+
+	function delete1(){
+		$(location).attr('href', '${pageContext.request.contextPath}/user/member/delete.do');
+	}
 </script>
 
 </head>

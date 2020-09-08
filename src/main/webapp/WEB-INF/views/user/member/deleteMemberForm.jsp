@@ -63,14 +63,14 @@
 	}
 	function LogOut() {
 		$.ajax({
-					type : 'POST',
-					url : '${pageContext.request.contextPath}/user/join/logout.do',
-					dataType : 'JSON',
-					data : {},
-					success : function(result) {
-						location.href = "${pageContext.request.contextPath}/user/main/mainForm.do";
-					}
-				});
+			type : 'POST',
+			url : '${pageContext.request.contextPath}/user/join/logout.do',
+			dataType : 'JSON',
+			data : {},
+			success : function(result) {
+				location.href = "${pageContext.request.contextPath}/user/main/mainForm.do";
+			}
+		});
 	}
 	function delete_modal() {
 		var req = document.form.req.checked;
