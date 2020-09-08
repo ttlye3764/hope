@@ -75,7 +75,7 @@ public class AccountController {
 	
 	@RequestMapping("accountList")
 	public ModelAndView accountList(String mem_no, HttpServletRequest request,HttpSession session,
-			Map<String, String> params,ModelAndView andView,String currentPage, RolePaginationUtil_BYEOL pagination) throws Exception {
+			Map<String, String> params,ModelAndView andView,String currentPage, RolePaginationUtil_account pagination) throws Exception {
 		
 		if(currentPage == null){
 			currentPage = "1";
@@ -97,7 +97,7 @@ public class AccountController {
 		//params.put("mem_no", memberInfo.getMem_no());
 		params.put("mem_no", "2");
 		
-		List<DealVO> list = service.dealListView(params);
+		List<DealVO> list = service.searchList(params);
 		
 		andView.addObject("dealList", list);
 		andView.addObject("pagination",pagination.getPagingHtmls());

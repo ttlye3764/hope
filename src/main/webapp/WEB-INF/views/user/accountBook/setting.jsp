@@ -78,9 +78,7 @@ $(function(){
 		        data : {'card_kind':card_kind,'mem_no':${LOGIN_MEMBERINFO.mem_no}},
 		        success : function(Result) {
 			        var card_no = Number(Result.cardlist[Result.cardlist.length-1].card_no);
-			        
 			        $('#cardTable').append('<tr><td>'+card_kind+'</td><td><button type="button" value="'+card_no+'" onclick="deleteCard('+card_no+')">삭제</button></td></tr>');
-			        
 		        }
 		
 		   	});  // 등록 
@@ -155,8 +153,6 @@ function categoryChange(e){
 		opt.innerHTML=d[x];
 		target.appendChild(opt);
 	}
-		
-	
 }
 
 </script>

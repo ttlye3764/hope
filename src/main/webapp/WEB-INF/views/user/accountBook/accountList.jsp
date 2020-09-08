@@ -14,6 +14,7 @@
 }
 </style>
 <script>
+
 	$(function(){
 	var str = "";
 		for(i=6; i>0; i--){
@@ -72,8 +73,86 @@
 				    }
 			});
 		});
-	});
 
+		$('.deal_year').on('change',function(){
+			$(".deal_bungi option:eq(0)").prop("selected", true);
+			$(".deal_month option:eq(0)").prop("selected", true);
+			$(".deal_option option:eq(0)").prop("selected", true);
+			$(".deal_division option:eq(0)").prop("selected", true);
+			$(".deal_kind option:eq(0)").prop("selected", true);
+			$(".startDate").val("");
+			$(".endDate").val("");
+			$(".deal_name").val("");
+		});
+		$('.deal_bungi').on('change',function(){
+			$(".deal_year option:eq(0)").prop("selected", true);
+			$(".deal_month option:eq(0)").prop("selected", true);
+			$(".deal_option option:eq(0)").prop("selected", true);
+			$(".deal_division option:eq(0)").prop("selected", true);
+			$(".deal_kind option:eq(0)").prop("selected", true);
+			$(".startDate").val("");
+			$(".endDate").val("");
+			$(".deal_name").val("");
+		});
+		$('.deal_month').on('change',function(){
+			$(".deal_bungi option:eq(0)").prop("selected", true);
+			$(".deal_year option:eq(0)").prop("selected", true);
+			$(".deal_option option:eq(0)").prop("selected", true);
+			$(".deal_division option:eq(0)").prop("selected", true);
+			$(".deal_kind option:eq(0)").prop("selected", true);
+			$(".startDate").val("");
+			$(".endDate").val("");
+			$(".deal_name").val("");
+		});
+		$('.deal_division').on('change',function(){
+			$(".deal_bungi option:eq(0)").prop("selected", true);
+			$(".deal_year option:eq(0)").prop("selected", true);
+			$(".deal_month option:eq(0)").prop("selected", true);
+		});
+		$('.deal_option').on('change',function(){
+			$(".deal_bungi option:eq(0)").prop("selected", true);
+			$(".deal_year option:eq(0)").prop("selected", true);
+			$(".deal_month option:eq(0)").prop("selected", true);
+		});
+		$('.startDate').on('change',function(){
+			$(".deal_bungi option:eq(0)").prop("selected", true);
+			$(".deal_year option:eq(0)").prop("selected", true);
+			$(".deal_month option:eq(0)").prop("selected", true);
+		});
+		$('.endDate').on('change',function(){
+			$(".deal_bungi option:eq(0)").prop("selected", true);
+			$(".deal_year option:eq(0)").prop("selected", true);
+			$(".deal_month option:eq(0)").prop("selected", true);
+		});
+	});
+	
+	function categoryChange(e){
+
+		$(".deal_bungi option:eq(0)").prop("selected", true);
+		$(".deal_year option:eq(0)").prop("selected", true);
+		$(".deal_month option:eq(0)").prop("selected", true);
+
+		
+		var kind_a = ["체크카드","신용카드"];
+	    var target = document.getElementById("kind");
+	    
+		if(e.value=="카드"){
+		    var d = kind_a;
+			$("#kind").show(); 
+			$("#cardRegistBtn").show(); 
+		}else if(e.value=="현금"){
+			$("#kind").hide(); 
+			$("#cardRegistBtn").hide(); 
+		}
+			target.options.length = 0;
+
+		for(x in d){
+			var opt = document.createElement("option");
+			opt.value=d[x];
+			opt.innerHTML=d[x];
+			target.appendChild(opt);
+		}
+	}
 
 
 
@@ -195,13 +274,13 @@
 							<div style="width:180px; height:75px;">
 								<label class="control-label" style="margin-left: 10px; margin-top:5px; text-align:left; width:165px;">결제방법</label>
 								<!-- <input type="text" style="margin-top: 5px; text-align:left; width:150px; height: 40px;"> -->
-								<select name="deal_kind" class="deal_kind" style="text-align:center; margin-top: 5px; text-align:left; width:150px; height: 40px;">
+								<select name="deal_kind" class="deal_kind" onchange="categoryChange(this);" style="text-align:center; margin-top: 5px; text-align:left; width:150px; height: 40px;">
 									<option value="">결제방법</option>
 									<option value="현금">현금</option>
 									<option value="카드">카드</option>
-									<option value="계좌이체">계좌이체</option>
 							    </select>
 							</div>
+							
 						</div>
 					</div>
 					<div style="width:280px; height:150px; display: flex; flex-direction : column;">
@@ -216,10 +295,16 @@
 									<option style="text-align: center;" value="">월별</option>
 							</select>
 						</div>
-						<div style="width:280px; height:75px; display: flex; justify-content:flex-start; ">
-							<div style="width:180px; height:75px; display: flex; flex-direction : column	">
-									<label class="control-label" style="margin-left: 13px; margin-top:5px; text-align:left; width:50px;"></label>
-									<button class="btn btn-outline-grad btn-block" id="searchBTN" style="margin-left: 13px; color: #37bf74; width:40px; height:40px; text-align:left; margin-bottom: 10px;" type="button">검색</button>
+						<div style="width:280px; height:75px; display: flex; justify-content:flex-start; ">							
+							<div id="kind" style="width:180px; height:40px; visibility:hidden; ">
+								<label class="control-label" style="margin-left: 10px; margin-top:5px; text-align:left; width:165px;"></label>
+								<select style="width:180px; height:40px;">
+									<option value="">카드선택</option>
+								</select>
+							</div>
+							<div>
+								<label class="control-label" style="margin-left: 13px; margin-top:5px; text-align:left; width:50px;"></label>
+								<img alt="#" id="searchBTN" src="${pageContext.request.contextPath}/images/search1.PNG" style="border:1px solid green; margin-left: 13px; color: #37bf74; width:40px; height:40px;">
 							</div>
 						</div>
 					</div>
@@ -237,7 +322,6 @@
 									<th>아이템</th>
 									<th>금액</th>
 									<th>입/출</th>
-									<th>잔액</th>
 								</tr>
 							</thead>
 							<tbody id="tbody">
@@ -252,7 +336,7 @@
 								</c:forEach>
 							</tbody>
 						</table>
-						<div id="paginationDIV">
+						<div id="paginationDIV" style="margin-left: 35%;">
 						${pagination }
 						</div>
 					</div>
