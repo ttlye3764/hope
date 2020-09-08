@@ -78,7 +78,7 @@
 					        <div class="option">
 					            <div>
 					                <form onsubmit="searchPlaces(); return false;">
-					                  	  키워드 : <input type="text" value="헬스장" id="keyword" size="15"> 
+					                  	  키워드 : <input type="text" value="대전 중구 헬스장" id="keyword" size="15"> 
 					                    <input type="submit" style="margin: 5px 0px 0px 70px;">
 					                </form>
 					            </div>
