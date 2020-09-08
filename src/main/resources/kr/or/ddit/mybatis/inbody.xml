@@ -6,41 +6,50 @@
 	<select resultType="inbodyVO" id="inbodyList">
 		SELECT *
 		FROM INBODY
-		WHERE FILE_INBODY_NO = #{file_inbody_no}
-		ORDER BY FILE_NO DESC
+		ORDER BY INBODY_NO DESC
 	</select>
 	
 	<insert id="insertInbody" parameterType="inbodyVO">
 		INSERT INTO
 		INBODY(
-		FILE_NO,FILE_NAME,FILE_SAVE_NAME,
-		FILE_TYPE,FILE_SIZE,
-		FILE_INBODY_NO
+			inbody_no,
+			inbody_weight,
+			inbody_muscle,
+			inbody_fat,
+			inbody_bone,
+			mem_no
 		)
-
 		VALUES(
-		INBODY_SEQ.NEXTVAL,#{file_name},#{file_save_name},
-		#{file_type},#{file_size}, #{file_inbody_no}
+		INBODY_SEQ.NEXTVAL
+		,#{inbody_weight}
+		,#{inbody_muscle}
+		,#{inbody_fat}
+		,#{inbody_bone}
+		,#{mem_no}
 		)
 	</insert>
 	
 	<select resultType="inbodyVO" id="inbodyInfo" parameterType="map">
 		SELECT *
 		FROM INBODY
-		WHERE INBODY_SEQ = #{inbody_seq}
+		WHERE  inbody_no = #{inbody_no}
 	</select>
 	
 	<delete id="deleteInbody" parameterType="String">
 		DELETE
 		FROM INBODY
-		WHERE FILE_INBODY_NO = #{file_inbody_no}
+		WHERE inbody_no = #{inbody_no}
 	</delete>
 
 	<update id="updateInbody" parameterType="inbodyVO">
 		UPDATE INBODY
-		SET FILE_NAME = #{file_name}, FILE_SAVE_NAME = #{file_save_name},
-		FILE_TYPE = #{file_type}, FILE_SIZE = #{file_size}
-		WHERE FILE_INBODY_NO = #{file_inbody_no}
+		SET 
+		inbody_weight = #{inbody_weight}, 
+		inbody_muscle = #{inbody_muscle},
+		inbody_fat = #{inbody_fat},
+		inbody_date = sysdate,
+		inbody_bone = #{inbody_bone}
+		WHERE inbody_no = #{inbody_no}
 	</update>
 	
 </mapper>

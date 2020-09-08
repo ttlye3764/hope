@@ -2,59 +2,68 @@ package kr.or.ddit.vo;
 
 public class InbodyVO {
 
-	private String file_no;
-	private String file_inbody_no;
-	private String file_name;
-	private String file_save_name;
-	private String file_type;
-	private String file_size;
+	private String inbody_no;
+	private String inbody_weight;
+	private String inbody_muscle;
+	private String inbody_fat;
+	private String inbody_date;
+	private String inbody_bone;
+	private String mem_no;
 
-	public String getFile_no() {
-		return file_no;
+	public String getMem_no() {
+		return mem_no;
 	}
 
-	public void setFile_no(String file_no) {
-		this.file_no = file_no;
+	public void setMem_no(String mem_no) {
+		this.mem_no = mem_no;
 	}
 
-	public String getFile_inbody_no() {
-		return file_inbody_no;
+	public String getInbody_bone() {
+		return inbody_bone;
 	}
 
-	public void setFile_inbody_no(String file_inbody_no) {
-		this.file_inbody_no = file_inbody_no;
+	public void setInbody_bone(String inbody_bone) {
+		this.inbody_bone = inbody_bone;
 	}
 
-	public String getFile_name() {
-		return file_name;
+	public String getInbody_date() {
+		return inbody_date;
 	}
 
-	public void setFile_name(String file_name) {
-		this.file_name = file_name;
+	public void setInbody_date(String inbody_date) {
+		this.inbody_date = inbody_date;
 	}
 
-	public String getFile_save_name() {
-		return file_save_name;
+	public String getInbody_no() {
+		return inbody_no;
 	}
 
-	public void setFile_save_name(String file_save_name) {
-		this.file_save_name = file_save_name;
+	public void setInbody_no(String inbody_no) {
+		this.inbody_no = inbody_no;
 	}
 
-	public String getFile_type() {
-		return file_type;
+	public String getInbody_weight() {
+		return inbody_weight;
 	}
 
-	public void setFile_type(String file_type) {
-		this.file_type = file_type;
+	public void setInbody_weight(String inbody_weight) {
+		this.inbody_weight = inbody_weight;
 	}
 
-	public String getFile_size() {
-		return file_size;
+	public String getInbody_muscle() {
+		return inbody_muscle;
 	}
 
-	public void setFile_size(String file_size) {
-		this.file_size = file_size;
+	public void setInbody_muscle(String inbody_muscle) {
+		this.inbody_muscle = inbody_muscle;
+	}
+
+	public String getInbody_fat() {
+		return inbody_fat;
+	}
+
+	public void setInbody_fat(String inbody_fat) {
+		this.inbody_fat = inbody_fat;
 	}
 
 }
