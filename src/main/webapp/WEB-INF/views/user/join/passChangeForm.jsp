@@ -28,13 +28,14 @@
 	<!-- Theme CSS -->
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 	
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.js"></script>
 <script type='text/javascript'>
 $(function(){
 	$('#btn1').click(function(){
 		if($('#passchecklb').text()=="비밀번호가 일치하지 않습니다."){
-			alert('비밀번호를 확인해주세요.');
+			swal("","비밀번호를 확인해주세요.", "warning");
 			return false;
 		}
 		

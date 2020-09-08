@@ -42,48 +42,6 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 $(function(){
-   $("#mem_hp").keyup(function(e){
-      if(e.keyCode == 8){
-         var code = $('input[name=mem_hp]').val();
-         var lastChar = code.charAt(code.length-1);
-         if(lastChar == '-'){
-            code = code.substr(0,code.length-1);
-            $('input[name=mem_hp]').val(code);
-         }
-      }else{
-         var hp = $('input[name=mem_hp]').val();
-         var lastChar = hp.charAt(hp.length-1);
-         if(lastChar == '-'){
-             hp = hp.substr(0,hp.length-1);
-             $('input[name=mem_hp]').val(hp);
-         }else{
-            if(hp.length == 3 || hp.length == 8){
-               $('input[name=mem_hp]').val(hp + "-");
-            }
-         }     
-      }
-   });
-   $("#mem_birth").keyup(function(e){
-         if(e.keyCode == 8){
-            var code = $('input[name=mem_birth]').val();
-            var lastChar = code.charAt(code.length-1);
-            if(lastChar == '-'){
-               code = code.substr(0,code.length-1);
-               $('input[name=mem_birth]').val(code);
-            }
-         }else{
-            var birth = $('input[name=mem_birth]').val();
-            var lastChar = birth.charAt(birth.length-1);
-            if(lastChar == '-'){
-               birth = birth.substr(0,birth.length-1);
-               $('input[name=mem_birth]').val(birth);
-           }else{
-               if(birth.length == 4 || birth.length == 7){
-                  $('input[name=mem_birth]').val(birth + "-");
-               }
-           }
-         }
-      });
    $('form[name=memberForm]').submit(function() {
       var idcheck = $('#idlabel').text();
       var emailcheck = $('#emaillabel').text();
@@ -91,15 +49,12 @@ $(function(){
       var pass = $('#pass').val();
       var pass2 = $('#pass2').val();
       var passlb = $('#passchecklb').text();
+      var nickcheck = $('#nicklb').text();
 
          if(idcheck == '' || idcheck == '이미 존재하는 아이디입니다.' || idcheck == '형식에 맞지 않는 아이디입니다.'){
             swal("","아이디를 확인해주세요.", "warning");
             return false;
          }   
-         if(idcheck == '' || idcheck == '이미 존재하는 닉네임입니다.' || idcheck == '형식에 맞지 않는 닉네임입니다.'){
-            swal("","닉네임을 확인해주세요.", "warning");
-            return false;
-         }
          if(pass == '' || pass2 == ''){
         	swal("","비밀번호를 입력해주세요.", "warning");
             return false;
@@ -117,12 +72,17 @@ $(function(){
             swal("","성별을 선택해주세요.", "warning");
             return false;
          }
+         var name = $('#mem_name').val();
+         if (name == '') {
+        	 swal("","이름을 입력해주세요.", "warning");
+            return false;
+         }
 
-//          var name = $('#mem_name').val();
-//          if (!name.validationNAME()) {
-//             alert('올바른 이름을 입력해주세요.')
-//             return false;
-//          }
+         if(nickcheck == '' || nickcheck == '이미 존재하는 닉네임입니다.' || nickcheck == '형식에 맞지 않는 닉네임입니다.'){
+             swal("","닉네임을 확인해주세요.", "warning");
+             return false;
+          }
+         
          var mem_birth =   $('input[name=mem_birth]').val();
          
          if (!mem_birth.validationBIR()) {
@@ -250,10 +210,10 @@ $(function(){
             mem_hp : $('input[name=mem_hp]').val()
          },
          error : function(result) {
-        	swal("",result.json, "warning");
+        	swal("",result.json, "success");
          },
          success : function(result) {
-        	swal("",result.json, "warning");
+        	swal("",result.json, "success");
          }
       });
    };
@@ -303,10 +263,10 @@ $(function(){
               $('.wrap-loading').addClass('display-none');
           },
          error : function(result) {
-        	swal("",result.json, "warning");
+        	swal("",result.json, "success");
          },
          success : function(result) {
-        	swal("",result.json, "warning");
+        	swal("",result.json, "success");
          }
       });
    };
@@ -503,7 +463,7 @@ $(function(){
             <td width="150px" height="25" class="idright">휴대전화</td>
             <td>
             <div class="input-group mb-3" style="width:350px">
-            <input type="text" name="mem_hp" id="mem_hp" class="form-control" placeholder="- 빼고 입력" onchange="smschange()"/> 
+            <input type="text" name="mem_hp" id="mem_hp" class="form-control" placeholder="010-1234-5678" onchange="smschange()"/> 
             <a href="javascript:sendsms();">[인증번호 전송]</a></div>
             <input type="text" class="form-control" name="hp_num" onkeyup="checksms()"/>
             <label id="hplabel"></label>

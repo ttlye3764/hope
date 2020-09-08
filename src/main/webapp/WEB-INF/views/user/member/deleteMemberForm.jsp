@@ -41,11 +41,15 @@
 <script type='text/javascript'>
 	$(function() {
 		var id = '${LOGIN_MEMBERINFO.mem_id}';
-		if (id == '') {
-			swal("","로그인 후 이용해주세요.", "warning");
-			$(location).attr('href',
-					'${pageContext.request.contextPath}/user/main/mainForm.do');
-		}
+		if(id==''){
+			   swal({
+		      	    title: "",
+		      	    text: "로그인 후 이용해주세요.",
+		      	    type: "warning"
+		      	}).then(function() {
+		      		$(location).attr('href','${pageContext.request.contextPath}/user/main/mainForm.do');
+		      	});
+		   }
 	});
 	function chk() {
 			$.ajax({

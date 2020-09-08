@@ -50,54 +50,18 @@ $(function(){
    }else{
       $('#woman').prop('checked', true);
    }
-
-   $("#mem_hp").keyup(function(e){
-	      if(e.keyCode == 8){
-	         var code = $('input[name=mem_hp]').val();
-	         var lastChar = code.charAt(code.length-1);
-	         if(lastChar == '-'){
-	            code = code.substr(0,code.length-1);
-	            $('input[name=mem_hp]').val(code);
-	         }
-	      }else{
-	         var hp = $('input[name=mem_hp]').val();
-	         var lastChar = hp.charAt(hp.length-1);
-	         if(lastChar == '-'){
-	             hp = hp.substr(0,hp.length-1);
-	             $('input[name=mem_hp]').val(hp);
-	         }else{
-	         	if(hp.length == 3 || hp.length == 8){
-	         	   $('input[name=mem_hp]').val(hp + "-");
-	        	 }
-	         }     
-	      }
-	   });
-	   $("#mem_birth").keyup(function(e){
-		      if(e.keyCode == 8){
-		         var code = $('input[name=mem_birth]').val();
-		         var lastChar = code.charAt(code.length-1);
-		         if(lastChar == '-'){
-		            code = code.substr(0,code.length-1);
-		            $('input[name=mem_birth]').val(code);
-		         }
-		      }else{
-		         var birth = $('input[name=mem_birth]').val();
-		         var lastChar = birth.charAt(birth.length-1);
-		         if(lastChar == '-'){
-		        	 birth = birth.substr(0,birth.length-1);
-			         $('input[name=mem_birth]').val(birth);
-			     }else{
-			         if(birth.length == 4 || birth.length == 7){
-			            $('input[name=mem_birth]').val(birth + "-");
-			         }
-			     }
-		      }
-		   });
    
    $('form[name=myPage]').submit(function(){
          var emailcheck = $('#emaillabel').text();
          var smscheck = $('#hplabel').text();
 
+         var pw = $('#newPass').val();
+         var pw2 = $('#pass2').val();
+
+         if((pw=='' && pw2!='') || (pw2=='' && pw!='')){
+        	 swal("","새로운 비밀번호를 확인해주세요.", "warning");
+        	 return false;
+         }
          var passchecklb = $('#passchecklb').text();
          if(passchecklb == '비밀번호가 일치하지 않습니다.' || passchecklb == '비밀번호는 최소 4자리 이상 입력해주세요.'){
             swal("","새로운 비밀번호를 확인해주세요.", "warning");
@@ -147,12 +111,22 @@ $(function(){
    var id = '${memberInfo.mem_id}';
    var social = '${memberInfo.mem_join_addr}';
    if(social=='n'){
-	  swal("","소셜 로그인 사용자는 이용할 수 없습니다.", "warning");
-      window.history.back();
-   }else if(id==''){
-      swal("","로그인 후 이용해주세요.", "warning");
-      $(location).attr('href','${pageContext.request.contextPath}/user/main/mainForm.do');
-   }
+	   swal({
+     	    title: "",
+     	    text: "소셜 로그인 사용자는 이용할 수 없습니다.",
+     	    type: "warning"
+     	}).then(function() {
+     		window.history.back();
+     	});
+	   }else if(id==''){
+		   swal({
+	      	    title: "",
+	      	    text: "로그인 후 이용해주세요.",
+	      	    type: "warning"
+	      	}).then(function() {
+	      		$(location).attr('href','${pageContext.request.contextPath}/user/main/mainForm.do');
+	      	});
+	   }
    
    $('#out').click(function(){
       $(location).attr('href', '${pageContext.request.contextPath}/user/member/deleteMemberForm.do');
@@ -193,11 +167,11 @@ function sendsms() {
          mem_hp : $('input[name=mem_hp]').val()
       },
       error : function(result) {
-    	 swal("",result.json, "warning");
+    	 swal("",result.json, "success");
       },
       success : function(result) {
          //{ flag : true | false}
-    	 swal("",result.json, "warning");
+    	 swal("",result.json, "success");
       }
    });
 };
@@ -247,10 +221,10 @@ function mailSending() {
            $('.wrap-loading').addClass('display-none');
        },
       error : function(result) {
-    	 swal("",result.json, "warning");
+    	 swal("",result.json, "success");
       },
       success : function(result) {
-    	 swal("",result.json, "warning");
+    	 swal("",result.json, "success");
       }
    });
 };
@@ -484,7 +458,7 @@ function setThumbnail(event) {
             <td width="150px" height="25" class="idright">휴대전화</td>
             <td>
             <div class="input-group mb-3" style="width:350px">
-            <input type="text" name="mem_hp" class="form-control" id="mem_hp" placeholder="- 빼고 입력" onchange="smschange()" value='${memberInfo.mem_hp }'/> 
+            <input type="text" name="mem_hp" class="form-control" id="mem_hp" placeholder="010-1234-5678" onchange="smschange()" value='${memberInfo.mem_hp }'/> 
             <a href="javascript:sendsms();">[인증번호 전송]</a></div>
             <input type="text" class="form-control" name="hp_num" onkeyup="checksms()"/>
             <label id="hplabel"></label>
