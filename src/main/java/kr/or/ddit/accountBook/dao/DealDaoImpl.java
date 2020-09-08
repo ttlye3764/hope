@@ -62,6 +62,11 @@ public class DealDaoImpl implements IDealDao{
 	public List<DealVO> searchList(Map<String, String> params) throws Exception {
 		return client.selectList("deal.searchList",params);
 	}
+
+	@Override
+	public void deletedeal(String deal_no) throws Exception {
+		client.update("deal.deletedeal",deal_no);
+	}
 	
 
 

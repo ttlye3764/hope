@@ -133,6 +133,12 @@
       WHERE CARD_NO = #{card_no}
    </delete>
 	
+   <delete id="deletedeal" parameterType="String">
+   	 DELETE 
+      FROM DEAL
+      WHERE DEAL_NO = #{deal_no}
+   </delete>
+	
 	
 </mapper>    
 

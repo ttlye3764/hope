@@ -84,6 +84,8 @@ $(function(){
 		        }
 		
 		   	});  // 등록 
+		
+		   	
 	}); //카드 등록 액션
 
 
@@ -91,6 +93,24 @@ $(function(){
 	
 });
 
+function deletebtn(deal_no){
+	
+	$.ajax({
+   	 	async    : false,
+        url     : '${pageContext.request.contextPath}/user/accountBook/deletedeal.do',
+        type    : 'post',
+        dataType : 'json',
+        data : {'deal_no':deal_no, 'mem_no':${LOGIN_MEMBERINFO.mem_no}},
+        success : function(Result) {
+            
+        }
+
+   	});  // 삭제
+
+   	location.reload();
+   	
+   		
+}
 
 function deleteCard(card_no){
 
@@ -136,7 +156,24 @@ function handleImgFileSelect(e){
 }
 
 function categoryChange(e){
-	var kind_a = ["체크카드","신용카드"];
+
+	var kind_a = [];
+	
+	$.ajax({
+   	 	async    : false,
+        url     : '${pageContext.request.contextPath}/user/accountBook/cardList.do',
+        type    : 'post',
+        dataType : 'json',
+        data : {'mem_no':${LOGIN_MEMBERINFO.mem_no}},
+        success : function(Result) {
+	        for(var i=0; i<Result.cardlist.length; i++){
+				kind_a[i] = Result.cardlist[i].card_kind;
+		    }
+        }
+
+   	});  // 등록 
+	
+   	
     var target = document.getElementById("kind");
     
 	if(e.value=="카드"){

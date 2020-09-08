@@ -57,6 +57,11 @@ public class IDealServiceImpl implements IDealService{
 		return dao.searchList(params);
 	}
 
+	@Override
+	public void deletedeal(String deal_no) throws Exception {
+		dao.deletedeal(deal_no);
+	}
+
 	
 
 	
