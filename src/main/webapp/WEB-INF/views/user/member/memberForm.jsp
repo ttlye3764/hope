@@ -39,6 +39,7 @@
 <script type='text/javascript' src='<%=request.getContextPath()%>/js/validation.js'></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="/resources/js/addressapi.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 $(function(){
    $("#mem_hp").keyup(function(e){
@@ -92,28 +93,28 @@ $(function(){
       var passlb = $('#passchecklb').text();
 
          if(idcheck == '' || idcheck == '이미 존재하는 아이디입니다.' || idcheck == '형식에 맞지 않는 아이디입니다.'){
-            alert('아이디를 확인해주세요.');
+            swal("","아이디를 확인해주세요.", "warning");
             return false;
          }   
          if(idcheck == '' || idcheck == '이미 존재하는 닉네임입니다.' || idcheck == '형식에 맞지 않는 닉네임입니다.'){
-            alert('닉네임을 확인해주세요.');
+            swal("","닉네임을 확인해주세요.", "warning");
             return false;
          }
          if(pass == '' || pass2 == ''){
-            alert('비밀번호를 입력해주세요.');
+        	swal("","비밀번호를 입력해주세요.", "warning");
             return false;
          }
-         if(pass.length < 8){
-            alert('비밀번호는 최소 8자리 이상 입력해주세요.');
+         if(pass.length < 4){
+        	swal("","비밀번호는 최소 4자리 이상 입력해주세요.", "warning");
             return false;
          }
          if(passlb == '비밀번호가 일치하지 않습니다.'){
-            alert('비밀번호를 확인해주세요.');
+	       	swal("","비밀번호를 확인해주세요.", "warning");
             return false;
          }
 
          if(!$('input:radio[name=mem_gender]').is(':checked')){
-            alert('성별을 선택해주세요.');
+            swal("","성별을 선택해주세요.", "warning");
             return false;
          }
 
@@ -125,28 +126,28 @@ $(function(){
          var mem_birth =   $('input[name=mem_birth]').val();
          
          if (!mem_birth.validationBIR()) {
-            alert('올바른 생년월일을 입력해주세요.')
+            swal("","올바른 생년월일을 입력해주세요.", "warning");
             return false;
          }
          if(emailcheck == ''){
-            alert('이메일 인증을 완료해주세요.');
+            swal("","이메일 인증을 완료해주세요.", "warning");
             return false;
          }
          if(smscheck == ''){
-            alert('휴대폰 인증을 완료해주세요.');
+            swal("","휴대폰 인증을 완료해주세요.", "warning");
             return false;
          }
          var zip = $('input[name=mem_zip1]').val();
 
          if(zip == ''){
-            alert('우편번호를 입력해주세요.');
+        	swal("","우편번호를 입력해주세요,", "warning");
             return false;
          }
 
          var addr2 = $('input[name=mem_addr2]').val();
 
          if(addr2 == ''){
-            alert('상세주소를 입력해주세요.');
+            swal("","상세주소를 입력해주세요.", "warning");
             return false;
          }
       
@@ -237,7 +238,7 @@ $(function(){
       var mem_hp = $('input[name=mem_hp]').val();
       
       if (!mem_hp.validationHP()) {
-         alert('휴대전화번호를 바르게 입력해주세요.');
+    	 swal("","휴대전화번호를 바르게 입력해주세요.", "warning");
          return false;
       }
       
@@ -249,11 +250,10 @@ $(function(){
             mem_hp : $('input[name=mem_hp]').val()
          },
          error : function(result) {
-            alert(result.json);
+        	swal("",result.json, "warning");
          },
          success : function(result) {
-            //{ flag : true | false}
-            alert(result.json);
+        	swal("",result.json, "warning");
          }
       });
    };
@@ -285,7 +285,7 @@ $(function(){
       var mem_email = $('input[name=mem_email]').val();   
 
       if (!mem_email.validationMAIL()) {
-         alert('이메일을 바르게 입력해주세요.');
+    	 swal("","이메일 바르게 입력해주세요.", "warning");
          return false;
       }
 
@@ -303,10 +303,10 @@ $(function(){
               $('.wrap-loading').addClass('display-none');
           },
          error : function(result) {
-            alert(result.json);
+        	swal("",result.json, "warning");
          },
          success : function(result) {
-            alert(result.json);
+        	swal("",result.json, "warning");
          }
       });
    };

@@ -35,13 +35,14 @@
 <!-- Theme CSS -->
 <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type='text/javascript'
 	src='<%=request.getContextPath()%>/js/validation.js'></script>
 <script type='text/javascript'>
 	$(function() {
 		var id = '${LOGIN_MEMBERINFO.mem_id}';
 		if (id == '') {
-			alert('로그인 후 이용해주세요.');
+			swal("","로그인 후 이용해주세요.", "warning");
 			$(location).attr('href',
 					'${pageContext.request.contextPath}/user/main/mainForm.do');
 		}
@@ -55,7 +56,7 @@
 							mem_id : '${LOGIN_MEMBERINFO.mem_id}'
 						},
 						success : function(result) {
-							alert(result.json);
+							swal("",result.json, "warning");
 							LogOut();
 						}
 					});
@@ -80,7 +81,7 @@
 		if (num == 1) {
 			$("#delete_modal").modal("show"); //모달창 띄우기
 		} else {
-			alert("개인정보 약관에 동의하셔야 합니다.");
+			swal("","개인정보 약관에 동의하셔야 합니다.", "warning");
 		}
 	}
 </script>

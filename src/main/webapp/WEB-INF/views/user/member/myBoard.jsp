@@ -6,13 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>내가 작성한 게시글</title>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
 <script type="text/javascript">
 $(function(){
 	var id = '${LOGIN_MEMBERINFO.mem_id}';
 	if(id==''){
-	   alert('로그인 후 이용해주세요.');
-	   $(location).attr('href','${pageContext.request.contextPath}/user/main/mainForm.do');
+		swal("","로그인 후 이용해주세요.", "warning");
+	    $(location).attr('href','${pageContext.request.contextPath}/user/main/mainForm.do');
 	}
 	
 	$('#fboardTBY tr').on('click', function() {
