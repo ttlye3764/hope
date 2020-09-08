@@ -39,7 +39,7 @@ $(function(){
 	});
 	
 	$('form[name=memView]').submit(function(){
-			$(this).attr('action','${pageContext.request.contextPath}/admin/member/updateMemberInfo.do);
+			$(this).attr('action','${pageContext.request.contextPath}/admin/member/updateMemberInfo.do');
 
 			var mem_birth =	$('input[name=mem_birth]').val();
 			
