@@ -271,13 +271,10 @@ public class AccountController {
 
 		params.put("startCount", startCount);
 		params.put("endCount", endCount);
-		System.out.println("스타트카운트");
-		System.out.println(startCount);
-		System.out.println(endCount);
 		
 		
 		List<DealVO> list =  service.searchList(params);
-		
+		System.out.println(list.get(0).getDeal_date());
 		
 		System.out.println(pagination.getPagingHtmls());
 		ModelAndView andView = new ModelAndView();
@@ -287,8 +284,14 @@ public class AccountController {
 		return andView;
 	}
 	
-	
-	
+	@RequestMapping("deleteAccount")
+	public ModelAndView deleteAccount(String deal_no) throws Exception {
+		System.out.println(deal_no);
+		service.deletedeal(deal_no);
+		ModelAndView andView = new ModelAndView();
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
 	
 	
 	
