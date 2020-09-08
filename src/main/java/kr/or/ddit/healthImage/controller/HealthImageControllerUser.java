@@ -1,8 +1,14 @@
 package kr.or.ddit.healthImage.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +23,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.cloud.vision.v1.AnnotateImageRequest;
+import com.google.cloud.vision.v1.AnnotateImageResponse;
+import com.google.cloud.vision.v1.BatchAnnotateImagesResponse;
+import com.google.cloud.vision.v1.Feature;
+import com.google.cloud.vision.v1.Feature.Type;
+import com.google.cloud.vision.v1.Image;
+import com.google.cloud.vision.v1.ImageAnnotatorClient;
+import com.google.protobuf.ByteString;
 
 import kr.or.ddit.healthImage.service.IHealthImageService;
 import kr.or.ddit.healthImageFile.service.IHealthImageFileService;
@@ -195,5 +211,62 @@ public class HealthImageControllerUser {
 		wb.write(fileOut);
 		fileOut.close();
 	}
+	
+	// ocr
+	@RequestMapping("ocr")
+	public String ocr(Model model, @RequestParam("files") MultipartFile items) throws FileNotFoundException, IOException {
+		
+		String imageFilePath = "D:\\inbody\\" + saveFile(items);
+		
+		ByteString imgBytes = ByteString.readFrom(new FileInputStream(imageFilePath));
+		
+		List<AnnotateImageRequest> requests = new ArrayList<>();
+		Image img = Image.newBuilder().setContent(imgBytes).build();
+		Feature feat = Feature.newBuilder().setType(Type.TEXT_DETECTION).build();
+		AnnotateImageRequest req = AnnotateImageRequest.newBuilder().addFeatures(feat).setImage(img).build();
+		requests.add(req);
+
+		// 만들어진 AnnotateImageRequest를 클라이언트 요청에 담아 보내서 Response 객체를 받아오는 부분
+		try (ImageAnnotatorClient client = ImageAnnotatorClient.create()) {
+			BatchAnnotateImagesResponse resp = client.batchAnnotateImages(requests);
+			List<AnnotateImageResponse> responses = resp.getResponsesList();
+
+			// 1개의 이미지만 넣었기 때문에 response도 하나이고, 따라서 for문은 별 의미는 없다.
+			for (AnnotateImageResponse res : responses) {
+				if (res.hasError()) {
+					System.out.println(res.getError().getMessage());
+					break;
+				}
+				// Response 객체에 담겨져 온 분석 결과 (이미지 내의 텍스트) 가 여기서 출력된다.
+				System.out.println("Text : ");
+				System.out.println(res.getTextAnnotationsList().get(0).getDescription());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "redirect:/user/healthImage/healthImageList.do";
+	}
+	
+	// 사진 저장될 경로
+	private static final String UPLOAD_PATH = "D:\\inbody";
+	
+	private String saveFile(@RequestParam("files") MultipartFile items){
+		
+		// 파일 저장
+		String saveName = items.getOriginalFilename();
+
+	    // 저장할 File 객체를 생성(껍데기 파일)
+	    File saveFile = new File(UPLOAD_PATH,saveName); // 저장할 폴더 이름, 저장할 파일 이름
+
+	    try {
+	    	items.transferTo(saveFile); // 업로드 파일에 saveFile넣기
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+
+	    return saveName;
+	} 
 			
 }

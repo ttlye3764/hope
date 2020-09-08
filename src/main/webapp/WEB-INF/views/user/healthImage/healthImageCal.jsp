@@ -202,6 +202,19 @@ $(function(){
 </head>
 <body>
 
+<%@ page import="com.google.cloud.vision.v1.ImageAnnotatorClient" %>
+<%@ page import="com.google.cloud.vision.v1.AnnotateImageRequest" %>
+<%@ page import="com.google.cloud.vision.v1.AnnotateImageResponse" %>
+<%@ page import="com.google.cloud.vision.v1.BatchAnnotateImagesResponse" %>
+<%@ page import="com.google.cloud.vision.v1.Feature" %>
+<%@ page import="com.google.cloud.vision.v1.Feature.Type" %>
+<%@ page import="com.google.cloud.vision.v1.EntityAnnotation" %>
+<%@ page import="com.google.cloud.vision.v1.Image" %>
+<%@ page import="com.google.protobuf.ByteString" %>
+<%@ page import="java.io.FileInputStream" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
+ 
 <div class="innerpage-banner center bg-overlay-dark-7 py-7" 
 	style="background:url(${pageContext.request.contextPath }/resources/template/assets/images/bg/04.jpg) no-repeat; background-size:cover; 
 		background-position: center center;">

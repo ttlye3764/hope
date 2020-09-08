@@ -192,13 +192,13 @@
 													</button>
 												</div>
 												<div class="modal-body">
-													<form name="file" method="post" enctype="multipart/form-data">
+													<form action="${pageContext.request.contextPath}/user/healthImage/ocr.do" name="file" method="post" enctype="multipart/form-data">
 														<div class="form-group">
 															<label for="exampleFormControlFile1">인바디 파일을 넣어주세요.</label>
 															<input type="file" name="files" class="form-control-file" id="file">
 														</div>
+ 													<input type="submit" class="btn btn-light mb-2 mr-1" id="inbody" style="margin: 0px 0px 0px 190px;">
 													</form>
- 													<button type="button" class="btn btn-light mb-2 mr-1" id="inbody" style="margin: 0px 0px 0px 160px;">추천 운동 확인</button>
 												</div>
 											</div>
 										</div>
@@ -247,17 +247,17 @@
 					$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/healthImageList.do');
 				}); 
 
-				// 인바디 정보 등록
+				/* // 인바디 정보 등록
 				$('#inbody').click(function(){
-					var file = $('#file').val();
-					if(file == ""){
+					var files = $('#file').val();
+					if(files == ""){
 						swal("FILE","파일을 넣어주세요.", "warning");
 
 						return false;
 					}
 					
-					$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/excelDown.do');
-				}); 
+					$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/ocr.do?files=' + files);
+				});  */
 
 				$("#playBtn").on("click", function() {
 			        $("#myVideo").trigger("play");
