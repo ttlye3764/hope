@@ -19,6 +19,7 @@ import kr.or.ddit.accountBook.service.IDealService;
 import kr.or.ddit.schedule.service.IScheduleService;
 import kr.or.ddit.utiles.RolePaginationUtil;
 import kr.or.ddit.utiles.RolePaginationUtil_BYEOL;
+import kr.or.ddit.utiles.RolePaginationUtil_account;
 import kr.or.ddit.utiles.RolePaginationUtil_pill;
 import kr.or.ddit.utiles.RolePaginationUtil_yun;
 import kr.or.ddit.vo.CardVO;
@@ -169,7 +170,8 @@ public class AccountController {
 	@RequestMapping("searchAccountList")
 	public ModelAndView searchAccountList(@RequestParam(value = "startDate", required = false) String startDate, @RequestParam(value = "endDate", required = false) String endDate, @RequestParam(value = "deal_option", required = false) String deal_option,
 			@RequestParam(value = "deal_name", required = false) String deal_name, @RequestParam(value = "deal_division", required = false) String deal_division, @RequestParam(value = "deal_kind", required = false) String deal_kind,
-			@RequestParam(value = "deal_year", required = false) String deal_year, @RequestParam(value = "deal_bungi", required = false) String deal_bungi,@RequestParam(value = "deal_month", required = false) String deal_month, String mem_no) throws Exception {
+			@RequestParam(value = "deal_year", required = false) String deal_year, @RequestParam(value = "deal_bungi", required = false) String deal_bungi,@RequestParam(value = "deal_month", required = false) String deal_month, String mem_no,
+			HttpServletRequest request, String currentPage, RolePaginationUtil_account pagination) throws Exception {
 		Map<String, String> params = new HashMap<>();
 		String bungiStart = null;
 		String bungiEnd = null;
@@ -206,7 +208,6 @@ public class AccountController {
 			deal_year = null;
 		}
 		if(deal_bungi.length()<1) {
-			System.out.println("널임");
 			deal_bungi = null;
 		}else if(deal_bungi.length()>0) {
 			String[] str = deal_bungi.split("/");
@@ -253,12 +254,35 @@ public class AccountController {
 		params.put("deal_year", deal_year);
 		params.put("mem_no", mem_no);
 		
+		
+		
+		
+		if (currentPage == null) {
+			currentPage = "1";
+		}
+
+		String totalCount = service.totalCount(params);
+
+		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount));
+
+		String startCount = String.valueOf(pagination.getStartCount());
+
+		String endCount = String.valueOf(pagination.getEndCount());
+
+		params.put("startCount", startCount);
+		params.put("endCount", endCount);
+		System.out.println("스타트카운트");
+		System.out.println(startCount);
+		System.out.println(endCount);
+		
+		
 		List<DealVO> list =  service.searchList(params);
 		
 		
-		
+		System.out.println(pagination.getPagingHtmls());
 		ModelAndView andView = new ModelAndView();
 		andView.addObject("list", list);
+		andView.addObject("pagination", pagination.getPagingHtmls());
 		andView.setViewName("jsonConvertView");
 		return andView;
 	}

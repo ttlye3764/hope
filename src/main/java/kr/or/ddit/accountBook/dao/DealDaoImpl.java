@@ -67,6 +67,11 @@ public class DealDaoImpl implements IDealDao{
 	public void deletedeal(String deal_no) throws Exception {
 		client.update("deal.deletedeal",deal_no);
 	}
+
+	@Override
+	public String totalCount(Map<String, String> params) throws Exception {
+		return client.selectOne("deal.totalCount", params);
+	}
 	
 
 
