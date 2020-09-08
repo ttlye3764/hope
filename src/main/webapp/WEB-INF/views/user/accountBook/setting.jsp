@@ -40,6 +40,11 @@ $(function(){
 	
 
 
+	$('#staticTrace').click(function(){
+		 $("#staticModal").modal("show"); //모달창 띄우기
+
+	}); //영수증 등록
+
 	$('#registreceipt').click(function(){
 		 $("#regist-modal").modal("show"); //모달창 띄우기
 		 $("#img").attr("src", " ");
@@ -277,6 +282,7 @@ function categoryChange(e){
                                                 	
                                                 	<br>&nbsp; &nbsp; <button type="button" id="registBtn">등록</button>
                                                 	&nbsp; <button type="button" id="registreceipt">영수증 등록</button>
+                                                	&nbsp; <button type="button" id="staticTrace">고정 거래 등록</button>
                                                 	
                                                 <br>
                                                 <br>
@@ -391,6 +397,24 @@ function categoryChange(e){
 														
 													</tbody>	
 												</table>
+                                                    	
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
+	
+	
+	
+						 <!-- Center modal content -->
+                                        <div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="myCenterModalLabel">Register Your Card</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                    	
                                                     	
                                                     </div>
                                                 </div><!-- /.modal-content -->
