@@ -174,7 +174,6 @@ function setThumbnail(event) {
 
 			if (file == "") {
 				swal("ERROR","파일을 입력해주세요,", "warning");
-				
 
 				return false;
 			}
