@@ -18,7 +18,16 @@ public class MemberVO {
 	private String mem_zip1;
 	private String mem_zip2;
 	private String mem_delete;
+	//채팅
+	private String ch_no;
 	
+	
+	public String getCh_no() {
+		return ch_no;
+	}
+	public void setCh_no(String ch_no) {
+		this.ch_no = ch_no;
+	}
 	public String getMem_no() {
 		return mem_no;
 	}

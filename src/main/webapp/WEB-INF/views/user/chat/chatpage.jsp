@@ -23,7 +23,7 @@
 				<a class="social-icons-link" onclick="searchFriendForm();"><i class="fa fa-dribbble"></i></a>
 			</li>
 			<li class="social-icons-item social-flickr">
-				<a class="social-icons-link" onclick=""><i class="fa fa-flickr"></i></a>
+				<a class="social-icons-link" onclick="friendListForm();"><i class="fa fa-flickr"></i></a>
 			</li>
 		</ul>
 		<div class="recent_heading">
@@ -36,7 +36,9 @@
 			</div>
 		</div>
 	  </div>
-	  <div class="inbox_chat scroll">
+	  
+	  <!-- 친구 목록 -->
+	  <div class="inbox_chat scroll" id="chatRoomList">
 		<div class="chat_list active_chat">
 		  <div class="chat_people">
 			<div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
@@ -59,9 +61,10 @@
 		</div>
 		
 	  </div>
+	  <!-- 친구 목록 끝 -->
 	</div>
 	<div class="mesgs">
-	  <div class="msg_history">
+	  <div class="msg_history" id="msg_history">
 		<div class="incoming_msg">
 		  <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
 		  <div class="received_msg">
@@ -103,8 +106,8 @@
 	  </div>
 	  <div class="type_msg">
 		<div class="input_msg_write">
-		  <input type="text" class="write_msg" placeholder="Type a message" />
-		  <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+		  <input type="text" class="write_msg" id="message" placeholder="Type a message" />
+		  <button class="msg_send_btn" id="sendBtn" type="button"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 		</div>
 	  </div>
 	</div>
@@ -123,31 +126,52 @@
 								</div>
 								<div class="modal-body">
 									<h4>친구 아이디로 찾기 </h4>
-									친구 아이디 : <input class="form-control" type="text" id="mem_name" placeholder="이름을 입력해주세요" style="width:200px; !important">
-									
+									친구 아이디 : <input class="form-control" onchange="searchFriendID();" type="text" id="mem_id" placeholder="이름을 입력해주세요" style="width:200px; !important">
 									<br>
 									<br>
+									<table id="searchFriendID">
+									</table>
 									<div class="divider divider-grad"></div>
 									<br>
-									<br>
-									
-									<div id="searchFriendId">
-										
-									</div>
-									
 									<h4>친구 이름으로 찾기 </h4>
 									<br>
 									<br>
-									친구 이름 : <input class="form-control" type="text" placeholder="아이디를 입력해주세요" style="width:200px; !important">
-									
-									<br>
-									<br>
-									<div class="divider divider-grad"></div>
-									
+									친구 이름 : <input class="form-control" onchange="searchFriendName();" type="text" id="mem_name" placeholder="아이디를 입력해주세요" style="width:200px; !important">
 									<table id="searchFriendName">
-									
 									</table>
-									
+									<div class="divider divider-grad"></div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-primary">Save changes</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!-- 친구목록 모달창 -->
+					<div class="modal fade text-left" id="friendListForm"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" style="display: none; overflow: auto;" aria-hidden="true" >
+						<div class="modal-dialog modal-dialog-centered" role="document" >
+							<div class="modal-content">
+								<div class="modal-header">
+									친구 목록
+								</div>
+								<div class="modal-body" id="friendListFormBody" style="height:600px; overflow: auto; !important">
+									<!-- 친구 한명 -->
+									<div class="col-sm-6 col-md-3">
+					<div class="team-item text-center">
+						<div class="team-avatar">
+							<img src="${pageContext.request.contextPath }/resources/image/friend1.jpg" alt="">
+						</div>
+						<div class="team-desc">
+							<h5 class="team-name">Allen Smith</h5>
+							<span class="team-position">Founder</span>
+							<p></p>
+							<button class="btn btn-grad" onclick="createChatRoom(this);"><i class="fa fa-arrow-right"></i>채팅하기</button>
+						</div>
+					</div>
+				</div>
+				<!-- 친구한명 끝 -->
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -159,15 +183,105 @@
 				
 
 					
-
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js'></script>
 <script type="text/javascript">
+
+
 
 var socket;
 var messages = document.getElementById("messages");
 var targetMemNo;
+var targetMemName;
 var currentTargetMemNo;
-var mem_no = ${LOGIN_MEMBERINFO.mem_no};
-var chatingRoomNO;
+var chatingRoomNo;
+
+//채팅방 리스트 띄우기
+function chatRoomList(){
+	$.ajax({
+		url : '${pageContext.request.contextPath}/user/chat/chatRoomList',
+		success : function(result){
+			$('#chatRoomList').empty();
+			if(result.chatMemberList == null){
+				$('#chatRoomList').append('진행중인 채팅이 없습니다.');
+				alert(result.fail);
+			}else{
+				var chatRoomList = "";
+				$.each(result.chatMemberList, function(index, item){
+					chatRoomList += '<div class="chat_list active_chat" onclick="startChat(this);">';
+					chatRoomList += '<input type="hidden" id="ch_no" value="'+item.ch_no+'">';
+					chatRoomList += '<input type="hidden" id="mem_no" value="'+item.mem_no+'">';
+					chatRoomList += '<div class="chat_people">';
+					chatRoomList += '<div class="chat_img"> <img src="${pageContext.request.contextPath}/resources/image/friend1.jpg" alt="sunil"> </div>';
+					chatRoomList += '<div class="chat_ib">';
+					chatRoomList += '<h5 id="mem_no"><input type="hidden" id="mem_name" value="'+item.mem_name+'">'+item.mem_name+'<span class="chat_date" id="lastChat">Dec 25</span></h5>';
+					chatRoomList += '<p>상태말</p>';
+					chatRoomList += '</div>';
+					chatRoomList += '</div>';
+					chatRoomList += '</div>';
+				})
+				$('#chatRoomList').append(chatRoomList);
+			}
+		},
+		error : function(result){
+			alert('채팅방 조회에 실패하였습니다.');
+		}
+	})
+}
+
+// 채팅방 클릭하면 채팅방 비우고 메세지 내역 디비에서 가져와서 출력
+function startChat(e){
+	chatingRoomNo = $(e).find('#ch_no').val();
+	targetMemNo = $(e).find('#mem_no').val();
+	targetMemName = $(e).find('#mem_name').val();
+
+	console.log(chatingRoomNo);
+	console.log(targetMemNo);
+	console.log(targetMemName);
+
+	$('#msg_history').empty();
+	messageList();
+}
+
+function messageList(){
+	$.ajax({
+		url : '${pageContext.request.contextPath}/user/chat/messageList',
+		data : {
+			ch_no : chatingRoomNo
+		},
+		success : function(result){
+
+			$('#msg_history').empty();
+			
+			if(result.messageList==null){
+
+			}
+			var messageList = "";
+			$.each(result.messageList, function(index, item){
+				
+				if(item.mem_no == '${LOGIN_MEMBERINFO.mem_no}'){
+					messageList += '<div class="outgoing_msg">';
+					messageList += '<div class="sent_msg">';
+					messageList += '<p>'+item.msg_content+'</p>';
+					messageList += '<span class="time_date"> '+item.msg_date.split(' ')[1].split(':')[0]+':' +item.msg_date.split(' ')[1].split(':')[1] +'</span> </div>';
+					messageList += '</div>';
+				}else{
+					messageList += '<div class="incoming_msg">';
+					messageList += '<div class="incoming_msg_img"> <img src="${pageContext.request.contextPath}/resources/image/friend1.jpg" alt="sunil"> </div>';
+					messageList += '<div class="received_msg">';
+					messageList += '<div class="received_withd_msg">';
+					messageList += '<p>'+item.msg_content+'</p>';
+					messageList += '<span class="time_date"> '+item.msg_date.split(' ')[1].split(':')[0]+':' +item.msg_date.split(' ')[1].split(':')[1] +'</span> </div>';
+					messageList += '</div>';
+					messageList += '</div>';
+				}
+			})
+			$('#msg_history').append(messageList);
+		},
+		error : function(result){
+			alert('채팅방 조회에 실패하였습니다.')
+		}
+	})
+}
 
 function initSocket(url) {
 	socket = new SockJS(url);
@@ -176,20 +290,7 @@ function initSocket(url) {
 		console.log(evt.data + "<br/>");
 		// 받아온 메세지 넣어주기
 
-		var bot = document.createElement("div");
-		bot.className = "message-text left";
-
-		bot.innerHTML = evt.data;
-		var out = document.querySelector(".message");
-		var innerDiv = document.createElement("div");
-
-		innerDiv.className = "solo-message";
-
-		innerDiv.appendChild(bot);
-		out.appendChild(innerDiv);
-
-		out.scrollBy(0, 1000);
-		document.querySelector(".input input").value = "";
+		messageList();
 	};
 	
 	socket.onclose = function(evt) {
@@ -198,10 +299,12 @@ function initSocket(url) {
 	
 	$("#sendBtn").on("click", function() {
 		var msg = $("#message").val();
-		var text = document.getElementById("messageinput").value + "," + chatingRoomNo;
+		var text = msg + "," + chatingRoomNo;
 		socket.send(text);
 		console.log(text);
 		text = "";
+		$('#message').empty();
+ 		messageList();
 	});
 }
 
@@ -211,16 +314,111 @@ function searchFriendForm(){
 }
 
 // 친구목록 모달창 띄우기
-function friendList(){
-	$("#friend_list").modal("show");
+function friendListForm(){
+	$.ajax({
+		url : '${pageContext.request.contextPath}/user/chat/selectFriendList',
+		success : function (result){
+			if(result.memberList == null){
+				alert(result.fail);
+			}else{
+				$('#friendListFormBody').empty();
+				var friendInfo ="";
+				$.each(result.memberList, function(index, item){
+					friendInfo += '<div class="col-sm-6 col-md-3">';
+					friendInfo += '<div class="team-item text-center" style="width:100px; !important">';
+					friendInfo += '<div class="team-avatar">';
+					friendInfo += '<img src="${pageContext.request.contextPath }/resources/image/friend1.jpg" alt="">';
+					friendInfo += '</div>';
+					friendInfo += '<div class="team-desc">';
+					friendInfo += '<h5 class="team-name">'+item.mem_name+'</h5>';
+					friendInfo += '<span class="team-position">'+item.mem_id+'</span>';
+					friendInfo += '<p></p>';
+					friendInfo += '<button class="btn btn-grad" onclick="createChatingRoom(this);"><input type="hidden" value="'+item.mem_no+'"><i class="fa fa-arrow-right"></i>채팅하기</button>';
+					friendInfo += '</div>';
+					friendInfo += '</div>';	
+					})
+					$('#friendListFormBody').append(friendInfo);
+					
+			}
+		},
+		error : function(result){
+			alert('친구 목록 조회에 실패했습니다.')
+		}
+	})
+	
+	$("#friendListForm").modal("show");
 }
 
-// 친구 검색하기
-function searchFriend(){
+// 채팅방 생성, 참여
+function createChatingRoom(e){
+	var fri_mem_no = $(e).find('input').val()
+
 	$.ajax({
 		type : 'POST',
-		url : '${pageContext.request.contextPath}/user/chat/searchMember.do',
-		dataType : 'JSON',
+		url : '${pageContext.request.contextPath}/user/chat/createChatingRoom',
+			
+		error : function(result) {
+			alert("채팅방 생성 실패");
+		},
+		success : function(result) {
+			alert("채팅방 생성 성공");
+			
+		},
+		complete : function(result){
+			 $.ajax({
+					type : 'POST',
+					url : '${pageContext.request.contextPath}/user/chat/insertParticipation',
+					//dataType : 'JSON',
+					data : {
+						fri_mem_no : $(e).find('input').val()
+					},
+					success : function(result){
+						alert("참여 테이블 삽입 성공");
+					},
+					error : function(result){
+						alert("참여 테이블 삽입 실패");
+					}	
+				 })
+			}
+	});
+}
+
+// 친구 검색하기 id
+function searchFriendID(){
+	$.ajax({
+		url : '${pageContext.request.contextPath}/user/chat/selectMemList',
+		data : {
+			mem_id : $('#mem_id').val()
+		},
+		error : function(result) {
+			alert("친구검색에 실패했습니다.");
+		},
+		success : function(result) {
+			
+			$('#searchFriendID').empty();
+			
+ 			$('#searchFriendID').append('<tr>')
+ 			$('#searchFriendID').append('<th>프로필 사진</th>');
+ 			$('#searchFriendID').append('<th>ID</th>');
+ 			$('#searchFriendID').append('<th>이름</th>');
+ 			$('#searchFriendID').append('<th></th>');
+ 			$('#searchFriendID').append('</tr>');
+ 			
+ 			$.each(result.memberList, function(index, item){
+ 				$('#searchFriendID').append('<tr>');
+ 				$('#searchFriendID').append('<td><img src=""></td>');
+ 				$('#searchFriendID').append('<td>'+item.mem_id+'</td>');
+ 				$('#searchFriendID').append('<td>'+item.mem_name+'</td>');
+ 				$('#searchFriendID').append('<td><button type="button" onclick="insertFriendBtn(this)"><input type="hidden" value="'+item.mem_no+'">추가</button></td>');
+ 				$('#searchFriendID').append('</tr>');	 
+ 			 });
+		}
+	});
+}	
+// 친구 검색하기 name
+function searchFriendName(){
+	$.ajax({
+		url : '${pageContext.request.contextPath}/user/chat/selectMemList',
 		data : {
 			mem_name : $('#mem_name').val()
 		},
@@ -228,51 +426,68 @@ function searchFriend(){
 			alert("친구검색에 실패했습니다.");
 		},
 		success : function(result) {
-
+		
 			$('#searchFriendName').empty();
 
- 			$('#searchFriendName').append('<tr>')
- 			$('#searchFriendName').append('<th>프로필 사진</th>');
- 			$('#searchFriendName').append('<th>ID</th>');
- 			$('#searchFriendName').append('<th>이름</th>');
- 			$('#searchFriendName').append('<th></th>');
- 			$('#searchFriendName').append('</tr>');
+			if(result.memberList != null){
+				$('#searchFriendName').append('<tr>')
+	 			$('#searchFriendName').append('<th>프로필 사진</th>');
+	 			$('#searchFriendName').append('<th>ID</th>');
+	 			$('#searchFriendName').append('<th>이름</th>');
+	 			$('#searchFriendName').append('<th></th>');
+	 			$('#searchFriendName').append('</tr>');
+	 			
+	 			$.each(result.memberList, function(index, item){
+	 				$('#searchFriendName').append('<tr>');
+	 				$('#searchFriendName').append('<td><img src=""></td>');
+	 				$('#searchFriendName').append('<td onclick="">'+item.mem_id+'</td>');
+	 				$('#searchFriendName').append('<td>'+item.mem_name+'</td>');
+	 				$('#searchFriendName').append('<td><button type="button" onclick="insertFriendBtn(this)"><input type="hidden" value="'+item.mem_no+'">추가</button></td>');
+	 				$('#searchFriendName').append('</tr>');	 
+	 			 });
+			}else{
+				$('#searchFriendName').append('<tr>')
+	 			$('#searchFriendName').append('<th>프로필 사진</th>');
+	 			$('#searchFriendName').append('<th>ID</th>');
+	 			$('#searchFriendName').append('<th>이름</th>');
+	 			$('#searchFriendName').append('<th></th>');
+	 			$('#searchFriendName').append('</tr>');
+
+	 			$('#searchFriendName').append('<tr>');
+	 			$('#searchFriendName').append('<td colspan="4">'+result.fail+'</td>');
+ 				$('#searchFriendName').append('</tr>');	
+			}	
  			
- 			$.each(result.memberList, function(index, item){
- 				$('#searchFriendName').append('<tr>');
- 				$('#searchFriendName').append('<td><img src=""></td>');
- 				$('#searchFriendName').append('<td onclick=""><input type="hidden" id="searchFriendNo" value="'+item.men_no+'">'+item.mem_id+'</td>');
- 				$('#searchFriendName').append('<td>'+item.mem_name+'</td>');
- 				$('#searchFriendName').append('<td><button type="button" id="insertFriendBtn">추가</button></td>');
- 				$('#searchFriendName').append('</tr>');	 
- 			 });
 		}
 	});
 }	
-		
 
-	})
 	
 //친구 추가
-$("#insertFriendBtn").click(function(){
+function insertFriendBtn(e){
 		$.ajax({
-			url : '${pageContext.request.contextPath}/user/chat/addFriend',
-			data : mem_no = $('#searchFriendNo').val(),
+			url : '${pageContext.request.contextPath}/user/chat/insertFriendInfo',
+			data : {
+				mem_no : $(e).find('input').val(),
+				mem_a : '1'
+			},
 			error : function(result) {
 				alert("친구 추가 실패");
 			},
 			success : function(result) {
 				alert("친구 추가 성공");
-			},
+			}
 		});
-	});
+	}
 
 
 $(function(){
-	initSocket("http://localhost:8080/lastProject/echo?mem_no=" + ${LOGIN_MEMBERINFO.mem_no});
+	initSocket("http://192.168.31.49:8080/lastProject/echo?mem_no=" + ${LOGIN_MEMBERINFO.mem_no});
+	chatRoomList();
 
-
-		
+	$('.chat_list').click(function(){
+		$('.chat_list').toggleClass('active_chat');	
+	})	
 })
 </script>
 

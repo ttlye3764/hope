@@ -3,35 +3,36 @@
 <mapper namespace="diet">
 	<insert id="insertMenu" parameterType="Map">
 		INSERT INTO MENU(MENU_NO
-						,MENU_NAME
-						,MENU_KCAL)
-						VALUES(
-						MENU_SEQ.NEXTVAL,
-						#{menu_name},
-						#{menu_kcal}
-						)
+		,MENU_NAME
+		,MENU_KCAL)
+		VALUES(
+		MENU_SEQ.NEXTVAL,
+		#{menu_name},
+		#{menu_kcal}
+		)
 	</insert>
-	
+
 	<insert id="insertDietMem" parameterType="dietMemVO">
-		INSERT INTO DIET_MEM(DM_NO,
-							HEIGHT,
-	 						DM_DATE,
-	 						CURRENT_WEIGHT,
-	 						PURPOSE_WEIGHT, 
-	 						BMI,
-							DAY_KCAL,
-	 						MEM_NO)
-	 						VALUES(DIET_MEM_SEQ.NEXTVAL,
-	 								#{height},
-	 								sysdate,
-	 								#{current_weight},
-	 								#{purpose_weight},
-	 								#{bmi},
-	 								#{day_kcal},
-	 								#{mem_no}
-	 								)
+		INSERT INTO
+		DIET_MEM(DM_NO,
+		HEIGHT,
+		DM_DATE,
+		CURRENT_WEIGHT,
+		PURPOSE_WEIGHT,
+		BMI,
+		DAY_KCAL,
+		MEM_NO)
+		VALUES(DIET_MEM_SEQ.NEXTVAL,
+		#{height},
+		sysdate,
+		#{current_weight},
+		#{purpose_weight},
+		#{bmi},
+		#{day_kcal},
+		#{mem_no}
+		)
 	</insert>
-	
+
 	<select id="menuList" resultType="menuVO" parameterType="Map">
 		SELECT *
 		FROM MENU
@@ -41,14 +42,16 @@
     	]]>
 		</if>
 	</select>
-	
-	<select id="dietMemList" resultType="dietMemVO" parameterType="Map">
+
+	<select id="dietMemList" resultType="dietMemVO"
+		parameterType="Map">
 		SELECT *
 		FROM DIET_MEM
 		WHERE MEM_NO = #{mem_no}
-		ORDER BY DM_DATE
+		ORDER BY
+		DM_DATE
 	</select>
-	
+
 	<select id="menuSearch" parameterType="Map" resultType="menuVO">
 		SELECT *
 		FROM MENU
@@ -56,93 +59,120 @@
 			WHERE MENU_NAME LIKE '%'||#{menu_search}||'%'
 		</if>
 	</select>
-	
-	<insert id="insertDietDay" parameterType="dietDayVO" useGeneratedKeys="true" keyColumn="DD_NO" keyProperty="dd_no">
-		INSERT INTO DIET_DAY(DD_NO,
-						MEM_NO,
-						DD_KCAL,
-						DD_DATE)
-						VALUES(
-						diet_day_seq.nextval,
-						#{mem_no},
-						0,
-						#{dd_date}
-						)
+
+	<insert id="insertDietDay" parameterType="dietDayVO"
+		useGeneratedKeys="true" keyColumn="DD_NO" keyProperty="dd_no">
+		INSERT INTO
+		DIET_DAY(DD_NO,
+		MEM_NO,
+		DD_KCAL,
+		DD_DATE)
+		VALUES(
+		diet_day_seq.nextval,
+		#{mem_no},
+		0,
+		#{dd_date}
+		)
 	</insert>
-	
+
 	<insert id="insertDietDayInfo" parameterType="dietDayInfoVO">
-		INSERT INTO DIET_DAY_INFO(DDI_NO,
-								DD_NO,
-								MENU_NO,
-								DD_INFO_DIVISION)VALUES(
-									diet_day_info_seq.nextval,
-									#{dd_no},
-									#{menu_no},
-									#{dd_info_division}
-									)
-								
+		INSERT INTO
+		DIET_DAY_INFO(DDI_NO,
+		DD_NO,
+		MENU_NO,
+		DD_INFO_DIVISION)VALUES(
+		diet_day_info_seq.nextval,
+		#{dd_no},
+		#{menu_no},
+		#{dd_info_division}
+		)
+
 	</insert>
-	
+
 	<update id="updateDietDayKcal" parameterType="Map">
-		<selectKey keyProperty="dd_kcal" resultType="java.lang.String" order="BEFORE">
-    		select sum(a.menu_kcal) dd_kcal
+		<selectKey keyProperty="dd_kcal"
+			resultType="java.lang.String" order="BEFORE">
+			select sum(a.menu_kcal) dd_kcal
 			from menu a,
-				(select *
-				from diet_day_info
-				where dd_no = #{dd_no}) b
-				where b.MENU_NO = a.MENU_NO
-    	</selectKey>
-  		UPDATE DIET_DAY SET DD_KCAL = #{dd_kcal} WHERE DD_NO = #{dd_no}  
+			(select *
+			from diet_day_info
+			where dd_no = #{dd_no}) b
+			where b.MENU_NO = a.MENU_NO
+		</selectKey>
+		UPDATE DIET_DAY SET DD_KCAL = #{dd_kcal} WHERE DD_NO = #{dd_no}
 	</update>
-	
-	<select id="selectDietDay" parameterType="Map" resultType="dietDayVO">
+
+	<select id="selectDietDay" parameterType="Map"
+		resultType="dietDayVO">
 		SELECT *
 		FROM DIET_DAY
 		WHERE DD_DATE = #{dd_date}
-		AND MEM_NO = #{mem_no}
+		AND MEM_NO =
+		#{mem_no}
 	</select>
-	
-	<select id="dietDayInfoList" parameterType="Map" resultType="dietDayInfoVO">
-	
+
+	<select id="dietDayInfoList" parameterType="Map"
+		resultType="dietDayInfoVO">
+
 		SELECT b.*, a.MENU_NAME MENU_NAME, a.menu_kcal MENU_KCAL
-		FROM MENU a, (SELECT *
-					FROM DIET_DAY_INFO
-					where DD_NO = #{dd_no}
-					<if test="dd_info_division != null">
-						AND DD_INFO_DIVISION = #{dd_info_division}
-					</if>) b
+		FROM MENU a,
+		(SELECT *
+		FROM DIET_DAY_INFO
+		where DD_NO = #{dd_no}
+		<if test="dd_info_division != null">
+			AND DD_INFO_DIVISION = #{dd_info_division}
+		</if>
+		) b
 		WHERE b.MENU_NO = a.MENU_NO
 	</select>
-	
+
 	<delete id="deleteDietDayInfo" parameterType="Map">
-		DELETE DIET_DAY_INFO
+		DELETE
+		DIET_DAY_INFO
 		WHERE DDI_NO = #{ddi_no}
-		AND DD_INFO_DIVISION = #{dd_info_division}
+		AND DD_INFO_DIVISION =
+		#{dd_info_division}
 	</delete>
-	
-	<select id="dietMemGraphList" parameterType="Map" resultType="dietDayVO">
-		select c.MEM_NO MEM_NO, d.DD_DATE DD_DATE, d.DD_KCAL DD_KCAL, c.DAY_KCAL DAY_KCAL
-		from (
-        	 select MEM_NO, dm_no, DAY_KCAL, TO_CHAR(DM_DATE, 'YYYY-MM-DD') dm_date
-           	 from diet_mem
-        	 where dm_no IN (
-             	select max(a.dm_no) dm_no
-            	from diet_mem a, diet_day b
-             	where a.MEM_NO = b.MEM_NO
-                AND b.dd_date = TO_CHAR(a.DM_DATE, 'YYYY-MM-DD')
-              	group by dd_date)
-           	 AND TO_CHAR(DM_DATE, 'YYYY-MM-DD') in (
-             	select dd_date
-            	 from diet_mem a, diet_day b
-             	 where a.MEM_NO = b.MEM_NO
-               	 AND b.dd_date = TO_CHAR(a.DM_DATE, 'YYYY-MM-DD')
-             group by dd_date
-        	 )
-     		)c , DIET_DAY d
-		where c.dm_date = d.dd_date
+
+	<select id="dietMemGraphList" parameterType="Map"
+		resultType="dietDayVO">
+		SELECT c.MEM_NO MEM_NO, d.DD_DATE DD_DATE, d.DD_KCAL DD_KCAL, c.DAY_KCAL DAY_KCAL
+		FROM (
+			SELECT MEM_NO, dm_no, DAY_KCAL, TO_CHAR(DM_DATE, 'YYYY-MM-DD') dm_date
+			FROM DIET_MEM
+			WHERE dm_no IN (
+				SELECT max(a.dm_no) dm_no
+				FROM diet_mem a, diet_day b
+				WHERE a.MEM_NO = b.MEM_NO
+				AND b.dd_date = TO_CHAR(a.DM_DATE, 'YYYY-MM-DD')
+				GROUP BY dd_date)
+			AND TO_CHAR(DM_DATE, 'YYYY-MM-DD') IN (
+													SELECT dd_date
+													FROM diet_mem a, diet_day b
+													WHERE a.MEM_NO = b.MEM_NO
+													AND b.dd_date = TO_CHAR(a.DM_DATE, 'YYYY-MM-DD')
+													GROUP BY dd_date
+													)
+			)c , DIET_DAY d
+		WHERE c.dm_date = d.dd_date
 		AND c.mem_no = #{mem_no}
-		order by dd_date
+		ORDER BY dd_date
 	</select>
+
+	<select id="dietBoardList" parameterType="Map" resultType="dietBoardVO">
+	  SELECT *
+	  FROM DIET_BOARD
+	  WHERE MEM_NO = #{mem_no}
+	  ORDER BY DIET_BOARD_SEQ
+	</select>
+	
+	<update id="updateDietBoard" parameterType="List">
+		BEGIN
+		<foreach collection="list" item="item" separator=";"> 
+			UPDATE DIET_BOARD SET diet_board_title = #{item.diet_board_title}, diet_board_content = #{item.diet_board_content} where diet_board_no = #{item.diet_board_no}
+		</foreach>;
+		END;
+	</update>
 </mapper>
 
 

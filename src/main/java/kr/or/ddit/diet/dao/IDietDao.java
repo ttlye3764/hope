@@ -3,6 +3,7 @@ package kr.or.ddit.diet.dao;
 import java.util.List;
 import java.util.Map;
 
+import kr.or.ddit.vo.DietBoardVO;
 import kr.or.ddit.vo.Diet_dayVO;
 import kr.or.ddit.vo.Diet_day_infoVO;
 import kr.or.ddit.vo.Diet_infoVO;
@@ -48,4 +49,10 @@ public interface IDietDao {
 	
 	// graph
 	public List<Diet_dayVO> dietMemGraphList(Map<String, String> params) throws Exception;
+	
+	// 다이어트 게시판 조회
+	public List<DietBoardVO> dietBoardList(Map<String, String> params) throws Exception;
+	
+	//다이어트 게시판 삽입
+	public void updateDietBoard(List<DietBoardVO> dietBoardList) throws Exception;
 }
