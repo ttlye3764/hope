@@ -21,5 +21,7 @@ public interface IDealDao {
 	public List<DealVO> selectexpenditure() throws Exception;
 	public List<DealVO> selectrevenue() throws Exception;
 	public List<DealVO> staticList(String mem_no) throws Exception;
+	public DealVO dealInfo(String deal_no) throws Exception;
+	public void updateAccount(Map<String, String> params) throws Exception;
 
 }

@@ -72,6 +72,16 @@ public class IDealServiceImpl implements IDealService{
 		return dao.staticList(mem_no);
 	}
 
+	@Override
+	public DealVO dealInfo(String deal_no) throws Exception {
+		return dao.dealInfo(deal_no);
+	}
+
+	@Override
+	public void updateAccount(Map<String, String> params) throws Exception {
+		dao.updateAccount(params);		
+	}
+
 	
 
 	

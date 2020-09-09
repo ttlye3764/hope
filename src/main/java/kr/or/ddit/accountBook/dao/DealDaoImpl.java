@@ -89,10 +89,15 @@ public class DealDaoImpl implements IDealDao{
 		return client.selectList("deal.staticList", mem_no);
 	}
 
-	
-	
-	
+	@Override
+	public DealVO dealInfo(String deal_no) throws Exception {
+		return client.selectOne("deal.dealInfo", deal_no);	
+	}
 
+	@Override
+	public void updateAccount(Map<String, String> params) throws Exception {
+		client.update("deal.updateAccount",params);
+	}
 
 
 }

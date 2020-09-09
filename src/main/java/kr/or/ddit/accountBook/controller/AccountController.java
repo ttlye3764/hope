@@ -160,6 +160,20 @@ public class AccountController {
 		andView.setViewName("jsonConvertView");
 		return andView;
 	}
+	@RequestMapping("accountInfo")
+	public ModelAndView accountInfo(String deal_no) throws Exception {
+		
+		DealVO vo =service.dealInfo(deal_no);
+		
+		
+		
+		
+		
+		ModelAndView andView = new ModelAndView();
+		andView.addObject("dealInfo",vo);
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
 	
 	@RequestMapping("cardList")
 	public ModelAndView cardList(String card_kind, String mem_no) throws Exception {
@@ -209,36 +223,27 @@ public class AccountController {
 		Map<String, String> params = new HashMap<>();
 		String bungiStart = null;
 		String bungiEnd = null;
-		System.out.println(deal_year);
-		System.out.println(deal_year.length());
-		System.out.println(deal_bungi);
-		System.out.println(deal_month);
+		System.out.println("테스트");
+		System.out.println(deal_kind);
 		if(deal_name.length()<1) {
-			System.out.println("널임");
 			deal_name = null;
 		}
 		if(startDate.length()<1) {
-			System.out.println("널임");
 			startDate = null;
 		}
 		if(endDate.length()<1) {
-			System.out.println("널임");
 			endDate = null;
 		}
 		if(deal_option.length()<1) {
-			System.out.println("널임");
 			deal_option = null;
 		}
 		if(deal_division.length()<1) {
-			System.out.println("널임");
 			deal_division = null;
 		}
 		if(deal_kind.length()<1) {
-			System.out.println("널임");
 			deal_kind = null;
 		}
 		if(deal_year.length()<1) {
-			System.out.println("널임");
 			deal_year = null;
 		}
 		if(deal_bungi.length()<1) {
@@ -246,7 +251,6 @@ public class AccountController {
 		}else if(deal_bungi.length()>0) {
 			String[] str = deal_bungi.split("/");
 			deal_bungi = str[0];
-			System.out.println(deal_bungi);
 			if(deal_bungi.equals("1")) {
 				bungiStart = "1";
 				bungiEnd = "3";
@@ -263,14 +267,11 @@ public class AccountController {
 				bungiStart = "10";
 				bungiEnd = "12";
 			}
-			System.out.println("분기");
-			System.out.println(bungiStart);
 			params.put("bungiStart", bungiStart);
 			params.put("bungiEnd", bungiEnd);
 			params.put("deal_bungi", deal_bungi);
 		}
 		if(deal_month.length()<1) {
-			System.out.println("널임");
 			deal_month = null;
 		}else if(deal_month.length()>0) {
 			String[] m = deal_month.split("월");
@@ -284,7 +285,16 @@ public class AccountController {
 		params.put("deal_option", deal_option);
 		params.put("deal_name", deal_name);
 		params.put("deal_division", deal_division);
-		params.put("deal_kind", deal_kind);
+		if(deal_kind == null) {
+			params.put("deal_kind", null);
+			params.put("deal_card_name", null);
+		}
+		else if(deal_kind.equals("현금")) {
+			params.put("deal_kind", deal_kind);
+		}
+		else if(!(deal_kind.equals("현금")) && deal_kind != null) {
+			params.put("deal_card_name", deal_kind);
+		}
 		params.put("deal_year", deal_year);
 		params.put("mem_no", mem_no);
 		
@@ -306,9 +316,9 @@ public class AccountController {
 		params.put("startCount", startCount);
 		params.put("endCount", endCount);
 		
+		System.out.println(params.get(deal_kind));
 		
 		List<DealVO> list =  service.searchList(params);
-		System.out.println(list.get(0).getDeal_date());
 		
 		System.out.println(pagination.getPagingHtmls());
 		ModelAndView andView = new ModelAndView();
@@ -322,6 +332,29 @@ public class AccountController {
 	public ModelAndView deleteAccount(String deal_no) throws Exception {
 		System.out.println(deal_no);
 		service.deletedeal(deal_no);
+		ModelAndView andView = new ModelAndView();
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
+	@RequestMapping("updateAccount")
+	public ModelAndView updateAccount(String deal_no, String deal_date, String deal_name, String deal_price, String deal_division, String deal_option, String deal_kind, String deal_card_name) throws Exception {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("deal_no", deal_no);		
+		params.put("deal_date", deal_date);		
+		params.put("deal_name", deal_name);		
+		params.put("deal_price", deal_price);		
+		params.put("deal_division", deal_division);		
+		params.put("deal_option", deal_option);		
+		
+		
+		if(deal_kind.equals("현금")) {
+			params.put("deal_kind", deal_kind);		
+		}else if(deal_kind.equals("카드")) {
+			params.put("deal_kind", deal_kind);
+			params.put("deal_card_name", deal_card_name);
+		}
+        
+		service.updateAccount(params);
 		ModelAndView andView = new ModelAndView();
 		andView.setViewName("jsonConvertView");
 		return andView;
