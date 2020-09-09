@@ -15,6 +15,12 @@ $(function(){
 	$('#files').on('change', handleImgFileSelect);
 	$('#files2').on('change', handleImgFileSelect);
 
+
+	// 엑셀
+	$('#excel').click(function(){
+		$(location).attr('href','${pageContext.request.contextPath}/user/accountBook/excelDown.do');
+	}); 
+
 	
 	$('#registBtn').click(function(){
 		paymentOption = $('#paymentOption option:selected').val();
@@ -27,7 +33,10 @@ $(function(){
 		deal_fix_expenditure = 0;
 		
 		if(paymentMethod=="카드"){
-			paymentMethod = $('#kind').val();
+			deal_card_name = $('#kind').val();
+		}
+		if(paymentMethod=="현금"){
+			deal_card_name = '현금';
 		}
 		
 	     $.ajax({
@@ -35,7 +44,7 @@ $(function(){
 	        url     : '${pageContext.request.contextPath}/user/accountBook/registTrace.do',
 	        type    : 'post',
 	        dataType : 'json',
-	        data : {'deal_option':paymentOption,'deal_kind':paymentMethod,'deal_date':date,'deal_name':item,'deal_price':price, 'mem_no':${LOGIN_MEMBERINFO.mem_no}, 'deal_division':division, 'deal_fix_revenue':deal_fix_revenue, 'deal_fix_expenditure':deal_fix_expenditure},
+	        data : {'deal_option':paymentOption,'deal_kind':paymentMethod,'deal_card_name':deal_card_name,'deal_date':date,'deal_name':item,'deal_price':price, 'mem_no':${LOGIN_MEMBERINFO.mem_no}, 'deal_division':division, 'deal_fix_revenue':deal_fix_revenue, 'deal_fix_expenditure':deal_fix_expenditure},
 	        success : function(Result) {
 	        //  $('#accountTable').append('<tr><td>'+Result.list.length+'</td><td>'+Result.list[Result.list.length-1].deal_date+'</td><td>'+item+'</td><td>'+price+'</td><td>'+paymentMethod+'</td><td><button id="deleteBtn" type="button">삭제</button></td></tr>');
 	        }
@@ -53,7 +62,10 @@ $(function(){
 		staticdivision = $('#staticdivision').val();
 		
 		if(staticpaymentMethod=="카드"){
-			staticpaymentMethod = $('#statickind').val();
+			staticcard_name = $('#statickind').val();
+		}
+		if(staticpaymentMethod=="현금"){
+			staticcard_name = '현금';
 		}
 
 		if(staticpaymentOption=="입금"){
@@ -69,7 +81,7 @@ $(function(){
 	        url     : '${pageContext.request.contextPath}/user/accountBook/staticregistTrace.do',
 	        type    : 'post',
 	        dataType : 'json',
-	        data : {'deal_option':staticpaymentOption,'deal_kind':staticpaymentMethod,'deal_date':staticdate,'deal_name':staticitem,'deal_price':staticprice, 'mem_no':${LOGIN_MEMBERINFO.mem_no}, 'deal_division':staticdivision, 'deal_fix_revenue':staticdeal_fix_revenue, 'deal_fix_expenditure':staticdeal_fix_expenditure},
+	        data : {'deal_option':staticpaymentOption,'deal_kind':staticpaymentMethod,'deal_date':staticdate,'deal_name':staticitem,'deal_price':staticprice, 'mem_no':${LOGIN_MEMBERINFO.mem_no}, 'deal_division':staticdivision, 'deal_fix_revenue':staticdeal_fix_revenue, 'deal_fix_expenditure':staticdeal_fix_expenditure, 'deal_card_name':staticcard_name},
 	        success : function(Result) {
 	        	$('#staticTable').append('<tr><td>'+Result.list[Result.list.length-1].deal_name+'</td><td>'+Result.list[Result.list.length-1].deal_date+'</td><td>'+Result.list[Result.list.length-1].deal_price+'</td><td><button type="button" value="'+Result.list[Result.list.length-1].deal_no+'" onclick="deleteStaticDeal('+Result.list[Result.list.length-1].deal_no+')">삭제</button></td></tr>');
 	        }
@@ -362,7 +374,6 @@ function staticcategoryChange(e){
                                     <div class="card-body">
 
                                         <ul class="nav nav-tabs nav-bordered mb-3">
-                                            
                                             <li class="nav-item">
                                                 <a href="#profile-b1" data-toggle="tab" aria-expanded="true" class="nav-link active">
                                                     <i class="mdi mdi-account-circle d-lg-none d-block mr-1"></i>
@@ -423,7 +434,9 @@ function staticcategoryChange(e){
                                                 <br>
                                                 <br>
 
-
+											<div align="left">
+	                                            <button type="button" class="btn btn-light mb-2 mr-1" id="excel">Excel</button>
+											</div>
                                                 <table id="accountTable" class="table table-sm table-centered mb-0" style="margin: auto; text-align: center;" >
 													<thead>
 														<tr>

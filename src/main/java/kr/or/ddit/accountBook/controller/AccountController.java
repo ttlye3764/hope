@@ -1,12 +1,21 @@
 package kr.or.ddit.accountBook.controller;
 
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.MessageSourceAccessor;
@@ -22,9 +31,11 @@ import kr.or.ddit.utiles.RolePaginationUtil;
 import kr.or.ddit.utiles.RolePaginationUtil_BYEOL;
 import kr.or.ddit.utiles.RolePaginationUtil_account;
 import kr.or.ddit.utiles.RolePaginationUtil_pill;
+import kr.or.ddit.utiles.RolePaginationUtil_su;
 import kr.or.ddit.utiles.RolePaginationUtil_yun;
 import kr.or.ddit.vo.CardVO;
 import kr.or.ddit.vo.DealVO;
+import kr.or.ddit.vo.HealthImageVO;
 import kr.or.ddit.vo.MemberVO;
 import kr.or.ddit.vo.MypillVO;
 import kr.or.ddit.vo.PillVO;
@@ -106,7 +117,7 @@ public class AccountController {
 	
 	
 	@RequestMapping("registTrace")
-	public ModelAndView registTrace(String deal_option, String deal_kind, String deal_date, String deal_name, String deal_price, String mem_no, String deal_division, String deal_fix_revenue, String deal_fix_expenditure) throws Exception {
+	public ModelAndView registTrace(String deal_option, String deal_kind, String deal_date, String deal_name, String deal_price, String mem_no, String deal_division, String deal_fix_revenue, String deal_fix_expenditure, String deal_card_name) throws Exception {
 		DealVO dealInfo = new DealVO();
 		dealInfo.setDeal_option(deal_option);
 		dealInfo.setDeal_kind(deal_kind);
@@ -117,6 +128,7 @@ public class AccountController {
 		dealInfo.setMem_no(mem_no);
 		dealInfo.setDeal_fix_expenditure(deal_fix_expenditure);
 		dealInfo.setDeal_fix_revenue(deal_fix_revenue);
+		dealInfo.setDeal_card_name(deal_card_name);
 		
 		int cnt = this.service.insertDeal(dealInfo);
 		ModelAndView andView = new ModelAndView();
@@ -127,7 +139,7 @@ public class AccountController {
 		return andView;
 	}
 	@RequestMapping("staticregistTrace")
-	public ModelAndView staticregistTrace(String deal_option, String deal_kind, String deal_date, String deal_name, String deal_price, String mem_no, String deal_division, String deal_fix_revenue, String deal_fix_expenditure) throws Exception {
+	public ModelAndView staticregistTrace(String deal_option, String deal_kind, String deal_date, String deal_name, String deal_price, String mem_no, String deal_division, String deal_fix_revenue, String deal_fix_expenditure, String deal_card_name) throws Exception {
 		DealVO dealInfo = new DealVO();
 		dealInfo.setDeal_option(deal_option);
 		dealInfo.setDeal_kind(deal_kind);
@@ -138,6 +150,7 @@ public class AccountController {
 		dealInfo.setMem_no(mem_no);
 		dealInfo.setDeal_fix_expenditure(deal_fix_expenditure);
 		dealInfo.setDeal_fix_revenue(deal_fix_revenue);
+		dealInfo.setDeal_card_name(deal_card_name);
 		
 		int cnt = this.service.insertDeal(dealInfo);
 		ModelAndView andView = new ModelAndView();
@@ -358,6 +371,101 @@ public class AccountController {
 		ModelAndView andView = new ModelAndView();
 		andView.setViewName("jsonConvertView");
 		return andView;
+	}
+	
+	
+	@RequestMapping("excelDown")
+	public void excelDown(HttpServletResponse response,
+							HttpSession session
+							,Map<String, String> params
+							,RolePaginationUtil_BYEOL pagination
+							,HttpServletRequest request
+							,@RequestParam(value = "currentPage", required = false) String currentPage) throws Exception {
+		
+		if(currentPage == null){
+	         currentPage = "1";
+	      }
+		
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		List<DealVO> list4Size = service.dealList(memberInfo.getMem_no());
+		String totalCount = Integer.toString(list4Size.size());
+	    
+		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount));
+	    String startCount = String.valueOf(pagination.getStartCount());
+	    String endCount = String.valueOf(pagination.getEndCount());
+	    
+	    params.put("startCount", startCount);
+	    params.put("endCount", endCount);
+	    params.put("mem_no", memberInfo.getMem_no());
+	    
+	    List<DealVO> list = service.dealList(memberInfo.getMem_no());
+		
+		// 워크북 생성
+		Workbook wb = new HSSFWorkbook();
+		Sheet sheet = wb.createSheet("거래 등록 내역");
+		Row row = null;
+		Cell cell = null;
+		int rowNo = 0;
+
+		// 헤더 생성
+		row = sheet.createRow(rowNo++);
+		cell = row.createCell(0);
+		cell.setCellValue("거래 일자");
+		
+		cell = row.createCell(1);
+		cell.setCellValue("구분");
+		
+		cell = row.createCell(2);
+		cell.setCellValue("거래방법");
+		
+		cell = row.createCell(3);
+		cell.setCellValue("거래 내역");
+		
+		cell = row.createCell(4);
+		cell.setCellValue("입/출");
+		
+		cell = row.createCell(5);
+		cell.setCellValue("금액");
+		
+		// 데이터 부분 생성
+		for(DealVO vo : list) {
+			row = sheet.createRow(rowNo++);
+			cell = row.createCell(0);
+			cell.setCellValue(vo.getDeal_date());
+			
+			cell = row.createCell(1);
+			cell.setCellValue(vo.getDeal_division());
+			
+			cell = row.createCell(2);
+			cell.setCellValue(vo.getDeal_kind());
+			
+			cell = row.createCell(3);
+			cell.setCellValue(vo.getDeal_name());
+			
+			cell = row.createCell(4);
+			cell.setCellValue(vo.getDeal_option());
+			
+			cell = row.createCell(5);
+			cell.setCellValue(vo.getDeal_price());
+		}
+		
+		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+		
+		Calendar time = Calendar.getInstance();
+		
+		String format_time1 = format1.format(time.getTime());
+		
+		
+		// 엑셀 출력
+		response.setContentType("application/vnd.ms-excel");
+		response.setHeader("Content-Disposition", "attachment;filename=trace_"+format_time1+".xls");
+		
+		
+		wb.write(response.getOutputStream());
+
+		FileOutputStream fileOut = new FileOutputStream("excel.xlsx");
+		wb.write(fileOut);
+		fileOut.close();
 	}
 	
 	

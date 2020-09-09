@@ -30,6 +30,12 @@ public class RolePaginationUtil_seung {
 		this.totalCount = totalCount;
 		this.search_keycode = search_keycode;
 		this.search_keyword = search_keyword;
+		if(search_keycode == null) {
+			this.search_keycode = "TOTAL";
+		}
+		if(search_keyword == null) {
+			this.search_keyword = "";
+		}
 		
 		pagingHtmls = new StringBuffer();
 		

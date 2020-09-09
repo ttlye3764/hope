@@ -17,7 +17,8 @@
                deal_fix_expenditure,
                mem_no,
                deal_option,
-               deal_division)
+               deal_division,
+               deal_card_name)
          VALUES
              (
                deal_seq.nextval,      
@@ -30,7 +31,8 @@
                #{deal_fix_expenditure},
                #{mem_no},
                #{deal_option},
-               #{deal_division}
+               #{deal_division},
+               #{deal_card_name}
                )
          
    </insert>
@@ -41,6 +43,7 @@
 		WHERE MEM_NO = #{mem_no}
 		AND deal_fix_revenue = 0
 		AND deal_fix_expenditure = 0
+		ORDER BY deal_no
 	</select>
 	
 	
@@ -228,7 +231,10 @@
 	</select>
 	
 	<select id="staticList" resultType="dealVO" parameterType="String">
-		select * from deal where DEAL_FIX_EXPENDITURE=1 OR DEAL_FIX_REVENUE=1 AND MEM_NO = #{mem_no} order by deal_no
+		select * from deal 
+		where MEM_NO= #{mem_no}
+		AND( DEAL_FIX_EXPENDITURE=1 OR DEAL_FIX_REVENUE=1 )
+		order by deal_no
 	</select>
 	
 </mapper>    
