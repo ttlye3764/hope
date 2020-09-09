@@ -39,7 +39,11 @@
 		SELECT *
 		FROM deal
 		WHERE MEM_NO = #{mem_no}
+		AND deal_fix_revenue = 0
+		AND deal_fix_expenditure = 0
 	</select>
+	
+	
    <select id="totalCount" resultType="String" parameterType="map">
 		select count(*)
 		from deal
@@ -140,6 +144,8 @@
 					FROM(SELECT DEAL.*
 					FROM DEAL
 					WHERE MEM_NO = #{mem_no}
+					AND deal_fix_revenue = 0
+					AND deal_fix_expenditure = 0
 				ORDER BY DEAL_NO
 				)A
 			)B
@@ -188,6 +194,17 @@
       WHERE DEAL_NO = #{deal_no}
    </delete>
 	
+	<select id="selectexpenditure" resultType="dealVO">
+		select * from deal where DEAL_FIX_EXPENDITURE=1
+	</select>
+			
+	<select id="selectrevenue" resultType="dealVO">
+		select * from deal where DEAL_FIX_REVENUE=1
+	</select>
+	
+	<select id="staticList" resultType="dealVO" parameterType="String">
+		select * from deal where DEAL_FIX_EXPENDITURE=1 OR DEAL_FIX_REVENUE=1 AND MEM_NO = #{mem_no} order by deal_no
+	</select>
 	
 </mapper>    
 
