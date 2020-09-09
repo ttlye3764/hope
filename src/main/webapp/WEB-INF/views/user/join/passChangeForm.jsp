@@ -4,29 +4,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!-- c:url을 이용하여 처리 -->
 <c:url var="regustMemberURI" value="/user/member/memberForm.do"></c:url>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>Wizixo | Creative Multipurpose Bootstrap Template</title>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="author" content="Webestica.com">
-	<meta name="description" content="Creative Multipurpose Bootstrap Template">
-
-	<!-- Favicon -->
-	<link rel="shortcut icon" href="assets/images/favicon.ico">
-
-	<!-- Google Font -->
-	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900%7CPlayfair+Display:400,400i,700,700i%7CRoboto:400,400i,500,700" rel="stylesheet">
-
-	<!-- Plugins CSS -->
-	<link rel="stylesheet" type="text/css" href="assets/vendor/font-awesome/css/font-awesome.min.css" />
-	<link rel="stylesheet" type="text/css" href="assets/vendor/themify-icons/css/themify-icons.css" />
-	<link rel="stylesheet" type="text/css" href="assets/vendor/animate/animate.min.css" />
-
-	<!-- Theme CSS -->
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 	
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript"
@@ -105,23 +82,32 @@ td{
 </head>
 <body>
 <div align="center">
-<h3>비밀번호 변경</h3>
-	<table width="500px">
-		<tr>
-			<td class="fieldName" width="120px" height="25" class="idright">비밀번호</td>
-			<td><input type="password" name="mem_pass" id="mem_pass" onkeyup="pwcheck()" 
-			class="form-control"/></td>
-		</tr>
-
-		<tr>
-			<td class="fieldName" width="120px" height="25" class="idright">비밀번호확인</td>
-			<td><input type="password" name="mem_pass_confirm" id="pass2" onkeyup="pwcheck()" 
-			class="form-control"/> <label id="passchecklb"></label></td>
-		</tr>
-	</table>
-	<input id="btn1" type="submit" value="변경">
-					&nbsp;&nbsp;&nbsp;&nbsp;
-	<button	id="btn3" type="button">취소 </button>
+<div class="innerpage-banner center bg-overlay-dark-7 py-7"
+		style="background: url(assets/images/bg/04.jpg) no-repeat; background-size: cover; background-position: center center;">
+      <div class="container">
+         <div class="row all-text-white">
+            <div class="col-md-12 align-self-center">
+               <h3 class="innerpage-title">비밀번호 변경</h3>
+               <div align="center">
+	               <table width="400px">
+						<tr>
+							<td class="fieldName" width="120px" height="25" class="idright">비밀번호</td>
+							<td><input type="password" name="mem_pass" id="mem_pass" onkeyup="pwcheck()" 
+							class="form-control"/></td>
+						</tr>
+				
+						<tr>
+							<td class="fieldName" width="120px" height="25" class="idright">비밀번호확인</td>
+							<td><input type="password" name="mem_pass_confirm" id="pass2" onkeyup="pwcheck()" 
+							class="form-control"/> <label id="passchecklb"></label></td>
+						</tr>
+					</table>
+					<input id="btn1" type="submit" value="변경">
+									&nbsp;&nbsp;&nbsp;&nbsp;
+					<button	id="btn3" type="button">취소 </button>
+				</div>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>
-</body>
-</html>
