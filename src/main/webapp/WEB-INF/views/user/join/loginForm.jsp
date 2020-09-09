@@ -50,80 +50,13 @@
 
 </style>
 	
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type='text/javascript' src='<%=request.getContextPath()%>/js/validation.js'></script>
 <script type='text/javascript'>
 	var big_mem_id;
       $(function(){
-            if(eval('${!empty param.message}')){
-               alert('${param.message}');
-            }
-
             $("#mem_id").keyup(function(e){if(e.keyCode == 13) login();});
             $("#mem_pass").keyup(function(e){if(e.keyCode == 13) login();});
-
-            $("#mem_hp_pw").keyup(function(e){
-                if(e.keyCode == 8){
-                   var code = $('input[name=mem_hp_pw]').val();
-                   var lastChar = code.charAt(code.length-1);
-                   if(lastChar == '-'){
-                      code = code.substr(0,code.length-1);
-                      $('input[name=mem_hp_pw]').val(code);
-                   }
-                }else{
-                   var hp = $('input[name=mem_hp_pw]').val();
-                   var lastChar = hp.charAt(hp.length-1);
-                   if(lastChar == '-'){
-                       hp = hp.substr(0,hp.length-1);
-                       $('input[name=mem_hp_pw]').val(hp);
-                   }else{
-                   	if(hp.length == 3 || hp.length == 8){
-                   	   $('input[name=mem_hp_pw]').val(hp + "-");
-                  	 }
-                   }     
-                }
-             });
-             $("#mem_birth_pw").keyup(function(e){
-          	      if(e.keyCode == 8){
-          	         var code = $('input[name=mem_birth_pw]').val();
-          	         var lastChar = code.charAt(code.length-1);
-          	         if(lastChar == '-'){
-          	            code = code.substr(0,code.length-1);
-          	            $('input[name=mem_birth_pw]').val(code);
-          	         }
-          	      }else{
-          	         var birth = $('input[name=mem_birth_pw]').val();
-          	         var lastChar = birth.charAt(birth.length-1);
-          	         if(lastChar == '-'){
-          	        	 birth = birth.substr(0,birth.length-1);
-          		         $('input[name=mem_birth_pw]').val(birth);
-          		     }else{
-          		         if(birth.length == 4 || birth.length == 7){
-          		            $('input[name=mem_birth_pw]').val(birth + "-");
-          		         }
-          		     }
-          	      }
-          	   });
-             $("#mem_birth").keyup(function(e){
-         	      if(e.keyCode == 8){
-         	         var code = $('input[name=mem_birth]').val();
-         	         var lastChar = code.charAt(code.length-1);
-         	         if(lastChar == '-'){
-         	            code = code.substr(0,code.length-1);
-         	            $('input[name=mem_birth]').val(code);
-         	         }
-         	      }else{
-         	         var birth = $('input[name=mem_birth]').val();
-         	         var lastChar = birth.charAt(birth.length-1);
-         	         if(lastChar == '-'){
-         	        	 birth = birth.substr(0,birth.length-1);
-         		         $('input[name=mem_birth]').val(birth);
-         		     }else{
-         		         if(birth.length == 4 || birth.length == 7){
-         		            $('input[name=mem_birth]').val(birth + "-");
-         		         }
-         		     }
-         	      }
-         	   });
       });
 
       function login(){
@@ -170,11 +103,21 @@
         		if(result.json==1){
         			$(location).attr('href', '${pageContext.request.contextPath}/user/main/mainForm.do');
         		}else if(result.json==2){
-        			alert('임시비밀번호로 로그인하셨습니다. \n비밀번호 변경창으로 이동합니다.');
-        			$(location).attr('href', '${pageContext.request.contextPath}/user/join/passChangeForm.do');
+        			swal({
+        	      	    title: "",
+        	      	    text: "임시비밀번호로 로그인하셨습니다. \n비밀번호 변경창으로 이동합니다.",
+        	      	    type: "success"
+        	      	}).then(function() {
+        	      		$(location).attr('href', '${pageContext.request.contextPath}/user/join/passChangeForm.do');
+        	      	});
             	}else if(result.json==0){
-					alert('관리자님 환영합니다!');
-					$(location).attr('href', '${pageContext.request.contextPath}/admin/main/mainForm.do');
+            		swal({
+        	      	    title: "",
+        	      	    text: "관리자님 환영합니다!",
+        	      	    type: "success"
+        	      	}).then(function() {
+						$(location).attr('href', '${pageContext.request.contextPath}/admin/main/mainForm.do');
+        	      	});
                 }
             	else{
             		$('#label').text(result.json);
@@ -220,7 +163,7 @@
     	var mem_hp = $('input[name=mem_hp_pw]').val();
 
   		if (!mem_hp.validationHP()) {
-  			alert('휴대전화번호를 바르게 입력해주세요.');
+  			swal("","휴대전화번호를 바르게 입력해주세요.", "warning");
   			return false;
   		}
   		
@@ -232,11 +175,10 @@
   				mem_hp : $('input[name=mem_hp_pw]').val()
   			},
   			error : function(result) {
-  				alert(result.json);
+  				swal("",result.json, "success");
   			},
   			success : function(result) {
-  				//{ flag : true | false}
-  				alert(result.json);
+  				swal("",result.json, "success");
   			}
   		});
   	};
@@ -265,14 +207,14 @@
       
     function searchID(){
 		if($('#mem_name').val()==''){
-			alert('이름을 입력해주세요');
+			swal("","이름을 입력해주세요.", "warning");
 			return false;
 		}
 		
     	var mem_birth = $('#mem_birth').val();
 
     	if (!mem_birth.validationBIR()) {
-			alert('올바른 생년월일을 입력해주세요.')
+			swal("","올바른 생년월일을 입력해주세요.", "warning");
 			return false;
 		}
 
@@ -300,25 +242,25 @@
 		var mem_hp = $('input[name=mem_hp_pw]').val();
 
 		if($('#mem_id_pw').val()==''){
-			alert('아이디를 입력해주세요.');
+			swal("","아이디를 입력해주세요.", "warning");
 			return false;
 		}
 		
 		if($('#mem_name_pw').val()==''){
-			alert('이름을 입력해주세요');
+			swal("","이름을 입력해주세요.", "warning");
 			return false;
 		}
 
 		var mem_birth = $('#mem_birth_pw').val();
 
     	if (!mem_birth.validationBIR()) {
-			alert('올바른 생년월일을 입력해주세요.')
+			swal("","올바른 생년월일을 입력해주세요.", "warning");
 			return false;
 		}
 
 		var hp = $('#hplabel').text();
 		if(hp == ''){
-			alert('휴대전화 인증을 해주세요.');
+			swal("","휴대전화 인증을 해주세요.", "warning");
 			return false;
 		}
 
@@ -357,6 +299,10 @@
 	function smschange(){
 		$('#hplabel').text("");
 		$('input[name=hp_num]').removeAttr("disabled");
+	}
+
+	function delete1(){
+		$(location).attr('href', '${pageContext.request.contextPath}/user/member/delete.do');
 	}
 </script>
 
@@ -514,7 +460,7 @@
 					</div>
 					<div class="input-group mb-3" style="width:400px" align="center">
 						휴대전화&nbsp;&nbsp;&nbsp;
-						<input type="text" class="form-control" id="mem_hp_pw" name="mem_hp_pw" placeholder="-빼고 입력" onchange="smschange()" ><a href="javascript:sendsms();">[인증번호 전송]</a>
+						<input type="text" class="form-control" id="mem_hp_pw" name="mem_hp_pw" placeholder="010-1234-5678" onchange="smschange()" ><a href="javascript:sendsms();">[인증번호 전송]</a>
 					</div>
 					<div class="input-group mb-3" style="width:400px" align="center">
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

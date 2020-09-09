@@ -39,7 +39,6 @@ public class MemberController {
 	@Autowired
 	private IBoardService boardService;
 
-
 	@RequestMapping("memberView")
 	public ModelMap memberView(String mem_id, Map<String, String> params, ModelMap modelMap) throws Exception {
 		params.put("mem_id", mem_id);

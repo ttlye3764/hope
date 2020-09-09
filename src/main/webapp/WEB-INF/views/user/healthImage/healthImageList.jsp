@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
@@ -10,17 +9,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Webestica.com">
 <meta name="description" content="Creative Multipurpose Bootstrap Template">
+
 <link rel="shortcut icon" href="${pageContext.request.contextPath }/resources/template/assets/images/favicon.ico">
 
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900%7CPlayfair+Display:400,400i,700,700i%7CRoboto:400,400i,500,700" rel="stylesheet">
-
 <!-- Plugins CSS -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/font-awesome/css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/themify-icons/css/themify-icons.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/animate/animate.min.css" />
-
-<!-- Theme CSS -->
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/animate/animate.min.css" /><!-- Theme CSS -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/css/style.css" />
 <title>Insert title here</title>
 </head>
@@ -97,7 +94,6 @@
 							</ul>
 						</div>
                         <br> 
-                                     
 					<div class="portfolio-wrap grid items-4 items-padding">
 					<c:forEach items= "${healthImageList }" var= "healthInfo" varStatus="status">
 						<!-- portfolio-card -->
@@ -192,13 +188,13 @@
 													</button>
 												</div>
 												<div class="modal-body">
-													<form name="file" method="post" enctype="multipart/form-data">
+													<form action="${pageContext.request.contextPath}/user/healthImage/ocr.do" name="file" method="post" enctype="multipart/form-data">
 														<div class="form-group">
 															<label for="exampleFormControlFile1">인바디 파일을 넣어주세요.</label>
 															<input type="file" name="files" class="form-control-file" id="file">
 														</div>
+ 													<input type="submit" class="btn btn-light mb-2 mr-1" id="inbody" style="margin: 0px 0px 0px 190px;">
 													</form>
- 													<button type="button" class="btn btn-light mb-2 mr-1" id="inbody" style="margin: 0px 0px 0px 160px;">추천 운동 확인</button>
 												</div>
 											</div>
 										</div>
@@ -247,17 +243,17 @@
 					$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/healthImageList.do');
 				}); 
 
-				// 인바디 정보 등록
-				$('#inbody').click(function(){
-					var file = $('#file').val();
-					if(file == ""){
+				 // 인바디 정보 등록
+				$('form[name=file]').submit(function(){
+					var files = $('#file').val();
+					if(files == ""){
 						swal("FILE","파일을 넣어주세요.", "warning");
 
 						return false;
 					}
 					
-					$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/excelDown.do');
-				}); 
+					$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/ocr.do');
+				});  
 
 				$("#playBtn").on("click", function() {
 			        $("#myVideo").trigger("play");

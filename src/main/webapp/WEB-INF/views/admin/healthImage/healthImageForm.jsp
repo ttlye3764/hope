@@ -137,6 +137,7 @@
 
         <!-- App js -->
 <script src="${pageContext.request.contextPath }/resources/html/dist/assets/js/app.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script type="text/javascript">
 function setThumbnail(event) { 
@@ -166,18 +167,19 @@ function setThumbnail(event) {
 			var file = $('#inputGroupFile04').val();
 
 			if (title == "" || age == "" || time == "") {
-				alert("빈 칸을 모두 입력해주세요.(내용 제외)");
+				swal("ERROR","빈 칸을 모두 입력해주세요.(내용 제외)", "warning");
 
 				return false;
 			}
 
 			if (file == "") {
-				alert("파일을 넣어주세요.")
+				swal("ERROR","파일을 입력해주세요,", "warning");
+				
 
 				return false;
 			}
 
-			alert("등록 완료");
+			swal("REGISTER","등록 완료", "success");
 
 			var category = $('#category option:selected').val();
 			var diet = $('#diet option:selected').val();

@@ -36,11 +36,11 @@
 						<p class="mb-0">R shade in cause.</p>
 					</div>
 					<div class="widget">
-						<h5 class="widget-title" id="dietSied_h5_recommendDiet">추천 식단 리스트</h5>
+						<h5 class="widget-title" id="dietSide_h5_recommendDiet">추천 식단 리스트</h5>
 						<p class="mb-0"> procuring the why performed continual improving. Civil songs so large shade in cause.</p>
 					</div>
 					<div class="widget">
-						<h5 class="widget-title" id="dietSied_h5_bmi">BMI 계산기</h5>
+						<h5 class="widget-title" id="dietSide_h5_bmi">BMI 계산기</h5>
 						<p class="mb-0">. She procuring the why performed continual improving. Civil songs so large shade in cause.</p>
 					</div>
 				</aside>

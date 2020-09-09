@@ -35,11 +35,11 @@
 						<p class="mb-0">R shade in cause.</p>
 					</div>
 					<div class="widget">
-						<h5 class="widget-title" id="dietSied_h5_recommendDiet">추천 식단 리스트</h5>
+						<h5 class="widget-title" id="dietSide_h5_recommendDiet">추천 식단 리스트</h5>
 						<p class="mb-0"> procuring the why performed continual improving. Civil songs so large shade in cause.</p>
 					</div>
 					<div class="widget">
-						<h5 class="widget-title" id="dietSied_h5_bmi">BMI 계산기</h5>
+						<h5 class="widget-title" id="dietSide_h5_bmi">BMI 계산기</h5>
 						<p class="mb-0">. She procuring the why performed continual improving. Civil songs so large shade in cause.</p>
 					</div>
 				</aside>
@@ -148,7 +148,19 @@
 				</div>						</div>
 						<div class="tab-pane active" id="tab-1-2">
 						
-						<section class="py-4 counter counter-grad-text counter-light counter-small">
+						
+			<form>
+			<div class="input-group">
+				<input type="text" id="kcal_kcal" class="form-control" placeholder="Enter your Email..." style="width:300px; !important">
+					<span class="input-group-btn">
+						<button type="button" id="kcal_calculate" class="btn btn-grad mb-0"><i class="fa fa-paper-plane m-0"></i></button>
+					</span>
+			</div>
+		</form>						
+						
+		<section class="py-4 counter counter-grad-text counter-light counter-small">
+		
+		<!-- 첫번째 줄-->
 		<div class="container">
 			<div class="row">
 				<!-- count item -->
@@ -185,15 +197,212 @@
 				</div>
 			</div>
 		</div>
-		<form>
-			<div class="input-group">
-				<input type="text" id="kcal_kcal" class="form-control" placeholder="Enter your Email..." style="width:300px; !important">
-					<span class="input-group-btn">
-						<button type="button" id="kcal_calculate" class="btn btn-grad mb-0"><i class="fa fa-paper-plane m-0"></i></button>
-					</span>
+		
+		<!--  두번째 줄 -->
+		<section class="py-4 bg-light counter counter-light counter-small">
+		<div class="container">
+			<div class="row">
+				<!-- count item -->
+				<div class="col-md-3 col-6">
+					<div class="counter-item text-center">
+						<i class="counter-item-icon ti-write"></i>
+						<h2 class="counter-item-digit" data-from="0" data-to="5257" data-speed="3000" data-refresh-interval="10">5257</h2>
+						<p class="counter-item-text">Lines of code</p>
+					</div>
+				</div>
+				<!-- count item -->
+				<div class="col-md-3 col-6">
+					<div class="counter-item text-center">
+						<i class="counter-item-icon ti-truck"></i>
+						<h2 class="counter-item-digit" data-from="0" data-to="865" data-speed="3000" data-refresh-interval="10">865</h2>
+						<p class="counter-item-text">Project Delivered</p>
+					</div>
+				</div>
+				<!-- count item -->
+				<div class="col-md-3 col-6">
+					<div class="counter-item text-center">
+						<i class="counter-item-icon ti-face-smile"></i>
+						<h2 class="counter-item-digit" data-from="0" data-to="127" data-speed="3000" data-refresh-interval="10">127</h2>
+						<p class="counter-item-text">Satisfied clients</p>
+					</div>
+				</div>
+				<!-- count item -->
+				<div class="col-md-3 col-6">
+					<div class="counter-item text-center">
+						<i class="counter-item-icon ti-cup"></i>
+						<h2 class="counter-item-digit" data-from="0" data-to="16" data-speed="3000" data-refresh-interval="10">16</h2>
+						<p class="counter-item-text">Awards won</p>
+					</div>
+				</div>
 			</div>
-		</form>
+		</div>
 	</section>
+	
+	
+	</section>
+	
+	
+	<!-- 세번째 줄 -->
+	<section class="py-4 counter counter-grad-text counter-light counter-small">
+		<div class="container">
+			<div class="row">
+				<!-- count item -->
+				<div class="col-md-3 col-6">
+					<div class="counter-item text-center">
+						<i class="counter-item-icon ti-write"></i>
+						<h2 class="counter-item-digit" data-from="0" data-to="5257" data-speed="3000" data-refresh-interval="10">5257</h2>
+						<p class="counter-item-text">Lines of code</p>
+					</div>
+				</div>
+				<!-- count item -->
+				<div class="col-md-3 col-6">
+					<div class="counter-item text-center">
+						<i class="counter-item-icon ti-truck"></i>
+						<h2 class="counter-item-digit" data-from="0" data-to="865" data-speed="3000" data-refresh-interval="10">865</h2>
+						<p class="counter-item-text">Project Delivered</p>
+					</div>
+				</div>
+				<!-- count item -->
+				<div class="col-md-3 col-6">
+					<div class="counter-item text-center">
+						<i class="counter-item-icon ti-face-smile"></i>
+						<h2 class="counter-item-digit" data-from="0" data-to="127" data-speed="3000" data-refresh-interval="10">127</h2>
+						<p class="counter-item-text">Satisfied clients</p>
+					</div>
+				</div>
+				<!-- count item -->
+				<div class="col-md-3 col-6">
+					<div class="counter-item text-center">
+						<i class="counter-item-icon ti-cup"></i>
+						<h2 class="counter-item-digit" data-from="0" data-to="16" data-speed="3000" data-refresh-interval="10">16</h2>
+						<p class="counter-item-text">Awards won</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<!-- 네번째 줄 -->
+	<section class="py-4 counter bg-dark counter-small">
+		<div class="container">
+			<div class="row">
+				<!-- count item -->
+				<div class="col-md-3 col-6">
+					<div class="counter-item text-center">
+						<i class="counter-item-icon ti-write"></i>
+						<h2 class="counter-item-digit" data-from="0" data-to="5257" data-speed="3000" data-refresh-interval="10">5257</h2>
+						<p class="counter-item-text">Lines of code</p>
+					</div>
+				</div>
+				<!-- count item -->
+				<div class="col-md-3 col-6">
+					<div class="counter-item text-center">
+						<i class="counter-item-icon ti-truck"></i>
+						<h2 class="counter-item-digit" data-from="0" data-to="865" data-speed="3000" data-refresh-interval="10">865</h2>
+						<p class="counter-item-text">Project Delivered</p>
+					</div>
+				</div>
+				<!-- count item -->
+				<div class="col-md-3 col-6">
+					<div class="counter-item text-center">
+						<i class="counter-item-icon ti-face-smile"></i>
+						<h2 class="counter-item-digit" data-from="0" data-to="127" data-speed="3000" data-refresh-interval="10">127</h2>
+						<p class="counter-item-text">Satisfied clients</p>
+					</div>
+				</div>
+				<!-- count item -->
+				<div class="col-md-3 col-6">
+					<div class="counter-item text-center">
+						<i class="counter-item-icon ti-cup"></i>
+						<h2 class="counter-item-digit" data-from="0" data-to="16" data-speed="3000" data-refresh-interval="10">16</h2>
+						<p class="counter-item-text">Awards won</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	
+	<!-- 다섯번째  --> 
+	<section class="py-4 bg-grad counter counter-small">
+		<div class="container">
+			<div class="row">
+				<!-- count item -->
+				<div class="col-md-3 col-6">
+					<div class="counter-item text-center">
+						<i class="counter-item-icon ti-write"></i>
+						<h2 class="counter-item-digit" data-from="0" data-to="5257" data-speed="3000" data-refresh-interval="10">5257</h2>
+						<p class="counter-item-text">Lines of code</p>
+					</div>
+				</div>
+				<!-- count item -->
+				<div class="col-md-3 col-6">
+					<div class="counter-item text-center">
+						<i class="counter-item-icon ti-truck"></i>
+						<h2 class="counter-item-digit" data-from="0" data-to="865" data-speed="3000" data-refresh-interval="10">865</h2>
+						<p class="counter-item-text">Project Delivered</p>
+					</div>
+				</div>
+				<!-- count item -->
+				<div class="col-md-3 col-6">
+					<div class="counter-item text-center">
+						<i class="counter-item-icon ti-face-smile"></i>
+						<h2 class="counter-item-digit" data-from="0" data-to="127" data-speed="3000" data-refresh-interval="10">127</h2>
+						<p class="counter-item-text">Satisfied clients</p>
+					</div>
+				</div>
+				<!-- count item -->
+				<div class="col-md-3 col-6">
+					<div class="counter-item text-center">
+						<i class="counter-item-icon ti-cup"></i>
+						<h2 class="counter-item-digit" data-from="0" data-to="16" data-speed="3000" data-refresh-interval="10">16</h2>
+						<p class="counter-item-text">Awards won</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<!-- 여섯번째 -->
+	<section class="py-4 bg-dark-grad counter counter-small">
+		<div class="container">
+			<div class="row">
+				<!-- count item -->
+				<div class="col-md-3 col-6">
+					<div class="counter-item text-center">
+						<i class="counter-item-icon ti-write"></i>
+						<h2 class="counter-item-digit" data-from="0" data-to="5257" data-speed="3000" data-refresh-interval="10">5257</h2>
+						<p class="counter-item-text">Lines of code</p>
+					</div>
+				</div>
+				<!-- count item -->
+				<div class="col-md-3 col-6">
+					<div class="counter-item text-center">
+						<i class="counter-item-icon ti-truck"></i>
+						<h2 class="counter-item-digit" data-from="0" data-to="865" data-speed="3000" data-refresh-interval="10">865</h2>
+						<p class="counter-item-text">Project Delivered</p>
+					</div>
+				</div>
+				<!-- count item -->
+				<div class="col-md-3 col-6">
+					<div class="counter-item text-center">
+						<i class="counter-item-icon ti-face-smile"></i>
+						<h2 class="counter-item-digit" data-from="0" data-to="127" data-speed="3000" data-refresh-interval="10">127</h2>
+						<p class="counter-item-text">Satisfied clients</p>
+					</div>
+				</div>
+				<!-- count item -->
+				<div class="col-md-3 col-6">
+					<div class="counter-item text-center">
+						<i class="counter-item-icon ti-cup"></i>
+						<h2 class="counter-item-digit" data-from="0" data-to="16" data-speed="3000" data-refresh-interval="10">16</h2>
+						<p class="counter-item-text">Awards won</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
 						</div>
 						<div class="tab-pane" id="tab-1-3">
 							화이팅

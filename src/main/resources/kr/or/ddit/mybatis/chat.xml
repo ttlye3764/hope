@@ -51,10 +51,85 @@
 		WHERE b.MEM_NO = #{mem_no}
 	</select>
 	
+	<select id="chatRoomList" parameterType="Map" resultType="memberVO">
+		SELECT b.ch_no ch_no, a.mem_no mem_no, a.mem_name mem_name
+		FROM MEMBER a,(
+			SELECT ch_no, mem_no
+			FROM PARTICIPATION
+			WHERE ch_no IN (
+    			SELECT ch_no
+    			FROM PARTICIPATION
+    			WHERE MEM_NO = #{mem_no}
+	 		   )
+			AND MEM_NO != #{mem_no}) b
+		WHERE a.mem_no = b.mem_no
+	</select>
+	
 	<select id ="participationList" parameterType="Map" resultType="participationVO">
 		SELECT *
 		FROM PARTICIPATION
+		<if test="CH_NO != null">
 		WHERE CH_NO = #{ch_no}
+		</if>
+		<if test="MEM_NO != null">
+		WHERE MEM_NO = #{mem_no}
+		</if>
+	</select>
+	
+	<select id="selectMemList" parameterType="Map" resultType="MemberVO">
+		SELECT *
+		FROM MEMBER
+		WHERE MEM_NO != #{mem_no}
+		<if test="mem_id != null">
+			AND MEM_ID LIKE '%'||#{mem_id}||'%'
+		</if>
+		<if test="mem_name != null">
+			AND MEM_NAME LIKE '%'||#{mem_name}||'%'
+		</if>
+		
+	</select>
+	
+	<select id="selectTwoMemInfo" parameterType="Map" resultType="FriendVO">
+		select a.MEM_NO MEM_NO, b.MEM_NO FRI_MEM_NO, a.MEM_NAME MEM_NAME, b.MEM_NAME FRI_MEM_NAME, a.MEM_ID MEM_ID, b.MEM_ID FRI_MEM_ID
+				from (
+    				select *
+    				from MEMBER
+    				where mem_no = #{mem_no}
+				) a,
+				(select *
+    			from MEMBER
+    			where mem_no = #{fri_mem_no}
+    			) b
+	</select>
+	
+	<insert id="insertFriendInfo" parameterType="friendVO">
+		INSERT INTO FRIEND (FRI_NO, MEM_NO, FRI_MEM_NO, MEM_NAME, FRI_MEM_NAME, MEM_ID, FRI_MEM_ID)
+						VALUES(FRIEND_SEQ.NEXTVAL,
+								#{mem_no},
+								#{fri_mem_no},
+								#{mem_name},
+								#{fri_mem_name},
+								#{mem_id},
+								#{fri_mem_id}
+								)
+				
+	</insert>
+	
+	<select id="selectFriendList" parameterType="Map" resultType="memberVO">
+		SELECT *
+		FROM MEMBER
+		WHERE MEM_NO IN
+				(SELECT FRI_MEM_NO
+				FROM FRIEND
+				WHERE MEM_NO = #{mem_no}
+				)
+	</select>
+	
+	<select id="messageList" parameterType="Map" resultType="messageVO">
+		SELECT *
+		FROM MESSAGE
+		WHERE CH_NO = #{ch_no}
+		ORDER BY MSG_DATE
 	</select>
 </mapper>
 	

@@ -12,9 +12,130 @@
     height: 16px;
     line-height: 1em;
 }
+tr:hover{
+		background-color: #e3e3e3;
+	} 
 </style>
 <script>
-	$(function(){
+
+function updateFunc(i){
+	
+	
+	alert(i);
+}
+function deleteFunc(i){
+	var no = i
+	$.ajax({
+         url     : '${pageContext.request.contextPath}/user/accountBook/deleteAccount.do',
+         type    : 'post',
+         dataType: 'json',
+         data : {'deal_no' : no },
+         async : false,
+         success : function(result) {
+             alert(no);
+        	 getAccountList();
+	 	 }
+	}); 
+}
+function getAccountList(){
+	var startDate = $('.startDate').val();
+	var endDate = $('.endDate').val();
+	var deal_option = $('.deal_option option:selected').val();
+	var deal_name = $('.deal_name').val();
+	var deal_division = $('.deal_division option:selected').val();
+	var deal_kind = $('.deal_kind option:selected').val();
+	var deal_year = $('.deal_year option:selected').val();
+	var deal_bungi = $('.deal_bungi option:selected').val();
+	var deal_month = $('.deal_month option:selected').val();
+	if(deal_kind == '카드'){
+		deal_kind = $('#kind option:selected').val();
+	}
+	 $.ajax({
+            url     : '${pageContext.request.contextPath}/user/accountBook/searchAccountList.do',
+            type    : 'post',
+            dataType: 'json',
+            async : false,
+            data : {'startDate':startDate, 'endDate':endDate, 'deal_option':deal_option, 'deal_name':deal_name, 'deal_division':deal_division, 'deal_kind':deal_kind,
+	            		'deal_year':deal_year, 'deal_bungi':deal_bungi, 'deal_month':deal_month, 'mem_no':${LOGIN_MEMBERINFO.mem_no} },
+            success : function(result) {
+	            console.log(result.list);
+	            console.log(result.pagination);
+            	$('#paginationDIV').empty();
+            	    $('#paginationDIV').append(result.pagination);
+	            $('#tbody').empty();
+				var str = "";
+				$.each(result.list,function(i,v){
+					str += '<tr><input type="hidden" value="'+v.deal_no+'"/>';
+					str += '<th>'+(i+1)+'</th>';
+					str += '<td>'+v.deal_date +'</td>';
+					str += '<td>'+v.deal_name +'</td>';
+					str += '<td>'+v.deal_division +'</td>';
+					str += '<td>'+v.deal_price +'</td>';
+					str += '<td>'+v.deal_kind +'</td>';
+					str += '<td>'+v.deal_option +'</td>';
+					str += '<td style="width:50px; height: 50px;">';
+					str += '<div style="display: flex; justify-content:space-around; height: 50px; width:50px;">';
+					str += '<img class="img1" src="${pageContext.request.contextPath}/images/update.PNG" onclick="updateFunc('+v.deal_no+');" style="width:25px; height: 25px;  display:none;">';
+					str += '<img class="img2" src="${pageContext.request.contextPath}/images/delete.PNG" onclick="deleteFunc('+v.deal_no+');" style="width:25px; height: 25px;  display:none;"></div></td></tr>';
+				});
+				$('#tbody').append(str);
+		    }
+	})
+}
+
+	   
+$(function(){
+	$("#kind").hide(); 
+	$(".img1").hide();
+	$(".img2").hide();
+	
+	
+	/* $('#tbody').on('mouseenter', 'tr', function() {
+		$(this).find('.img1').show();
+		$(this).find('.img2').show();
+	}).on('mouseleave', 'tr', function() {
+		$(this).find('.img1').hide();
+		$(this).find('.img2').hide();
+	});
+ */
+	$(document).on('mouseenter','#tbody tr', function(){
+		$(this).find('.img1').show();
+		$(this).find('.img2').show();
+	});
+	$(document).on('mouseleave','#tbody tr', function(){
+		$(this).find('.img1').hide();
+		$(this).find('.img2').hide();
+	});
+//  	$('#tbody tr').on('mouseenter', function() {
+// 		$(this).find('.img1').show();
+// 		$(this).find('.img2').show();
+// 	});
+// 	$('#tbody tr').on('mouseleave', function() {
+// 		$(this).find('.img1').hide();
+// 		$(this).find('.img2').hide();
+// 	}); 
+	
+// 	$('#tbody tr').on('mouseenter', function() {
+// 		$(this).find('.img1').show();
+// 		$(this).find('.img2').show();
+// 	});
+// 	$('#tbody tr').on('mouseleave', function() {
+// 		$(this).find('.img1').hide();
+// 		$(this).find('.img2').hide();
+// 	}); 
+		
+	/* $('#tbody tr').hover(function(){
+		$(this).find('.img1').show();
+		$(this).find('.img2').show();
+	},function(){
+		$(this).find('.img1').hide();
+		$(this).find('.img2').hide();
+	}); */
+	 
+	
+	
+	
+		
 	var str = "";
 		for(i=6; i>0; i--){
 			str += '<option style="text-align: center;" value="'+(2020-i)+'">'+(2020-i)+'</option>';
@@ -46,7 +167,9 @@
 			var deal_year = $('.deal_year option:selected').val();
 			var deal_bungi = $('.deal_bungi option:selected').val();
 			var deal_month = $('.deal_month option:selected').val();
-
+			if(deal_kind == '카드'){
+				deal_kind = $('#kind option:selected').val();
+			}
 			 $.ajax({
 		            url     : '${pageContext.request.contextPath}/user/accountBook/searchAccountList.do',
 		            type    : 'post',
@@ -61,19 +184,120 @@
 			            $('#tbody').empty();
 						var str = "";
 						$.each(result.list,function(i,v){
-							str += '<tr><th>'+(i+1)+'</th>';
+							str += '<tr><input type="hidden" value="'+v.deal_no+'"/>';
+							str += '<th>'+(i+1)+'</th>';
 							str += '<td>'+v.deal_date +'</td>';
 							str += '<td>'+v.deal_name +'</td>';
+							str += '<td>'+v.deal_division +'</td>';
 							str += '<td>'+v.deal_price +'</td>';
-							str += '<td>'+v.deal_option +'</td></tr>';
+							str += '<td>'+v.deal_kind +'</td>';
+							str += '<td>'+v.deal_option +'</td>';
+							str += '<td style="width:50px; height: 50px;">';
+							str += '<div style="display: flex; justify-content:space-around; height: 50px; width:50px;">';
+							str += '<img class="img1" src="${pageContext.request.contextPath}/images/update.PNG" onclick="updateFunc('+v.deal_no+');" style="width:25px; height: 25px;  display:none;">';
+							str += '<img class="img2" src="${pageContext.request.contextPath}/images/delete.PNG" onclick="deleteFunc('+v.deal_no+');" style="width:25px; height: 25px;  display:none;"></div></td></tr>';
 						});
-
 						$('#tbody').append(str);
 				    }
 			});
 		});
-	});
 
+		$('.deal_year').on('change',function(){
+			$(".deal_bungi option:eq(0)").prop("selected", true);
+			$(".deal_month option:eq(0)").prop("selected", true);
+			$(".deal_option option:eq(0)").prop("selected", true);
+			$(".deal_division option:eq(0)").prop("selected", true);
+			$(".deal_kind option:eq(0)").prop("selected", true);
+			$(".startDate").val("");
+			$(".endDate").val("");
+			$(".deal_name").val("");
+			$("#kind").hide();
+		});
+		$('.deal_bungi').on('change',function(){
+			$(".deal_year option:eq(0)").prop("selected", true);
+			$(".deal_month option:eq(0)").prop("selected", true);
+			$(".deal_option option:eq(0)").prop("selected", true);
+			$(".deal_division option:eq(0)").prop("selected", true);
+			$(".deal_kind option:eq(0)").prop("selected", true);
+			$(".startDate").val("");
+			$(".endDate").val("");
+			$(".deal_name").val("");
+			$("#kind").hide();
+		});
+		$('.deal_month').on('change',function(){
+			$(".deal_bungi option:eq(0)").prop("selected", true);
+			$(".deal_year option:eq(0)").prop("selected", true);
+			$(".deal_option option:eq(0)").prop("selected", true);
+			$(".deal_division option:eq(0)").prop("selected", true);
+			$(".deal_kind option:eq(0)").prop("selected", true);
+			$(".startDate").val("");
+			$(".endDate").val("");
+			$(".deal_name").val("");
+			$("#kind").hide();
+		});
+		$('.deal_division').on('change',function(){
+			$(".deal_bungi option:eq(0)").prop("selected", true);
+			$(".deal_year option:eq(0)").prop("selected", true);
+			$(".deal_month option:eq(0)").prop("selected", true);
+		});
+		$('.deal_option').on('change',function(){
+			$(".deal_bungi option:eq(0)").prop("selected", true);
+			$(".deal_year option:eq(0)").prop("selected", true);
+			$(".deal_month option:eq(0)").prop("selected", true);
+		});
+		$('.startDate').on('change',function(){
+			$(".deal_bungi option:eq(0)").prop("selected", true);
+			$(".deal_year option:eq(0)").prop("selected", true);
+			$(".deal_month option:eq(0)").prop("selected", true);
+		});
+		$('.endDate').on('change',function(){
+			$(".deal_bungi option:eq(0)").prop("selected", true);
+			$(".deal_year option:eq(0)").prop("selected", true);
+			$(".deal_month option:eq(0)").prop("selected", true);
+		});
+	});
+	
+	function categoryChange(e){
+
+		$(".deal_bungi option:eq(0)").prop("selected", true);
+		$(".deal_year option:eq(0)").prop("selected", true);
+		$(".deal_month option:eq(0)").prop("selected", true);
+
+		var kind_a = [];
+		
+		$.ajax({
+	   	 	async    : false,
+	        url     : '${pageContext.request.contextPath}/user/accountBook/cardList.do',
+	        type    : 'post',
+	        dataType : 'json',
+	        data : {'mem_no':${LOGIN_MEMBERINFO.mem_no}},
+	        success : function(Result) {
+		        for(var i=0; i<Result.cardlist.length; i++){
+					kind_a[i] = Result.cardlist[i].card_kind;
+			    }
+	        }
+
+	   	});
+		
+	    var target = document.getElementById("kind");
+	    
+		if(e.value=="카드"){
+		    var d = kind_a;
+			$("#kind").show(); 
+		}else if(e.value=="현금"){
+			$("#kind").hide(); 
+		}else if(e.value==""){
+			$("#kind").hide(); 
+		}
+		target.options.length = 0;
+
+		for(x in d){
+			var opt = document.createElement("option");
+			opt.value=d[x];
+			opt.innerHTML=d[x];
+			target.appendChild(opt);
+		}
+	}
 
 
 
@@ -106,9 +330,16 @@
 						str += '<tr><th>'+(i+1)+'</th>';
 						str += '<td>'+v.deal_date +'</td>';
 						str += '<td>'+v.deal_name +'</td>';
+						str += '<td>'+v.deal_division +'</td>';
 						str += '<td>'+v.deal_price +'</td>';
-						str += '<td>'+v.deal_option +'</td></tr>';
-					});
+						str += '<td>'+v.deal_kind +'</td>';
+						str += '<td>'+v.deal_option +'</td>';
+						str += '<td style="width:50px; height: 50px;">';
+						str += '<div style="display: flex; justify-content:space-around; height: 50px; width:50px;">';
+						str += '<img class="img1" src="${pageContext.request.contextPath}/images/update.PNG" onclick="updateFunc('+v.deal_no+');" style="width:25px; height: 25px; display:none;">';
+						str += '<img class="img2" src="${pageContext.request.contextPath}/images/delete.PNG" onclick="deleteFunc('+v.deal_no+');" style="width:25px; height: 25px;  display:none;"></div></td></tr>';
+
+						});
 
 					$('#tbody').append(str);
 			    }
@@ -195,13 +426,13 @@
 							<div style="width:180px; height:75px;">
 								<label class="control-label" style="margin-left: 10px; margin-top:5px; text-align:left; width:165px;">결제방법</label>
 								<!-- <input type="text" style="margin-top: 5px; text-align:left; width:150px; height: 40px;"> -->
-								<select name="deal_kind" class="deal_kind" style="text-align:center; margin-top: 5px; text-align:left; width:150px; height: 40px;">
+								<select name="deal_kind" class="deal_kind" onchange="categoryChange(this);" style="text-align:center; margin-top: 5px; text-align:left; width:150px; height: 40px;">
 									<option value="">결제방법</option>
 									<option value="현금">현금</option>
 									<option value="카드">카드</option>
-									<option value="계좌이체">계좌이체</option>
 							    </select>
 							</div>
+							
 						</div>
 					</div>
 					<div style="width:280px; height:150px; display: flex; flex-direction : column;">
@@ -216,10 +447,16 @@
 									<option style="text-align: center;" value="">월별</option>
 							</select>
 						</div>
-						<div style="width:280px; height:75px; display: flex; justify-content:flex-start; ">
-							<div style="width:180px; height:75px; display: flex; flex-direction : column	">
-									<label class="control-label" style="margin-left: 13px; margin-top:5px; text-align:left; width:50px;"></label>
-									<button class="btn btn-outline-grad btn-block" id="searchBTN" style="margin-left: 13px; color: #37bf74; width:40px; height:40px; text-align:left; margin-bottom: 10px;" type="button">검색</button>
+						<div style="width:280px; height:75px; display: flex; justify-content:flex-start; ">							
+							<div  style="width:180px; height:40px; ">
+								<label class="control-label" style="margin-left: 10px; margin-top:5px; text-align:left; width:165px;"></label>
+								<select id="kind" style="width:180px; height:40px;">
+									<option value="">카드선택</option>
+								</select>
+							</div>
+							<div>
+								<label class="control-label" style="margin-left: 13px; margin-top:5px; text-align:left; width:50px;"></label>
+								<img alt="#" id="searchBTN" src="${pageContext.request.contextPath}/images/search1.PNG" style="border:1px solid green; margin-left: 13px; color: #37bf74; width:40px; height:40px;">
 							</div>
 						</div>
 					</div>
@@ -232,27 +469,38 @@
 							style="margin: auto; text-align: center;">
 							<thead>
 								<tr>
-									<th></th>
+									<th>순번</th>
 									<th>날짜</th>
 									<th>아이템</th>
+									<th>구분</th>
 									<th>금액</th>
+									<th>결제방법</th>
 									<th>입/출</th>
-									<th>잔액</th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody id="tbody">
 								<c:forEach var="dealVO" items="${dealList }" varStatus="status">
 									<tr>
+										<input type="hidden" value="${dealVO.deal_no }"/>
 										<th>${status.count }</th>
 										<td>${dealVO.deal_date }</td>
 										<td>${dealVO.deal_name}</td>
+										<td>${dealVO.deal_division}</td>
 										<td>${dealVO.deal_price}</td>
+										<td>${dealVO.deal_kind}</td>
 										<td>${dealVO.deal_option}</td>
+										<td style="width:50px; height: 50px;">
+											<div style="display: flex; justify-content:space-around; height: 50px; width:50px;">
+												<img class="img1" src="${pageContext.request.contextPath}/images/update.PNG" onclick="updateFunc(${dealVO.deal_no});" style="width:25px; height: 25px;">
+												<img class="img2" src="${pageContext.request.contextPath}/images/delete.PNG" onclick="deleteFunc(${dealVO.deal_no});" style="width:25px; height: 25px;">
+											</div>
+										</td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
-						<div id="paginationDIV">
+						<div id="paginationDIV" style="margin-left: 35%;">
 						${pagination }
 						</div>
 					</div>

@@ -76,7 +76,7 @@ public class AccountController {
 	
 	@RequestMapping("accountList")
 	public ModelAndView accountList(String mem_no, HttpServletRequest request,HttpSession session,
-			Map<String, String> params,ModelAndView andView,String currentPage, RolePaginationUtil_BYEOL pagination) throws Exception {
+			Map<String, String> params,ModelAndView andView,String currentPage, RolePaginationUtil_account pagination) throws Exception {
 		
 		if(currentPage == null){
 			currentPage = "1";
@@ -98,7 +98,7 @@ public class AccountController {
 		//params.put("mem_no", memberInfo.getMem_no());
 		params.put("mem_no", "2");
 		
-		List<DealVO> list = service.dealListView(params);
+		List<DealVO> list = service.searchList(params);
 		
 		andView.addObject("dealList", list);
 		andView.addObject("pagination",pagination.getPagingHtmls());
@@ -308,13 +308,10 @@ public class AccountController {
 
 		params.put("startCount", startCount);
 		params.put("endCount", endCount);
-		System.out.println("스타트카운트");
-		System.out.println(startCount);
-		System.out.println(endCount);
 		
 		
 		List<DealVO> list =  service.searchList(params);
-		
+		System.out.println(list.get(0).getDeal_date());
 		
 		System.out.println(pagination.getPagingHtmls());
 		ModelAndView andView = new ModelAndView();
@@ -324,8 +321,14 @@ public class AccountController {
 		return andView;
 	}
 	
-	
-	
+	@RequestMapping("deleteAccount")
+	public ModelAndView deleteAccount(String deal_no) throws Exception {
+		System.out.println(deal_no);
+		service.deletedeal(deal_no);
+		ModelAndView andView = new ModelAndView();
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
 	
 	
 	

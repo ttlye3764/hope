@@ -41,6 +41,7 @@
 <script type='text/javascript' src='<%=request.getContextPath()%>/js/validation.js'></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="/resources/js/addressapi.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 $(function(){
    var gender = '${memberInfo.mem_gender}';
@@ -49,62 +50,26 @@ $(function(){
    }else{
       $('#woman').prop('checked', true);
    }
-
-   $("#mem_hp").keyup(function(e){
-	      if(e.keyCode == 8){
-	         var code = $('input[name=mem_hp]').val();
-	         var lastChar = code.charAt(code.length-1);
-	         if(lastChar == '-'){
-	            code = code.substr(0,code.length-1);
-	            $('input[name=mem_hp]').val(code);
-	         }
-	      }else{
-	         var hp = $('input[name=mem_hp]').val();
-	         var lastChar = hp.charAt(hp.length-1);
-	         if(lastChar == '-'){
-	             hp = hp.substr(0,hp.length-1);
-	             $('input[name=mem_hp]').val(hp);
-	         }else{
-	         	if(hp.length == 3 || hp.length == 8){
-	         	   $('input[name=mem_hp]').val(hp + "-");
-	        	 }
-	         }     
-	      }
-	   });
-	   $("#mem_birth").keyup(function(e){
-		      if(e.keyCode == 8){
-		         var code = $('input[name=mem_birth]').val();
-		         var lastChar = code.charAt(code.length-1);
-		         if(lastChar == '-'){
-		            code = code.substr(0,code.length-1);
-		            $('input[name=mem_birth]').val(code);
-		         }
-		      }else{
-		         var birth = $('input[name=mem_birth]').val();
-		         var lastChar = birth.charAt(birth.length-1);
-		         if(lastChar == '-'){
-		        	 birth = birth.substr(0,birth.length-1);
-			         $('input[name=mem_birth]').val(birth);
-			     }else{
-			         if(birth.length == 4 || birth.length == 7){
-			            $('input[name=mem_birth]').val(birth + "-");
-			         }
-			     }
-		      }
-		   });
    
    $('form[name=myPage]').submit(function(){
          var emailcheck = $('#emaillabel').text();
          var smscheck = $('#hplabel').text();
 
+         var pw = $('#newPass').val();
+         var pw2 = $('#pass2').val();
+
+         if((pw=='' && pw2!='') || (pw2=='' && pw!='')){
+        	 swal("","새로운 비밀번호를 확인해주세요.", "warning");
+        	 return false;
+         }
          var passchecklb = $('#passchecklb').text();
-         if(passchecklb == '비밀번호가 일치하지 않습니다.' || passchecklb == '비밀번호는 최소 8자리 이상 입력해주세요.'){
-            alert('새로운 비밀번호를 확인해주세요.');
+         if(passchecklb == '비밀번호가 일치하지 않습니다.' || passchecklb == '비밀번호는 최소 4자리 이상 입력해주세요.'){
+            swal("","새로운 비밀번호를 확인해주세요.", "warning");
             return false;
          }
          var nicklb = $('#nicklb').text();
          if(nicklb == '형식에 맞지 않는 닉네임입니다.' || nicklb == '이미 존재하는 닉네임입니다.'){
-            alert('닉네임을 확인해주세요.');
+            swal("","닉네임을 확인해주세요.", "warning");
             return false;
          }
 
@@ -112,7 +77,7 @@ $(function(){
 
          if(!(mem_email == '${memberInfo.mem_email}')){
             if(emailcheck == ''){
-               alert('이메일 인증을 완료해주세요.');
+               swal("","이메일 인증을 완료해주세요..", "warning");
                return false;
             }
          }
@@ -120,14 +85,14 @@ $(function(){
          var mem_hp = $('input[name=mem_hp]').val();
          if(!(mem_hp == '${memberInfo.mem_hp}')){
             if(smscheck == ''){
-               alert('휴대폰 인증을 완료해주세요.');
+               swal("","휴대폰 인증을 완료해주세요.", "warning");
                return false;
             }
          }
 
          var addr2 = $('input[name=mem_addr2]').val();
          if(addr2 == ''){
-            alert('상세주소를 입력해주세요.');
+            swal("","상세주소를 입력해주세요.", "warning");
             return false;
          }
          
@@ -146,12 +111,22 @@ $(function(){
    var id = '${memberInfo.mem_id}';
    var social = '${memberInfo.mem_join_addr}';
    if(social=='n'){
-      alert('소셜 로그인 사용자는 이용할 수 없습니다.');
-      window.history.back();
-   }else if(id==''){
-      alert('로그인 후 이용해주세요.');
-      $(location).attr('href','${pageContext.request.contextPath}/user/main/mainForm.do');
-   }
+	   swal({
+     	    title: "",
+     	    text: "소셜 로그인 사용자는 이용할 수 없습니다.",
+     	    type: "warning"
+     	}).then(function() {
+     		window.history.back();
+     	});
+	   }else if(id==''){
+		   swal({
+	      	    title: "",
+	      	    text: "로그인 후 이용해주세요.",
+	      	    type: "warning"
+	      	}).then(function() {
+	      		$(location).attr('href','${pageContext.request.contextPath}/user/main/mainForm.do');
+	      	});
+	   }
    
    $('#out').click(function(){
       $(location).attr('href', '${pageContext.request.contextPath}/user/member/deleteMemberForm.do');
@@ -180,7 +155,7 @@ function sendsms() {
    var mem_hp = $('input[name=mem_hp]').val();
    
    if (!mem_hp.validationHP()) {
-      alert('휴대전화번호를 바르게 입력해주세요.');
+      swal("","휴대전화번호를 바르게 입력해주세요.", "warning");
       return false;
    }
    
@@ -192,11 +167,11 @@ function sendsms() {
          mem_hp : $('input[name=mem_hp]').val()
       },
       error : function(result) {
-         alert(result.json);
+    	 swal("",result.json, "success");
       },
       success : function(result) {
          //{ flag : true | false}
-         alert(result.json);
+    	 swal("",result.json, "success");
       }
    });
 };
@@ -228,7 +203,7 @@ function mailSending() {
    var mem_email = $('input[name=mem_email]').val();   
 
    if (!mem_email.validationMAIL()) {
-      alert('이메일을 바르게 입력해주세요.');
+      swal("","이메일을 바르게 입력해주세요.", "warning");
       return false;
    }
 
@@ -246,10 +221,10 @@ function mailSending() {
            $('.wrap-loading').addClass('display-none');
        },
       error : function(result) {
-         alert(result.json);
+    	 swal("",result.json, "success");
       },
       success : function(result) {
-         alert(result.json);
+    	 swal("",result.json, "success");
       }
    });
 };
@@ -292,8 +267,8 @@ function pwcheck(){
       $('#passchecklb').css('color', 'red');
    }
 
-   if(pw2.length < 8){
-      $('#passchecklb').text("비밀번호는 최소 8자리 이상 입력해주세요.");
+   if(pw2.length < 4){
+      $('#passchecklb').text("비밀번호는 최소 4자리 이상 입력해주세요.");
       $('#passchecklb').css('color', 'red');
    }
 }
@@ -483,7 +458,7 @@ function setThumbnail(event) {
             <td width="150px" height="25" class="idright">휴대전화</td>
             <td>
             <div class="input-group mb-3" style="width:350px">
-            <input type="text" name="mem_hp" class="form-control" id="mem_hp" placeholder="- 빼고 입력" onchange="smschange()" value='${memberInfo.mem_hp }'/> 
+            <input type="text" name="mem_hp" class="form-control" id="mem_hp" placeholder="010-1234-5678" onchange="smschange()" value='${memberInfo.mem_hp }'/> 
             <a href="javascript:sendsms();">[인증번호 전송]</a></div>
             <input type="text" class="form-control" name="hp_num" onkeyup="checksms()"/>
             <label id="hplabel"></label>

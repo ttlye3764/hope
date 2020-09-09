@@ -15,7 +15,7 @@
 <meta name="author" content="Webestica.com">
 <meta name="description"
 	content="Creative Multipurpose Bootstrap Template">
-
+	
 <!-- Favicon -->
 <link rel="shortcut icon" href="assets/images/favicon.ico">
 
@@ -60,6 +60,7 @@
 		
 		$("#setting").modal("show"); //모달창 띄우기
 	}
+
 </script>
 </head>
 
