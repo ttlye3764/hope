@@ -19,9 +19,7 @@ tr:hover{
 <script>
 
 function updateFunc(i){
-	
-	
-	alert(i);
+	$("#centermodal").modal("show");
 }
 function deleteFunc(i){
 	var no = i
@@ -256,7 +254,45 @@ $(function(){
 			$(".deal_month option:eq(0)").prop("selected", true);
 		});
 	});
-	
+
+
+	function categoryChange2(e){
+		var kind_a = [];
+		
+		$.ajax({
+	   	 	async    : false,
+	        url     : '${pageContext.request.contextPath}/user/accountBook/cardList.do',
+	        type    : 'post',
+	        dataType : 'json',
+	        data : {'mem_no':${LOGIN_MEMBERINFO.mem_no}},
+	        success : function(Result) {
+		        for(var i=0; i<Result.cardlist.length; i++){
+					kind_a[i] = Result.cardlist[i].card_kind;
+			    }
+	        }
+
+	   	});
+		
+	    var target = document.getElementById("kind2");
+	    
+		if(e.value=="카드"){
+		    var d = kind_a;
+			$("#kind2").show(); 
+		}else if(e.value=="현금"){
+			$("#kind2").hide(); 
+		}else if(e.value==""){
+			$("#kind2").hide(); 
+		}
+		target.options.length = 0;
+
+		for(x in d){
+			var opt = document.createElement("option");
+			opt.value=d[x];
+			opt.innerHTML=d[x];
+			target.appendChild(opt);
+		}
+	}
+
 	function categoryChange(e){
 
 		$(".deal_bungi option:eq(0)").prop("selected", true);
@@ -512,11 +548,86 @@ $(function(){
 
 	</div>
 	<!-- end col -->
-
-
-
-
-
-
 </div>
+
+
+
+
+
+ <!-- Center modal content -->
+		<div class="modal fade" id="centermodal" tabindex="-1" role="dialog"
+			aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h6 class="modal-title" id="myCenterModalLabel" style="text-align: center;">내역 수정</h6>
+					</div>
+					<div class="modal-body">
+						<div>
+							<div style="display: flex; justify-content:space-between;">
+                                                	<label>날짜</label><input type="date" id="modal_date" style="border: 1px solid #e3e3e3; height: 27px;"> &nbsp;&nbsp;
+                                                	<label>아이템</label><input type="text" id="modal_item" style="border: 1px solid #e3e3e3; height: 27px;"> 
+							</div>
+                            <div style="display: flex; justify-content:flex-start; margin-top: 5px;">
+                                                	<div><label>금액</label><input type="text" id="modal_price" style="border: 1px solid #e3e3e3; height: 27px; margin-left: 21px; width:145px;"></div>
+                                                	<div><label style="margin-left: 46px;">구분</label>
+                                                	<select name="division" id="modal_division" style="border: 1px solid #e3e3e3; height: 27px; width:164px; margin-left: 30px;">
+                                                			<option value="">구분</option>
+                                                			<option value="식비">식비</option>
+                                                			<option value="교통비">교통비</option>
+                                                			<option value="주거/통신">주거/통신</option>
+                                                			<option value="생활용품">생활용품</option>
+                                                			<option value="경조사비">경조사비</option>
+                                                			<option value="지식문화">지식문화</option>
+                                                			<option value="의복,미용">의복,미용</option>
+                                                			<option value="의료,건강">의료,건강</option>
+                                                			<option value="여가,유흥">여가,유흥</option>
+                                                			<option value="세금,이자">세금,이자</option>
+                                                			<option value="기타비용">기타비용</option>
+                                                	</select>
+                                                	</div>
+                            </div>              	
+							<div style="margin-top: 5px;">
+									  <label>거래종류</label>
+									  <select name="paymentOption" id="modal_option" style="width:100px; border: 1px solid #e3e3e3; margin-left: 5px;">
+											<option value="">거래종류</option>
+											<option value="출금">출금</option>
+											<option value="입금">입금</option>
+									  </select>
+								     <label style="margin-left: 20px;	">결제방법</label>
+								     <select name="paymentMethod" id="modal_method" onchange="categoryChange2(this)" style="width:100px; border: 1px solid #e3e3e3;  margin-left: 5px;">
+											<option value="">결제방법</option>
+											<option value="현금">현금</option>
+											<option value="카드">카드</option>
+									</select>		
+									<select id="modal_kind2" style="width:100px; border: 1px solid #e3e3e3;  margin-left: 5px;  display:none; ">
+										<option value="">카드선택</option>
+									</select>
+									
+									
+									
+									
+							</div>
+                                                                                                                									
+																													
+                                                	
+                            <div style="display: flex; justify-content: center; margin-top: 5px; "><button type="button" id="registBtn">수정</button></div>
+                                                	
+                                                	
+                                               
+
+
+                                               
+                                                	
+                     </div>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+<!-- /.modal -->
+
+
+
 

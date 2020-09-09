@@ -53,7 +53,6 @@ public class AccountController {
 	      }
 		
 		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
-		memberInfo.setMem_no("2");
 		List<DealVO> list4Size = service.dealList(memberInfo.getMem_no());
 		String totalCount = Integer.toString(list4Size.size());
 	    
@@ -81,11 +80,10 @@ public class AccountController {
 			currentPage = "1";
 		}
 		
-		//MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
 		
 		
-		//List<DealVO> list4Size = service.dealList(memberInfo.getMem_no());
-		List<DealVO> list4Size = service.dealList("2");
+		List<DealVO> list4Size = service.dealList(memberInfo.getMem_no());
 		String totalCount = Integer.toString(list4Size.size());
 		
 		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount));
@@ -94,8 +92,7 @@ public class AccountController {
 		
 		params.put("startCount", startCount);
 		params.put("endCount", endCount);
-		//params.put("mem_no", memberInfo.getMem_no());
-		params.put("mem_no", "2");
+		params.put("mem_no", memberInfo.getMem_no());
 		
 		List<DealVO> list = service.searchList(params);
 		
