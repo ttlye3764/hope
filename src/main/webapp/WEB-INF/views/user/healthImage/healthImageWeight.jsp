@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
 <meta charset="UTF-8">
 <style type="text/css">
 li {
@@ -178,8 +177,6 @@ $(function(){
 });
 
 </script>
-</head>
-<body>
 <div class="innerpage-banner center bg-overlay-dark-7 py-7" 
 	style="background:url(${pageContext.request.contextPath }/resources/template/assets/images/bg/04.jpg) no-repeat; background-size:cover; 
 		background-position: center center;">
@@ -745,6 +742,4 @@ $(function(){
 			</div>
 		</div>
 	</section>
-
-</body>
 </html>

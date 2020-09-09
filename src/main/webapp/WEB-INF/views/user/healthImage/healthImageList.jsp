@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
-<head>
+
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,8 +20,6 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/animate/animate.min.css" /><!-- Theme CSS -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/css/style.css" />
 <title>Insert title here</title>
-</head>
-<body>
 
 <div class="innerpage-banner center bg-overlay-dark-7 py-7" 
 	style="background:url(${pageContext.request.contextPath }/resources/template/assets/images/bg/04.jpg) no-repeat; background-size:cover; 
@@ -105,7 +103,7 @@
 								 <c:if test="${!empty healthInfo.items}">  
 									<div class="portfolio-card-header" id="image_container" style="width: 235px; height: 160px;">
 										<img src="/files/${fileitemInfo.file_save_name}" alt="pic1" 
-										onError="this.src='${pageContext.request.contextPath }/resources/template/assets/images/character.PNG';"
+										onError="this.src='${pageContext.request.contextPath }/resources/image/playBtn.jpeg';"
 										style="width: 233px; height: 160px;">
 				 					</div> 
 								 </c:if> 
@@ -336,5 +334,4 @@
 
 
 </script>
-</body>
 </html>
