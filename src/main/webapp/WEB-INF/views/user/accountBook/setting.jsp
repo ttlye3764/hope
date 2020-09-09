@@ -20,6 +20,32 @@ $(function(){
 	$('#excel').click(function(){
 		$(location).attr('href','${pageContext.request.contextPath}/user/accountBook/excelDown.do');
 	}); 
+	// 영수증 제출 버튼 클릭
+	$('#receipt').click(function(){
+		
+		   var form = $("#files")[0];
+	        var formData = new FormData(form);
+	        formData.append("message", "ajax로 파일 전송하기");
+	        formData.append("file", $("#files")[0].files[0]);
+
+	        jQuery.ajax({
+	              url : "${pageContext.request.contextPath}/user/accountBook/ocr.do"
+	            , type : "POST"
+	            , processData : false
+	            , contentType : false
+	            , data : formData
+	            ,beforeSend:function(){
+	                $('.wrap-loading').removeClass('display-none');
+	            },
+	            complete:function(){
+	                $('.wrap-loading').addClass('display-none');
+	            }
+	            , success:function(result) {
+			       	console.log(result);
+
+	            }
+	        });
+	}); 
 
 	
 	$('#registBtn').click(function(){
@@ -492,18 +518,22 @@ function staticcategoryChange(e){
 										<!-- contact form -->
 										<div class="col-md-6">
 											<div class="h-100" style="width:500px; height: 1500px;">
-												<form class="contact-form" id="contact-form" name="contactform2" action="${pageContext.request.contextPath}/" method="post" enctype="multipart/form-data">			
+											
+											
+											
+												<form class="contact-form" id="files" name="file" method="post" enctype="multipart/form-data">			
 													<!-- Start main form -->
 														<div class="" style="width:50%; float: right;">
 															<div></div>
 															<div class="col-md-12 text-center">
-															<input type="file" class="btn btn-outline-primary btn-block" style="margin-top: 10px;" id="files" name="files">
+															<label for="exampleFormControlFile1">영수증 파일을 넣어주세요.</label>
+															<input type="file" name="files" class="btn btn-outline-primary btn-block" style="margin-top: 10px;" id="files" >
 															</div>
 															<div style="width: 230px; height: 400px;" >
 															<img id="img" style="width: 100%; height: 100%;">
 															</div>
 														</div>
-														<button class="btn btn-outline-grad btn-block" type="submit">등록</button>	
+														<button class="btn btn-outline-grad btn-block" type="button" id="receipt">제출</button>	
 													<!-- End main form -->
 												</form>
 											</div>
