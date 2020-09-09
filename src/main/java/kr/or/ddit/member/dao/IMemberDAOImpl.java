@@ -50,8 +50,8 @@ public class IMemberDAOImpl implements IMemberDAO {
 	}
 
 	@Override
-	public void insertMember(MemberVO memberVO) throws Exception {
-		client.insert("member.insertMember", memberVO);
+	public String insertMember(MemberVO memberVO) throws Exception {
+		return Integer.toString(client.insert("member.insertMember", memberVO));
 		
 	}
 
@@ -107,5 +107,15 @@ public class IMemberDAOImpl implements IMemberDAO {
 	@Override
 	public String totalCount(Map<String, String> params) throws Exception {
 		return (String)client.selectOne("member.totalCount", params);
+	}
+
+	@Override
+	public String fileSequence() throws Exception {
+		return client.selectOne("member.fileSequence");
+	}
+
+	@Override
+	public String selectMem_no(String mem_id) throws Exception {
+		return client.selectOne("member.selectMem_no", mem_id);
 	}
 }

@@ -81,12 +81,12 @@ public class LoginController {
 		
 		String [] id = email.split("@");
 //4.파싱 닉네임 세션으로 저장
-		params.put("mem_id", id[0]);
+		params.put("mem_id", id[0]+"_naver");
 		params.put("mem_join_addr", "n");
 		MemberVO memberInfo1 = this.service.memberInfo(params);
 		MemberVO memberInfo = new MemberVO();
 		
-		memberInfo.setMem_id(id[0]);
+		memberInfo.setMem_id(id[0]+"_naver");
 		memberInfo.setMem_nickname(nickname);
 		memberInfo.setMem_name(name);
 		memberInfo.setMem_email(email);
@@ -103,9 +103,9 @@ public class LoginController {
 		memberInfo.setMem_zip2("123");
 		
 		if(memberInfo1 == null) {
-			this.service.insertMember(memberInfo);
+			this.service.insertMember(memberInfo, null);
 		}else {
-			this.service.updateMemberInfo(memberInfo);
+			this.service.updateMemberInfo(memberInfo, null);
 		}
 		
 		params.put("mem_id", memberInfo.getMem_id());

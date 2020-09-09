@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddit.member.service.IMemberService;
-import kr.or.ddit.utiles.RolePaginationUtil;
+import kr.or.ddit.utiles.RolePaginationUtil_seung;
 import kr.or.ddit.utiles.UserSha256;
 import kr.or.ddit.vo.MemberVO;
 
@@ -36,18 +36,18 @@ public class AdminMemberController {
 							, ModelAndView andView
 							,Map<String, String> params
 							,String currentPage
-							,RolePaginationUtil pagination
+							,RolePaginationUtil_seung pagination
 							,HttpServletRequest request) throws Exception {
 		
-		if(currentPage == null){
+		if(currentPage == null || currentPage.equals("")){
 	         currentPage = "1";
-	      }
+	    }
 
 		params.put("search_keycode", search_keycode);
 		params.put("search_keyword", search_keyword);
 		String totalCount = this.service.totalCount(params);
 		
-		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount));
+		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount), search_keycode, search_keyword);
 	    String startCount = String.valueOf(pagination.getStartCount());
 	    String endCount = String.valueOf(pagination.getEndCount());
 	    params.put("startCount", startCount);
@@ -58,6 +58,7 @@ public class AdminMemberController {
 		
 		andView.addObject("param",search_keycode);
 		andView.addObject("param",search_keyword);
+		andView.addObject("currentPage",currentPage);
 		andView.addObject("memberList", memberList);
 		andView.setViewName("admin/member/memberList");
 		andView.addObject("pagination", pagination.getPagingHtmls());
@@ -66,11 +67,23 @@ public class AdminMemberController {
 	}
 	
 	@RequestMapping("memberView")
-	public ModelMap memberView(String mem_id, Map<String, String> params, ModelMap modelMap) throws Exception {
+	public ModelMap memberView(String mem_id, 
+							Map<String, String> params, 
+							ModelMap modelMap, 
+							String search_keycode,
+							String search_keyword,
+							String currentPage) throws Exception {
+		if(currentPage == null || currentPage.equals("")){
+	         currentPage = "1";
+	    }
+		
 		params.put("mem_id", mem_id);
 		MemberVO memberInfo = this.service.memberInfo(params);
 
 //	      ModelMap modelMap = new ModelMap();
+		modelMap.addAttribute("search_keycode",search_keycode);
+		modelMap.addAttribute("search_keyword",search_keyword);
+		modelMap.addAttribute("currentPage",currentPage);
 		modelMap.addAttribute("memberInfo", memberInfo);
 
 		return modelMap;
@@ -83,7 +96,7 @@ public class AdminMemberController {
 		String pass = UserSha256.encrypt(memberInfo.getMem_pass());
 		memberInfo.setMem_pass(pass);
 		
-		this.service.updateMemberInfo(memberInfo);
+		this.service.updateMemberInfo(memberInfo, null);
 		
 		memberInfo = this.service.memberInfo(params);
 

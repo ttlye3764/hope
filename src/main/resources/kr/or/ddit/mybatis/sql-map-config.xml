@@ -31,8 +31,11 @@
 		<typeAlias alias="scheduleVO" type="kr.or.ddit.vo.ScheduleVO" />
 		<typeAlias alias="busVO" type="kr.or.ddit.vo.BusVO" />
 		<typeAlias alias="dealVO" type="kr.or.ddit.vo.DealVO" />
+		<typeAlias alias="cardVO" type="kr.or.ddit.vo.CardVO" />
+		
 		<!-- 승민 -->	
 		<typeAlias alias="memberVO" type="kr.or.ddit.vo.MemberVO" />
+		<typeAlias alias="MemberFileVO" type="kr.or.ddit.vo.MemberFileVO" />
 		<typeAlias alias="categoryVO" type="kr.or.ddit.vo.CategoryVO" />
 			
 		<!-- 윤희 -->
@@ -45,6 +48,7 @@
 		<typeAlias alias="fileitemVO" type="kr.or.ddit.vo.FileItemVO"/>
 		<typeAlias alias="healthFileVO" type="kr.or.ddit.vo.HealthFileVO"/>
 		<typeAlias alias="healthImageVO" type="kr.or.ddit.vo.HealthImageVO"/>
+		<typeAlias alias="inbodyVO" type="kr.or.ddit.vo.InbodyVO"/>
 		
 	</typeAliases>
 
@@ -66,6 +70,7 @@
 	<!-- 승민 -->	
 		<mapper resource="kr/or/ddit/mybatis/member.xml" />
 		<mapper resource="kr/or/ddit/mybatis/category.xml" />
+		<mapper resource="kr/or/ddit/mybatis/memberfile.xml" />
 	<!-- 윤희 -->
 		<mapper resource="kr/or/ddit/mybatis/board.xml" />
 		<mapper resource="kr/or/ddit/mybatis/board_file.xml" />
@@ -75,6 +80,7 @@
 		<mapper resource="kr/or/ddit/mybatis/fileitem.xml" />
 		<mapper resource="kr/or/ddit/mybatis/healthFile.xml" />
 		<mapper resource="kr/or/ddit/mybatis/healthImage.xml" />
+		<mapper resource="kr/or/ddit/mybatis/inbody.xml" />
 	
 	</mappers>
 </configuration>

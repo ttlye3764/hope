@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
 $(function(){
-
+	$("#cardRegistBtn").hide(); 
+	
 	$('#files').on('change', handleImgFileSelect);
 	$('#files2').on('change', handleImgFileSelect);
 
@@ -14,13 +15,18 @@ $(function(){
 		date = $('#date').val();
 		item = $('#item').val();
 		price = $('#price').val();
+		division = $('#division').val();
+		
+		if(paymentMethod=="카드"){
+			paymentMethod = $('#kind').val();
+		}
 		
 	     $.ajax({
 	   	 	async    : false,
 	        url     : '${pageContext.request.contextPath}/user/accountBook/registTrace.do',
 	        type    : 'post',
 	        dataType : 'json',
-	        data : {'deal_option':paymentOption,'deal_kind':paymentMethod,'deal_date':date,'deal_name':item,'deal_price':price, 'mem_no':${LOGIN_MEMBERINFO.mem_no}},
+	        data : {'deal_option':paymentOption,'deal_kind':paymentMethod,'deal_date':date,'deal_name':item,'deal_price':price, 'mem_no':${LOGIN_MEMBERINFO.mem_no}, 'deal_division':division},
 	        success : function(Result) {
 	        //  $('#accountTable').append('<tr><td>'+Result.list.length+'</td><td>'+Result.list[Result.list.length-1].deal_date+'</td><td>'+item+'</td><td>'+price+'</td><td>'+paymentMethod+'</td><td><button id="deleteBtn" type="button">삭제</button></td></tr>');
 	        }
@@ -30,6 +36,14 @@ $(function(){
 	});
 
 
+	
+
+
+	$('#staticTrace').click(function(){
+		 $("#staticModal").modal("show"); //모달창 띄우기
+
+	}); //영수증 등록
+
 	$('#registreceipt').click(function(){
 		 $("#regist-modal").modal("show"); //모달창 띄우기
 		 $("#img").attr("src", " ");
@@ -37,7 +51,91 @@ $(function(){
 	}); //영수증 등록
 
 	
+	$('#cardRegistBtn').click(function(){
+		$('#cardTable').empty();
+		 $.ajax({
+		   	 	async    : false,
+		        url     : '${pageContext.request.contextPath}/user/accountBook/cardList.do',
+		        type    : 'post',
+		        dataType : 'json',
+		        data : {'mem_no':${LOGIN_MEMBERINFO.mem_no}},
+		        success : function(Result) {
+			        for(var i=0; i<Result.cardlist.length; i++){
+		        		$('#cardTable').append('<tr><td>'+Result.cardlist[i].card_kind+'</td><td><button type="button" value="'+Result.cardlist[i].card_no+'" onclick="deleteCard('+Result.cardlist[i].card_no+')">삭제</button></td></tr>');
+
+				    }
+		        }
+		
+		   	});  // 등록 
+		   	
+		 $("#centermodal").modal("show"); //모달창 띄우기
+	}); //영수증 등록
+
+	
+	$('#cardBtn').click(function(){
+		card_kind = $('#card_kind').val();
+		 $.ajax({
+		   	 	async    : false,
+		        url     : '${pageContext.request.contextPath}/user/accountBook/registCard.do',
+		        type    : 'post',
+		        dataType : 'json',
+		        data : {'card_kind':card_kind,'mem_no':${LOGIN_MEMBERINFO.mem_no}},
+		        success : function(Result) {
+			        var card_no = Number(Result.cardlist[Result.cardlist.length-1].card_no);
+			        $('#cardTable').append('<tr><td>'+card_kind+'</td><td><button type="button" value="'+card_no+'" onclick="deleteCard('+card_no+')">삭제</button></td></tr>');
+		        }
+		
+		   	});  // 등록 
+		
+		   	
+	}); //카드 등록 액션
+
+
+
+	
 });
+
+function deletebtn(deal_no){
+	
+	$.ajax({
+   	 	async    : false,
+        url     : '${pageContext.request.contextPath}/user/accountBook/deletedeal.do',
+        type    : 'post',
+        dataType : 'json',
+        data : {'deal_no':deal_no, 'mem_no':${LOGIN_MEMBERINFO.mem_no}},
+        success : function(Result) {
+            
+        }
+
+   	});  // 삭제
+
+   	location.reload();
+   	
+   		
+}
+
+function deleteCard(card_no){
+
+	$.ajax({
+   	 	async    : false,
+        url     : '${pageContext.request.contextPath}/user/accountBook/deleteCard.do',
+        type    : 'post',
+        dataType : 'json',
+        data : {'card_no':card_no, 'mem_no':${LOGIN_MEMBERINFO.mem_no}},
+        success : function(Result) {
+	        $('#cardTable').empty();
+	        for(var i=0; i<Result.cardlist.length; i++){
+        		$('#cardTable').append('<tr><td>'+Result.cardlist[i].card_kind+'</td><td><button type="button" value="'+Result.cardlist[i].card_no+'" onclick="deleteCard('+Result.cardlist[i].card_no+')">삭제</button></td></tr>');
+
+		    }
+	        
+
+        }
+
+   	});  // 삭제
+   	
+	
+}
 
 function handleImgFileSelect(e){
 	var files = e.target.files;
@@ -57,6 +155,45 @@ function handleImgFileSelect(e){
 		}
 		reader.readAsDataURL(f);
 	});
+}
+
+function categoryChange(e){
+
+	var kind_a = [];
+	
+	$.ajax({
+   	 	async    : false,
+        url     : '${pageContext.request.contextPath}/user/accountBook/cardList.do',
+        type    : 'post',
+        dataType : 'json',
+        data : {'mem_no':${LOGIN_MEMBERINFO.mem_no}},
+        success : function(Result) {
+	        for(var i=0; i<Result.cardlist.length; i++){
+				kind_a[i] = Result.cardlist[i].card_kind;
+		    }
+        }
+
+   	});  // 등록 
+	
+   	
+    var target = document.getElementById("kind");
+    
+	if(e.value=="카드"){
+    var d = kind_a;
+	$("#kind").show(); 
+	$("#cardRegistBtn").show(); 
+	}else if(e.value=="현금"){
+	$("#kind").hide(); 
+	$("#cardRegistBtn").hide(); 
+	}
+	target.options.length = 0;
+
+	for(x in d){
+		var opt = document.createElement("option");
+		opt.value=d[x];
+		opt.innerHTML=d[x];
+		target.appendChild(opt);
+	}
 }
 
 </script>
@@ -98,28 +235,49 @@ function handleImgFileSelect(e){
                                            
                                         </ul>
 
-                                        <div class="tab-content">
+                                        <div class="tab-content" align="center">
                                             <div class="tab-pane" id="home-b1">
                                                 	
                                             </div>
                                             <div class="tab-pane show active" id="profile-b1">
                                                <div>
-                                                	날짜  <input type="text" id="date"> 아이템 <input type="text" id="item"> 
-                                                	<br><br>
-                                                	금액 <input type="text" id="price"> 
-                                                	거래종류  <select name="paymentOption" id="paymentOption">
-															    <option value="">거래종류</option>
-															    <option value="minus">출금</option>
-															    <option value="plus">입금</option>
-															</select>
-													결제방법  <select name="paymentMethod" id="paymentMethod">
-															    <option value="">결제방법</option>
-															    <option value=" cash">현금</option>
-															    <option value="card">카드</option>
-															</select>
+                                                	날짜  <input type="date" id="date"> &nbsp;&nbsp;  물품 <input type="text" id="item"> 
                                                 	
-                                                	<button type="button" id="registBtn">등록</button>
-                                                	<button type="button" id="registreceipt">영수증 등록</button>
+                                                	금액 <input type="text" id="price"> <br><br>
+                                                	구분 <select name="division" id="division" style="width:100px;">
+                                                			<option value="       "></option>
+                                                			<option value="식비">식비</option>
+                                                			<option value="교통비">교통비</option>
+                                                			<option value="주거/통신">주거/통신</option>
+                                                			<option value="생활용품">생활용품</option>
+                                                			<option value="경조사비">경조사비</option>
+                                                			<option value="지식문화">지식문화</option>
+                                                			<option value="의복,미용">의복,미용</option>
+                                                			<option value="의료,건강">의료,건강</option>
+                                                			<option value="여가,유흥">여가,유흥</option>
+                                                			<option value="세금,이자">세금,이자</option>
+                                                			<option value="기타비용">기타비용</option>
+                                                		</select>
+                                                	거래종류  <select name="paymentOption" id="paymentOption" style="width:100px;">
+															    <option value="       "></option>
+															    <option value="출금">출금</option>
+															    <option value="입금">입금</option>
+															</select>
+													결제방법  <select name="paymentMethod" id="paymentMethod" onchange="categoryChange(this)" style="width:100px;">
+															    <option value="       "></option>
+															    <option value="현금">현금</option>
+															    <option value="카드">카드</option>
+															</select>
+															
+															<select id="kind" style="width:100px;">
+																<option value="       "></option>
+															</select>
+															<button type="button" id="cardRegistBtn">카드등록</button>
+															<br>
+                                                	
+                                                	<br>&nbsp; &nbsp; <button type="button" id="registBtn">등록</button>
+                                                	&nbsp; <button type="button" id="registreceipt">영수증 등록</button>
+                                                	&nbsp; <button type="button" id="staticTrace">고정 거래 등록</button>
                                                 	
                                                 <br>
                                                 <br>
@@ -133,7 +291,8 @@ function handleImgFileSelect(e){
 														<tr>
 															<th></th>
 															<th>날짜</th>
-															<th>아이템</th>
+															<th>구분</th>
+															<th>물품</th>
 															<th>금액</th>
 															<th>거래종류</th>
 															<th>삭제</th>
@@ -144,6 +303,7 @@ function handleImgFileSelect(e){
 															<tr>
 																<th>${status.count }</th>
 									 							<td>${dealVO.deal_date }</td>
+									 							<td>${dealVO.deal_division }</td>
 									 							<td>${dealVO.deal_name}</td>
 									 							<td>${dealVO.deal_price}</td>
 									 							<td>${dealVO.deal_kind}</td>
@@ -205,6 +365,56 @@ function handleImgFileSelect(e){
 								<!-- /.modal-dialog -->
 							</div>
 							<!-- /.modal -->
+	
+	
+	
+						 <!-- Center modal content -->
+                                        <div class="modal fade" id="centermodal" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="myCenterModalLabel">Register Your Card</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                    	카드 이름 : <input type="text" id="card_kind">
+                                                    	<button type="button" id="cardBtn"> 등록 </button>
+                                                    	
+                                                    	
+                                                    	<table id="cardTable" class="table table-sm table-centered mb-0" style="margin: auto; text-align: center;" >
+													<thead>
+														<tr>
+															<th>카드이름</th>
+															<th>삭제</th>
+														</tr>
+													</thead>
+													<tbody>
+														
+													</tbody>	
+												</table>
+                                                    	
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
+	
+	
+	
+						 <!-- Center modal content -->
+                                        <div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="myCenterModalLabel">고정 거래 등록</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                    	
+                                                    	
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
 	
 	
 

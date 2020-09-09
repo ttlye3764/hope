@@ -18,10 +18,23 @@ public class MemberVO {
 	private String mem_zip1;
 	private String mem_zip2;
 	private String mem_delete;
+	private List<MemberFileVO> items; // 이미지 리스트
+	private List<MemberFileVO> items2; // 이미지 리스트
 	//채팅
 	private String ch_no;
 	
-	
+	public List<MemberFileVO> getItems2() {
+		return items2;
+	}
+	public void setItems2(List<MemberFileVO> items2) {
+		this.items2 = items2;
+	}
+	public List<MemberFileVO> getItems() {
+		return items;
+	}
+	public void setItems(List<MemberFileVO> items) {
+		this.items = items;
+	}
 	public String getCh_no() {
 		return ch_no;
 	}

@@ -1,5 +1,7 @@
 package kr.or.ddit.healthImage.service;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,9 +17,9 @@ import kr.or.ddit.vo.HealthFileVO;
 import kr.or.ddit.vo.HealthImageVO;
 
 @Service("healthImageService")
-public class IHealthImageServiceImpl implements IHealthImageService{
-	
-	@Autowired 
+public class IHealthImageServiceImpl implements IHealthImageService {
+
+	@Autowired
 	private IHealthImageDAO healthImageDAO;
 	@Autowired
 	private IHealthImageFileDAO healthFileDAO;
@@ -35,21 +37,21 @@ public class IHealthImageServiceImpl implements IHealthImageService{
 	@Override
 	public String insertHealth(HealthImageVO healthInfo, MultipartFile[] items) throws Exception {
 		healthImageDAO.insertHealth(healthInfo);
-		
+
 		String fileSequence = healthImageDAO.fileSequence();
-		List<HealthFileVO> fileItemList =AttachFileMapper.healthMapper(items, fileSequence);
-		
-	    healthFileDAO.inserthealthFile(fileItemList);
-		
+		List<HealthFileVO> fileItemList = AttachFileMapper.healthMapper(items, fileSequence);
+
+		healthFileDAO.inserthealthFile(fileItemList);
+
 		return fileSequence;
 	}
 
 	@Override
 	public void updateHealth(HealthImageVO healthInfo, MultipartFile[] items) throws Exception {
 		healthImageDAO.updateHealth(healthInfo);
-		
-		List<HealthFileVO> fileItemList =AttachFileMapper.healthMapper(items, healthInfo.getHealthImage_no());
-	    healthFileDAO.updatehealthFile(fileItemList);
+
+		List<HealthFileVO> fileItemList = AttachFileMapper.healthMapper(items, healthInfo.getHealthImage_no());
+		healthFileDAO.updatehealthFile(fileItemList);
 	}
 
 	@Override

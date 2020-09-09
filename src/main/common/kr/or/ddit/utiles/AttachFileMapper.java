@@ -6,10 +6,13 @@ import java.util.List;
 import java.util.UUID;
 
 import kr.or.ddit.global.GlobalConstant;
+import kr.or.ddit.member.service.IMemberSerivceImpl;
+import kr.or.ddit.member.service.IMemberService;
 import kr.or.ddit.vo.Board_FileVO;
 import kr.or.ddit.vo.FileItemVO;
 import kr.or.ddit.vo.HealthFileVO;
 import kr.or.ddit.vo.HealthImageVO;
+import kr.or.ddit.vo.MemberFileVO;
 import kr.or.ddit.vo.MypillFileVO;
 
 import org.apache.commons.fileupload.FileItem;
@@ -62,6 +65,51 @@ public class AttachFileMapper {
 		}
 		return fileItemList;
 	}
+	// Member file
+			public static List<MemberFileVO> memberMapper(MultipartFile[] items, String mem_no) throws Exception{
+				List<MemberFileVO> fileItemList = new ArrayList<MemberFileVO>();        
+		 
+				if (items != null) {
+					MemberFileVO fileItemInfo = null;
+
+					for (MultipartFile item : items) {
+						if (item.getSize() > 0) {
+							fileItemInfo = new MemberFileVO();
+							fileItemInfo.setMem_no(mem_no);
+							
+							// 파일명 취득
+							// 브라우저별 d:\\temp\image\a.png
+							// or a.png
+							// a.png 반환
+							
+							String fileName = FilenameUtils.getName(item.getOriginalFilename());
+							fileItemInfo.setFile_name(fileName);
+
+							// 파일 실제저장소 : D:\\temp\\files
+							// 저장용 파일명을 별도로 작성
+							// a.png => a
+							String baseName = FilenameUtils.getBaseName(fileName);
+							// a.png => png
+							String extension = FilenameUtils.getExtension(fileName);
+							// UUID(Universally Unique Identifier) : 128bit 유일값 생성('-'포함)
+							String genID = UUID.randomUUID().toString().replace("-", "");
+
+							// |---------------유니크한 랜덤값----------|
+							// a48546546546546546546546546546546546546.png
+							String saveFileName = baseName + genID + '.' + extension;
+							fileItemInfo.setFile_save_name(saveFileName);
+
+							fileItemInfo.setFile_type(item.getContentType());
+							fileItemInfo.setFile_size(String.valueOf(item.getSize()));
+
+							fileItemList.add(fileItemInfo);
+
+							saveFile(saveFileName, item);
+						}
+					}
+				}
+				return fileItemList;
+			}
 	// pill file
 	public static List<MypillFileVO> medicalMapper(MultipartFile[] items, String bo_no) {
 		List<MypillFileVO> fileItemList = new ArrayList<MypillFileVO>();

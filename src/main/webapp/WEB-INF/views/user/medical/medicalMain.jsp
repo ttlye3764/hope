@@ -36,6 +36,9 @@
 .placeinfo .title {font-weight: bold; font-size:14px;border-radius: 6px 6px 0 0;margin: -1px -1px 0 -1px;padding:10px; color: #fff;background: #d95050;background: #d95050 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
 .placeinfo .tel {color:#0f7833;}
 .placeinfo .jibun {color:#999;font-size:11px;margin-top:0;}
+.list tr:hover{
+		background-color: #e3e3e3;
+	}
 </style> 
 <script>
 function pill_info(pill_no){
@@ -75,7 +78,7 @@ function pill_info(pill_no){
              url     : '/lastProject/user/medical/todayMedical.do',		
              type    : 'post',
              dataType: 'json',
-             data : {'mem_no':1},
+             data : {'mem_no':${LOGIN_MEMBERINFO.mem_no}},
              success : function(result) {      
             	$.each(result.json,function(i,v){
             		var str = '<a href="#" class="btn btn-outline-primary" /* onclick="pill_info('+v.pill_no+');" */ id="'+v.pill_no+'"  style="margin-left: 5px; display: block; margin-top:5px; margin-right:5px;">'+v.pill_name+'</a>';
@@ -88,7 +91,7 @@ function pill_info(pill_no){
              url     : '/lastProject/user/medical/weekMedical.do',		
              type    : 'post',
              dataType: 'json',
-             data : {'mem_no':1},
+             data : {'mem_no':${LOGIN_MEMBERINFO.mem_no}},
              success : function(result) {      
             	$.each(result.json,function(i,v){
             		var str = '<a href="#" class="btn btn-outline-primary" /* onclick="pill_info('+v.pill_no+');" */ id="'+v.pill_no+'"  style="margin-left: 5px; display: block; margin-top:5px; margin-right:5px;">'+v.pill_name+'</a>';
@@ -211,7 +214,7 @@ function pill_info(pill_no){
 	             url     : '/lastProject/user/medical/viewJson.do',
 	             type    : 'post',
 	             dataType: 'json',
-	             data : {'mem_no':1},
+	             data : {'mem_no':${LOGIN_MEMBERINFO.mem_no}},
 	             success : function(result) {      
 	            	$.each(result.json,function(i,v){
 	             		  event.push({
@@ -260,7 +263,6 @@ function pill_info(pill_no){
 					$("#deleteBTN").on('click',function(){
 						$(location).attr('href', '/lastProject/user/medical/deleteMedicalInfo.do?pill_no='+eventObj.id);
 					})
-	    	        
 	    	    },
 	          initialView: 'dayGridMonth', //초기화면설정
 	          navLinks: true, 
@@ -1201,11 +1203,11 @@ function pill_info(pill_no){
 					</tr>
 					<tr>
 						<td colspan="2" style="border: none;">
-							<button class="btn btn-outline-grad btn-block" id="searchBTN"
+							<button class="btn btn-outline-grad btn-block" id="searchBTN" style="color: #37bf74;"
 								type="button">검색</button>
 						</td>
 						<td colspan="2" style="border: none;">
-							<button class="btn btn-outline-grad btn-block" id="cancleBTN"
+							<button class="btn btn-outline-grad btn-block" id="cancleBTN" style="color: #37bf74;"
 								type="button">취소</button>
 						</td>
 					</tr>
@@ -1360,7 +1362,7 @@ function pill_info(pill_no){
 									<li id="PM9" data-order="2"><span
 										class="category_bg pharmacy"></span> 약국</li>
 								</ul>
-								<input type="button" onclick="sample5_execDaumPostcode()"
+							<input type="button" onclick="sample5_execDaumPostcode()" style=" width:100px; z-index:1; position:absolute;top:10px; right:10px;"
 									value="주소 검색">
 							</div>
 						</div>
@@ -1388,8 +1390,7 @@ function pill_info(pill_no){
 		    mapOption = {
 		        center: new kakao.maps.LatLng(36.3249282,127.4195606), // 지도의 중심좌표
 		        level: 3 // 지도의 확대 레벨
-		    };  
-		
+		    };  	
 		// 지도를 생성합니다    
 		var map = new kakao.maps.Map(mapContainer, mapOption); 
 		var geocoder = new daum.maps.services.Geocoder();
@@ -1440,15 +1441,12 @@ function pill_info(pill_no){
 		// 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
 		function placesSearchCB(data, status, pagination) {
 		    if (status === kakao.maps.services.Status.OK) {
-		
 		        // 정상적으로 검색이 완료됐으면 지도에 마커를 표출합니다
 		        displayPlaces(data);
 		    } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
 		        // 검색결과가 없는경우 해야할 처리가 있다면 이곳에 작성해 주세요
-		
 		    } else if (status === kakao.maps.services.Status.ERROR) {
 		        // 에러로 인해 검색결과가 나오지 않은 경우 해야할 처리가 있다면 이곳에 작성해 주세요
-		        
 		    }
 		}
 		
@@ -1588,7 +1586,10 @@ function pill_info(pill_no){
 							// 해당 주소에 대한 좌표를 받아서 
 								x = result.x;
 								y = result.y;
-								
+								var marker = new kakao.maps.Marker({
+								        map: map,
+								        position: new kakao.maps.LatLng(y,x) 
+								});		
 								var coords = new daum.maps.LatLng(result.y, result.x); // 지도를 보여준다.
 								mapContainer.style.display = "block";
 								map.relayout(); // 지도 중심을 변경한다. 

@@ -16,7 +16,8 @@
                deal_fix_revenue,
                deal_fix_expenditure,
                mem_no,
-               deal_option)
+               deal_option,
+               deal_division)
          VALUES
              (
                deal_seq.nextval,      
@@ -28,7 +29,8 @@
                #{deal_fix_revenue},
                #{deal_fix_expenditure},
                #{mem_no},
-               #{deal_option}
+               #{deal_option},
+               #{deal_division}
                )
          
    </insert>
@@ -38,21 +40,154 @@
 		FROM deal
 		WHERE MEM_NO = #{mem_no}
 	</select>
+   <select id="totalCount" resultType="String" parameterType="map">
+		select count(*)
+		from deal
+		where 1=1 and mem_no = #{mem_no}
+						<if test="deal_name !=null">
+							and 
+							deal_name like '%' || #{deal_name} || '%' 
+						</if>
+						<if test="deal_option !=null">   
+							and
+							deal_option like #{deal_option}
+						</if> 
+						<if test="deal_division !=null">
+							and
+							deal_division like #{deal_division} 
+						</if> 
+						<if test="deal_kind !=null">
+							and
+							deal_kind like #{deal_kind} 
+						</if> 
+						<if test="startDate !=null">
+							and
+						<![CDATA[	deal_date > to_date(#{startDate},'yyyy-mm-dd') ]]>
+						</if> 
+						<if test="endDate !=null">
+							and
+						<![CDATA[	deal_date < to_date(#{endDate},'yyyy-mm-dd') ]]>
+						</if> 
+						<if test="deal_year !=null">  
+							and
+						<![CDATA[	deal_date between  to_date(#{deal_year}||'01','yyyymm') and to_date(#{deal_year}||'12','yyyymm') ]]>
+						</if> 
+						<if test="deal_bungi !=null">  
+							and
+						<![CDATA[	deal_date between  to_date('2020'||#{bungiStart},'yyyymm') and last_day(to_date('2020'||#{bungiEnd},'yyyymm')) ]]>
+						</if> 
+						<if test="deal_month !=null">  
+							and
+						<![CDATA[	deal_date between  to_date('2020'||#{deal_month},'yyyymm') and last_day(to_date('2020'||#{deal_month},'yyyymm')) ]]>
+						</if>
+	</select>
+	
+	<select id="searchList" parameterType="map" resultType="dealVO">
+	select b.*	
+		from(select ROWNUM rnum, a.*
+			 from(select *
+				  from deal
+			  	  where 1=1 and mem_no = #{mem_no}
+							<if test="deal_name !=null">
+								and 
+								deal_name like '%' || #{deal_name} || '%' 
+							</if>
+							<if test="deal_option !=null">   
+								and
+								deal_option like #{deal_option}
+							</if> 
+							<if test="deal_division !=null">
+								and
+								deal_division like #{deal_division} 
+							</if> 
+							<if test="deal_kind !=null">
+								and
+								deal_kind like #{deal_kind} 
+							</if> 
+							<if test="startDate !=null">
+								and
+							<![CDATA[	deal_date > to_date(#{startDate},'yyyy-mm-dd') ]]>
+							</if> 
+							<if test="endDate !=null">
+								and
+							<![CDATA[	deal_date < to_date(#{endDate},'yyyy-mm-dd') ]]>
+							</if> 
+							<if test="deal_year !=null">  
+								and
+							<![CDATA[	deal_date between  to_date(#{deal_year}||'01','yyyymm') and to_date(#{deal_year}||'12','yyyymm') ]]>
+							</if> 
+							<if test="deal_bungi !=null">  
+								and
+							<![CDATA[	deal_date between  to_date('2020'||#{bungiStart},'yyyymm') and last_day(to_date('2020'||#{bungiEnd},'yyyymm')) ]]>
+							</if> 
+							<if test="deal_month !=null">  
+								and
+							<![CDATA[	deal_date between  to_date('2020'||#{deal_month},'yyyymm') and last_day(to_date('2020'||#{deal_month},'yyyymm')) ]]>
+							</if>
+				)a
+			)b
+		<![CDATA[
+			WHERE B.RNUM <= #{startCount}
+			AND B.RNUM >= #{endCount}
+		]]>
+	</select>
+
+
 
 	<select id="dealListView" resultType="dealVO" parameterType="map">
 		SELECT B.*
-			FROM(SELECT A.*
-					FROM(SELECT ROWNUM RNUM, DEAL.*
+			FROM(SELECT A.*, ROWNUM RNUM
+					FROM(SELECT DEAL.*
 					FROM DEAL
 					WHERE MEM_NO = #{mem_no}
-				ORDER BY DEAL_NO DESC
+				ORDER BY DEAL_NO
 				)A
 			)B
 			<![CDATA[
 				WHERE B.RNUM <= #{startCount}
 				AND B.RNUM >= #{endCount}
 	        ]]>	
-	      ORDER BY B.rnum  DESC
+	      ORDER BY DEAL_NO DESC 
 	</select>
+	
+	
+	 <select id="cardList" resultType="cardVO" parameterType="String">
+		SELECT *
+		FROM card
+		WHERE MEM_NO = #{mem_no}
+		ORDER BY CARD_NO
+		
+	</select>
+	
+	
+	<insert id="registCard" parameterType="cardVO">
+      INSERT 
+         INTO card
+            (
+               card_no,
+               mem_no,
+               card_kind)
+         VALUES
+             (
+               card_seq.nextval,      
+               #{mem_no},
+               #{card_kind}
+               )
+         
+   </insert>
+   
+   <delete id="deleteCard" parameterType="String">
+   	 DELETE 
+      FROM CARD
+      WHERE CARD_NO = #{card_no}
+   </delete>
+	
+   <delete id="deletedeal" parameterType="String">
+   	 DELETE 
+      FROM DEAL
+      WHERE DEAL_NO = #{deal_no}
+   </delete>
+	
+	
 </mapper>    
 

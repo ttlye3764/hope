@@ -51,25 +51,6 @@ function LogOut(){
 					<!-- navbar top Left-->
 					<div class="d-flex align-items-center">
 						<!-- Language -->
-						<div class="dropdown">
-						  <a class="dropdown-toggle" href="#" role="button" id="dropdownLanguage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img class="dropdown-item-icon" src="assets/images/flags/uk.svg" alt=""> English </a>
-						  <div class="dropdown-menu mt-2 shadow" aria-labelledby="dropdownLanguage">
-						  	<span class="dropdown-item-text">Select language</span>
-						  	<div class="dropdown-divider"></div>
-						    <a class="dropdown-item" href="#"><img class="dropdown-item-icon" src="assets/images/flags/sp.svg" alt=""> EspaÃ±ol</a>
-						    <a class="dropdown-item" href="#"><img class="dropdown-item-icon" src="assets/images/flags/fr.svg" alt=""> FranÃ§ais</a>
-						    <a class="dropdown-item" href="#"><img class="dropdown-item-icon" src="assets/images/flags/gr.svg" alt=""> Deutsch</a>
-						  </div>
-						</div>
-						<!-- Top info -->
-						<ul class="nav list-unstyled ml-3">
-							<li class="nav-item mr-3">
-								<a class="navbar-link" href="#"><strong>Phone:</strong> 010-6634-3764</a>
-							</li>
-							<li class="nav-item mr-3">
-								<a class="navbar-link" href="#"><strong>Email:</strong> Notnullove@jobis.com</a>
-							</li>
-						</ul>
 					</div>
 
 					<!-- navbar top Right-->
@@ -89,17 +70,6 @@ function LogOut(){
 						  </div>
 						</div>
 						<!-- top social -->
-						<ul class="social-icons">
-							<li class="social-icons-item social-facebook m-0">
-								<a class="social-icons-link w-auto px-2" href="#"><i class="fa fa-facebook"></i></a>
-							</li>
-							<li class="social-icons-item social-instagram m-0">
-								<a class="social-icons-link w-auto px-2" href="#"><i class="fa fa-instagram"></i></a>
-							</li>
-							<li class="social-icons-item social-twitter m-0">
-								<a class="social-icons-link w-auto pl-2" href="#"><i class="fa fa-twitter"></i></a>
-							</li>
-						</ul>
 					</div>
 				</div>
 			</div>
@@ -124,38 +94,6 @@ function LogOut(){
 				<!-- Main Menu Start -->
 				<div class="collapse navbar-collapse" id="navbarCollapse">
 					<ul class="navbar-nav ml-auto">
-						<!-- Menu item 1 Demos-->
-						<li class="nav-item dropdown active">
-							<a class="nav-link dropdown-toggle" href="#" id="demosMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Demos</a>
-							<div class="dropdown-menu pb-3 pb-lg-0" aria-labelledby="demosMenu" >
-								<div class="d-block d-sm-flex">
-									<ul class="list-unstyled w-100 w-sm-50 pr-0 pr-lg-5">
-										<li class="dropdown-header">Business Homepages</li>
-										<li> <a class="dropdown-item active" href="index.html">Classic Default<span class="badge badge-success ml-2">Hot</span></a> </li>
-										<li> <a class="dropdown-item" href="index-2.html">Corporate Start-Up</a> </li>
-										<li> <a class="dropdown-item" href="index-3.html">Landing Trendy</a> </li>
-										<li> <a class="dropdown-item" href="index-4.html">Portfolio Modern</a> </li>
-										<li> <a class="dropdown-item" href="index-5.html">Agency Start-Up</a> </li>
-									</ul>
-									<ul class="list-unstyled w-100 w-sm-50 pr-0 pr-lg-5">
-										<li class="dropdown-header mt-3 mt-sm-0">Classic Homepages</li>
-										<li> <a class="dropdown-item" href="index-6.html">Classic Corporate</a> </li>
-										<li> <a class="dropdown-item" href="index-7.html">Creative agency</a> </li>
-										<li> <a class="dropdown-item" href="index-8.html">Home Elegant</a> </li>
-										<li> <a class="dropdown-item" href="index-9.html">Marketplace</a> </li>
-										<li> <a class="dropdown-item" href="index-10.html">Personal Portfolio</a> </li>
-									</ul>
-								</div>
-								<!-- mega menu Bottom -->
-								<div class="w-100 bg-grad pattern-overlay-2 p-4 mt-3 all-text-white d-none d-lg-flex">
-									<div class="align-self-center mr-4">
-										<h4 class="mb-0">Checkout the doc!</h4>
-										<p class="mb-0 small">For better understanding of theme standard</p>
-									</div>
-									<a href="https://wizixo.webestica.com/documentation/" target="_blank" class="btn btn-outline-white btn-sm mb-0 align-self-center ml-auto">Read more!</a>
-								</div>
-							</div>
-						</li>
 						<!-- Menu item 2 Blog-->
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="blogMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Medical</a>
@@ -176,8 +114,8 @@ function LogOut(){
 						</li>
 						<!-- 건강관리 -->
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Health</a>
-							<ul class="dropdown-menu" aria-labelledby="pagesMenu">
+							<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Health</a>
+							<ul class="dropdown-menu" aria-labelledby="blogMenu">
 								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/healthImage/healthImageList.do'>운동법 리스트</a></li>
 								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/healthImage/healthImageWeight.do'>표준몸무게</a></li>
 								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/healthImage/healthImageCal.do'>운동 칼로리 계산기</a></li>

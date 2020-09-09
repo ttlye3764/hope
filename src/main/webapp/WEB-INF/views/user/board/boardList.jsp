@@ -31,16 +31,12 @@
 <!-- Theme CSS -->
 <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 
-
-
-
-
 <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
 <script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
 <script src="${pageContext.request.contextPath }/resources/template/assets/vendor/fitvids/jquery.fitvids.js"></script>
 <script type="text/javascript">
 
-	// 엔터키 이벤트 제거
+	// 부트스트랩 엔터키 이벤트 제거
    $(document).keypress(function(e) { if (e.keyCode == 13) e.preventDefault(); });
    
    $(function() {
@@ -130,7 +126,6 @@ function enterkey(){
    	 	var search_keyword = $("input[id='search_keyword']").val();
     	var search_keycode = $("#search_keycode option:selected").val();     
 
-     
 //		 alert(search_keyword);
 //		 alert(search_keycode);
      $.ajax({

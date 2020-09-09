@@ -140,9 +140,7 @@ public class BoardController {
 			if(currentPage == null){
 		         currentPage = "1";
 		      }
-			
-			System.out.println(bd_division);
-			
+
 			System.out.println("bd_division : " + bd_division);
 			
 			String board_division_name = "";
@@ -193,23 +191,38 @@ public class BoardController {
 	
 	
 	
-	
 	// 상세보기
 	@RequestMapping("boardView")
 		public BoardVO boardView(String bd_division,
 								 String bd_no,
 								 String rnum,
+								 String currentPage, 
+								 String search_keyword, 
+								 String search_keycode,
 							     Map<String, String> params,
 							     ModelMap modelMap,
 							     BoardVO boardInfo)throws Exception{
 		
 		params.put("bd_no", bd_no);
 		boardInfo = this.boardService.boardInfo(params);
+		
 		List<Board_ReplyVO> replyList = new ArrayList<Board_ReplyVO>();
 		replyList = boardService.selectBoardReply(bd_no);
 		modelMap.addAttribute("replyList", replyList);
 		
 		System.out.println(boardInfo);
+		
+		params.put("currentPage", currentPage);
+		params.put("search_keyword", search_keyword);
+		params.put("search_keycode", search_keycode);
+		
+		System.out.println(currentPage);
+		System.out.println(search_keyword);
+		System.out.println(search_keycode);
+		
+		modelMap.addAttribute("currentPage", currentPage);
+		modelMap.addAttribute("search_keyword", search_keyword);
+		modelMap.addAttribute("search_keycode", search_keycode);
 		
 		boardService.countHit(bd_no);
 		modelMap.addAttribute("bd_division", bd_division);

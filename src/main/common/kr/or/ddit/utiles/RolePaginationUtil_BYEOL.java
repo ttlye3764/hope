@@ -38,6 +38,7 @@ public class RolePaginationUtil_BYEOL {
 		// 해당 페이지 내 게시글 시작 번호, 끝번호
 		this.startCount = this.totalCount - (this.currentPage - 1) * this.blockCount;
 		this.endCount = this.startCount - this.blockCount + 1;
+
 		if(this.endCount < 0){
 			this.endCount = 1;
 		}

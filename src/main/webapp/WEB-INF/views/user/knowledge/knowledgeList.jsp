@@ -64,14 +64,6 @@
 		list.push("${knowledgeInfo.k_answer}");
 
 		var Chk = $('input:radio[name=radio${status.count }]').is(':checked');
-// 		if (!Chk) {
-// 			document.getElementById("allChk").innerHTML = "체크 되지 않은 것이 있습니다.";
-// 			$('#answer').hide();
-// 			$('#return').hide();
-// 			$('#statistic').hide();
-
-// 			return;
-// 		} 
 
 		// 사용자가 선택한 값
 		var radioChk = $('input[name="radio${status.count }"]:checked').val();
@@ -171,12 +163,11 @@
 		<div class="container">
 			<div class="row all-text-white">
 				<div class="col-md-12 align-self-center">
-					<h1 class="innerpage-title">퀴즈 풀기</h1>
-					<h6 class="subtitle">두뇌 강화 퀴즈 풀이 입니다 </h6>
+					<h1 class="innerpage-title">Knowledge</h1>
+					<h6 class="subtitle">It's a brain strengthening quiz. Have fun solving the problem.</h6>
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
-							<li class="breadcrumb-item active"><a href="index.html"><i class="ti-home"></i> Home</a></li>
-							<li class="breadcrumb-item">Timeline</li>
+							<li class="breadcrumb-item active"><a href="${pageContext.request.contextPath}/user/knowledge/knowledgeList.do"><i class="ti-home"></i> Home</a></li>
 						</ol>
 					</nav>
 				</div>

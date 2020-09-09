@@ -109,13 +109,11 @@ $(function(){
 								>${knowledgeInfo.k_content}</textarea>
 							</div>
 							
-							 <c:if test="${!empty knowledgeInfo.items }">  
-							<div id="image_container" style="width: 300px; height: 200px;">
-								<c:forEach items="${knowledgeInfo.items }" var="fileitemInfo">
-									<img src="/files/${fileitemInfo.file_save_name }" alt="pic1">
-								</c:forEach>
-							</div>
-							 </c:if>
+							<c:forEach items="${knowledgeInfo.itemsInfo }" var="fileitemInfo" varStatus="status">
+								<div id="image_container" style="width: 300px; height: 200px;">
+									<img src="/files/${knowledgeInfo.itemsInfo[status.index].file_save_name }" alt="pic1" style="width: 300px; height: 200px;">
+								</div>
+							</c:forEach>
 
 							<div class="list-group-number list-unstyled list-group-borderless">
 								      

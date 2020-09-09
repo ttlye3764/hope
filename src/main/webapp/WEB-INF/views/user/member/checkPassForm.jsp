@@ -34,6 +34,7 @@
 <!-- Theme CSS -->
 <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.js"></script>
 <script type='text/javascript'>
@@ -46,12 +47,22 @@ $(function(){
 	var id = '${LOGIN_MEMBERINFO.mem_id}';
 	var social = '${LOGIN_MEMBERINFO.mem_join_addr}';
 	if(social=='n'){
-	   alert('소셜 로그인 사용자는 이용할 수 없습니다.');
-	   window.history.back();
-	}else if(id==''){
-	   alert('로그인 후 이용해주세요.');
-	   $(location).attr('href','${pageContext.request.contextPath}/user/main/mainForm.do');
-	}
+		swal({
+      	    title: "",
+      	    text: "소셜 로그인 사용자는 이용할 수 없습니다.",
+      	    type: "warning"
+      	}).then(function() {
+      		window.history.back();
+      	});
+	   }else if(id==''){
+		   swal({
+	      	    title: "",
+	      	    text: "로그인 후 이용해주세요.",
+	      	    type: "warning"
+	      	}).then(function() {
+	      		$(location).attr('href','${pageContext.request.contextPath}/user/main/mainForm.do');
+	      	});
+	   }
 });
 function checkpass(){
 	$.ajax({

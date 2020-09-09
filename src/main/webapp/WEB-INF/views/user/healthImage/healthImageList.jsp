@@ -23,11 +23,13 @@
 </head>
 <body>
 
-<div class="innerpage-banner center bg-overlay-dark-7 py-7" style="background:url(assets/images/bg/04.jpg) no-repeat; background-size:cover; background-position: center center;">
+<div class="innerpage-banner center bg-overlay-dark-7 py-7" 
+	style="background:url(${pageContext.request.contextPath }/resources/template/assets/images/bg/04.jpg) no-repeat; background-size:cover; 
+		background-position: center center;">
 		<div class="container">
 			<div class="row all-text-white">
 				<div class="col-md-12 align-self-center">
-					<h1 class="innerpage-title">Health Management</h1>
+					<h1 class="innerpage-title">Health</h1>
 					<h6 class="subtitle">Show your awesome work in Health style</h6>
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
@@ -48,16 +50,6 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 p-0">
-					<!-- <div class="nav justify-content-center">
-						<ul class="nav-tabs nav-tabs-style-3 text-center px-2 p-md-0 m-0 mb-4">
-							<li class="nav-filter active" data-filter="all" onclick="all();">전체</li>
-							<li class="nav-filter" data-filter="shoulder" onclick="shoulder();"><input type="hidden" value="어깨" id="shoulder"/>어깨</li>
-							<li class="nav-filter" data-filter="back" onclick="back();"><input type="hidden" value="등" id="back"/>등</li>
-							<li class="nav-filter" data-filter="chest" onclick="chest();"><input type="hidden" value="가슴" id="chest"/>가슴</li>
-							<li class="nav-filter" data-filter="arm" onclick="arm();"><input type="hidden" value="팔" id="arm"/>팔</li>
-							<li class="nav-filter" data-filter="leg" onclick="leg();"><input type="hidden" value="다리" id="leg"/>다리</li>
-						</ul>
-					</div> -->
 						<div class="col-sm-12 col-md-12">
 							<h5 class="mb-4">Tab line</h5>
 							<ul class="nav nav-tabs tab-line">
@@ -109,13 +101,15 @@
 							<div class="portfolio-card-body">
 							
 								<!-- 파일 -->
-								 <c:if test="${!empty healthInfo.items[status.index].file_save_name }">  
+								<c:forEach items="${healthInfo.items }" var="fileitemInfo" varStatus="stat">
+								 <c:if test="${!empty healthInfo.items}">  
 									<div class="portfolio-card-header" id="image_container" style="width: 235px; height: 160px;">
-										<img src="/files/${healthInfo.items[status.index].file_save_name}" alt="pic1" 
+										<img src="/files/${fileitemInfo.file_save_name}" alt="pic1" 
 										onError="this.src='${pageContext.request.contextPath }/resources/template/assets/images/character.PNG';"
 										style="width: 233px; height: 160px;">
 				 					</div> 
-								 </c:if>  
+								 </c:if> 
+								 
 								
 								<div class="portfolio-card-footer">
 									<a href="#" class="full-screen" data-toggle="modal" data-target="#exampleModalCenter${status.index}"
@@ -147,18 +141,18 @@
 												<div class="modal-header" style="text-align: center;vertical-align: middle">
 													
 													<!-- 동영상일 때 -->
-													<c:set var="fileName" value="${fn:split(healthInfo.items[status.index].file_save_name,'.') }" />
+													<c:set var="fileName" value="${fn:split(fileitemInfo.file_save_name,'.') }" />
 													  <c:if test="${fileName[1] eq 'mp4'}">  
-															  <video id="myVideo" oncontextmenu="return false;" width="640" controls autoplay="autoplay">
-															    <source src="/files/${healthInfo.items[status.index].file_save_name}" type="video/mp4">
-															</video>
+														  <video id="myVideo" oncontextmenu="return false;" width="640" controls autoplay="autoplay">
+														    <source src="/files/${fileitemInfo.file_save_name}" type="video/mp4">
+														</video>
 													 </c:if> 
 													 
 													<!-- 파일일 때 --> 
-													<c:set var="fileName" value="${fn:split(healthInfo.items[status.index].file_save_name,'.') }" />
+													<c:set var="fileName" value="${fn:split(fileitemInfo.file_save_name,'.') }" />
 													  <c:if test="${fileName[1] eq 'jpg' || fileName[1] eq 'png'}">    
 														<div class="portfolio-card-header" id="image_container" style="width: 235px; height: 160px;margin-left: 25%">
-															<img src="/files/${healthInfo.items[status.index].file_save_name}" 
+															<img src="/files/${fileitemInfo.file_save_name}" 
 															alt="pic1" style="width: 233px; height: 160px;margin: auto;">
 									 					</div> 
 													 </c:if>
@@ -180,6 +174,7 @@
 											</div>
 										</div>
 									</div>
+									</c:forEach> 
 									
 									<!-- 모달2 inbody -->
 									<div class="modal fade text-left" id="exampleModal" tabindex="-1" role="dialog" 
@@ -193,15 +188,13 @@
 													</button>
 												</div>
 												<div class="modal-body">
-													<form name="file" method="post" enctype="multipart/form-data">
+													<form action="${pageContext.request.contextPath}/user/healthImage/ocr.do" name="file" method="post" enctype="multipart/form-data">
 														<div class="form-group">
 															<label for="exampleFormControlFile1">인바디 파일을 넣어주세요.</label>
-															<input type="file" name="files" 
-															class="form-control-file" id="file" onchange="setThumbnail(event);">
+															<input type="file" name="files" class="form-control-file" id="file">
 														</div>
+ 													<input type="submit" class="btn btn-light mb-2 mr-1" id="inbody" style="margin: 0px 0px 0px 190px;">
 													</form>
-<!-- 												    <div id="image_container" style="width: 230px;height: 160px;"></div> -->
- 													<button type="button" class="btn btn-light mb-2 mr-1" id="" style="margin: 0px 0px 0px 160px;">추천 운동 확인</button>
 												</div>
 											</div>
 										</div>
@@ -225,6 +218,7 @@
 	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/jquery/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/popper.js/umd/popper.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 	<!--Vendors-->
 	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/fancybox/js/jquery.fancybox.min.js"></script>
@@ -233,6 +227,7 @@
 
 	<!--Template Functions-->
 	<script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script type="text/javascript">
 
@@ -247,6 +242,18 @@
 				$('#all').click(function(){
 					$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/healthImageList.do');
 				}); 
+
+				 // 인바디 정보 등록
+				$('form[name=file]').submit(function(){
+					var files = $('#file').val();
+					if(files == ""){
+						swal("FILE","파일을 넣어주세요.", "warning");
+
+						return false;
+					}
+					
+					$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/ocr.do');
+				});  
 
 				$("#playBtn").on("click", function() {
 			        $("#myVideo").trigger("play");
@@ -299,27 +306,27 @@
 			
 			function shoulder() {
 				  var choose = $('#shoulder').val();	
-				  location.href = '${pageContext.request.contextPath}/user/healthImage/chooseList.do?choose=' + choose;
+				  location.href = '${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose=' + choose;
 			}
 			
 			function back() {
 				  var choose = $('#back').val();	
-				  location.href = '${pageContext.request.contextPath}/user/healthImage/chooseList.do?choose=' + choose;
+				  location.href = '${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose=' + choose;
 			}
 			
 			function chest() {
 				  var choose = $('#chest').val();	
-				  location.href = '${pageContext.request.contextPath}/user/healthImage/chooseList.do?choose=' + choose;
+				  location.href = '${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose=' + choose;
 			}
 			
 			function arm() {
 				  var choose = $('#arm').val();	
-				  location.href = '${pageContext.request.contextPath}/user/healthImage/chooseList.do?choose=' + choose;
+				  location.href = '${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose=' + choose;
 			}
 			
 			function leg() {
 				  var choose = $('#leg').val();	
-				  location.href = '${pageContext.request.contextPath}/user/healthImage/chooseList.do?choose=' + choose;
+				  location.href = '${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose=' + choose;
 			}
 
 		    $("#myVideo").on("ended", function() {

@@ -46,6 +46,24 @@
 
 </head>
 <body>
+<div class="innerpage-banner center bg-overlay-dark-7 py-7" 
+	style="background:url(${pageContext.request.contextPath }/resources/template/assets/images/bg/04.jpg) no-repeat; background-size:cover; 
+		background-position: center center;">
+		<div class="container">
+			<div class="row all-text-white">
+				<div class="col-md-12 align-self-center">
+					<h1 class="innerpage-title">Health</h1>
+					<h6 class="subtitle">Show your awesome work in Health style</h6>
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item active">
+							<a href='${pageContext.request.contextPath}/user/healthImage/healthImageMap.do'><i class="ti-home"></i> Home</a></li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
 <section>
 		<div class="container">
 			<div class="row mb-4">
@@ -60,7 +78,7 @@
 					        <div class="option">
 					            <div>
 					                <form onsubmit="searchPlaces(); return false;">
-					                  	  키워드 : <input type="text" value="헬스장" id="keyword" size="15"> 
+					                  	  키워드 : <input type="text" value="대전 중구 헬스장" id="keyword" size="15"> 
 					                    <input type="submit" style="margin: 5px 0px 0px 70px;">
 					                </form>
 					            </div>

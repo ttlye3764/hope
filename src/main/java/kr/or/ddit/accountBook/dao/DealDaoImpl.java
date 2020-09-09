@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import kr.or.ddit.vo.CardVO;
 import kr.or.ddit.vo.DealVO;
 
 
@@ -40,6 +41,36 @@ public class DealDaoImpl implements IDealDao{
 	@Override
 	public List<DealVO> dealListView(Map<String, String> params) throws Exception {
 		return client.selectList("deal.dealListView",params);
+	}
+
+	@Override
+	public List<CardVO> cardList(String mem_no) throws Exception {
+		return client.selectList("deal.cardList",mem_no);
+	}
+
+	@Override
+	public void registCard(CardVO cardInfo) throws Exception {
+		client.insert("deal.registCard",cardInfo);
+	}
+
+	@Override
+	public void deleteCard(String card_no) throws Exception {
+		client.update("deal.deleteCard",card_no);
+	}
+
+	@Override
+	public List<DealVO> searchList(Map<String, String> params) throws Exception {
+		return client.selectList("deal.searchList",params);
+	}
+
+	@Override
+	public void deletedeal(String deal_no) throws Exception {
+		client.update("deal.deletedeal",deal_no);
+	}
+
+	@Override
+	public String totalCount(Map<String, String> params) throws Exception {
+		return client.selectOne("deal.totalCount", params);
 	}
 	
 

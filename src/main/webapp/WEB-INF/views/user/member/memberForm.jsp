@@ -30,7 +30,7 @@
     }
     
     #loading{
-    	z-index : 900;
+       z-index : 900;
     }
 
 </style>
@@ -39,50 +39,9 @@
 <script type='text/javascript' src='<%=request.getContextPath()%>/js/validation.js'></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="/resources/js/addressapi.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 $(function(){
-   $("#mem_hp").keyup(function(e){
-      if(e.keyCode == 8){
-         var code = $('input[name=mem_hp]').val();
-         var lastChar = code.charAt(code.length-1);
-         if(lastChar == '-'){
-            code = code.substr(0,code.length-1);
-            $('input[name=mem_hp]').val(code);
-         }
-      }else{
-         var hp = $('input[name=mem_hp]').val();
-         var lastChar = hp.charAt(hp.length-1);
-         if(lastChar == '-'){
-             hp = hp.substr(0,hp.length-1);
-             $('input[name=mem_hp]').val(hp);
-         }else{
-         	if(hp.length == 3 || hp.length == 8){
-         	   $('input[name=mem_hp]').val(hp + "-");
-        	 }
-         }     
-      }
-   });
-   $("#mem_birth").keyup(function(e){
-	      if(e.keyCode == 8){
-	         var code = $('input[name=mem_birth]').val();
-	         var lastChar = code.charAt(code.length-1);
-	         if(lastChar == '-'){
-	            code = code.substr(0,code.length-1);
-	            $('input[name=mem_birth]').val(code);
-	         }
-	      }else{
-	         var birth = $('input[name=mem_birth]').val();
-	         var lastChar = birth.charAt(birth.length-1);
-	         if(lastChar == '-'){
-	        	 birth = birth.substr(0,birth.length-1);
-		         $('input[name=mem_birth]').val(birth);
-		     }else{
-		         if(birth.length == 4 || birth.length == 7){
-		            $('input[name=mem_birth]').val(birth + "-");
-		         }
-		     }
-	      }
-	   });
    $('form[name=memberForm]').submit(function() {
       var idcheck = $('#idlabel').text();
       var emailcheck = $('#emaillabel').text();
@@ -90,63 +49,65 @@ $(function(){
       var pass = $('#pass').val();
       var pass2 = $('#pass2').val();
       var passlb = $('#passchecklb').text();
+      var nickcheck = $('#nicklb').text();
 
          if(idcheck == '' || idcheck == '이미 존재하는 아이디입니다.' || idcheck == '형식에 맞지 않는 아이디입니다.'){
-            alert('아이디를 확인해주세요.');
+            swal("","아이디를 확인해주세요.", "warning");
             return false;
          }   
-         if(idcheck == '' || idcheck == '이미 존재하는 닉네임입니다.' || idcheck == '형식에 맞지 않는 닉네임입니다.'){
-            alert('닉네임을 확인해주세요.');
-            return false;
-         }
          if(pass == '' || pass2 == ''){
-            alert('비밀번호를 입력해주세요.');
+        	swal("","비밀번호를 입력해주세요.", "warning");
             return false;
          }
-         if(pass.length < 8){
-            alert('비밀번호는 최소 8자리 이상 입력해주세요.');
+         if(pass.length < 4){
+        	swal("","비밀번호는 최소 4자리 이상 입력해주세요.", "warning");
             return false;
          }
          if(passlb == '비밀번호가 일치하지 않습니다.'){
-            alert('비밀번호를 확인해주세요.');
+	       	swal("","비밀번호를 확인해주세요.", "warning");
             return false;
          }
 
          if(!$('input:radio[name=mem_gender]').is(':checked')){
-            alert('성별을 선택해주세요.');
+            swal("","성별을 선택해주세요.", "warning");
+            return false;
+         }
+         var name = $('#mem_name').val();
+         if (name == '') {
+        	 swal("","이름을 입력해주세요.", "warning");
             return false;
          }
 
-//          var name = $('#mem_name').val();
-//          if (!name.validationNAME()) {
-//             alert('올바른 이름을 입력해주세요.')
-//             return false;
-//          }
+         if(nickcheck == '' || nickcheck == '이미 존재하는 닉네임입니다.' || nickcheck == '형식에 맞지 않는 닉네임입니다.'){
+             swal("","닉네임을 확인해주세요.", "warning");
+             return false;
+          }
+         
          var mem_birth =   $('input[name=mem_birth]').val();
          
          if (!mem_birth.validationBIR()) {
-            alert('올바른 생년월일을 입력해주세요.')
+            swal("","올바른 생년월일을 입력해주세요.", "warning");
             return false;
          }
          if(emailcheck == ''){
-            alert('이메일 인증을 완료해주세요.');
+            swal("","이메일 인증을 완료해주세요.", "warning");
             return false;
          }
          if(smscheck == ''){
-            alert('휴대폰 인증을 완료해주세요.');
+            swal("","휴대폰 인증을 완료해주세요.", "warning");
             return false;
          }
          var zip = $('input[name=mem_zip1]').val();
 
          if(zip == ''){
-            alert('우편번호를 입력해주세요.');
+        	swal("","우편번호를 입력해주세요,", "warning");
             return false;
          }
 
          var addr2 = $('input[name=mem_addr2]').val();
 
          if(addr2 == ''){
-            alert('상세주소를 입력해주세요.');
+            swal("","상세주소를 입력해주세요.", "warning");
             return false;
          }
       
@@ -237,7 +198,7 @@ $(function(){
       var mem_hp = $('input[name=mem_hp]').val();
       
       if (!mem_hp.validationHP()) {
-         alert('휴대전화번호를 바르게 입력해주세요.');
+    	 swal("","휴대전화번호를 바르게 입력해주세요.", "warning");
          return false;
       }
       
@@ -249,11 +210,10 @@ $(function(){
             mem_hp : $('input[name=mem_hp]').val()
          },
          error : function(result) {
-            alert(result.json);
+        	swal("",result.json, "success");
          },
          success : function(result) {
-            //{ flag : true | false}
-            alert(result.json);
+        	swal("",result.json, "success");
          }
       });
    };
@@ -285,7 +245,7 @@ $(function(){
       var mem_email = $('input[name=mem_email]').val();   
 
       if (!mem_email.validationMAIL()) {
-         alert('이메일을 바르게 입력해주세요.');
+    	 swal("","이메일 바르게 입력해주세요.", "warning");
          return false;
       }
 
@@ -303,10 +263,10 @@ $(function(){
               $('.wrap-loading').addClass('display-none');
           },
          error : function(result) {
-            alert(result.json);
+        	swal("",result.json, "success");
          },
          success : function(result) {
-            alert(result.json);
+        	swal("",result.json, "success");
          }
       });
    };
@@ -388,18 +348,64 @@ $(function(){
            }
         }).open();
     }
+   function setThumbnail(event) { 
+		var reader = new FileReader(); 
+		var img;
+		reader.onload = function(event) {
+				img = document.createElement("img"); 
+				
+				img.setAttribute("src", event.target.result); 
+				
+				document.querySelector("div#image_container").appendChild(img); 
+				
+				img.style.height = '100px';
+			    img.style.width = '100px';
+			}; 
+			reader.readAsDataURL(event.target.files[0]);
+
+			document.querySelector("div#image_container").addEventListener('click', function() {
+				//document.querySelector("div#image_container").style.display = 'none';
+				document.querySelector("div#image_container").removeChild(img);
+			});
+		};
 
 </script>
 <body>
 <div id="loading" class="wrap-loading display-none">
     <div><img src="../../image/Progress_Loading.gif"/></div>
 </div> 
-   <form name="memberForm" method="post">
+<div class="innerpage-banner center bg-overlay-dark-7 py-7" style="background:url(assets/images/bg/04.jpg) no-repeat; background-size:cover; background-position: center center;">
+      <div class="container">
+         <div class="row all-text-white">
+            <div class="col-md-12 align-self-center">
+               <h1 class="innerpage-title">회원 가입</h1>
+               <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                     <li class="breadcrumb-item active"><a href="${pageContext.request.contextPath}/user/main/mainForm.do"><i class="ti-home"></i> Home</a></li>
+                     <li class="breadcrumb-item">Timeline</li>
+                  </ol>
+               </nav>
+            </div>
+         </div>
+      </div>
+   </div>
+      <br>
+      <br>
+      <br>
+   <form name="memberForm" method="post" enctype="multipart/form-data">
    <input type="hidden" name="mem_division" value="0"> 
       <table style="border: none" align="center">
-         <tr>
-            <td colspan="3" align="center"><h3>회원가입</h3></td>
-         </tr>
+      	<tr>
+			<td>사진등록</td>
+			<td>
+				<div id="image_container"></div>
+				<div class="form-group">
+					<label for="exampleFormControlFile1"></label>
+					<input type="file" class="form-control-file" name="files"
+					  id="exampleFormControlFile1" onchange="setThumbnail(event);"/>
+				</div>
+			</td>
+		</tr>
          <tr>            
             <td width="150px" height="25" class="idright">아이디</td>
             <td>
@@ -457,7 +463,7 @@ $(function(){
             <td width="150px" height="25" class="idright">휴대전화</td>
             <td>
             <div class="input-group mb-3" style="width:350px">
-            <input type="text" name="mem_hp" id="mem_hp" class="form-control" placeholder="- 빼고 입력" onchange="smschange()"/> 
+            <input type="text" name="mem_hp" id="mem_hp" class="form-control" placeholder="010-1234-5678" onchange="smschange()"/> 
             <a href="javascript:sendsms();">[인증번호 전송]</a></div>
             <input type="text" class="form-control" name="hp_num" onkeyup="checksms()"/>
             <label id="hplabel"></label>

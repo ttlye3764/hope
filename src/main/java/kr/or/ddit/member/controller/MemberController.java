@@ -14,6 +14,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -37,7 +38,6 @@ public class MemberController {
 	private IMemberService service;
 	@Autowired
 	private IBoardService boardService;
-
 
 	@RequestMapping("memberView")
 	public ModelMap memberView(String mem_id, Map<String, String> params, ModelMap modelMap) throws Exception {
@@ -90,7 +90,7 @@ public class MemberController {
 	}
 
 	@RequestMapping("updateMemberInfo")
-	public String updateMember(MemberVO memberInfo, HttpSession session, Map<String, String> params) throws Exception {
+	public String updateMember(MemberVO memberInfo, HttpSession session, Map<String, String> params, @RequestParam("files") MultipartFile[] items) throws Exception {
 		params.put("mem_id", memberInfo.getMem_id());
 		
 		if(!(memberInfo.getMem_pass().length()>0)) {
@@ -101,7 +101,7 @@ public class MemberController {
 			memberInfo.setMem_pass(pass);
 			params.put("mem_pass", memberInfo.getMem_pass());
 		}
-		this.service.updateMemberInfo(memberInfo);		
+		this.service.updateMemberInfo(memberInfo, items);
 		
 		memberInfo = this.service.memberInfo(params);
 		session.setAttribute("LOGIN_MEMBERINFO", memberInfo);
@@ -134,13 +134,13 @@ public class MemberController {
 	}
 
 	@RequestMapping("insertMemberInfo")
-	public String insertMember(MemberVO memberInfo, @RequestBody String totalparams,
-			RedirectAttributes redirectAttributes) throws Exception {
+	public String insertMember(MemberVO memberInfo,
+			RedirectAttributes redirectAttributes, @RequestParam("files") MultipartFile[] items) throws Exception {
 		
 		String pass = UserSha256.encrypt(memberInfo.getMem_pass());
 		memberInfo.setMem_pass(pass);
 		
-		this.service.insertMember(memberInfo);
+		this.service.insertMember(memberInfo, items);
 		
 		redirectAttributes.addFlashAttribute("message", "회원가입이 완료되었습니다");
 		return "redirect:/user/join/loginForm.do";
