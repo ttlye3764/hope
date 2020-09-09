@@ -1,5 +1,7 @@
 package kr.or.ddit.vo;
 
+import java.util.List;
+
 public class MemberVO {
 	private String mem_no;
 	private String mem_id;

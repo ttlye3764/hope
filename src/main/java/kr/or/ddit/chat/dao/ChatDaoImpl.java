@@ -13,7 +13,6 @@ import kr.or.ddit.vo.FriendVO;
 import kr.or.ddit.vo.MemberVO;
 import kr.or.ddit.vo.MessageVO;
 import kr.or.ddit.vo.ParticipationVO;
-import oracle.net.aso.p;
 
 @Repository
 public class ChatDaoImpl implements IChatDao{
