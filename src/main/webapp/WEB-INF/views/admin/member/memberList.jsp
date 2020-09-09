@@ -27,6 +27,9 @@
 		if(keycode == '' || keycode == null){
 			keycode = 'TOTAL';
 		}
+		if(keyword == null){
+			keyword = '';
+		} 
 		$('select[name=search_keycode]').val(keycode);
 		$('input[name=search_keyword]').val(keyword);
 	});
