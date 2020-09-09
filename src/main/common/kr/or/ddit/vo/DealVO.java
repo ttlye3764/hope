@@ -15,8 +15,6 @@ public class DealVO {
 	private String deal_division;
 	private String deal_card_name;
 	
-	
-	
 	public String getDeal_card_name() {
 		return deal_card_name;
 	}

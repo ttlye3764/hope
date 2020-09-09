@@ -50,7 +50,8 @@
    <select id="totalCount" resultType="String" parameterType="map">
 		select count(*)
 		from deal
-		where 1=1 and mem_no = #{mem_no}
+		where 1=1 and mem_no = #{mem_no} AND deal_fix_revenue = 0
+		AND deal_fix_expenditure = 0
 						<if test="deal_name !=null">
 							and 
 							deal_name like '%' || #{deal_name} || '%' 
@@ -67,6 +68,10 @@
 							and
 							deal_kind like #{deal_kind} 
 						</if> 
+						<if test="deal_card_name !=null">
+								and
+								deal_card_name like #{deal_card_name} 
+						</if>
 						<if test="startDate !=null">
 							and
 						<![CDATA[	deal_date > to_date(#{startDate},'yyyy-mm-dd') ]]>
@@ -89,13 +94,21 @@
 						</if>
 	</select>
 	
+	<select id="dealInfo" parameterType="String" resultType="dealVO"> 
+		select *
+		from deal
+		where deal_no = #{deal_no}
+	</select>
+	
+	
 	<select id="searchList" parameterType="map" resultType="dealVO">
 	select b.*	
 		from(select ROWNUM rnum, a.*
 			 from(select *
 				  from deal
-			  	  where 1=1 and mem_no = #{mem_no}
-							<if test="deal_name !=null">
+			  	  where 1=1 and mem_no = #{mem_no} AND deal_fix_revenue = 0
+					AND deal_fix_expenditure = 0
+							<if test="deal_name !=null">	
 								and 
 								deal_name like '%' || #{deal_name} || '%' 
 							</if>
@@ -110,6 +123,10 @@
 							<if test="deal_kind !=null">
 								and
 								deal_kind like #{deal_kind} 
+							</if> 
+							<if test="deal_card_name !=null">
+								and
+								deal_card_name like #{deal_card_name} 
 							</if> 
 							<if test="startDate !=null">
 								and
@@ -190,6 +207,14 @@
       FROM CARD
       WHERE CARD_NO = #{card_no}
    </delete>
+   <update id="updateAccount" parameterType="String">
+   	 update
+     deal
+     set deal_date = #{deal_date}, deal_name = #{deal_name},
+     		deal_price = #{deal_price}, deal_division = #{deal_division},
+     		deal_option = #{deal_option}, deal_kind = #{deal_kind}, deal_card_name = #{deal_card_name}
+     WHERE deal_no = #{deal_no}
+   </update>
 	
    <delete id="deletedeal" parameterType="String">
    	 DELETE 

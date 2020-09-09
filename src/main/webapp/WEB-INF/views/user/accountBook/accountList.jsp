@@ -19,6 +19,55 @@ tr:hover{
 <script>
 
 function updateFunc(i){
+	var card ="";
+	$.ajax({
+        url     : '${pageContext.request.contextPath}/user/accountBook/accountInfo.do',
+        type    : 'post',
+        dataType: 'json',
+        data : {'deal_no' : i },
+        async : false,
+        success : function(result) {
+			console.log(result.dealInfo);
+			var date = result.dealInfo.deal_date.split(' ');
+			$('#deal_no').val(i);
+			$('#modal_date').val(date[0]);
+			$('#modal_item').val(result.dealInfo.deal_name);
+			$('#modal_price').val(result.dealInfo.deal_price);
+			$('#modal_division').val(result.dealInfo.deal_division);
+			$('#modal_option').val(result.dealInfo.deal_option);
+			if(result.dealInfo.deal_kind=='현금'){
+				$('#modal_method').val(result.dealInfo.deal_kind);
+				$("#modal_kind2").hide(); 
+			}
+			else if(result.dealInfo.deal_kind!='현금'){				
+				$('#modal_method').val('카드');
+				card = result.dealInfo.deal_card_name;
+				$('#modal_kind2').empty();
+				$.ajax({
+			   	 	async    : false,
+			        url     : '${pageContext.request.contextPath}/user/accountBook/cardList.do',
+			        type    : 'post',
+			        dataType : 'json',
+			        async : false,
+			        data : {'mem_no':${LOGIN_MEMBERINFO.mem_no}},
+			        success : function(Result) {
+						var str="";
+				        for(var i=0; i<Result.cardlist.length; i++){
+							if(card == Result.cardlist[i].card_kind){
+								str += '<option selected="selected" value="'+Result.cardlist[i].card_kind+'">'+Result.cardlist[i].card_kind+'</option>';
+							}else{
+					    		str += '<option value="'+Result.cardlist[i].card_kind+'">'+Result.cardlist[i].card_kind+'</option>';
+							}
+					    }
+						$('#modal_kind2').append(str);
+			        }
+
+			   	});
+				$("#modal_kind2").show(); 
+			}
+	 	 }
+	}); 
+	
 	$("#centermodal").modal("show");
 }
 function deleteFunc(i){
@@ -30,8 +79,8 @@ function deleteFunc(i){
          data : {'deal_no' : no },
          async : false,
          success : function(result) {
-             alert(no);
         	 getAccountList();
+        	 alert('삭제완료');
 	 	 }
 	}); 
 }
@@ -69,7 +118,11 @@ function getAccountList(){
 					str += '<td>'+v.deal_name +'</td>';
 					str += '<td>'+v.deal_division +'</td>';
 					str += '<td>'+v.deal_price +'</td>';
-					str += '<td>'+v.deal_kind +'</td>';
+					if(v.deal_kind=='현금'){
+						str += '<td>'+v.deal_kind +'</td>';
+					}else if(v.deal_kind=='카드'){
+						str += '<td>'+v.deal_card_name +'</td>';
+					}
 					str += '<td>'+v.deal_option +'</td>';
 					str += '<td style="width:50px; height: 50px;">';
 					str += '<div style="display: flex; justify-content:space-around; height: 50px; width:50px;">';
@@ -87,6 +140,90 @@ $(function(){
 	$(".img1").hide();
 	$(".img2").hide();
 	
+
+	$('#registBtn1').on('click',function(){
+		var deal_no = $('#deal_no').val();
+		var date = $('#modal_date').val();
+		var item = $('#modal_item').val();
+		var price = $('#modal_price').val();
+		var division = $('#modal_division').val();
+		var option = $('#modal_option').val();
+		var method = $('#modal_method').val();
+		var card_name ="";		
+		alert(deal_no);
+		if(method=='현금'){
+			$("#modal_kind2").hide(); 
+		}
+		else if(method!='현금'){
+			card_name = $('#modal_kind2').val();
+			$("#modal_kind2").show(); 
+		}
+
+		 $.ajax({
+	            url     : '${pageContext.request.contextPath}/user/accountBook/updateAccount.do',
+	            type    : 'post',
+	            dataType: 'json',
+	            async : false,
+	            data : {'deal_no':deal_no, 'deal_date':date, 'deal_name':item, 'deal_price':price, 'deal_division' : division,
+		            'deal_option':option,'deal_kind':method,'deal_card_name':card_name },
+	            success : function(result) {
+	            	$("#centermodal").modal("hide");
+
+	        		$('#tbody').empty();
+	        		
+	        		var startDate = $('.startDate').val();
+	        		var endDate = $('.endDate').val();
+	        		var deal_option = $('.deal_option option:selected').val();
+	        		var deal_name = $('.deal_name').val();
+	        		var deal_division = $('.deal_division option:selected').val();
+	        		var deal_kind = $('.deal_kind option:selected').val(); //현금 카드
+	        		var deal_year = $('.deal_year option:selected').val();
+	        		var deal_bungi = $('.deal_bungi option:selected').val();
+	        		var deal_month = $('.deal_month option:selected').val();
+	        		
+	        		if(deal_kind == '카드'){
+	        			deal_kind = $('#kind option:selected').val();
+	        		}
+
+	        		 $.ajax({
+	        	            url     : '${pageContext.request.contextPath}/user/accountBook/searchAccountList.do',
+	        	            type    : 'post',
+	        	            dataType: 'json',
+	        	            async : false,
+	        	            data : {'startDate':startDate, 'endDate':endDate, 'deal_option':deal_option, 'deal_name':deal_name, 'deal_division':deal_division, 'deal_kind':deal_kind,
+	        		            		'deal_year':deal_year, 'deal_bungi':deal_bungi, 'deal_month':deal_month, 'mem_no':${LOGIN_MEMBERINFO.mem_no} },
+	        	            success : function(result) {
+	        	            	$('#paginationDIV').empty();
+	                     	    $('#paginationDIV').append(result.pagination);
+	        		            $('#tbody').empty();
+	        					var str = "";
+	        					$.each(result.list,function(i,v){
+	        						str += '<tr><input type="hidden" value="'+v.deal_no+'"/>';
+	        						str += '<th>'+(i+1)+'</th>';
+	        						str += '<td>'+v.deal_date +'</td>';
+	        						str += '<td>'+v.deal_name +'</td>';
+	        						str += '<td>'+v.deal_division +'</td>';
+	        						str += '<td>'+v.deal_price +'</td>';
+	        						if(v.deal_kind=='현금'){
+	        							str += '<td>'+v.deal_kind +'</td>';
+	        						}else if(v.deal_kind=='카드'){
+	        							str += '<td>'+v.deal_card_name +'</td>';
+	        						}
+	        						str += '<td>'+v.deal_option +'</td>';
+	        						str += '<td style="width:50px; height: 50px;">';
+	        						str += '<div style="display: flex; justify-content:space-around; height: 50px; width:50px;">';
+	        						str += '<img class="img1" src="${pageContext.request.contextPath}/images/update.PNG" onclick="updateFunc('+v.deal_no+');" style="width:25px; height: 25px;  display:none;">';
+	        						str += '<img class="img2" src="${pageContext.request.contextPath}/images/delete.PNG" onclick="deleteFunc('+v.deal_no+');" style="width:25px; height: 25px;  display:none;"></div></td></tr>';
+	        					});
+	        					$('#tbody').append(str);
+	        			    }
+	        		});
+	        		alert('수정완료');
+			    }
+		 })
+	});
+		
+
 	
 	/* $('#tbody').on('mouseenter', 'tr', function() {
 		$(this).find('.img1').show();
@@ -161,10 +298,11 @@ $(function(){
 			var deal_option = $('.deal_option option:selected').val();
 			var deal_name = $('.deal_name').val();
 			var deal_division = $('.deal_division option:selected').val();
-			var deal_kind = $('.deal_kind option:selected').val();
+			var deal_kind = $('.deal_kind option:selected').val(); //현금 카드
 			var deal_year = $('.deal_year option:selected').val();
 			var deal_bungi = $('.deal_bungi option:selected').val();
 			var deal_month = $('.deal_month option:selected').val();
+			
 			if(deal_kind == '카드'){
 				deal_kind = $('#kind option:selected').val();
 			}
@@ -188,7 +326,11 @@ $(function(){
 							str += '<td>'+v.deal_name +'</td>';
 							str += '<td>'+v.deal_division +'</td>';
 							str += '<td>'+v.deal_price +'</td>';
-							str += '<td>'+v.deal_kind +'</td>';
+							if(v.deal_kind=='현금'){
+								str += '<td>'+v.deal_kind +'</td>';
+							}else if(v.deal_kind=='카드'){
+								str += '<td>'+v.deal_card_name +'</td>';
+							}
 							str += '<td>'+v.deal_option +'</td>';
 							str += '<td style="width:50px; height: 50px;">';
 							str += '<div style="display: flex; justify-content:space-around; height: 50px; width:50px;">';
@@ -273,15 +415,15 @@ $(function(){
 
 	   	});
 		
-	    var target = document.getElementById("kind2");
+	    var target = document.getElementById("modal_kind2");
 	    
 		if(e.value=="카드"){
 		    var d = kind_a;
-			$("#kind2").show(); 
+			$("#modal_kind2").show(); 
 		}else if(e.value=="현금"){
-			$("#kind2").hide(); 
+			$("#modal_kind2").hide(); 
 		}else if(e.value==""){
-			$("#kind2").hide(); 
+			$("#modal_kind2").hide(); 
 		}
 		target.options.length = 0;
 
@@ -368,7 +510,11 @@ $(function(){
 						str += '<td>'+v.deal_name +'</td>';
 						str += '<td>'+v.deal_division +'</td>';
 						str += '<td>'+v.deal_price +'</td>';
-						str += '<td>'+v.deal_kind +'</td>';
+						if(v.deal_kind=='현금'){
+							str += '<td>'+v.deal_kind +'</td>';
+						}else if(v.deal_kind=='카드'){
+							str += '<td>'+v.deal_card_name +'</td>';
+						}
 						str += '<td>'+v.deal_option +'</td>';
 						str += '<td style="width:50px; height: 50px;">';
 						str += '<div style="display: flex; justify-content:space-around; height: 50px; width:50px;">';
@@ -524,7 +670,12 @@ $(function(){
 										<td>${dealVO.deal_name}</td>
 										<td>${dealVO.deal_division}</td>
 										<td>${dealVO.deal_price}</td>
-										<td>${dealVO.deal_kind}</td>
+										<c:if test="${dealVO.deal_kind eq '현금'}">
+											<td>${dealVO.deal_kind}</td>
+										</c:if>
+										<c:if test="${dealVO.deal_kind eq '카드'}">
+											<td>${dealVO.deal_card_name}</td>
+										</c:if>
 										<td>${dealVO.deal_option}</td>
 										<td style="width:50px; height: 50px;">
 											<div style="display: flex; justify-content:space-around; height: 50px; width:50px;">
@@ -564,6 +715,7 @@ $(function(){
 					</div>
 					<div class="modal-body">
 						<div>
+							<input type="hidden" id="deal_no" value="">
 							<div style="display: flex; justify-content:space-between;">
                                                 	<label>날짜</label><input type="date" id="modal_date" style="border: 1px solid #e3e3e3; height: 27px;"> &nbsp;&nbsp;
                                                 	<label>아이템</label><input type="text" id="modal_item" style="border: 1px solid #e3e3e3; height: 27px;"> 
@@ -611,7 +763,7 @@ $(function(){
                                                                                                                 									
 																													
                                                 	
-                            <div style="display: flex; justify-content: center; margin-top: 5px; "><button type="button" id="registBtn">수정</button></div>
+                            <div style="display: flex; justify-content: center; margin-top: 5px; "><button type="button" id="registBtn1">수정</button></div>
                                                 	
                                                 	
                                                

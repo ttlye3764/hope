@@ -33,5 +33,7 @@ public interface IDealDao {
 	public List<DealVO> selectrevenue() throws Exception;
 	//고정리스트(멤버별)
 	public List<DealVO> staticList(String mem_no) throws Exception;
+	public DealVO dealInfo(String deal_no) throws Exception;
+	public void updateAccount(Map<String, String> params) throws Exception;
 
 }
