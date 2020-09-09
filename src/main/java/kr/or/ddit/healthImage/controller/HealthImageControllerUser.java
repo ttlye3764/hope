@@ -203,6 +203,7 @@ public class HealthImageControllerUser {
 
 		wb.write(response.getOutputStream());
 
+		// 엑셀 닫기
 		FileOutputStream fileOut = new FileOutputStream("excel.xlsx");
 		wb.write(fileOut);
 		fileOut.close();
@@ -210,8 +211,8 @@ public class HealthImageControllerUser {
 
 	// ocr
 	@RequestMapping("ocr")
-	public String ocr(Model model, InbodyVO inbodyInfo, @RequestParam("files") MultipartFile items,
-			HttpServletRequest request) throws Exception {
+	public ModelAndView ocr(Model model, InbodyVO inbodyInfo, @RequestParam("files") MultipartFile items,
+			HttpServletRequest request, ModelAndView andView) throws Exception {
 
 		HttpSession session = request.getSession();
 		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
@@ -261,8 +262,14 @@ public class HealthImageControllerUser {
 		}
 
 		this.inbodyService.insertInbody(inbodyInfo);
-
-		return "redirect:/user/healthImage/healthImageList.do";
+		
+		String result2 = "success";
+		
+		andView.addObject("inbodyInfo", inbodyInfo);
+		andView.addObject("json", result2);
+		andView.setViewName("jsonConvertView");
+		
+		return andView;
 	}
 
 	// 사진 저장될 경로

@@ -20,10 +20,38 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/animate/animate.min.css" /><!-- Theme CSS -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/css/style.css" />
 <title>Insert title here</title>
+<style>
+.wrap-loading{ /*화면 전체를 어둡게 합니다.*/
+    position: fixed;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    background: rgba(0,0,0,0.2); /*not in ie */
+    filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000', endColorstr='#20000000');    /* ie */
+}
 
+    .wrap-loading div{ /*로딩 이미지*/
+        position: fixed;
+        top:50%;
+        left:50%;
+        margin-left: -21px;
+        margin-top: -21px;
+    }
+    .display-none{ /*감추기*/
+        display:none;
+    }
+    
+    #loading{
+       z-index : 900;
+    }
+</style>
 <div class="innerpage-banner center bg-overlay-dark-7 py-7" 
 	style="background:url(${pageContext.request.contextPath }/resources/template/assets/images/bg/04.jpg) no-repeat; background-size:cover; 
 		background-position: center center;">
+		<div id="loading" class="wrap-loading display-none">
+    		<div><img src="../../image/Progress_Loading.gif"/></div>
+		</div>
 		<div class="container">
 			<div class="row all-text-white">
 				<div class="col-md-12 align-self-center">
@@ -131,7 +159,7 @@
                                      </c:if>
 								</div>
 								
-									<!-- 모달1 -->
+									<!-- 모달1 이미지 상세보기-->
 									<div class="modal fade text-left" id="exampleModalCenter${status.index}"
 										tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
 										<div class="modal-dialog modal-dialog-centered" role="document">
@@ -186,13 +214,31 @@
 													</button>
 												</div>
 												<div class="modal-body">
-													<form action="${pageContext.request.contextPath}/user/healthImage/ocr.do" name="file" method="post" enctype="multipart/form-data">
+													<form id="files" name="file" method="post">
 														<div class="form-group">
 															<label for="exampleFormControlFile1">인바디 파일을 넣어주세요.</label>
-															<input type="file" name="files" class="form-control-file" id="file">
+															<input type="file" name="files" class="form-control-file" id="files">
 														</div>
- 													<input type="submit" class="btn btn-light mb-2 mr-1" id="inbody" style="margin: 0px 0px 0px 190px;">
+ 													<button type="button" class="btn btn-light" onClick="ajaxFileUpload();" id="inbody" style="margin: 0px 0px 0px 190px;">제출</button>
 													</form>
+													
+													<%-- <c:if test="${!empty inbodyInfo }">
+														<div class="form-group" style="display: inline;">
+														체중<input class="form-control form-control-sm" type="text" style="width: 100px;" value="${inbodyInfo.inbody_weight}" id="inbody_weight">
+														골격근량<input class="form-control form-control-sm" type="text" style="width: 100px;" value="${inbodyInfo.inbody_bone}" id="inbody_bone">
+														체지방<input class="form-control form-control-sm" type="text" style="width: 100px;" value="${inbodyInfo.inbody_fat}" id="inbody_fat">
+														근육량<input class="form-control form-control-sm" type="text" style="width: 100px;" value="${inbodyInfo.inbody_muscle}" id="inbody_muscle">
+														</div>
+													</c:if> --%>
+													
+													<c:if test="${empty inbodyInfo }">
+														<div class="form-group" style="display: inline;">
+														체중<input class="form-control form-control-sm" type="text" style="width: 100px;" id="inbody_weight">
+														골격근량<input class="form-control form-control-sm" type="text" style="width: 100px;" id="inbody_bone">
+														체지방<input class="form-control form-control-sm" type="text" style="width: 100px;" id="inbody_fat">
+														근육량<input class="form-control form-control-sm" type="text" style="width: 100px;" id="inbody_muscle">
+														</div>
+													</c:if>
 												</div>
 											</div>
 										</div>
@@ -241,19 +287,21 @@
 					$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/healthImageList.do');
 				}); 
 
+				/* 
 				 // 인바디 정보 등록
-				$('form[name=file]').submit(function(){
-					var files = $('#file').val();
+				$('#inbody').click(function(){
+					var files = $('#files').val();
 					if(files == ""){
 						swal("FILE","파일을 넣어주세요.", "warning");
 
 						return false;
 					}
 					
-					$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/ocr.do');
-				});  
+					//$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/ocr.do');
+				});  */ 
 
-				$("#playBtn").on("click", function() {
+
+				/* $("#playBtn").on("click", function() {
 			        $("#myVideo").trigger("play");
 
 			    });
@@ -279,9 +327,40 @@
 			    $("#myVideo").on("ended", function() {
 			         console.log("Video Finished");
 
-			    });
+			    }); */
 
 			});
+
+			// 파일 ocr 등록
+			 function ajaxFileUpload() {
+
+			        var form = $("#files")[0];
+			        var formData = new FormData(form);
+			        formData.append("message", "ajax로 파일 전송하기");
+			        formData.append("file", $("#files")[0].files[0]);
+
+			        jQuery.ajax({
+			              url : "${pageContext.request.contextPath}/user/healthImage/ocr.do"
+			            , type : "POST"
+			            , processData : false
+			            , contentType : false
+			            , data : formData
+			            ,beforeSend:function(){
+			                $('.wrap-loading').removeClass('display-none');
+			            },
+			            complete:function(){
+			                $('.wrap-loading').addClass('display-none');
+			            }
+			            , success:function(result) {
+					        $('#inbody_weight').val(result.inbodyInfo.inbody_weight);
+					        $('#inbody_bone').val(result.inbodyInfo.inbody_bone);
+					        $('#inbody_fat').val(result.inbodyInfo.inbody_fat);
+					        $('#inbody_muscle').val(result.inbodyInfo.inbody_muscle);
+
+			            }
+			        });
+
+			    }
 
 			function setThumbnail(event) { 
 				var reader = new FileReader(); 
