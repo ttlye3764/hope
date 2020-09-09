@@ -16,12 +16,12 @@
 
 	<!--Template Functions-->
 	<script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	$('form[name=knowledgeView]').on('submit', function(){	
 
-		alert("수정 완료");
+		swal("UPDATE","수정 완료", "success");
 	    var k_answer = $('input[name="k_answer"]:checked').val();
 		$(this).append('<input type="hidden" name="k_no" value="${knowledgeInfo.k_no}"/>');
      	$(this).attr('action','${pageContext.request.contextPath}/admin/knowledge/updateKnowledgeInfo.do?k_answer=' + k_answer);
