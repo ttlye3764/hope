@@ -21,37 +21,49 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/css/style.css" />
 <title>Insert title here</title>
 <style>
-.wrap-loading{ /*화면 전체를 어둡게 합니다.*/
-    position: fixed;
-    left:0;
-    right:0;
-    top:0;
-    bottom:0;
-    background: rgba(0,0,0,0.2); /*not in ie */
-    filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000', endColorstr='#20000000');    /* ie */
+.wrap-loading { /*화면 전체를 어둡게 합니다.*/
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.2); /*not in ie */
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000',
+		endColorstr='#20000000'); /* ie */
 }
 
-    .wrap-loading div{ /*로딩 이미지*/
-        position: fixed;
-        top:50%;
-        left:50%;
-        margin-left: -21px;
-        margin-top: -21px;
-    }
-    .display-none{ /*감추기*/
-        display:none;
-    }
-    
-    #loading{
-       z-index : 900;
-    }
+.wrap-loading div { /*로딩 이미지*/
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-left: -21px;
+	margin-top: -21px;
+}
+
+.display-none { /*감추기*/
+	display: none;
+}
+
+#back {
+	position: absolute;
+	z-index: 100;
+	background-color: #000000;
+	display: none;
+	left: 0;
+	top: 0;
+}
+
+#loadingBar {
+	position: absolute;
+	left: 50%;
+	top: 40%;
+	display: none;
+	z-index: 200;
+}
 </style>
 <div class="innerpage-banner center bg-overlay-dark-7 py-7" 
 	style="background:url(${pageContext.request.contextPath }/resources/template/assets/images/bg/04.jpg) no-repeat; background-size:cover; 
 		background-position: center center;">
-		<div id="loading" class="wrap-loading display-none">
-    		<div><img src="../../image/Progress_Loading.gif"/></div>
-		</div>
 		<div class="container">
 			<div class="row all-text-white">
 				<div class="col-md-12 align-self-center">
@@ -245,8 +257,10 @@
 			</div>
 		</div>
 	</section>
-	
-
+	<!-- 로딩 화면 -->
+	<div class="wrap-loading display-none">
+    	<div><img src="./images/loading1.gif" /></div>
+	</div> 
 	<!-- =======================
 	Portfolio -->
 	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/jquery/jquery.min.js"></script>
@@ -264,6 +278,26 @@
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script type="text/javascript">
+
+function FunLoadingBarStart() {
+	var backHeight = $(document).height(); //뒷 배경의 상하 폭
+	var backWidth = window.document.body.clientWidth; //뒷 배경의 좌우 폭
+	var backGroundCover = "<div id='back'></div>"; //뒷 배경을 감쌀 커버
+	var loadingBarImage = ''; //가운데 띄워 줄 이미지
+	loadingBarImage += "<div id='loadingBar'>";
+	loadingBarImage += " <img src='../img/loadingbar.gif'/>"; //로딩 바 이미지
+	loadingBarImage += "</div>";
+	$('body').append(backGroundCover).append(loadingBarImage);
+	$('#back').css({ 'width': backWidth, 'height': backHeight, 'opacity': '0.3' });
+	$('#back').show();
+	$('#loadingBar').show();
+	}
+
+function FunLoadingBarEnd() {
+	$('#back, #loadingBar').hide();
+	$('#back, #loadingBar').remove();
+	}
+
 
 			$(function(){
 
@@ -345,10 +379,10 @@
 			            , data : formData
 			            // 로딩 화면
 			            ,beforeSend : function(){
-			                $('.wrap-loading').removeClass('display-none');
+			            	FunLoadingBarStart();
 			            },
 			            complete : function(){
-			                $('.wrap-loading').addClass('display-none');
+			            	FunLoadingBarEnd();
 			            }
 			            // 성공시 
 			            , success : function(result) {

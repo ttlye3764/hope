@@ -263,10 +263,10 @@ public class HealthImageControllerUser {
 
 		this.inbodyService.insertInbody(inbodyInfo);
 		
-		String result2 = "success";
+		String result = "success";
 		
 		andView.addObject("inbodyInfo", inbodyInfo);
-		andView.addObject("json", result2);
+		andView.addObject("json", result);
 		andView.setViewName("jsonConvertView");
 		
 		return andView;
