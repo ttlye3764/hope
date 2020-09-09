@@ -21,22 +21,6 @@ $(function(){
 	}else{
 		$('#woman').prop('checked', true);
 	}
-
-	$("#mem_hp").keyup(function(e){
-		if(e.keyCode == 8){
-			var code = $('input[name=mem_hp]').val();
-			var lastChar = code.charAt(code.length-1);
-			if(lastChar == '-'){
-				code = code.substr(0,code.length-1);
-				$('input[name=mem_hp]').val(code);
-			}
-		}else{
-			var hp = $('input[name=mem_hp]').val();
-			if(hp.length == 3 || hp.length == 8){
-				$('input[name=mem_hp]').val(hp + "-");
-			}
-		}
-	});
 	
 	$('form[name=memView]').submit(function(){
 			$(this).attr('action','${pageContext.request.contextPath}/admin/member/updateMemberInfo.do');
