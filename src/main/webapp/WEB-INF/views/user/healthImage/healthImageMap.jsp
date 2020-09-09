@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
     <meta charset="utf-8">
     <title>키워드로 장소검색하고 목록으로 표출하기</title>
     <style>
@@ -44,8 +43,6 @@
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
 </style>
 
-</head>
-<body>
 <div class="innerpage-banner center bg-overlay-dark-7 py-7" 
 	style="background:url(${pageContext.request.contextPath }/resources/template/assets/images/bg/04.jpg) no-repeat; background-size:cover; 
 		background-position: center center;">
@@ -359,5 +356,4 @@ function removeAllChildNods(el) {
     }
 }
 </script>
-</body>
 </html>

@@ -224,6 +224,7 @@ $(function(){
 						        $('#regist-modal [name="mem_no"]').val(array[i]); 
 				         }
 				  	}); 
+				  	
 			  }
 
 			 $.ajax({
@@ -234,7 +235,6 @@ $(function(){
 			        async: false,
 			        data :JSON.stringify(arrSchedule),
 			        success : function(result) {
-			        	
 			        }, 
 			        error : function(e){
 				        console.log(e);

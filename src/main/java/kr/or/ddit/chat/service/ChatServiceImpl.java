@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import kr.or.ddit.chat.dao.IChatDao;
 import kr.or.ddit.vo.ChatingRoomVO;
+import kr.or.ddit.vo.FriendVO;
+import kr.or.ddit.vo.MemberVO;
 import kr.or.ddit.vo.MessageVO;
 import kr.or.ddit.vo.ParticipationVO;
 
@@ -40,5 +42,29 @@ public class ChatServiceImpl implements IChatService {
 	public List<ParticipationVO> participationList(Map<String, String> params) throws Exception {
 		return chatDao.participationList(params);
 	}
-
+	@Override
+	public void insertFriendInfo(FriendVO freindInfo) throws Exception {
+		chatDao.insertFriendInfo(freindInfo);
+		
+	}
+	@Override
+	public List<MemberVO> selectMemList(Map<String, String> params) throws Exception {
+		return chatDao.selectMemList(params);
+	}
+	@Override
+	public FriendVO selectTwoMemInfo(Map<String, String> params) throws Exception {
+		return chatDao.selectTwoMemInfo(params);
+	}
+	@Override
+	public List<MemberVO> selectFriendList(Map<String, String> params) throws Exception {
+		return chatDao.selectFriendList(params);
+	}
+	@Override
+	public List<MemberVO> chatRoomList(Map<String, String> params) throws Exception {
+		return chatDao.chatRoomList(params);
+	}
+	@Override
+	public List<MessageVO> messageList(Map<String, String> params) throws Exception {
+		return chatDao.messageList(params);
+	}
 }

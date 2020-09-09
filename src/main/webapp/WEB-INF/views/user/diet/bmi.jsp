@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+ <style>
+ .bmi-calculator{
+ 	position : absolute;
+ 	left : 10%;
+ }
+ </style>
+    
  <div class="innerpage-banner center bg-overlay-dark-7 py-7" style="background:url(${pageContext.request.contextPath}/image/food1.jpg) no-repeat; background-size:cover; background-position: center center;">
 		<div class="container">
 			<div class="row all-text-white">
@@ -56,9 +64,113 @@
 							,<br>   25~30은 비만, 30이상은 고도비만</cite>
 					</blockquote>
 				</div>
+				
+				
+				<form name="bmiForm">
+				<div class="bmi-calculator">
+					<h3 style="margin-bottom: 1em;">당신의 BMI를 계산해보세요!!</h3>
+					<div class="bmi-calculator-weight">
+						<input class="weight-slider" name="realweight" id="myWeight"
+							type="range" min="25" max="180" value="60">
+						<p style="margin-top: 1.8em;">
+							몸무게 : <input name="Teža" id="inputWeight" type="number"
+								value="60" min="25" max="180"
+								oninput="showValWeight(this.value)"> <span id="weight"></span>
+							kg
+						</p>
+					</div>
+					<div class="bmi-calculator-height">
+						<input class="height-slider" name="realheight" id="myHeight"
+							type="range" min="100" max="220" value="160">
+						<p style="margin-top: 1.8em;">
+							키 : <input name="Višina" id="inputHeight" type="number"
+								value="160" min="100" max="220"
+								oninput="showValHeight(this.value)"> <span id="height"></span>
+							cm
+						</p>
+					</div>
+					<input class="gumb" type="button" value="Calculate"
+						onclick="calculateBmi()" style="margin-top: 0.5em">
+					<p style="margin-top: 1em; font-size: 1.2em;">
+						<strong>당신의 BMI 지수:</strong> <span id="yourbmi"
+							style="font-size: 1.2em; margin-left: 8px;"> 35.9</span>
+					</p>
+					<p></p>
+					<p>
+						<span id="evaluationMessage">YOU'RE A FAT ASS!!!</span>
+					</p>
+				</div>
+			</form>
 
 				</div>
-				<!-- blog End -->
+
+			
+			<!-- blog End -->
 			</div>
 		</div>
 	</section>
+	
+<script type="text/javascript" >
+$(function(){
+
+	
+})
+
+
+	// Define variables for range sliders
+	// Weight variables
+	var weightSlider = document.getElementById("myWeight");
+	var weightOutput = document.getElementById("inputWeight");
+	// Height variables
+	var heightSlider = document.getElementById("myHeight");
+	var heightOutput = document.getElementById("inputHeight");
+	// Display slider value
+	weightOutput.innerHTML = weightSlider.value;
+	heightOutput.innerHTML = heightSlider.value;
+	// Update sliders in real time while dragging it
+	weightSlider.oninput = function () {
+	  weightOutput.innerHTML = this.value;
+	}
+	heightSlider.oninput = function () {
+	  heightOutput.innerHTML = this.value;
+	}
+	// Change weight-slider value on weight-number input
+	function showValWeight(newVal) {
+	  weightSlider.value=newVal;
+	};
+	// Change height-slider value on height-number input
+	function showValHeight(newVal) {
+	  heightSlider.value=newVal;
+	};
+	// *** Change number input when dragging slider ***
+	// Add 2 eventListeners for weight and input sliders
+	weightSlider.addEventListener("input", updateValueWeight);
+	heightSlider.addEventListener("input", updateValueHeight);
+	function updateValueWeight(e) {
+	  weightOutput.value = e.srcElement.value;
+	}
+	function updateValueHeight(e) {
+	  heightOutput.value = e.srcElement.value;
+	}
+	// Calculate BMI
+	function calculateBmi() {
+	  var weight = document.bmiForm.realweight.value;
+	  var height = (document.bmiForm.realheight.value)/100;
+	  var realbmi = (weight)/Math.pow(height, 2);
+	  var realbmiOutput = document.getElementById("yourbmi");
+	  var messageOutput = document.getElementById("evaluationMessage");
+	  var roundedBmi = realbmi.toFixed(1);
+	  messageOutput.innerHTML = ""; // Clear message before calculating new BMI
+	  realbmiOutput.innerHTML = " " + roundedBmi; // Print BMI
+	  // Appropriate message for your BMI rating
+	  if (roundedBmi > 26) {
+	    messageOutput.innerHTML = "YOU'RE A FAT ASS!!!";
+	  } else {
+	    
+	  }
+	  // Console loggings
+	  console.log('Teža: ' + weight + " kg");
+	  console.log('Višina: ' + height + " m");
+	  console.log('BMI: ' + realbmi);
+	}
+</script>

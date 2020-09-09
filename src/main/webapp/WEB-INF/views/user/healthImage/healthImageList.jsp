@@ -1,30 +1,25 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
-<head>
+
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Webestica.com">
 <meta name="description" content="Creative Multipurpose Bootstrap Template">
+
 <link rel="shortcut icon" href="${pageContext.request.contextPath }/resources/template/assets/images/favicon.ico">
 
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900%7CPlayfair+Display:400,400i,700,700i%7CRoboto:400,400i,500,700" rel="stylesheet">
-
 <!-- Plugins CSS -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/font-awesome/css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/themify-icons/css/themify-icons.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/animate/animate.min.css" />
-
-<!-- Theme CSS -->
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/animate/animate.min.css" /><!-- Theme CSS -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/css/style.css" />
 <title>Insert title here</title>
-</head>
-<body>
 
 <div class="innerpage-banner center bg-overlay-dark-7 py-7" 
 	style="background:url(${pageContext.request.contextPath }/resources/template/assets/images/bg/04.jpg) no-repeat; background-size:cover; 
@@ -97,7 +92,6 @@
 							</ul>
 						</div>
                         <br> 
-                                     
 					<div class="portfolio-wrap grid items-4 items-padding">
 					<c:forEach items= "${healthImageList }" var= "healthInfo" varStatus="status">
 						<!-- portfolio-card -->
@@ -109,7 +103,7 @@
 								 <c:if test="${!empty healthInfo.items}">  
 									<div class="portfolio-card-header" id="image_container" style="width: 235px; height: 160px;">
 										<img src="/files/${fileitemInfo.file_save_name}" alt="pic1" 
-										onError="this.src='${pageContext.request.contextPath }/resources/template/assets/images/character.PNG';"
+										onError="this.src='${pageContext.request.contextPath }/resources/image/playBtn.jpeg';"
 										style="width: 233px; height: 160px;">
 				 					</div> 
 								 </c:if> 
@@ -340,5 +334,4 @@
 
 
 </script>
-</body>
 </html>

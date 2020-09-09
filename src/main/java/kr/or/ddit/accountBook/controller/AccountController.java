@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -105,7 +106,7 @@ public class AccountController {
 	
 	
 	@RequestMapping("registTrace")
-	public ModelAndView registTrace(String deal_option, String deal_kind, String deal_date, String deal_name, String deal_price, String mem_no, String deal_division) throws Exception {
+	public ModelAndView registTrace(String deal_option, String deal_kind, String deal_date, String deal_name, String deal_price, String mem_no, String deal_division, String deal_fix_revenue, String deal_fix_expenditure) throws Exception {
 		DealVO dealInfo = new DealVO();
 		dealInfo.setDeal_option(deal_option);
 		dealInfo.setDeal_kind(deal_kind);
@@ -114,10 +115,33 @@ public class AccountController {
 		dealInfo.setDeal_price(deal_price);
 		dealInfo.setDeal_division(deal_division);
 		dealInfo.setMem_no(mem_no);
+		dealInfo.setDeal_fix_expenditure(deal_fix_expenditure);
+		dealInfo.setDeal_fix_revenue(deal_fix_revenue);
 		
 		int cnt = this.service.insertDeal(dealInfo);
 		ModelAndView andView = new ModelAndView();
 		List<DealVO> list = service.dealList(mem_no);
+		andView.addObject("list", list);
+		// <bean id="jsonConvertView" class="..MappingJackson2JsonView>
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
+	@RequestMapping("staticregistTrace")
+	public ModelAndView staticregistTrace(String deal_option, String deal_kind, String deal_date, String deal_name, String deal_price, String mem_no, String deal_division, String deal_fix_revenue, String deal_fix_expenditure) throws Exception {
+		DealVO dealInfo = new DealVO();
+		dealInfo.setDeal_option(deal_option);
+		dealInfo.setDeal_kind(deal_kind);
+		dealInfo.setDeal_date(deal_date);
+		dealInfo.setDeal_name(deal_name);
+		dealInfo.setDeal_price(deal_price);
+		dealInfo.setDeal_division(deal_division);
+		dealInfo.setMem_no(mem_no);
+		dealInfo.setDeal_fix_expenditure(deal_fix_expenditure);
+		dealInfo.setDeal_fix_revenue(deal_fix_revenue);
+		
+		int cnt = this.service.insertDeal(dealInfo);
+		ModelAndView andView = new ModelAndView();
+		List<DealVO> list = service.staticList(mem_no);
 		andView.addObject("list", list);
 		// <bean id="jsonConvertView" class="..MappingJackson2JsonView>
 		andView.setViewName("jsonConvertView");
@@ -136,6 +160,7 @@ public class AccountController {
 		andView.setViewName("jsonConvertView");
 		return andView;
 	}
+	
 	@RequestMapping("cardList")
 	public ModelAndView cardList(String card_kind, String mem_no) throws Exception {
 		ModelAndView andView = new ModelAndView();
@@ -144,6 +169,18 @@ public class AccountController {
 		andView.setViewName("jsonConvertView");
 		return andView;
 	}
+	
+	
+	@RequestMapping("staticList")
+	public ModelAndView staticList(String mem_no) throws Exception {
+		ModelAndView andView = new ModelAndView();
+		List<DealVO> staticList = service.staticList(mem_no);
+		andView.addObject("staticList", staticList);
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
+	
+	
 	@RequestMapping("deleteCard")
 	public ModelAndView deleteCard(String card_no, String mem_no) throws Exception {
 		ModelAndView andView = new ModelAndView();
@@ -157,8 +194,8 @@ public class AccountController {
 	public ModelAndView deletedeal(String deal_no, String mem_no) throws Exception {
 		ModelAndView andView = new ModelAndView();
 		service.deletedeal(deal_no);
-		List<DealVO> list = service.dealList(mem_no);
-		andView.addObject("list", list);
+		List<DealVO> staticList = service.staticList(mem_no);
+		andView.addObject("staticList", staticList);
 		// <bean id="jsonConvertView" class="..MappingJackson2JsonView>
 		andView.setViewName("jsonConvertView");
 		return andView;

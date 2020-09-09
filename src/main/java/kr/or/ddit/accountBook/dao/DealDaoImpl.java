@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Repository;
 
 import kr.or.ddit.vo.CardVO;
@@ -72,6 +73,24 @@ public class DealDaoImpl implements IDealDao{
 	public String totalCount(Map<String, String> params) throws Exception {
 		return client.selectOne("deal.totalCount", params);
 	}
+
+	@Override
+	public List<DealVO> selectexpenditure() throws Exception {
+		return client.selectList("deal.selectexpenditure");
+	}
+
+	@Override
+	public List<DealVO> selectrevenue() throws Exception {
+		return client.selectList("deal.selectrevenue");
+	}
+
+	@Override
+	public List<DealVO> staticList(String mem_no) throws Exception {
+		return client.selectList("deal.staticList", mem_no);
+	}
+
+	
+	
 	
 
 

@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import kr.or.ddit.vo.DietBoardVO;
 import kr.or.ddit.vo.Diet_dayVO;
 import kr.or.ddit.vo.Diet_day_infoVO;
 import kr.or.ddit.vo.Diet_infoVO;
@@ -79,5 +80,20 @@ public class DietDaoImpl implements IDietDao {
 	@Override
 	public void deleteDietDayInfo(Map<String, String> params) throws Exception {
 		client.delete("diet.deleteDietDayInfo", params);
+	}
+	
+	@Override
+	public List<Diet_dayVO> dietMemGraphList(Map<String, String> params) throws Exception {
+		return client.selectList("diet.dietMemGraphList", params);
+	}
+	
+	@Override
+	public List<DietBoardVO> dietBoardList(Map<String, String> params) throws Exception {
+		return client.selectList("diet.dietBoardList", params);
+	}
+	
+	@Override
+	public void updateDietBoard(List<DietBoardVO> dietBoardList) throws Exception {
+		 client.update("diet.updateDietBoard", dietBoardList);	
 	}
 }

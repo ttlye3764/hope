@@ -5,7 +5,15 @@ public class Diet_dayVO {
 	private String mem_no;
 	private String dd_kcal;
 	private String dd_date;
+	private String day_kcal;
 	
+	
+	public String getDay_kcal() {
+		return day_kcal;
+	}
+	public void setDay_kcal(String day_kcal) {
+		this.day_kcal = day_kcal;
+	}
 	public String getDd_no() {
 		return dd_no;
 	}

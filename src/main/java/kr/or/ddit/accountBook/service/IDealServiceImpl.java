@@ -67,6 +67,11 @@ public class IDealServiceImpl implements IDealService{
 		return dao.totalCount(params);
 	}
 
+	@Override
+	public List<DealVO> staticList(String mem_no) throws Exception {
+		return dao.staticList(mem_no);
+	}
+
 	
 
 	

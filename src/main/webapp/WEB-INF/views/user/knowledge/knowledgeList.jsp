@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
 <html>
-<head>
 <meta charset="UTF-8">
-<title>지식관리</title>
 <style type="text/css">
 #ex_box {
  position: relative; top:0; left:0; 
@@ -156,8 +153,6 @@
 	       
 	});  
 </script>
-</head>
-<body>
 
 <div class="innerpage-banner center bg-overlay-dark-7 py-7" style="background:url(assets/images/bg/04.jpg) no-repeat; background-size:cover; background-position: center center;">
 		<div class="container">
@@ -328,5 +323,4 @@
 		</form>	
 		</div>
 	</section>
-</body>
 </html>
