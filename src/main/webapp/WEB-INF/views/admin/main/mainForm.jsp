@@ -22,6 +22,21 @@
 
 	<!-- Theme CSS -->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/css/style.css" />
+	
+	<script>
+		function LogOut(){
+			$.ajax({
+				type : 'POST',
+				url : '${pageContext.request.contextPath}/user/join/logout.do',
+				dataType : 'JSON',
+				data : {
+				},
+				success : function(result) {
+					$(location).attr('href','${pageContext.request.contextPath}/user/join/loginForm.do');
+				}
+			});
+		}
+</script>
 </head>
 	<!-- =======================
 	service  -->
@@ -30,7 +45,6 @@
 			<div class="row">
 				<div class="col-md-8 mx-auto text-center mb-5">
 					<h2 class="h1 font-weight-bold">관리자 메인페이지</h2>
-					<h5>We provide innovative ideas, designs, and multimedia solutions to our clients. </h5>
 				</div>
 			</div>
 			<div class="row">
@@ -61,8 +75,7 @@
 			</div>
 			<div class="row">
 				<div class="col-12 col-lg-8 mx-auto text-center mt-5">
-					<h6>We have a strong foundation built on legacy and emerging technologies, including excellent track record of on-time deliveries.</h6>
-					<a class="btn btn-dark" href="#!">View all services</a>
+					<a class="btn btn-dark" href="javascript:LogOut();">로그아웃</a>
 				</div>
 			</div>
 		</div>
