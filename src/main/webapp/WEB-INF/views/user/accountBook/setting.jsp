@@ -10,6 +10,7 @@
 <script>
 $(function(){
 	$("#cardRegistBtn").hide(); 
+	$("#kind").hide();
 	
 	$('#files').on('change', handleImgFileSelect);
 	$('#files2').on('change', handleImgFileSelect);
@@ -191,6 +192,14 @@ function deleteStaticDeal(deal_no){
         data : {'deal_no':deal_no, 'mem_no':${LOGIN_MEMBERINFO.mem_no}},
         success : function(Result) {
 	        $('#staticTable').empty();
+	    	$('#staticTable').append('<thead>');
+        	$('#staticTable').append('<tr>');
+        			$('#staticTable').append('	<th>고정 지출 명</th>');
+        					$('#staticTable').append('<th>고정 거래 일</th>');
+        							$('#staticTable').append('<th>고정 거래 금액</th>');
+        									$('#staticTable').append('	<th>삭제</th>');
+        											$('#staticTable').append('</tr>');
+        													$('#staticTable').append('</thead>');
 	        for(var i=0; i<Result.staticList.length; i++){
 	        	$('#staticTable').append('<tr><td>'+Result.staticList[i].deal_name+'</td><td>'+Result.staticList[i].deal_date+'</td><td>'+Result.staticList[i].deal_price+'</td><td><button type="button" value="'+Result.staticList[i].deal_no+'" onclick="deleteStaticDeal('+Result.staticList[i].deal_no+')">삭제</button></td></tr>');
 
