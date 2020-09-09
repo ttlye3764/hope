@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>회원가입</title>
-</head>
 <style>
 .wrap-loading{ /*화면 전체를 어둡게 합니다.*/
     position: fixed;
@@ -370,7 +364,6 @@ $(function(){
 		};
 
 </script>
-<body>
 <div id="loading" class="wrap-loading display-none">
     <div><img src="../../image/Progress_Loading.gif"/></div>
 </div> 
@@ -498,5 +491,3 @@ $(function(){
          </tr>
       </table>
    </form>
-</body>
-</html>
