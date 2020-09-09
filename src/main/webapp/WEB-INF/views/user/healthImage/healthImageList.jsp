@@ -217,28 +217,18 @@
 													<form id="files" name="file" method="post">
 														<div class="form-group">
 															<label for="exampleFormControlFile1">인바디 파일을 넣어주세요.</label>
-															<input type="file" name="files" class="form-control-file" id="files">
+															<input type="file" name="files" class="form-control-file" id="fileName">
 														</div>
- 													<button type="button" class="btn btn-light" onClick="ajaxFileUpload();" id="inbody" style="margin: 0px 0px 0px 190px;">제출</button>
+ 													<button type="button" class="btn btn-light" onClick="ajaxFileUpload();" style="margin: 0px 0px 0px 190px;">제출</button>
 													</form>
 													
-													<%-- <c:if test="${!empty inbodyInfo }">
-														<div class="form-group" style="display: inline;">
-														체중<input class="form-control form-control-sm" type="text" style="width: 100px;" value="${inbodyInfo.inbody_weight}" id="inbody_weight">
-														골격근량<input class="form-control form-control-sm" type="text" style="width: 100px;" value="${inbodyInfo.inbody_bone}" id="inbody_bone">
-														체지방<input class="form-control form-control-sm" type="text" style="width: 100px;" value="${inbodyInfo.inbody_fat}" id="inbody_fat">
-														근육량<input class="form-control form-control-sm" type="text" style="width: 100px;" value="${inbodyInfo.inbody_muscle}" id="inbody_muscle">
-														</div>
-													</c:if> --%>
-													
-													<c:if test="${empty inbodyInfo }">
 														<div class="form-group" style="display: inline;">
 														체중<input class="form-control form-control-sm" type="text" style="width: 100px;" id="inbody_weight">
 														골격근량<input class="form-control form-control-sm" type="text" style="width: 100px;" id="inbody_bone">
 														체지방<input class="form-control form-control-sm" type="text" style="width: 100px;" id="inbody_fat">
 														근육량<input class="form-control form-control-sm" type="text" style="width: 100px;" id="inbody_muscle">
 														</div>
-													</c:if>
+ 													<button type="button" class="btn btn-light" id="inbody" style="margin: 0px 0px 0px 190px;">제출</button>
 												</div>
 											</div>
 										</div>
@@ -287,18 +277,19 @@
 					$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/healthImageList.do');
 				}); 
 
-				/* 
+				 
 				 // 인바디 정보 등록
 				$('#inbody').click(function(){
-					var files = $('#files').val();
+					var files = $('#fileName').val();
 					if(files == ""){
 						swal("FILE","파일을 넣어주세요.", "warning");
 
 						return false;
 					}
+
 					
-					//$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/ocr.do');
-				});  */ 
+					
+				});  
 
 
 				/* $("#playBtn").on("click", function() {
@@ -334,24 +325,33 @@
 			// 파일 ocr 등록
 			 function ajaxFileUpload() {
 
+				 var files = $('#fileName').val();
+					if(files == ""){
+						swal("FILE","파일을 넣어주세요.", "warning");
+
+						return false;
+					}
+
 			        var form = $("#files")[0];
 			        var formData = new FormData(form);
 			        formData.append("message", "ajax로 파일 전송하기");
 			        formData.append("file", $("#files")[0].files[0]);
 
-			        jQuery.ajax({
+			        $.ajax({
 			              url : "${pageContext.request.contextPath}/user/healthImage/ocr.do"
 			            , type : "POST"
 			            , processData : false
 			            , contentType : false
 			            , data : formData
-			            ,beforeSend:function(){
+			            // 로딩 화면
+			            ,beforeSend : function(){
 			                $('.wrap-loading').removeClass('display-none');
 			            },
-			            complete:function(){
+			            complete : function(){
 			                $('.wrap-loading').addClass('display-none');
 			            }
-			            , success:function(result) {
+			            // 성공시 
+			            , success : function(result) {
 					        $('#inbody_weight').val(result.inbodyInfo.inbody_weight);
 					        $('#inbody_bone').val(result.inbodyInfo.inbody_bone);
 					        $('#inbody_fat').val(result.inbodyInfo.inbody_fat);
