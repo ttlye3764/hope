@@ -87,12 +87,12 @@ public class BoardServiceImpl implements IBoardService{
 
 	// 댓글 등록 
 	@Override
-	public void insertBoardReply(String re_content, String bd_no, String mem_id) {
+	public void insertBoardReply(String re_content, String bd_no, String re_writer) {
 		
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("re_content", re_content);
 		params.put("bd_no", bd_no);
-		params.put("memId", mem_id);
+		params.put("re_writer", re_writer);
 		
 		boardDao.insertBoardReply(params);
 	}

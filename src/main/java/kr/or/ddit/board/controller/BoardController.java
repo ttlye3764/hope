@@ -28,6 +28,7 @@ import kr.or.ddit.utiles.RolePaginationUtil_yun;
 import kr.or.ddit.vo.BoardVO;
 import kr.or.ddit.vo.Board_FileVO;
 import kr.or.ddit.vo.Board_ReplyVO;
+import kr.or.ddit.vo.DealVO;
 import kr.or.ddit.vo.MemberVO;
 
 @Controller
@@ -233,6 +234,23 @@ public class BoardController {
 		
 		return boardInfo;
 	}
+	
+	@RequestMapping("replyList")
+	public ModelAndView replyList(ModelAndView andView,
+									String bd_no
+									) throws Exception{
+		
+		
+		List<Board_ReplyVO> replyList = new ArrayList<Board_ReplyVO>();
+		
+		replyList = boardService.selectBoardReply(bd_no);
+		
+		andView.addObject("replyList", replyList);
+		andView.setViewName("jsonConvertView");
+		
+		
+		return andView;
+	}
 
 	// 수정
 	@RequestMapping("updateBoardInfo")       
@@ -348,16 +366,18 @@ public class BoardController {
 	
 	// 댓글 등록 
 	@RequestMapping("insertBoardReply")
-	public void insertBoardReply(HttpSession session, 
-			                     String re_content, 
-			                     String bd_no) {
-		
+	public ModelAndView insertBoardReply(HttpSession session, 
+			                     		String re_content, 
+			                     		String bd_no) {
 		System.out.println("///////////////////////////////bd_no : " + bd_no);
-		
-		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");		
-		String mem_id = memberInfo.getMem_nickname();
-		
-		boardService.insertBoardReply(re_content, bd_no, mem_id);
+		ModelAndView andView = new ModelAndView();
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		String re_writer = memberInfo.getMem_nickname();
+		boardService.insertBoardReply(re_content, bd_no, re_writer);
+		List<Board_ReplyVO> board_replyList = boardService.selectBoardReply(bd_no);
+		andView.addObject("board_replyList", board_replyList);
+		andView.setViewName("jsonConvertView");
+		return andView;
 	}
 	
 

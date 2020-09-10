@@ -15,7 +15,7 @@
 					values (re_seq.nextval,
 							#{bd_no},
 							#{re_content},
-							#{mem_id},
+							#{re_writer},
 							(SELECT NVL(MAX(re_rnum),0)+1 FROM board_reply WHERE bd_no = #{bd_no}),
 							SYSDATE
 							)		

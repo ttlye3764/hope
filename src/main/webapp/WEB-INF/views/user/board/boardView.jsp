@@ -54,17 +54,70 @@ $(function(){
     
 });
 
-// 파일 다운로드기능 
-function fileDown(fileName, fileNo, fileBdNo) {
-	$(location).attr('href','${pageContext.request.contextPath}/user/board/fileDownload.do?fileName='+ fileName + '&fileNo='+ fileNo + '&fileBdNo='+ fileBdNo);
+//댓글 등록기능 
+function insertReplyA(bd_no){
+	var re_content = $('#re_content').val();
+	
+	$.ajax({
+   	 	async    : false,
+        url     : '${pageContext.request.contextPath}/user/board/insertBoardReply.do',
+        type    : 'post',
+        dataType : 'json',
+        data : {'re_content':re_content,'bd_no':bd_no},
+        success : function(Result) {
+	       console.log(Result);
+	      
+	       /* board_replyList */
+	       
+	       
+        },
+        complete : function(){
+        	 replyList();
+         }
+   	});  // 삭제
 }
 
-// 댓글 등록기능 
-function insertReply(bd_no){
-	var re_content = $('#re_content').val();
-	var bd_no = bd_no;
+function replyList(){
+	$.ajax({
+		url : '${pageContext.request.contextPath}/user/board/replyList',
+		data : {
+			bd_no : $('#bd_no').val()
+		},
+		success : function(result){
+			$('#comment_list').empty();
+			var replyList = "";
+			var count = 0;
+			$.each(result.replyList, function(index, item){
+				replyList += '<input type="hidden" name="re_no" value="'+item.re_no+'" id="re_no">';
+				replyList += '<div class="comment">';
+				replyList += '<div class="comment-author"><img class="avatar" src="assets/images/thumbnails/avatar-01.jpg" alt=""></div>';
+				replyList += '<div class="comment-body">';
+				replyList += '<div class="comment-meta">';
+				replyList += '<div class="comment-meta-author"><a href="#">'+item.re_writer+'</a></div>';
+				replyList += '<div class="comment-meta-date">'+item.re_date+'</div>';
+				replyList += '</div>';
+				replyList += '<div class="comment-content" style="width: 920px;">';
+				replyList += '<p>'+item.re_content+'</p>';
+				replyList += '<div align="right">';
+				replyList += '<button type="button" id="updateReply1"  data-toggle="modal" data-target="#replyModal$'+count+'">수정</button>';
+				replyList += '<button type="button" id="deleteReply"  class="">삭제</button>';
+				replyList += '</div>';
+				replyList += '</div>';
+				replyList += '</div>';
+				replyList += '</div>';
+				count ++;
+			})
 
-	alert("goofffd");
+			$('#comment_list').append(replyList);
+		},
+		error : function(result){
+				alert('리플 조회 실패')
+		}
+	})   		
+}
+	
+	/* var re_content = $('#re_content').val();
+	var bd_no = bd_no;
 
 	if(re_content.length == 0){
 		alert("댓글 내용을 입력해 주세요.")
@@ -76,11 +129,23 @@ function insertReply(bd_no){
             data : {'re_content':re_content,'bd_no':bd_no,'re_no':re_no},
             dataType: 'json',
             success : function(result) {      
-           		alert("댓글을 등록하였습니다.")
+           		alert('댓글을 등록하였습니다.');
             }
 		});
-	}	
+	}	  */
+
+
+
+
+
+// 파일 다운로드기능 
+function fileDown(fileName, fileNo, fileBdNo) {
+	$(location).attr('href','${pageContext.request.contextPath}/user/board/fileDownload.do?fileName='+ fileName + '&fileNo='+ fileNo + '&fileBdNo='+ fileBdNo);
 }
+
+
+
+
 
 // 댓글 수정기능 
 function updateReply2(bd_no, re_no, index){
@@ -120,8 +185,8 @@ $(function(){
 						<div class="col-md-12">
 							<h2 class="mb-3">게시판 상세보기</h2>
 						</div>
-							                                           <input type="hidden" id="bd_division" name="bd_division" value="${bd_division }">
-																	   <input type="hidden" name="bd_no" value="${boardInfo.bd_no}"/>
+						<input type="hidden" id="bd_division" name="bd_division" value="${bd_division }">
+						<input type="hidden" id="bd_no" name="bd_no" value="${boardInfo.bd_no}"/>
 						<div class="col-md-9 mb-2"><span class="form-group"><input type="text" class="form-control" placeholder="title"  id="bd_title" name="bd_title" value="${boardInfo.bd_title}"></span></div>
 						<div class="col-md-9 mb-2"><span class="form-group"><input type="text" class="form-control" placeholder="writer" id="bd_writer" name="bd_writer" value="${boardInfo.bd_writer}"></span></div>
 						<div class="col-md-9"><span class="form-group"><input type="text" class="form-control" id="bd_date" name="bd_date" value="${boardInfo.bd_date}"></span></div>
@@ -166,7 +231,7 @@ $(function(){
 					
 						<div style="width: 100%;">
 							<h4>댓글</h4>
-							<div class="comment-list">
+							<div class="comment-list" id="comment_list">
 							
 							<c:choose>
     								<c:when test="${fn:length(replyList) == 0}">
@@ -227,8 +292,7 @@ $(function(){
 								</span>
 							</div>
 							<div class="col-md-12 text-right" >
-								<a href="javascript:insertReply('${boardInfo.bd_no}')">babo</a>dsffs
-								<button id="insertReply" style="background-color: #343a40; color: #fff; border-color:#343a40;" onclick="insertReply('${boardInfo.bd_no}')">등록</button>
+								<button type="button" id="insertReply" onclick="insertReplyA(${boardInfo.bd_no})" style="background-color: #343a40; color: #fff; border-color:#343a40;">등록</button>
 							</div>		
 						</div>
 						
