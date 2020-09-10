@@ -62,8 +62,19 @@ public class HealthImageControllerUser {
 										HttpServletRequest request, @RequestParam(value = "currentPage", required = false) String currentPage)
 										throws Exception {
 
+		System.out.println(choose2);
+		
 		if (currentPage == null) {
 			currentPage = "1";
+		}
+
+		if (choose2 != null) {
+			
+		String[] array = request.getParameterValues("choose2"); 
+		
+		for (int i = 0; i < array.length; i++) { 
+			params.put("healthImage_difficulty", array[i]);
+			}
 		}
 
 		// 카테고리 설정 값 params에 넣기
@@ -141,13 +152,9 @@ public class HealthImageControllerUser {
 			currentPage = "1";
 		}
 
-		// 카테고리 설정 값 params에 넣기
-		params.put("healthImage_category", choose);
-		params.put("healthImage_difficulty", choose2);
-		
 		String totalCount = this.healthImageService.totalCount(params);
 
-		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount), choose, choose2);
+		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount), choose,  choose2);
 
 		String startCount = String.valueOf(pagination.getStartCount());
 		String endCount = String.valueOf(pagination.getEndCount());

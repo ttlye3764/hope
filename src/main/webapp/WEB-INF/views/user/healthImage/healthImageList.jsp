@@ -240,7 +240,7 @@
 										
 										<!-- 로딩 화면 -->
 										<div id="loading">
-											<img src="${pageContext.request.contextPath }/resources/image/loader.png" alt="loading">
+											<img src="../../image/Progress_Loading.gif" alt="loading">
 										</div> 
 										
 									</div>
@@ -388,23 +388,37 @@
 					$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/healthImageList.do');
 				}); 
 
-				 
 				 // 인바디 정보 등록
 				$('#inbody').click(function(){
-					var files = $('#fileName').val();
+					/* var files = $('#fileName').val();
 					if(files == ""){
 						swal("FILE","파일을 넣어주세요.", "warning");
 
 						return false;
 					}
-					
+					 */
 					var weight = $('#inbody_weight').val().substring(0,2);
 			        var bone = $('#inbody_bone').val().substring(0,2);
 			        var aver = weight * 0.48;
 
 			        // 골격근량이 평균보다 높음 => 근육량 많음 
 			         if (bone > aver) {
-			        	 var choose2 = $('#high').text();
+				        	var choose2 = new Array();
+							
+							choose2.push($('#high').text());
+				        	choose2.push($('#middle').text());
+				        	 
+			        		$.ajaxSettings.traditional = true;
+			        	 	$.ajax({ 
+				        	 	type: "post", 
+				        	 	url: "${pageContext.request.contextPath}/user/healthImage/healthImageList.do", 
+				        	 	dataType: "json", 
+				        	 	data:  {"choose2" : choose2},
+				        	 	success: function (data) { 
+				        	 		alert(data);
+					        	 } 
+			        	 	});
+
 			        	$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose2=' + choose2);
 
 					// 골격근량이 평균보다 낮음 => 근육량 적음
