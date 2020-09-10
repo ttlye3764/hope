@@ -500,7 +500,8 @@ function receiptcategoryChange(e){
                                                 	
                                                 	금액 <input type="text" id="price"> <br><br>
                                                 	구분 <select name="division" id="division" style="width:100px;">
-                                                			<option value="       "></option>
+                                                			<option value="    "></option>
+                                                			<optgroup label="지출">
                                                 			<option value="식비">식비</option>
                                                 			<option value="교통비">교통비</option>
                                                 			<option value="주거/통신">주거/통신</option>
@@ -512,6 +513,13 @@ function receiptcategoryChange(e){
                                                 			<option value="여가,유흥">여가,유흥</option>
                                                 			<option value="세금,이자">세금,이자</option>
                                                 			<option value="기타비용">기타비용</option>
+                                                			</optgroup>
+                                                			<optgroup label="수익">
+                                                			<option value="월급">월급</option>
+                                                			<option value="상여금">상여금</option>
+                                                			<option value="펀드,주식">펀드,주식</option>
+                                                			<option value="기타수익">기타수익</option>
+                                                			</optgroup>
                                                 		</select>
                                                 	거래종류  <select name="paymentOption" id="paymentOption" style="width:100px;">
 															    <option value="       "></option>
@@ -604,6 +612,7 @@ function receiptcategoryChange(e){
 										 	
                                                 	구분 : <select name="receiptdivision" id="receiptdivision" style="width:60px;">
                                                 			<option value="    "></option>
+                                                			<optgroup label="지출">
                                                 			<option value="식비">식비</option>
                                                 			<option value="교통비">교통비</option>
                                                 			<option value="주거/통신">주거/통신</option>
@@ -615,6 +624,13 @@ function receiptcategoryChange(e){
                                                 			<option value="여가,유흥">여가,유흥</option>
                                                 			<option value="세금,이자">세금,이자</option>
                                                 			<option value="기타비용">기타비용</option>
+                                                			</optgroup>
+                                                			<optgroup label="수익">
+                                                			<option value="월급">월급</option>
+                                                			<option value="상여금">상여금</option>
+                                                			<option value="펀드,주식">펀드,주식</option>
+                                                			<option value="기타수익">기타수익</option>
+                                                			</optgroup>
                                                 		</select><br><br>
                                                 	거래종류 : <select name="receiptpaymentOption" id="receiptpaymentOption" style="width:60px;">
 															    <option value="  "></option>
@@ -715,6 +731,7 @@ function receiptcategoryChange(e){
                                                 	<br><br>
                                                 	구분 <select name="staticdivision" id="staticdivision" style="width:50px;">
                                                 			<option value="    "></option>
+                                                			<optgroup label="지출">
                                                 			<option value="식비">식비</option>
                                                 			<option value="교통비">교통비</option>
                                                 			<option value="주거/통신">주거/통신</option>
@@ -726,6 +743,13 @@ function receiptcategoryChange(e){
                                                 			<option value="여가,유흥">여가,유흥</option>
                                                 			<option value="세금,이자">세금,이자</option>
                                                 			<option value="기타비용">기타비용</option>
+                                                			</optgroup>
+                                                			<optgroup label="수익">
+                                                			<option value="월급">월급</option>
+                                                			<option value="상여금">상여금</option>
+                                                			<option value="펀드,주식">펀드,주식</option>
+                                                			<option value="기타수익">기타수익</option>
+                                                			</optgroup>
                                                 		</select>
                                                 	거래종류  <select name="staticpaymentOption" id="staticpaymentOption" style="width:50px;">
 															    <option value="  "></option>
