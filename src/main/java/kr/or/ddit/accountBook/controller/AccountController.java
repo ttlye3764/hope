@@ -56,6 +56,41 @@ public class AccountController {
 
 	
 	
+	
+	@RequestMapping("accountStatistics")
+	public ModelAndView accountStatistics(ModelAndView andView) {
+		
+		
+		//이번달 기준
+		//총 비용, 총 수익
+		
+		
+		//그룹(식비,교통비)-비용
+		
+		
+		//그룹(월급,상여금)-수익
+		
+		
+		//그룹(고정비용, 고정수익)
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		andView.setViewName("user/accountBook/accountStatistics");
+		return andView;
+	}
+	
+	
 	@RequestMapping("setting")
 	public ModelAndView setting(String mem_no, HttpServletRequest request,HttpSession session,
 								Map<String, String> params,ModelAndView andView,String currentPage, RolePaginationUtil_BYEOL pagination) throws Exception {
@@ -83,6 +118,8 @@ public class AccountController {
 		andView.setViewName("user/accountBook/setting");
 		return andView;
 	}
+	
+	
 	
 	@RequestMapping("accountList")
 	public ModelAndView accountList(String mem_no, HttpServletRequest request,HttpSession session,

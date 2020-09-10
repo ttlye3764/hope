@@ -147,7 +147,7 @@ function LogOut(){
 							<ul class="dropdown-menu" aria-labelledby="portfolioMenu">
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/accountBook/setting.do">거래 등록</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/accountBook/accountList.do">거래 내역 보기</a> </li>
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/">거래 내역 통계</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/accountBook/accountStatistics.do">거래 내역 통계</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/">가까운 은행보기</a> </li>
 								
 							</ul>
