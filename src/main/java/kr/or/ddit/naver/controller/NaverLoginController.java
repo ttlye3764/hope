@@ -77,6 +77,7 @@ public class NaverLoginController {
 		loginVO.setLg_time(nowtime);
 		loginVO.setLg_status("Success");
 		loginVO.setLg_comname(computerName);
+		loginVO.setLg_count("1");
 		
 		if(memberInfo == null) {
 			loginVO.setLg_status("Failed");

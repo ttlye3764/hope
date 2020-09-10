@@ -6,6 +6,13 @@ public class LoginVO {
 	String lg_time;
 	String lg_status;
 	String lg_comname;
+	String lg_count;
+	public String getLg_count() {
+		return lg_count;
+	}
+	public void setLg_count(String lg_count) {
+		this.lg_count = lg_count;
+	}
 	public String getLg_comname() {
 		return lg_comname;
 	}

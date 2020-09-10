@@ -4,8 +4,8 @@
 <mapper namespace="login">
 	<insert id="insertLogin" parameterType="LoginVO">
 		INSERT INTO
-		LOGIN(LG_IP, MEM_ID, LG_TIME, LG_STATUS, LG_COMNAME)
-		VALUES(#{lg_ip}, #{mem_id}, #{lg_time}, #{lg_status}, #{lg_comname})
+		LOGIN(LG_IP, MEM_ID, LG_TIME, LG_STATUS, LG_COMNAME, LG_COUNT)
+		VALUES(#{lg_ip}, #{mem_id}, #{lg_time}, #{lg_status}, #{lg_comname}, #{lg_count})
 	</insert>
 	
 	<select id="loginList" resultType="LoginVO" parameterType="map">
@@ -21,6 +21,6 @@
 		<if test="status != null">
 			AND LG_STATUS = #{status}
 		</if>
-		ORDER BY LG_TIME
+		ORDER BY LG_TIME, LG_COUNT
 	</select>
 </mapper>    

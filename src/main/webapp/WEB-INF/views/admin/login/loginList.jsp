@@ -64,6 +64,7 @@
 							<th scope="col" >컴퓨터이름</th>
 							<th scope="col" >시도한 아이디</th>
 							<th scope="col" >접속여부</th>
+							<th scope="col" >시도횟수</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -74,6 +75,7 @@
 							<td>${login.lg_comname }</td>
 							<td>${login.mem_id }</td>
 							<td>${login.lg_status }</td>
+							<td>${login.lg_count }</td>
 						</tr>
 					</c:forEach>
 					</tbody>

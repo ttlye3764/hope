@@ -2,9 +2,9 @@ package kr.or.ddit.join.controller;
 
 import java.net.InetAddress;
 import java.net.URLEncoder;
-import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -33,6 +33,8 @@ import kr.or.ddit.vo.MemberVO;
 @Controller
 @RequestMapping("/user/join/")
 public class JoinController {
+	Map<String, Integer> count = new HashMap<String, Integer>();
+	
 	@Autowired
 	private MessageSourceAccessor accessor;
 	@Autowired
@@ -44,7 +46,7 @@ public class JoinController {
 	@RequestMapping("joinChoiceForm")
 	public void joinChoiceForm() {
 	}
-
+	
 	@RequestMapping("loginForm")
 	public void loginForm(HttpServletRequest request) {
 		Map<String, ?> paramMap = RequestContextUtils.getInputFlashMap(request);
@@ -67,17 +69,31 @@ public class JoinController {
 		Date time = new Date();
 		String nowtime = format1.format(time);
 		
+		int i = 1;
+		
+		if(count.get(ip) == null) {
+			count.put(ip, i);
+		}else {
+			int check = count.get(ip);
+			count.put(ip, check+1);
+		}
+		
 		loginVO.setLg_ip(ip);
 		loginVO.setMem_id(mem_id);
 		loginVO.setLg_time(nowtime);
 		loginVO.setLg_comname(computerName);
+		loginVO.setLg_count(toString().valueOf(count.get(ip)));
 		
 		if(status == null) {
 			status = "LogOut";
+			loginVO.setLg_count(" ");
+			count.remove(ip);
 		}else {
 			status = "Success";
 			if(memberInfo == null) {
 				status = "Failed";
+			}else {
+				count.remove(ip);
 			}
 		}		
 		loginVO.setLg_status(status);
