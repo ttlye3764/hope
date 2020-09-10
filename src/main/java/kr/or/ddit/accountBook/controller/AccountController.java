@@ -154,6 +154,29 @@ public class AccountController {
 		andView.setViewName("jsonConvertView");
 		return andView;
 	}
+	@RequestMapping("receiptregistTrace")
+	public ModelAndView receiptregistTrace(String deal_option, String deal_kind, String deal_date, String deal_name, String deal_price, String mem_no, String deal_division, String deal_fix_revenue, String deal_fix_expenditure, String deal_card_name) throws Exception {
+		DealVO dealInfo = new DealVO();
+		dealInfo.setDeal_option(deal_option);
+		dealInfo.setDeal_kind(deal_kind);
+		dealInfo.setDeal_date(deal_date);
+		dealInfo.setDeal_name(deal_name);
+		dealInfo.setDeal_price(deal_price);
+		dealInfo.setDeal_division(deal_division);
+		dealInfo.setMem_no(mem_no);
+		dealInfo.setDeal_fix_expenditure(deal_fix_expenditure);
+		dealInfo.setDeal_fix_revenue(deal_fix_revenue);
+		dealInfo.setDeal_card_name(deal_card_name);
+		
+		int cnt = this.service.insertDeal(dealInfo);
+		ModelAndView andView = new ModelAndView();
+		List<DealVO> list = service.dealList(mem_no);
+		andView.addObject("list", list);
+		// <bean id="jsonConvertView" class="..MappingJackson2JsonView>
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
+	
 	@RequestMapping("staticregistTrace")
 	public ModelAndView staticregistTrace(String deal_option, String deal_kind, String deal_date, String deal_name, String deal_price, String mem_no, String deal_division, String deal_fix_revenue, String deal_fix_expenditure, String deal_card_name) throws Exception {
 		DealVO dealInfo = new DealVO();
@@ -425,13 +448,16 @@ public class AccountController {
 					System.out.println(res.getTextAnnotationsList().get(0).getDescription());
 
 					System.out.println("============================================================");
-					System.out.println("결제방법 : " + res.getTextAnnotationsList().get(6).getDescription());
-					System.out.println("골격근량 : " + res.getTextAnnotationsList().get(13).getDescription());
-					System.out.println("체지방량 : " + res.getTextAnnotationsList().get(21).getDescription());
-					System.out.println("근육량 : " + res.getTextAnnotationsList().get(35).getDescription());
+					System.out.println("날짜 : " + res.getTextAnnotationsList().get(117).getDescription());
+					System.out.println("물품 : " + res.getTextAnnotationsList().get(38).getDescription());
+					System.out.println("금액 : " + res.getTextAnnotationsList().get(48).getDescription());
 					System.out.println("============================================================");
 					System.out.println();
-
+					
+					dealInfo.setDeal_date(res.getTextAnnotationsList().get(117).getDescription());
+					dealInfo.setDeal_name(res.getTextAnnotationsList().get(38).getDescription());
+					dealInfo.setDeal_price(res.getTextAnnotationsList().get(48).getDescription());
+					
 					/*
 					 * inbodyInfo.setInbody_weight(res.getTextAnnotationsList().get(6).
 					 * getDescription());
@@ -451,7 +477,7 @@ public class AccountController {
 			
 			String result2 = "success";
 			
-			/* andView.addObject("dealInfo", dealInfo); */
+		    andView.addObject("dealInfo", dealInfo); 
 			andView.addObject("json", result2);
 			andView.setViewName("jsonConvertView");
 			

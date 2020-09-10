@@ -41,7 +41,10 @@ $(function(){
 	                $('.wrap-loading').addClass('display-none');
 	            }
 	            , success:function(result) {
-			       	console.log(result);
+			       	console.log(result.dealInfo.deal_date);
+			       	$('#receiptdate').val(result.dealInfo.deal_date);
+			       	$('#receiptitem').val(result.dealInfo.deal_name);
+			       	$('#receiptprice').val(result.dealInfo.deal_price);
 
 	            }
 	        });
@@ -114,6 +117,41 @@ $(function(){
 	
 	   	});  // 고정 수입 지출 등록 
 	});
+	
+	$('#receiptregistBtn').click(function(){
+		receiptpaymentOption = $('#receiptpaymentOption option:selected').val();
+		receiptpaymentMethod = $('#receiptpaymentMethod option:selected').val();
+		receiptdateA = $('#receiptdate').val();
+		receiptdateB = receiptdateA.split(".");
+		receiptdate = receiptdateB[0]+'-'+receiptdateB[1]+'-'+receiptdateB[2];
+		receiptitem = $('#receiptitem').val();
+		receiptpriceA = $('#receiptprice').val();
+		var receiptprice ;
+		receiptprice = receiptpriceA.replace(/,/,""); //금액 , 지우기
+		receiptdivision = $('#receiptdivision').val();
+		
+		if(receiptpaymentMethod=="카드"){
+			receiptcard_name = $('#receiptkind').val();
+		}
+		if(receiptpaymentMethod=="현금"){
+			receiptcard_name = '현금';
+		}
+
+			receiptdeal_fix_revenue = 0;
+			receiptdeal_fix_expenditure = 0;
+				
+	     $.ajax({
+	   	 	async    : false,
+	        url     : '${pageContext.request.contextPath}/user/accountBook/receiptregistTrace.do',
+	        type    : 'post',
+	        dataType : 'json',
+	        data : {'deal_option':receiptpaymentOption,'deal_kind':receiptpaymentMethod,'deal_date':receiptdate,'deal_name':receiptitem,'deal_price':receiptprice, 'mem_no':${LOGIN_MEMBERINFO.mem_no}, 'deal_division':receiptdivision, 'deal_fix_revenue':receiptdeal_fix_revenue, 'deal_fix_expenditure':receiptdeal_fix_expenditure, 'deal_card_name':receiptcard_name},
+	        success : function(Result) {
+	        }
+	
+	   	});  // 영수증 수입 지출 등록 
+	     location.reload();
+	});
 
 
 	
@@ -147,11 +185,12 @@ $(function(){
 		$("#statickind").hide(); 
 		 $("#staticModal").modal("show"); //모달창 띄우기
 
-	}); //고정 거래 등록
+	}); //고정 거래 등록 버튼 클릭
 
 	
 
 	$('#registreceipt').click(function(){
+		$("#receiptkind").hide(); 
 		 $("#regist-modal").modal("show"); //모달창 띄우기
 		 $("#img").attr("src", " ");
 
@@ -372,6 +411,47 @@ function staticcategoryChange(e){
 	
 }
 
+
+function receiptcategoryChange(e){
+	var receiptkind_a = [];
+	
+	$.ajax({
+   	 	async    : false,
+        url     : '${pageContext.request.contextPath}/user/accountBook/cardList.do',
+        type    : 'post',
+        dataType : 'json',
+        data : {'mem_no':${LOGIN_MEMBERINFO.mem_no}},
+        success : function(Result) {
+	        for(var i=0; i<Result.cardlist.length; i++){
+	        	receiptkind_a[i] = Result.cardlist[i].card_kind;
+		    }
+        }
+
+   	});  // 등록 
+	
+   	
+    var target = document.getElementById("receiptkind");
+    
+	if(e.value=="카드"){
+    var d = receiptkind_a;
+	$("#receiptkind").show(); 
+	$("#receiptcardRegistBtn").show(); 
+	}else if(e.value=="현금"){
+	$("#receiptkind").hide(); 
+	$("#receiptcardRegistBtn").hide(); 
+	}
+	target.options.length = 0;
+
+	for(x in d){
+		var opt = document.createElement("option");
+		opt.value=d[x];
+		opt.innerHTML=d[x];
+		target.appendChild(opt);
+	}
+		
+	
+}
+
 </script>
 <div class="innerpage-banner center bg-overlay-dark-7 py-7" style="background:url(assets/images/bg/04.jpg) no-repeat; background-size:cover; background-position: center center;">
 		<div class="container">
@@ -517,10 +597,43 @@ function staticcategoryChange(e){
 									<div class="row ">
 										<!-- contact form -->
 										<div class="col-md-6">
+										<div class="" style="width:100%; float: left ; padding: 40px;">
+										 	날짜 : <input type="text" id="receiptdate" size=10 maxlength=8><br><br>
+										 	물품 : <input type="text" id="receiptitem" size=10 maxlength=8><br><br>
+										 	금액 : <input type="text" id="receiptprice" size=10 maxlength=8><br><br>
+										 	
+                                                	구분 : <select name="receiptdivision" id="receiptdivision" style="width:60px;">
+                                                			<option value="    "></option>
+                                                			<option value="식비">식비</option>
+                                                			<option value="교통비">교통비</option>
+                                                			<option value="주거/통신">주거/통신</option>
+                                                			<option value="생활용품">생활용품</option>
+                                                			<option value="경조사비">경조사비</option>
+                                                			<option value="지식문화">지식문화</option>
+                                                			<option value="의복,미용">의복,미용</option>
+                                                			<option value="의료,건강">의료,건강</option>
+                                                			<option value="여가,유흥">여가,유흥</option>
+                                                			<option value="세금,이자">세금,이자</option>
+                                                			<option value="기타비용">기타비용</option>
+                                                		</select><br><br>
+                                                	거래종류 : <select name="receiptpaymentOption" id="receiptpaymentOption" style="width:60px;">
+															    <option value="  "></option>
+															    <option value="출금">출금</option>
+															    <option value="입금">입금</option>
+															</select><br><br>
+													결제방법 : <select name="receiptpaymentMethod" id="receiptpaymentMethod" onchange="receiptcategoryChange(this)" style="width:60px;">
+															    <option value="  "></option>
+															    <option value="현금">현금</option>
+															    <option value="카드">카드</option>
+															</select><br><br>
+															
+															<select id="receiptkind" style="width:100px;">
+																<option value="       "></option>
+															</select>
+                                                	<br><br>
+                                                	<br><button type="button" id="receiptregistBtn">등록</button>
+										</div>
 											<div class="h-100" style="width:500px; height: 1500px;">
-											
-											
-											
 												<form class="contact-form" id="files" name="file" method="post" enctype="multipart/form-data">			
 													<!-- Start main form -->
 														<div class="" style="width:50%; float: right;">
@@ -547,7 +660,7 @@ function staticcategoryChange(e){
 								</div>
 								<!-- /.modal-dialog -->
 							</div>
-							<!-- /.modal -->
+							<!-- /.영수증 등록 modal --> 
 	
 	
 	
@@ -580,7 +693,7 @@ function staticcategoryChange(e){
                                                     </div>
                                                 </div><!-- /.modal-content -->
                                             </div><!-- /.modal-dialog -->
-                                        </div><!-- /.modal -->
+                                        </div><!-- /.카드 등록 modal -->
 	
 	
 	
@@ -647,7 +760,7 @@ function staticcategoryChange(e){
                                                     </div>
                                                 </div><!-- /.modal-content -->
                                             </div><!-- /.modal-dialog -->
-                                        </div><!-- /.modal -->
+                                        </div><!-- /.고정 거래 등록 modal -->
                                          
 	
 	
