@@ -18,16 +18,11 @@
 // 			$(location).attr('href','${pageContext.request.contextPath}/user/main/mainForm.do');
 // 		}
 
-		var keycode = '${param.search_keycode}';
-		var keyword = '${param.search_keyword}';
-		if(keycode == '' || keycode == null){
-			keycode = 'TOTAL';
-		}
-		if(keyword == null){
-			keyword = '';
-		} 
-		$('select[name=search_keycode]').val(keycode);
-		$('input[name=search_keyword]').val(keyword);
+		var start = '${param.start_time}';
+		var end = '${param.end_time}';
+
+		$('#start_time').val(start);
+		$('#end_time').val(end);
 	});
 </script>
 </head>
@@ -38,26 +33,22 @@
 				<div class="widget widget-newsletter border-0 p-0"
 					style="display: flex; justify-content: space-between;">
 					<div>
-						<form action="${pageContext.request.contextPath}/admin/member/memberList.do" method="post">
+						<form method="post" name="date1" action="${pageContext.request.contextPath}/admin/login/loginList.do">
 							<div class="input-group mb-0">
-								<div style="width: 110px; margin: 0px 5px 0px 0px; display: flex; justify-content: center; align-items: center;">
-									<select id="search_keycode" name="search_keycode" class="custom-select select-big">
-										<option value="TOTAL" selected="selected">전체</option>
-										<option value="NAME">이름</option>
-										<option value="ID">아이디</option>
-										<option value="PHONE">전화번호</option>
-									</select>
-								</div>
 								<div class="input-group-btn">
-									<input id="search_keyword"
-									class="form-control border-radius-right-0 border-right-0 mb-0"
-									style="height: 45px; display: inline-block;" type="text" name="search_keyword"
-									placeholder="Search" size="35px">
+									<h5>검색조건</h5>
+									<div class="input-group mb-0">
+										<input type="date" class="form-control border-radius-right-0 border-right-0 mb-0" 
+										style="height: 45px; width:200px;" size="35px" name="start_time" id="start_time"> <h3>&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;  </h3> 
+										<input type="date" class="form-control border-radius-right-0 border-right-0 mb-0" 
+										style="height: 45px; width:200px;" size="35px" name="end_time" id="end_time">
+										<span class="input-group-btn">
+											<input type="submit" id="searchBTN" 
+												class="btn btn-primary" value="검색"/>
+											<input type="reset" class="btn btn-primary" value="초기화">
+										</span>
+                                   </div>
 								</div>
-								<span class="input-group-btn">
-									<input type="submit" id="searchBTN" 
-										class="btn btn-primary" value="검색"/>
-								</span>
 							</div>
 						</form>
 					</div>

@@ -1,5 +1,8 @@
 package kr.or.ddit.login.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -18,21 +21,50 @@ import kr.or.ddit.vo.LoginVO;
 public class LoginController {
 	@Autowired
 	private ILoginService service;
-	
-	@RequestMapping("loginList")
-	public ModelAndView memberList(String search_keycode
-							,String search_keyword
-							, ModelAndView andView
-							,Map<String, String> params
-							,HttpServletRequest request) throws Exception {
 
-		params.put("search_keycode", search_keycode);
-		params.put("search_keyword", search_keyword);
-		
+	@RequestMapping("loginList")
+	public ModelAndView memberList(String end_time, String start_time, ModelAndView andView, Map<String, String> params,
+			HttpServletRequest request) throws Exception {
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal = Calendar.getInstance();
+		Date d_end_time;
+		Date day;
+
+		if (end_time == null) {
+			start_time = null;
+		} else if(start_time == null){
+			end_time = null;
+		}
+		else {
+			if (end_time.equals("") || start_time.equals("")) {
+				start_time = null;
+				end_time = null;
+			}
+		}
+
+		if (end_time == null) {
+		} else {
+			d_end_time = format1.parse(end_time);
+			cal.setTime(d_end_time);
+
+			cal.add(Calendar.DATE, +1);
+			day = cal.getTime();
+			end_time = format1.format(day);
+		}
+		params.put("start_time", start_time);
+		params.put("end_time", end_time);
+
 		List<LoginVO> loginList = this.service.loginList(params);
-		
-		andView.addObject("param",search_keycode);
-		andView.addObject("param",search_keyword);
+
+		if (end_time == null) {
+		} else {
+			cal.add(Calendar.DATE, -1);
+			day = cal.getTime();
+			end_time = format1.format(day);
+		}
+
+		andView.addObject("param", start_time);
+		andView.addObject("param", end_time);
 		andView.addObject("loginList", loginList);
 		andView.setViewName("admin/login/loginList");
 
