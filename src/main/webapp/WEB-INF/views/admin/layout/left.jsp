@@ -14,7 +14,7 @@
     <div class="slimscroll-menu" id="left-side-menu-container">
 
         <!-- LOGO -->
-        <a href="index.html" class="logo text-center">
+        <a href="${pageContext.request.contextPath}/admin/main/mainForm.do" class="logo text-center">
             <span class="logo-lg">
                 <img src="${pageContext.request.contextPath }/resources/html/dist/assets/images/logo.png" alt="" height="16" id="side-main-logo">
             </span>

@@ -1,7 +1,11 @@
 package kr.or.ddit.accountBook.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -21,9 +25,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.cloud.vision.v1.AnnotateImageRequest;
+import com.google.cloud.vision.v1.AnnotateImageResponse;
+import com.google.cloud.vision.v1.BatchAnnotateImagesResponse;
+import com.google.cloud.vision.v1.Feature;
+import com.google.cloud.vision.v1.Image;
+import com.google.cloud.vision.v1.ImageAnnotatorClient;
+import com.google.cloud.vision.v1.Feature.Type;
+import com.google.protobuf.ByteString;
 
 import kr.or.ddit.accountBook.service.IDealService;
 import kr.or.ddit.schedule.service.IScheduleService;
@@ -36,6 +51,7 @@ import kr.or.ddit.utiles.RolePaginationUtil_yun;
 import kr.or.ddit.vo.CardVO;
 import kr.or.ddit.vo.DealVO;
 import kr.or.ddit.vo.HealthImageVO;
+import kr.or.ddit.vo.InbodyVO;
 import kr.or.ddit.vo.MemberVO;
 import kr.or.ddit.vo.MypillVO;
 import kr.or.ddit.vo.PillVO;
@@ -175,6 +191,29 @@ public class AccountController {
 		andView.setViewName("jsonConvertView");
 		return andView;
 	}
+	@RequestMapping("receiptregistTrace")
+	public ModelAndView receiptregistTrace(String deal_option, String deal_kind, String deal_date, String deal_name, String deal_price, String mem_no, String deal_division, String deal_fix_revenue, String deal_fix_expenditure, String deal_card_name) throws Exception {
+		DealVO dealInfo = new DealVO();
+		dealInfo.setDeal_option(deal_option);
+		dealInfo.setDeal_kind(deal_kind);
+		dealInfo.setDeal_date(deal_date);
+		dealInfo.setDeal_name(deal_name);
+		dealInfo.setDeal_price(deal_price);
+		dealInfo.setDeal_division(deal_division);
+		dealInfo.setMem_no(mem_no);
+		dealInfo.setDeal_fix_expenditure(deal_fix_expenditure);
+		dealInfo.setDeal_fix_revenue(deal_fix_revenue);
+		dealInfo.setDeal_card_name(deal_card_name);
+		
+		int cnt = this.service.insertDeal(dealInfo);
+		ModelAndView andView = new ModelAndView();
+		List<DealVO> list = service.dealList(mem_no);
+		andView.addObject("list", list);
+		// <bean id="jsonConvertView" class="..MappingJackson2JsonView>
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
+	
 	@RequestMapping("staticregistTrace")
 	public ModelAndView staticregistTrace(String deal_option, String deal_kind, String deal_date, String deal_name, String deal_price, String mem_no, String deal_division, String deal_fix_revenue, String deal_fix_expenditure, String deal_card_name) throws Exception {
 		DealVO dealInfo = new DealVO();
@@ -411,6 +450,101 @@ public class AccountController {
 	}
 	
 	
+	
+	// ocr
+		@RequestMapping("ocr")
+		public ModelAndView ocr(Model model, DealVO dealInfo, @RequestParam("files") MultipartFile items,
+				HttpServletRequest request, ModelAndView andView) throws Exception {
+
+			HttpSession session = request.getSession();
+			MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+
+			String imageFilePath = "D:\\receipt\\" + saveFile(items);
+
+			ByteString imgBytes = ByteString.readFrom(new FileInputStream(imageFilePath));
+
+			List<AnnotateImageRequest> requests = new ArrayList<>();
+			Image img = Image.newBuilder().setContent(imgBytes).build();
+			Feature feat = Feature.newBuilder().setType(Type.TEXT_DETECTION).build();
+			AnnotateImageRequest req = AnnotateImageRequest.newBuilder().addFeatures(feat).setImage(img).build();
+			requests.add(req);
+
+			// 만들어진 AnnotateImageRequest를 클라이언트 요청에 담아 보내서 Response 객체를 받아오는 부분
+			try (ImageAnnotatorClient client = ImageAnnotatorClient.create()) {
+				BatchAnnotateImagesResponse resp = client.batchAnnotateImages(requests);
+				List<AnnotateImageResponse> responses = resp.getResponsesList();
+
+				// 1개의 이미지만 넣었기 때문에 response도 하나이고, 따라서 for문은 별 의미는 없다.
+				for (AnnotateImageResponse res : responses) {
+					if (res.hasError()) {
+						System.out.println(res.getError().getMessage());
+						break;
+					}
+					// Response 객체에 담겨져 온 분석 결과 (이미지 내의 텍스트) 가 여기서 출력된다.
+					System.out.println("Text : ");
+					System.out.println(res.getTextAnnotationsList().get(0).getDescription());
+
+					System.out.println("============================================================");
+					System.out.println("날짜 : " + res.getTextAnnotationsList().get(117).getDescription());
+					System.out.println("물품 : " + res.getTextAnnotationsList().get(38).getDescription());
+					System.out.println("금액 : " + res.getTextAnnotationsList().get(48).getDescription());
+					System.out.println("============================================================");
+					System.out.println();
+					
+					dealInfo.setDeal_date(res.getTextAnnotationsList().get(117).getDescription());
+					dealInfo.setDeal_name(res.getTextAnnotationsList().get(38).getDescription());
+					dealInfo.setDeal_price(res.getTextAnnotationsList().get(48).getDescription());
+					
+					/*
+					 * inbodyInfo.setInbody_weight(res.getTextAnnotationsList().get(6).
+					 * getDescription());
+					 * inbodyInfo.setInbody_bone(res.getTextAnnotationsList().get(13).getDescription
+					 * ());
+					 * inbodyInfo.setInbody_fat(res.getTextAnnotationsList().get(21).getDescription(
+					 * )); inbodyInfo.setInbody_muscle(res.getTextAnnotationsList().get(35).
+					 * getDescription()); inbodyInfo.setMem_no(memberInfo.getMem_no());
+					 */
+
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			/* this.service.insertDeal(dealInfo); */
+			
+			String result2 = "success";
+			
+		    andView.addObject("dealInfo", dealInfo); 
+			andView.addObject("json", result2);
+			andView.setViewName("jsonConvertView");
+			
+			return andView;
+		}
+		
+	
+		// 사진 저장될 경로
+		private static final String UPLOAD_PATH = "D:\\receipt";
+
+	
+		private String saveFile(@RequestParam("files") MultipartFile items) {
+
+			// 파일 저장
+			String saveName = items.getOriginalFilename();
+
+			// 저장할 File 객체를 생성(껍데기 파일)
+			File saveFile = new File(UPLOAD_PATH, saveName); // 저장할 폴더 이름, 저장할 파일 이름
+
+			try {
+				items.transferTo(saveFile); // 업로드 파일에 saveFile넣기
+			} catch (IOException e) {
+				e.printStackTrace();
+				return null;
+			}
+			return saveName;
+		}
+		
+		
+		
 	@RequestMapping("excelDown")
 	public void excelDown(HttpServletResponse response,
 							HttpSession session

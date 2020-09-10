@@ -73,7 +73,6 @@
 					<thead>
 						<tr>
 							<th scope="col" >회원번호</th>
-							<th scope="col" >회원번호</th>
 							<th scope="col" >이  름</th>
 							<th scope="col" >아이디</th>
 							<th scope="col" >전화번호</th>
@@ -83,7 +82,6 @@
 					<tbody>
 					<c:forEach items="${memberList }" var="member">
 						<tr>
-							<th scope="row">${member.mem_no }</th>
 							<th scope="row">${member.mem_no }</th>
 							<td>${member.mem_name }</td>
 							<td>${member.mem_id }</td>
