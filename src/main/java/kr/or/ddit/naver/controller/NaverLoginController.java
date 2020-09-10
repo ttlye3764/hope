@@ -61,15 +61,12 @@ public class NaverLoginController {
 	
 	public void login(MemberVO memberInfo, String mem_id) throws Exception {
 		InetAddress local; 
-		String ip = null;
-		try { 
-			local = InetAddress.getLocalHost(); 
-			ip = local.getHostAddress(); 
-		} catch (UnknownHostException e1) { 
-			e1.printStackTrace(); 
-		}
+		local = InetAddress.getLocalHost(); 
+		String ip = local.getHostAddress(); 
 		
 		LoginVO loginVO = new LoginVO();
+		
+		String computerName = InetAddress.getLocalHost().getHostName();
 		
 		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
 		Date time = new Date();
@@ -79,6 +76,7 @@ public class NaverLoginController {
 		loginVO.setMem_id(mem_id);
 		loginVO.setLg_time(nowtime);
 		loginVO.setLg_status("Success");
+		loginVO.setLg_comname(computerName);
 		
 		if(memberInfo == null) {
 			loginVO.setLg_status("Failed");

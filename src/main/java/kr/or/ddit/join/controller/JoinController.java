@@ -54,21 +54,12 @@ public class JoinController {
 		}
 	}
 	
-	@RequestMapping("loginForm2")
-	public String loginForm2(HttpSession session) {
-		session.invalidate();
-		return "redirect:/user/join/loginForm.do";
-	}
-	
 	public void loginLog(MemberVO memberInfo, String mem_id, String status) throws Exception {
 		InetAddress local; 
-		String ip = null;
-		try { 
-			local = InetAddress.getLocalHost(); 
-			ip = local.getHostAddress(); 
-		} catch (UnknownHostException e1) { 
-			e1.printStackTrace(); 
-		}
+		local = InetAddress.getLocalHost(); 
+		String ip = local.getHostAddress(); 
+		
+		String computerName = InetAddress.getLocalHost().getHostName();
 		
 		LoginVO loginVO = new LoginVO();
 		
@@ -79,6 +70,7 @@ public class JoinController {
 		loginVO.setLg_ip(ip);
 		loginVO.setMem_id(mem_id);
 		loginVO.setLg_time(nowtime);
+		loginVO.setLg_comname(computerName);
 		
 		if(status == null) {
 			status = "LogOut";

@@ -31,7 +31,7 @@ $(function(){
 	});
 		
 	$('#btn3').click(function() {
-		$(location).attr('href','${pageContext.request.contextPath}/user/join/loginForm2.do');
+		$(location).attr('href','${pageContext.request.contextPath}/user/main/mainForm.do');
 	});
 });
 function pwcheck(){
@@ -104,7 +104,7 @@ td{
 					</table>
 					<input id="btn1" type="submit" value="변경">
 									&nbsp;&nbsp;&nbsp;&nbsp;
-					<button	id="btn3" type="button">취소 </button>
+					<button	id="btn3" type="button">다음에 변경하기 </button>
 				</div>
             </div>
          </div>

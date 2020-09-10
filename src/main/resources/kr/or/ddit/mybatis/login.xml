@@ -4,8 +4,8 @@
 <mapper namespace="login">
 	<insert id="insertLogin" parameterType="LoginVO">
 		INSERT INTO
-		LOGIN(LG_IP, MEM_ID, LG_TIME, LG_STATUS)
-		VALUES(#{lg_ip}, #{mem_id}, #{lg_time}, #{lg_status})
+		LOGIN(LG_IP, MEM_ID, LG_TIME, LG_STATUS, LG_COMNAME)
+		VALUES(#{lg_ip}, #{mem_id}, #{lg_time}, #{lg_status}, #{lg_comname})
 	</insert>
 	
 	<select id="loginList" resultType="LoginVO" parameterType="map">

@@ -5,6 +5,13 @@ public class LoginVO {
 	String mem_id;
 	String lg_time;
 	String lg_status;
+	String lg_comname;
+	public String getLg_comname() {
+		return lg_comname;
+	}
+	public void setLg_comname(String lg_comname) {
+		this.lg_comname = lg_comname;
+	}
 	public String getLg_ip() {
 		return lg_ip;
 	}

@@ -59,18 +59,20 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th scope="col" >접속ip</th>
-							<th scope="col" >아이디</th>
 							<th scope="col" >접속시간</th>
+							<th scope="col" >접속ip</th>
+							<th scope="col" >컴퓨터이름</th>
+							<th scope="col" >시도한 아이디</th>
 							<th scope="col" >접속여부</th>
 						</tr>
 					</thead>
 					<tbody>
 					<c:forEach items="${loginList }" var="login">
 						<tr>
-							<th scope="row">${login.lg_ip }</th>
-							<td>${login.mem_id }</td>
 							<td>${login.lg_time }</td>
+							<td>${login.lg_ip }</td>
+							<td>${login.lg_comname }</td>
+							<td>${login.mem_id }</td>
 							<td>${login.lg_status }</td>
 						</tr>
 					</c:forEach>
