@@ -31,9 +31,14 @@ public interface IBoardService {
 		public Board_FileVO selectBoardFileInfo(String fileNo, String fileBdNo);
 		
 		// 게시판 댓글 등록
-		public void insertBoardReply(String reContent, String bdNo, String mem_id);
+		public void insertBoardReply(String re_content, String bd_no, String mem_id);
 		// 게시판 댓글 조회
 		public List<Board_ReplyVO> selectBoardReply(String bd_no);
+		// 게시판 댓글 수정 
+		public void updateBoardReply(String re_content, String bd_no, String mem_id, String re_no);
+		// 게시판 댓글 삭제
+//		public void deleteBoardReply(String reContent, String bdNo, String re_no, String currentPage, String search_keyword, String search_keycode);
+		
 		
 		
 

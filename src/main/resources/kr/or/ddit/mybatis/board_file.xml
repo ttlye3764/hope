@@ -17,11 +17,19 @@
 	
 	<insert id="insertFile" parameterType="board_fileVO">
 		INSERT INTO
-		BOARD_FILE( FILE_NO, FILE_BD_NO, FILE_NAME, 
-		            FILE_SAVE_NAME, FILE_TYPE, FILE_SIZE
+		BOARD_FILE( FILE_NO, 
+					FILE_BD_NO, 
+					FILE_NAME, 
+		            FILE_SAVE_NAME, 
+		            FILE_TYPE, 
+		            FILE_SIZE
 				  )
-		   VAlUES ( FILE_SEQ.NEXTVAL, #{file_bd_no}, #{file_name},
-				   #{file_save_name}, #{file_type}, #{file_size}		   
+		   VAlUES ( FILE_SEQ.NEXTVAL, 
+		   			#{file_bd_no}, 
+		   			#{file_name},
+				    #{file_save_name}, 
+				    #{file_type}, 
+				    #{file_size}		   
 		          )
 	</insert>
 	

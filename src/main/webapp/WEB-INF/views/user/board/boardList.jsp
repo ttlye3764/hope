@@ -36,16 +36,15 @@
 <script src="${pageContext.request.contextPath }/resources/template/assets/vendor/fitvids/jquery.fitvids.js"></script>
 <script type="text/javascript">
 
-	// 부트스트랩 엔터키 이벤트 제거
-   $(document).keypress(function(e) { if (e.keyCode == 13) e.preventDefault(); });
+
    
    $(function() {
         // 상세보기 기능
       $('#boardTBY tr').on('click', function() {
-
          var bd_no = $(this).find('td:eq(0) input').val();
          var rnum = $(this).find('td:eq(0)').text();
-         $(location).attr('href', '${pageContext.request.contextPath}/user/board/boardView.do?bd_no=' + bd_no + '&rnum=' + rnum + "&bd_division=${bd_division}");
+
+         $(location).attr('href', '${pageContext.request.contextPath}/user/board/boardView.do?bd_no=' + bd_no + '&rnum=' + rnum + "&bd_division=${bd_division}" + '&currentPage=${currentPage}' + '&search_keyword=${search_keyword}' + '&search_keycode=${search_keycode}');
       });
 
         // 검색 버튼 기능 
@@ -53,146 +52,29 @@
          var search_keyword = $("input[id='search_keyword']").val();
          var search_keycode = $("#search_keycode option:selected").val();     
 
-          
-//   		 alert(search_keyword);
-//   		 alert(search_keycode);
-          $.ajax({
-                url     : "${pageContext.request.contextPath}/user/board/list.do?bd_division=${bd_division}&search_keyword="+search_keyword+"&search_keycode="+search_keycode,
-                type    : 'get',
-                dataType: 'json',
-                success : function(result) {      
-                  // 잘 들어오는지 확인하기  
-                  console.log(result.boardList);
-
-               // 검색,페이징처리하기전에 기존에 있었던 목록정보 비우는 작업   
-               $('#boardTBY').empty();
-               $('#paginationDIV').empty();
-
-
-               // boardList html 동적으로 생성하기 (밑에 있는 아이 똑같이 가져와야함)
-               
-               var html = "";
-
-               // ajax에서 for문같은 아이
-               $.each(result.boardList, function(index, board){
-
-                  html += '<tr>';
-                  html += '   <td>' + board.rnum + '<input type="hidden" class="bd_no" value="' + board.bd_no + '"/></td>';
-                  html += '   <td>';
-                  if(board.bd_depth != 0) {
-                     for(var i = 0; i <= board.bd_dept; i++){
-                        html += '&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;';
-                     }
-                  }
-
-                  html += board.bd_title + '</td>';
-                  
-                  html += '<td>' + board.bd_writer + '</td>';
-                  html += '<td>' + board.bd_date + '</td>';
-                  html += '<td>' + board.bd_hit + '</td>';
-
-                  html += '</tr>';          
-               });
-               
-               // 잘 들어오는지 콘솔에 찍어보기 
-               console.log(html);               
-                              
-               // 비웠던 이 아이들 다시 어팬드해서 가져오기 
-               $('#boardTBY').append(html);
-               $('#paginationDIV').append(result.pagination);
-
-               
-               $('#boardTBY tr').on('click', function() {
-                   var bd_no = $(this).find('td:eq(0) input').val();
-                   var rnum = $(this).find('td:eq(0)').text();
-                   $(location).attr('href', '${pageContext.request.contextPath}/user/board/boardView.do?bd_no=' + bd_no + '&rnum=' + rnum + "&bd_division=${bd_division}");
-                });
-              }
-           });
-              
+         document.location.href = '${pageContext.request.contextPath}/user/board/boardList.do?bd_division=${bd_division}&currentPage=${currentPage}&search_keyword=' + search_keyword + '&search_keycode='+ search_keycode;
       });
 
    });
 
-
+// 부트스트랩 엔터키 이벤트 제거
+   $(document).keypress(function(e) { if (e.keyCode == 13) e.preventDefault(); });   
 
 // 엔터 버튼 눌렀을때 검색
 function enterkey(){
 
-	  if (window.event.keyCode == 13) {
+	if (window.event.keyCode == 13) {
+		// triiger : 강제로 기능 수행하는 아이 
+		$('#searchBTN').trigger("click");
+	};
+};
 
-		var bdDivisionNo = $('#bdDivisionNo').val(); 
-		
-   	 	var search_keyword = $("input[id='search_keyword']").val();
-    	var search_keycode = $("#search_keycode option:selected").val();     
-
-//		 alert(search_keyword);
-//		 alert(search_keycode);
-     $.ajax({
-           url     : "${pageContext.request.contextPath}/user/board/list.do?bd_division="+ bdDivisionNo +"&search_keyword="+search_keyword+"&search_keycode="+search_keycode,
-           type    : 'get',
-           dataType: 'json',
-           success : function(result) {      
-             // 잘 들어오는지 확인하기  
-             console.log(result.boardList);
-
-          // 검색,페이징처리하기전에 기존에 있었던 목록정보 비우는 작업   
-          $('#boardTBY').empty();
-          $('#paginationDIV').empty();
-
-
-          // boardList html 동적으로 생성하기 (밑에 있는 아이 똑같이 가져와야함)
-          
-          var html = "";
-
-          // ajax에서 for문같은 아이
-          $.each(result.boardList, function(index, board){
-
-             html += '<tr>';
-             html += '   <td>' + board.rnum + '<input type="hidden" class="bd_no" value="' + board.bd_no + '"/></td>';
-             html += '   <td>';
-             if(board.bd_depth != 0) {
-                for(var i = 0; i <= board.bd_dept; i++){
-                   html += '&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;';
-                }
-             }
-
-             html += board.bd_title + '</td>';
-             
-             html += '<td>' + board.bd_writer + '</td>';
-             html += '<td>' + board.bd_date + '</td>';
-             html += '<td>' + board.bd_hit + '</td>';
-
-             html += '</tr>';          
-          });
-          
-          // 잘 들어오는지 콘솔에 찍어보기 
-          console.log(html);               
-                         
-          // 비웠던 이 아이들 다시 어팬드해서 가져오기 
-          $('#boardTBY').append(html);
-          $('#paginationDIV').append(result.pagination);
-
-          
-          	$('#boardTBY tr').on('click', function() {
-              var bd_no = $(this).find('td:eq(0) input').val();
-              var rnum = $(this).find('td:eq(0)').text();
-              $(location).attr('href', '${pageContext.request.contextPath}/user/board/boardView.do?bd_no=' + bd_no + '&rnum=' + rnum + "&bd_division="+ bdDivisionNo );
-           });
-        }
-      });
-	}
-}
 </script>
-
 </head>
-
 <body>
    <div class="preloader">
       <img src="assets/images/preloader.svg" alt="Pre-loader">
    </div>
-
-
 
    <!-- =======================
 Banner innerpage -->
@@ -235,17 +117,17 @@ Banner innerpage -->
                            <div class="input-group mb-40">
                               <div style="width: 110px; margin: 0px 5px 0px 0px; display: flex; justify-content: center; align-items: center; height: 50px;">
                                  <select id="search_keycode" name="search_keycode" class="custom-select select-big">
-                                    <option value="TOTAL" selected="selected">전체</option>
-                                    <option value="TITLE">제목</option>
-                                    <option value="CONTENT">내용</option>
-                                    <option value="WRITER">작성자</option>
+                                    <option value="TOTAL" <c:if test="${search_keycode == 'TOTAL'}">selected="selected"</c:if> >전체</option>
+                                    <option value="TITLE" <c:if test="${search_keycode == 'TITLE'}">selected="selected"</c:if>>제목</option>
+                                    <option value="CONTENT" <c:if test="${search_keycode == 'CONTENT'}">selected="selected"</c:if>>내용</option>
+                                    <option value="WRITER" <c:if test="${search_keycode == 'WRITER'}">selected="selected"</c:if>>작성자</option>
                                  </select>
                               </div>
                               <div class=>
                                  <input id="search_keyword" onkeyup="enterkey();" 
                                     class="form-control border-radius-right-0 border-right-0 mb-0"
                                     style="height: 40px; display: inline-block;" type="text" name="search_keyword"
-                                    placeholder="Search" size="35px">
+                                    placeholder="Search" size="35px" value="${search_keyword }">
                               </div>
                               <span class="input-group-btn">
                                  <button type="button" id="searchBTN" 
@@ -266,7 +148,6 @@ Banner innerpage -->
                          </div>  
                         </form>
                      </div>
-
 
                   </div>
                </div>

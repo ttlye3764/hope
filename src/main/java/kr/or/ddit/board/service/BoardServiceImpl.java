@@ -87,21 +87,48 @@ public class BoardServiceImpl implements IBoardService{
 
 	// 댓글 등록 
 	@Override
-	public void insertBoardReply(String reContent, String bdNo, String mem_id) {
+	public void insertBoardReply(String re_content, String bd_no, String mem_id) {
 		
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("reContent", reContent);
-		params.put("bdNo", bdNo);
+		params.put("re_content", re_content);
+		params.put("bd_no", bd_no);
 		params.put("memId", mem_id);
 		
 		boardDao.insertBoardReply(params);
-		
 	}
 	
+	
+	// 댓글 조회
 	@Override
 	public List<Board_ReplyVO> selectBoardReply(String bd_no) {
 		return boardDao.selectBoardReply(bd_no);
+	} 
+
+	// 댓글 수정
+	@Override
+	public void updateBoardReply(String re_content, String bd_no, String mem_id, String re_no) {
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		
+		// xml 부분과 맞춰주지 않아서 수정이 되지 않았음  
+		params.put("re_content", re_content);
+		params.put("re_no", re_no);
+		
+		//params.put("bdNo", bdNo);
+		//params.put("memId", mem_id);
+		
+		boardDao.updateBoardReply(params);
 	}
+
+//	@Override
+//	public void deleteBoardReply(String reContent, String bdNo, String re_no, String currentPage, String search_keyword,
+//			String search_keycode) {
+//		boardDao.deleteBoardReply(re_no);
+//	}
+
+	
+
+
 
 
 }
