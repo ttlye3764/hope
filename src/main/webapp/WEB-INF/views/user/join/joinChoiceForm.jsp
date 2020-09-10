@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01
-
- Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 	function chk() {
 		var req = document.form.req.checked;
@@ -15,18 +11,16 @@
 		if (num == 1) {
 			document.form.submit();
 		} else {
-			alert("개인정보 약관에 동의하셔야 합니다.");
+			swal("","개인정보 약관에 동의하셔야 합니다.", "warning");
 		}
 	}
 	function nochk() {
-		alert("동의하지 않으면 가입하실 수 없습니다");
+		swal("","동의하지 않으면 가입하실 수 없습니다.", "warning");
 		location.href = "${pageContext.request.contextPath}/user/main/mainForm.do";
 	}
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>회원가입 약관동의</title>
-</head>
-<body>
 <div align="center" style="width:100%">
 	<form action="${pageContext.request.contextPath}/user/member/memberForm.do" name="form" method="post">
 		<table width="900" height="650">
@@ -70,5 +64,3 @@
 		</table>
 	</form>
 </div>
-</body>
-</html>

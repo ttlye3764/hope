@@ -14,6 +14,7 @@
 			<result property="k_answer" column="k_answer"/>
 			<result property="mem_no" column="mem_no"/>
 			<collection property="items" column="k_no" select="fileitem.fileitemList" ofType="fileitemVO" javaType="java.util.List"></collection>
+			<collection property="itemsInfo" column="k_no" select="fileitem.fileitemListInfo" ofType="fileitemVO" javaType="java.util.List"></collection>
     	</resultMap>
     	
     	<sql id="selectAll">

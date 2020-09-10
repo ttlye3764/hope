@@ -3,11 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html>
-<head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body class="loading">
+<div class="loading">
         <div id="detached-topbar-placeholder"></div>
         <!-- Begin page -->
         <div class="wrapper">
@@ -201,5 +198,5 @@ function setThumbnail(event) {
 
 	});
 </script>
-</body>
+</div>
 </html>

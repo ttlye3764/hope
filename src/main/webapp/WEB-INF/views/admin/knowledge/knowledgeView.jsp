@@ -16,12 +16,12 @@
 
 	<!--Template Functions-->
 	<script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	$('form[name=knowledgeView]').on('submit', function(){	
 
-		alert("수정 완료");
+		swal("UPDATE","수정 완료", "success");
 	    var k_answer = $('input[name="k_answer"]:checked').val();
 		$(this).append('<input type="hidden" name="k_no" value="${knowledgeInfo.k_no}"/>');
      	$(this).attr('action','${pageContext.request.contextPath}/admin/knowledge/updateKnowledgeInfo.do?k_answer=' + k_answer);
@@ -109,13 +109,11 @@ $(function(){
 								>${knowledgeInfo.k_content}</textarea>
 							</div>
 							
-							 <c:if test="${!empty knowledgeInfo.items }">  
-							<div id="image_container" style="width: 300px; height: 200px;">
-								<c:forEach items="${knowledgeInfo.items }" var="fileitemInfo">
-									<img src="/files/${fileitemInfo.file_save_name }" alt="pic1">
-								</c:forEach>
-							</div>
-							 </c:if>
+							<c:forEach items="${knowledgeInfo.itemsInfo }" var="fileitemInfo" varStatus="status">
+								<div id="image_container" style="width: 300px; height: 200px;">
+									<img src="/files/${knowledgeInfo.itemsInfo[status.index].file_save_name }" alt="pic1" style="width: 300px; height: 200px;">
+								</div>
+							</c:forEach>
 
 							<div class="list-group-number list-unstyled list-group-borderless">
 								      

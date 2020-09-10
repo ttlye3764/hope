@@ -4,36 +4,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!-- c:url을 이용하여 처리 -->
 <c:url var="regustMemberURI" value="/user/member/memberForm.do"></c:url>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<title>Wizixo | Creative Multipurpose Bootstrap Template</title>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="author" content="Webestica.com">
-<meta name="description"
-	content="Creative Multipurpose Bootstrap Template">
 
-<!-- Favicon -->
-<link rel="shortcut icon" href="assets/images/favicon.ico">
-
-<!-- Google Font -->
-<link
-	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900%7CPlayfair+Display:400,400i,700,700i%7CRoboto:400,400i,500,700"
-	rel="stylesheet">
-
-<!-- Plugins CSS -->
-<link rel="stylesheet" type="text/css"
-	href="assets/vendor/font-awesome/css/font-awesome.min.css" />
-<link rel="stylesheet" type="text/css"
-	href="assets/vendor/themify-icons/css/themify-icons.css" />
-<link rel="stylesheet" type="text/css"
-	href="assets/vendor/animate/animate.min.css" />
-
-<!-- Theme CSS -->
-<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.js"></script>
 <script type='text/javascript'>
@@ -46,12 +18,22 @@ $(function(){
 	var id = '${LOGIN_MEMBERINFO.mem_id}';
 	var social = '${LOGIN_MEMBERINFO.mem_join_addr}';
 	if(social=='n'){
-	   alert('소셜 로그인 사용자는 이용할 수 없습니다.');
-	   window.history.back();
-	}else if(id==''){
-	   alert('로그인 후 이용해주세요.');
-	   $(location).attr('href','${pageContext.request.contextPath}/user/main/mainForm.do');
-	}
+		swal({
+      	    title: "",
+      	    text: "소셜 로그인 사용자는 이용할 수 없습니다.",
+      	    type: "warning"
+      	}).then(function() {
+      		window.history.back();
+      	});
+	   }else if(id==''){
+		   swal({
+	      	    title: "",
+	      	    text: "로그인 후 이용해주세요.",
+	      	    type: "warning"
+	      	}).then(function() {
+	      		$(location).attr('href','${pageContext.request.contextPath}/user/main/mainForm.do');
+	      	});
+	   }
 });
 function checkpass(){
 	$.ajax({
@@ -102,8 +84,6 @@ td {
 	text-align: right;
 }
 </style>
-</head>
-<body>
 	<div class="innerpage-banner center bg-overlay-dark-7 py-7"
 		style="background: url(assets/images/bg/04.jpg) no-repeat; background-size: cover; background-position: center center;">
 		<div class="container">
@@ -112,7 +92,7 @@ td {
 					<h1 class="innerpage-title">비밀번호 확인</h1>
 					<h6 class="subtitle">현재 비밀번호를 입력해주세요.</h6>
 					<div align="center">
-						<table width="400px">
+						<table width="500px">
 							<tr>
 								<td width="280px"><input type="password" name="mem_pass" id="mem_pass"
 									class="form-control" /></td>
@@ -130,5 +110,3 @@ td {
 	<br>
 	<br>
 	<br>
-</body>
-</html>

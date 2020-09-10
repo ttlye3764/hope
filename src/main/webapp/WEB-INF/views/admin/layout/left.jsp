@@ -14,7 +14,7 @@
     <div class="slimscroll-menu" id="left-side-menu-container">
 
         <!-- LOGO -->
-        <a href="index.html" class="logo text-center">
+        <a href="${pageContext.request.contextPath}/admin/main/mainForm.do" class="logo text-center">
             <span class="logo-lg">
                 <img src="${pageContext.request.contextPath }/resources/html/dist/assets/images/logo.png" alt="" height="16" id="side-main-logo">
             </span>
@@ -36,6 +36,11 @@
                 </a>
             </li>
                 <ul class="side-nav-second-level" aria-expanded="false">
+                	<li class="side-nav-item">
+                        <a href="${pageContext.request.contextPath}/admin/member/memberList.do" aria-expanded="false">MemberList
+                            <span class="menu-arrow"></span>
+                        </a>
+                    </li>
                     <li class="side-nav-item">
                         <a href="${pageContext.request.contextPath}/admin/healthImage/healthImageList.do" aria-expanded="false">Health
                             <span class="menu-arrow"></span>

@@ -6,7 +6,24 @@ public class FriendVO {
 	private String fri_mem_no;
 	private String mem_name;
 	private String fri_mem_name;
+	private String mem_id;
+	private String fri_mem_id;
 	
+	
+	
+	
+	public String getMem_id() {
+		return mem_id;
+	}
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
+	}
+	public String getFri_mem_id() {
+		return fri_mem_id;
+	}
+	public void setFri_mem_id(String fri_mem_id) {
+		this.fri_mem_id = fri_mem_id;
+	}
 	public String getFri_no() {
 		return fri_no;
 	}

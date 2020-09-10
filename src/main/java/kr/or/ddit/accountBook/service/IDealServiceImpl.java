@@ -58,8 +58,28 @@ public class IDealServiceImpl implements IDealService{
 	}
 
 	@Override
+	public void deletedeal(String deal_no) throws Exception {
+		dao.deletedeal(deal_no);
+	}
+
+	@Override
 	public String totalCount(Map<String, String> params) throws Exception {
 		return dao.totalCount(params);
+	}
+
+	@Override
+	public List<DealVO> staticList(String mem_no) throws Exception {
+		return dao.staticList(mem_no);
+	}
+
+	@Override
+	public DealVO dealInfo(String deal_no) throws Exception {
+		return dao.dealInfo(deal_no);
+	}
+
+	@Override
+	public void updateAccount(Map<String, String> params) throws Exception {
+		dao.updateAccount(params);		
 	}
 
 	

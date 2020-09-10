@@ -43,6 +43,7 @@ import kr.or.ddit.member.service.IMemberService;
 import kr.or.ddit.vo.ChatingRoomVO;
 import kr.or.ddit.vo.FriendVO;
 import kr.or.ddit.vo.MemberVO;
+import kr.or.ddit.vo.MessageVO;
 import kr.or.ddit.vo.ParticipationVO;
 
 @Controller
@@ -91,66 +92,135 @@ public class ChatController {
 		
 		andView.addObject("chatingRoomList", chatingRoomList);
 		andView.addObject("friendList",friendList);
-		andView.setViewName("user/chat/chat");
+		andView.setViewName("user/chat/chatpage");
 		return andView;
 	};
 	
-	@RequestMapping("searchMember")
+	@RequestMapping("participationList")
+	public ModelAndView participationList(ModelAndView andView,
+											HttpServletRequest request,
+											HttpSession session,
+											Map<String, String> params) throws Exception{
+		return andView;
+	}
+	
+	@RequestMapping("chatRoomList")
+	public ModelAndView chatRoomList(ModelAndView andView,
+									String ch_no,
+									HttpServletRequest request,
+									HttpSession session,
+									Map<String, String> params,
+									String fail) throws Exception{
+		session = request.getSession();
+		
+		MemberVO memberInfo= (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		
+		params.put("mem_no", memberInfo.getMem_no());
+	
+		
+		List<MemberVO> chatMemberList = chatService.chatRoomList(params);
+		
+		if(chatMemberList !=null) {
+			andView.addObject("chatMemberList", chatMemberList);
+		}else {
+			fail = "참여중인 채팅이 없습니다.";
+			andView.addObject("fail", fail);
+		} 
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
+	
+	@RequestMapping("selectMemList")
 	public ModelAndView searchMember(ModelAndView andView,
 									Map<String, String> params,
-									@RequestParam String mem_name) throws Exception {
+									String mem_name,
+									String mem_id,
+									HttpServletRequest request,
+									HttpSession session) throws Exception {
 
-		params.put("mem_name", mem_name);
+		session = request.getSession();
 		
-		MemberVO memberInfo = memberService.memberInfo(params);
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO"); 
 		
-		  andView.addObject("memberInfo", memberInfo);
-		  andView.setViewName("jsonConvertView");
-				
+		if(mem_name != null) {
+			params.put("mem_name", mem_name);
+		}
+		if(mem_id != null) {
+			params.put("mem_id", mem_id);
+		}
+		params.put("mem_no", memberInfo.getMem_no());
+		
+		List<MemberVO> memberList = chatService.selectMemList(params);
+		
+		if(memberList == null) {
+			andView.addObject("fail","검색된 친구가 없습니다.");
+		}else {
+			andView.addObject("memberList", memberList);
+		}
+
+		andView.setViewName("jsonConvertView");
 		
 		return andView;
 	}
 	
-	@RequestMapping("addFriend")
+	@RequestMapping("insertFriendInfo")
 	public ModelAndView addFriend(ModelAndView andView,
 								 Map<String, String> params,
-								 @RequestParam String mem_name,
+								 @RequestParam String mem_no,
 								 MemberVO memberInfo,
 								 FriendVO friendInfo,
 								 HttpServletRequest request) throws Exception{
 		
 		HttpSession session = request.getSession();
 		
-		params.put("mem_name",mem_name);
+		params.put("fri_mem_no",mem_no);
 		
-		// 등록할 친구
-		memberInfo = memberService.memberInfo(params);
-		
-//		memberService.addFriend(memberInfo);
-		
-		// 나
 		MemberVO member = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		params.put("mem_no", member.getMem_no());
 		
-		System.out.println(memberInfo.getMem_no());
+		friendInfo = chatService.selectTwoMemInfo(params);
 		
-		System.out.println(member.getMem_no());
-		
-		friendInfo.setFri_mem_no(memberInfo.getMem_no());
-		friendInfo.setFri_mem_name(memberInfo.getMem_name());
-		friendInfo.setMem_name(member.getMem_name());
-		friendInfo.setMem_no(member.getMem_no());
-		
-		memberService.addFriend(friendInfo);
-		
-		friendInfo.setFri_mem_no(member.getMem_no());
-		friendInfo.setFri_mem_name(member.getMem_name());
-		friendInfo.setMem_name(memberInfo.getMem_name());
-		friendInfo.setMem_no(memberInfo.getMem_no());
-		
-		memberService.addFriend(friendInfo);
+		chatService.insertFriendInfo(friendInfo);
 		
 		andView.setViewName("jsonConvertView");
 		
+		return andView;
+	}
+	
+	@RequestMapping("messageList")
+	public ModelAndView messageList(ModelAndView andView,
+									Map<String, String> params,
+									String ch_no) throws Exception{
+	params.put("ch_no", ch_no);
+	List<MessageVO> messageList = chatService.messageList(params);
+	
+	andView.addObject("messageList", messageList);
+	andView.setViewName("jsonConvertView");
+	return andView;	
+	}
+	
+	@RequestMapping("selectFriendList")
+	public ModelAndView selectFriendList(ModelAndView andView,
+										String mem_no,
+										HttpServletRequest request,
+										HttpSession session,
+										Map<String, String> params,
+										String fail) throws Exception{
+		session = request.getSession();
+		
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		
+		params.put("mem_no", memberInfo.getMem_no());
+		
+		List<MemberVO> memberList = chatService.selectFriendList(params);
+		
+		if(memberList ==null) {
+			fail = "등록된 친구가 없습니다.";
+			andView.addObject("fail", fail);
+		}else {
+			andView.addObject("memberList", memberList);
+		}
+		andView.setViewName("jsonConvertView");
 		return andView;
 	}
 	
@@ -164,21 +234,23 @@ public class ChatController {
 	}
 	
 	@RequestMapping("insertParticipation")
-	public ModelAndView insertParticipation(@RequestParam String mem_no, @RequestParam String target_mem_no,
+	public ModelAndView insertParticipation(@RequestParam String fri_mem_no,
 											Map<String, String> params,
-											ModelAndView andView) throws Exception {
+											ModelAndView andView,
+											HttpServletRequest request,
+											HttpSession session) throws Exception {
 		
-		System.out.println(mem_no);
+		session = request.getSession();
 		
-		System.out.println("타겟 : " + target_mem_no);
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
 		
 		ParticipationVO participationInfo = new ParticipationVO();
 		
-		participationInfo.setMem_no(mem_no);
+		participationInfo.setMem_no(memberInfo.getMem_no());
 		
 		chatService.insertParticipation(participationInfo);
 		
-		participationInfo.setMem_no(target_mem_no);
+		participationInfo.setMem_no(fri_mem_no);
 		
 		chatService.insertParticipation(participationInfo);
 		
@@ -191,8 +263,9 @@ public class ChatController {
 	  public ModelAndView detectIntentTexts(
 	      String projectId,  String sessionId, String languageCode, ModelAndView andView)
 	      throws IOException, ApiException {
+		  String result=null;
 		  List<String> texts = new ArrayList<>();
-		  texts.add("재호");
+		  texts.add("수아");
 		  projectId = "testagent-crvsfc";
 		  sessionId="testAgent";
 		  languageCode="ko";
@@ -225,11 +298,13 @@ public class ChatController {
 	            "Detected Intent: %s (confidence: %f)\n",
 	            queryResult.getIntent().getDisplayName(), queryResult.getIntentDetectionConfidence());
 	        System.out.format("Fulfillment Text: '%s'\n", queryResult.getFulfillmentText());
-
+	        result = queryResult.getFulfillmentText();
 	        queryResults.put(text, queryResult);
 	      }
 	    }
 	    System.out.println("queryREsults : " + queryResults);
+	    andView.addObject("result", result);
+	    andView.setViewName("user/chat/chatBot");
 	    return andView;
 	  }
 	

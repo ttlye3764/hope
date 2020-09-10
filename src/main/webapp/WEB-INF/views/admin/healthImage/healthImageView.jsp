@@ -135,7 +135,7 @@
 											 
 											<!-- 파일일 때 --> 
 											<c:set var="fileName" value="${fn:split(healthInfo.itemsInfo[status.index].file_save_name,'.') }" />
-												<c:if test="${fileName[1] eq 'jpg' || fileName[1] eq 'png'}">  
+												<c:if test="${fileName[1] ne 'mp4'}">  
 													<div id="image_container" style="width: 300px; height: 200px;">
 														<img src="/files/${fileitemInfo.file_save_name }" alt="pic1" style="width: 300px; height: 200px;">
 													</div>
@@ -160,7 +160,7 @@
 
         <!-- App js -->
 <script src="${pageContext.request.contextPath }/resources/html/dist/assets/js/app.min.js"></script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 function setThumbnail(event) { 
 	var reader = new FileReader(); 
@@ -182,8 +182,9 @@ function setThumbnail(event) {
 
 	$(function(){
 		$('form[name=healForm]').on('submit', function(){	
-			alert("수정 완료");
-		    var category = $('#category option:selected').val();
+			swal("UPDATE","수정 완료", "success");
+
+			var category = $('#category option:selected').val();
 		    var diet = $('#diet option:selected').val();
 
 		     $(this).append('<input type="hidden" name="healthImage_no" value="${healthInfo.healthImage_no}"/>');
@@ -199,7 +200,8 @@ function setThumbnail(event) {
 
 		// 삭제
 		$('#delBtn').click(function(){
-			alert("삭제 되었습니다.");	
+			swal("DELETE","삭제 완료", "success");	
+
 			var healthImage_no = $('#healthImage_no').val();
 			$(location).attr('href','${pageContext.request.contextPath}/admin/healthImage/deleteHealthImageInfo.do?healthImage_no=' + healthImage_no);
 			

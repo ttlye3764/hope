@@ -107,6 +107,20 @@
 		                                                    <span class="d-none d-lg-block">다리</span>
 		                                                </a>
 		                                            </li>
+		                                            <li class="nav-item">
+		                                                <a href="#settings" onclick="exe1();" data-toggle="tab" aria-expanded="true" class="nav-link">
+		                                                    <i class="mdi mdi-settings-outline d-lg-none d-block mr-1"></i>
+		                                                    <input type="hidden" value="추천 유지 운동" id="exe1"/>
+		                                                    <span class="d-none d-lg-block">추천 유지 운동</span>
+		                                                </a>
+		                                            </li>
+		                                            <li class="nav-item">
+		                                                <a href="#settings" onclick="exe2();" data-toggle="tab" aria-expanded="true" class="nav-link">
+		                                                    <i class="mdi mdi-settings-outline d-lg-none d-block mr-1"></i>
+		                                                    <input type="hidden" value="추천 근욱 운동" id="exe2"/>
+		                                                    <span class="d-none d-lg-block">추천 근육 운동</span>
+		                                                </a>
+		                                            </li>
 		                                           
 		                                        </ul>
                                                 <thead class="thead-light">
@@ -228,27 +242,37 @@
 
 			function shoulder() {
 				  var choose = $('#shoulder').val();	
-				  location.href = '${pageContext.request.contextPath}/admin/healthImage/chooseList.do?choose=' + choose;
+				  location.href = '${pageContext.request.contextPath}/admin/healthImage/healthImageList.do?choose=' + choose;
 			}
 			
 			function back() {
 				  var choose = $('#back').val();	
-				  location.href = '${pageContext.request.contextPath}/admin/healthImage/chooseList.do?choose=' + choose;
+				  location.href = '${pageContext.request.contextPath}/admin/healthImage/healthImageList.do?choose=' + choose;
 			}
 			
 			function chest() {
 				  var choose = $('#chest').val();	
-				  location.href = '${pageContext.request.contextPath}/admin/healthImage/chooseList.do?choose=' + choose;
+				  location.href = '${pageContext.request.contextPath}/admin/healthImage/healthImageList.do?choose=' + choose;
 			}
 			
 			function arm() {
 				  var choose = $('#arm').val();	
-				  location.href = '${pageContext.request.contextPath}/admin/healthImage/chooseList.do?choose=' + choose;
+				  location.href = '${pageContext.request.contextPath}/admin/healthImage/healthImageList.do?choose=' + choose;
 			}
 			
 			function leg() {
 				  var choose = $('#leg').val();	
-				  location.href = '${pageContext.request.contextPath}/admin/healthImage/chooseList.do?choose=' + choose;
+				  location.href = '${pageContext.request.contextPath}/admin/healthImage/healthImageList.do?choose=' + choose;
+			}
+
+			function exe1() {
+				  var choose = $('#exe1').val();	
+				  location.href = '${pageContext.request.contextPath}/admin/healthImage/healthImageList.do?choose=' + choose;
+			}
+
+			function exe2() {
+				  var choose = $('#exe2').val();	
+				  location.href = '${pageContext.request.contextPath}/admin/healthImage/healthImageList.do?choose=' + choose;
 			}
 
 			

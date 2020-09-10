@@ -16,7 +16,7 @@
 
 	<!--Template Functions-->
 	<script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	$('form[name=knowledgeForm]').on('submit', function(){	
@@ -33,18 +33,18 @@ $(function(){
 		var radio4 = $('input:radio[name=customRadio4]').is(':checked');
 
 		if (k_title == "" || k_answer1 == "" || k_answer2 == "" || k_answer3 == "" || k_answer4 == "") {
-			alert("빈 칸을 모두 입력해주세요.(내용 제외)");
+			swal("error","빈 칸을 모두 입력해주세요.(내용 제외)", "warning");
 
 			return false;
 		} 
 
 		if (!radio1) {
-			alert("버튼을 체크해주세요.")
+			swal("error","버튼을 체크해주세요.", "warning");
 
 			return false;
 		}
 
-		alert("등록 완료");
+		swal("REGISTER","등록 완료", "success");
 	    var k_answer = $('input[name="k_answer"]:checked').val();
 		 $(this).attr('action','${pageContext.request.contextPath}/admin/knowledge/insertKnowledgeInfo.do?k_answer=' + k_answer);
 	        
@@ -89,25 +89,6 @@ $(function(){
                 <div id="vertical-topbar-placeholder"></div>
                     <div id="horizontal-topbar-placeholder"></div>
                     
-
-<!-- 탑 메뉴 -->
-<!-- <div class="innerpage-banner center bg-overlay-dark-7 py-7" style="background:url(assets/images/bg/04.jpg) no-repeat; background-size:cover; background-position: center center;">
-		<div class="container">
-			<div class="row all-text-white">
-				<div class="col-md-12 align-self-center">
-					<h1 class="innerpage-title">퀴즈 풀기</h1>
-					<h6 class="subtitle">두뇌 강화 퀴즈 풀이 입니다 </h6>
-					<nav aria-label="breadcrumb">
-						<ol class="breadcrumb">
-							<li class="breadcrumb-item active"><a href="index.html"><i class="ti-home"></i> Home</a></li>
-							<li class="breadcrumb-item">Timeline</li>
-						</ol>
-					</nav>
-				</div>
-			</div>
-		</div>
-	</div> -->
-	
 	<!-- 문제 -->
 	<section class="timeline-page">
 		<div class="container">
@@ -162,11 +143,11 @@ $(function(){
 								</div>
 								
 							</div>
-									<div class="form-group">
-										<label for="exampleFormControlFile1"></label>
-										<input type="file" class="form-control-file" name="files"
-										  id="exampleFormControlFile1" onchange="setThumbnail(event);"/>
-									</div>
+								<div class="form-group">
+									<label for="exampleFormControlFile1"></label>
+									<input type="file" class="form-control-file" name="files"
+									  id="exampleFormControlFile1" onchange="setThumbnail(event);"/>
+								</div>
 						</div>
 					</div>
 				</div>
@@ -185,7 +166,7 @@ $(function(){
 					</div>
 				</div>
 			</form>
-			</section>
+		</section>
 			
 		</div>
 	</div>

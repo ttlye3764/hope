@@ -37,6 +37,8 @@
 <script type="text/javascript">
 
 
+   // 부트스트랩 엔터키 이벤트 제거
+   $(document).keypress(function(e) { if (e.keyCode == 13) e.preventDefault(); });
    
    $(function() {
         // 상세보기 기능

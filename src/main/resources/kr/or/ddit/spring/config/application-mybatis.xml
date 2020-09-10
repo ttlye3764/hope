@@ -16,8 +16,11 @@
 		 
 		 <bean id="dataSource" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource">
 		 	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+<!-- 		 	<property name="url" value="jdbc:oracle:thin:@112.220.114.130:1521:XE"/> -->
+<!-- 		 	<property name="username" value="NOTNULLOVE"/> -->
+<!-- 		 	<property name="password" value="java"/> -->
 		 	<property name="url" value="jdbc:oracle:thin:@112.220.114.130:1521:XE"/>
-		 	<property name="username" value="NOTNULLOVE"/>
+		 	<property name="username" value="notnullove"/>
 		 	<property name="password" value="java"/>
 		 </bean>
 		 

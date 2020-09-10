@@ -5,46 +5,22 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!-- c:url을 이용하여 처리 -->
 <c:url var="regustMemberURI" value="/user/member/memberForm.do"></c:url>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<title>Wizixo | Creative Multipurpose Bootstrap Template</title>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="author" content="Webestica.com">
-<meta name="description"
-	content="Creative Multipurpose Bootstrap Template">
 
-<!-- Favicon -->
-<link rel="shortcut icon" href="assets/images/favicon.ico">
-
-<!-- Google Font -->
-<link
-	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900%7CPlayfair+Display:400,400i,700,700i%7CRoboto:400,400i,500,700"
-	rel="stylesheet">
-
-<!-- Plugins CSS -->
-<link rel="stylesheet" type="text/css"
-	href="assets/vendor/font-awesome/css/font-awesome.min.css" />
-<link rel="stylesheet" type="text/css"
-	href="assets/vendor/themify-icons/css/themify-icons.css" />
-<link rel="stylesheet" type="text/css"
-	href="assets/vendor/animate/animate.min.css" />
-
-<!-- Theme CSS -->
-<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type='text/javascript'
 	src='<%=request.getContextPath()%>/js/validation.js'></script>
 <script type='text/javascript'>
 	$(function() {
 		var id = '${LOGIN_MEMBERINFO.mem_id}';
-		if (id == '') {
-			alert('로그인 후 이용해주세요.');
-			$(location).attr('href',
-					'${pageContext.request.contextPath}/user/main/mainForm.do');
-		}
+		if(id==''){
+			   swal({
+		      	    title: "",
+		      	    text: "로그인 후 이용해주세요.",
+		      	    type: "warning"
+		      	}).then(function() {
+		      		$(location).attr('href','${pageContext.request.contextPath}/user/main/mainForm.do');
+		      	});
+		   }
 	});
 	function chk() {
 			$.ajax({
@@ -55,21 +31,21 @@
 							mem_id : '${LOGIN_MEMBERINFO.mem_id}'
 						},
 						success : function(result) {
-							alert(result.json);
+							swal("",result.json, "warning");
 							LogOut();
 						}
 					});
 	}
 	function LogOut() {
 		$.ajax({
-					type : 'POST',
-					url : '${pageContext.request.contextPath}/user/join/logout.do',
-					dataType : 'JSON',
-					data : {},
-					success : function(result) {
-						location.href = "${pageContext.request.contextPath}/user/main/mainForm.do";
-					}
-				});
+			type : 'POST',
+			url : '${pageContext.request.contextPath}/user/join/logout.do',
+			dataType : 'JSON',
+			data : {},
+			success : function(result) {
+				location.href = "${pageContext.request.contextPath}/user/main/mainForm.do";
+			}
+		});
 	}
 	function delete_modal() {
 		var req = document.form.req.checked;
@@ -80,13 +56,10 @@
 		if (num == 1) {
 			$("#delete_modal").modal("show"); //모달창 띄우기
 		} else {
-			alert("개인정보 약관에 동의하셔야 합니다.");
+			swal("","개인정보 약관에 동의하셔야 합니다.", "warning");
 		}
 	}
 </script>
-</head>
-
-<body>
 	<div class="innerpage-banner center bg-overlay-dark-7 py-7" style="background:url(assets/images/bg/04.jpg) no-repeat; background-size:cover; background-position: center center;">
       <div class="container">
          <div class="row all-text-white">
@@ -154,6 +127,3 @@
 			</div>
 		</div>
 	</div>
-</body>
-</body>
-</html>

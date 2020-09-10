@@ -13,7 +13,14 @@ public class DealVO {
 	private String mem_no;
 	private String deal_option;
 	private String deal_division;
+	private String deal_card_name;
 	
+	public String getDeal_card_name() {
+		return deal_card_name;
+	}
+	public void setDeal_card_name(String deal_card_name) {
+		this.deal_card_name = deal_card_name;
+	}
 	public String getDeal_no() {
 		return deal_no;
 	}

@@ -5,6 +5,7 @@
 	<select resultType="healthFileVO" id="healthFileList">
 		SELECT *
 		FROM HEALTHFILE
+		WHERE FILE_HEALTHIMAGE_NO = #{file_healthImage_no}
 		ORDER BY FILE_NO DESC
 	</select>
 	
@@ -32,7 +33,7 @@
 	<select resultType="healthFileVO" id="healthFileInfo" parameterType="map">
 		SELECT *
 		FROM HEALTHFILE
-		WHERE FILE_HEALTHIMAGE_NO = #{file_healthImage_no}
+		WHERE HEALTHIMAGE_SEQ = #{healthimage_seq}
 	</select>
 
 	<delete id="deletehealthFile" parameterType="String">

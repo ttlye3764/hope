@@ -78,6 +78,12 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			
+			<dependency>
+			  <groupId>com.google.cloud1</groupId>
+			  <artifactId>google-cloud-vision</artifactId>
+			  <version>1.14.0</version>
+			</dependency>
 
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
@@ -585,5 +591,6 @@
 			<version>20180813</version>
 		</dependency>
 
+		
 	</dependencies>
 </project>

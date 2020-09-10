@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
 <meta charset="UTF-8">
 <style type="text/css">
 li {
@@ -178,8 +177,6 @@ $(function(){
 });
 
 </script>
-</head>
-<body>
 <div class="innerpage-banner center bg-overlay-dark-7 py-7" 
 	style="background:url(${pageContext.request.contextPath }/resources/template/assets/images/bg/04.jpg) no-repeat; background-size:cover; 
 		background-position: center center;">
@@ -235,477 +232,477 @@ $(function(){
 					</a> 
 					
 					 <table class="tg" style="width: 650px;margin: auto;">
-						<thead>
-						  <tr>
-						    <th class="tg-6ykz" colspan="4">여성</th>
-						    <th class="tg-396i" rowspan="2">신장</th>
-						    <th class="tg-guxg" colspan="4">남성</th>
-						  </tr>
-						  <tr>
-						    <td class="tg-3trw">비만</td>
-						    <td class="tg-3trw">과체중</td>
-						    <td class="tg-3trw">표준</td>
-						    <td class="tg-3trw">저체중</td>
-						    <td class="tg-3trw">저체중</td>
-						    <td class="tg-3trw">표준</td>
-						    <td class="tg-3trw">과체중</td>
-						    <td class="tg-3trw">비만</td>
-						  </tr>
-						</thead>
-						<tbody>
-						  <tr>
-						    <td class="tg-cqae">51</td>
-						    <td class="tg-cqae">46.8</td>
-						    <td class="tg-3trw">42.5</td>
-						    <td class="tg-3trw">36.1</td>
-						    <td class="tg-396i">150cm</td>
-						    <td class="tg-3trw">38.3</td>
-						    <td class="tg-3trw">45.0</td>
-						    <td class="tg-3trw">49.5</td>
-						    <td class="tg-3trw">54.0</td>
-						  </tr>
-						  <tr>
-						    <td class="tg-cqae">52</td>
-						    <td class="tg-cqae">47.7</td>
-						    <td class="tg-3trw">43.4</td>
-						    <td class="tg-3trw">36.8</td>
-						    <td class="tg-396i">151cm</td>
-						    <td class="tg-3trw">39.0</td>
-						    <td class="tg-3trw">45.9</td>
-						    <td class="tg-3trw">50.5</td>
-						    <td class="tg-3trw">55.1</td>
-						  </tr>
-						  <tr>
-						    <td class="tg-cqae">53</td>
-						    <td class="tg-cqae">48.6</td>
-						    <td class="tg-3trw">44.2</td>
-						    <td class="tg-3trw">37.6</td>
-						    <td class="tg-396i">152cm</td>
-						    <td class="tg-3trw">39.8</td>
-						    <td class="tg-3trw">46.8</td>
-						    <td class="tg-3trw">51.5</td>
-						    <td class="tg-3trw"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-cqae">54.1</td>
-						    <td class="tg-cqae">49.6</td>
-						    <td class="tg-3trw">45.1</td>
-						    <td class="tg-3trw"></td>
-						    <td class="tg-396i"></td>
-						    <td class="tg-3trw"></td>
-						    <td class="tg-3trw"></td>
-						    <td class="tg-3trw"></td>
-						    <td class="tg-3trw"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-cqae">55.1</td>
-						    <td class="tg-cqae">50.5</td>
-						    <td class="tg-3trw"></td>
-						    <td class="tg-3trw"></td>
-						    <td class="tg-396i"></td>
-						    <td class="tg-3trw"></td>
-						    <td class="tg-3trw"></td>
-						    <td class="tg-3trw"></td>
-						    <td class="tg-3trw"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-cqae">561</td>
-						    <td class="tg-cqae">51.4</td>
-						    <td class="tg-3trw"></td>
-						    <td class="tg-3trw"></td>
-						    <td class="tg-396i"></td>
-						    <td class="tg-3trw"></td>
-						    <td class="tg-3trw"></td>
-						    <td class="tg-3trw"></td>
-						    <td class="tg-3trw"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-cqae">57.1</td>
-						    <td class="tg-cqae">52.4</td>
-						    <td class="tg-3trw"></td>
-						    <td class="tg-3trw"></td>
-						    <td class="tg-396i"></td>
-						    <td class="tg-3trw"></td>
-						    <td class="tg-3trw"></td>
-						    <td class="tg-3trw"></td>
-						    <td class="tg-3trw"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-cqae">581</td>
-						    <td class="tg-cqae">53.3</td>
-						    <td class="tg-3trw"></td>
-						    <td class="tg-3trw"></td>
-						    <td class="tg-396i"></td>
-						    <td class="tg-3trw"></td>
-						    <td class="tg-3trw"></td>
-						    <td class="tg-3trw"></td>
-						    <td class="tg-3trw"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">59.2</td>
-						    <td class="tg-lboi">54.2</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">60.2</td>
-						    <td class="tg-lboi">55.2</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">612</td>
-						    <td class="tg-lboi">56.1</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">62.2</td>
-						    <td class="tg-lboi">57</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">63.2</td>
-						    <td class="tg-lboi">58</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">64.3</td>
-						    <td class="tg-lboi">58.9</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">65.3</td>
-						    <td class="tg-lboi">59.8</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">66.3</td>
-						    <td class="tg-lboi">60.8</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">67.3</td>
-						    <td class="tg-lboi">61.7</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">68.3</td>
-						    <td class="tg-lboi">62.6</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">69.4</td>
-						    <td class="tg-lboi">63.6</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">70.4</td>
-						    <td class="tg-lboi">64.5</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">714</td>
-						    <td class="tg-lboi">65.5</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">72.4</td>
-						    <td class="tg-lboi">66.4</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">73.4</td>
-						    <td class="tg-lboi">67.3</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">74.5</td>
-						    <td class="tg-lboi">68.3</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">75.5</td>
-						    <td class="tg-lboi">69.2</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">76.5</td>
-						    <td class="tg-lboi">70.1</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">77.5</td>
-						    <td class="tg-lboi">71.1</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">78.5</td>
-						    <td class="tg-lboi">72</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">79.6</td>
-						    <td class="tg-lboi">72.9</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">80.6</td>
-						    <td class="tg-lboi">73.9</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">81.6</td>
-						    <td class="tg-lboi">74.8</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">82.6</td>
-						    <td class="tg-lboi">75.7</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">83.6</td>
-						    <td class="tg-lboi">76.7</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">84.7</td>
-						    <td class="tg-lboi">77.6</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">85.7</td>
-						    <td class="tg-lboi">78.5</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">86.7</td>
-						    <td class="tg-lboi">79.5</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">87.7</td>
-						    <td class="tg-lboi">80.4</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">88.7</td>
-						    <td class="tg-lboi">81.3</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">89.8</td>
-						    <td class="tg-lboi">82.3</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">90.8</td>
-						    <td class="tg-lboi">83.2</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-lboi">91.8</td>
-						    <td class="tg-lboi">84.2</td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-y698"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						    <td class="tg-0pky"></td>
-						  </tr>
-						</tbody>
-					</table> 
+                  <thead>
+                    <tr>
+                      <th class="tg-6ykz" colspan="4">여성</th>
+                      <th class="tg-396i" rowspan="2">신장</th>
+                      <th class="tg-guxg" colspan="4">남성</th>
+                    </tr>
+                    <tr>
+                      <td class="tg-3trw">비만</td>
+                      <td class="tg-3trw">과체중</td>
+                      <td class="tg-3trw">표준</td>
+                      <td class="tg-3trw">저체중</td>
+                      <td class="tg-3trw">저체중</td>
+                      <td class="tg-3trw">표준</td>
+                      <td class="tg-3trw">과체중</td>
+                      <td class="tg-3trw">비만</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="tg-cqae">51.0</td>
+                      <td class="tg-cqae">46.8</td>
+                      <td class="tg-3trw">42.5</td>
+                      <td class="tg-3trw">36.1</td>
+                      <td class="tg-396i">150cm</td>
+                      <td class="tg-3trw">38.3</td>
+                      <td class="tg-3trw">45.0</td>
+                      <td class="tg-3trw">49.5</td>
+                      <td class="tg-3trw">54.0</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">52.0</td>
+                      <td class="tg-cqae">47.7</td>
+                      <td class="tg-3trw">43.4</td>
+                      <td class="tg-3trw">36.8</td>
+                      <td class="tg-396i">151cm</td>
+                      <td class="tg-3trw">39.0</td>
+                      <td class="tg-3trw">45.9</td>
+                      <td class="tg-3trw">50.5</td>
+                      <td class="tg-3trw">55.1</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">53.0</td>
+                      <td class="tg-cqae">48.6</td>
+                      <td class="tg-3trw">44.2</td>
+                      <td class="tg-3trw">37.6</td>
+                      <td class="tg-396i">152cm</td>
+                      <td class="tg-3trw">39.8</td>
+                      <td class="tg-3trw">46.8</td>
+                      <td class="tg-3trw">51.5</td>
+                      <td class="tg-3trw">56.2</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">54.1</td>
+                      <td class="tg-cqae">49.6</td>
+                      <td class="tg-3trw">45.1</td>
+                      <td class="tg-3trw">38.3</td>
+                      <td class="tg-396i">153cm</td>
+                      <td class="tg-3trw">40.5</td>
+                      <td class="tg-3trw">47.7</td>
+                      <td class="tg-3trw">52.5</td>
+                      <td class="tg-3trw">57.2</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">55.1</td>
+                      <td class="tg-cqae">50.5</td>
+                      <td class="tg-3trw">45.9</td>
+                      <td class="tg-3trw">39.0</td>
+                      <td class="tg-396i">154cm</td>
+                      <td class="tg-3trw">41.3</td>
+                      <td class="tg-3trw">48.6</td>
+                      <td class="tg-3trw">53.5</td>
+                      <td class="tg-3trw">58.3</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">56.1</td>
+                      <td class="tg-cqae">51.4</td>
+                      <td class="tg-3trw">46.8</td>
+                      <td class="tg-3trw">39.7</td>
+                      <td class="tg-396i">155cm</td>
+                      <td class="tg-3trw">42.1</td>
+                      <td class="tg-3trw">49.5</td>
+                      <td class="tg-3trw">54.5</td>
+                      <td class="tg-3trw">59.4</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">57.1</td>
+                      <td class="tg-cqae">52.4</td>
+                      <td class="tg-3trw">47.6</td>
+                      <td class="tg-3trw">40.5</td>
+                      <td class="tg-396i">156cm</td>
+                      <td class="tg-3trw">42.8</td>
+                      <td class="tg-3trw">50.4</td>
+                      <td class="tg-3trw">55.4</td>
+                      <td class="tg-3trw">60.5</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">58.1</td>
+                      <td class="tg-cqae">53.3</td>
+                      <td class="tg-3trw">48.5</td>
+                      <td class="tg-3trw">41.2</td>
+                      <td class="tg-396i">157cm</td>
+                      <td class="tg-3trw">43.6</td>
+                      <td class="tg-3trw">51.3</td>
+                      <td class="tg-3trw">56.4</td>
+                      <td class="tg-3trw">61.6</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">59.2</td>
+                      <td class="tg-cqae">54.2</td>
+                      <td class="tg-3trw">49.3</td>
+                      <td class="tg-3trw">41.9</td>
+                      <td class="tg-396i">158cm</td>
+                      <td class="tg-3trw">44.4</td>
+                      <td class="tg-3trw">52.2</td>
+                      <td class="tg-3trw">57.4</td>
+                      <td class="tg-3trw">62.6</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">60.2</td>
+                      <td class="tg-cqae">55.2</td>
+                      <td class="tg-3trw">50.2</td>
+                      <td class="tg-3trw">42.6</td>
+                      <td class="tg-396i">159cm</td>
+                      <td class="tg-3trw">45.1</td>
+                      <td class="tg-3trw">53.1</td>
+                      <td class="tg-3trw">58.4</td>
+                      <td class="tg-3trw">63.7</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">61.2</td>
+                      <td class="tg-cqae">56.1</td>
+                      <td class="tg-3trw">56.1</td>
+                      <td class="tg-3trw">51.0</td>
+                      <td class="tg-396i">160cm</td>
+                      <td class="tg-3trw">45.9</td>
+                      <td class="tg-3trw">54.0</td>
+                      <td class="tg-3trw">59.4</td>
+                      <td class="tg-3trw">64.8</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">62.2</td>
+                      <td class="tg-cqae">57</td>
+                      <td class="tg-3trw">51.9</td>
+                      <td class="tg-3trw">44.8</td>
+                      <td class="tg-396i">161cm</td>
+                      <td class="tg-3trw">46.7</td>
+                      <td class="tg-3trw">54.9</td>
+                      <td class="tg-3trw">60.4</td>
+                      <td class="tg-3trw">65.9</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">63.2</td>
+                      <td class="tg-cqae">58.0</td>
+                      <td class="tg-3trw">52.7</td>
+                      <td class="tg-3trw">44.8</td>
+                      <td class="tg-396i">162cm</td>
+                      <td class="tg-3trw">47.4</td>
+                      <td class="tg-3trw">55.8</td>
+                      <td class="tg-3trw">61.4</td>
+                      <td class="tg-3trw">67.0</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">64.3</td>
+                      <td class="tg-cqae">58.9</td>
+                      <td class="tg-3trw">53.6</td>
+                      <td class="tg-3trw">45.5</td>
+                      <td class="tg-396i">163cm</td>
+                      <td class="tg-3trw">48.2</td>
+                      <td class="tg-3trw">56.7</td>
+                      <td class="tg-3trw">62.4</td>
+                      <td class="tg-3trw">68.0</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">65.3</td>
+                      <td class="tg-cqae">59.8</td>
+                      <td class="tg-3trw">54.4</td>
+                      <td class="tg-3trw">46.2</td>
+                      <td class="tg-396i">164cm</td>
+                      <td class="tg-3trw">49.0</td>
+                      <td class="tg-3trw">57.6</td>
+                      <td class="tg-3trw">63.4</td>
+                      <td class="tg-3trw">69.1</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">66.3</td>
+                      <td class="tg-cqae">60.8</td>
+                      <td class="tg-3trw">55.3</td>
+                      <td class="tg-3trw">47.0</td>
+                      <td class="tg-396i">165cm</td>
+                      <td class="tg-3trw">49.7</td>
+                      <td class="tg-3trw">58.5</td>
+                      <td class="tg-3trw">64.4</td>
+                      <td class="tg-3trw">70.2</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">67.3</td>
+                      <td class="tg-cqae">61.7</td>
+                      <td class="tg-3trw">56.1</td>
+                      <td class="tg-3trw">47.7</td>
+                      <td class="tg-396i">166cm</td>
+                      <td class="tg-3trw">50.5</td>
+                      <td class="tg-3trw">59.4</td>
+                      <td class="tg-3trw">65.3</td>
+                      <td class="tg-3trw">71.3</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">68.3</td>
+                      <td class="tg-cqae">62.6</td>
+                      <td class="tg-3trw">57.0</td>
+                      <td class="tg-3trw">48.4</td>
+                      <td class="tg-396i">167cm</td>
+                      <td class="tg-3trw">51.3</td>
+                      <td class="tg-3trw">60.3</td>
+                      <td class="tg-3trw">66.3</td>
+                      <td class="tg-3trw">72.4</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">69.4</td>
+                      <td class="tg-cqae">63.6</td>
+                      <td class="tg-3trw">57.8</td>
+                      <td class="tg-3trw">49.1</td>
+                      <td class="tg-396i">168cm</td>
+                      <td class="tg-3trw">52.0</td>
+                      <td class="tg-3trw">61.2</td>
+                      <td class="tg-3trw">67.3</td>
+                      <td class="tg-3trw">73.4</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">70.4</td>
+                      <td class="tg-cqae">64.5</td>
+                      <td class="tg-3trw">58.7</td>
+                      <td class="tg-3trw">49.9</td>
+                      <td class="tg-396i">169cm</td>
+                      <td class="tg-3trw">52.8</td>
+                      <td class="tg-3trw">62.1</td>
+                      <td class="tg-3trw">68.3</td>
+                      <td class="tg-3trw">74.5</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">71.4</td>
+                      <td class="tg-cqae">65.5</td>
+                      <td class="tg-3trw">59.5</td>
+                      <td class="tg-3trw">50.6</td>
+                      <td class="tg-396i">170cm</td>
+                      <td class="tg-3trw">53.6</td>
+                      <td class="tg-3trw">63.0</td>
+                      <td class="tg-3trw">69.3</td>
+                      <td class="tg-3trw">75.6</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">72.4</td>
+                      <td class="tg-cqae">66.4</td>
+                      <td class="tg-3trw">60.4</td>
+                      <td class="tg-3trw">51.3</td>
+                      <td class="tg-396i">171cm</td>
+                      <td class="tg-3trw">54.3</td>
+                      <td class="tg-3trw">63.9</td>
+                      <td class="tg-3trw">70.3</td>
+                      <td class="tg-3trw">76.7</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">73.4</td>
+                      <td class="tg-cqae">67.3</td>
+                      <td class="tg-3trw">61.2</td>
+                      <td class="tg-3trw">52.0</td>
+                      <td class="tg-396i">172cm</td>
+                      <td class="tg-3trw">55.1</td>
+                      <td class="tg-3trw">64.8</td>
+                      <td class="tg-3trw">71.3</td>
+                      <td class="tg-3trw">77.8</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">74.5</td>
+                      <td class="tg-cqae">68.3</td>
+                      <td class="tg-3trw">62.1</td>
+                      <td class="tg-3trw">52.7</td>
+                      <td class="tg-396i">173cm</td>
+                      <td class="tg-3trw">55.8</td>
+                      <td class="tg-3trw">65.7</td>
+                      <td class="tg-3trw">72.3</td>
+                      <td class="tg-3trw">79.9</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">75.5</td>
+                      <td class="tg-cqae">69.2</td>
+                      <td class="tg-3trw">62.9</td>
+                      <td class="tg-3trw">53.5</td>
+                      <td class="tg-396i">174cm</td>
+                      <td class="tg-3trw">56.6</td>
+                      <td class="tg-3trw">66.6</td>
+                      <td class="tg-3trw">73.3</td>
+                      <td class="tg-3trw">79.9</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">76.5</td>
+                      <td class="tg-cqae">70.1</td>
+                      <td class="tg-3trw">63.8</td>
+                      <td class="tg-3trw">54.2</td>
+                      <td class="tg-396i">175cm</td>
+                      <td class="tg-3trw">57.4</td>
+                      <td class="tg-3trw">67.5</td>
+                      <td class="tg-3trw">74.3</td>
+                      <td class="tg-3trw">81.0</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">77.5</td>
+                      <td class="tg-cqae">71.1</td>
+                      <td class="tg-3trw">64.6</td>
+                      <td class="tg-3trw">54.9</td>
+                      <td class="tg-396i">176cm</td>
+                      <td class="tg-3trw">58.1</td>
+                      <td class="tg-3trw">68.4</td>
+                      <td class="tg-3trw">75.2</td>
+                      <td class="tg-3trw">82.1</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">78.5</td>
+                      <td class="tg-cqae">72.0</td>
+                      <td class="tg-3trw">65.5</td>
+                      <td class="tg-3trw">55.6</td>
+                      <td class="tg-396i">177cm</td>
+                      <td class="tg-3trw">58.9</td>
+                      <td class="tg-3trw">69.3</td>
+                      <td class="tg-3trw">76.2</td>
+                      <td class="tg-3trw">83.2</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">79.6</td>
+                      <td class="tg-cqae">72.9</td>
+                      <td class="tg-3trw">66.3</td>
+                      <td class="tg-3trw">56.4</td>
+                      <td class="tg-396i">178cm</td>
+                      <td class="tg-3trw">59.7</td>
+                      <td class="tg-3trw">70.2</td>
+                      <td class="tg-3trw">77.2</td>
+                      <td class="tg-3trw">84.2</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">80.6</td>
+                      <td class="tg-cqae">73.9</td>
+                      <td class="tg-3trw">67.2</td>
+                      <td class="tg-3trw">57.1</td>
+                      <td class="tg-396i">179cm</td>
+                      <td class="tg-3trw">60.4</td>
+                      <td class="tg-3trw">71.1</td>
+                      <td class="tg-3trw">78.2</td>
+                      <td class="tg-3trw">85.3</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">81.6</td>
+                      <td class="tg-cqae">74.8</td>
+                      <td class="tg-3trw">68.0</td>
+                      <td class="tg-3trw">57.8</td>
+                      <td class="tg-396i">180cm</td>
+                      <td class="tg-3trw">61.2</td>
+                      <td class="tg-3trw">72.0</td>
+                      <td class="tg-3trw">79.2</td>
+                      <td class="tg-3trw">86.4</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">82.6</td>
+                      <td class="tg-cqae">75.7</td>
+                      <td class="tg-3trw">68.9</td>
+                      <td class="tg-3trw">58.5</td>
+                      <td class="tg-396i">181cm</td>
+                      <td class="tg-3trw">62.0</td>
+                      <td class="tg-3trw">72.9</td>
+                      <td class="tg-3trw">80.2</td>
+                      <td class="tg-3trw">87.5</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">83.6</td>
+                      <td class="tg-cqae">76.6</td>
+                      <td class="tg-3trw">69.7</td>
+                      <td class="tg-3trw">59.2</td>
+                      <td class="tg-396i">182cm</td>
+                      <td class="tg-3trw">62.7</td>
+                      <td class="tg-3trw">73.8</td>
+                      <td class="tg-3trw">81.2</td>
+                      <td class="tg-3trw">88.6</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">84.7</td>
+                      <td class="tg-cqae">77.6</td>
+                      <td class="tg-3trw">70.6</td>
+                      <td class="tg-3trw">60.0</td>
+                      <td class="tg-396i">183cm</td>
+                      <td class="tg-3trw">63.5</td>
+                      <td class="tg-3trw">74.7</td>
+                      <td class="tg-3trw">82.2</td>
+                      <td class="tg-3trw">89.6</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">85.7</td>
+                      <td class="tg-cqae">78.5</td>
+                      <td class="tg-3trw">71.4</td>
+                      <td class="tg-3trw">60.7</td>
+                      <td class="tg-396i">184cm</td>
+                      <td class="tg-3trw">64.3</td>
+                      <td class="tg-3trw">75.6</td>
+                      <td class="tg-3trw">83.2</td>
+                      <td class="tg-3trw">90.7</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">86.7</td>
+                      <td class="tg-cqae">79.5</td>
+                      <td class="tg-3trw">72.3</td>
+                      <td class="tg-3trw">61.4</td>
+                      <td class="tg-396i">185cm</td>
+                      <td class="tg-3trw">65.0</td>
+                      <td class="tg-3trw">76.5</td>
+                      <td class="tg-3trw">84.2</td>
+                      <td class="tg-3trw">91.8</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">87.7</td>
+                      <td class="tg-cqae">80.4</td>
+                      <td class="tg-3trw">73.1</td>
+                      <td class="tg-3trw">62.1</td>
+                      <td class="tg-396i">186cm</td>
+                      <td class="tg-3trw">65.8</td>
+                      <td class="tg-3trw">77.4</td>
+                      <td class="tg-3trw">85.1</td>
+                      <td class="tg-3trw">92.9</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">88.7</td>
+                      <td class="tg-cqae">81.3</td>
+                      <td class="tg-3trw">74.0</td>
+                      <td class="tg-3trw">62.9</td>
+                      <td class="tg-396i">187cm</td>
+                      <td class="tg-3trw">66.6</td>
+                      <td class="tg-3trw">78.3</td>
+                      <td class="tg-3trw">86.1</td>
+                      <td class="tg-3trw">94.0</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">89.8</td>
+                      <td class="tg-cqae">82.3</td>
+                      <td class="tg-3trw">74.8</td>
+                      <td class="tg-3trw">63.6</td>
+                      <td class="tg-396i">188cm</td>
+                      <td class="tg-3trw">67.3</td>
+                      <td class="tg-3trw">79.2</td>
+                      <td class="tg-3trw">87.1</td>
+                      <td class="tg-3trw">95.0</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-cqae">90.8</td>
+                      <td class="tg-cqae">83.2</td>
+                      <td class="tg-3trw">75.7</td>
+                      <td class="tg-3trw">64.3</td>
+                      <td class="tg-396i">189cm</td>
+                      <td class="tg-3trw">68.1</td>
+                      <td class="tg-3trw">80.1</td>
+                      <td class="tg-3trw">88.1</td>
+                      <td class="tg-3trw">96.1</td>
+                    </tr>
+           <tr>
+                      <td class="tg-cqae">91.8</td>
+                      <td class="tg-cqae">84.2</td>
+                      <td class="tg-3trw">76.5</td>
+                      <td class="tg-3trw">65.0</td>
+                      <td class="tg-396i">190cm</td>
+                      <td class="tg-3trw">68.9</td>
+                      <td class="tg-3trw">81.0</td>
+                      <td class="tg-3trw">89.1</td>
+                      <td class="tg-3trw">97.2</td>
+                    </tr>
+                  </tbody>
+               </table>   
 				</div>
 				
 				<!-- 모달 -->
@@ -745,6 +742,4 @@ $(function(){
 			</div>
 		</div>
 	</section>
-
-</body>
 </html>
