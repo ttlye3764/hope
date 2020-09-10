@@ -1,5 +1,9 @@
 package kr.or.ddit.naver.controller;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -15,21 +19,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
+import kr.or.ddit.join.controller.JoinController;
+import kr.or.ddit.login.service.ILoginService;
 import kr.or.ddit.member.service.IMemberService;
 import kr.or.ddit.utiles.UserSha256;
+import kr.or.ddit.vo.LoginVO;
 import kr.or.ddit.vo.MemberVO;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
-public class LoginController {
+public class NaverLoginController {
 	/* NaverLoginBO */
 	private NaverLoginBO naverLoginBO;
 	private String apiResult = null;
 	
 	@Autowired
 	private IMemberService service;
+	
+	@Autowired
+	private ILoginService lservice;
 
 	@Autowired
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
@@ -47,6 +57,34 @@ public class LoginController {
 //네이버
 		model.addAttribute("url", naverAuthUrl);
 		return "user/join/loginForm";
+	}
+	
+	public void login(MemberVO memberInfo, String mem_id) throws Exception {
+		InetAddress local; 
+		String ip = null;
+		try { 
+			local = InetAddress.getLocalHost(); 
+			ip = local.getHostAddress(); 
+		} catch (UnknownHostException e1) { 
+			e1.printStackTrace(); 
+		}
+		
+		LoginVO loginVO = new LoginVO();
+		
+		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+		Date time = new Date();
+		String nowtime = format1.format(time);
+		
+		loginVO.setLg_ip(ip);
+		loginVO.setMem_id(mem_id);
+		loginVO.setLg_time(nowtime);
+		loginVO.setLg_status("Success");
+		
+		if(memberInfo == null) {
+			loginVO.setLg_status("Failed");
+		}
+		
+		lservice.insertLogin(loginVO); 
 	}
 
 //네이버 로그인 성공시 callback호출 메소드
@@ -107,6 +145,8 @@ public class LoginController {
 		}else {
 			this.service.updateMemberInfo(memberInfo, null);
 		}
+		
+		login(memberInfo, id[0]+"_naver");
 		
 		params.put("mem_id", memberInfo.getMem_id());
 		params.put("mem_pass", memberInfo.getMem_pass());

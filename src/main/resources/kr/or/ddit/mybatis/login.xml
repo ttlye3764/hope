@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="login">
+	<insert id="insertLogin" parameterType="LoginVO">
+		INSERT INTO
+		LOGIN(LG_IP, MEM_ID, LG_TIME, LG_STATUS)
+		VALUES(#{lg_ip}, #{mem_id}, #{lg_time}, #{lg_status})
+	</insert>
+	
+
+	<sql id="selectAll">
+		SELECT *
+		FROM LOGIN
+	</sql>
+	
+	<select id="loginList" resultType="LoginVO" parameterType="map">
+<!-- 		SELECT B.* -->
+<!-- 		FROM(SELECT A.* -->
+<!-- 		FROM (SELECT ROWNUM RNUM, MEMBER.* -->
+<!-- 		FROM MEMBER -->
+<!-- 		WHERE MEM_DELETE = 'n' -->
+<!-- 		<if test="search_keycode != null"> -->
+<!-- 			<if test='search_keycode.equals("TOTAL")'> -->
+<!-- 				AND -->
+<!-- 				(MEM_NAME LIKE '%' || #{search_keyword} || '%' -->
+<!-- 				OR MEM_ID LIKE '%'|| #{search_keyword} || '%' -->
+<!-- 				OR MEM_HP LIKE '%' || #{search_keyword} || '%') -->
+<!-- 			</if> -->
+<!-- 			<if test='search_keycode.equals("NAME")'> -->
+<!-- 				AND -->
+<!-- 				MEM_NAME LIKE '%' || #{search_keyword} || '%' -->
+<!-- 			</if> -->
+<!-- 			<if test='search_keycode.equals("ID")'> -->
+<!-- 				AND -->
+<!-- 				MEM_ID LIKE '%' || #{search_keyword} || '%' -->
+<!-- 			</if> -->
+<!-- 			<if test='search_keycode.equals("PHONE")'> -->
+<!-- 				AND -->
+<!-- 				MEM_HP LIKE '%' || -->
+<!-- 				#{search_keyword} || '%' -->
+<!-- 			</if> -->
+<!-- 		</if> -->
+<!-- 		ORDER BY MEM_NO -->
+<!-- 		)A -->
+<!-- 		)B -->
+<!-- 		ORDER BY B.rnum -->
+		SELECT *
+		FROM LOGIN
+	</select>
+</mapper>    

@@ -1,31 +1,31 @@
 package kr.or.ddit.join.controller;
 
+import java.net.InetAddress;
 import java.net.URLEncoder;
-import java.util.HashMap;
+import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.mail.Session;
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import kr.or.ddit.aop.Loggable;
-import kr.or.ddit.member.service.IMemberService;
-import kr.or.ddit.utiles.UserSha256;
-import kr.or.ddit.vo.MemberVO;
-
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.RequestContextUtils;
+
+import kr.or.ddit.login.service.ILoginService;
+import kr.or.ddit.member.service.IMemberService;
+import kr.or.ddit.utiles.UserSha256;
+import kr.or.ddit.vo.LoginVO;
+import kr.or.ddit.vo.MemberVO;
 
 // /SpringToddler/user/join/loginForm.do
 // /SpringToddler/user/join/loginCheck.do
@@ -37,6 +37,9 @@ public class JoinController {
 	private MessageSourceAccessor accessor;
 	@Autowired
 	private IMemberService service;
+	
+	@Autowired
+	private ILoginService lservice;
 	
 	@RequestMapping("joinChoiceForm")
 	public void joinChoiceForm() {
@@ -56,12 +59,44 @@ public class JoinController {
 		session.invalidate();
 		return "redirect:/user/join/loginForm.do";
 	}
+	
+	public void loginLog(MemberVO memberInfo, String mem_id, String status) throws Exception {
+		InetAddress local; 
+		String ip = null;
+		try { 
+			local = InetAddress.getLocalHost(); 
+			ip = local.getHostAddress(); 
+		} catch (UnknownHostException e1) { 
+			e1.printStackTrace(); 
+		}
+		
+		LoginVO loginVO = new LoginVO();
+		
+		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+		Date time = new Date();
+		String nowtime = format1.format(time);
+		
+		loginVO.setLg_ip(ip);
+		loginVO.setMem_id(mem_id);
+		loginVO.setLg_time(nowtime);
+		
+		if(status == null) {
+			status = "LogOut";
+		}else {
+			status = "Success";
+			if(memberInfo == null) {
+				status = "Failed";
+			}
+		}		
+		loginVO.setLg_status(status);
+		
+		lservice.insertLogin(loginVO); 
+	}
 
 	@RequestMapping(value = "loginCheck")
 	public ModelAndView loginCheck(HttpServletRequest request,@RequestParam(value="mem_id") String mem_id,@RequestParam(value="mem_pass") String mem_pass, HttpSession session,
 			HttpServletResponse response, Map<String, String> params, ModelAndView andView) throws Exception {
 
-//		Map<String, String> params = new HashMap<String, String>();
 		params.put("mem_id", mem_id);
 		
 		String pass = UserSha256.encrypt(mem_pass);
@@ -69,12 +104,11 @@ public class JoinController {
 		params.put("mem_pass", mem_pass);
 
 		MemberVO memberInfo = this.service.memberInfo(params);
+		
+		loginLog(memberInfo, mem_id, "login"); // 로그인 성공여부 저장
 
 		if (memberInfo == null) {
-			// 리다이렉트(컨텍스트 루트 | 패스 생략)
-//			String message = this.accessor.getMessage("가입되지 않은 회원이거나, 비밀번호를 확인해주세요.", Locale.KOREA);
 			String message = "아이디 혹은 비밀번호가 일치하지 않습니다.";
-//			message = URLEncoder.encode(message, "UTF-8");
 			andView.addObject("json", message);
 			andView.setViewName("jsonConvertView");
 			return andView;
@@ -129,10 +163,16 @@ public class JoinController {
 	}
 
 	@RequestMapping("logout")
-	public ModelAndView logout(HttpSession session, ModelAndView andView) throws Exception {
+	public ModelAndView logout(ModelAndView andView, HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		String mem_id = memberInfo.getMem_id();
+		
 		session.invalidate();
 		andView.addObject("json", "로그아웃 되었습니다.");
 		andView.setViewName("jsonConvertView");
+		
+		loginLog(null, mem_id, null); // 로그인 성공여부 저장
 		
 		return andView;
 	}
