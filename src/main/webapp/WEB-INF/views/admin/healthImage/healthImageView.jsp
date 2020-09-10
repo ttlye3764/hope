@@ -135,7 +135,7 @@
 											 
 											<!-- 파일일 때 --> 
 											<c:set var="fileName" value="${fn:split(healthInfo.itemsInfo[status.index].file_save_name,'.') }" />
-												<c:if test="${fileName[1] eq 'jpg' || fileName[1] eq 'png'}">  
+												<c:if test="${fileName[1] ne 'mp4'}">  
 													<div id="image_container" style="width: 300px; height: 200px;">
 														<img src="/files/${fileitemInfo.file_save_name }" alt="pic1" style="width: 300px; height: 200px;">
 													</div>
