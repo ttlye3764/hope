@@ -15,11 +15,13 @@
 			<div class="row py-0 py-md-5 justify-content-between align-items-center">
 				<div class="col-sm-10 col-lg-6 all-text-white my-5 mt-md-0">
 					<div class="text-left py-0 py-md-5 my-5">
-						<h6>You found it!</h6>
-						<h2 class="display-5 display-lg-4 font-weight-normal">diet</h2>
-						<p class="mb-4 display-8 font-weight-normal"> u keep going!</p>
-						<a href="#" class="btn btn-white mr-3">다이어트 하러가기</a>
-						<a href="#" class="btn btn-outline-white">내 칼로리 계산하기</a>
+						<h6>도전하세요!</h6>
+						<h2 class="display-5 display-lg-4 font-weight-normal">식단 관리</h2>
+						<p class="mb-4 display-8 font-weight-normal">먹어봤자 다 아는 맛이다</p>
+						<p class="mb-4 display-8 font-weight-normal">세끼 다 먹으면 살 쪄요</p>
+						<p class="mb-4 display-8 font-weight-normal">인생은 살이 쪘을때와 안쪘을때로 나뉜다.</p>
+						<a href="${pageContext.request.contextPath }/user/diet/diet_my" class="btn btn-white mr-3">식단관리 하러 가기!</a>
+						<a href="${pageContext.request.contextPath }/user/diet/bmi" class="btn btn-outline-white">내 BMI 계산하기</a>
 					</div>
 				</div>
 				<div class="col-sm-10 col-md-6 d-none d-lg-block mb-5">
@@ -46,14 +48,14 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="owl-carousel owl-grab" data-arrow="false" data-dots="false" data-items-xl="6" data-items-lg="5" data-items-md="4" data-items-sm="3" data-items-xs="2" data-autoplay="4500">
-						<div class="item"><img class="w-75" src="assets/images/clients/01.png" alt=""></div>
-						<div class="item"><img class="w-75" src="assets/images/clients/02.png" alt=""></div>
-						<div class="item"><img class="w-75" src="assets/images/clients/03.png" alt=""></div>
-						<div class="item"><img class="w-75" src="assets/images/clients/04.png" alt=""></div>
-						<div class="item"><img class="w-75" src="assets/images/clients/05.png" alt=""></div>
-						<div class="item"><img class="w-75" src="assets/images/clients/06.png" alt=""></div>
-						<div class="item"><img class="w-75" src="assets/images/clients/07.png" alt=""></div>
-						<div class="item"><img class="w-75" src="assets/images/clients/08.png" alt=""></div>
+						<div class="item"><img class="w-75" src="" alt=""></div>
+						<div class="item"><img class="w-75" src="" alt=""></div>
+						<div class="item"><img class="w-75" src="" alt=""></div>
+						<div class="item"><img class="w-75" src="" alt=""></div>
+						<div class="item"><img class="w-75" src="" alt=""></div>
+						<div class="item"><img class="w-75" src="" alt=""></div>
+						<div class="item"><img class="w-75" src="" alt=""></div>
+						<div class="item"><img class="w-75" src="" alt=""></div>
 					</div>
 				</div>
 			</div>

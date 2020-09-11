@@ -123,8 +123,9 @@ input, textarea {
 }
 
 #calender-content {
-	width: 900px;
-	padding: 10px;
+	width: 760px;
+	padding: 0 0 0 35px;
+	
 }
 #calender-panel #info {
 	border-right: 6px solid #FF6B6B;
@@ -236,7 +237,7 @@ input, textarea {
 
 .month {
 	width: 100px;
-	height: 90px;
+	height: 70px;
 	transition: .4s;
 }
 

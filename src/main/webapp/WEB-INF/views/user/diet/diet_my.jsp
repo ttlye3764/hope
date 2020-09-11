@@ -10,24 +10,20 @@
 	href="${pageContext.request.contextPath }/resources/myCSS/dietMem.css" />
 
 
-<div class="innerpage-banner center bg-overlay-dark-7 py-7"
-	style="background:url(${pageContext.request.contextPath}/image/food1.jpg) no-repeat; background-size:cover; background-position: center center;">
-	<div class="container">
-		<div class="row all-text-white">
-			<div class="col-md-12 align-self-center">
-				<h1 class="innerpage-title">Menu List</h1>
-				<h6 class="subtitle">안녕하세요 메뉴 리스트입니다</h6>
-				<nav aria-label="breadcrumb">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item active"><a href="index.html"><i
-								class="ti-home"></i> Home</a></li>
-						<li class="breadcrumb-item">Blog</li>
-					</ol>
-				</nav>
+<div class="innerpage-banner center bg-overlay-dark-7 py-7" style="background:url(${pageContext.request.contextPath}/image/food1.jpg) no-repeat; background-size:cover; background-position: center center;">
+		<div class="container">
+			<div class="row all-text-white">
+				<div class="col-md-12 align-self-center">
+					<h1 class="innerpage-title">${param.titleName }</h1>
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item active"><a href="${pageContext.request.contextPath}/user/diet/dietMain"><i class="ti-home"></i> Home</a></li>
+						</ol>
+					</nav>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 <section class="blog-page pb-0">
 	<div class="container">
 		<div class="row">
@@ -35,7 +31,7 @@
 			<aside class="col-md-3 sidebar order-last order-md-first">
 				<!-- Text Widget -->
 				<div class="widget">
-					<h5 class="widget-title" id="dietSide_h5_my">내꺼 내꺼 내</h5>
+					<h5 class="widget-title" id="dietSide_h5_my">나의 식단 관리</h5>
 					<p class="mb-0">procuring the why performed continual
 						improving. Civil songs so large shade in cause.</p>
 				</div>
@@ -65,7 +61,7 @@
 			<div class="col-md-9 order-first order-lg-first">
 
 
-				<h5 class="mb-2 mt-5">내꺼 내꺼 내꺼</h5>
+				<h5 class="mb-2 mt-5">나의 식단 관리</h5>
 				<div class="divider divider-grad"></div>
 				<br>
 
@@ -127,9 +123,8 @@
 					</div>
 				</div>
 				<!-- 내 정보 상세 끝 -->
-				<h5 class="mb-2 mt-5">체중 통계</h5>
-				<div class="divider divider-bold"></div>
-				<h5 class="mb-2 mt-5">체중 차트</h5>
+				
+				<h5 class="mb-2 mt-5">열량 차트</h5>
 				<div class="divider divider-bold"></div>
 				<!-- goole chart star 구글차트-->
 				<div id="Line_Controls_Chart">
@@ -138,18 +133,12 @@
 					<!-- 컨트롤바를 생성할 영역 -->
 					<div id="controlsArea" style="padding: 0px 20px 0px 0px;"></div>
 				</div>
-
-
-
-
 				<!-- goole chart end -->
 
 				<h5 class="mb-2 mt-5">나의 식단표</h5>
 				<div class="divider divider-bold"></div>
 				<br> <br>
 				<!-- 달력 시작 -->
-
-
 
 				<div id="calender-wrapper"
 					style="margin-left: 50px; width: 750px; !important ">
@@ -174,37 +163,15 @@
 					</div>
 					<div id="calender-content" class="flex row wrap disable-select">
 					</div>
-					<div id="calender-panel" class="flex row center-v end">
-						<div id="info" class="flex column center-vh bgColorDarkRed">
-							<div id="info-titles" class="flex row center-vh">
-								<p class="flex column center-vh">Start Date</p>
-								<p class="flex column center-vh">End Date</p>
-							</div>
-							<div class="flex row center-vh bgColorRed">
-								<p class="flex column center-vh" id="startdate"></p>
-								<p class="flex column center-vh" id="enddate"></p>
-							</div>
-						</div>
-						<div id="clear" class="flex column center-vh bgColorDarkRed">
-							<p>CLEAR SELECTION</p>
-						</div>
-					</div>
+					
 				</div>
 				<button type="button" id="calendarModal" style="opacity: 0"
 					class="btn btn-grad" data-toggle="modal"
 					data-target="#exampleModalCenter">Launch demo modal</button>
-				<div id="calender-buttons" class="flex row center-vh wrap"
-					style="margin-left: 50px; width: 750px; !important ">
-					<div id="make-booking" class="flex column center-vh width-half">
-						<p>MARK AVAILABLE</p>
-					</div>
-					<div id="remove-booking" class="flex column center-vh width-half">
-						<p>MARK UNAVAILABLE</p>
-					</div>
-				</div>
+				
 
 				<!-- 달력 끝 -->
-				<!-- 현재 -->
+				
 				<h5 class="mb-2 mt-5">다이어트 일기장</h5>
 				<div class="divider divider-bold"></div>
 
@@ -218,156 +185,11 @@
 							<p class="mb-5">할 수 없었기에 포기했던 것이 아니라 포기했기에 할 수 없었던 것입니다</p>
 						</div>
 					</div>
-					<div id="timelineBtn">
-						<button type="button" id="timelineControll"
-							onclick="dietBoardList();" class="btn btn-grad">목록출력</button>
-						<button type="button" id="dietBoardControl"
-							onclick="updateDietBoardForm();" class="btn btn-grad">관리</button>
+					<div id="timelineBtn" style="text-align: right;">
+						<button type="button" id="dietBoardControl" onclick="updateDietBoardForm();" class="btn btn-grad">관리</button>
+						<button type="button" id="dietBoardAddBtn" onclick="insertDietBoard();" style="opacity:0" disabled="disabled" class="btn btn-grad">추가</button>
 					</div>
-					<div id="dietBoard_div" >
-						<!-- timeline item 1 -->
-						<div class="row no-gutters">
-							<div class="timeline-top"></div>
-							<div class="col-md"></div>
-							<!-- 빈공간 -->
-							<div
-								class="col-md-1 text-center timeline-line flex-column d-none d-md-flex">
-								<!-- 중간 -->
-								<div class="timeline-dot"></div>
-							</div>
-							<div class="col-md py-2">
-								<div class="card">
-									<div class="card-body">
-										<div class="float-right small">Jan 9th</div>
-										<h4 class="mb-2">
-											1일차
-											</textarea>
-										</h4>
-										<p>Wizixo; an innovative Internet marketing solutions
-											company that offers comprehensive web development, SMO
-											services, SEO strategies and various other types of Internet
-											marketing related services.</p>
-										<div
-											class="list-group-number list-unstyled list-group-borderless">
-											<a href="#" class="list-group-item list-group-item-action"><span>01</span>
-												Creative Ideas</a> <a href="#"
-												class="list-group-item list-group-item-action"><span>02</span>
-												Super Responsive for all devices</a> <a href="#"
-												class="list-group-item list-group-item-action"><span>03</span>
-												Extensive documentation</a> <a href="#"
-												class="list-group-item list-group-item-action"><span>04</span>
-												Excellent features</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- <textarea style="background-color:transparent"> -->
-						<!-- timeline item 2 -->
-						<div class="row no-gutters">
-							<div class="col-md py-2">
-								<div class="card">
-									<div class="card-body">
-										<div class="float-right small">Jan 10th</div>
-										<h4 class="mb-2">An Idea Will Make You Tons Of Cash.
-											Here's How!</h4>
-										<p class="mb-0">Sign-up for the lessons and speakers that
-											coincide with your course syllabus. Meet and greet with
-											instructors.</p>
-									</div>
-									<img class="img-fluid" src="assets/images/service/01.jpg"
-										alt="">
-								</div>
-							</div>
-							<div
-								class="col-md-1 text-center timeline-line flex-column d-none d-md-flex">
-								<div class="timeline-dot"></div>
-							</div>
-							<div class="col-md"></div>
-						</div>
-
-						<!-- timeline item 3 -->
-						<div class="row no-gutters">
-							<div class="col-md"></div>
-							<div
-								class="col-md-1 text-center timeline-line flex-column d-none d-md-flex">
-								<div class="timeline-dot"></div>
-							</div>
-							<div class="col-md py-2">
-								<div class="card">
-									<div class="card-body">
-										<div class="float-right small">Jan 11th</div>
-										<h4 class="mb-2">Months had too ham cousin remove far
-											spirit</h4>
-									</div>
-									<div class="fit-video">
-										<div class="fluid-width-video-wrapper"
-											style="padding-top: 56.25%;">
-											<iframe
-												src="https://player.vimeo.com/video/167434033?title=0&amp;byline=0&amp;portrait=0"
-												allowfullscreen="" name="fitvid0"></iframe>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- timeline item 4 -->
-						<div class="row no-gutters">
-							<div class="col-md py-2">
-								<div class="card">
-									<div class="card-body">
-										<div class="float-right small">Jan 12th</div>
-										<h4 class="mb-2">7 Great Lessons You Can Learn From
-											Business</h4>
-										<p>By expect it result silent in formal of. Ask eat
-											questions abilities described elsewhere assurance.</p>
-										<div
-											class="accordion accordion-line toggle-icon-left toggle-icon-round mb-0"
-											id="accordion4">
-											<!-- item -->
-											<div class="accordion-item">
-												<div class="accordion-title">
-													<a class="h6 mb-0 collapsed" data-toggle="collapse"
-														href="#collapse-10" aria-expanded="false">How many
-														free samples can i redeem?</a>
-												</div>
-												<div class="collapse" id="collapse-10"
-													data-parent="#accordion4" style="">
-													<div class="accordion-content">Due to the limited
-														quantity, each member's account is only entitled to 1
-														unique free sample. You can check out up to 4 free samples
-														in each checkout. We take such matters very seriously and
-														will look into individual cases thoroughly.</div>
-												</div>
-											</div>
-											<!-- item -->
-											<div class="accordion-item">
-												<div class="accordion-title">
-													<a class="h6 mb-0 collapsed" data-toggle="collapse"
-														href="#collapse-11" aria-expanded="false">What are the
-														payment methods available?</a>
-												</div>
-												<div class="collapse" id="collapse-11"
-													data-parent="#accordion4" style="">
-													<div class="accordion-content">At the moment, we only
-														accept Credit/Debit cards and Paypal payments. Paypal is
-														the easiest way to make payments online. While checking
-														out your order. Be sure to fill in correct details for
-														fast &amp; hassle-free payment processing.</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div
-								class="col-md-1 text-center timeline-line flex-column d-none d-md-flex">
-								<div class="timeline-dot"></div>
-							</div>
-							<div class="col-sm"></div>
-						</div>
+					<div id="dietBoard_div" >	
 					</div>
 				</div>
 				<!-- timeLine end -->
@@ -544,17 +366,7 @@ var dd_date;
 var dd_no;
 
 
-// updateDietBoardForm
-function updateDietBoardForm(){
 
-	$.ajax({
-		url : '${pageContext.request.contextPath}/user/diet/dietBoardList',
-		sucess : function(result){
-			$('#dietBoard_div').empty();
-		},
-
-	})
-}
 
 // updateDietBoard
 function updateDietBoardForm(){
@@ -576,7 +388,7 @@ function updateDietBoardForm(){
 					dietBoardList += '<div class="col-md py-2">';
 					dietBoardList += '<div class="card">';
 					dietBoardList += '<div class="card-body">';
-					dietBoardList += '<div class="float-right small">'+item.diet_board_date.split(' ')[0].split('-')[1]+item.diet_board_date.split(' ')[0].split('-')[2]+'</div>';
+					dietBoardList += '<div class="float-right small">'+item.diet_board_date.split(' ')[0].split('-')[1]+' / '+item.diet_board_date.split(' ')[0].split('-')[2]+'</div>';
 					dietBoardList += '<h4 class="mb-2"><textarea class="diet_board_title" style="background-color:transparent">'+item.diet_board_title+'</textarea></h4>';
 					dietBoardList += '<p class="mb-0"><textarea class="diet_board_content" style="background-color:transparent">'+item.diet_board_content+'</textarea></p>';
 					dietBoardList += '</div>';
@@ -598,7 +410,7 @@ function updateDietBoardForm(){
 					dietBoardList += '<div class="col-md py-2">';
 					dietBoardList += '<div class="card">';
 					dietBoardList += '<div class="card-body">';
-					dietBoardList += '<div class="float-right small">'+item.diet_board_date.split(' ')[0].split('-')[1]+item.diet_board_date.split(' ')[0].split('-')[2]+'</div>';
+					dietBoardList += '<div class="float-right small">'+item.diet_board_date.split(' ')[0].split('-')[1]+' / '+item.diet_board_date.split(' ')[0].split('-')[2]+'</div>';
 					dietBoardList += '<h4 class="mb-2"><textarea class="diet_board_title" style="background-color:transparent">'+item.diet_board_title+'</textarea></h4>';
 					dietBoardList += '<p><textarea class="diet_board_content" style="background-color:transparent">'+item.diet_board_content+'</textarea></p>';
 					dietBoardList += '</div>';
@@ -610,12 +422,17 @@ function updateDietBoardForm(){
 			$('#dietBoard_div').append(dietBoardList);
 			$('#dietBoardControl').text('완료');
 			$('#dietBoardControl').attr('onclick', 'updateDietBoardComplete();');
+			$('#dietBoardAddBtn').attr('disabled', false);
+			$('#dietBoardAddBtn').css('opacity', '100');
+			
 		},
 		error : function(result){
 			alert('updateDietBoardForm 실패');
 		}
 	})
 }
+
+
 
 
 //dietBoard
@@ -625,59 +442,138 @@ function dietBoardList(){
 		success : function(result){
 
 			$('#dietBoard_div').empty();
-
-			if(result.dietBoardList == null){
+			
+			var dietBoardList="";	
+			
+			if(result.dietBoardList.length == 0){
 				alert('등록된게 없습니다.');
+				dietBoardList += '<div>';
+				dietBoardList += '<button type="button" id="dietBoardStartBtn" onclick="insertDietBoardFirst();" class="btn btn-grad">시작하기</button>';
+				dietBoardList += '</div>';
+				$('#dietBoard_div').append(dietBoardList);
+			}else{	
+				$.each(result.dietBoardList, function(index, item){
+					
+					if(Number(item.diet_board_seq)%2 ==0){
+						// 0이면 왼쪽	
+						dietBoardList += '<div class="row no-gutters">';
+						dietBoardList += '<div class="col-md py-2">';
+						dietBoardList += '<div class="card">';
+						dietBoardList += '<div class="card-body">';
+						dietBoardList += '<div class="float-right small">'+item.diet_board_date.split(' ')[0].split('-')[1]+' / '+item.diet_board_date.split(' ')[0].split('-')[2]+'</div>';
+						dietBoardList += '<h4 class="mb-2">'+item.diet_board_title+'</h4>';
+						dietBoardList += '<p class="mb-0">'+item.diet_board_content+'</p>';
+						dietBoardList += '</div>';
+						dietBoardList += '</div>';
+						dietBoardList += '</div>';
+						dietBoardList += '<div class="col-md-1 text-center timeline-line flex-column d-none d-md-flex">';
+						dietBoardList += '<div class="timeline-dot"></div>';
+						dietBoardList += '</div>';
+						dietBoardList += '<div class="col-md"></div>';
+						dietBoardList += '</div>';					
+					}else{
+						// 0이 아니면 오른쪽
+						dietBoardList += '<div class="row no-gutters">';
+						dietBoardList += '<div class="timeline-top"></div>';
+						dietBoardList += '<div class="col-md"> </div>';
+						dietBoardList += '<div class="col-md-1 text-center timeline-line flex-column d-none d-md-flex">';
+						dietBoardList += '<div class="timeline-dot"></div>';
+						dietBoardList += '</div>';
+						dietBoardList += '<div class="col-md py-2">';
+						dietBoardList += '<div class="card">';
+						dietBoardList += '<div class="card-body">';
+						dietBoardList += '<div class="float-right small">'+item.diet_board_date.split(' ')[0].split('-')[1]+' / '+item.diet_board_date.split(' ')[0].split('-')[2]+'</div>';
+						dietBoardList += '<h4 class="mb-2">'+item.diet_board_title+'</h4>';
+						dietBoardList += '<p>'+item.diet_board_content+'</p>';
+						dietBoardList += '</div>';
+						dietBoardList += '</div>';
+						dietBoardList += '</div>';
+						dietBoardList += '</div>';
+					}
+					
+				})
+				$('#dietBoard_div').append(dietBoardList);
 			}
 
-			var dietBoardList="";
 			
-			$.each(result.dietBoardList, function(index, item){
-				
-				if(Number(item.diet_board_seq)%2 ==0){
-					// 0이면 왼쪽	
-					dietBoardList += '<div class="row no-gutters">';
-					dietBoardList += '<div class="col-md py-2">';
-					dietBoardList += '<div class="card">';
-					dietBoardList += '<div class="card-body">';
-					dietBoardList += '<div class="float-right small">'+item.diet_board_date.split(' ')[0].split('-')[1]+' : '+item.diet_board_date.split(' ')[0].split('-')[2]+'</div>';
-					dietBoardList += '<h4 class="mb-2">'+item.diet_board_title+'</h4>';
-					dietBoardList += '<p class="mb-0">'+item.diet_board_content+'</p>';
-					dietBoardList += '</div>';
-					dietBoardList += '</div>';
-					dietBoardList += '</div>';
-					dietBoardList += '<div class="col-md-1 text-center timeline-line flex-column d-none d-md-flex">';
-					dietBoardList += '<div class="timeline-dot"></div>';
-					dietBoardList += '</div>';
-					dietBoardList += '<div class="col-md"></div>';
-					dietBoardList += '</div>';					
-				}else{
-					// 0이 아니면 오른쪽
-					dietBoardList += '<div class="row no-gutters">';
-					dietBoardList += '<div class="timeline-top"></div>';
-					dietBoardList += '<div class="col-md"> </div>';
-					dietBoardList += '<div class="col-md-1 text-center timeline-line flex-column d-none d-md-flex">';
-					dietBoardList += '<div class="timeline-dot"></div>';
-					dietBoardList += '</div>';
-					dietBoardList += '<div class="col-md py-2">';
-					dietBoardList += '<div class="card">';
-					dietBoardList += '<div class="card-body">';
-					dietBoardList += '<div class="float-right small">'+item.diet_board_date.split(' ')[0].split('-')[1]+item.diet_board_date.split(' ')[0].split('-')[2]+'</div>';
-					dietBoardList += '<h4 class="mb-2">'+item.diet_board_title+'</h4>';
-					dietBoardList += '<p>'+item.diet_board_content+'</p>';
-					dietBoardList += '</div>';
-					dietBoardList += '</div>';
-					dietBoardList += '</div>';
-					dietBoardList += '</div>';
-				}
-				
-			})
-			$('#dietBoard_div').append(dietBoardList);
+			
 		},
 		error : function(){
 			
 		}
 	})
+}
+
+
+
+function updateDietBoardComplete(){
+	var diet_board_title_class = $('.diet_board_title');
+	var diet_board_content_class = $('.diet_board_content');
+	var diet_board_no_class = $('.diet_board_no');
+
+	
+	var diet_board_list = new Array();
+	
+	// list<Map<String, String>>
+	
+	for(var i = 0; i < diet_board_title_class.length; i++){
+		var data = new Object();
+		data.diet_board_title = diet_board_title_class.eq(i).val();
+		data.diet_board_content = diet_board_content_class.eq(i).val();
+		data.diet_board_no = diet_board_no_class.eq(i).val();
+
+		diet_board_list.push(data);
+	}
+	var jsonData = JSON.stringify(diet_board_list) ;
+		alert(jsonData);
+
+	$.ajax({
+		type : 'POST',
+		url : '${pageContext.request.contextPath}/user/diet/updateDietBoard',
+		contentType : 'application/json; charset=UTF-8',
+		async: false,
+		data : jsonData,
+		success : function(){
+			alert('성공');
+			dietBoardList();
+			$('#dietBoardControl').text('관리');
+			$('#dietBoardControl').attr('onclick', 'updateDietBoardForm();');
+			$('#dietBoardAddBtn').attr('disalbed', '');
+			$('#dietBoardAddBtn').css('opacity', '0');
+			
+		},
+		error : function(){
+			alert('실패');
+		}
+	
+	})
+	
+}
+
+
+function insertDietBoardFirst(){
+	$.ajax({
+		url : '${pageContext.request.contextPath}/user/diet/insertDietBoardFirst',
+		success : function(result){
+			updateDietBoardForm();
+		},
+		erorr : function(result){
+			alert('dietBoardInsert 실패');
+		}
+	})
+}
+
+function insertDietBoard(){
+	$.ajax({
+		url : '${pageContext.request.contextPath}/user/diet/insertDietBoard',
+		success : function(result){
+			updateDietBoardForm();
+		},
+		erorr : function(result){
+			alert('dietBoardInsert 실패');
+		}
+	})
+	
 }
 
 //차트
@@ -789,43 +685,6 @@ var chartDrowFun = {
  }
 
 
-function updateDietBoardComplete(){
-	var diet_board_title_class = $('.diet_board_title');
-	var diet_board_content_class = $('.diet_board_content');
-	var diet_board_no_class = $('.diet_board_no');
-
-	
-	var diet_board_list = new Array();
-	
-	// list<Map<String, String>>
-	
-	for(var i = 0; i < diet_board_title_class.length; i++){
-		var data = new Object();
-		data.diet_board_title = diet_board_title_class.eq(i).val();
-		data.diet_board_content = diet_board_content_class.eq(i).val();
-		data.diet_board_no = diet_board_no_class.eq(i).val();
-
-		diet_board_list.push(data);
-	}
-	var jsonData = JSON.stringify(diet_board_list) ;
-		alert(jsonData);
-
-	$.ajax({
-		type : 'POST',
-		url : '${pageContext.request.contextPath}/user/diet/updateDietBoard',
-		contentType : 'application/json; charset=UTF-8',
-		async: false,
-		data : jsonData,
-		success : function(){
-			alert('성');
-		},
-		error : function(){
-			alert('실패');
-		}
-	
-	})
-	
-}
 
 $(function() {
 	 //google.charts.load('current', {'packages':['line','controls']});
@@ -833,7 +692,9 @@ $(function() {
 	
 	graph();
 
-	
+	dietBoardList();
+
+// 	현재
 	displayCalender(currentMonth)
 	$("#date").append(new Date);
 
@@ -859,7 +720,7 @@ $(function() {
 	 		success : function(result) {
  	 			$('#menu_search1').val("");
  	 			$('#menu_search_result1').empty();
- 	 			dietDayInfoList1();
+ 	 			dietDayInfoList();
 	 		}
 	 	});
 		
@@ -887,7 +748,7 @@ $(function() {
 	 		success : function(result) {
 	 			$('#menu_search2').val("");
  	 			$('#menu_search_result2').empty();
- 	 			dietDayInfoList2();
+ 	 			dietDayInfoList();
 	 		}
 	 	});	
 	})
@@ -914,7 +775,7 @@ $(function() {
 	 		success : function(result) {
 	 			$('#menu_search3').val("");
  	 			$('#menu_search_result3').empty();
- 	 			dietDayInfoList3();
+ 	 			dietDayInfoList();
 	 		}
 	 	});	
 	})
@@ -956,9 +817,9 @@ function calendarModal(e){
 	
 	dd_date = year + '-' + month + '-' + day;
 	
-	dietDayInfoList1();
-	dietDayInfoList2();
-	dietDayInfoList3();
+	dietDayInfoList();
+
+
 
 	$('#calendarModal').trigger("click");
 
@@ -1056,7 +917,7 @@ function menu_search3(){
 }
 
 
-function dietDayInfoList1(){
+function dietDayInfoList(){
 	$.ajax({
 		type : 'POST',
 		url : '${pageContext.request.contextPath}/user/diet/calendarModal',
@@ -1071,8 +932,13 @@ function dietDayInfoList1(){
 
 			$('#dietDayInfo_thead1').empty();
 			$('#dietDayInfo_tbody1').empty();
+			$('#dietDayInfo_thead2').empty();
+			$('#dietDayInfo_tbody2').empty();
+			$('#dietDayInfo_thead3').empty();
+			$('#dietDayInfo_tbody3').empty();
 			
 			var itemIndex = 1;
+			
  			dd_no = result.dietDay.dd_no;
 
 			$('#dietDayInfo_thead1').append('<tr>');
@@ -1080,97 +946,59 @@ function dietDayInfoList1(){
 			$('#dietDayInfo_thead1').append('<th scope="col">메뉴</th>');
 			$('#dietDayInfo_thead1').append('<th scope="col">칼로리</th>');
 			$('#dietDayInfo_thead1').append('<th scope="col"></th>');
-			
- 			$.each(result.dietDayInfoList1, function(index, item){
- 				$('#dietDayInfo_tbody1').append('<tr>')
- 				$('#dietDayInfo_tbody1').append('<td><input type="hidden" value="'+item.dd_no +'">'+itemIndex++ +'</td>'); 				
- 				$('#dietDayInfo_tbody1').append('<td>'+item.menu_name+'</td>');
- 				$('#dietDayInfo_tbody1').append('<td>'+item.menu_kcal+'</td>');
- 				$('#dietDayInfo_tbody1').append('<td><button class="btn btn-success" onclick="menu_delete1(this)"><input type="hidden" value="'+item.ddi_no +'">삭제</button></td>');
- 				$('#dietDayInfo_tbody1').append('</tr>');
- 			 });
-			 
- 			$('#dd_kcal').empty();
-// 			$('#dd_kcal').append('<div>'+result.dietDay.dd_kcal+'</div>');
-		}
-	});
-}
-
-function dietDayInfoList2(){	
-	$.ajax({
-		type : 'POST',
-		url : '${pageContext.request.contextPath}/user/diet/calendarModal',
-		dataType : 'JSON',
-		data : {
-			dd_date : dd_date
-		},
-		error : function(result) {
-			alert(result.memberInfo.mem_name);
-		},
-		success : function(result) {
-
-			$('#dietDayInfo_thead2').empty();
-			$('#dietDayInfo_tbody2').empty();
-
-			var itemIndex = 1;
 
 			$('#dietDayInfo_thead2').append('<tr>');
 			$('#dietDayInfo_thead2').append('<th scope="col">#</th>');
 			$('#dietDayInfo_thead2').append('<th scope="col">메뉴</th>');
 			$('#dietDayInfo_thead2').append('<th scope="col">칼로리</th>');
-			
- 			$.each(result.dietDayInfoList2, function(index, item){
- 				$('#dietDayInfo_tbody2').append('<tr>')
- 				$('#dietDayInfo_tbody2').append('<td><input type="hidden" value="'+item.dd_no +'">'+itemIndex++ +'</td>'); 				
- 				$('#dietDayInfo_tbody2').append('<td>'+item.menu_name+'</td>');
- 				$('#dietDayInfo_tbody2').append('<td>'+item.menu_kcal+'</td>');
- 				$('#dietDayInfo_tbody1').append('<td><button class="btn btn-success" onclick="menu_delete2(this)"><input type="hidden" value="'+item.ddi_no +'">삭제</button></td>');
- 				$('#dietDayInfo_tbody2').append('</tr>')	 
- 			 });
-			$('#dd_kcal').empty();
-// 			$('#dd_kcal').append('<div>'+result.dietDay.dd_kcal+'</div>');
-		}
-	});
-	
-}
-
-function dietDayInfoList3(){
-	$.ajax({
-		type : 'POST',
-		url : '${pageContext.request.contextPath}/user/diet/calendarModal',
-		dataType : 'JSON',
-		data : {
-			dd_date : dd_date
-		},
-		error : function(result) {
-			alert(result.memberInfo.mem_name);
-		},
-		success : function(result) {
-
-			$('#dietDayInfo_thead3').empty();
-			$('#dietDayInfo_tbody3').empty();
-				
-			var itemIndex = 1;
+			$('#dietDayInfo_thead2').append('<th scope="col"></th>');
 
 			$('#dietDayInfo_thead3').append('<tr>');
 			$('#dietDayInfo_thead3').append('<th scope="col">#</th>');
 			$('#dietDayInfo_thead3').append('<th scope="col">메뉴</th>');
 			$('#dietDayInfo_thead3').append('<th scope="col">칼로리</th>');
+			$('#dietDayInfo_thead3').append('<th scope="col"></th>');
+
+			if(result.dietDayInfoList1 != null){
+				$.each(result.dietDayInfoList1, function(index, item){
+	 				$('#dietDayInfo_tbody1').append('<tr>')
+	 				$('#dietDayInfo_tbody1').append('<td><input type="hidden" value="'+item.dd_no +'">'+itemIndex++ +'</td>'); 				
+	 				$('#dietDayInfo_tbody1').append('<td>'+item.menu_name+'</td>');
+	 				$('#dietDayInfo_tbody1').append('<td>'+item.menu_kcal+'</td>');
+	 				$('#dietDayInfo_tbody1').append('<td><button class="btn btn-success" onclick="menu_delete1(this)"><input type="hidden" value="'+item.ddi_no +'">삭제</button></td>');
+	 				$('#dietDayInfo_tbody1').append('</tr>');
+	 			 });
+			}
+
+			if(result.dietDayInfoList2 != null){
+				$.each(result.dietDayInfoList2, function(index, item){
+	 				$('#dietDayInfo_tbody2').append('<tr>')
+	 				$('#dietDayInfo_tbody2').append('<td><input type="hidden" value="'+item.dd_no +'">'+itemIndex++ +'</td>'); 				
+	 				$('#dietDayInfo_tbody2').append('<td>'+item.menu_name+'</td>');
+	 				$('#dietDayInfo_tbody2').append('<td>'+item.menu_kcal+'</td>');
+	 				$('#dietDayInfo_tbody2').append('<td><button class="btn btn-success" onclick="menu_delete2(this)"><input type="hidden" value="'+item.ddi_no +'">삭제</button></td>');
+	 				$('#dietDayInfo_tbody2').append('</tr>')	 
+	 			 });	
+			}
+
+			if(result.dietDayInfoList3 != null){
+				$.each(result.dietDayInfoList3, function(index, item){
+	 				$('#dietDayInfo_tbody3').append('<tr>')
+	 				$('#dietDayInfo_tbody3').append('<td><input type="hidden" value="'+item.dd_no +'">'+itemIndex++ +'</td>'); 				
+	 				$('#dietDayInfo_tbody3').append('<td>'+item.menu_name+'</td>');
+	 				$('#dietDayInfo_tbody3').append('<td>'+item.menu_kcal+'</td>');
+	 				$('#dietDayInfo_tbody3').append('<td><button class="btn btn-success" onclick="menu_delete3(this)"><input type="hidden" value="'+item.ddi_no +'">삭제</button></td>');
+	 				$('#dietDayInfo_tbody3').append('</tr>');	 
+	 			 });
+			}
 			
- 			$.each(result.dietDayInfoList3, function(index, item){
- 				$('#dietDayInfo_tbody3').append('<tr>')
- 				$('#dietDayInfo_tbody3').append('<td><input type="hidden" value="'+item.dd_no +'">'+itemIndex++ +'</td>'); 				
- 				$('#dietDayInfo_tbody3').append('<td>'+item.menu_name+'</td>');
- 				$('#dietDayInfo_tbody3').append('<td>'+item.menu_kcal+'</td>');
- 				$('#dietDayInfo_tbody1').append('<td><button class="btn btn-success" onclick="menu_delete3(this)"><input type="hidden" value="'+item.ddi_no +'">삭제</button></td>');
- 				$('#dietDayInfo_tbody3').append('</tr>');	 
- 			 });
  			$('#dd_kcal').empty();
-// 			$('#dd_kcal').append('<div>'+result.dietDay.dd_kcal+'</div>');
+ 			
+			$('#dd_kcal').append('<div>'+result.dietDay.dd_kcal+'</div>');
 		}
 	});
-	
 }
+
 
 function menu_delete1(e){
 	ddi_no = $(e).find('input').val();
@@ -1181,13 +1009,14 @@ function menu_delete1(e){
 		dataType : 'JSON',
 		data : {
 			ddi_no : ddi_no,
-			dd_info_division : "1"
+			dd_info_division : "1",
+			dd_no : dd_no
 		},
 		error : function(result) {
 			alert("실패");
 		},
 		success : function(result) {
-			dietDayInfoList1();
+			dietDayInfoList();
 		}
 	});
 }
@@ -1201,13 +1030,14 @@ function menu_delete2(e){
 		dataType : 'JSON',
 		data : {
 			ddi_no : ddi_no,
-			dd_info_division : "2"
+			dd_info_division : "2",
+			dd_no : dd_no
 		},
 		error : function(result) {
 			alert("실패");
 		},
 		success : function(result) {
-			dietDayInfoList2();
+			dietDayInfoList();
 		}
 	});
 }
@@ -1221,13 +1051,14 @@ function menu_delete3(e){
 		dataType : 'JSON',
 		data : {
 			ddi_no : ddi_no,
-			dd_info_division : "3"
+			dd_info_division : "3",
+			dd_no : dd_no
 		},
 		error : function(result) {
 			alert("실패");
 		},
 		success : function(result) {
-			dietDayInfoList3();
+			dietDayInfoList();
 		}
 	});
 }
@@ -1303,7 +1134,8 @@ function displayCalender() {
 	$("#calender-title p").html(monthNames[currentMonth].toUpperCase());
 	$("#calender-content").html("");
 
-	for (var i = 1; i < firstDayOffset(new Date()); i++) {
+	for (var i = 1; i <= firstDayOffset(new Date()); i++) {
+		console.log(firstDayOffset(new Date()));
 		$("#calender-content").append("<div class='month flex center-vh'></div>");
 	}
 	for (var i = 1; i <= days; i++) {
@@ -1312,65 +1144,11 @@ function displayCalender() {
 		$("#calender-content").append(string);
 	}
 
-	checkSelected();
-	checkBookings();
 }
-// function monthClick(e) {
-// 		clickedDays += 1;
-		
-// 		if (clickedDays == 1) {
-// 			$(e).toggleClass("clicked");
-// 			startDateIndex = parseInt($(e).attr('id').split('-')[1]);
-// 			startDate = new Date(currentYear, currentMonth, startDateIndex);
-// 		}
-// 		if (clickedDays > 1) {
-// 			endDateIndex = parseInt($(e).attr('id').split('-')[1]);
-// 			endDate = new Date(currentYear, currentMonth, endDateIndex);
-// 		}
-// 		if (endDate > startDate) {
-// 			var clicked = $(".clicked");
-// 			$(clicked).not(clicked[0]).removeClass("clicked");
-// 			$(e).toggleClass("clicked");
-
-// 			dateArray = getDates(startDate, endDate);
-// 			dateArray = formatDates(dateArray)
-// 			selectedDates = dateArray;
-
-// 			for (var i = 0; i < dateArray.length; i++) {
-// 				$("#" + dateArray[i]).addClass("clicked");
-// 			}
-// 		}
-// 		$("#startdate").html(startDate.toString().split(' ').slice(0, 4).join(' '));
-// 		$("#enddate").html(endDate.toString().split(' ').slice(0, 4).join(' '));
-// }
 function firstDayOffset(date) {
 	return new Date(currentYear, currentMonth, 1).getDay();
 }
-function checkBookings() {
-		
-	if (bookedDates != null) {
-		for (var i = 0; i < bookedDates.length; i++) {
-			var inner = bookedDates[i];
-			for (var j = 0; j < inner.length; j++) {
-				$("#" + inner[j]).removeClass("clickable").delay(400).addClass("booked");
-			}
-		}
-	}
-}
-function checkSelected() {
-	selectedDates = getDates(startDate, endDate);
-	selectedDates = formatDates(selectedDates);
-	if (selectedDates != null) {
-		for (var i = 0; i < selectedDates.length; i++) {
-			$("#" + selectedDates[i]).addClass("clicked");
-		}
-	}
-}
-function addBooking() {
-	bookedDates.push(dateArray);
-	clearCalender();
-	displayCalender();
-}
+
 function formatDates(dates) {
 	if (dates != null) {
 		var newDateArray = [];
@@ -1386,6 +1164,7 @@ function formatDates(dates) {
 	}
 	return null;
 }
+
 function getDates(startDate, stopDate) {
 	if (startDate != "" && endDate != "") {
 		var dateArray = new Array();
@@ -1398,9 +1177,6 @@ function getDates(startDate, stopDate) {
 	}
 	return null;
 }
-
-
-
 
 $("#left").on("click", function() {
 	

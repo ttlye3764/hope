@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
+
     <div class="innerpage-banner center bg-overlay-dark-7 py-7" style="background:url(${pageContext.request.contextPath}/image/food1.jpg) no-repeat; background-size:cover; background-position: center center;">
 		<div class="container">
 			<div class="row all-text-white">
 				<div class="col-md-12 align-self-center">
-					<h1 class="innerpage-title">Menu List</h1>
-					<h6 class="subtitle">안녕하세요 메뉴 리스트입니다</h6>
+					<h1 class="innerpage-title">${param.titleName }</h1>
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
-							<li class="breadcrumb-item active"><a href="index.html"><i class="ti-home"></i> Home</a></li>
-							<li class="breadcrumb-item">Blog</li>
+							<li class="breadcrumb-item active"><a href="${pageContext.request.contextPath}/user/diet/dietMain"><i class="ti-home"></i> Home</a></li>
 						</ol>
 					</nav>
 				</div>
@@ -50,13 +51,25 @@
 				<div class="col-md-9 order-first order-lg-first">
 					<!-- Post item  with image-->
 					
+					
+							<!--검색 시작-->
+				<form>
 					<h5 class="widget-title">메뉴 리스트</h5>
 					<div class="input-group">
-								<input type="text" class="form-control" placeholder="검색어를 입력해주요">
-								<span class="input-group-btn">
-									<button type="submit" class="btn btn-grad mb-0"><i class="fa fa-paper-plane m-0"></i></button>
-								</span>
-							</div>
+						<h2>열량</h2><input type="text" class="form-control" id="searchKcalMin" name="search_kcal_min" placeholder="최소 열량을 입력해주세요"><h2>~</h2>
+						<input type="text" class="form-control" id="searchKcalMax" name="search_kcal_max" placeholder="최대 열량을 입력해주세요">
+						<h2>메뉴명 : </h2><input type="text" class="form-control" id="searchMenuName" name="search_menu_name" placeholder="메뉴명을 입력해주세요"> 
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-grad mb-0" onclick="searchMenu();">
+								<i class="fa fa-paper-plane m-0"></i>
+							</button>
+						</span>
+					</div>
+				</form>
+				<!-- 검색 불 -->
+							 
+							 
+							
 					<table class="table table-lg table-noborder table-striped">
 							<thead class="all-text-white bg-grad">
 								<tr>
@@ -66,7 +79,7 @@
 									<th scope="col">Handle</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="menu_list_tbody">
 							<c:forEach items="${menuList }" var="menuInfo" varStatus="status">
 								<tr>
 									<th scope="row">${status.count}</th>
@@ -79,20 +92,8 @@
 						</table>
 						
 					<!-- pagination -->
-					<div class="container mb-6">
-						<div class="row justify-content-center">
-							<div class="col-md-8">
-								<nav>
-									<ul class="pagination justify-content-center">
-										<li class="page-item disabled"> <span class="page-link">Prev</span> </li>
-										<li class="page-item active"> <span class="page-link bg-grad"> 1 </span> </li>
-										<li class="page-item"><a class="page-link" href="#">2</a></li>
-										<li class="page-item"><a class="page-link" href="#">3</a></li>
-										<li class="page-item"><a class="page-link" href="#">Next</a> </li>
-									</ul>
-								</nav>
-							</div>
-						</div>
+					<div class="container mb-6" id="pagination">
+						${pagination }
 					</div>
 					<!-- pagination -->
 
@@ -101,3 +102,118 @@
 			</div>
 		</div>
 	</section>
+	
+	
+	
+	
+<script type="text/javascript">
+$(function(){
+})
+	
+function searchMenu(){
+	
+	var searchMenuName = $('#searchMenuName').val();
+	var searchKcalMin = $('#searchKcalMin').val();
+	var searchKcalMax = $('#searchKcalMax').val();
+
+	if(searchMenuName.length < 1){
+		searchMenuName = null;
+	} 
+
+	if(searchKcalMin.length < 1){
+		searchKcalMin = null;
+	}
+
+	if(searchKcalMax.length < 1){
+		searchKcalMax = null;
+	}
+
+	$.ajax({
+		url : '${pageContext.request.contextPath}/user/diet/menuList',
+		data : {
+			search_menu_name : searchMenuName,
+			search_kcal_min : searchKcalMin,
+			search_kcal_max : searchKcalMax,
+			ajax : "true"
+		},
+		success : function(result){
+			$('#menu_list_tbody').empty();
+			$('#pagination').empty();
+			var menuList="";
+			var count =1;
+			$.each(result.menuList, function(index, item){
+				
+				menuList += '<tr>';
+				menuList += '<th scope="row">'+count+'</th>';
+				menuList += '<td>'+item.menu_name+'</td>';
+				menuList += '<td>'+item.menu_kcal+'</td>';
+				menuList += '<td>@mdo</td>';
+				menuList += '</tr>';
+				count ++;
+			})
+			$('#menu_list_tbody').append(menuList);
+			$('#pagination').append(result.pagination);
+			
+		},	
+		error : function(result){
+			alert('실패');
+		}
+	
+	}) 
+	
+}
+
+function callAjax(i){
+
+
+	var searchMenuName = $('#searchMenuName').val();
+	var searchKcalMin = $('#searchKcalMin').val();
+	var searchKcalMax = $('#searchKcalMax').val();
+
+	if(searchMenuName.length < 1){
+		searchMenuName = null;
+	} 
+
+	if(searchKcalMin.length < 1){
+		searchKcalMin = null;
+	}
+
+	if(searchKcalMax.length < 1){
+		searchKcalMax = null;
+	}
+	
+	 $.ajax({
+		 url : '${pageContext.request.contextPath}/user/diet/menuList',
+			data : {
+				search_menu_name : searchMenuName,
+				search_kcal_min : searchKcalMin,
+				search_kcal_max : searchKcalMax,
+				ajax : "ture",
+				currentPage : i
+			},
+			success : function(result){
+				$('#menu_list_tbody').empty();
+				$('#pagination').empty();
+				var menuList="";
+				var count =1;
+				$.each(result.menuList, function(index, item){
+					
+					menuList += '<tr>';
+					menuList += '<th scope="row">'+count+'</th>';
+					menuList += '<td>'+item.menu_name+'</td>';
+					menuList += '<td>'+item.menu_kcal+'</td>';
+					menuList += '<td>@mdo</td>';
+					menuList += '</tr>';
+					count ++;
+				})
+				$('#menu_list_tbody').append(menuList);
+				$('#pagination').append(result.pagination);
+				
+			},	
+			error : function(result){
+				alert('실패');
+			}
+				
+	});
+}
+</script>

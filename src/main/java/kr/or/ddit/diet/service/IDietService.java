@@ -57,4 +57,10 @@ public interface IDietService {
 		
 		//다이어트 게시판 삽입
 		public void updateDietBoard(List<DietBoardVO> dietBoardList) throws Exception;
+		
+		//다이어트 게시판 삽입
+		public void insertDietBoard(Map<String, String> params) throws Exception;
+		
+		//다이어트 게시판 처음 삽입
+		public void insertDietBoardFirst(Map<String, String> params) throws Exception;
 }

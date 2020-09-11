@@ -53,6 +53,12 @@ public interface IDietDao {
 	// 다이어트 게시판 조회
 	public List<DietBoardVO> dietBoardList(Map<String, String> params) throws Exception;
 	
-	//다이어트 게시판 삽입
+	//다이어트 게시판 수정
 	public void updateDietBoard(List<DietBoardVO> dietBoardList) throws Exception;
+	
+	//다이어트 게시판 삽입
+	public void insertDietBoard(Map<String, String> params) throws Exception;
+	
+	//다이어트 게시판 처음 삽입
+	public void insertDietBoardFirst(Map<String, String> params) throws Exception;
 }
