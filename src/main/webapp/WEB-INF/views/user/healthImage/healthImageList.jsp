@@ -75,9 +75,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 p-0">
-						 <div style="width: 100px;height: 100px;">
-							<img id="qrcode" />
-						 </div>
+						
 						<div class="col-sm-12 col-md-12">
 							<h5 class="mb-4">Tab line</h5>
 							<ul class="nav nav-tabs tab-line">
@@ -385,29 +383,10 @@
 				$('#back, #loadingBar').remove();
 			}
 
-		  $("#gcDiv").qrcode({   //qrcode 시작
-		        render : "table",      //table, canvas 형식 두 종류가 있다. 
-		        width : 100,            //넓이 조절
-		        height : 100,           //높이 조절
-		        text   : "운동법 리스트"     //QR코드에 실릴 문자열
-		    });
-
 		  googleQRUrl = "https://chart.googleapis.com/chart?chs=177x177&cht=qr&chl=";
 
-		  <c:forEach items="${healthImageList}" var="healthInfo">
-			  var title = new Array();
-			  var diffi = new Array();
-			  var category = new Array();  
-
-			  title.push("${healthInfo.healthImage_title}");
-			  diffi.push("${healthInfo.healthImage_difficulty}");
-			  category.push("${healthInfo.healthImage_category}");
-		  </c:forEach>  
-
-		  alert(title)
-
-			 $('#qrcode').attr('src', googleQRUrl + "제목:" + title  + "/ 난이도: " + diffi + "/ 난이도: " + category + '&choe=UTF-8');
-
+			 $('#qrcode').attr('src', googleQRUrl + "제목:" +'&choe=UTF-8');
+			 
 			 $(function(){
 				// 엑셀
 				$('#excel').click(function(){
