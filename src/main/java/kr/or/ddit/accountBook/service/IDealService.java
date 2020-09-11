@@ -17,5 +17,8 @@ public interface IDealService {
 	public void deleteCard(String card_no) throws Exception;
 	public void deletedeal(String deal_no) throws Exception;
 	public String totalCount(Map<String, String> params) throws Exception;
+	public List<DealVO> staticList(String mem_no) throws Exception;
+	public DealVO dealInfo(String deal_no) throws Exception;
+	public void updateAccount(Map<String, String> params) throws Exception;
 
 }

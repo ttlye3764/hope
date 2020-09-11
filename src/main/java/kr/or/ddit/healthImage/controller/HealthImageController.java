@@ -22,11 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddit.healthImage.service.IHealthImageService;
 import kr.or.ddit.healthImageFile.service.IHealthImageFileService;
-import kr.or.ddit.utiles.RolePaginationUtil;
 import kr.or.ddit.utiles.RolePaginationUtil_su;
-import kr.or.ddit.vo.HealthFileVO;
 import kr.or.ddit.vo.HealthImageVO;
-import kr.or.ddit.vo.KnowledgeVO;
 
 @Controller
 @RequestMapping("/admin/healthImage/")
@@ -42,6 +39,7 @@ public class HealthImageController {
 		public ModelAndView healthImageList(ModelAndView andView 
 											,Map<String, String> params
 											,@RequestParam(value = "choose", required = false) String choose
+											,@RequestParam(value = "choose2", required = false) String choose2
 											,RolePaginationUtil_su pagination
 											,HttpServletRequest request
 											,@RequestParam(value = "currentPage", required = false) String currentPage) throws Exception {
@@ -53,10 +51,11 @@ public class HealthImageController {
 			
 			// 카테고리 설정 값 params에 넣기
 			params.put("healthImage_category", choose);
+			params.put("healthImage_difficulty", choose);
 
 			String totalCount = this.healthImageService.totalCount(params);
 			
-			pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount), choose);
+			pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount), choose, choose2);
 		    
 			String startCount = String.valueOf(pagination.getStartCount());
 		    String endCount = String.valueOf(pagination.getEndCount());
@@ -129,6 +128,7 @@ public class HealthImageController {
 		public void excelDown(HttpServletResponse response
 								,Map<String, String> params
 								,@RequestParam(value = "choose", required = false) String choose
+								,@RequestParam(value = "choose2", required = false) String choose2
 								,RolePaginationUtil_su pagination
 								,HttpServletRequest request
 								,@RequestParam(value = "currentPage", required = false) String currentPage) throws Exception {
@@ -137,9 +137,13 @@ public class HealthImageController {
 		         currentPage = "1";
 		      }
 
+			// 카테고리 설정 값 params에 넣기
+			params.put("healthImage_category", choose);
+			params.put("healthImage_difficulty", choose2);
+			
 			String totalCount = this.healthImageService.totalCount(params);
 			
-			pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount), totalCount);
+			pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount), choose, choose2);
 		    
 			String startCount = String.valueOf(pagination.getStartCount());
 		    String endCount = String.valueOf(pagination.getEndCount());

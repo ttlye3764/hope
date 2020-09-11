@@ -30,6 +30,12 @@ public class RolePaginationUtil_seung {
 		this.totalCount = totalCount;
 		this.search_keycode = search_keycode;
 		this.search_keyword = search_keyword;
+		if(search_keycode == null) {
+			this.search_keycode = "TOTAL";
+		}
+		if(search_keyword == null) {
+			this.search_keyword = "";
+		}
 		
 		pagingHtmls = new StringBuffer();
 		
@@ -80,14 +86,13 @@ public class RolePaginationUtil_seung {
 				this.pagingHtmls.append("<li class=\"page-item active\"><a class=\"page-link\" href='#'>"+ i +"</a></li>");
 			}else{
 				this.pagingHtmls.append("<li class=\"page-item\"><a class=\"page-link\" href='" + requestURI + "?currentPage="+ i +"&search_keyword=" + search_keyword + "&search_keycode=" + search_keycode + "'>"+ i +"</a></li>");
-
 			}
 		}
 		// 다음
 		if(this.currentPage < this.totalPage){
-			this.pagingHtmls.append("<li class=\\\"page-item\\\"><a class=\"page-link\" href=\"#\">Next</a> </li>");
-		}else{
 			this.pagingHtmls.append("<li class=\"page-item\"><a class=\"page-link\" href='" + requestURI + "?currentPage="+ (this.currentPage +1) + "&search_keyword=" + search_keyword + "&search_keycode=" + search_keycode + "'>Next</a></li>");
+		}else{
+			this.pagingHtmls.append("<li class=\"page-item disabled\"> <span class=\"page-link\">Next</span> </li>");
 		}
 		this.pagingHtmls.append("</ul>");
 		this.pagingHtmls.append("</nav>");

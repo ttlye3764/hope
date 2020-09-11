@@ -13,10 +13,10 @@
 							 re_date
 							)
 					values (re_seq.nextval,
-							#{bdNo},
-							#{reContent},
-							#{memId},
-							(SELECT NVL(MAX(re_rnum),0)+1 FROM board_reply WHERE bd_no = #{bdNo}),
+							#{bd_no},
+							#{re_content},
+							#{re_writer},
+							(SELECT NVL(MAX(re_rnum),0)+1 FROM board_reply WHERE bd_no = #{bd_no}),
 							SYSDATE
 							)		
 </insert>
@@ -27,5 +27,17 @@
 	where bd_no = #{bd_no}
 	ORDER BY TO_NUMBER(re_rnum) DESC
 </select>
+
+<update id="updateBoardReply" parameterType="map">
+	  update board_reply
+	   set 
+	   re_content = #{re_content}
+	   where re_no = #{re_no}
+</update>
+
+<!-- <delete id="deleteBoardReply" parameterType="String"> -->
+<!-- 	DELETE FROM BOARD_REPLY -->
+<!-- 	WHERE RE_NO = #{re_no} -->
+<!-- </delete> -->
 
 </mapper>

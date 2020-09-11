@@ -3,9 +3,13 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	 xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
-		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/task 
+		http://www.springframework.org/schema/task/spring-task.xsd">
+		
 
 	<!-- 어노테이션 기반 자동 빈 선언 및 빈 인스턴스 활용 context:component-scan - base package 
 		속성에 선언된 해당 패키지 하위 전체 패키지 내 모든 클래스들을 대상으로 빈 등록 빈 등록 조건 : 클래스 상단에 어노테이션(@Controller, 
@@ -18,6 +22,12 @@
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 	
+	<!-- scheduled를 쓰기위해 추가해줌 -->
+	<context:component-scan base-package="kr.or.ddit" />
+	<task:scheduler id="jobScheduler" pool-size="10" />
+	<task:annotation-driven scheduler="jobScheduler" />
+	
+	
 	<mvc:default-servlet-handler/>
-
+	
 </beans>

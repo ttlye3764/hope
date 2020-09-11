@@ -46,9 +46,7 @@ public class BoardDaoImpl implements IBoardDao{
 	@Override
 	public void updateBoard(BoardVO boardVO) throws Exception {
 		client.update("board.updateBoardInfo", boardVO);
-
 	}
-
 
 	@Override
 	public BoardVO boardInfo(Map<String, String> params) throws Exception {
@@ -88,11 +86,24 @@ public class BoardDaoImpl implements IBoardDao{
 	public void insertBoardReply(Map<String, Object> params) {
 		client.insert("boardReply.insertBoardReply", params );
 	}
-
+	
+	// 댓글 조회 
 	@Override
 	public List<Board_ReplyVO> selectBoardReply(String bd_no) {
 		return client.selectList("boardReply.selectBoardReply", bd_no);
 	}
+	
+	// 댓글 수정 
+	@Override
+	public void updateBoardReply(Map<String, Object> params) {
+		 client.update("boardReply.updateBoardReply", params);
+	}
+
+	// 댓글 삭제
+//	@Override
+//	public void deleteBoardReply(String re_no) {
+//		client.delete("boardReply.deleteBoardReply", re_no);
+//	}
 
 
 }

@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>내가 작성한 게시글</title>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
 <script type="text/javascript">
@@ -39,8 +34,6 @@ $(function(){
 });
 
 </script>
-</head>
-<body>
 <div class="innerpage-banner center bg-overlay-dark-7 py-7" style="background:url(assets/images/bg/04.jpg) no-repeat; background-size:cover; background-position: center center;">
       <div class="container">
          <div class="row all-text-white">
@@ -177,5 +170,3 @@ $(function(){
 			</div>
 		</div>
 	</div>
-</body>
-</html>

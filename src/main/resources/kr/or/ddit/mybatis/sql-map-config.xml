@@ -36,7 +36,13 @@
 		<!-- 승민 -->	
 		<typeAlias alias="memberVO" type="kr.or.ddit.vo.MemberVO" />
 		<typeAlias alias="MemberFileVO" type="kr.or.ddit.vo.MemberFileVO" />
-		<typeAlias alias="categoryVO" type="kr.or.ddit.vo.CategoryVO" />
+		<typeAlias alias="LoginVO" type="kr.or.ddit.vo.LoginVO" />
+		<typeAlias alias="PetVO" type="kr.or.ddit.vo.PetVO" />
+		<typeAlias alias="PetBoardKindVO" type="kr.or.ddit.vo.PetBoardKindVO" />
+		<typeAlias alias="PetBoardVO" type="kr.or.ddit.vo.PetBoardVO" />
+		<typeAlias alias="PetBreedVO" type="kr.or.ddit.vo.PetBreedVO" />
+		<typeAlias alias="PetFileVO" type="kr.or.ddit.vo.PetFileVO" />
+		<typeAlias alias="PetVaccinationVO" type="kr.or.ddit.vo.PetVaccinationVO" />
 			
 		<!-- 윤희 -->
 		<typeAlias alias="boardVO" type="kr.or.ddit.vo.BoardVO" />
@@ -69,8 +75,9 @@
 	    <mapper resource="kr/or/ddit/mybatis/deal.xml" />
 	<!-- 승민 -->	
 		<mapper resource="kr/or/ddit/mybatis/member.xml" />
-		<mapper resource="kr/or/ddit/mybatis/category.xml" />
 		<mapper resource="kr/or/ddit/mybatis/memberfile.xml" />
+		<mapper resource="kr/or/ddit/mybatis/pet.xml" />
+		<mapper resource="kr/or/ddit/mybatis/login.xml" />
 	<!-- 윤희 -->
 		<mapper resource="kr/or/ddit/mybatis/board.xml" />
 		<mapper resource="kr/or/ddit/mybatis/board_file.xml" />

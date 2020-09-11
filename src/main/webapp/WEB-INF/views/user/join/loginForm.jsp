@@ -5,29 +5,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!-- c:url을 이용하여 처리 -->
 <c:url var="regustMemberURI" value="/user/member/memberForm.do"></c:url>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>Wizixo | Creative Multipurpose Bootstrap Template</title>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="author" content="Webestica.com">
-	<meta name="description" content="Creative Multipurpose Bootstrap Template">
-
-	<!-- Favicon -->
-	<link rel="shortcut icon" href="assets/images/favicon.ico">
-
-	<!-- Google Font -->
-	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900%7CPlayfair+Display:400,400i,700,700i%7CRoboto:400,400i,500,700" rel="stylesheet">
-
-	<!-- Plugins CSS -->
-	<link rel="stylesheet" type="text/css" href="assets/vendor/font-awesome/css/font-awesome.min.css" />
-	<link rel="stylesheet" type="text/css" href="assets/vendor/themify-icons/css/themify-icons.css" />
-	<link rel="stylesheet" type="text/css" href="assets/vendor/animate/animate.min.css" />
-
-	<!-- Theme CSS -->
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 	
 <style>
 .btn{
@@ -47,9 +24,9 @@
 .di{
 	width : 200px;
 }
-
 </style>
 	
+
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type='text/javascript' src='<%=request.getContextPath()%>/js/validation.js'></script>
 <script type='text/javascript'>
@@ -305,10 +282,6 @@
 		$(location).attr('href', '${pageContext.request.contextPath}/user/member/delete.do');
 	}
 </script>
-
-</head>
-
-<body>
 	<div class="preloader">
 		<img src="assets/images/preloader.svg" alt="Pre-loader">
 	</div>
@@ -495,5 +468,3 @@
 			</div>
 		</div>
 	</div>
-</body>
-</html>

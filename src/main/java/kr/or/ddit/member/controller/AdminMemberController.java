@@ -93,8 +93,10 @@ public class AdminMemberController {
 	public String updateMember(MemberVO memberInfo, HttpSession session, Map<String, String> params) throws Exception {
 		params.put("mem_id", memberInfo.getMem_id());
 		
-		String pass = UserSha256.encrypt(memberInfo.getMem_pass());
-		memberInfo.setMem_pass(pass);
+		if(!memberInfo.getMem_pass().equals("")) {
+			String pass = UserSha256.encrypt(memberInfo.getMem_pass());
+			memberInfo.setMem_pass(pass);
+		}
 		
 		this.service.updateMemberInfo(memberInfo, null);
 		
