@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -62,21 +63,18 @@ public class HealthImageControllerUser {
 										HttpServletRequest request, @RequestParam(value = "currentPage", required = false) String currentPage)
 										throws Exception {
 
-		System.out.println(choose2);
-		
 		if (currentPage == null) {
 			currentPage = "1";
 		}
 
+		// 상 또는 중 배열값으로 들어감
 		if (choose2 != null) {
-			
 		String[] array = request.getParameterValues("choose2"); 
 		
-		for (int i = 0; i < array.length; i++) { 
-			params.put("healthImage_difficulty", array[i]);
-			}
+		 //System.out.println("배열에 들어있는값 : " + Arrays.toString(array));
+		 
 		}
-
+		
 		// 카테고리 설정 값 params에 넣기
 		params.put("healthImage_category", choose);
 		params.put("healthImage_difficulty", choose2);

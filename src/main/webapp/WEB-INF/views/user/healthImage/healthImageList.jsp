@@ -402,6 +402,7 @@
 			        var aver = weight * 0.48;
 
 			        // 골격근량이 평균보다 높음 => 근육량 많음 
+			        // 상 또는 중 난이도의 운동 출력
 			         if (bone > aver) {
 				        	var choose2 = new Array();
 							
@@ -415,13 +416,15 @@
 				        	 	dataType: "json", 
 				        	 	data:  {"choose2" : choose2},
 				        	 	success: function (data) { 
-				        	 		alert(data);
+				        	 		 var as = eval(data);
+				                     alert("data:" + as[0] + "/" + as[1]);
 					        	 } 
 			        	 	});
 
-			        	$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose2=' + choose2);
+			        	$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose2=' + choose2[0]);
 
 					// 골격근량이 평균보다 낮음 => 근육량 적음
+					// 하 난이도의 운동 출력
 				    } else if (bone < aver) {
 				    	var choose2 = $('#row').text();	
 			        	$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose2=' + choose2);
