@@ -28,6 +28,7 @@ import kr.or.ddit.utiles.RolePaginationUtil_yun;
 import kr.or.ddit.vo.BoardVO;
 import kr.or.ddit.vo.Board_FileVO;
 import kr.or.ddit.vo.Board_ReplyVO;
+import kr.or.ddit.vo.DealVO;
 import kr.or.ddit.vo.MemberVO;
 
 @Controller
@@ -57,7 +58,6 @@ public class BoardController {
 	
 	// 4. modelAndView
 	
-	
 	// 조회
 	@RequestMapping("boardList")
 	public ModelAndView boardList(String bd_division,
@@ -67,8 +67,8 @@ public class BoardController {
 								  HttpServletRequest request, 
 								  String currentPage, 
 								  RolePaginationUtil_yun pagination, 
-								  String search_keyword, 
-								  String search_keycode) throws Exception{		
+								  @RequestParam(defaultValue = "", required = false) String search_keyword, 
+								  @RequestParam(defaultValue = "TOTAL", required = false)String search_keycode) throws Exception{		
 		
 	
 		if(currentPage == null){
@@ -93,8 +93,8 @@ public class BoardController {
 	    	board_division_name = "QNA 게시판";
 	    	break;    
 		}
-		
-		
+	
+				
 		params.put("bd_division",bd_division);
 		params.put("search_keyword",search_keyword);
 		params.put("search_keycode",search_keycode);
@@ -116,6 +116,8 @@ public class BoardController {
 		andView.addObject("boardList", boardList);
 		andView.addObject("board_division_name", board_division_name);
 		andView.addObject("bd_division", bd_division);
+		
+		andView.addObject("currentPage", currentPage);
 		andView.addObject("search_keycode", search_keycode);
 		andView.addObject("search_keyword", search_keyword);
 		andView.setViewName("user/board/boardList");		
@@ -125,6 +127,7 @@ public class BoardController {
 	}
 	
 	
+
 	// 검색에 필요한 아이 
 		@RequestMapping("list")
 		public ModelAndView list(String bd_division,
@@ -216,10 +219,6 @@ public class BoardController {
 		params.put("search_keyword", search_keyword);
 		params.put("search_keycode", search_keycode);
 		
-		System.out.println(currentPage);
-		System.out.println(search_keyword);
-		System.out.println(search_keycode);
-		
 		modelMap.addAttribute("currentPage", currentPage);
 		modelMap.addAttribute("search_keyword", search_keyword);
 		modelMap.addAttribute("search_keycode", search_keycode);
@@ -235,10 +234,30 @@ public class BoardController {
 		
 		return boardInfo;
 	}
+	
+	@RequestMapping("replyList")
+	public ModelAndView replyList(ModelAndView andView,
+									String bd_no
+									) throws Exception{
+		
+		
+		List<Board_ReplyVO> replyList = new ArrayList<Board_ReplyVO>();
+		
+		replyList = boardService.selectBoardReply(bd_no);
+		
+		andView.addObject("replyList", replyList);
+		andView.setViewName("jsonConvertView");
+		
+		
+		return andView;
+	}
 
 	// 수정
 	@RequestMapping("updateBoardInfo")       
-	public String updateBoard(String bd_division,
+	public String updateBoard(String bd_division, 
+							  String bd_no, String re_no, 
+							  String currentPage, String search_keyword, 
+							  String search_keycode,
 						      BoardVO boardVO, 
 						      ModelMap modelMap,
 						      @RequestParam("files") MultipartFile[] items) throws Exception{
@@ -246,7 +265,7 @@ public class BoardController {
         this.boardService.updateBoard(boardVO, items);
         modelMap.addAttribute("bd_division", bd_division);
         
-		return "redirect:/user/board/boardList.do";
+		return "redirect:/user/board/boardView.do?bd_no="+ bd_no + "&re_no=" + re_no + "&bd_division=" + bd_division + "&currentPage=" + currentPage + "&search_keyword=" + search_keyword + "&search_keycode=" + search_keycode;
 	}
 	
 	// 삭제
@@ -283,7 +302,7 @@ public class BoardController {
 	public ModelAndView boardForm(String bd_division, 
 								  ModelAndView andView ) {
 		
-		System.out.println(bd_division);
+		System.out.println("bd_division" + bd_division);
 		
 		andView.addObject("bd_division", bd_division);
 		andView.setViewName("user/board/boardForm");
@@ -296,9 +315,11 @@ public class BoardController {
 	
 	// 파일 다운로드
 	@RequestMapping("fileDownload")
-	public void  fileDownload(String fileName, String fileNo, String fileBdNo,
-			ModelAndView andView, HttpServletResponse response, HttpServletRequest request)
-			throws Exception {
+	public void  fileDownload(String fileName, String fileNo, 
+			                  String fileBdNo,
+							  ModelAndView andView, 
+							  HttpServletResponse response, 
+							  HttpServletRequest request) throws Exception {
 		
 		// 다운받는 실제 경로
 		String filePath = FILE_PATH + fileName;
@@ -342,22 +363,56 @@ public class BoardController {
 		out.close();
 	}
 	
+	
+	// 댓글 등록 
 	@RequestMapping("insertBoardReply")
-	public void insertBoardReply(HttpSession session, String reContent, String bdNo) {
-		// 들어온거 콘솔에 확인하기 
-//		System.out.println(reContent);
-//		System.out.println(bdNo);
+	public ModelAndView insertBoardReply(HttpSession session, 
+			                     		String re_content, 
+			                     		String bd_no) {
+		System.out.println("///////////////////////////////bd_no : " + bd_no);
+		ModelAndView andView = new ModelAndView();
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		String re_writer = memberInfo.getMem_nickname();
+		boardService.insertBoardReply(re_content, bd_no, re_writer);
+		List<Board_ReplyVO> board_replyList = boardService.selectBoardReply(bd_no);
+		andView.addObject("board_replyList", board_replyList);
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
+	
+
+	
+	// 댓글 수정 
+	@RequestMapping("updateBoardReply")
+	public String updateBoardReply(HttpSession session, 
+			                       String re_content, 
+			                       String bd_no, 
+			                       String bd_division, 
+			                       String re_no, String currentPage, 
+			                       String search_keyword, String search_keycode) {
+		
 		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
 		
 		String mem_id = memberInfo.getMem_nickname();
 		
+		boardService.updateBoardReply(re_content, bd_no, mem_id, re_no);
 		
-		boardService.insertBoardReply(reContent, bdNo, mem_id);
+		return "redirect:/user/board/boardView.do?bd_no="+ bd_no + "&re_no=" + re_no + "&bd_division=" + bd_division + "&currentPage=" + currentPage + "&search_keyword=" + search_keyword + "&search_keycode=" + search_keycode;
 	}
 	
-	
-	
+	// 댓글 삭제
+//	@RequestMapping("deleteBoardReply")
+//	public String deleteBoardReply (HttpSession session, String reContent, String bdNo, String bd_division, String re_no, String currentPage, String search_keyword, String search_keycode) {
+//		
+//		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+//		
+//		String mem_id = memberInfo.getMem_nickname();
+//		
+//		boardService.deleteBoardReply(reContent, bdNo, re_no, currentPage, search_keyword, search_keycode);
+//		
+//		return "redirect:/user/board/boardView.do?bd_no="+ bdNo + "&re_no=" + re_no + "&bd_division=" + bd_division + "&currentPage=" + currentPage + "&search_keyword=" + search_keyword + "&search_keycode=" + search_keycode;
+//	}
+//	
 	
 	
 }
-

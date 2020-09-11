@@ -37,6 +37,11 @@
             </li>
                 <ul class="side-nav-second-level" aria-expanded="false">
                 	<li class="side-nav-item">
+                        <a href="${pageContext.request.contextPath}/admin/login/loginList.do" aria-expanded="false">LoginLog
+                            <span class="menu-arrow"></span>
+                        </a>
+                    </li>
+                	<li class="side-nav-item">
                         <a href="${pageContext.request.contextPath}/admin/member/memberList.do" aria-expanded="false">MemberList
                             <span class="menu-arrow"></span>
                         </a>

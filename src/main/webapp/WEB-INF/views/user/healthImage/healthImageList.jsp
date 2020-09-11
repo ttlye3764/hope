@@ -19,46 +19,33 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/themify-icons/css/themify-icons.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/vendor/animate/animate.min.css" /><!-- Theme CSS -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/css/style.css" />
-<title>Insert title here</title>
 <style>
-.wrap-loading { /*화면 전체를 어둡게 합니다.*/
-	position: fixed;
-	left: 0;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	background: rgba(0, 0, 0, 0.2); /*not in ie */
-	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000',
-		endColorstr='#20000000'); /* ie */
-}
-
-.wrap-loading div { /*로딩 이미지*/
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	margin-left: -21px;
-	margin-top: -21px;
-}
-
-.display-none { /*감추기*/
-	display: none;
-}
-
-#back {
-	position: absolute;
-	z-index: 100;
-	background-color: #000000;
-	display: none;
-	left: 0;
-	top: 0;
-}
-
 #loadingBar {
 	position: absolute;
 	left: 50%;
 	top: 40%;
 	display: none;
 	z-index: 200;
+}
+
+#loading {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	position: fixed;
+	display: block;
+	opacity: 0.8;
+	background: white;
+	z-index: 99;
+	text-align: center;
+}
+
+#loading>img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 100;
 }
 </style>
 <div class="innerpage-banner center bg-overlay-dark-7 py-7" 
@@ -148,8 +135,7 @@
 				 					</div> 
 								 </c:if> 
 								 
-								
-								<div class="portfolio-card-footer">
+								<div class="portfolio-card-footer" id="diffi">
 									<a href="#" class="full-screen" data-toggle="modal" data-target="#exampleModalCenter${status.index}"
 										 data-fancybox="portfolio" data-caption="title">
 										<i class="ti-fullscreen"></i>
@@ -159,15 +145,15 @@
 										</h6>
 									
 									<c:if test="${healthInfo.healthImage_difficulty eq '상'}">
-                                         <span class="badge badge-danger" >${healthInfo.healthImage_difficulty}</span>
+                                         <span id="high" class="badge badge-danger" >${healthInfo.healthImage_difficulty}</span>
                                      </c:if>
                                      
                                      <c:if test="${healthInfo.healthImage_difficulty eq '중'}">
-                                         <span class="badge badge-warning" >${healthInfo.healthImage_difficulty}</span>
+                                         <span id="middle" class="badge badge-warning" >${healthInfo.healthImage_difficulty}</span>
                                      </c:if>
                                      
                                      <c:if test="${healthInfo.healthImage_difficulty eq '하'}">
-                                         <span class="badge badge-success" >${healthInfo.healthImage_difficulty}</span>
+                                         <span id="row" class="badge badge-success" >${healthInfo.healthImage_difficulty}</span>
                                      </c:if>
 								</div>
 								
@@ -201,10 +187,15 @@
 												</div>
 												<div class="modal-body" style="text-align: center;">
 													<p>운동명 : ${healthInfo.healthImage_title}</p>
-													<p>카테고리 : ${healthInfo.healthImage_category}</p>
+													
+													<c:if test="${healthInfo.healthImage_category ne '추천 근육 운동'}">  
+														<p>카테고리 : ${healthInfo.healthImage_category}</p>
+													</c:if>
+													
 													<p>추천 연령 : ${healthInfo.healthImage_age}</p>
 													<p>운동법 : ${healthInfo.healthImage_diet}</p>
 													<p>적정 시간 : ${healthInfo.healthImage_time}분</p>
+													
 													<c:if test="${!empty healthInfo.healthImage_content}">  
 														<p>설명 : ${healthInfo.healthImage_content}</p>
 									 				</c:if>
@@ -217,7 +208,7 @@
 									<!-- 모달2 inbody -->
 									<div class="modal fade text-left" id="exampleModal" tabindex="-1" role="dialog" 
 												aria-labelledby="exampleModal" aria-hidden="true">
-										<div class="modal-dialog modal-dialog-centered" role="document">
+										<div class="modal-dialog modal-dialog-centered" role="document" >
 									  		<div class="modal-content" id="modals">
 												<div class="modal-header">
 													<h5 class="modal-title" id="exampleModalLongTitle" ><p>My Inbody</p></h5>
@@ -228,27 +219,33 @@
 												<div class="modal-body">
 													<form id="files" name="file" method="post">
 														<div class="form-group">
-															<label for="exampleFormControlFile1">인바디 파일을 넣어주세요.</label>
-															<input type="file" name="files" class="form-control-file" id="fileName">
+															<label for="exampleFormControlFile1" style="margin: 0px 0px 5px 150px;">인바디 파일을 넣어주세요.</label>
+															<input type="file" name="files" class="form-control-file" id="fileName" style="margin: 0px 0px 5px 150px;">
 														</div>
- 													<button type="button" class="btn btn-light" onClick="ajaxFileUpload();" style="margin: 0px 0px 0px 190px;">제출</button>
+ 													<button type="button" class="btn btn-light" onClick="ajaxFileUpload();" style="margin: 0px 0px 20px 190px;">확인</button>
 													</form>
 													
+													<form class="form-inline">
 														<div class="form-group" style="display: inline;">
-														체중<input class="form-control form-control-sm" type="text" style="width: 100px;" id="inbody_weight">
-														골격근량<input class="form-control form-control-sm" type="text" style="width: 100px;" id="inbody_bone">
-														체지방<input class="form-control form-control-sm" type="text" style="width: 100px;" id="inbody_fat">
-														근육량<input class="form-control form-control-sm" type="text" style="width: 100px;" id="inbody_muscle">
+														체중<input class="form-control form-control-sm" type="text" style="width: 70px;" id="inbody_weight">
+														골격근량<input class="form-control form-control-sm" type="text" style="width: 70px;" id="inbody_bone">
+														체지방<input class="form-control form-control-sm" type="text" style="width: 70px;" id="inbody_fat">
+														근육량<input class="form-control form-control-sm" type="text" style="width: 70px;" id="inbody_muscle">
 														</div>
+													</form>
  													<button type="button" class="btn btn-light" id="inbody" style="margin: 0px 0px 0px 190px;">제출</button>
 												</div>
 											</div>
 										</div>
+										
+										<!-- 로딩 화면 -->
+										<div id="loading">
+											<img src="../../image/Progress_Loading.gif" alt="loading">
+										</div> 
+										
 									</div>
-				
-									
+								</div>
 							</div>
-						</div>
 						<!-- portfolio-card -->
 					</c:forEach>
 					</div>
@@ -257,10 +254,9 @@
 			</div>
 		</div>
 	</section>
-	<!-- 로딩 화면 -->
-	<div class="wrap-loading display-none">
-    	<div><img src="./images/loading1.gif" /></div>
-	</div> 
+	
+	
+	
 	<!-- =======================
 	Portfolio -->
 	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/jquery/jquery.min.js"></script>
@@ -278,29 +274,110 @@
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script type="text/javascript">
+		// 로딩창 숨기기
+		$('#loading').hide();
 
-function FunLoadingBarStart() {
-	var backHeight = $(document).height(); //뒷 배경의 상하 폭
-	var backWidth = window.document.body.clientWidth; //뒷 배경의 좌우 폭
-	var backGroundCover = "<div id='back'></div>"; //뒷 배경을 감쌀 커버
-	var loadingBarImage = ''; //가운데 띄워 줄 이미지
-	loadingBarImage += "<div id='loadingBar'>";
-	loadingBarImage += " <img src='../img/loadingbar.gif'/>"; //로딩 바 이미지
-	loadingBarImage += "</div>";
-	$('body').append(backGroundCover).append(loadingBarImage);
-	$('#back').css({ 'width': backWidth, 'height': backHeight, 'opacity': '0.3' });
-	$('#back').show();
-	$('#loadingBar').show();
-	}
+		//파일 ocr 등록
+		function ajaxFileUpload() {
+		
+			 var files = $('#fileName').val();
+				if(files == ""){
+					swal("FILE","파일을 넣어주세요.", "warning");
+		
+					return false;
+				}
 
-function FunLoadingBarEnd() {
-	$('#back, #loadingBar').hide();
-	$('#back, #loadingBar').remove();
-	}
+			   // 버튼 클릭시 로딩창 띄우기
+			   $('#loading').show();
+		
+		       var form = $("#files")[0];
+		       var formData = new FormData(form);
+		       formData.append("file", $("#files")[0].files[0]);
+		
+		       $.ajax({
+		             url : "${pageContext.request.contextPath}/user/healthImage/ocr.do"
+		           , type : "POST"
+		           , processData : false
+		           , contentType : false
+		           , data : formData
+		           // 성공시 
+		           , success : function(result) {
+		        	    $('#loading').hide();
+		        	    
+				        $('#inbody_weight').val(result.inbodyInfo.inbody_weight);
+				        $('#inbody_bone').val(result.inbodyInfo.inbody_bone);
+				        $('#inbody_fat').val(result.inbodyInfo.inbody_fat);
+				        $('#inbody_muscle').val(result.inbodyInfo.inbody_muscle);
+		
+		           }
+		       });
+		
+		   }
+		
+		function setThumbnail(event) { 
+			var reader = new FileReader(); 
+			reader.onload = function(event) { 
+				var img = document.createElement("img"); 
+				
+				img.setAttribute("src", event.target.result); 
+				document.querySelector("div#image_container").appendChild(img); 
+				
+				img.style.height = '230px';
+			    img.style.width = '160px';
+				}; 
+				reader.readAsDataURL(event.target.files[0]);
+		
+				document.querySelector("div#image_container").addEventListener('click', function() {
+				document.querySelector("div#image_container").remove();
+				});
+			};
+		
+		
+		function shoulder() {
+			  var choose = $('#shoulder').val();	
+			  location.href = '${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose=' + choose;
+		}
+		
+		function back() {
+			  var choose = $('#back').val();	
+			  location.href = '${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose=' + choose;
+		}
+		
+		function chest() {
+			  var choose = $('#chest').val();	
+			  location.href = '${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose=' + choose;
+		}
+		
+		function arm() {
+			  var choose = $('#arm').val();	
+			  location.href = '${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose=' + choose;
+		}
+		
+		function leg() {
+			  var choose = $('#leg').val();	
+			  location.href = '${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose=' + choose;
+		}
 
+		function FunLoadingBarStart() {
+			var backHeight = $(document).height(); //뒷 배경의 상하 폭
+			var backWidth = window.document.body.clientWidth; //뒷 배경의 좌우 폭
+			var backGroundCover = "<div id='back'></div>"; //뒷 배경을 감쌀 커버
+			var loadingBarImage = ''; //가운데 띄워 줄 이미지
+				loadingBarImage += "<div id='loadingBar'>";
+				loadingBarImage += " <img src='../img/loadingbar.gif'/>"; //로딩 바 이미지
+				loadingBarImage += "</div>";
+				$('body').append(backGroundCover).append(loadingBarImage);
+				$('#back').css({ 'width': backWidth, 'height': backHeight, 'opacity': '0.3' });
+				$('#back').show();
+				$('#loadingBar').show();
+			}
+		
+		function FunLoadingBarEnd() {
+				$('#back, #loadingBar').hide();
+				$('#back, #loadingBar').remove();
+			}
 
 			$(function(){
-
 				// 엑셀
 				$('#excel').click(function(){
 					$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/excelDown.do');
@@ -311,140 +388,47 @@ function FunLoadingBarEnd() {
 					$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/healthImageList.do');
 				}); 
 
-				 
 				 // 인바디 정보 등록
 				$('#inbody').click(function(){
-					var files = $('#fileName').val();
+					/* var files = $('#fileName').val();
 					if(files == ""){
 						swal("FILE","파일을 넣어주세요.", "warning");
 
 						return false;
 					}
+					 */
+					var weight = $('#inbody_weight').val().substring(0,2);
+			        var bone = $('#inbody_bone').val().substring(0,2);
+			        var aver = weight * 0.48;
 
-					
+			        // 골격근량이 평균보다 높음 => 근육량 많음 
+			         if (bone > aver) {
+				        	var choose2 = new Array();
+							
+							choose2.push($('#high').text());
+				        	choose2.push($('#middle').text());
+				        	 
+			        		$.ajaxSettings.traditional = true;
+			        	 	$.ajax({ 
+				        	 	type: "post", 
+				        	 	url: "${pageContext.request.contextPath}/user/healthImage/healthImageList.do", 
+				        	 	dataType: "json", 
+				        	 	data:  {"choose2" : choose2},
+				        	 	success: function (data) { 
+				        	 		alert(data);
+					        	 } 
+			        	 	});
+
+			        	$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose2=' + choose2);
+
+					// 골격근량이 평균보다 낮음 => 근육량 적음
+				    } else if (bone < aver) {
+				    	var choose2 = $('#row').text();	
+			        	$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose2=' + choose2);
+					}   
 					
 				});  
-
-
-				/* $("#playBtn").on("click", function() {
-			        $("#myVideo").trigger("play");
-
-			    });
-
-			    $("#fullBtn").on("click", function() {
-			        var elem = document.getElementById("myVideo");
-
-			        if(elem.requestFullscreen) {
-			            elem.requestFullscreen();
-
-			        } else if(elem.mozRequestFullScreen) {
-			            elem.mozRequestFullScreen();
-
-			        } else if (elem.webkitRequestFullscreen) {
-			            elem.webkitRequestFullscreen();
-
-			        } else if (elem.msRequestFullscreen) {
-			            elem.msRequestFullscreen();
-			        }
-
-			    });
-
-			    $("#myVideo").on("ended", function() {
-			         console.log("Video Finished");
-
-			    }); */
-
 			});
-
-			// 파일 ocr 등록
-			 function ajaxFileUpload() {
-
-				 var files = $('#fileName').val();
-					if(files == ""){
-						swal("FILE","파일을 넣어주세요.", "warning");
-
-						return false;
-					}
-
-			        var form = $("#files")[0];
-			        var formData = new FormData(form);
-			        formData.append("message", "ajax로 파일 전송하기");
-			        formData.append("file", $("#files")[0].files[0]);
-
-			        $.ajax({
-			              url : "${pageContext.request.contextPath}/user/healthImage/ocr.do"
-			            , type : "POST"
-			            , processData : false
-			            , contentType : false
-			            , data : formData
-			            // 로딩 화면
-			            ,beforeSend : function(){
-			            	FunLoadingBarStart();
-			            },
-			            complete : function(){
-			            	FunLoadingBarEnd();
-			            }
-			            // 성공시 
-			            , success : function(result) {
-					        $('#inbody_weight').val(result.inbodyInfo.inbody_weight);
-					        $('#inbody_bone').val(result.inbodyInfo.inbody_bone);
-					        $('#inbody_fat').val(result.inbodyInfo.inbody_fat);
-					        $('#inbody_muscle').val(result.inbodyInfo.inbody_muscle);
-
-			            }
-			        });
-
-			    }
-
-			function setThumbnail(event) { 
-				var reader = new FileReader(); 
-				reader.onload = function(event) { 
-					var img = document.createElement("img"); 
-					
-					img.setAttribute("src", event.target.result); 
-					document.querySelector("div#image_container").appendChild(img); 
-					
-					img.style.height = '230px';
-				    img.style.width = '160px';
-					}; 
-					reader.readAsDataURL(event.target.files[0]);
-
-					document.querySelector("div#image_container").addEventListener('click', function() {
-					document.querySelector("div#image_container").remove();
-					});
-				};
-
-			
-			function shoulder() {
-				  var choose = $('#shoulder').val();	
-				  location.href = '${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose=' + choose;
-			}
-			
-			function back() {
-				  var choose = $('#back').val();	
-				  location.href = '${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose=' + choose;
-			}
-			
-			function chest() {
-				  var choose = $('#chest').val();	
-				  location.href = '${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose=' + choose;
-			}
-			
-			function arm() {
-				  var choose = $('#arm').val();	
-				  location.href = '${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose=' + choose;
-			}
-			
-			function leg() {
-				  var choose = $('#leg').val();	
-				  location.href = '${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose=' + choose;
-			}
-
-		    $("#myVideo").on("ended", function() {
-		         console.log("Video Finished");
-
-		    });
-
 
 </script>
 </html>

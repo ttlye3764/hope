@@ -20,6 +20,7 @@
 	<sql id="selectAll">
 		SELECT *
 		FROM HEALTHIMAGE
+		WHERE 1=1
 	</sql>
 
 	<select id="healthImageList" resultType="healthImageVO" parameterType="map" resultMap="healthResultMap">
@@ -28,7 +29,10 @@
 		FROM (
 		<include refid="selectAll" />
 		<if test="healthImage_category != null">
-			where healthImage_category = #{healthImage_category}
+			and healthImage_category = #{healthImage_category}
+		</if>
+		<if test="healthImage_difficulty != null">
+			and healthImage_difficulty = #{healthImage_difficulty}
 		</if>
 		ORDER BY healthImage_no)A) B
 		<![CDATA[
@@ -40,7 +44,7 @@
 
 	<select id="healthImageInfo" parameterType="map" resultMap="healthResultMap">
 		<include refid="selectAll" />
-		WHERE healthImage_no = #{healthImage_no}
+		and healthImage_no = #{healthImage_no}
 	</select>
 
 	<select id="fileSequence" resultType="String">
@@ -93,8 +97,13 @@
 	<select id="totalCount" parameterType="map" resultType="String">
 		select count(healthImage_no)
 		from HEALTHIMAGE
+		WHERE 1=1
 		<if test="healthImage_category != null">
-			where healthImage_category = #{healthImage_category}
+			and healthImage_category = #{healthImage_category}
+		</if>
+		<if test="healthImage_difficulty != null">
+			and healthImage_difficulty = #{healthImage_difficulty}
+			or healthImage_difficulty = #{healthImage_difficulty}
 		</if>	
 	</select>
 

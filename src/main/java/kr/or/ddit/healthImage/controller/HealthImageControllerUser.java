@@ -56,24 +56,38 @@ public class HealthImageControllerUser {
 	// 운동법 리스트
 	@RequestMapping("healthImageList")
 	public ModelAndView healthImageList(ModelAndView andView, Map<String, String> params,
-			@RequestParam(value = "choose", required = false) String choose, RolePaginationUtil_su pagination,
-			HttpServletRequest request, @RequestParam(value = "currentPage", required = false) String currentPage)
-			throws Exception {
+										@RequestParam(value = "choose", required = false) String choose, 
+										@RequestParam(value = "choose2", required = false) String choose2, 
+										RolePaginationUtil_su pagination,
+										HttpServletRequest request, @RequestParam(value = "currentPage", required = false) String currentPage)
+										throws Exception {
 
+		System.out.println(choose2);
+		
 		if (currentPage == null) {
 			currentPage = "1";
 		}
 
+		if (choose2 != null) {
+			
+		String[] array = request.getParameterValues("choose2"); 
+		
+		for (int i = 0; i < array.length; i++) { 
+			params.put("healthImage_difficulty", array[i]);
+			}
+		}
+
 		// 카테고리 설정 값 params에 넣기
 		params.put("healthImage_category", choose);
-
+		params.put("healthImage_difficulty", choose2);
+		
 		String totalCount = this.healthImageService.totalCount(params);
 
-		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount), choose);
+		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount), choose, choose2);
 
 		String startCount = String.valueOf(pagination.getStartCount());
 		String endCount = String.valueOf(pagination.getEndCount());
-
+		
 		params.put("startCount", startCount);
 		params.put("endCount", endCount);
 
@@ -114,7 +128,8 @@ public class HealthImageControllerUser {
 	// 운동법 상세
 	@RequestMapping("healthImageView")
 	public HealthImageVO healthImageView(@RequestParam(value = "healthImage_no") String healthImage_no,
-			Map<String, String> params, Model model, HealthImageVO healthInfo) throws Exception {
+											Map<String, String> params, 
+											Model model, HealthImageVO healthInfo) throws Exception {
 		params.put("healthImage_no", healthImage_no);
 
 		healthInfo = this.healthImageService.healthInfo(params);
@@ -126,8 +141,11 @@ public class HealthImageControllerUser {
 	// 엑셀 출력
 	@RequestMapping("excelDown")
 	public void excelDown(HttpServletResponse response, Map<String, String> params,
-			@RequestParam(value = "choose", required = false) String choose, RolePaginationUtil_su pagination,
-			HttpServletRequest request, @RequestParam(value = "currentPage", required = false) String currentPage)
+							@RequestParam(value = "choose", required = false) String choose, 
+							@RequestParam(value = "choose2", required = false) String choose2, 
+							RolePaginationUtil_su pagination,
+							HttpServletRequest request, 
+							@RequestParam(value = "currentPage", required = false) String currentPage)
 			throws Exception {
 
 		if (currentPage == null) {
@@ -136,7 +154,7 @@ public class HealthImageControllerUser {
 
 		String totalCount = this.healthImageService.totalCount(params);
 
-		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount), choose);
+		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount), choose,  choose2);
 
 		String startCount = String.valueOf(pagination.getStartCount());
 		String endCount = String.valueOf(pagination.getEndCount());
@@ -211,8 +229,9 @@ public class HealthImageControllerUser {
 
 	// ocr
 	@RequestMapping("ocr")
-	public ModelAndView ocr(Model model, InbodyVO inbodyInfo, @RequestParam("files") MultipartFile items,
-			HttpServletRequest request, ModelAndView andView) throws Exception {
+	public ModelAndView ocr(Model model, InbodyVO inbodyInfo, 
+							@RequestParam("files") MultipartFile items,
+							HttpServletRequest request, ModelAndView andView) throws Exception {
 
 		HttpSession session = request.getSession();
 		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");

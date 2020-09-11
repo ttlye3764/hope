@@ -15,16 +15,20 @@ public class RolePaginationUtil_su {
 	private HttpServletRequest request;
 	private StringBuffer pagingHtmls;
 	private String choose;
+	private String choose2;
 	
 	// choose => 카테고리값 쿼리스트링으로 넘김
 	public void RolePaginationUtil(HttpServletRequest request,
 							  int currentPage,
 							  int totalCount,
-							  String choose){
+							  String choose,
+							  String choose2){
 		this.request = request;
 		this.currentPage = currentPage;
 		this.totalCount = totalCount;
 		this.choose = choose;
+		this.choose2 = choose2;
+		
 		
 		pagingHtmls = new StringBuffer();
 		
@@ -68,12 +72,20 @@ public class RolePaginationUtil_su {
 			this.pagingHtmls.append("<li class=\"page-item disabled\"> <span class=\"page-link\">Prev</span> </li>");
 		}else{
 			String lo = "<li class=\"page-item\"><a class=\"page-link\" href='" + requestURI + "?currentPage="+ (this.currentPage -1);
-			if(choose == null) {
+			
+			if(choose == null && choose2 == null) {
 				lo += "'>Prev</a></li>";
+			} else if(choose == null || choose2 == null) {
+				if (choose == null) {
+					lo += "&choose2=" + choose2 +"'>Prev</a></li>";
+				} else if(choose2 == null) {
+					lo += "&choose=" + choose +"'>Prev</a></li>";
+				} 
 			}
 			else {
-				lo += "&choose=" + choose +"'>Prev</a></li>";
+				lo += "&choose=" + choose + "&choose2=" + choose2 +"'>Prev</a></li>";
 			}
+			
 			this.pagingHtmls.append(lo);
 //			this.pagingHtmls.append("<li class=\\\"page-item disabled\\\"><a class=\"page-link\" href='" + requestURI + "?currentPage="+ (this.currentPage -1) +"&choose=" + choose +"'>Prev</a></li>");
 		}
@@ -83,12 +95,20 @@ public class RolePaginationUtil_su {
 				this.pagingHtmls.append("<li class=\"page-item active\"><a class=\"page-link\" href='#'>"+ i +"</a></li>");
 			}else{
 				String lo = "<li class=\"page-item\"><a class=\"page-link\" href='" + requestURI + "?currentPage="+ i;
-				if(choose == null) {
-					lo += "'>"+ i + "</a></li>";
+				
+				if(choose == null && choose2 == null) {
+					lo += "'>"+ i +"</a></li>";
+				} else if(choose == null || choose2 == null) {
+					if (choose == null) {
+						lo += "&choose2=" + choose2 +"'>"+ i +"</a></li>";
+					} else if(choose2 == null) {
+						lo += "&choose=" + choose +"'>"+ i +"</a></li>";
+					} 
 				}
 				else {
-					lo += "&choose=" + choose +"'>" + i + "</a></li>";
+					lo += "&choose=" + choose + "&choose2=" + choose2 +"'>"+ i +"</a></li>";
 				}
+				
 				this.pagingHtmls.append(lo);
 //				this.pagingHtmls.append("<li class=\"page-item\"><a class=\"page-link\" href='" + requestURI + "?currentPage="+ i +"&choose=" + choose+"'>"+ i +"</a></li>");
 
@@ -99,11 +119,18 @@ public class RolePaginationUtil_su {
 			this.pagingHtmls.append("<li class=\\\"page-item\\\"><a class=\"page-link\" href=" + requestURI  +"?currentPage=" + (this.currentPage +1) +">Next</a> </li>");
 		}else{
 			String lo = "<li class=\"page-item\"><a class=\"page-link\" href='" + requestURI + "?currentPage="+ (this.currentPage +1);
-			if(choose == null) {
+			
+			if(choose == null && choose2 == null) {
 				lo += "'>Next</a></li>";
+			} else if(choose == null || choose2 == null) {
+				if (choose == null) {
+					lo += "&choose2=" + choose2 +"'>Next</a></li>";
+				} else if(choose2 == null) {
+					lo += "&choose=" + choose +"'>Next</a></li>";
+				} 
 			}
 			else {
-				lo += "&choose=" + choose +"'>Next</a></li>";
+				lo += "&choose=" + choose + "&choose2=" + choose2 +"'>Next</a></li>";
 			}
 			this.pagingHtmls.append(lo);
 //			this.pagingHtmls.append("<li class=\"page-item\"><a class=\"page-link\" href='" + requestURI + "?currentPage="+ (this.currentPage +1) +"&choose=" + choose +"'>Next</a></li>");

@@ -39,5 +39,9 @@ public interface IBoardDao {
 	public void insertBoardReply(Map<String, Object> params);
 	// 댓글 조회 
 	public List<Board_ReplyVO> selectBoardReply(String bd_no);
+	// 댓글 수정
+	public void updateBoardReply(Map<String, Object> params);
+	// 댓글 삭제
+//	public void deleteBoardReply(String re_no);
 	
 }
