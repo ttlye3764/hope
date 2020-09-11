@@ -99,5 +99,25 @@ public class DealDaoImpl implements IDealDao{
 		client.update("deal.updateAccount",params);
 	}
 
+	@Override
+	public String totalPlus(String mem_no) throws Exception {
+		return client.selectOne("deal.totalPlus",mem_no);
+	}
+
+	@Override
+	public String totalMinus(String mem_no) throws Exception {
+		return client.selectOne("deal.totalMinus",mem_no);
+	}
+
+	@Override
+	public String fix_plus(String mem_no) throws Exception {
+		return client.selectOne("deal.fix_plus",mem_no);
+	}
+
+	@Override
+	public String fix_minus(String mem_no) throws Exception {
+		return client.selectOne("deal.fix_minus",mem_no);
+	}
+
 
 }

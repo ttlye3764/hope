@@ -20,5 +20,9 @@ public interface IDealService {
 	public List<DealVO> staticList(String mem_no) throws Exception;
 	public DealVO dealInfo(String deal_no) throws Exception;
 	public void updateAccount(Map<String, String> params) throws Exception;
+	public String totalPlus(String mem_no) throws Exception;
+	public String totalMinus(String mem_no) throws Exception;
+	public String fix_plus(String mem_no) throws Exception;
+	public String fix_minus(String mem_no) throws Exception;
 
 }

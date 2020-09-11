@@ -21,21 +21,22 @@
   -webkit-transition: width 1.5s ease-in-out;
   transition: width 1.5s ease-in-out;
 }
-
 </style>
 
 <script>
-    $(function () { 
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+$(function () { 
   $('[data-toggle="tooltip"]').tooltip({trigger: 'manual'}).tooltip('show');
   $(".progress-bar").each(function(){
 	    each_bar_width = $(this).attr('aria-valuenow');
 	    $(this).width(each_bar_width + '%');
-	  });
+  });
+        var total_plus = numberWithCommas(${total_plus});
+  	
 });  
-
-
-
-
 </script>
 
 <div class="innerpage-banner center bg-overlay-dark-7 py-7" style="background:url(assets/images/bg/04.jpg) no-repeat; background-size:cover; background-position: center center;">
@@ -79,15 +80,15 @@
 								<div style="width: 80px; text-align: left; color: black;">
 									<span class="progressText"><B>총 비용</B></span>
 								</div>
-								<div class="progress" style="width:280px;">
-									<div class="progress-bar" role="progressbar" aria-valuenow="40"
-										aria-valuemin="0" aria-valuemax="100">
+								<div class="progress" style="width:230px;">
+									<div class="progress-bar" role="progressbar" aria-valuenow="${total_minus}"
+										aria-valuemin="0" aria-valuemax="${total_minus}">
 										<span class="popOver" data-toggle="tooltip"
-											data-placement="right" title="5,000"> </span>
+											data-placement="right" title="${total_minus}"> </span>
 									</div>
 								</div>
-								<div style="margin-left: 40px;">
-									<span>40%</span>
+								<div style="margin-left: 80px;">
+									<span>100%</span>
 								</div>
 							</div>
 							
@@ -95,14 +96,14 @@
 								<div style="width: 80px; text-align: left;">
 									<span class="progressText"><B>식비</B></span>
 								</div>
-								<div class="progress" style="width:280px;">
+								<div class="progress" style="width:230px;">
 									<div class="progress-bar" role="progressbar" aria-valuenow="0"
 										aria-valuemin="0" aria-valuemax="100">
 										<span class="popOver" data-toggle="tooltip"
 											data-placement="right" title="0"> </span>
 									</div>
 								</div>
-								<div style="margin-left: 40px;">
+								<div style="margin-left: 80px;">
 									<span>0%</span>
 								</div>
 							</div>
@@ -110,14 +111,14 @@
 								<div style="width: 80px; text-align: left;">
 									<span class="progressText"><B>교통비</B></span>
 								</div>
-								<div class="progress" style="width:280px;">
+								<div class="progress" style="width:230px;">
 									<div class="progress-bar" role="progressbar" aria-valuenow="0"
 										aria-valuemin="0" aria-valuemax="100">
 										<span class="popOver" data-toggle="tooltip"
 											data-placement="right" title="0"> </span>
 									</div>
 								</div>
-								<div style="margin-left: 40px;">
+								<div style="margin-left: 80px;">
 									<span>0%</span>
 								</div>
 							</div>
@@ -125,14 +126,14 @@
 								<div style="width: 80px; text-align: left;">
 									<span class="progressText"><B>주거,통신</B></span>
 								</div>
-								<div class="progress" style="width:280px;">
+								<div class="progress" style="width:230px;">
 									<div class="progress-bar" role="progressbar" aria-valuenow="0"
 										aria-valuemin="0" aria-valuemax="100">
 										<span class="popOver" data-toggle="tooltip"
 											data-placement="right" title="0"> </span>
 									</div>
 								</div>
-								<div style="margin-left: 40px;">
+								<div style="margin-left: 80px;">
 									<span>0%</span>
 								</div>
 							</div>
@@ -141,17 +142,18 @@
 								<div style="width: 80px; text-align: left; color: black;">
 									<span class="progressText"><B>총 고정</B></span>
 								</div>
-								<div class="progress" style="width: 280px;">
-									<div class="progress-bar" role="progressbar" aria-valuenow="40"
-										aria-valuemin="0" aria-valuemax="100">
+								<div class="progress" style="width: 230px;">
+									<div class="progress-bar" role="progressbar" aria-valuenow="${fix_minus}"
+										aria-valuemin="0" aria-valuemax="${fix_minus}">
 										<span class="popOver" data-toggle="tooltip"
-											data-placement="right" title="5,000"> </span>
+											data-placement="right" title="${fix_minus}"> </span>
 									</div>
 								</div>
-								<div style="margin-left: 40px;">
-									<span>40%</span>
+								<div style="margin-left: 80px;">
+									<span>100%</span>
 								</div>
 							</div>
+							
 						</div>
 						
 						<div style="background-color: white; width: 49%; height: 400px;">
@@ -162,15 +164,15 @@
 									<div style="width: 80px; text-align: left; color: black;">
 										<span class="progressText"><B>총 수익</B></span>
 									</div>
-									<div class="progress" style="width:280px;">
-										<div class="progress-bar" role="progressbar" aria-valuenow="40"
-											aria-valuemin="0" aria-valuemax="100">
+									<div class="progress" style="width:230px;">
+										<div class="progress-bar" role="progressbar" aria-valuenow="${total_plus}"
+											aria-valuemin="0" aria-valuemax="${total_plus}">
 											<span class="popOver" data-toggle="tooltip"
-												data-placement="right" title="5,000"> </span>
+												data-placement="right" title="${total_plus}"> </span>
 										</div>
 									</div>
-									<div style="margin-left: 40px;">
-										<span>40%</span>
+									<div style="margin-left: 80px;">
+										<span>100%</span>
 									</div>
 								</div>
 								
@@ -178,14 +180,14 @@
 									<div style="width: 80px; text-align: left;">
 										<span class="progressText"><B>월급</B></span>
 									</div>
-									<div class="progress" style="width:280px;">
+									<div class="progress" style="width:230px;">
 										<div class="progress-bar" role="progressbar" aria-valuenow="0"
 											aria-valuemin="0" aria-valuemax="100">
 											<span class="popOver" data-toggle="tooltip"
 												data-placement="right" title="0"> </span>
 										</div>
 									</div>
-									<div style="margin-left: 40px;">
+									<div style="margin-left: 80px;">
 										<span>0%</span>
 									</div>
 								</div>
@@ -193,14 +195,14 @@
 									<div style="width: 80px; text-align: left;">
 										<span class="progressText"><B>상여금</B></span>
 									</div>	
-									<div class="progress" style="width:280px;">
+									<div class="progress" style="width:230px;">
 										<div class="progress-bar" role="progressbar" aria-valuenow="0"
 											aria-valuemin="0" aria-valuemax="100">
 											<span class="popOver" data-toggle="tooltip"
 												data-placement="right" title="0"> </span>
 										</div>
 									</div>
-									<div style="margin-left: 40px;">
+									<div style="margin-left: 80px;">
 										<span>0%</span>
 									</div>
 								</div>
@@ -208,14 +210,14 @@
 									<div style="width: 80px; text-align: left;">
 										<span class="progressText"><B>펀드,주식</B></span>
 									</div>
-									<div class="progress" style="width:280px;">
+									<div class="progress" style="width:230px;">
 										<div class="progress-bar" role="progressbar" aria-valuenow="0"
 											aria-valuemin="0" aria-valuemax="100">
 											<span class="popOver" data-toggle="tooltip"
 												data-placement="right" title="0"> </span>
 										</div>
 									</div>
-									<div style="margin-left: 40px;">
+									<div style="margin-left: 80px;">
 										<span>0%</span>
 									</div>
 								</div>
@@ -223,14 +225,14 @@
 									<div style="width: 80px; text-align: left;">
 										<span class="progressText"><B>기타수익</B></span>
 									</div>
-									<div class="progress" style="width:280px;">
+									<div class="progress" style="width:230px;">
 										<div class="progress-bar" role="progressbar" aria-valuenow="0"
 											aria-valuemin="0" aria-valuemax="100">
 											<span class="popOver" data-toggle="tooltip"
 												data-placement="right" title="0"> </span>
 										</div>
 									</div>
-									<div style="margin-left: 40px;">
+									<div style="margin-left: 80px;">
 										<span>0%</span>
 									</div>
 								</div>
@@ -239,15 +241,15 @@
 									<div style="width: 80px; text-align: left; color: black;">
 										<span class="progressText"><B>총 고정</B></span>
 									</div>
-									<div class="progress" style="width: 280px;">
-										<div class="progress-bar" role="progressbar" aria-valuenow="40"
-											aria-valuemin="0" aria-valuemax="100">
+									<div class="progress" style="width: 230px;">
+										<div class="progress-bar" role="progressbar" aria-valuenow="${fix_plus}"
+											aria-valuemin="0" aria-valuemax="${fix_plus}">
 											<span class="popOver" data-toggle="tooltip"
-												data-placement="right" title="5,000"> </span>
+												data-placement="right" title="${fix_plus}"> </span>
 										</div>
 									</div>
-									<div style="margin-left: 40px;">
-										<span>40%</span>
+									<div style="margin-left: 80px;">
+										<span>100%</span>
 									</div>
 								</div>
 							</div>
@@ -261,30 +263,30 @@
 									<div style="width: 80px; text-align: left; color: black;">
 										<span class="progressText"><B>총 수익</B></span>
 									</div>
-									<div class="progress" style="width:280px;">
-										<div class="progress-bar" role="progressbar" aria-valuenow="40"
-											aria-valuemin="0" aria-valuemax="100">
+									<div class="progress" style="width:230px;">
+										<div class="progress-bar" role="progressbar" aria-valuenow="${total_plus}"
+											aria-valuemin="0" aria-valuemax="${total_plus}">
 											<span class="popOver" data-toggle="tooltip"
-												data-placement="right" title="5,000"> </span>
+												data-placement="right" title="${total_plus}"> </span>
 										</div>
 									</div>
-									<div style="margin-left: 40px;">
-										<span>40%</span>
+									<div style="margin-left: 80px;">
+										<span>100%</span>
 									</div>
 								</div>
 								<div style="display: flex; justify-content:flex-start; align-items:center; height: 30px; border-bottom: 2px double gray;">
 									<div style="width: 80px; text-align: left; color: black;">
 										<span class="progressText"><B>총 비용</B></span>
 									</div>
-									<div class="progress" style="width:280px;">
-										<div class="progress-bar" role="progressbar" aria-valuenow="40"
-											aria-valuemin="0" aria-valuemax="100">
+									<div class="progress" style="width:230px;">
+										<div class="progress-bar" role="progressbar" aria-valuenow="${total_minus}"
+											aria-valuemin="0" aria-valuemax="${total_minus}">
 											<span class="popOver" data-toggle="tooltip"
-												data-placement="right" title="5,000"> </span>
+												data-placement="right" title="${total_minus}"></span>
 										</div>
 									</div>
-									<div style="margin-left: 40px;">
-										<span>40%</span>
+									<div style="margin-left: 80px;">
+										<span>100%</span>
 									</div>
 								</div>
 								

@@ -74,34 +74,39 @@ public class AccountController {
 	
 	
 	@RequestMapping("accountStatistics")
-	public ModelAndView accountStatistics(ModelAndView andView) {
+	public ModelAndView accountStatistics(ModelAndView andView, HttpSession session) throws Exception {
 		
-		
+		MemberVO vo = (MemberVO)session.getAttribute("LOGIN_MEMBERINFO");
+		String mem_no = vo.getMem_no();
+		System.out.println(mem_no);
 		//이번달 기준
 		//총 비용, 총 수익
-		
-		
+		String total_plus =  service.totalPlus(mem_no);
+		String total_minus = service.totalMinus(mem_no);
+		System.out.println(total_plus);
+		System.out.println(total_minus);
 		//그룹(식비,교통비)-비용
+		
+		
+		
 		
 		
 		//그룹(월급,상여금)-수익
 		
 		
+		
+		
 		//그룹(고정비용, 고정수익)
+		String fix_plus = service.fix_plus(mem_no);
+		String fix_minus = service.fix_minus(mem_no);
 		
+		System.out.println(fix_plus);
+		System.out.println(fix_minus);
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		andView.addObject("total_plus",total_plus);
+		andView.addObject("total_minus",total_minus);
+		andView.addObject("fix_plus",fix_plus);
+		andView.addObject("fix_minus",fix_minus);
 		andView.setViewName("user/accountBook/accountStatistics");
 		return andView;
 	}
