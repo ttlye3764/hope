@@ -33,6 +33,7 @@
 		</if>
 		<if test="healthImage_difficulty != null">
 			and healthImage_difficulty = #{healthImage_difficulty}
+			or healthImage_difficulty = #{healthImage_difficulty}
 		</if>
 		ORDER BY healthImage_no)A) B
 		<![CDATA[
