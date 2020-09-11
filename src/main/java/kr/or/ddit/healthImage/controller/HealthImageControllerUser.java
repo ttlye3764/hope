@@ -39,6 +39,7 @@ import kr.or.ddit.healthImage.service.IHealthImageService;
 import kr.or.ddit.healthImageFile.service.IHealthImageFileService;
 import kr.or.ddit.inbody.service.IInbodyService;
 import kr.or.ddit.utiles.RolePaginationUtil_su;
+import kr.or.ddit.vo.HealthFileVO;
 import kr.or.ddit.vo.HealthImageVO;
 import kr.or.ddit.vo.InbodyVO;
 import kr.or.ddit.vo.MemberVO;
@@ -135,6 +136,8 @@ public class HealthImageControllerUser {
 
 		return healthInfo;
 	}
+	// 큐알코드
+
 
 	// 엑셀 출력
 	@RequestMapping("excelDown")

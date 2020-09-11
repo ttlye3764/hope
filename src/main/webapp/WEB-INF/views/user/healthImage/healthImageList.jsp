@@ -75,6 +75,9 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 p-0">
+						 <div style="width: 100px;height: 100px;">
+							<img id="qrcode" />
+						 </div>
 						<div class="col-sm-12 col-md-12">
 							<h5 class="mb-4">Tab line</h5>
 							<ul class="nav nav-tabs tab-line">
@@ -185,6 +188,7 @@
 													<span aria-hidden="true">&times;</span>
 													</button>
 												</div>
+												<input type="hidden" value="${healthInfo.healthImage_title}" id="title">
 												<div class="modal-body" style="text-align: center;">
 													<p>운동명 : ${healthInfo.healthImage_title}</p>
 													
@@ -272,6 +276,10 @@
 	<!--Template Functions-->
 	<script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="https://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/template/assets/js/jquery.qrcode.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/template/assets/js/qrcode.js"></script>
+
 
 <script type="text/javascript">
 		// 로딩창 숨기기
@@ -377,7 +385,30 @@
 				$('#back, #loadingBar').remove();
 			}
 
-			$(function(){
+		  $("#gcDiv").qrcode({   //qrcode 시작
+		        render : "table",      //table, canvas 형식 두 종류가 있다. 
+		        width : 100,            //넓이 조절
+		        height : 100,           //높이 조절
+		        text   : "운동법 리스트"     //QR코드에 실릴 문자열
+		    });
+
+		  googleQRUrl = "https://chart.googleapis.com/chart?chs=177x177&cht=qr&chl=";
+
+		  <c:forEach items="${healthImageList}" var="healthInfo">
+			  var title = new Array();
+			  var diffi = new Array();
+			  var category = new Array();  
+
+			  title.push("${healthInfo.healthImage_title}");
+			  diffi.push("${healthInfo.healthImage_difficulty}");
+			  category.push("${healthInfo.healthImage_category}");
+		  </c:forEach>  
+
+		  alert(title)
+
+			 $('#qrcode').attr('src', googleQRUrl + "제목:" + title  + "/ 난이도: " + diffi + "/ 난이도: " + category + '&choe=UTF-8');
+
+			 $(function(){
 				// 엑셀
 				$('#excel').click(function(){
 					$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/excelDown.do');
@@ -390,13 +421,13 @@
 
 				 // 인바디 정보 등록
 				$('#inbody').click(function(){
-					/* var files = $('#fileName').val();
+				    var files = $('#fileName').val();
 					if(files == ""){
 						swal("FILE","파일을 넣어주세요.", "warning");
 
 						return false;
 					}
-					 */
+					 
 					var weight = $('#inbody_weight').val().substring(0,2);
 			        var bone = $('#inbody_bone').val().substring(0,2);
 			        var aver = weight * 0.48;
@@ -427,6 +458,10 @@
 					// 하 난이도의 운동 출력
 				    } else if (bone < aver) {
 				    	var choose2 = $('#row').text();	
+			        	$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose2=' + choose2);
+
+					} else if (bone = aver) {
+				    	var choose2 = $('#middle').text();	
 			        	$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose2=' + choose2);
 					}   
 					
