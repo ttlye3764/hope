@@ -584,8 +584,8 @@ $(function(){
 						</div>
 						<div style="width:600px; height:75px; display: flex; justify-content:flex-start;">
 							<div style="width:180px; height:75px;">
-								<label class="control-label" style="margin-left: 10px; margin-top:5px; text-align:left; width:165px;">아이템</label>
-								<input type="text" class="deal_name" name="deal_name" style="margin-top: 5px; text-align:left; width:150px; height: 40px; margin-left: 5px;">
+								<label class="control-label" style="margin-left: 10px; margin-top:5px; text-align:left; width:165px;   ">아이템</label>
+								<input type="text" class="deal_name" name="deal_name" style="margin-top: 5px; text-align:left; width:150px; height: 40px; margin-left: 5px;  border: 1px solid black;">
 							</div>
 							<div style="width:180px; height:75px;">
 								<label class="control-label" style="margin-left: 10px; margin-top:5px; text-align:left; width:165px;">구분</label>
@@ -602,6 +602,10 @@ $(function(){
 									<option value="여가,유흥">여가,유흥</option>
 									<option value="세금,이자">세금,이자</option>
 									<option value="기타비용">기타비용</option>
+									<option value="월급">월급</option>
+									<option value="상여금">상여금</option>
+									<option value="펀드,수익">펀드,주식</option>
+									<option value="기타수익">기타수익</option>
 								</select>
 								
 							</div>
@@ -619,13 +623,13 @@ $(function(){
 					</div>
 					<div style="width:280px; height:150px; display: flex; flex-direction : column;">
 						<div style="width:280px; height:75px; display: flex; justify-content:space-around; ">
-							<select name="deal_year" class="deal_year" style="text-align:center; width:65px; height: 25px; margin-top: 30px; border: 1px solid #e3e3e3;">
+							<select name="deal_year" class="deal_year" style="text-align:center; width:65px; height: 25px; margin-top: 30px; border: 1px solid black;">
 									<option style="text-align: center;" value="">연도별</option>
 							</select>
-							<select name="deal_bungi" class="deal_bungi" style="text-align:center; width:65px; height: 25px; margin-top: 30px; border: 1px solid #e3e3e3;">
+							<select name="deal_bungi" class="deal_bungi" style="text-align:center; width:65px; height: 25px; margin-top: 30px; border: 1px solid black;">
 									<option style="text-align: center;" value="">분기별</option>
 							</select>
-							<select name="deal_month" class="deal_month" style="text-align:center; width:65px; height: 25px; margin-top: 30px; border: 1px solid #e3e3e3;">
+							<select name="deal_month" class="deal_month" style="text-align:center; width:65px; height: 25px; margin-top: 30px; border: 1px solid black;">
 									<option style="text-align: center;" value="">월별</option>
 							</select>
 						</div>
@@ -687,7 +691,7 @@ $(function(){
 								</c:forEach>
 							</tbody>
 						</table>
-						<div id="paginationDIV" style="margin-left: 35%;">
+						<div id="paginationDIV" style="margin-left: 40%;">
 						${pagination }
 						</div>
 					</div>
@@ -736,6 +740,10 @@ $(function(){
                                                 			<option value="여가,유흥">여가,유흥</option>
                                                 			<option value="세금,이자">세금,이자</option>
                                                 			<option value="기타비용">기타비용</option>
+                                                			<option value="월급">월급</option>
+															<option value="상여금">상여금</option>
+															<option value="펀드,수익">펀드,주식</option>
+															<option value="기타수익">기타수익</option>
                                                 	</select>
                                                 	</div>
                             </div>              	
@@ -763,7 +771,7 @@ $(function(){
                                                                                                                 									
 																													
                                                 	
-                            <div style="display: flex; justify-content: center; margin-top: 5px; "><button type="button" id="registBtn1">수정</button></div>
+                            <div style="display: flex; justify-content: center; margin-top: 5px;"><button type="button" id="registBtn1">수정</button></div>
                                                 	
                                                 	
                                                
