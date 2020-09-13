@@ -33,7 +33,11 @@
 $(function(){
 	var message = '<c:out value="${message}"></c:out>';
 	if(message.length > 1 ){
-		alert(message);
+		swal({
+      	    title: "",
+      	    text: "로그인 후 이용해주세요.",
+      	    type: "warning"
+      	});
 	}
 })
 	var big_mem_id;
