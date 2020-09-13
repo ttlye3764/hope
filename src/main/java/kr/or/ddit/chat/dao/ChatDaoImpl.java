@@ -68,4 +68,8 @@ public class ChatDaoImpl implements IChatDao{
 	public List<MessageVO> messageList(Map<String, String> params) throws Exception {
 		return client.selectList("messageList", params);
 	}
+@Override
+	public MessageVO messageLast(Map<String, String> params) throws Exception {
+		return client.selectOne("messageLast", params);
+	}
 }

@@ -214,7 +214,7 @@ function chatRoomList(){
 		success : function(result){
 			$('#chatRoomList').empty();
 			if(result.chatMemberList == null){
-				$('#chatRoomList').append('진행중인 채팅이 없습니다.');
+				$('#chatRoomList').append(result.fail);
 				alert(result.fail);
 			}else{
 				var chatRoomList = "";
@@ -226,7 +226,7 @@ function chatRoomList(){
 					chatRoomList += '<div class="chat_img"> <img src="${pageContext.request.contextPath}/resources/image/friend1.jpg" alt="sunil"> </div>';
 					chatRoomList += '<div class="chat_ib">';
 					chatRoomList += '<h5 id="mem_no"><input type="hidden" id="mem_name" value="'+item.mem_name+'">'+item.mem_name+'<span class="chat_date" id="lastChat">Dec 25</span></h5>';
-					chatRoomList += '<p>상태말</p>';
+					chatRoomList += '<p>''</p>';
 					chatRoomList += '</div>';
 					chatRoomList += '</div>';
 					chatRoomList += '</div>';
@@ -316,6 +316,7 @@ function initSocket(url) {
 		console.log(text);
 		text = "";
 		$('#message').empty();
+		
  		messageList();
 	});
 }

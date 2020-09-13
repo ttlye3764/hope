@@ -5,7 +5,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!-- c:url을 이용하여 처리 -->
 <c:url var="regustMemberURI" value="/user/member/memberForm.do"></c:url>
-	
+<c:set var="message" value="${param.message}"/>
 <style>
 .btn{
 	color : #4CBD94;
@@ -30,6 +30,12 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type='text/javascript' src='<%=request.getContextPath()%>/js/validation.js'></script>
 <script type='text/javascript'>
+$(function(){
+	var message = '<c:out value="${message}"></c:out>';
+	if(message.length > 1 ){
+		alert(message);
+	}
+})
 	var big_mem_id;
       $(function(){
             $("#mem_id").keyup(function(e){if(e.keyCode == 13) login();});

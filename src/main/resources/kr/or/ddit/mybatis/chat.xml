@@ -125,6 +125,17 @@
 				)
 	</select>
 	
+	<select id="messageLast">
+		SELECT *
+		FROM (
+			SELECT *
+			FROM MESSAGE
+			WHERE CH_NO = #{ch_no}
+			ORDER BY ROWNUM DESC
+			)
+		WHERE ROWNUM = 1
+	</select>
+	
 	<select id="messageList" parameterType="Map" resultType="messageVO">
 		SELECT *
 		FROM MESSAGE

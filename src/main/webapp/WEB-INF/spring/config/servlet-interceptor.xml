@@ -28,15 +28,13 @@
 			<bean class="kr.or.ddit.utiles.EncodingInterceptor"></bean>
 		</mvc:interceptor>
 		
-		<!-- <mvc:interceptor>
-			<mvc:mapping path="/user/**/*.do"/>
-			<bean class="kr.or.ddit.utiles.IPCheckInterceptor"></bean>
-		</mvc:interceptor> -->
-		<!-- <mvc:interceptor>
+		<mvc:interceptor>
 			<mvc:mapping path="/user/**/*.do"/>
 			<mvc:exclude-mapping path="/user/join/loginForm.do"/>
-			<bean class=""></bean>
-		</mvc:interceptor> -->
+			<mvc:exclude-mapping path="/user/join/loginCheck.do"/>
+			<mvc:exclude-mapping path="/user/diet/menuList"/>
+			<bean class="kr.or.ddit.utiles.LoginCheckInterceptor"></bean>
+		</mvc:interceptor> 
 	</mvc:interceptors>
 
 </beans>

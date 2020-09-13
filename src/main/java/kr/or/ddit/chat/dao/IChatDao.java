@@ -32,4 +32,7 @@ public interface IChatDao {
 		public List<MemberVO> chatRoomList(Map<String, String> params) throws Exception;
 		//메세지 테이블 조회
 		public List<MessageVO> messageList(Map<String, String> params) throws Exception;
+		//마지막 메세지 조회
+		public MessageVO messageLast(Map<String, String> params) throws Exception;
+		
 }
