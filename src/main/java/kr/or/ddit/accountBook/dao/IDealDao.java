@@ -40,5 +40,7 @@ public interface IDealDao {
 	public String totalMinus(String mem_no) throws Exception;
 	public String fix_plus(String mem_no) throws Exception;
 	public String fix_minus(String mem_no) throws Exception;
+	public List<DealVO> groupPlus(String mem_no) throws Exception;
+	public List<DealVO> groupMinus(String mem_no) throws Exception;
 
 }
