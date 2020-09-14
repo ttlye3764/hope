@@ -34,4 +34,9 @@ public class ICarServiceImpl implements ICarService{
 		return dao.selectchoiceMycar(params);
 	}
 
+	@Override
+	public void updateCarno(Map<String, String> params) throws Exception {
+		dao.updateCarno(params);
+	}
+
 }

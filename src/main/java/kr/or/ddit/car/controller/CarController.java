@@ -43,7 +43,7 @@ public class CarController {
 		String mem_no = memberInfo.getMem_no();
 		
 		params.put("mem_no", mem_no);
-		params.put("car_no", car_no);
+		params.put("car_no", car_no); // db에 저장되어있는 차 번호
 		
 		MyCarVO carInfo = (MyCarVO) service.selectchoiceMycar(params);
 		
@@ -53,6 +53,9 @@ public class CarController {
 		if(no.length > 1) {
 			car_no = no[0]+no[1];
 			carInfo.setCar_no(car_no);
+			
+			params.put("car_no1", car_no); // 띄어쓰기를 없앤 차 번호
+			service.updateCarno(params);
 		}
 		
 		andView.addObject("carInfo", carInfo);

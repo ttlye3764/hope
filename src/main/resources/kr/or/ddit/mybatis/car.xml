@@ -29,6 +29,13 @@
 		AND CAR_NO = #{car_no}
 	</update>
 	
+	<update id="updateCarno" parameterType="map">
+		UPDATE MYCAR
+		SET
+		CAR_NO = #{car_no1}
+		WHERE CAR_NO = #{car_no}
+	</update>
+	
 	<select id="selectMycar" resultType="mycarVO">
 		SELECT *
 		FROM MYCAR

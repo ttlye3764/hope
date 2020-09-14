@@ -39,7 +39,8 @@
          <tr>            
             <td width="150px" height="25" class="idright">차량번호</td>
             <td>
-            <input type="text" class="form-control" id="car_no" name="car_no" value=${carInfo.car_no } />
+            <input type="hidden" class="form-control" id="car_no" name="car_no" value=${carInfo.car_no } />
+            <input type="text" class="form-control" value=${carInfo.car_no } disabled="disabled" />
             </td>
             <td width="150px"></td>
          </tr>

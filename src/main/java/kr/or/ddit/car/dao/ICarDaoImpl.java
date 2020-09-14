@@ -34,5 +34,10 @@ public class ICarDaoImpl implements ICarDao{
 	public MyCarVO selectchoiceMycar(Map<String, String> params) throws Exception {
 		return client.selectOne("car.selectchoiceMycar",params);
 	}
+
+	@Override
+	public void updateCarno(Map<String, String> params) throws Exception {
+		client.update("car.updateCarno", params);
+	}
 	
 }
