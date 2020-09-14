@@ -273,7 +273,7 @@ public class HealthImageControllerUser {
 				inbodyInfo.setInbody_weight(res.getTextAnnotationsList().get(6).getDescription());
 				inbodyInfo.setInbody_bone(res.getTextAnnotationsList().get(13).getDescription());
 				inbodyInfo.setInbody_fat(res.getTextAnnotationsList().get(21).getDescription());
-				inbodyInfo.setInbody_muscle(res.getTextAnnotationsList().get(35).getDescription());
+				inbodyInfo.setInbody_muscle(res.getTextAnnotationsList().get(28).getDescription());
 				inbodyInfo.setMem_no(memberInfo.getMem_no());
 
 			}
