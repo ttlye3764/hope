@@ -1,3 +1,4 @@
+<%@page import="java.util.Calendar"%>
 <%@ page language="JAVA" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 
@@ -194,6 +195,10 @@ var name;
 
 
 $(function(){
+
+
+
+	
 	$('#regist').click(function(){
 	         var shareId = $("#list option:selected").text(); 
          var array = shareId.split(" "); //배열로 담기
@@ -410,5 +415,12 @@ function setCalendar(data){
    $('#change-modal [name="s_enddate"]').datetimepicker();
    $('#regist-modal [name="s_startdate"]').datetimepicker();
    $('#regist-modal [name="s_enddate"]').datetimepicker();
-   
+
+
+
+
+
+	
+		
+		
 </script>

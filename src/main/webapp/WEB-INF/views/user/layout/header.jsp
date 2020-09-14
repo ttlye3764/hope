@@ -15,6 +15,30 @@ function LogOut(){
 		}
 	});
 }
+
+
+var timer = setInterval(function(){
+
+	   var html;
+			   $.ajax({
+		           url     : '${pageContext.request.contextPath}/user/schedule/alarm.do',
+		           type    : 'post',
+		           dataType: 'json',
+		           data : {'mem_no':${LOGIN_MEMBERINFO.mem_no}},
+		           success : function(result) {  
+			           for(var i=0; i<result.json.length; i++){
+				           console.log(result)
+		             		alert(result.json[i].s_memo);
+				       }                    
+		           	}
+		                
+		        });                
+		           
+		         
+		    },60000) //일정 알림주기
+
+
+		    
 </script>
 
 
