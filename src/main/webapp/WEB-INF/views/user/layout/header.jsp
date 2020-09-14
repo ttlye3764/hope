@@ -141,13 +141,24 @@ function LogOut(){
 								
 							</ul>
 						</li>
+						
+						<!-- 펫 관리 -->
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="docMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">car</a>
+							<ul class="dropdown-menu" aria-labelledby="docMenu">
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/carMain.do">내 차 관리</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/carForm.do">세차하기 좋은 날</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/diet_my">카센터 위치</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/pet_albumForm.do">주유소 가격 조회</a> </li>
+							</ul>
+						</li>
 						<!-- Menu item 5 Elements-->
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="elementsMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Asset management</a>
 							<ul class="dropdown-menu" aria-labelledby="portfolioMenu">
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/accountBook/setting.do">거래 등록</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/accountBook/accountList.do">거래 내역 보기</a> </li>
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/">거래 내역 통계</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/accountBook/accountStatistics.do">거래 내역 통계</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/">가까운 은행보기</a> </li>
 								
 							</ul>
@@ -157,10 +168,11 @@ function LogOut(){
 							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath }/user/diet/dietMain" id="docMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">diet</a>
 							<ul class="dropdown-menu" aria-labelledby="docMenu">
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/dietMain">dietMain</a> </li>
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/diet_my">내꺼</a> </li>
-								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/#installation-section">Gulp</a> </li>
-								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/#edit-section">Customization</a> </li>
-								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/#faqs">FAQs</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/dayKcal?titleName=당신에게 맞는 하루 열량과 그에 따른 운동을 확인해보세요!">일일 열량</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/menuList?titleName=오늘 당신이 먹은 혹은 먹을 음식의 칼로리를 확인해보세요!">칼로리 사전</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/bmi?titleName=당신의 BMI는!!?">BMI 계산기</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/diet_my?titleName=추천 식단을 확인해보세요">추천 식단 리스트</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/diet_my?titleName=나의 식단관리에 대한 모든 것을 확인해보세요!">나의 식단관리</a> </li>
 								<li class="dropdown-divider"></li>
 								<li> <a class="dropdown-item" href="http://support.webestica.com/" target="_blank">Support</a> </li>
 							</ul>
