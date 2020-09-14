@@ -1,13 +1,17 @@
 package kr.or.ddit.chat.controller;
 
 public class ChatMessage {
+	
 	public enum MessageType{
 		ENTER, TALK
 	}
 	
 	private MessageType type;
+	
 	private String roomID;
+	
 	private String sender;
+	
 	private String message;
 	
 	public MessageType getType() {

@@ -96,4 +96,14 @@ public class DietDaoImpl implements IDietDao {
 	public void updateDietBoard(List<DietBoardVO> dietBoardList) throws Exception {
 		 client.update("diet.updateDietBoard", dietBoardList);	
 	}
+	
+	@Override
+	public void insertDietBoard(Map<String, String> params) throws Exception {
+		client.insert("diet.insertDietBoard", params);
+	}
+	
+	@Override
+	public void insertDietBoardFirst(Map<String, String> params) throws Exception {
+		client.insert("diet.insertDietBoardFirst",params);
+	}
 }

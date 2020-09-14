@@ -82,6 +82,27 @@ public class IDealServiceImpl implements IDealService{
 		dao.updateAccount(params);		
 	}
 
+	@Override
+	public String totalPlus(String mem_no) throws Exception {
+		return dao.totalPlus(mem_no);	
+	}
+
+	@Override
+	public String totalMinus(String mem_no) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.totalMinus(mem_no);	
+	}
+
+	@Override
+	public String fix_plus(String mem_no) throws Exception {
+		return dao.fix_plus(mem_no);	
+	}
+
+	@Override
+	public String fix_minus(String mem_no) throws Exception {
+		return dao.fix_minus(mem_no);	
+	}
+
 	
 
 	

@@ -237,5 +237,32 @@
 		order by deal_no
 	</select>
 	
+	<select id="totalPlus" resultType="String" parameterType="String">
+		select nvl(sum(deal_price),0) totalPrice
+		from deal
+		where deal_option='입금' and to_char(deal_date,'yyyymm') = to_char(sysdate,'yyyymm') and mem_no = #{mem_no}
+	</select>
+	
+	<select id="totalMinus" resultType="String" parameterType="String">
+		select nvl(sum(deal_price),0) totalPrice
+		from deal
+		where deal_option='출금' and to_char(deal_date,'yyyymm') = to_char(sysdate,'yyyymm') and mem_no = #{mem_no}
+	</select>
+	
+	<select id="fix_plus" resultType="String" parameterType="String">
+		select nvl(sum(deal_price),0)
+		from deal
+		where mem_no = #{mem_no} and deal_fix_revenue = 1
+	</select>
+	
+	<select id="fix_minus" resultType="String" parameterType="String">
+		select nvl(sum(deal_price),0)
+		from deal
+		where mem_no = #{mem_no} and deal_fix_expenditure = 1
+	</select>
+	
+	
+	
+	
 </mapper>    
 

@@ -5,11 +5,22 @@
 <!--   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 <!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/myCSS/chatPage.css">
-
-
-<br>
-<br>
-<br>
+<div class="innerpage-banner center bg-overlay-dark-7 py-7" style="background:url(/lastProject/image/kakao.jpg) no-repeat; background-size:cover; background-position: center center;">
+	<div class="container">
+		<div class="row all-text-white">
+			<div class="col-md-12 align-self-center">
+				<h1 class="innerpage-title">채팅</h1>
+				<h6 class="subtitle">다른 유저들과 채팅을 할 수 있습니다.</h6>
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="index.html"><i class="ti-home"></i> Home</a></li>
+						<li class="breadcrumb-item">Blog</li>
+					</ol>
+				</nav>
+			</div>
+		</div>
+	</div>
+</div>
 <br>
 <br>
 <br>
@@ -64,7 +75,8 @@
 	  <!-- 친구 목록 끝 -->
 	</div>
 	<div class="mesgs">
-	  <div class="msg_history" id="msg_history">
+	
+	  <div class="msg_history" id="msg_history" style="background-image: url(${pageContext.request.contextPath}/image/kakao.jpg);">
 		<div class="incoming_msg">
 		  <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
 		  <div class="received_msg">
@@ -202,7 +214,7 @@ function chatRoomList(){
 		success : function(result){
 			$('#chatRoomList').empty();
 			if(result.chatMemberList == null){
-				$('#chatRoomList').append('진행중인 채팅이 없습니다.');
+				$('#chatRoomList').append(result.fail);
 				alert(result.fail);
 			}else{
 				var chatRoomList = "";
@@ -214,7 +226,7 @@ function chatRoomList(){
 					chatRoomList += '<div class="chat_img"> <img src="${pageContext.request.contextPath}/resources/image/friend1.jpg" alt="sunil"> </div>';
 					chatRoomList += '<div class="chat_ib">';
 					chatRoomList += '<h5 id="mem_no"><input type="hidden" id="mem_name" value="'+item.mem_name+'">'+item.mem_name+'<span class="chat_date" id="lastChat">Dec 25</span></h5>';
-					chatRoomList += '<p>상태말</p>';
+					chatRoomList += '<p>''</p>';
 					chatRoomList += '</div>';
 					chatRoomList += '</div>';
 					chatRoomList += '</div>';
@@ -304,6 +316,7 @@ function initSocket(url) {
 		console.log(text);
 		text = "";
 		$('#message').empty();
+		
  		messageList();
 	});
 }
@@ -482,9 +495,8 @@ function insertFriendBtn(e){
 
 
 $(function(){
-	initSocket("http://192.168.31.49:8080/lastProject/echo?mem_no=" + ${LOGIN_MEMBERINFO.mem_no});
+	initSocket("http://localhost:8080/lastProject/echo?mem_no=" + ${LOGIN_MEMBERINFO.mem_no});
 	chatRoomList();
-
 	$('.chat_list').click(function(){
 		$('.chat_list').toggleClass('active_chat');	
 	})	

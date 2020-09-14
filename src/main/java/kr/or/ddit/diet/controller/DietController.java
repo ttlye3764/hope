@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.cloud.vision.v1.AnnotateImageRequest;
@@ -32,6 +33,7 @@ import com.google.cloud.vision.v1.ImageAnnotatorClient;
 import com.google.protobuf.ByteString;
 
 import kr.or.ddit.diet.service.IDietService;
+import kr.or.ddit.utiles.RolePaginationUtil_diet;
 import kr.or.ddit.vo.DietBoardVO;
 import kr.or.ddit.vo.Diet_dayVO;
 import kr.or.ddit.vo.Diet_day_infoVO;
@@ -59,12 +61,67 @@ public class DietController {
 	}
 
 	@RequestMapping("menuList")
-	public ModelAndView menuList(ModelAndView andView, Map<String, String> params) throws Exception {
-		params.put("rownum", "100");
-		List<MenuVO> menuList = dietService.menuList(params);
+	public ModelAndView menuList(ModelAndView andView, Map<String, String> params,
+								@RequestParam(value="search_menu_name", required=false) String search_menu_name,
+								@RequestParam(value="search_kcal_min", required=false) String search_kcal_min,
+								@RequestParam(value="search_kcal_max", required=false) String search_kcal_max,
+								@RequestParam(value="currentPage", required=false) String currentPage,
+								RolePaginationUtil_diet pagination,
+								HttpServletRequest request,
+								String ajax) throws Exception {
+		
 
-		andView.addObject("menuList", menuList);
-		andView.setViewName("user/diet/menuList");
+		if(currentPage == null) {
+			currentPage = "1";
+		}
+		
+		// first Loading
+		if(search_menu_name != null) {
+			if(search_menu_name.length() < 1) {
+				params.put("search_menu_name", null);
+			}else {
+				params.put("search_menu_name", search_menu_name);
+			}
+			
+			if(search_kcal_min.length() < 1) {
+				params.put("search_kcal_min", null);
+			}else {
+				params.put("search_kcal_min", search_kcal_min);
+			}
+			
+			if(search_kcal_max.length() < 1) {
+				params.put("search_kcal_max", null);
+			}else {
+				params.put("search_kcal_max", search_kcal_max);
+			}
+		}
+		
+		
+		List<MenuVO> menuList = dietService.menuList(params);
+		
+		int totalCount = menuList.size();
+		
+		 
+		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), totalCount);
+		
+	    String startCount = String.valueOf(pagination.getStartCount());
+	    String endCount = String.valueOf(pagination.getEndCount());
+	    
+	    params.put("startCount", startCount);
+	    params.put("endCount", endCount);
+	    
+	    menuList = dietService.menuList(params);
+	    
+	    
+	    andView.addObject("menuList", menuList);
+		andView.addObject("pagination",pagination.getPagingHtmls());
+		if(ajax == null) {
+			andView.setViewName("user/diet/menuList");
+			
+		}else {
+			andView.setViewName("jsonConvertView");
+		}
+		
 		return andView;
 	}
 
@@ -87,13 +144,20 @@ public class DietController {
 	@RequestMapping("diet_my")
 	public ModelAndView diet_my(ModelAndView andView, Map<String, String> params, HttpServletRequest request,
 			HttpSession session) throws Exception {
+		
 		session = request.getSession();
+		
 		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		
 		params.put("mem_no", memberInfo.getMem_no());
 
 		List<Diet_memVO> dietMemList = dietService.dietMemList(params);
-
-		Diet_memVO dietMemLast = dietMemList.get(dietMemList.size() - 1);
+		
+		Diet_memVO dietMemLast = new Diet_memVO();
+		
+		if(dietMemList.size() > 1) {
+			dietMemLast = dietMemList.get(dietMemList.size() - 1);
+		}
 
 		andView.addObject("dietMemLast", dietMemLast);
 		andView.addObject("dietMemList", dietMemList);
@@ -283,16 +347,20 @@ public class DietController {
 		params.put("dd_date", dd_date);
 		params.put("mem_no", memberInfo.getMem_no());
 
+		// 처음 선택시에는 잘 들어가는데 그다음 다른창을 선택하면 insert가 3번된다?
 		if (dietService.selectDietDay(params) == null) {
 			dd_no = dietService.insertDietDay(dietDay) + "";
+			params.put("dd_no", dd_no);
+			
 		} else {
 			dietDay = dietService.selectDietDay(params);
+			params.put("dd_no", dietDay.getDd_no());
 		}
 
 		// 일별 식단 내용 가져오기
 
 		// 일별 식단의 식단 번호 가져오기
-		params.put("dd_no", dietDay.getDd_no());
+		
 
 		// 일별 식단 상세 가져오기
 		// 1 -> 아침꺼
@@ -318,11 +386,13 @@ public class DietController {
 
 	@RequestMapping("deleteDietDayInfo")
 	public ModelAndView deleteDietDayInfo(ModelAndView andView, Map<String, String> params, String ddi_no,
-			String dd_info_division) throws Exception {
+			String dd_info_division, int dd_no) throws Exception {
 		params.put("ddi_no", ddi_no);
 		params.put("dd_info_division", dd_info_division);
 
 		dietService.deleteDietDayInfo(params);
+		params.put("dd_no", dd_no + "");
+		dietService.updateDietDayKcal(params);
 
 		andView.setViewName("jsonConvertView");
 		return andView;
@@ -345,47 +415,78 @@ public class DietController {
 		andView.setViewName("jsonConvertView");
 		return andView;
 	}
-	
+
 	@RequestMapping("dietBoardList")
-	public ModelAndView dietBoardList(ModelAndView andView,
-									Map<String, String> params,
-									HttpSession session,
-									HttpServletRequest request) throws Exception{
-		
+	public ModelAndView dietBoardList(ModelAndView andView, Map<String, String> params, HttpSession session,
+			HttpServletRequest request) throws Exception {
+
 		session = request.getSession();
-	
-		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO"); 
+
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
 		params.put("mem_no", memberInfo.getMem_no());
-		
+
 		List<DietBoardVO> dietBoardList = dietService.dietBoardList(params);
-		
+
 		andView.addObject("dietBoardList", dietBoardList);
-		
+
 		andView.setViewName("jsonConvertView");
 		return andView;
 	}
-	
+
 	@RequestMapping("updateDietBoard")
-	public ModelAndView updateDietBoard(ModelAndView andView,
-										Map<String, String> params,
-										@RequestBody List<Map<String, String>> json
-										) throws Exception{
-		
+	public ModelAndView updateDietBoard(ModelAndView andView, Map<String, String> params,
+			@RequestBody List<Map<String, String>> json) throws Exception {
+
 		List<DietBoardVO> dietBoardList = new ArrayList<DietBoardVO>();
-		for(int i = 0 ; i< json.size(); i++) {
+		for (int i = 0; i < json.size(); i++) {
 			DietBoardVO dietBoardInfo = new DietBoardVO();
 			dietBoardInfo.setDiet_board_title(json.get(i).get("diet_board_title"));
 			dietBoardInfo.setDiet_board_content(json.get(i).get("diet_board_content"));
 			dietBoardInfo.setDiet_board_no(json.get(i).get("diet_board_no"));
-			
+
 			dietBoardList.add(dietBoardInfo);
 		}
-		
+
 		dietService.updateDietBoard(dietBoardList);
+
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
+	
+	@RequestMapping("insertDietBoard")
+	public ModelAndView insertDietBoard(ModelAndView andView,
+										Map<String, String> params,
+										HttpServletRequest request,
+										HttpSession session) throws Exception{
+		
+		session = request.getSession();
+		
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		
+		params.put("mem_no", memberInfo.getMem_no());
+		
+		dietService.insertDietBoard(params);
 		
 		andView.setViewName("jsonConvertView");
 		return andView;
 	}
+	
+	@RequestMapping("insertDietBoardFirst")
+	public ModelAndView insertDietBoardFirst(ModelAndView andView, Map<String, String> params, HttpServletRequest request,
+									HttpSession session) throws Exception {
+
+		session = request.getSession();
+
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+
+		params.put("mem_no", memberInfo.getMem_no());
+
+		dietService.insertDietBoardFirst(params);
+
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
+	
 
 	@RequestMapping("ocr")
 	public static void detectText(HttpServletRequest request) throws IOException {
@@ -429,5 +530,5 @@ public class DietController {
 			}
 		}
 	}
-	
+
 }

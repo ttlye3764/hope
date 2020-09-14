@@ -71,9 +71,6 @@ function pill_info(pill_no){
 	})
 } 
 	$(function(){
-		
-	
-		
 		 $.ajax({			//당일 복용리스트
              url     : '/lastProject/user/medical/todayMedical.do',		
              type    : 'post',

@@ -120,11 +120,18 @@ public class BoardServiceImpl implements IBoardService{
 		boardDao.updateBoardReply(params);
 	}
 
-//	@Override
-//	public void deleteBoardReply(String reContent, String bdNo, String re_no, String currentPage, String search_keyword,
-//			String search_keycode) {
-//		boardDao.deleteBoardReply(re_no);
-//	}
+	// 댓글삭제
+	@Override
+	public void deleteBoardReply(String bd_no, String re_no) {
+		boardDao.deleteBoardReply(re_no);
+	}
+
+	
+	// 답글 등록
+	@Override
+	public void insertReplyInfo(BoardVO boardVO) {
+		boardDao.insertReplyInfo(boardVO.getBd_group());
+	}
 
 	
 

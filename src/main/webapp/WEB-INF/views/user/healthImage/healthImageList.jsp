@@ -75,6 +75,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 p-0">
+						
 						<div class="col-sm-12 col-md-12">
 							<h5 class="mb-4">Tab line</h5>
 							<ul class="nav nav-tabs tab-line">
@@ -185,6 +186,7 @@
 													<span aria-hidden="true">&times;</span>
 													</button>
 												</div>
+												<input type="hidden" value="${healthInfo.healthImage_title}" id="title">
 												<div class="modal-body" style="text-align: center;">
 													<p>운동명 : ${healthInfo.healthImage_title}</p>
 													
@@ -272,6 +274,10 @@
 	<!--Template Functions-->
 	<script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="https://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/template/assets/js/jquery.qrcode.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/template/assets/js/qrcode.js"></script>
+
 
 <script type="text/javascript">
 		// 로딩창 숨기기
@@ -377,7 +383,11 @@
 				$('#back, #loadingBar').remove();
 			}
 
-			$(function(){
+		  googleQRUrl = "https://chart.googleapis.com/chart?chs=177x177&cht=qr&chl=";
+
+			 $('#qrcode').attr('src', googleQRUrl + "제목:" +'&choe=UTF-8');
+			 
+			 $(function(){
 				// 엑셀
 				$('#excel').click(function(){
 					$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/excelDown.do');
@@ -390,18 +400,19 @@
 
 				 // 인바디 정보 등록
 				$('#inbody').click(function(){
-					/* var files = $('#fileName').val();
+				    var files = $('#fileName').val();
 					if(files == ""){
 						swal("FILE","파일을 넣어주세요.", "warning");
 
 						return false;
 					}
-					 */
+					 
 					var weight = $('#inbody_weight').val().substring(0,2);
 			        var bone = $('#inbody_bone').val().substring(0,2);
 			        var aver = weight * 0.48;
 
 			        // 골격근량이 평균보다 높음 => 근육량 많음 
+			        // 상 또는 중 난이도의 운동 출력
 			         if (bone > aver) {
 				        	var choose2 = new Array();
 							
@@ -415,15 +426,21 @@
 				        	 	dataType: "json", 
 				        	 	data:  {"choose2" : choose2},
 				        	 	success: function (data) { 
-				        	 		alert(data);
+				        	 		 var as = eval(data);
+				                     alert("data:" + as[0] + "/" + as[1]);
 					        	 } 
 			        	 	});
 
-			        	$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose2=' + choose2);
+			        	$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose2=' + choose2[0]);
 
 					// 골격근량이 평균보다 낮음 => 근육량 적음
+					// 하 난이도의 운동 출력
 				    } else if (bone < aver) {
 				    	var choose2 = $('#row').text();	
+			        	$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose2=' + choose2);
+
+					} else if (bone = aver) {
+				    	var choose2 = $('#middle').text();	
 			        	$(location).attr('href','${pageContext.request.contextPath}/user/healthImage/healthImageList.do?choose2=' + choose2);
 					}   
 					

@@ -10,9 +10,9 @@ public class BoardVO {
 	private String bd_date;
 	private String bd_hit;
 	private String bd_pass;
-	private String bd_sequence;
-	private String bd_group;
-	private String bd_depth;
+	private String bd_sequence;  // 순서  
+	private String bd_group;     // 그룹번호 
+	private String bd_depth;     // 깊이   
 	private String bd_division;
 	private String mem_no;
 	private String rnum;

@@ -1,19 +1,14 @@
 package kr.or.ddit.utiles;
 
-import java.io.IOException;
-
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+import kr.or.ddit.vo.MemberVO;
 
 // 클라이언트 요청(인터셉터 선언 순서대로 동작)
 //			1. preHandle() 콜백 (default return true)
@@ -64,8 +59,6 @@ public class EncodingInterceptor extends HandlerInterceptorAdapter {
 		
 		request.setCharacterEncoding(encodingType);
 		
-		// return false : 컨트롤러 메서드 호출 무시
-		// return true : 컨트롤러 메서드 호출 (default)
 		return true;
 	}
 

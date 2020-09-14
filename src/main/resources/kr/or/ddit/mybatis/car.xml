@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="car">
+	<insert id="insertMycar" parameterType="mycarVO">
+		INSERT INTO MYCAR(CAR_NO,
+					CAR_KINDS,
+					CAR_DATE,
+					CAR_OIL,
+					MEM_NO
+					)
+					values(
+					#{car_no},
+					#{car_kinds},
+					#{car_date},
+					#{car_oil},
+					#{mem_no}
+					)
+	</insert>
+	
+	<update id="updateMycar" parameterType="mycarVO">
+		UPDATE MYCAR
+		SET
+		CAR_NO = #{car_no},
+		CAR_KINDS = #{car_kinds},
+		CAR_DATE = #{car_date},
+		CAR_OIL = #{car_oil}
+		WHERE MEM_NO = #{mem_no}
+		AND CAR_NO = #{car_no}
+	</update>
+	
+	<update id="updateCarno" parameterType="map">
+		UPDATE MYCAR
+		SET
+		CAR_NO = #{car_no1}
+		WHERE CAR_NO = #{car_no}
+	</update>
+	
+	<select id="selectMycar" resultType="mycarVO">
+		SELECT *
+		FROM MYCAR
+		WHERE MEM_NO = #{mem_no}
+	</select>
+	
+	<select id="selectchoiceMycar" resultType="mycarVO" parameterType="map">
+		SELECT *
+		FROM MYCAR
+		WHERE MEM_NO = #{mem_no}
+		AND CAR_NO = #{car_no}
+	</select>
+</mapper>    

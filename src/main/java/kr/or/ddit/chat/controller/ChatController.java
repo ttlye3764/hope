@@ -1,5 +1,6 @@
 package kr.or.ddit.chat.controller;
 
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -106,21 +107,28 @@ public class ChatController {
 	
 	@RequestMapping("chatRoomList")
 	public ModelAndView chatRoomList(ModelAndView andView,
-									String ch_no,
+									@RequestParam(value="ch_no", required = false)String ch_no,
 									HttpServletRequest request,
 									HttpSession session,
 									Map<String, String> params,
 									String fail) throws Exception{
+		
 		session = request.getSession();
 		
 		MemberVO memberInfo= (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
 		
 		params.put("mem_no", memberInfo.getMem_no());
-	
 		
 		List<MemberVO> chatMemberList = chatService.chatRoomList(params);
 		
+		//참여중인 채팅이 있을 경우에만
 		if(chatMemberList !=null) {
+			
+//			params.put("ch_no", ch_no);
+//			MessageVO messageLast = chatService.messageLast(params);
+//			
+//			andView.addObject("messageLast", messageLast);
+			
 			andView.addObject("chatMemberList", chatMemberList);
 		}else {
 			fail = "참여중인 채팅이 없습니다.";
@@ -198,7 +206,7 @@ public class ChatController {
 	andView.setViewName("jsonConvertView");
 	return andView;	
 	}
-	
+
 	@RequestMapping("selectFriendList")
 	public ModelAndView selectFriendList(ModelAndView andView,
 										String mem_no,

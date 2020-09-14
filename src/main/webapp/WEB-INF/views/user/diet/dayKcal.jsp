@@ -1,15 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <div class="innerpage-banner center bg-overlay-dark-7 py-7" style="background:url(${pageContext.request.contextPath}/image/food1.jpg) no-repeat; background-size:cover; background-position: center center;">
+<div class="innerpage-banner center bg-overlay-dark-7 py-7" style="background:url(${pageContext.request.contextPath}/image/food1.jpg) no-repeat; background-size:cover; background-position: center center;">
 		<div class="container">
 			<div class="row all-text-white">
 				<div class="col-md-12 align-self-center">
-					<h1 class="innerpage-title">Menu List</h1>
-					<h6 class="subtitle">안녕하세요 메뉴 리스트입니다</h6>
+					<h1 class="innerpage-title">${param.titleName }</h1>
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
-							<li class="breadcrumb-item active"><a href="index.html"><i class="ti-home"></i> Home</a></li>
-							<li class="breadcrumb-item">Blog</li>
+							<li class="breadcrumb-item active"><a href="${pageContext.request.contextPath}/user/diet/dietMain"><i class="ti-home"></i> Home</a></li>
 						</ol>
 					</nav>
 				</div>
@@ -422,9 +420,11 @@ $(function(){
 		var stairs = $('#kcal_kcal').val() / 7
 
 		$('#kcal_walking').text(walking);
+		$('#kcal_walking').attr('data-to', walking);
 		$('#kcal_jump').text(jump);
 		$('#kcal_swimming').text(swimming);
 		$('#kcal_stairs').text(stairs);
 	})
 })
+
 </script>

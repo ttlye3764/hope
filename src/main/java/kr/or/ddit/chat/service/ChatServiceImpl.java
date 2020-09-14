@@ -67,4 +67,9 @@ public class ChatServiceImpl implements IChatService {
 	public List<MessageVO> messageList(Map<String, String> params) throws Exception {
 		return chatDao.messageList(params);
 	}
+	@Override
+	public MessageVO messageLast(Map<String, String> params) throws Exception {
+		return chatDao.messageLast(params);
+	}
 }
+

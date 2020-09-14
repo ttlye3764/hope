@@ -34,13 +34,32 @@
 	</insert>
 
 	<select id="menuList" resultType="menuVO" parameterType="Map">
-		SELECT *
+	SELECT *
+	FROM(
+		SELECT ROWNUM RNUM, MENU_NO, MENU_NAME, MENU_KCAL
 		FROM MENU
-		<if test="rownum != null">
-		 <![CDATA[ 
-		  WHERE ROWNUM < #{rownum}
-    	]]>
+		WHERE 1=1
+		<if test="search_menu_name != null">
+			AND MENU_NAME LIKE '%'||#{search_menu_name, jdbcType=VARCHAR} ||'%'
 		</if>
+		<if test="search_kcal_min !=null">
+			<![CDATA[ 
+		  		AND MENU_KCAL >= #{search_kcal_min, jdbcType=VARCHAR}
+    		]]> 
+		</if>
+		<if test="search_kcal_max !=null">
+			<![CDATA[ 
+		  		AND MENU_KCAL <= #{search_kcal_max, jdbcType=VARCHAR}
+    		]]> 
+		</if>
+		)
+		<if test="startCount != null">
+			<![CDATA[
+			   WHERE RNUM <= #{startCount}
+				 AND RNUM >= #{endCount}
+		]]>
+		</if>
+		
 	</select>
 
 	<select id="dietMemList" resultType="dietMemVO"
@@ -60,8 +79,7 @@
 		</if>
 	</select>
 
-	<insert id="insertDietDay" parameterType="dietDayVO"
-		useGeneratedKeys="true" keyColumn="DD_NO" keyProperty="dd_no">
+	<insert id="insertDietDay" parameterType="dietDayVO" useGeneratedKeys="true" keyColumn="DD_NO" keyProperty="dd_no">
 		INSERT INTO
 		DIET_DAY(DD_NO,
 		MEM_NO,
@@ -102,13 +120,11 @@
 		UPDATE DIET_DAY SET DD_KCAL = #{dd_kcal} WHERE DD_NO = #{dd_no}
 	</update>
 
-	<select id="selectDietDay" parameterType="Map"
-		resultType="dietDayVO">
+	<select id="selectDietDay" parameterType="Map" resultType="dietDayVO">
 		SELECT *
 		FROM DIET_DAY
 		WHERE DD_DATE = #{dd_date}
-		AND MEM_NO =
-		#{mem_no}
+		AND MEM_NO = #{mem_no}
 	</select>
 
 	<select id="dietDayInfoList" parameterType="Map"
@@ -173,6 +189,59 @@
 		</foreach>;
 		END;
 	</update>
+	
+	<select id="totalCount"  parameterType="Map" resultType="string">
+    		SELECT COUNT(MENU_NO)
+    		FROM MENU
+    		WHERE 1=1
+			<if test="search_menu_name !=null">
+				AND MENU_NAME = ${search_menu_name}
+			</if>
+			<if test="search_kcal_min !=null">
+				<![CDATA[ 
+		  			AND MENU_KCAL >= ${search_kcal_min}
+    			]]> 
+			</if>
+			<if test="search_kcal_max !=null">
+				<![CDATA[ 
+			  		AND MENU_KCAL <= ${search_kcal_max}
+    			]]>
+    		</if> 
+    </select>
+    
+    <insert id="insertDietBoard" parameterType="Map">
+    	<selectKey keyProperty="diet_board_seq" resultType="java.lang.String" order="BEFORE">
+			SELECT MAX(DIET_BOARD_SEQ)+1 DIET_BOARD_SEQ
+			FROM DIET_BOARD
+			WHERE mem_no = #{mem_no}
+		</selectKey>
+		INSERT INTO DIET_BOARD(DIET_BOARD_NO,
+								DIET_BOARD_DATE,
+								DIET_BOARD_TITLE,
+								DIET_BOARD_CONTENT,
+								MEM_NO,
+								DIET_BOARD_SEQ)VALUES(
+												diet_board_seq.nextval,
+												sysdate,
+												'제목을 입력해주세요',
+												'내용을 입력해주세요',
+												#{mem_no},
+												#{diet_board_seq} )
+    </insert>
+     <insert id="insertDietBoardFirst" parameterType="Map">
+		INSERT INTO DIET_BOARD(DIET_BOARD_NO,
+								DIET_BOARD_DATE,
+								DIET_BOARD_TITLE,
+								DIET_BOARD_CONTENT,
+								MEM_NO,
+								DIET_BOARD_SEQ)VALUES(
+												diet_board_seq.nextval,
+												sysdate,
+												'제목을 입력해주세요',
+												'내용을 입력해주세요',
+												#{mem_no},
+												1)
+    </insert>
 </mapper>
 
 

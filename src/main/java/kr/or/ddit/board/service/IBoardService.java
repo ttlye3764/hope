@@ -37,7 +37,11 @@ public interface IBoardService {
 		// 게시판 댓글 수정 
 		public void updateBoardReply(String re_content, String bd_no, String mem_id, String re_no);
 		// 게시판 댓글 삭제
-//		public void deleteBoardReply(String reContent, String bdNo, String re_no, String currentPage, String search_keyword, String search_keycode);
+		public void deleteBoardReply( String bd_no, String re_no);
+		
+		// 답글등록
+		public void insertReplyInfo(BoardVO boardVO);
+
 		
 		
 		
