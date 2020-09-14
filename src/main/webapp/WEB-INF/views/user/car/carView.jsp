@@ -27,7 +27,7 @@
       <br>
       <br>
       <br>
-   <form name="carForm" method="post" action="${pageContext.request.contextPath}/user/car/insertMycar.do">
+   <form name="carForm" method="post" action="${pageContext.request.contextPath}/user/car/updateMycar.do">
       <table style="border: none" align="center">
 		<tr>            
             <td width="150px" height="25" class="idright">차종</td>

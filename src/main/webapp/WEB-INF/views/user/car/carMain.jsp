@@ -1,13 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script type="text/javascript"
-   src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type='text/javascript' src='<%=request.getContextPath()%>/js/validation.js'></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="/resources/js/addressapi.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
+$(function(){
+	$('table tr:gt(0)').on('click',function(){
+		var car_no = $(this).find('td:eq(0)').text();
+		$(location).attr('href','${pageContext.request.contextPath}/user/car/carView.do?car_no='+car_no);
+	});
+});
 
 </script>
 <div class="innerpage-banner center bg-overlay-dark-7 py-7" style="background:url(assets/images/bg/04.jpg) no-repeat; background-size:cover; background-position: center center;">
@@ -28,47 +33,28 @@
       <br>
       <br>
       <br>
-   <form name="carForm" method="post" action="${pageContext.request.contextPath}/user/car/insertMycar.do">
-      <table style="border: none" align="center">
-		<tr>            
-            <td width="150px" height="25" class="idright">차종</td>
-            <td>
-            <input type="text" class="form-control" id="car_kinds" name="car_kinds" value=${carInfo.car_kinds } />
-            </td>
-            <td width="150px"></td>
-         </tr>
-         <tr>            
-            <td width="150px" height="25" class="idright">차량번호</td>
-            <td>
-            <input type="text" class="form-control" id="car_no" name="car_no" value=${carInfo.car_no } />
-            </td>
-            <td width="150px"></td>
-         </tr>
-        <tr>            
-            <td width="150px" height="25" class="idright">출고년도</td>
-            <td>
-            <input type="text" class="form-control" id="car_date" name="car_date" value=${carInfo.car_date } />
-            </td>
-            <td width="150px"></td>
-         </tr>
-         <tr>            
-            <td width="150px" height="25" class="idright">유종구분</td>
-            <td>
-            	<select id="search_keycode" name="car_oil" class="custom-select select-big">
-					<option value="휘발유" selected="selected">휘발유</option>
-					<option value="경유">경유</option>
-					<option value="LPG">LPG</option>
-				</select>
-            </td>
-            <td width="150px"></td>
-         </tr>
-         <tr>
-            <td class="btnGroup" colspan="3" align="center">
-               <input id="btn1" type="submit" value="가입"/>               
-               &nbsp;&nbsp;&nbsp;&nbsp;
-               <button id="btn3" type="button">취소
-               </button>
-            </td>
-         </tr>
-      </table>
-   </form>
+   <div class="col-sm-12 mb-5">
+			<div class="table-responsive-sm">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th scope="col" >차량번호</th>
+							<th scope="col" >차 종</th>
+							<th scope="col" >출고년도</th>
+							<th scope="col" >유종구분</th>
+						</tr>
+					</thead>
+					<tbody>
+					<c:forEach items="${carInfo }" var="car">
+						<tr>
+							<td>${car.car_no }</td>
+							<td>${car.car_kinds }</td>
+							<td>${car.car_date }</td>
+							<td>${car.car_oil }</td>
+						</tr>
+					</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<button id="btn3" type="button">등록 </button>

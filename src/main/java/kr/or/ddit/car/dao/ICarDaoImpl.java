@@ -1,5 +1,8 @@
 package kr.or.ddit.car.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -18,8 +21,18 @@ public class ICarDaoImpl implements ICarDao{
 	}
 
 	@Override
-	public MyCarVO selectMycar(String mem_no) throws Exception {
-		return (MyCarVO) client.selectOne("car.selectMycar", mem_no);
+	public List<MyCarVO> selectMycar(String mem_no) throws Exception {
+		return client.selectList("car.selectMycar", mem_no);
+	}
+
+	@Override
+	public void updateMycar(MyCarVO carInfo) throws Exception {
+		client.update("car.updateMycar", carInfo);
+	}
+
+	@Override
+	public MyCarVO selectchoiceMycar(Map<String, String> params) throws Exception {
+		return client.selectOne("car.selectchoiceMycar",params);
 	}
 	
 }

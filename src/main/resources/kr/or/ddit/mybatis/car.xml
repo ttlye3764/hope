@@ -18,9 +18,27 @@
 					)
 	</insert>
 	
+	<update id="updateMycar" parameterType="mycarVO">
+		UPDATE MYCAR
+		SET
+		CAR_NO = #{car_no},
+		CAR_KINDS = #{car_kinds},
+		CAR_DATE = #{car_date},
+		CAR_OIL = #{car_oil}
+		WHERE MEM_NO = #{mem_no}
+		AND CAR_NO = #{car_no}
+	</update>
+	
 	<select id="selectMycar" resultType="mycarVO">
 		SELECT *
 		FROM MYCAR
 		WHERE MEM_NO = #{mem_no}
+	</select>
+	
+	<select id="selectchoiceMycar" resultType="mycarVO" parameterType="map">
+		SELECT *
+		FROM MYCAR
+		WHERE MEM_NO = #{mem_no}
+		AND CAR_NO = #{car_no}
 	</select>
 </mapper>    
