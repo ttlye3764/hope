@@ -144,11 +144,12 @@ function LogOut(){
 						
 						<!-- 펫 관리 -->
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath }/user/pet/dietMain" id="docMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">pet</a>
+							<a class="nav-link dropdown-toggle" href="#" id="docMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">car</a>
 							<ul class="dropdown-menu" aria-labelledby="docMenu">
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/pet/dietMain">펫 정보</a> </li>
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/pet/diet_my">예방접종 관리</a> </li>
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/pet/diet_my">사진첩</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/carForm.do">내 차 정보 등록</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/carForm.do">세차하기 좋은 날</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/diet_my">카센터 위치</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/pet_albumForm.do">주유소 가격 조회</a> </li>
 							</ul>
 						</li>
 						<!-- Menu item 5 Elements-->
