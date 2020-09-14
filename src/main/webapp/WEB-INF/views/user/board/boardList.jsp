@@ -31,6 +31,14 @@
 <!-- Theme CSS -->
 <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 
+<style>
+	.list-tr:hover {
+		cursor: pointer;
+		background-color: #d9eecd !important;
+		transition: 1s;
+	}
+</style>
+
 <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
 <script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
 <script src="${pageContext.request.contextPath }/resources/template/assets/vendor/fitvids/jquery.fitvids.js"></script>
@@ -175,7 +183,7 @@ Banner innerpage -->
                         </c:if>
                         <c:if test="${!empty boardList }">
                            <c:forEach items="${boardList}" var="boardInfo">
-                              <tr>
+                              <tr class="list-tr">
                                  <td>${boardInfo.rnum}<input type="hidden" class="bd_no"
                                     value="${boardInfo.bd_no}" /></td>
                                  <td><c:if test="${boardInfo.bd_depth != 0 }">

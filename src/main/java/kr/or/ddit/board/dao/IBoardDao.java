@@ -4,9 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
-
-import kr.or.ddit.domain.Criteria;
-
 import kr.or.ddit.vo.BoardVO;
 import kr.or.ddit.vo.Board_FileVO;
 import kr.or.ddit.vo.Board_ReplyVO;
@@ -42,6 +39,9 @@ public interface IBoardDao {
 	// 댓글 수정
 	public void updateBoardReply(Map<String, Object> params);
 	// 댓글 삭제
-//	public void deleteBoardReply(String re_no);
+	public void deleteBoardReply(String re_no);
+	
+	// 답글 등록 
+	public void insertReplyInfo(String bd_group);
 	
 }
