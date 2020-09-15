@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="car">
+	<insert id="insertMycar" parameterType="mycarVO">
+		INSERT INTO MYCAR(CAR_NO,
+					CAR_KINDS,
+					CAR_DATE,
+					CAR_OIL,
+					MEM_NO
+					)
+					values(
+					#{car_no},
+					#{car_kinds},
+					#{car_date},
+					#{car_oil},
+					#{mem_no}
+					)
+	</insert>
+	
+	<update id="updateMycar" parameterType="mycarVO">
+		UPDATE MYCAR
+		SET
+		CAR_NO = #{car_no},
+		CAR_KINDS = #{car_kinds},
+		CAR_DATE = #{car_date},
+		CAR_OIL = #{car_oil}
+		WHERE MEM_NO = #{mem_no}
+		AND CAR_NO = #{car_no}
+	</update>
+	
+	<update id="updateCarno" parameterType="map">
+		UPDATE MYCAR
+		SET
+		CAR_NO = #{car_no1}
+		WHERE CAR_NO = #{car_no}
+	</update>
+	
+	<select id="selectMycar" resultType="mycarVO">
+		SELECT *
+		FROM MYCAR
+		WHERE MEM_NO = #{mem_no}
+	</select>
+	
+	<select id="selectchoiceMycar" resultType="mycarVO" parameterType="map">
+		SELECT *
+		FROM MYCAR
+		WHERE MEM_NO = #{mem_no}
+		AND CAR_NO = #{car_no}
+	</select>
+	
+	<delete id="deleteMycar" parameterType="map">
+		DELETE FROM MYCAR
+		WHERE MEM_NO = #{mem_no}
+		AND CAR_NO = #{car_no}
+	</delete>
+	
+	<insert id="insertKm" parameterType="mycarDetailVO">
+		INSERT INTO MYCAR_DETAIL(
+				MD_NO,
+				CAR_NO,
+				MD_KM,
+				MD_DATE)
+			VALUES(
+				#{md_no},
+				#{car_no},
+				#{md_km},
+				#{md_date}
+			)
+	</insert>
+	
+	<insert id="insertBreak" parameterType="mycarDetailVO">
+		INSERT INTO MYCAR_DETAIL(
+				MD_NO,
+				CAR_NO,
+				MD_KM,
+				MD_BRAKE,
+				MD_DATE)
+			VALUES(
+				#{md_no},
+				#{car_no},
+				#{md_km},
+				#{md_break},
+				#{md_date}
+			)
+	</insert>
+	
+	<insert id="insertEngine" parameterType="mycarDetailVO">
+		INSERT INTO MYCAR_DETAIL(
+				MD_NO,
+				CAR_NO,
+				MD_KM,
+				MD_ENGINE,
+				MD_DATE)
+			VALUES(
+				#{md_no},
+				#{car_no},
+				#{md_km},
+				#{md_engine},
+				#{md_date}
+			)
+	</insert>
+	
+	<select id="selectKm" parameterType="map" resultType="mycarDetailVO">
+		SELECT CAR_NO, MD_DATE, MD_KM
+		FROM MYCAR_DETAIL
+		WHERE MEM_NO = #{mem_no}
+		AND CAR_NO = #{car_no}
+	</select>
+	
+	<select id="selectBreak" parameterType="map" resultType="mycarDetailVO">
+		SELECT CAR_NO, MD_DATE, MD_KM, MD_BREAK
+		FROM MYCAR_DETAIL
+		WHERE MEM_NO = #{mem_no}
+		AND CAR_NO = #{car_no}
+	</select>
+	
+	<select id="selectEngine" parameterType="map" resultType="mycarDetailVO">
+		SELECT CAR_NO, MD_DATE, MD_KM, MD_ENGINE
+		FROM MYCAR_DETAIL
+		WHERE MEM_NO = #{mem_no}
+		AND CAR_NO = #{car_no}
+	</select>
+</mapper>    

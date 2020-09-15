@@ -766,40 +766,18 @@ $(function(){
 					if(i<9){
 					list.push(v.confCase);
 					la.push(v.gubun);
-						}
+					}
 				})
-				
-				
 				AgeBarChart(la,list);
-				
 				list = [];
 				la = [];
-				
 				$.each(result.response.body.items.item,function(i,v){
 					if(i>8 && i<11){
 					list.push(v.confCase);
 					la.push(v.gubun);
 						}
 				})
-
-				
 				AgePieChart(la,list);
-
-			/* 	0: {criticalRate: 0, death: 0, deathRate: 0, confCaseRate: 2.13, updateDt: null, …}
-				1: {criticalRate: 0, death: 0, deathRate: 0, confCaseRate: 5.79, updateDt: null, …}
-				2: {criticalRate: 0, death: 0, deathRate: 0, confCaseRate: 22.03, updateDt: null, …}
-				3: {criticalRate: 0.08, death: 2, deathRate: 0.63, confCaseRate: 12.59, updateDt: null, …}
-				4: {criticalRate: 0.16, death: 4, deathRate: 1.27, confCaseRate: 13.52, updateDt: null, …}
-				5: {criticalRate: 0.46, death: 16, deathRate: 5.06, confCaseRate: 18.25, updateDt: null, …}
-				6: {criticalRate: 1.48, death: 41, deathRate: 12.97, confCaseRate: 14.54, updateDt: null, …}
-				7: {criticalRate: 6.81, death: 94, deathRate: 29.75, confCaseRate: 7.24, updateDt: null, …}
-				8: {criticalRate: 21.23, death: 159, deathRate: 50.32, confCaseRate: 3.93, updateDt: null, …}
-				9: {criticalRate: 1.42, death: 149, deathRate: 47.15, confCaseRate: 54.84, updateDt: null, …}
-				10: */
-
-
-
-				
 		    }
 	})
 

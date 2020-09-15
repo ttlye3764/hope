@@ -35,9 +35,9 @@
 	   where re_no = #{re_no}
 </update>
 
-<!-- <delete id="deleteBoardReply" parameterType="String"> -->
-<!-- 	DELETE FROM BOARD_REPLY -->
-<!-- 	WHERE RE_NO = #{re_no} -->
-<!-- </delete> -->
+<delete id="deleteBoardReply" parameterType="String">
+	DELETE FROM BOARD_REPLY
+	WHERE RE_NO = #{re_no}
+</delete>
 
 </mapper>

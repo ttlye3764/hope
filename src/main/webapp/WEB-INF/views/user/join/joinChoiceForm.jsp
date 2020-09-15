@@ -15,8 +15,13 @@
 		}
 	}
 	function nochk() {
-		swal("","동의하지 않으면 가입하실 수 없습니다.", "warning");
-		location.href = "${pageContext.request.contextPath}/user/main/mainForm.do";
+		swal({
+      	    title: "",
+      	    text: "동의하지 않으면 가입하실 수 없습니다.",
+      	    type: "warning"
+      	}).then(function() {
+			location.href = "${pageContext.request.contextPath}/user/main/mainForm.do";
+      	});
 	}
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">

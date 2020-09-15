@@ -119,5 +119,15 @@ public class DealDaoImpl implements IDealDao{
 		return client.selectOne("deal.fix_minus",mem_no);
 	}
 
+	@Override
+	public List<DealVO> groupPlus(String mem_no) throws Exception {
+		return client.selectList("deal.groupPlus",mem_no);
+	}
+	
+	@Override
+	public List<DealVO> groupMinus(String mem_no) throws Exception {
+		return client.selectList("deal.groupMinus",mem_no);
+	}
+
 
 }

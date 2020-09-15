@@ -261,6 +261,20 @@
 		where mem_no = #{mem_no} and deal_fix_expenditure = 1
 	</select>
 	
+	<select id="groupPlus" resultType="dealVO" parameterType="String">
+		select deal_division, sum(deal_price) groupPrice
+		from deal
+		where deal_option='입금' and to_char(deal_date,'yyyymm') = to_char(sysdate,'yyyymm') and mem_no = #{mem_no}
+		group by deal_division
+	</select>
+	
+	<select id="groupMinus" resultType="dealVO" parameterType="String">
+		select deal_division, sum(deal_price) groupPrice
+		from deal
+		where deal_option='출금' and to_char(deal_date,'yyyymm') = to_char(sysdate,'yyyymm') and mem_no = #{mem_no}
+		group by deal_division
+	</select>
+	
 	
 	
 	

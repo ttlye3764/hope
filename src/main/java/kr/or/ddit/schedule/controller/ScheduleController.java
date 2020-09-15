@@ -1,5 +1,7 @@
 package kr.or.ddit.schedule.controller;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +12,8 @@ import kr.or.ddit.bis.Bis;
 import kr.or.ddit.bis.Bis_location;
 import kr.or.ddit.bis.BusStop;
 import kr.or.ddit.bis.Subway;
+import kr.or.ddit.medical.service.IMedicalService;
+import kr.or.ddit.medicalfile.service.IMedicalFileService;
 import kr.or.ddit.member.service.IMemberService;
 import kr.or.ddit.schedule.service.IScheduleService;
 import kr.or.ddit.vo.BusVO;
@@ -48,6 +52,9 @@ public class ScheduleController {
 
 	@Autowired
 	private IScheduleService service;
+	
+	@Autowired
+	private IMedicalService medicalservice;
 
 	@Autowired
 	private IMemberService MemberService;
@@ -157,6 +164,94 @@ public class ScheduleController {
 		andView.setViewName("jsonConvertView");
 		return andView;
 	}
+	
+	
+	@RequestMapping("alarm")
+	public ModelAndView alarm(String mem_no) throws Exception {
+		
+		List<ScheduleVO> scheduleList = this.service.scheduleListAlarm(mem_no);
+	     List<ScheduleVO> alarmList = new ArrayList<>();
+		for(int i=0; i<scheduleList.size(); i++) {
+			  String start = scheduleList.get(i).getS_startdate(); //시작
+			  String end =  scheduleList.get(i).getS_enddate(); //끝
+			  
+			  Calendar calendar = Calendar.getInstance();
+			  calendar.setTimeInMillis(System.currentTimeMillis()); 
+			  calendar.set(Integer.parseInt(start.substring(0, 4)),Integer.parseInt(start.substring(5, 7))-1,Integer.parseInt(start.substring(8, 10)),Integer.parseInt(start.substring(11, 13)),Integer.parseInt(start.substring(14, 16)));
+			  
+			  Calendar ecalendar = Calendar.getInstance();
+			  ecalendar.setTimeInMillis(System.currentTimeMillis()); 
+			  ecalendar.set(Integer.parseInt(end.substring(0, 4)),Integer.parseInt(end.substring(5, 7))-1,Integer.parseInt(end.substring(8, 10)),Integer.parseInt(end.substring(11, 13)),Integer.parseInt(end.substring(14, 16)));
+
+			 
+			  
+			  if(Calendar.getInstance().after(calendar)) {
+				  if(Calendar.getInstance().before(ecalendar)) {
+					  if(Calendar.getInstance().getTime().getHours()==calendar.getTime().getHours()) {
+						  if(Calendar.getInstance().getTime().getMinutes()==calendar.getTime().getMinutes()) {
+							  alarmList.add(scheduleList.get(i));
+							  
+							  
+						  }
+					  }
+				  }
+			  }
+			  
+			  if(Calendar.getInstance().equals(calendar)) {
+				  alarmList.add(scheduleList.get(i));
+			  }
+			  
+		}
+		
+		
+		
+		
+		List<MypillVO> medicalList = this.medicalservice.medicalList(mem_no);
+	    List<MypillVO> medicalalarmList = new ArrayList<>();
+		for(int i=0; i<medicalList.size(); i++) {
+			  String start = medicalList.get(i).getPill_start(); //시작
+			  String end =  medicalList.get(i).getPill_end(); //끝
+			  
+			  Calendar calendar = Calendar.getInstance();
+			  calendar.setTimeInMillis(System.currentTimeMillis()); 
+			  calendar.set(Integer.parseInt(start.substring(0, 4)),Integer.parseInt(start.substring(5, 7))-1,Integer.parseInt(start.substring(8, 10)),Integer.parseInt(start.substring(11, 13)),Integer.parseInt(start.substring(14, 16)));
+			  
+			  Calendar ecalendar = Calendar.getInstance();
+			  ecalendar.setTimeInMillis(System.currentTimeMillis()); 
+			  ecalendar.set(Integer.parseInt(end.substring(0, 4)),Integer.parseInt(end.substring(5, 7))-1,Integer.parseInt(end.substring(8, 10)),Integer.parseInt(end.substring(11, 13)),Integer.parseInt(end.substring(14, 16)));
+
+			 
+			  
+			  if(Calendar.getInstance().after(calendar)) {
+				  if(Calendar.getInstance().before(ecalendar)) {
+					  if(Calendar.getInstance().getTime().getHours()==calendar.getTime().getHours()) {
+						  if(Calendar.getInstance().getTime().getMinutes()==calendar.getTime().getMinutes()) {
+							  medicalalarmList.add(medicalList.get(i));
+							  
+							  
+						  }
+					  }
+				  }
+			  }
+			  
+			  if(Calendar.getInstance().equals(calendar)) {
+				  medicalalarmList.add(medicalList.get(i));
+			  }
+			  
+		}
+		
+		
+		
+		ModelAndView andView = new ModelAndView();
+		andView.addObject("json", alarmList);
+		andView.addObject("medicaljson", medicalalarmList);
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
+	
+	
+	
+	
 
 	@RequestMapping("viewJson2")
 	public ModelAndView sNoCheck(int s_no) throws Exception {

@@ -144,6 +144,10 @@
 		AND FILE_BD_NO = #{fileBdNo}
 	</select>
 	
+	<insert id="insertReplyInfo" parameterType="boardVO">
+		select *
+		from board
+	</insert>
 	
 	
 

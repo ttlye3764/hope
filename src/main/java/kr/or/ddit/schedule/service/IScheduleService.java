@@ -24,6 +24,7 @@ public interface IScheduleService {
    public void registBus(BusVO busInfo) throws Exception;
    public void deleteBus(String bus_index) throws Exception;
    public List<MemberVO> searchFriends(String mem_no) throws Exception;
+   public List<ScheduleVO> scheduleListAlarm(String mem_no) throws Exception;
    /*public String totalCount(Map<String, String> params) throws Exception;*/
    
 }

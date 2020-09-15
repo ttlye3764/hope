@@ -8,8 +8,6 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
-
-import kr.or.ddit.domain.Criteria;
 import kr.or.ddit.vo.BoardVO;
 import kr.or.ddit.vo.Board_FileVO;
 import kr.or.ddit.vo.Board_ReplyVO;
@@ -99,11 +97,19 @@ public class BoardDaoImpl implements IBoardDao{
 		 client.update("boardReply.updateBoardReply", params);
 	}
 
-	// 댓글 삭제
-//	@Override
-//	public void deleteBoardReply(String re_no) {
-//		client.delete("boardReply.deleteBoardReply", re_no);
-//	}
+	// 댓글 삭제 
+	@Override
+	public void deleteBoardReply(String re_no) {
+		client.delete("boardReply.deleteBoardReply", re_no);
+	}
+
+	// 답글 등록 
+	@Override
+	public void insertReplyInfo(String bd_group) {
+		client.insert("board.insertReplyInfo", bd_group);
+	}
+
+
 
 
 }

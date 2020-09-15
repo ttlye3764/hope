@@ -964,7 +964,7 @@ function pill_info(pill_no){
 				<!-- contact form -->
 				<div class="col-md-6">
 					<div class="h-100" style="width:500px;">
-						<form class="contact-form" id="contact-form2" name="contactform2" action="/lastProject/user/medical/insertMedicalInfo.do" method="post" enctype="multipart/form-data">			
+						<form class="contact-form" id="contact-form2" name="contactform2" action="/lastProject/user/medical/insertMedicalInfo.do?mem_no=${LOGIN_MEMBERINFO.mem_no}" method="post" enctype="multipart/form-data">			
 							<!-- Start main form -->
 							
 								<div class="" style="width:50%; float: left;">
@@ -1024,7 +1024,7 @@ function pill_info(pill_no){
 				<!-- contact form -->
 				<div class="col-md-6">
 					<div class="h-100" style="width:500px;">
-						<form class="contact-form" id="contact-form" name="contactform" action="/lastProject/user/medical/updateMedicalInfo.do" method="post" enctype="multipart/form-data">			
+						<form class="contact-form" id="contact-form" name="contactform" action="/lastProject/user/medical/updateMedicalInfo.do?mem_no=${LOGIN_MEMBERINFO.mem_no}" method="post" enctype="multipart/form-data">			
 							<!-- Start main form -->							
 								<div class="" style="width:50%; float: left;">
 									<!-- name -->
@@ -1346,27 +1346,22 @@ function pill_info(pill_no){
 						</div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b0cb6f2e037b46943623093ec6be0f37&libraries=services,clusterer,drawing"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> 
-						
-						
 						<div class="tab-pane" id="tab-6-3">
-						<div class="" style="width: 1300px; display: flex; justify-content: space-between;">
-							<div class="map_wrap" style="width: 1300px;">
-								<div id="map"
-									style="width: 1300px; border: 1px solid black; height: 500px;"></div>
-								<ul id="category">
-									<li id="HP8" data-order="2"><span
-										class="category_bg pharmacy"></span> 병원</li>
-									<li id="PM9" data-order="2"><span
-										class="category_bg pharmacy"></span> 약국</li>
-								</ul>
-							<input type="button" onclick="sample5_execDaumPostcode()" style=" width:100px; z-index:1; position:absolute;top:10px; right:10px;"
-									value="주소 검색">
+							<div class="" style="width: 1300px; display: flex; justify-content: space-between;">
+								<div class="map_wrap" style="width: 1300px;">
+									<div id="map"
+										style="width: 1300px; border: 1px solid black; height: 500px;"></div>
+									<ul id="category">
+										<li id="HP8" data-order="2"><span
+											class="category_bg pharmacy"></span> 병원</li>
+										<li id="PM9" data-order="2"><span
+											class="category_bg pharmacy"></span> 약국</li>
+									</ul>
+								<input type="button" onclick="sample5_execDaumPostcode()" style=" width:100px; z-index:1; position:absolute;top:10px; right:10px;"
+										value="주소 검색">
+								</div>
 							</div>
 						</div>
-
-
-
-					</div>
 					</div>
 				</div>
 				

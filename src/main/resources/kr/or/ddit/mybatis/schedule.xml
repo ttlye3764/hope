@@ -53,6 +53,13 @@
       WHERE MEM_NO = #{mem_no}
    </select>
    
+   <select id="scheduleListAlarm" resultType="scheduleVO" parameterType="String">
+      SELECT *
+      FROM SCHEDULE
+      WHERE MEM_NO = #{mem_no}
+      AND S_ALERTTIME IS NOT NULL
+   </select>
+   
    <select id="searchFriends" resultType="memberVO" parameterType="String">
    	select A.* from
 	(select * from member)A,

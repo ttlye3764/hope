@@ -78,24 +78,23 @@ public class AccountController {
 		
 		MemberVO vo = (MemberVO)session.getAttribute("LOGIN_MEMBERINFO");
 		String mem_no = vo.getMem_no();
-		System.out.println(mem_no);
 		//이번달 기준
 		//총 비용, 총 수익
 		String total_plus =  service.totalPlus(mem_no);
 		String total_minus = service.totalMinus(mem_no);
 		System.out.println(total_plus);
 		System.out.println(total_minus);
+		
+		
 		//그룹(식비,교통비)-비용
-		
-		
-		
-		
-		
+		List<DealVO> dealMinusList = service.groupMinus(mem_no);
+		System.out.println("그룹 비용");
+		System.out.println(dealMinusList.get(0).getGroupPrice());		//6000
+		System.out.println(total_minus);								//177000
+		System.out.println((Integer.parseInt(dealMinusList.get(0).getGroupPrice())*100) / Integer.parseInt(total_minus));
 		//그룹(월급,상여금)-수익
-		
-		
-		
-		
+		List<DealVO> dealPlusList = service.groupPlus(mem_no);
+
 		//그룹(고정비용, 고정수익)
 		String fix_plus = service.fix_plus(mem_no);
 		String fix_minus = service.fix_minus(mem_no);
@@ -103,6 +102,8 @@ public class AccountController {
 		System.out.println(fix_plus);
 		System.out.println(fix_minus);
 		
+		andView.addObject("dealMinusList",dealMinusList);
+		andView.addObject("dealPlusList",dealPlusList);
 		andView.addObject("total_plus",total_plus);
 		andView.addObject("total_minus",total_minus);
 		andView.addObject("fix_plus",fix_plus);
@@ -254,15 +255,27 @@ public class AccountController {
 		andView.setViewName("jsonConvertView");
 		return andView;
 	}
+	
+	@RequestMapping("barChart")
+	public ModelAndView barChart(String mem_no, String startDate, String endDate, String deal_year, String deal_bungi, String deal_month) throws Exception {
+		
+		System.out.println(mem_no);
+		System.out.println(startDate);
+		System.out.println(endDate);
+		System.out.println(deal_year);
+		System.out.println(deal_bungi);
+		System.out.println(deal_month);
+		
+		
+		ModelAndView andView = new ModelAndView();
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
+	
 	@RequestMapping("accountInfo")
 	public ModelAndView accountInfo(String deal_no) throws Exception {
 		
 		DealVO vo =service.dealInfo(deal_no);
-		
-		
-		
-		
-		
 		ModelAndView andView = new ModelAndView();
 		andView.addObject("dealInfo",vo);
 		andView.setViewName("jsonConvertView");

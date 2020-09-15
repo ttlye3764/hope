@@ -103,6 +103,16 @@ public class IDealServiceImpl implements IDealService{
 		return dao.fix_minus(mem_no);	
 	}
 
+	@Override
+	public List<DealVO> groupPlus(String mem_no) throws Exception {
+		return dao.groupPlus(mem_no);
+	}
+
+	@Override
+	public List<DealVO> groupMinus(String mem_no) throws Exception {
+		return dao.groupMinus(mem_no);
+	}
+
 	
 
 	

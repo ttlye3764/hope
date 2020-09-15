@@ -3,6 +3,50 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <script>
+
+window.onload = function () {
+    if (window.Notification) {
+        Notification.requestPermission();
+    }
+}
+
+
+
+function notify(message) {
+    if (Notification.permission !== 'granted') {
+        alert('notification is disabled');
+    }
+    else {
+        var notification = new Notification(message, {
+            icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
+            body: '클릭하면 스케줄로 들어갑니다',
+        });
+
+        notification.onclick = function () {
+            window.open('http://localhost/lastProject/user/schedule/schedule.do');
+        };
+    }
+}
+
+function notifymedical(message) {
+    if (Notification.permission !== 'granted') {
+        alert('notification is disabled');
+    }
+    else {
+        var notification = new Notification(message, {
+            icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
+            body: '클릭하면 약 스케줄로 들어갑니다',
+        });
+
+        notification.onclick = function () {
+            window.open('http://localhost/lastProject/user/medical/medicalMain.do');
+        };
+    }
+}
+
+
+
+
 function LogOut(){
 	$.ajax({
 		type : 'POST',
@@ -15,6 +59,28 @@ function LogOut(){
 		}
 	});
 }
+
+
+var timer = setInterval(function(){
+	   var html;
+			   $.ajax({
+		           url     : '${pageContext.request.contextPath}/user/schedule/alarm.do',
+		           type    : 'post',
+		           dataType: 'json',
+		           data : {'mem_no':${LOGIN_MEMBERINFO.mem_no}},
+		           success : function(result) {  
+			           for(var i=0; i<result.json.length; i++){
+		             		notify(result.json[i].s_memo);
+				       }
+				       for(var i=0; i<result.medicaljson.length; i++){
+							notifymedical(result.medicaljson[i].pill_name);
+					   }                    
+		           	}
+		        });                
+		    },60000) //일정 알림주기
+
+
+		    
 </script>
 
 
@@ -128,7 +194,6 @@ function LogOut(){
 							<a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Knowledge</a>
 							<ul class="dropdown-menu" aria-labelledby="pagesMenu">
 								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/knowledge/knowledgeList.do'>퀴즈 풀이</a></li>
-								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/knowledge/news.do'>최신 뉴스</a></li>
 							</ul>
 						</li>
 						<!-- Menu item 4 Portfolio-->
@@ -144,11 +209,12 @@ function LogOut(){
 						
 						<!-- 펫 관리 -->
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath }/user/pet/dietMain" id="docMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">pet</a>
+							<a class="nav-link dropdown-toggle" href="#" id="docMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">car</a>
 							<ul class="dropdown-menu" aria-labelledby="docMenu">
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/pet/dietMain">펫 정보</a> </li>
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/pet/diet_my">예방접종 관리</a> </li>
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/pet/diet_my">사진첩</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/carMain.do">내 차 관리</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/carForm.do">세차하기 좋은 날</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/diet_my">카센터 위치</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/parking.do">목적지 주차장 찾기</a> </li>
 							</ul>
 						</li>
 						<!-- Menu item 5 Elements-->

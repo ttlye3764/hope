@@ -28,12 +28,11 @@ import kr.or.ddit.utiles.RolePaginationUtil_yun;
 import kr.or.ddit.vo.BoardVO;
 import kr.or.ddit.vo.Board_FileVO;
 import kr.or.ddit.vo.Board_ReplyVO;
-import kr.or.ddit.vo.DealVO;
 import kr.or.ddit.vo.MemberVO;
 
 @Controller
-@RequestMapping("/user/board/")
-public class BoardController {
+@RequestMapping("/admin/board/")
+public class BoardControllerAdmin {
 	@Autowired
 	private IBoardService boardService;
 	@Autowired
@@ -250,7 +249,7 @@ public class BoardController {
 		modelMap.addAttribute("bd_division", bd_division);
 		this.boardService.deleteBoard(bd_no);
 
-		return "redirect:/user/board/boardList.do";
+		return "redirect:/admin/board/boardList.do";
 	}
 
 	// 등록
@@ -264,7 +263,7 @@ public class BoardController {
 		modelMap.addAttribute("bd_division", bd_division);
 		boardService.insertBoard(boardVO, items);
 
-		return "redirect:/user/board/boardList.do";
+		return "redirect:/admin/board/boardList.do";
 	}
 
 	// 게시판 폼
@@ -274,7 +273,7 @@ public class BoardController {
 		System.out.println("bd_division" + bd_division);
 
 		andView.addObject("bd_division", bd_division);
-		andView.setViewName("user/board/boardForm");
+		andView.setViewName("admin/board/boardForm");
 
 		return andView;
 	}
@@ -364,7 +363,7 @@ public class BoardController {
 
 		boardService.deleteBoardReply(bd_no, re_no);
 
-		return "redirect:/user/board/boardView.do?bd_no=" + bd_no + "&re_no=" + re_no + "&bd_divison=bd_division";
+		return "redirect:/admin/board/boardView.do?bd_no=" + bd_no + "&re_no=" + re_no + "&bd_divison=bd_division";
 	}
 	
 	
@@ -389,7 +388,6 @@ public class BoardController {
 			modelMap.addAttribute("bd_division", bd_division);
 			boardService.insertReplyInfo(boardVO);
 
-			return "redirect:/user/board/boardList.do";
+			return "redirect:/admin/board/boardList.do";
 		}
-	
 }

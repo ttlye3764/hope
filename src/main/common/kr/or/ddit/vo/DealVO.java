@@ -14,7 +14,16 @@ public class DealVO {
 	private String deal_option;
 	private String deal_division;
 	private String deal_card_name;
+	private String groupPrice;
 	
+	
+	
+	public String getGroupPrice() {
+		return groupPrice;
+	}
+	public void setGroupPrice(String groupPrice) {
+		this.groupPrice = groupPrice;
+	}
 	public String getDeal_card_name() {
 		return deal_card_name;
 	}

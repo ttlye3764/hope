@@ -4,9 +4,6 @@
 <c:set var="radio" value="0"/>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>지식관리</title>
 	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/jquery/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/popper.js/umd/popper.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -46,8 +43,6 @@ $(function(){
 });
 	
 </script>
-</head>
-<body>
 <div class="wrapper">
 	<div id="vertical-topbar-placeholder"></div>
 		<div id="horizontal-topbar-placeholder"></div>
@@ -181,5 +176,4 @@ $(function(){
 		</div>
 	</div>
 </div>
-</body>
 </html>
