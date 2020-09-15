@@ -211,7 +211,7 @@ var timer = setInterval(function(){
 							<a class="nav-link dropdown-toggle" href="#" id="docMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">car</a>
 							<ul class="dropdown-menu" aria-labelledby="docMenu">
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/carMain.do">내 차 관리</a> </li>
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/carForm.do">세차하기 좋은 날</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/weather.do">세차하기 좋은 날</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/oil.do">주변 주유소 위치</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/parking.do">주차장 찾기</a> </li>
 							</ul>

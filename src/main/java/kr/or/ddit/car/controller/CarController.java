@@ -25,7 +25,10 @@ public class CarController {
 	public void parking() {}
 	
 	@RequestMapping("oil")
-	public void carCenter() {}
+	public void oil() {}
+	
+	@RequestMapping("weather")
+	public void weather() {}
 	
 	@RequestMapping("carMain")
 	public ModelAndView carMain(HttpSession session, ModelAndView andView) throws Exception {
