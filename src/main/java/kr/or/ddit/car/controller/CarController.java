@@ -24,6 +24,9 @@ public class CarController {
 	@RequestMapping("parking")
 	public void parking() {}
 	
+	@RequestMapping("oil")
+	public void carCenter() {}
+	
 	@RequestMapping("carMain")
 	public ModelAndView carMain(HttpSession session, ModelAndView andView) throws Exception {
 		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
