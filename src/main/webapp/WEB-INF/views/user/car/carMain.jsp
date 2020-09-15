@@ -51,6 +51,7 @@
 					$('#lt_car_no_hd').val(result.carInfo.car_no);
 					$('#lt_car_date').val(result.carInfo.car_date);
 					$('#lt_car_oil').val(result.carInfo.car_oil);
+					console.log(result);
 				},
 				error : function(result) {
 					$('#lt_car_kinds').val(result.carInfo.car_kinds);
@@ -177,8 +178,8 @@
 	<div class="col-sm-12 mb-5" style="width: 50%">
 		<div class="row" align="center">
 			<!-- Job positions -->
-			<div class="col-md-8">
-				<h3 class="mb-3">내 차 세부정보</h3>
+			<div class="col-md-8" style="margin-left:140px">
+<!-- 				<h3 class="mb-3">내 차 세부정보</h3> -->
 				<div class="accordion accordion-line toggle-icon-left toggle-icon-round"
 					id="accordion1">
 					<!-- item -->
@@ -208,8 +209,8 @@
 										<option value="LPG">LPG</option>
 									</select>
 								</div>
-								<div class="input-group mb-3" style="width: 400px; margin:0px 0px 0px 180px" >
-									<button type="button" id="lt_btn" style="width:100px">수정</button>
+								<div class="input-group mb-3" style="width:400px; align:center;">
+									<button type="button" id="lt_btn" style="margin:0px 0px 0px 170px">수정</button>
 								</div>
 							</div>
 						</div>
@@ -218,15 +219,30 @@
 					<!-- item -->
 					<div class="accordion-item">
 						<div class="accordion-title">
-							<a class="collapsed" data-toggle="collapse" href="#collapse-2">주행거리</a>
+							<a class="collapsed" data-toggle="collapse" href="#collapse-2">주행거리 기록</a>
 						</div>
 						<div class="collapse" id="collapse-2"	data-parent="#accordion1">
 							<div class="accordion-content">
-								<p class="pt-2">
-									산책하기 : 22, 26, 30<br> 스트레칭 체조 : 31, 34, 43<br> 춤추기 :
-									34, 41, 48<br> 요가 : 21, 25, 29<br> 볼링 : 25, 33, 35<br>
-								</p>
-								<h6 class="mb-2">운동 소요 시간 : 10분</h6>
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th scope="col">차량번호</th>
+											<th scope="col">차 종</th>
+											<th scope="col">출고년도</th>
+											<th scope="col">유종구분</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach items="${carList }" var="car">
+											<tr>
+												<td>${car.car_no }</td>
+												<td>${car.car_kinds }</td>
+												<td>${car.car_date }</td>
+												<td>${car.car_oil }</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
 							</div>
 						</div>
 					</div>
@@ -234,7 +250,7 @@
 					<!-- item -->
 					<div class="accordion-item">
 						<div class="accordion-title">
-							<a class="collapsed" data-toggle="collapse" href="#collapse-3">엔진오일 교환</a>
+							<a class="collapsed" data-toggle="collapse" href="#collapse-3">엔진오일 교환 기록</a>
 						</div>
 						<div class="collapse" id="collapse-3" data-parent="#accordion1">
 							<div class="accordion-content">
@@ -251,7 +267,7 @@
 					<!-- item -->
 					<div class="accordion-item">
 						<div class="accordion-title">
-							<a class="collapsed" data-toggle="collapse" href="#collapse-4">브레이크오일 교환</a>
+							<a class="collapsed" data-toggle="collapse" href="#collapse-4">브레이크오일 교환 기록</a>
 						</div>
 						<div class="collapse" id="collapse-4" data-parent="#accordion1">
 							<div class="accordion-content">

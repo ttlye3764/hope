@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.ddit.car.dao.ICarDao;
+import kr.or.ddit.vo.MyCarDetailVO;
 import kr.or.ddit.vo.MyCarVO;
 
 @Service
@@ -42,6 +43,36 @@ public class ICarServiceImpl implements ICarService{
 	@Override
 	public void deleteMycar(Map<String, String> params) throws Exception {
 		dao.deleteMycar(params);
+	}
+
+	@Override
+	public void insertKm(MyCarDetailVO carDetailInfo) throws Exception {
+		dao.insertKm(carDetailInfo);
+	}
+
+	@Override
+	public void insertEngine(MyCarDetailVO carDetailInfo) throws Exception {
+		dao.insertEngine(carDetailInfo);
+	}
+
+	@Override
+	public void insertBreak(MyCarDetailVO carDetailInfo) throws Exception {
+		dao.insertBreak(carDetailInfo);
+	}
+
+	@Override
+	public List<MyCarDetailVO> selectKm(Map<String, String> params) throws Exception {
+		return dao.selectKm(params);
+	}
+
+	@Override
+	public List<MyCarDetailVO> selectEngine(Map<String, String> params) throws Exception {
+		return dao.selectEngine(params);
+	}
+
+	@Override
+	public List<MyCarDetailVO> selectBreak(Map<String, String> params) throws Exception {
+		return dao.selectBreak(params);
 	}
 
 }

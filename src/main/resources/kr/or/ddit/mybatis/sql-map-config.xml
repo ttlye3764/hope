@@ -38,6 +38,7 @@
 		<typeAlias alias="MemberFileVO" type="kr.or.ddit.vo.MemberFileVO" />
 		<typeAlias alias="LoginVO" type="kr.or.ddit.vo.LoginVO" />
 		<typeAlias alias="mycarVO" type="kr.or.ddit.vo.MyCarVO" />
+		<typeAlias alias="mycarDetailVO" type="kr.or.ddit.vo.MyCarDetailVO" />
 			
 		<!-- 윤희 -->
 		<typeAlias alias="boardVO" type="kr.or.ddit.vo.BoardVO" />
