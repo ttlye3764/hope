@@ -48,4 +48,77 @@
 		WHERE MEM_NO = #{mem_no}
 		AND CAR_NO = #{car_no}
 	</select>
+	
+	<delete id="deleteMycar" parameterType="map">
+		DELETE FROM MYCAR
+		WHERE MEM_NO = #{mem_no}
+		AND CAR_NO = #{car_no}
+	</delete>
+	
+	<insert id="insertKm" parameterType="mycarDetailVO">
+		INSERT INTO MYCAR_DETAIL(
+				MD_NO,
+				CAR_NO,
+				MD_KM,
+				MD_DATE)
+			VALUES(
+				#{md_no},
+				#{car_no},
+				#{md_km},
+				#{md_date}
+			)
+	</insert>
+	
+	<insert id="insertBreak" parameterType="mycarDetailVO">
+		INSERT INTO MYCAR_DETAIL(
+				MD_NO,
+				CAR_NO,
+				MD_KM,
+				MD_BRAKE,
+				MD_DATE)
+			VALUES(
+				#{md_no},
+				#{car_no},
+				#{md_km},
+				#{md_break},
+				#{md_date}
+			)
+	</insert>
+	
+	<insert id="insertEngine" parameterType="mycarDetailVO">
+		INSERT INTO MYCAR_DETAIL(
+				MD_NO,
+				CAR_NO,
+				MD_KM,
+				MD_ENGINE,
+				MD_DATE)
+			VALUES(
+				#{md_no},
+				#{car_no},
+				#{md_km},
+				#{md_engine},
+				#{md_date}
+			)
+	</insert>
+	
+	<select id="selectKm" parameterType="map" resultType="mycarDetailVO">
+		SELECT CAR_NO, MD_DATE, MD_KM
+		FROM MYCAR_DETAIL
+		WHERE MEM_NO = #{mem_no}
+		AND CAR_NO = #{car_no}
+	</select>
+	
+	<select id="selectBreak" parameterType="map" resultType="mycarDetailVO">
+		SELECT CAR_NO, MD_DATE, MD_KM, MD_BREAK
+		FROM MYCAR_DETAIL
+		WHERE MEM_NO = #{mem_no}
+		AND CAR_NO = #{car_no}
+	</select>
+	
+	<select id="selectEngine" parameterType="map" resultType="mycarDetailVO">
+		SELECT CAR_NO, MD_DATE, MD_KM, MD_ENGINE
+		FROM MYCAR_DETAIL
+		WHERE MEM_NO = #{mem_no}
+		AND CAR_NO = #{car_no}
+	</select>
 </mapper>    

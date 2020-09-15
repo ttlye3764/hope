@@ -242,6 +242,24 @@
 												#{mem_no},
 												1)
     </insert>
+    
+    <select id="recommendDietList" resultType="dietVO">
+     SELECT *
+	 FROM DIET
+    </select>
+    
+    <select id="recommendDietInfo" parameterType="Map" resultType="dietInfoVO">
+    	SELECT a.DIET_NO DIET_NO, a.diet_info_division diet_info_division, a.menu_no MENU_NO , b.menu_name menu_name, b.menu_kcal menu_kcal
+		FROM
+			(
+			SELECT *
+			FROM diet_info
+			WHERE diet_no = #{diet_no}
+			) a,
+			(SELECT *
+			FROM menu) b
+			WHERE a.menu_no = b.menu_no
+    </select>
 </mapper>
 
 

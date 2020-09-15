@@ -1,6 +1,7 @@
 package kr.or.ddit.chat.controller;
 
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,7 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.api.gax.paging.Page;
@@ -41,6 +45,7 @@ import com.google.protobuf.ByteString;
 
 import kr.or.ddit.chat.service.IChatService;
 import kr.or.ddit.member.service.IMemberService;
+import kr.or.ddit.vo.ChatFileVO;
 import kr.or.ddit.vo.ChatingRoomVO;
 import kr.or.ddit.vo.FriendVO;
 import kr.or.ddit.vo.MemberVO;
@@ -87,7 +92,6 @@ public class ChatController {
 		
 		System.out.println(friendList.size());
 		
-		
 		//참여중인 채팅방 리스트
 		List<ChatingRoomVO> chatingRoomList = chatService.ChatingRoomList(params);
 		
@@ -96,6 +100,72 @@ public class ChatController {
 		andView.setViewName("user/chat/chatpage");
 		return andView;
 	};
+	
+	@RequestMapping(value="insertChatFile", method=RequestMethod.POST, produces="text/plain")
+	public ModelAndView insertChatFile(ModelAndView andView,
+										MultipartHttpServletRequest request,
+										HttpSession session,
+										Map<String, String> params,
+										@RequestParam(value="ch_no", required = false)String ch_no) throws Exception{
+		
+		List<MultipartFile> fileList = request.getFiles("files");
+
+
+		
+//		String path = request.getContextPath() + "/image";
+//		
+//		File fileDir = new File(request.getSession().getServletContext().getRealPath("image")); 
+//		
+//		System.out.println(request.getSession().getServletContext().getRealPath("image"));
+		
+		String path = "/Users/jaeho/Pictures";
+		
+		File fileDir = new File(path);
+				
+		if (!fileDir.exists()) {
+			fileDir.mkdirs(); 
+			}
+		
+		long time = System.currentTimeMillis();
+		String originFileName = null;
+		String saveFileName = null;
+		String cf_type = null;
+		String cf_size = null;
+
+		for (MultipartFile mf : fileList) { 
+			originFileName = mf.getOriginalFilename(); // 원본 파일 명 
+			saveFileName = String.format("%d_%s", time, originFileName);
+			cf_type = String.valueOf(mf.getSize());
+			cf_size = mf.getContentType();
+			
+			 // 파일생성 
+			mf.transferTo(new File(path, saveFileName)); 	 
+		}
+		
+		session = request.getSession();
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		params.put("mem_no", memberInfo.getMem_no());
+		params.put("ch_no", ch_no);
+		
+		ChatFileVO chatFileInfo = new ChatFileVO();
+		
+		chatFileInfo.setCf_name(originFileName);
+		chatFileInfo.setCf_save_name(saveFileName);
+		chatFileInfo.setMem_no(memberInfo.getMem_no());
+		chatFileInfo.setCh_no(ch_no);
+		chatFileInfo.setCf_type(cf_type);
+		chatFileInfo.setCf_size(cf_size);
+		
+		//파일 사이즈, 타입
+		if(chatService.selectChatFileInfo(params) == null) {
+			chatService.insertChatFile(chatFileInfo);
+		}else {
+			chatService.updateChatFile(chatFileInfo);
+		}
+		
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
 	
 	@RequestMapping("participationList")
 	public ModelAndView participationList(ModelAndView andView,
@@ -198,10 +268,20 @@ public class ChatController {
 	@RequestMapping("messageList")
 	public ModelAndView messageList(ModelAndView andView,
 									Map<String, String> params,
-									String ch_no) throws Exception{
+									String ch_no,
+									HttpSession session,
+									HttpServletRequest request) throws Exception{
 	params.put("ch_no", ch_no);
 	List<MessageVO> messageList = chatService.messageList(params);
 	
+	session = request.getSession();
+	
+	MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+	
+	params.put("mem_no", memberInfo.getMem_no());
+	
+	ChatFileVO chatFileInfo = chatService.selectChatFileInfo(params);
+	andView.addObject("chatFileInfo", chatFileInfo);
 	andView.addObject("messageList", messageList);
 	andView.setViewName("jsonConvertView");
 	return andView;	

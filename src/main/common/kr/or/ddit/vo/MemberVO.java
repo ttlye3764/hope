@@ -1,3 +1,4 @@
+
 package kr.or.ddit.vo;
 
 import java.util.List;
@@ -24,7 +25,29 @@ public class MemberVO {
 	private List<MemberFileVO> items2; // 이미지 리스트
 	//채팅
 	private String ch_no;
+	private String msg_content;
+	private String msg_date;
+	private String file_save_name;
 	
+	
+	public String getFile_save_name() {
+		return file_save_name;
+	}
+	public void setFile_save_name(String file_save_name) {
+		this.file_save_name = file_save_name;
+	}
+	public String getMsg_content() {
+		return msg_content;
+	}
+	public void setMsg_content(String msg_content) {
+		this.msg_content = msg_content;
+	}
+	public String getMsg_date() {
+		return msg_date;
+	}
+	public void setMsg_date(String msg_date) {
+		this.msg_date = msg_date;
+	}
 	public List<MemberFileVO> getItems2() {
 		return items2;
 	}

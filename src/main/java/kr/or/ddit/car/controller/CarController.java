@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddit.car.service.ICarService;
 import kr.or.ddit.vo.MemberVO;
+import kr.or.ddit.vo.MyCarDetailVO;
 import kr.or.ddit.vo.MyCarVO;
 
 @Controller
@@ -20,34 +21,31 @@ public class CarController {
 	@Autowired
 	private ICarService service;
 	
+	@RequestMapping("parking")
+	public void parking() {}
+	
 	@RequestMapping("carMain")
 	public ModelAndView carMain(HttpSession session, ModelAndView andView) throws Exception {
 		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
 		String mem_no = memberInfo.getMem_no();
 		
-		List<MyCarVO> carInfo = service.selectMycar(mem_no);
+		List<MyCarVO> carList = service.selectMycar(mem_no);
 		
 		service.selectMycar(mem_no);
 		
-		andView.addObject("carInfo", carInfo);
+		andView.addObject("carList", carList);
 		
 		return andView;
 	}
 	
-	@RequestMapping("carForm")
-	public void carForm() throws Exception {}
-	
 	@RequestMapping("carView")
-	public ModelAndView carForm(HttpSession session, ModelAndView andView, Map<String,String>params, String car_no) throws Exception {
+	public ModelAndView carView(HttpSession session, ModelAndView andView, Map<String,String>params, String car_no, MyCarVO carInfo) throws Exception {
 		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
 		String mem_no = memberInfo.getMem_no();
 		
 		params.put("mem_no", mem_no);
 		params.put("car_no", car_no); // db에 저장되어있는 차 번호
 		
-		MyCarVO carInfo = (MyCarVO) service.selectchoiceMycar(params);
-		
-		car_no = carInfo.getCar_no();
 		String [] no = car_no.split(" ");
 		
 		if(no.length > 1) {
@@ -56,9 +54,25 @@ public class CarController {
 			
 			params.put("car_no1", car_no); // 띄어쓰기를 없앤 차 번호
 			service.updateCarno(params);
+			
+			params.remove("car_no");
+			params.put("car_no", car_no);
 		}
 		
+		carInfo = (MyCarVO) service.selectchoiceMycar(params);
+		
+//		List<MyCarDetailVO> kmList = service.selectKm(params);
+//		List<MyCarDetailVO> engineList = service.selectEngine(params);
+//		List<MyCarDetailVO> breakList = service.selectBreak(params);
+//		
+		String result = "success";
+		
 		andView.addObject("carInfo", carInfo);
+//		andView.addObject("kmList", kmList);
+//		andView.addObject("engineList", engineList);
+//		andView.addObject("breakList", breakList);
+		andView.addObject("json",result);
+		andView.setViewName("jsonConvertView");
 		
 		return andView;
 	}
@@ -83,6 +97,19 @@ public class CarController {
 		carInfo.setMem_no(mem_no);
 		
 		service.updateMycar(carInfo);
+		
+		return "redirect:/user/car/carMain.do";
+	}
+	
+	@RequestMapping("deleteMycar")
+	public String deleteMycar(String car_no, HttpSession session, Map<String,String>params) throws Exception{
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		String mem_no = memberInfo.getMem_no();
+		
+		params.put("mem_no", mem_no);
+		params.put("car_no", car_no);
+		
+		service.deleteMycar(params);
 		
 		return "redirect:/user/car/carMain.do";
 	}

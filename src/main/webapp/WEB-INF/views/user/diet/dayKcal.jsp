@@ -1,5 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<style>
+.diet_img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+  height: 100px;
+}
+
+.diet_img:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+</style>
 <div class="innerpage-banner center bg-overlay-dark-7 py-7" style="background:url(${pageContext.request.contextPath}/image/food1.jpg) no-repeat; background-size:cover; background-position: center center;">
 		<div class="container">
 			<div class="row all-text-white">
@@ -49,7 +63,7 @@
 					<ul class="nav nav-tabs" style="width:650px; !important">
 						<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tab-1-1"> 열량표 </a> </li>
 						<li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#tab-1-2"> 열량에 따른 운동 </a> </li>
-						<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tab-1-3"> Develop </a> </li>
+
 					</ul>
 					<div class="tab-content" style="width:650px; !important">
 						<div class="tab-pane show" id="tab-1-1">
@@ -149,13 +163,14 @@
 						
 			<form>
 			<div class="input-group">
-				<input type="text" id="kcal_kcal" class="form-control" placeholder="Enter your Email..." style="width:300px; !important">
-					<span class="input-group-btn">
+				<input type="text" id="kcal_kcal" class="form-control" placeholder="칼로리를 입력해주세요!!" style="width:300px; !important">
+									<span class="input-group-btn">
 						<button type="button" id="kcal_calculate" class="btn btn-grad mb-0"><i class="fa fa-paper-plane m-0"></i></button>
 					</span>
 			</div>
-		</form>						
-						
+		</form>	
+		<br>					
+						단위 : 분
 		<section class="py-4 counter counter-grad-text counter-light counter-small">
 		
 		<!-- 첫번째 줄-->
@@ -164,32 +179,32 @@
 				<!-- count item -->
 				<div class="col-md-3 col-6">
 					<div class="counter-item text-center">
-						<i class="counter-item-icon ti-write"></i>
-						<h2 id="kcal_jump" class="counter-item-digit" data-from="0" data-to="3000" data-speed="3000" data-refresh-interval="10">3000</h2>
+						<img class="diet_img" src="${pageContext.request.contextPath }/image/ring.jpg">
+						<h2 id="kcal_jump" class="counter-item-digit" data-from="0" data-to="${kcal.ring }" data-speed="3000" data-refresh-interval="10">${kcal.ring }</h2>
 						<p class="counter-item-text">줄넘기</p>
 					</div>
 				</div>
 				<!-- count item -->
 				<div class="col-md-3 col-6">
 					<div class="counter-item text-center">
-						<i class="counter-item-icon ti-truck"></i>
-						<h2 id="kcal_walking" class="counter-item-digit" data-from="0" data-to="865" data-speed="3000" data-refresh-interval="10">865</h2>
+						<img class="diet_img" src="${pageContext.request.contextPath }/image/waking.jpg">
+						<h2 id="kcal_walking" class="counter-item-digit" data-from="0" data-to="${kcal.waking }" data-speed="3000" data-refresh-interval="10">${kcal.waking }</h2>
 						<p class="counter-item-text">걷기</p>
 					</div>
 				</div>
 				<!-- count item -->
 				<div class="col-md-3 col-6">
 					<div class="counter-item text-center">
-						<i class="counter-item-icon ti-face-smile"></i>
-						<h2 id="kcal_swimming" class="counter-item-digit" data-from="0" data-to="127" data-speed="3000" data-refresh-interval="10">127</h2>
+						<img class="diet_img" src="${pageContext.request.contextPath }/image/swimming.jpg">
+						<h2 id="kcal_swimming" class="counter-item-digit" data-from="0" data-to="${kcal.swimming }" data-speed="3000" data-refresh-interval="10">${kcal.swimming }</h2>
 						<p class="counter-item-text">수영</p>
 					</div>
 				</div>
 				<!-- count item -->
 				<div class="col-md-3 col-6">
 					<div class="counter-item text-center">
-						<i class="counter-item-icon ti-cup"></i>
-						<h2 id="kcal_stairs" class="counter-item-digit" data-from="0" data-to="16" data-speed="3000" data-refresh-interval="10">16</h2>
+						<img class="diet_img" src="${pageContext.request.contextPath }/image/stairs.jpg">
+						<h2 id="kcal_stairs" class="counter-item-digit" data-from="0" data-to="${kcal.stairs }" data-speed="3000" data-refresh-interval="10">${kcal.stairs }</h2>
 						<p class="counter-item-text">계단 오르기</p>
 					</div>
 				</div>
@@ -203,33 +218,33 @@
 				<!-- count item -->
 				<div class="col-md-3 col-6">
 					<div class="counter-item text-center">
-						<i class="counter-item-icon ti-write"></i>
-						<h2 class="counter-item-digit" data-from="0" data-to="5257" data-speed="3000" data-refresh-interval="10">5257</h2>
-						<p class="counter-item-text">Lines of code</p>
+						<img class="diet_img" src="${pageContext.request.contextPath }/image/tenis.jpg">
+						<h2 class="counter-item-digit" data-from="0" data-to="${kcal.tenis }" data-speed="3000" data-refresh-interval="10">${kcal.tenis }</h2>
+						<p class="counter-item-text">테니스</p>
 					</div>
 				</div>
 				<!-- count item -->
 				<div class="col-md-3 col-6">
 					<div class="counter-item text-center">
-						<i class="counter-item-icon ti-truck"></i>
-						<h2 class="counter-item-digit" data-from="0" data-to="865" data-speed="3000" data-refresh-interval="10">865</h2>
-						<p class="counter-item-text">Project Delivered</p>
+						<img class="diet_img" src="${pageContext.request.contextPath }/image/hiking.jpeg">
+						<h2 class="counter-item-digit" data-from="0" data-to="${kcal.hiking }" data-speed="3000" data-refresh-interval="10">${kcal.hiking }</h2>
+						<p class="counter-item-text">하이킹</p>
 					</div>
 				</div>
 				<!-- count item -->
 				<div class="col-md-3 col-6">
 					<div class="counter-item text-center">
-						<i class="counter-item-icon ti-face-smile"></i>
-						<h2 class="counter-item-digit" data-from="0" data-to="127" data-speed="3000" data-refresh-interval="10">127</h2>
-						<p class="counter-item-text">Satisfied clients</p>
+						<img class="diet_img" src="${pageContext.request.contextPath }/image/takgu.jpg">
+						<h2 class="counter-item-digit" data-from="0" data-to="${kcal.takgu }" data-speed="3000" data-refresh-interval="10">${kcal.takgu }</h2>
+						<p class="counter-item-text">탁구</p>
 					</div>
 				</div>
 				<!-- count item -->
 				<div class="col-md-3 col-6">
 					<div class="counter-item text-center">
-						<i class="counter-item-icon ti-cup"></i>
-						<h2 class="counter-item-digit" data-from="0" data-to="16" data-speed="3000" data-refresh-interval="10">16</h2>
-						<p class="counter-item-text">Awards won</p>
+						<img class="diet_img" src="${pageContext.request.contextPath }/image/cycle.jpg">
+						<h2 class="counter-item-digit" data-from="0" data-to="${kcal.cycle }" data-speed="3000" data-refresh-interval="10">${kcal.cycle }</h2>
+						<p class="counter-item-text">사이클</p>
 					</div>
 				</div>
 			</div>
@@ -247,33 +262,33 @@
 				<!-- count item -->
 				<div class="col-md-3 col-6">
 					<div class="counter-item text-center">
-						<i class="counter-item-icon ti-write"></i>
-						<h2 class="counter-item-digit" data-from="0" data-to="5257" data-speed="3000" data-refresh-interval="10">5257</h2>
-						<p class="counter-item-text">Lines of code</p>
+						<img class="diet_img" src="${pageContext.request.contextPath }/image/joging.jpg">
+						<h2 class="counter-item-digit" data-from="0" data-to="${kcal.joging }" data-speed="3000" data-refresh-interval="10">${kcal.joging }</h2>
+						<p class="counter-item-text">조깅</p>
 					</div>
 				</div>
 				<!-- count item -->
 				<div class="col-md-3 col-6">
 					<div class="counter-item text-center">
-						<i class="counter-item-icon ti-truck"></i>
-						<h2 class="counter-item-digit" data-from="0" data-to="865" data-speed="3000" data-refresh-interval="10">865</h2>
-						<p class="counter-item-text">Project Delivered</p>
+						<img class="diet_img" src="${pageContext.request.contextPath }/image/ski.jpg">
+						<h2 class="counter-item-digit" data-from="0" data-to="${kcal.ski }" data-speed="3000" data-refresh-interval="10">${kcal.ski }</h2>
+						<p class="counter-item-text">스키</p>
 					</div>
 				</div>
 				<!-- count item -->
 				<div class="col-md-3 col-6">
 					<div class="counter-item text-center">
-						<i class="counter-item-icon ti-face-smile"></i>
-						<h2 class="counter-item-digit" data-from="0" data-to="127" data-speed="3000" data-refresh-interval="10">127</h2>
-						<p class="counter-item-text">Satisfied clients</p>
+						<img class="diet_img" src="${pageContext.request.contextPath }/image/mealpreparation.jpg">
+						<h2 class="counter-item-digit" data-from="0" data-to="${kcal.mealPreparation }" data-speed="3000" data-refresh-interval="10">${kcal.mealPreparation }</h2>
+						<p class="counter-item-text">식사 준비</p>
 					</div>
 				</div>
 				<!-- count item -->
 				<div class="col-md-3 col-6">
 					<div class="counter-item text-center">
-						<i class="counter-item-icon ti-cup"></i>
-						<h2 class="counter-item-digit" data-from="0" data-to="16" data-speed="3000" data-refresh-interval="10">16</h2>
-						<p class="counter-item-text">Awards won</p>
+						<img class="diet_img" src="${pageContext.request.contextPath }/image/blanket.jpg">
+						<h2 class="counter-item-digit" data-from="0" data-to="${kcal.blanket }" data-speed="3000" data-refresh-interval="10">${kcal.blanket }</h2>
+						<p class="counter-item-text">이불개기</p>
 					</div>
 				</div>
 			</div>
@@ -287,33 +302,33 @@
 				<!-- count item -->
 				<div class="col-md-3 col-6">
 					<div class="counter-item text-center">
-						<i class="counter-item-icon ti-write"></i>
-						<h2 class="counter-item-digit" data-from="0" data-to="5257" data-speed="3000" data-refresh-interval="10">5257</h2>
-						<p class="counter-item-text">Lines of code</p>
+						<img class="diet_img" src="${pageContext.request.contextPath }/image/dressing.jpg">
+						<h2 class="counter-item-digit" data-from="0" data-to="${kcal.dreesing } " data-speed="3000" data-refresh-interval="10">${kcal.dreesing }</h2>
+						<p class="counter-item-text">옷 입기</p>
 					</div>
 				</div>
 				<!-- count item -->
 				<div class="col-md-3 col-6">
 					<div class="counter-item text-center">
-						<i class="counter-item-icon ti-truck"></i>
-						<h2 class="counter-item-digit" data-from="0" data-to="865" data-speed="3000" data-refresh-interval="10">865</h2>
-						<p class="counter-item-text">Project Delivered</p>
+						<img class="diet_img" src="${pageContext.request.contextPath }/image/talk.jpg">
+						<h2 class="counter-item-digit" data-from="0" data-to="${kcal.talk }" data-speed="3000" data-refresh-interval="10">${kcal.talk }</h2>
+						<p class="counter-item-text">잡담</p>
 					</div>
 				</div>
 				<!-- count item -->
 				<div class="col-md-3 col-6">
 					<div class="counter-item text-center">
-						<i class="counter-item-icon ti-face-smile"></i>
-						<h2 class="counter-item-digit" data-from="0" data-to="127" data-speed="3000" data-refresh-interval="10">127</h2>
-						<p class="counter-item-text">Satisfied clients</p>
+						<img class="diet_img" src="${pageContext.request.contextPath }/image/clean.jpg">
+						<h2 class="counter-item-digit" data-from="0" data-to="${kcal.clean}" data-speed="3000" data-refresh-interval="10">${kcal.clean }</h2>
+						<p class="counter-item-text">청소</p>
 					</div>
 				</div>
 				<!-- count item -->
 				<div class="col-md-3 col-6">
 					<div class="counter-item text-center">
-						<i class="counter-item-icon ti-cup"></i>
-						<h2 class="counter-item-digit" data-from="0" data-to="16" data-speed="3000" data-refresh-interval="10">16</h2>
-						<p class="counter-item-text">Awards won</p>
+						<img class="diet_img" src="${pageContext.request.contextPath }/image/bath.jpg">
+						<h2 class="counter-item-digit" data-from="0" data-to="${kcal.bath }" data-speed="3000" data-refresh-interval="10">${kcal.bath }</h2>
+						<p class="counter-item-text">목욕</p>
 					</div>
 				</div>
 			</div>
@@ -328,33 +343,33 @@
 				<!-- count item -->
 				<div class="col-md-3 col-6">
 					<div class="counter-item text-center">
-						<i class="counter-item-icon ti-write"></i>
-						<h2 class="counter-item-digit" data-from="0" data-to="5257" data-speed="3000" data-refresh-interval="10">5257</h2>
+						<img class="diet_img" src="${pageContext.request.contextPath }/image/Ironing.jpg">
+						<h2 class="counter-item-digit" data-from="0" data-to="${kcal.ironing } " data-speed="3000" data-refresh-interval="10">${kcal.ironing }</h2>
 						<p class="counter-item-text">Lines of code</p>
 					</div>
 				</div>
 				<!-- count item -->
 				<div class="col-md-3 col-6">
 					<div class="counter-item text-center">
-						<i class="counter-item-icon ti-truck"></i>
-						<h2 class="counter-item-digit" data-from="0" data-to="865" data-speed="3000" data-refresh-interval="10">865</h2>
-						<p class="counter-item-text">Project Delivered</p>
+						<img class="diet_img" src="${pageContext.request.contextPath }/image/sleep.jpg">
+						<h2 class="counter-item-digit" data-from="0" data-to="${kcal.sleep }" data-speed="3000" data-refresh-interval="10">${kcal.sleep }</h2>
+						<p class="counter-item-text">잠자기</p>
 					</div>
 				</div>
 				<!-- count item -->
 				<div class="col-md-3 col-6">
 					<div class="counter-item text-center">
-						<i class="counter-item-icon ti-face-smile"></i>
-						<h2 class="counter-item-digit" data-from="0" data-to="127" data-speed="3000" data-refresh-interval="10">127</h2>
-						<p class="counter-item-text">Satisfied clients</p>
+						<img class="diet_img" src="${pageContext.request.contextPath }/image/look.jpg">
+						<h2 class="counter-item-digit" data-from="0" data-to="${kcal.look }" data-speed="3000" data-refresh-interval="10">${kcal.look }</h2>
+						<p class="counter-item-text">신문보기</p>
 					</div>
 				</div>
 				<!-- count item -->
 				<div class="col-md-3 col-6">
 					<div class="counter-item text-center">
-						<i class="counter-item-icon ti-cup"></i>
-						<h2 class="counter-item-digit" data-from="0" data-to="16" data-speed="3000" data-refresh-interval="10">16</h2>
-						<p class="counter-item-text">Awards won</p>
+						<img class="diet_img" src="${pageContext.request.contextPath }/image/cleanshoes.jpg">
+						<h2 class="counter-item-digit" data-from="0" data-to="${kcal.cleanshoes }" data-speed="3000" data-refresh-interval="10">${kcal.cleanshoes }</h2>
+						<p class="counter-item-text">구두닦이</p>
 					</div>
 				</div>
 			</div>
@@ -368,31 +383,31 @@
 				<!-- count item -->
 				<div class="col-md-3 col-6">
 					<div class="counter-item text-center">
-						<i class="counter-item-icon ti-write"></i>
-						<h2 class="counter-item-digit" data-from="0" data-to="5257" data-speed="3000" data-refresh-interval="10">5257</h2>
-						<p class="counter-item-text">Lines of code</p>
+						<img class="diet_img" src="${pageContext.request.contextPath }/image/tv.jpg">
+						<h2 class="counter-item-digit" data-from="0" data-to="${kcal.tv }" data-speed="3000" data-refresh-interval="10">${kcal.tv }</h2>
+						<p class="counter-item-text">TV 보기</p>
 					</div>
 				</div>
 				<!-- count item -->
 				<div class="col-md-3 col-6">
 					<div class="counter-item text-center">
-						<i class="counter-item-icon ti-truck"></i>
-						<h2 class="counter-item-digit" data-from="0" data-to="865" data-speed="3000" data-refresh-interval="10">865</h2>
-						<p class="counter-item-text">Project Delivered</p>
+						<img class="diet_img" src="${pageContext.request.contextPath }/image/makeup.jpg">
+						<h2 class="counter-item-digit" data-from="0" data-to="${kcal.makeup }" data-speed="3000" data-refresh-interval="10">${kcal.makeup }</h2>
+						<p class="counter-item-text">화장하기</p>
 					</div>
 				</div>
 				<!-- count item -->
 				<div class="col-md-3 col-6">
 					<div class="counter-item text-center">
-						<i class="counter-item-icon ti-face-smile"></i>
-						<h2 class="counter-item-digit" data-from="0" data-to="127" data-speed="3000" data-refresh-interval="10">127</h2>
-						<p class="counter-item-text">Satisfied clients</p>
+						<img class="diet_img" src="${pageContext.request.contextPath }/image/washh.jpg">
+						<h2 class="counter-item-digit" data-from="0" data-to="${kcal.wash }" data-speed="3000" data-refresh-interval="10">${kcal.wash }</h2>
+						<p class="counter-item-text">빨래하기</p>
 					</div>
 				</div>
 				<!-- count item -->
 				<div class="col-md-3 col-6">
 					<div class="counter-item text-center">
-						<i class="counter-item-icon ti-cup"></i>
+						<img class="diet_img" src="${pageContext.request.contextPath }/image/.jpg">
 						<h2 class="counter-item-digit" data-from="0" data-to="16" data-speed="3000" data-refresh-interval="10">16</h2>
 						<p class="counter-item-text">Awards won</p>
 					</div>
@@ -402,9 +417,7 @@
 	</section>
 	
 						</div>
-						<div class="tab-pane" id="tab-1-3">
-							화이팅
-						</div>
+						
 					</div>
 				</div>
 				<!-- blog End -->
@@ -414,16 +427,19 @@
 <script type="text/javascript">
 $(function(){
 	$("#kcal_calculate").click(function(){
-		var walking = $('#kcal_kcal').val() / 4
-		var jump = $('#kcal_kcal').val() / 10
-		var swimming = $('#kcal_kcal').val() / 9
-		var stairs = $('#kcal_kcal').val() / 7
+		var kcal = $('#kcal_kcal').val();
+		$(location).attr('href', '${pageContext.request.contextPath}/user/diet/kcalCalculate?kcal='+kcal);
+		
+// 		var walking = $('#kcal_kcal').val() / 4
+// 		var jump = $('#kcal_kcal').val() / 10
+// 		var swimming = $('#kcal_kcal').val() / 9
+// 		var stairs = $('#kcal_kcal').val() / 7
 
-		$('#kcal_walking').text(walking);
-		$('#kcal_walking').attr('data-to', walking);
-		$('#kcal_jump').text(jump);
-		$('#kcal_swimming').text(swimming);
-		$('#kcal_stairs').text(stairs);
+// 		$('#kcal_walking').text(walking);
+// 		$('#kcal_walking').attr('data-to', walking);
+// 		$('#kcal_jump').text(jump);
+// 		$('#kcal_swimming').text(swimming);
+// 		$('#kcal_stairs').text(stairs);
 	})
 })
 

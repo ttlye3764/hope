@@ -105,4 +105,14 @@ public class DietServiceImpl implements IDietService {
 	public void insertDietBoardFirst(Map<String, String> params) throws Exception {
 		dietDao.insertDietBoardFirst(params);
 	}
+	
+	@Override
+	public List<DietVO> recommendDietList(Map<String, String> params) throws Exception {
+		return dietDao.recommendDietList(params);
+	}
+	
+	@Override
+	public List<Diet_infoVO> recommendDietInfo(Map<String, String> params) throws Exception {
+		return dietDao.recommendDietInfo(params);
+	}
 }

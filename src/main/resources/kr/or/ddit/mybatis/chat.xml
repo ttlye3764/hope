@@ -52,17 +52,27 @@
 	</select>
 	
 	<select id="chatRoomList" parameterType="Map" resultType="memberVO">
-		SELECT b.ch_no ch_no, a.mem_no mem_no, a.mem_name mem_name
-		FROM MEMBER a,(
-			SELECT ch_no, mem_no
-			FROM PARTICIPATION
-			WHERE ch_no IN (
-    			SELECT ch_no
-    			FROM PARTICIPATION
-    			WHERE MEM_NO = #{mem_no}
-	 		   )
-			AND MEM_NO != #{mem_no}) b
-		WHERE a.mem_no = b.mem_no
+		SELECT a.ch_no CH_NO, a.mem_no MEM_NO, a.mem_name MEM_NAME, b.msg_content MSG_CONTENT, b.msg_date MSG_DATE
+		from
+			(SELECT b.ch_no ch_no, a.mem_no mem_no, a.mem_name mem_name
+			FROM MEMBER a,(
+				SELECT ch_no, mem_no
+				FROM PARTICIPATION
+				WHERE ch_no IN (
+								SELECT ch_no
+								FROM PARTICIPATION
+								WHERE MEM_NO = #{mem_no}
+								)
+				AND MEM_NO != #{mem_no}) b
+			WHERE a.mem_no = b.mem_no) a ,
+			(SELECT *
+			FROM (SELECT ch_no,
+						MSG_CONTENT,
+						msg_date,
+						ROW_NUMBER() OVER (PARTITION BY ch_no ORDER BY msg_date DESC) AS RankNo 
+						FROM message)
+			WHERE RankNo = 1) b
+		WHERE a.ch_no = b.ch_no(+)
 	</select>
 	
 	<select id ="participationList" parameterType="Map" resultType="participationVO">
@@ -116,13 +126,19 @@
 	</insert>
 	
 	<select id="selectFriendList" parameterType="Map" resultType="memberVO">
-		SELECT *
-		FROM MEMBER
-		WHERE MEM_NO IN
+		SELECT a.mem_no mem_no, a.mem_id mem_id, a.mem_name mem_name, a.mem_birth mem_birth, a.mem_email mem_email, a.mem_hp mem_hp, b.file_save_name
+		FROM(
+			SELECT *
+			FROM MEMBER
+			WHERE MEM_NO IN
 				(SELECT FRI_MEM_NO
-				FROM FRIEND
-				WHERE MEM_NO = #{mem_no}
-				)
+		 	 	 FROM FRIEND
+		 		 WHERE MEM_NO = #{mem_no}
+					) )a,
+			(
+			SELECT *
+			FROM memberfile) b
+			WHERE a.mem_no = b.mem_no(+)
 	</select>
 	
 	<select id="messageLast">
@@ -141,6 +157,35 @@
 		FROM MESSAGE
 		WHERE CH_NO = #{ch_no}
 		ORDER BY MSG_DATE
+	</select>
+	
+	<insert id="insertChatFile" parameterType="chatFileVO">
+		INSERT INTO CHAT_FILE (CF_NO,
+								MEM_NO,
+								CH_NO,
+								CF_NAME,
+								CF_SAVE_NAME,
+								CF_SIZE,
+								CF_TYPE)VALUES(CHAT_FILE_SEQ.NEXTVAL,
+												#{mem_no},
+												#{ch_no},
+												#{cf_name},
+												#{cf_save_name},
+												#{cf_size},
+												#{cf_type})
+							
+	</insert>
+	<update id="updateChatFile" parameterType="chatFileVO">
+		UPDATE CHAT_FILE SET CF_NAME = #{cf_name},
+							 CF_SAVE_NAVE = #{cf_save_name},
+							 CF_SIZE = #{cf_size},
+							 CF_TYPE = #{cf_type}
+	</update>
+	<select id="selectChatFileInfo" parameterType="Map" resultType="chatFileVO">
+		SELECT *
+		FROM CHAT_FILE
+		WHERE MEM_NO = #{mem_no}
+		AND CH_NO = #{ch_no}
 	</select>
 </mapper>
 	

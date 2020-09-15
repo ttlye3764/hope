@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
 <!--   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 <!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/myCSS/chatPage.css">
@@ -36,6 +37,7 @@
 			<li class="social-icons-item social-flickr">
 				<a class="social-icons-link" onclick="friendListForm();"><i class="fa fa-flickr"></i></a>
 			</li>
+			
 		</ul>
 		<div class="recent_heading">
 		  <h4>Recent</h4>
@@ -75,7 +77,11 @@
 	  <!-- 친구 목록 끝 -->
 	</div>
 	<div class="mesgs">
-	
+		<ul class="social-icons si-colored-bg si-medium">
+			<li class="social-icons-item social-dribbble">
+				<a class="social-icons-link" onclick="updateChatImageForm();"><i class="fa fa-dribbble"></i></a>
+			</li>
+		</ul>
 	  <div class="msg_history" id="msg_history" style="background-image: url(${pageContext.request.contextPath}/image/kakao.jpg);">
 		<div class="incoming_msg">
 		  <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
@@ -136,7 +142,7 @@
 								<div class="modal-header">
 									친구 추가
 								</div>
-								<div class="modal-body">
+								<div class="modal-body" >
 									<h4>친구 아이디로 찾기 </h4>
 									친구 아이디 : <input class="form-control" onchange="searchFriendID();" type="text" id="mem_id" placeholder="이름을 입력해주세요" style="width:200px; !important">
 									<br>
@@ -152,15 +158,15 @@
 									<table id="searchFriendName">
 									</table>
 									<div class="divider divider-grad"></div>
-								</div>
+									<br>
+									<br>			
 								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary">Save changes</button>
+									<button type="button" style="float:right;" class="btn btn-secondary" data-dismiss="modal">확인</button>
 								</div>
 							</div>
 						</div>
+						</div>
 					</div>
-					
 					<!-- 친구목록 모달창 -->
 					<div class="modal fade text-left" id="friendListForm"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" style="display: none; overflow: auto;" aria-hidden="true" >
 						<div class="modal-dialog modal-dialog-centered" role="document" >
@@ -170,34 +176,63 @@
 								</div>
 								<div class="modal-body" id="friendListFormBody" style="height:600px; overflow: auto; !important">
 									<!-- 친구 한명 -->
-									<div class="col-sm-6 col-md-3">
-					<div class="team-item text-center">
-						<div class="team-avatar">
-							<img src="${pageContext.request.contextPath }/resources/image/friend1.jpg" alt="">
-						</div>
-						<div class="team-desc">
-							<h5 class="team-name">Allen Smith</h5>
-							<span class="team-position">Founder</span>
-							<p></p>
-							<button class="btn btn-grad" onclick="createChatRoom(this);"><i class="fa fa-arrow-right"></i>채팅하기</button>
-						</div>
-					</div>
-				</div>
-				<!-- 친구한명 끝 -->
+									
+									<!-- 친구한명 끝 -->
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary">Save changes</button>
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">확인</button>
 								</div>
 							</div>
 						</div>
 					</div>
+					
+					
+					
+					
+					
+					<div class="modal fade text-left" id="updateChatImageForm"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" style="display: none; overflow: auto;" aria-hidden="true" >
+						<div class="modal-dialog modal-dialog-centered" role="document" >
+							<div class="modal-content">
+								<div class="modal-header">
+									채팅방 배경화면 수정
+								</div>
+								<div class="modal-body" id="friendListFormBody" style="height:600px; overflow: auto; !important">
 				
-
+									
+								배경화면 바꾸기 모달창
+									<form id="fileForm" method="post" enctype="multipart/form-data">
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+										<span class="input-group-text">Upload</span>
+										</div>
+										<div class="custom-file">	
+											<input type="file" class="custom-file-input" id="files" name="files">
+											<label class="custom-file-label" for="file">파일을 선택하세요</label>
+										</div>				
+									</div>
+									<div style="width: 390px; height: 280px; align-content: center;">
+											<img id="img" style="width: 100%; height: 100%; margin-left: 15px; margin-top: 30px;" src=" ">
+									</div>
+									</form>
+									<br>
+									<br>
+									<div style="float: right;">
+										<button type="button" class="btn btn-primary" onclick="insertChatFile()">저장</button>
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+									</div>
+								</div>
+											
+							</div>
+								<div class="modal-footer">
+								
+								</div>
+							</div>
+						</div>
+					
+					
 					
 <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js'></script>
 <script type="text/javascript">
-
 
 
 var socket;
@@ -219,14 +254,22 @@ function chatRoomList(){
 			}else{
 				var chatRoomList = "";
 				$.each(result.chatMemberList, function(index, item){
+
+					if(item.msg_date == null){
+						item.msg_date = '';
+					}
+					if(item.msg_content==null){
+						item.msg_content = '';
+					}
+					
 					chatRoomList += '<div class="chat_list active_chat" onclick="startChat(this);">';
 					chatRoomList += '<input type="hidden" id="ch_no" value="'+item.ch_no+'">';
 					chatRoomList += '<input type="hidden" id="mem_no" value="'+item.mem_no+'">';
 					chatRoomList += '<div class="chat_people">';
 					chatRoomList += '<div class="chat_img"> <img src="${pageContext.request.contextPath}/resources/image/friend1.jpg" alt="sunil"> </div>';
 					chatRoomList += '<div class="chat_ib">';
-					chatRoomList += '<h5 id="mem_no"><input type="hidden" id="mem_name" value="'+item.mem_name+'">'+item.mem_name+'<span class="chat_date" id="lastChat">Dec 25</span></h5>';
-					chatRoomList += '<p>''</p>';
+					chatRoomList += '<h5 id="mem_no"><input type="hidden" id="mem_name" value="'+item.mem_name+'">'+item.mem_name+'<span class="chat_date" id="lastChat">'+item.msg_date+'</span></h5>';
+					chatRoomList += '<p>'+item.msg_content+'</p>';
 					chatRoomList += '</div>';
 					chatRoomList += '</div>';
 					chatRoomList += '</div>';
@@ -254,6 +297,45 @@ function startChat(e){
 	messageList();
 }
 
+function insertChatFile(){
+
+	var formData = new FormData($('#fileForm')[0]);
+	
+	$.ajax({
+		type : 'POST',
+		enctype : 'multipart/form-data',
+		url : '${pageContext.request.contextPath}/user/chat/insertChatFile?ch_no='+chatingRoomNo,
+		data : formData ,
+		processData : false,
+		contentType : false,
+		cache : false,
+		success : function(result){
+		},
+		error : function(result){
+			alert('파일 삽입 실패');
+		}
+});
+}
+
+function handleImgFileSelect(e){
+	var files = e.target.files;
+	var filesArr = Array.prototype.slice.call(files);
+	
+	filesArr.forEach(function(f){
+		if(!f.type.match("image.*")){
+			alert("이미지만 업로드 가능합니다.");
+			return;
+		}
+		
+		sel_file = f;
+		var reader = new FileReader();
+		reader.onload = function(e)	{
+				$("#img").attr("src", e.target.result);
+		}
+		reader.readAsDataURL(f);
+	});
+}
+
 function messageList(){
 	$.ajax({
 		url : '${pageContext.request.contextPath}/user/chat/messageList',
@@ -263,6 +345,9 @@ function messageList(){
 		success : function(result){
 
 			$('#msg_history').empty();
+			if(result.chatFileInfo != null){
+				$('#msg_history').css('background', 'url(/files/'+result.chatFileInfo.cf_save_name + ')') ;
+				}
 			
 			if(result.messageList==null){
 
@@ -325,8 +410,22 @@ function initSocket(url) {
 function searchFriendForm(){
 	$("#searchFriendForm").modal("show"); //모달창 띄우기
 }
+//채팅 배경화면 이미지 수정 모달창 띄우기
+function updateChatImageForm(){
+	$('#updateChatImageForm').modal("show");
+}
 
-// 친구목록 모달창 띄우기
+
+
+ 
+
+  
+  
+  
+  
+
+
+// 친구목록
 function friendListForm(){
 	$.ajax({
 		url : '${pageContext.request.contextPath}/user/chat/selectFriendList',
@@ -337,18 +436,20 @@ function friendListForm(){
 				$('#friendListFormBody').empty();
 				var friendInfo ="";
 				$.each(result.memberList, function(index, item){
-					friendInfo += '<div class="col-sm-6 col-md-3">';
-					friendInfo += '<div class="team-item text-center" style="width:100px; !important">';
-					friendInfo += '<div class="team-avatar">';
-					friendInfo += '<img src="${pageContext.request.contextPath }/resources/image/friend1.jpg" alt="">';
+					friendInfo += '<div style="margin : 15px 15px 15px 15px; border : 1px solid black;">'
+					friendInfo += '<div class="row">';
+					friendInfo += '<div class="col-4" id="profile-image"><img id="modal-img" src="'+item.file_save_name+'" alt=""></div>';
+					friendInfo += '<div class="col-8" id="all-info">';
+					friendInfo += '<div id="profile-name"><i class="fas fa-user"></i>'+item.mem_name+'</div>';
+					friendInfo += '<div id="profile-birthday"><i class="fas fa-birthday-cake"></i>'+item.mem_birth+'</div>';
+					friendInfo += '<div id="profile-country"><i class="fas fa-globe"></i>'+item.mem_hp+'</div>';
+					friendInfo += '<div id="profile-email"><i class="fas fa-envelope"></i>'+item.mem_email+'</div>';
 					friendInfo += '</div>';
-					friendInfo += '<div class="team-desc">';
-					friendInfo += '<h5 class="team-name">'+item.mem_name+'</h5>';
-					friendInfo += '<span class="team-position">'+item.mem_id+'</span>';
-					friendInfo += '<p></p>';
-					friendInfo += '<button class="btn btn-grad" onclick="createChatingRoom(this);"><input type="hidden" value="'+item.mem_no+'"><i class="fa fa-arrow-right"></i>채팅하기</button>';
+					friendInfo += '<div class="col-4">';
+					friendInfo += '<button class="btn btn-grad" onclick="createChatingRoom(this);" style="float:right;"><input type="hidden" value="'+item.mem_no+'"><i class="fa fa-arrow-right"></i>채팅하기</button>';					
 					friendInfo += '</div>';
-					friendInfo += '</div>';	
+					friendInfo += '</div>';
+					friendInfo += '</div>';
 					})
 					$('#friendListFormBody').append(friendInfo);
 					
@@ -500,6 +601,8 @@ $(function(){
 	$('.chat_list').click(function(){
 		$('.chat_list').toggleClass('active_chat');	
 	})	
+
+	$('#files').on('change', handleImgFileSelect);
 })
 </script>
 

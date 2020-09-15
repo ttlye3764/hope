@@ -5,19 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import kr.or.ddit.global.GlobalConstant;
-import kr.or.ddit.member.service.IMemberSerivceImpl;
-import kr.or.ddit.member.service.IMemberService;
-import kr.or.ddit.vo.Board_FileVO;
-import kr.or.ddit.vo.FileItemVO;
-import kr.or.ddit.vo.HealthFileVO;
-import kr.or.ddit.vo.HealthImageVO;
-import kr.or.ddit.vo.MemberFileVO;
-import kr.or.ddit.vo.MypillFileVO;
-
-import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.multipart.MultipartFile;
+
+import kr.or.ddit.global.GlobalConstant;
+import kr.or.ddit.vo.Board_FileVO;
+import kr.or.ddit.vo.ChatFileVO;
+import kr.or.ddit.vo.FileItemVO;
+import kr.or.ddit.vo.HealthFileVO;
+import kr.or.ddit.vo.MemberFileVO;
+import kr.or.ddit.vo.MypillFileVO;
 
 public class AttachFileMapper {
 	// knowlege file
@@ -245,6 +242,51 @@ public class AttachFileMapper {
 			return fileItemList;
 		}
 
+		//chat file
+		public static List<ChatFileVO> chatMapper(MultipartFile[] items, String ch_no, String mem_no){
+			List<ChatFileVO> fileItemList = new ArrayList<ChatFileVO>();
+			
+			if(items != null){
+				ChatFileVO fileItemInfo = null;
+				
+				for(MultipartFile item : items){
+					if(item.getSize() > 0){
+						fileItemInfo = new ChatFileVO();
+						fileItemInfo.setCh_no(ch_no);
+						fileItemInfo.setMem_no(mem_no);
+						
+						// 파일명 취득
+						// 브라우저별 d:\\temp\image\a.png
+						//       or a.png
+						// a.png 반환
+						String fileName = FilenameUtils.getName(item.getOriginalFilename());
+						fileItemInfo.setCf_name(fileName);
+						
+						// 파일 실제저장소 : D:\\temp\\files
+						// 저장용 파일명을 별도로 작성
+						// a.png => a
+						String baseName = FilenameUtils.getBaseName(fileName);
+						// a.png => png
+						String extension = FilenameUtils.getExtension(fileName);
+						// UUID(Universally Unique Identifier) : 128bit 유일값 생성('-'포함)
+						String genID = UUID.randomUUID().toString().replace("-", "");
+						
+						//  |---------------유니크한 랜덤값----------|
+						// a48546546546546546546546546546546546546.png
+						String saveFileName = baseName + genID + '.' + extension;
+						fileItemInfo.setCf_save_name(saveFileName);
+						
+						fileItemInfo.setCf_type(item.getContentType());
+						fileItemInfo.setCf_size(String.valueOf(item.getSize()));
+						
+						fileItemList.add(fileItemInfo);
+						
+						saveFile(saveFileName, item);
+					}
+				}
+			}
+			return fileItemList;
+		}
 
 	private static void saveFile(String saveFileName, MultipartFile item) {
 		File saveFile = new File(GlobalConstant.FILE_PATH, saveFileName);
