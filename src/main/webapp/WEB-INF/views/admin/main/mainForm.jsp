@@ -29,43 +29,6 @@
 	service  -->
 	<section class="bg-light" style="margin-left:250px">
 		<div class="container">
-			
-			<%-- <div class="row">
-				<div class="col-sm-6 col-lg-3 mb-4 mb-lg-0">
-					<div class="shadow-hover h-100 bg-white px-5 pt-0 pb-5 text-center up-on-hover">
-						<a class="h5" href="${pageContext.request.contextPath}/admin/member/memberList.do">
-						<span class="alt-font text-light-gray display-2 font-italic opacity-2">01</span>
-						<span class="d-block mb-4"><img src="../../image/member.png" style="width:174px; height:125px;"></span>
-						MemberList</a>
-					</div>
-				</div>
-				<div class="col-sm-6 col-lg-3 mb-4 mb-lg-0">
-					<div class="shadow-hover h-100 bg-white px-5 pt-0 pb-5 text-center up-on-hover">
-						<a class="h5" href="${pageContext.request.contextPath}/admin/healthImage/healthImageList.do">
-						<span class="alt-font text-light-gray display-2 font-italic opacity-2">02</span>
-						<span class="d-block mb-4"><img src="../../image/health.png" style="width:180px; height:130px;"></span>
-						Health</a>
-					</div>
-				</div>
-				<div class="col-sm-6 col-lg-3 mb-4 mb-lg-0">
-					<div class="shadow-hover h-100 bg-white px-5 pt-0 pb-5 text-center up-on-hover">
-						<a class="h5" href="${pageContext.request.contextPath}/admin/knowledge/knowledgeList.do">
-						<span class="alt-font text-light-gray display-2 font-italic opacity-2">03</span>
-						<span class="d-block mb-4"><img src="../../image/knowledge.png" style="width:174px; height:125px;"></span>
-						Knowledge</a>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-12 col-lg-8 mx-auto text-center mt-5">
-					<a class="btn btn-dark" href="javascript:LogOut();">로그아웃</a>
-				</div>
-			</div>
-		</div> --%>
-		
-		
-		
-		
 		 <div class="row">
               <div class="col-12">
                   <div class="page-title-box">
@@ -74,6 +37,11 @@
                           		<li class="breadcrumb-item"><a href="javascript: void(0);">Jobis</a></li>
                                 <li class="breadcrumb-item active">main</li>
                           </ol>
+                          
+                          <div class="col-sm-12">
+                           		<a class="btn btn-primary" href="javascript:LogOut();">로그아웃</a>
+                           </div>
+                           <br>
                       </div>
                   </div>
               </div>
@@ -93,7 +61,7 @@
                                 <div class="card-body p-3">
 
                                     <h5 class="mt-2 mb-2">
-                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">복용 관리</a>
+                                        <a href="${pageContext.request.contextPath}/admin/medical/medicalMain.do" data-toggle="modal" data-target="#task-detail-modal" class="text-body">복용 관리</a>
                                     </h5>
 
                                     <p class="mb-0">
@@ -178,7 +146,7 @@
                             <div class="card mb-0">
                                 <div class="card-body p-3">
                                     <h5 class="mt-2 mb-2">
-                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">일정 관리</a>
+                                        <a href="${pageContext.request.contextPath}/admin/schedule/schedule.do" data-toggle="modal" data-target="#task-detail-modal" class="text-body">일정 관리</a>
                                     </h5>
 
                                     <p class="mb-0">
@@ -206,7 +174,7 @@
                             <div class="card mb-0">
                                 <div class="card-body p-3">
                                     <h5 class="mt-2 mb-2">
-                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">내 차 관리</a>
+                                        <a href="${pageContext.request.contextPath}/admin/car/carMain.do" data-toggle="modal" data-target="#task-detail-modal" class="text-body">내 차 관리</a>
                                     </h5>
 
                                     <p class="mb-0">
@@ -234,7 +202,7 @@
                             <div class="card mb-0">
                                 <div class="card-body p-3">
                                     <h5 class="mt-2 mb-2">
-                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">금전 관리</a>
+                                        <a href="${pageContext.request.contextPath}/admin/accountBook/accountList.do" data-toggle="modal" data-target="#task-detail-modal" class="text-body">금전 관리</a>
                                     </h5>
 
                                     <p class="mb-0">
@@ -263,7 +231,7 @@
                             <div class="card mb-0">
                                 <div class="card-body p-3">
                                     <h5 class="mt-2 mb-2">
-                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">운동 관리</a>
+                                        <a href="${pageContext.request.contextPath}/admin/diet/dietMain.do" data-toggle="modal" data-target="#task-detail-modal" class="text-body">식단 관리</a>
                                     </h5>
 
                                     <p class="mb-0">
@@ -295,12 +263,38 @@
                         <h5 class="mt-0 task-header text-uppercase">회원 및 게시판 관리</h5>
                         
                         <div id="task-list-two" class="task-list-items">
+                        
+                        	<div class="card mb-0">
+                                <div class="card-body p-3">
+                                    <h5 class="mt-2 mb-2">
+                                        <a href="${pageContext.request.contextPath}/admin/login/loginList.do" data-toggle="modal" data-target="#task-detail-modal" class="text-body">로그인 관리</a>
+                                    </h5>
+
+                                    <p class="mb-0">
+                                        <span class="pr-2 text-nowrap mb-2 d-inline-block">
+                                            <i class="mdi mdi-briefcase-outline text-muted"></i>
+                                            board
+                                        </span>
+                                    </p>
+
+                                    <div class="dropdown float-right">
+                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical font-18"></i>
+                                        </a>
+                                    </div>
+
+                                    <p class="mb-0">
+                                        <img src="${pageContext.request.contextPath }/resources/html/dist/assets/images/users/avatar-6.jpg" alt="user-img" class="avatar-xs rounded-circle mr-1" />
+                                        <span class="align-middle">Lee Seung Min</span>
+                                    </p>
+                                </div> <!-- end card-body -->
+                            </div>
 
                             <!-- Task Item -->
                             <div class="card mb-0">
                                 <div class="card-body p-3">
                                     <h5 class="mt-2 mb-2">
-                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">회원 관리</a>
+                                        <a href="${pageContext.request.contextPath}/admin/member/memberList.do" data-toggle="modal" data-target="#task-detail-modal" class="text-body">회원 관리</a>
                                     </h5>
 
                                     <p class="mb-0">
@@ -328,7 +322,7 @@
                             <div class="card mb-0">
                                 <div class="card-body p-3">
                                     <h5 class="mt-2 mb-2">
-                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">공지사항</a>
+                                        <a href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=2" data-toggle="modal" data-target="#task-detail-modal" class="text-body">공지사항</a>
                                     </h5>
 
                                     <p class="mb-0">
@@ -356,7 +350,7 @@
                             <div class="card mb-0">
                                 <div class="card-body p-3">
                                     <h5 class="mt-2 mb-2">
-                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">건의 사항</a>
+                                        <a href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=3" data-toggle="modal" data-target="#task-detail-modal" class="text-body">건의 사항</a>
                                     </h5>
 
                                     <p class="mb-0">
@@ -384,7 +378,7 @@
                             <div class="card mb-0">
                                 <div class="card-body p-3">
                                     <h5 class="mt-2 mb-2">
-                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">자유게시판</a>
+                                        <a href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=1" data-toggle="modal" data-target="#task-detail-modal" class="text-body">자유게시판</a>
                                     </h5>
 
                                     <p class="mb-0">
@@ -412,7 +406,7 @@
                             <div class="card mb-0">
                                 <div class="card-body p-3">
                                     <h5 class="mt-2 mb-2">
-                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">QnA</a>
+                                        <a href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=4" data-toggle="modal" data-target="#task-detail-modal" class="text-body">QnA</a>
                                     </h5>
 
                                     <p class="mb-0">
@@ -509,7 +503,7 @@
                    </div>
             </div> <!-- end col -->
         </div>
-		
+	</div>
 	</section>
 	<!-- =======================
 	service  -->
@@ -519,13 +513,13 @@
 	<!--Global JS-->
 	
 	
-	<script src="${pageContext.request.contextPath }/resources/html/dist/${pageContext.request.contextPath }/resources/html/dist/assets/js/app.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/html/dist/assets/js/app.min.js"></script>
 
         <!-- dragula js-->
-        <script src="${pageContext.request.contextPath }/resources/html/dist/${pageContext.request.contextPath }/resources/html/dist/assets/js/vendor/dragula.min.js"></script>
+        <script src="${pageContext.request.contextPath }/resources/html/dist/assets/js/vendor/dragula.min.js"></script>
 
         <!-- demo js -->
-        <script src="${pageContext.request.contextPath }/resources/html/dist/${pageContext.request.contextPath }/resources/html/dist/assets/js/ui/component.dragula.js"></script>
+        <script src="${pageContext.request.contextPath }/resources/html/dist/assets/js/ui/component.dragula.js"></script>
 
 </body>
 </html>
