@@ -162,6 +162,8 @@
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=695a00dbf1560fd30746e2be14b3f633&libraries=services"></script>
 <script>
+
+
 var citycode;
 var positions = [];
 var startx;
@@ -432,6 +434,8 @@ navigator.geolocation.getCurrentPosition(function(pos) {
           
       }
 
+
+     
 
 
       /* 지하철역 지도 end*/
@@ -723,7 +727,6 @@ function subwayRouteName(e){
 	   
    }
 
-
-   
+ 
 
 </script>

@@ -41,6 +41,11 @@ public class IScheduleDAOImpl implements IScheduleDAO {
    public List<ScheduleVO> scheduleList(String mem_no) throws Exception {
       return client.selectList("schedule.scheduleList", mem_no);
    }
+   
+   @Override
+   public List<ScheduleVO> scheduleListAlarm(String mem_no) throws Exception {
+	   return client.selectList("schedule.scheduleListAlarm", mem_no);
+   }
 
    @Override
    public void deleteSchedule(Map<String, String> params) throws Exception {
