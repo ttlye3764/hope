@@ -61,13 +61,17 @@ public class CarController {
 		
 		carInfo = (MyCarVO) service.selectchoiceMycar(params);
 		
-//		List<MyCarDetailVO> kmList = service.selectKm(params);
+		List<MyCarDetailVO> kmList = service.selectKm(params);
 //		List<MyCarDetailVO> engineList = service.selectEngine(params);
 //		List<MyCarDetailVO> breakList = service.selectBreak(params);
 //		
 		String result = "success";
 		
+		int kmlistsize = kmList.size();
+		System.out.println(kmlistsize);
+		
 		andView.addObject("carInfo", carInfo);
+		andView.addObject("kmlistsize",kmlistsize);
 //		andView.addObject("kmList", kmList);
 //		andView.addObject("engineList", engineList);
 //		andView.addObject("breakList", breakList);
@@ -85,6 +89,14 @@ public class CarController {
 		carInfo.setMem_no(mem_no);
 		
 		service.insertMycar(carInfo);
+		
+		return "redirect:/user/car/carMain.do";
+	}
+	
+	@RequestMapping("insertMycarkm")
+	public String insertMycarkm(MyCarDetailVO carDetailInfo) throws Exception{
+		
+		service.insertKm(carDetailInfo);
 		
 		return "redirect:/user/car/carMain.do";
 	}

@@ -57,12 +57,10 @@
 	
 	<insert id="insertKm" parameterType="mycarDetailVO">
 		INSERT INTO MYCAR_DETAIL(
-				MD_NO,
 				CAR_NO,
 				MD_KM,
 				MD_DATE)
 			VALUES(
-				#{md_no},
 				#{car_no},
 				#{md_km},
 				#{md_date}
@@ -71,13 +69,11 @@
 	
 	<insert id="insertBreak" parameterType="mycarDetailVO">
 		INSERT INTO MYCAR_DETAIL(
-				MD_NO,
 				CAR_NO,
 				MD_KM,
 				MD_BRAKE,
 				MD_DATE)
 			VALUES(
-				#{md_no},
 				#{car_no},
 				#{md_km},
 				#{md_break},
@@ -87,13 +83,11 @@
 	
 	<insert id="insertEngine" parameterType="mycarDetailVO">
 		INSERT INTO MYCAR_DETAIL(
-				MD_NO,
 				CAR_NO,
 				MD_KM,
 				MD_ENGINE,
 				MD_DATE)
 			VALUES(
-				#{md_no},
 				#{car_no},
 				#{md_km},
 				#{md_engine},
@@ -101,11 +95,10 @@
 			)
 	</insert>
 	
-	<select id="selectKm" parameterType="map" resultType="mycarDetailVO">
+	<select id="selectKM" parameterType="map" resultType="mycarDetailVO">
 		SELECT CAR_NO, MD_DATE, MD_KM
 		FROM MYCAR_DETAIL
-		WHERE MEM_NO = #{mem_no}
-		AND CAR_NO = #{car_no}
+		WHERE CAR_NO = #{car_no}
 	</select>
 	
 	<select id="selectBreak" parameterType="map" resultType="mycarDetailVO">

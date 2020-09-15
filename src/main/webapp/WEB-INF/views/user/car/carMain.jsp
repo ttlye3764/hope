@@ -4,9 +4,16 @@
 
 <script type='text/javascript'
 	src='<%=request.getContextPath()%>/js/validation.js'></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$('#lt_btn').click(function(){
+			var kind = $('#lt_car_kinds_hd').val();
+
+			if(kind == ''){
+				swal("","수정할 자동차를 선택해주세요.", "warning");
+				return false;
+			}
 			$.ajax({
 				type : 'POST',
 				url : '${pageContext.request.contextPath}/user/car/carView.do',
@@ -36,7 +43,10 @@
 		$('table tr:gt(0)').on('click', function() {
 			var no = $(this).find('td:eq(0)').text();
 			$('#hid').val(no);
+			$('#km_car_no').val(no);
+			$('#km_car_no2').val(no);
 			$('#collapse-1').collapse('show');
+			$('#kmtb').empty();
 
 			$.ajax({
 				type : 'POST',
@@ -47,14 +57,20 @@
 				},
 				success : function(result) {
 					$('#lt_car_kinds').val(result.carInfo.car_kinds);
+					$('#lt_car_kinds_hd').val(result.carInfo.car_kinds);
 					$('#lt_car_no').val(result.carInfo.car_no);
 					$('#lt_car_no_hd').val(result.carInfo.car_no);
 					$('#lt_car_date').val(result.carInfo.car_date);
 					$('#lt_car_oil').val(result.carInfo.car_oil);
+
+					$('#kmtb').append('<thead><tr><th>차량번호</th><th>총 키로수</th><th>입력날짜</th></tr></thead>');
+					alert(result.response.body.carInfo);
+		            $('#kmtb').append('<tbody>/<tbody>');
 					console.log(result);
 				},
 				error : function(result) {
 					$('#lt_car_kinds').val(result.carInfo.car_kinds);
+					$('#lt_car_kinds_hd').val(result.carInfo.car_kinds);
 					$('#lt_car_no').val(result.carInfo.car_no);
 					$('#lt_car_no_hd').val(result.carInfo.car_no);
 					$('#lt_car_date').val(result.carInfo.car_date);
@@ -72,6 +88,15 @@
 	});
 	function insertCar() {
 		$("#insertCar").modal("show"); //모달창 띄우기
+	}
+	function insertKm(){
+		var kind = $('#lt_car_kinds_hd').val();
+
+		if(kind == ''){
+			swal("","등록할 자동차를 선택해주세요.", "warning");
+			return false;
+		}
+		$("#insertKm").modal("show");
 	}
 </script>
 <div class="innerpage-banner center bg-overlay-dark-7 py-7"
@@ -95,6 +120,46 @@
 <br>
 <br>
 <br>
+
+<!-- 키로수 Modal -->
+<div class="modal fade text-left" id="insertKm" tabindex="-1"
+	role="dialog" aria-labelledby="exampleModal" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<form name="carForm" method="post"
+				action="${pageContext.request.contextPath}/user/car/insertMycarkm.do">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">내 차 등록</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" id="hid">
+					<div class="input-group mb-3" style="width: 400px" align="center">
+						<input type="hidden" name="car_no" id="km_car_no">
+						차량번호&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="form-control"
+							id="km_car_no2" disabled="disabled"/>
+					</div>
+					<div class="input-group mb-3" style="width: 400px" align="center">
+						등록날짜&nbsp;&nbsp;&nbsp;&nbsp;<input
+							type="date" class="form-control" id="md_date" name="md_date" />
+					</div>
+					<div class="input-group mb-3" style="width: 400px" align="center">
+						총 키로수&nbsp;&nbsp;&nbsp;<input type="text" class="form-control"
+							id="md_km" name="md_km" />
+					</div>
+				</div>
+				<div class="modal-footer">
+					<input type="submit" value="등록">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">닫기</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
 
 <!-- 내 차 등록 Modal -->
 <div class="modal fade text-left" id="insertCar" tabindex="-1"
@@ -190,6 +255,7 @@
 								<div class="collapse" id="collapse-1"	data-parent="#accordion1">
 									<div class="accordion-content">
 									<div class="input-group mb-3" style="width: 400px" align="center">
+									<input type="hidden" id="lt_car_kinds_hd">
 										차&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;종&nbsp;&nbsp;&nbsp;&nbsp;
 									<input type="text" class="form-control" id="lt_car_kinds" disabled="disabled"/>
 								</div>
@@ -223,25 +289,11 @@
 						</div>
 						<div class="collapse" id="collapse-2"	data-parent="#accordion1">
 							<div class="accordion-content">
-								<table class="table table-hover">
-									<thead>
-										<tr>
-											<th scope="col">차량번호</th>
-											<th scope="col">차 종</th>
-											<th scope="col">출고년도</th>
-											<th scope="col">유종구분</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach items="${carList }" var="car">
-											<tr>
-												<td>${car.car_no }</td>
-												<td>${car.car_kinds }</td>
-												<td>${car.car_date }</td>
-												<td>${car.car_oil }</td>
-											</tr>
-										</c:forEach>
-									</tbody>
+								<div align="right">
+									<button type="button" onClick="insertKm()" class="btn">주행거리 등록</button>
+								</div>
+								<table id="kmtb" class="table table-hover">
+									
 								</table>
 							</div>
 						</div>
