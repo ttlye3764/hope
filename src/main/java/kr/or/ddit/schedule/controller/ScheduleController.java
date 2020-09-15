@@ -191,7 +191,6 @@ public class ScheduleController {
 						  if(Calendar.getInstance().getTime().getMinutes()==calendar.getTime().getMinutes()) {
 							  alarmList.add(scheduleList.get(i));
 							  
-							  
 						  }
 					  }
 				  }
