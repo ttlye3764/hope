@@ -170,10 +170,8 @@ function LogOut(){
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/dayKcal?titleName=당신에게 맞는 하루 열량과 그에 따른 운동을 확인해보세요!">일일 열량</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/menuList?titleName=오늘 당신이 먹은 혹은 먹을 음식의 칼로리를 확인해보세요!">칼로리 사전</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/bmi?titleName=당신의 BMI는!!?">BMI 계산기</a> </li>
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/diet_my?titleName=추천 식단을 확인해보세요">추천 식단 리스트</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/recommendDiet?titleName=추천 식단을 확인해보세요">추천 식단 리스트</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/diet_my?titleName=나의 식단관리에 대한 모든 것을 확인해보세요!">나의 식단관리</a> </li>
-								<li class="dropdown-divider"></li>
-								<li> <a class="dropdown-item" href="http://support.webestica.com/" target="_blank">Support</a> </li>
 							</ul>
 						</li>
 						<!-- Menu item 8 board-->

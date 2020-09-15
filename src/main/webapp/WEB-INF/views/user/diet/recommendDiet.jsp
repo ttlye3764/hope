@@ -1,0 +1,128 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+    
+
+
+    <div class="innerpage-banner center bg-overlay-dark-7 py-7" style="background:url(${pageContext.request.contextPath}/image/food1.jpg) no-repeat; background-size:cover; background-position: center center;">
+		<div class="container">
+			<div class="row all-text-white">
+				<div class="col-md-12 align-self-center">
+					<h1 class="innerpage-title">${param.titleName }</h1>
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item active"><a href="${pageContext.request.contextPath}/user/diet/dietMain"><i class="ti-home"></i> Home</a></li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+<section class="blog-page pb-0">
+		<div class="container">
+			<div class="row">
+				<!-- sidebar start -->
+				<aside class="col-md-3 sidebar order-last order-md-first">
+					<!-- Text Widget -->
+					<div class="widget">
+						<h5 class="widget-title" id="dietSide_h5_my">내꺼 내꺼 내</h5>
+						<p class="mb-0"> procuring the why performed continual improving. Civil songs so large shade in cause.</p>
+					</div>
+					<div class="widget">
+						<h5 class="widget-title" id="dietSide_h5_dayKcal">일일 열량</h5>
+						<p class="mb-0">R shade in cause.</p>
+					</div>
+					<div class="widget">
+						<h5 class="widget-title" id="dietSide_h5_menuList">메뉴 리스트</h5>
+						<p class="mb-0">R shade in cause.</p>
+					</div>
+					<div class="widget">
+						<h5 class="widget-title" id="dietSide_h5_recommendDiet">추천 식단 리스트</h5>
+						<p class="mb-0"> procuring the why performed continual improving. Civil songs so large shade in cause.</p>
+					</div>
+					<div class="widget">
+						<h5 class="widget-title" id="dietSide_h5_bmi">BMI 계산기</h5>
+						<p class="mb-0">. She procuring the why performed continual improving. Civil songs so large shade in cause.</p>
+					</div>
+				</aside>
+				<!-- sidebar end -->
+
+				<!-- blog start -->
+				<div class="col-md-9 order-first order-lg-first">
+					<!-- Post item  with image-->
+					
+				<div class="col-md-6 mb-5">
+					<h5 class="mb-3">Accordion Default</h5>
+					<div class="accordion toggle-icon-round" id="accordion5" style="width:700px;">
+						<!-- item -->
+						<c:forEach items="${dietList}" var="dietInfo" varStatus="status">
+						<div class="accordion-item">
+							<div class="accordion-title">
+								${result.diet_kcal }
+								<a class="h6 mb-0 collapsed" data-toggle="collapse" href="#collapse-${status.count }" aria-expanded="false" onclick="recommendDietInfo(this);">${dietInfo.diet_name }          칼로리 : ${dietInfo.diet_kcal }<input type="hidden" value="${dietInfo.diet_no }"></a>
+							</div>
+							<div class="collapse" id="collapse-${status.count }" data-parent="#accordion5" style="">
+								<div class="accordion-content">
+								
+								</div>
+							</div>
+						</div>
+						</c:forEach>
+						<!-- item -->
+					</div>
+				</div>
+							 
+							 
+							
+					
+				</div>
+				<!-- blog End -->
+			</div>
+		</div>
+	</section>
+	
+	
+	
+	
+<script type="text/javascript">
+
+
+function recommendDietInfo(e){
+	
+	var dietNo = $(e).find('input').val();
+	
+	$.ajax({
+		url : '${pageContext.request.contextPath}/user/diet/recommendDietInfo',
+		data : {
+			diet_no : dietNo 
+		},
+		success : function(result){
+			$(e).closest('div').next().find('div').empty();
+			var dietInfo ='<div class="callout-block callout-warning">';
+			dietInfo += '<div class="content ml-0">';
+			dietInfo += '<h4 class="callout-title"> 아침</h4>';
+
+			$.each(result.dietInfoList1, function(index, item){
+				dietInfo += '<p class="text-dark mt-3">'+item.menu_name+ '     '+item.menu_kcal+'kcal</p>';
+			})
+			dietInfo += '<h4 class="callout-title"> 점심</h4>';
+			$.each(result.dietInfoList2, function(index, item){
+				dietInfo += '<p class="text-dark mt-3">'+item.menu_name+ '     '+item.menu_kcal+'kcal</p>';
+			})
+			dietInfo += '<h4 class="callout-title"> 저녁</h4>';
+			$.each(result.dietInfoList3, function(index, item){
+				dietInfo += '<p class="text-dark mt-3">'+item.menu_name+'     '+ item.menu_kcal+'kcal</p>';
+			})
+			dietInfo += '</div>';
+			dietInfo += '</div>';
+			
+			$(e).closest('div').next().find('div').append(dietInfo);		
+		},
+		erorr: function(result){
+			alert('상세조회 실패')
+		}
+	})
+	
+}
+</script>

@@ -4,7 +4,16 @@ public class DietVO {
 	private String diet_no;
 	private String diet_kcal;
 	private String mem_no;
+	private String diet_name;
 	
+	
+	
+	public String getDiet_name() {
+		return diet_name;
+	}
+	public void setDiet_name(String diet_name) {
+		this.diet_name = diet_name;
+	}
 	public String getDiet_no() {
 		return diet_no;
 	}

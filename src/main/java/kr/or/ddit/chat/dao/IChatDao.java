@@ -3,6 +3,7 @@ package kr.or.ddit.chat.dao;
 import java.util.List;
 import java.util.Map;
 
+import kr.or.ddit.vo.ChatFileVO;
 import kr.or.ddit.vo.ChatingRoomVO;
 import kr.or.ddit.vo.FriendVO;
 import kr.or.ddit.vo.MemberVO;
@@ -34,5 +35,11 @@ public interface IChatDao {
 		public List<MessageVO> messageList(Map<String, String> params) throws Exception;
 		//마지막 메세지 조회
 		public MessageVO messageLast(Map<String, String> params) throws Exception;
+		// 유저별, 채팅방별 배경화면 삽입
+		public int insertChatFile(ChatFileVO chatFileInfo) throws Exception;
+		// 유저별 채팅방별 배경화면 수정
+		public int updateChatFile(ChatFileVO chatFileInfo) throws Exception;
+		// 유저별, 채팅방별 등록한 사진이 있는지 확인p
+		public ChatFileVO selectChatFileInfo(Map<String, String> params) throws Exception;
 		
 }
