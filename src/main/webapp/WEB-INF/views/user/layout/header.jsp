@@ -67,7 +67,6 @@ var timer = setInterval(function(){
 		           url     : '${pageContext.request.contextPath}/user/schedule/alarm.do',
 		           type    : 'post',
 		           dataType: 'json',
-		           data : {'mem_no':${LOGIN_MEMBERINFO.mem_no}},
 		           success : function(result) {  
 			           for(var i=0; i<result.json.length; i++){
 		             		notify(result.json[i].s_memo);
