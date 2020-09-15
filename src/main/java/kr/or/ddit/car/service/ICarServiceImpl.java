@@ -39,4 +39,9 @@ public class ICarServiceImpl implements ICarService{
 		dao.updateCarno(params);
 	}
 
+	@Override
+	public void deleteMycar(Map<String, String> params) throws Exception {
+		dao.deleteMycar(params);
+	}
+
 }

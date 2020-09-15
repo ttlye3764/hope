@@ -11,4 +11,5 @@ public interface ICarDao {
 	public void updateCarno(Map<String,String> params) throws Exception;
 	public List<MyCarVO> selectMycar(String mem_no) throws Exception;
 	public MyCarVO selectchoiceMycar(Map<String,String> params) throws Exception;
+	public void deleteMycar(Map<String,String>params) throws Exception;
 }

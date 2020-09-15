@@ -48,4 +48,10 @@
 		WHERE MEM_NO = #{mem_no}
 		AND CAR_NO = #{car_no}
 	</select>
+	
+	<delete id="deleteMycar" parameterType="map">
+		DELETE FROM MYCAR
+		WHERE MEM_NO = #{mem_no}
+		AND CAR_NO = #{car_no}
+	</delete>
 </mapper>    

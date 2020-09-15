@@ -39,5 +39,10 @@ public class ICarDaoImpl implements ICarDao{
 	public void updateCarno(Map<String, String> params) throws Exception {
 		client.update("car.updateCarno", params);
 	}
+
+	@Override
+	public void deleteMycar(Map<String, String> params) throws Exception {
+		client.delete("car.deleteMycar",params);
+	}
 	
 }

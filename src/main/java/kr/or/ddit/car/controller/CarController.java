@@ -20,25 +20,25 @@ public class CarController {
 	@Autowired
 	private ICarService service;
 	
+	@RequestMapping("parking")
+	public void parking() {}
+	
 	@RequestMapping("carMain")
 	public ModelAndView carMain(HttpSession session, ModelAndView andView) throws Exception {
 		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
 		String mem_no = memberInfo.getMem_no();
 		
-		List<MyCarVO> carInfo = service.selectMycar(mem_no);
+		List<MyCarVO> carList = service.selectMycar(mem_no);
 		
 		service.selectMycar(mem_no);
 		
-		andView.addObject("carInfo", carInfo);
+		andView.addObject("carList", carList);
 		
 		return andView;
 	}
 	
-	@RequestMapping("carForm")
-	public void carForm() throws Exception {}
-	
 	@RequestMapping("carView")
-	public ModelAndView carForm(HttpSession session, ModelAndView andView, Map<String,String>params, String car_no) throws Exception {
+	public ModelAndView carView(HttpSession session, ModelAndView andView, Map<String,String>params, String car_no) throws Exception {
 		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
 		String mem_no = memberInfo.getMem_no();
 		
@@ -58,7 +58,11 @@ public class CarController {
 			service.updateCarno(params);
 		}
 		
+		String result = "success";
+		
 		andView.addObject("carInfo", carInfo);
+		andView.addObject("json",result);
+		andView.setViewName("jsonConvertView");
 		
 		return andView;
 	}
@@ -83,6 +87,19 @@ public class CarController {
 		carInfo.setMem_no(mem_no);
 		
 		service.updateMycar(carInfo);
+		
+		return "redirect:/user/car/carMain.do";
+	}
+	
+	@RequestMapping("deleteMycar")
+	public String deleteMycar(String car_no, HttpSession session, Map<String,String>params) throws Exception{
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		String mem_no = memberInfo.getMem_no();
+		
+		params.put("mem_no", mem_no);
+		params.put("car_no", car_no);
+		
+		service.deleteMycar(params);
 		
 		return "redirect:/user/car/carMain.do";
 	}
