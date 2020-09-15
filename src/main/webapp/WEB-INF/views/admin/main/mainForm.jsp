@@ -71,503 +71,444 @@
                   <div class="page-title-box">
                       <div class="page-title-right">
                           <ol class="breadcrumb m-0">
-                              <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
-                              <li class="breadcrumb-item"><a href="javascript: void(0);">Apps</a></li>
-                              <li class="breadcrumb-item active">Tasks</li>
+                          		<li class="breadcrumb-item"><a href="javascript: void(0);">Jobis</a></li>
+                                <li class="breadcrumb-item active">main</li>
                           </ol>
                       </div>
-                      <h4 class="page-title">Tasks 
-                          <a href="#" data-toggle="modal" data-target="#add-new-task-modal" class="btn btn-success btn-sm ml-3">Add New</a></h4>
                   </div>
               </div>
-          </div>     
+          </div>   
+          
+            
 		<div class="row">
-                            <div class="col-12">
-                                <div class="board">
-                                    <div class="tasks" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three", "task-list-four"]'>
-                                        <h5 class="mt-0 task-header">TODO (3)</h5>
-                                        
-                                        <div id="task-list-one" class="task-list-items">
+            <div class="col-12">
+                <div class="board">
+                    <div class="tasks" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three", "task-list-four"]'>
+                        <h5 class="mt-0 task-header">개인 관리</h5>
+                        
+                        <div id="task-list-one" class="task-list-items">
 
-                                            <!-- Task Item -->
-                                            <div class="card mb-0">
-                                                <div class="card-body p-3">
-                                                    <small class="float-right text-muted">18 Jul 2018</small>
-                                                    <span class="badge badge-danger">High</span>
+                            <!-- Task Item -->
+                            <div class="card mb-0">
+                                <div class="card-body p-3">
 
-                                                    <h5 class="mt-2 mb-2">
-                                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">iOS App home page</a>
-                                                    </h5>
+                                    <h5 class="mt-2 mb-2">
+                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">복용 관리</a>
+                                    </h5>
 
-                                                    <p class="mb-0">
-                                                        <span class="pr-2 text-nowrap mb-2 d-inline-block">
-                                                            <i class="mdi mdi-briefcase-outline text-muted"></i>
-                                                            iOS
-                                                        </span>
-                                                        <span class="text-nowrap mb-2 d-inline-block">
-                                                            <i class="mdi mdi-comment-multiple-outline text-muted"></i>
-                                                            <b>74</b> Comments
-                                                        </span>
-                                                    </p>
+                                    <p class="mb-0">
+                                        <span class="pr-2 text-nowrap mb-2 d-inline-block">
+                                            <i class="mdi mdi-briefcase-outline text-muted"></i>
+                                            Medical
+                                        </span>
+                                    </p>
 
-                                                    <div class="dropdown float-right">
-                                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false">
-                                                            <i class="mdi mdi-dots-vertical font-18"></i>
-                                                        </a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-pencil mr-1"></i>Edit</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-delete mr-1"></i>Delete</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-plus-circle-outline mr-1"></i>Add People</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-exit-to-app mr-1"></i>Leave</a>
-                                                        </div>
-                                                    </div>
-
-                                                    <p class="mb-0">
-                                                        <img src="assets/images/users/avatar-2.jpg" alt="user-img" class="avatar-xs rounded-circle mr-1" />
-                                                        <span class="align-middle">Robert Carlile</span>
-                                                    </p>
-                                                </div> <!-- end card-body -->
-                                            </div>
-                                            <!-- Task Item End -->
-
-                                            <!-- Task Item -->
-                                            <div class="card mb-0">
-                                                <div class="card-body p-3">
-                                                    <small class="float-right text-muted">18 Jul 2018</small>
-                                                    <span class="badge badge-secondary">Medium</span>
-
-                                                    <h5 class="mt-2 mb-2">
-                                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">Topnav layout design</a>
-                                                    </h5>
-
-                                                    <p class="mb-0">
-                                                        <span class="pr-2 text-nowrap mb-2 d-inline-block">
-                                                            <i class="mdi mdi-briefcase-outline text-muted"></i>
-                                                            Hyper
-                                                        </span>
-                                                        <span class="text-nowrap mb-2 d-inline-block">
-                                                            <i class="mdi mdi-comment-multiple-outline text-muted"></i>
-                                                            <b>28</b> Comments
-                                                        </span>
-                                                    </p>
-
-                                                    <div class="dropdown float-right">
-                                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false">
-                                                            <i class="mdi mdi-dots-vertical font-18"></i>
-                                                        </a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-pencil mr-1"></i>Edit</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-delete mr-1"></i>Delete</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-plus-circle-outline mr-1"></i>Add People</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-exit-to-app mr-1"></i>Leave</a>
-                                                        </div>
-                                                    </div>
-
-                                                    <p class="mb-0">
-                                                        <img src="assets/images/users/avatar-1.jpg" alt="user-img" class="avatar-xs rounded-circle mr-1" />
-                                                        <span class="align-middle">Coder Themes</span>
-                                                    </p>
-                                                </div> <!-- end card-body -->
-                                            </div>
-                                            <!-- Task Item End -->
-
-                                            <!-- Task Item -->
-                                            <div class="card mb-0">
-                                                <div class="card-body p-3">
-                                                    <small class="float-right text-muted">11 Jul 2018</small>
-                                                    <span class="badge badge-success">Low</span>
-
-                                                    <h5 class="mt-2 mb-2">
-                                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">Invite user to a project</a>
-                                                    </h5>
-
-                                                    <p class="mb-0">
-                                                        <span class="pr-2 text-nowrap mb-2 d-inline-block">
-                                                            <i class="mdi mdi-briefcase-outline text-muted"></i>
-                                                            CRM
-                                                        </span>
-                                                        <span class="text-nowrap mb-2 d-inline-block">
-                                                            <i class="mdi mdi-comment-multiple-outline text-muted"></i>
-                                                            <b>68</b> Comments
-                                                        </span>
-                                                    </p>
-
-                                                    <div class="dropdown float-right">
-                                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false">
-                                                            <i class="mdi mdi-dots-vertical font-18"></i>
-                                                        </a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-pencil mr-1"></i>Edit</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-delete mr-1"></i>Delete</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-plus-circle-outline mr-1"></i>Add People</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-exit-to-app mr-1"></i>Leave</a>
-                                                        </div>
-                                                    </div>
-
-                                                    <p class="mb-0">
-                                                        <img src="assets/images/users/avatar-3.jpg" alt="user-img" class="avatar-xs rounded-circle mr-1" />
-                                                        <span class="align-middle">Lucas Hardy</span>
-                                                    </p>
-                                                </div> <!-- end card-body -->
-                                            </div>
-                                            <!-- Task Item End -->
-                                            
-                                        </div> <!-- end company-list-1-->
+                                    <div class="dropdown float-right">
+                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical font-18"></i>
+                                        </a>
                                     </div>
 
-                                    <div class="tasks">
-                                        <h5 class="mt-0 task-header text-uppercase">In Progress (2)</h5>
-                                        
-                                        <div id="task-list-two" class="task-list-items">
+                                    <p class="mb-0">
+                                        <img src="${pageContext.request.contextPath }/resources/html/dist/assets/images/users/avatar-2.jpg" alt="user-img" class="avatar-xs rounded-circle mr-1" />
+                                        <span class="align-middle">Lee Young Chun</span>
+                                    </p>
+                                </div> <!-- end card-body -->
+                            </div>
+                            <!-- Task Item End -->
 
-                                            <!-- Task Item -->
-                                            <div class="card mb-0">
-                                                <div class="card-body p-3">
-                                                    <small class="float-right text-muted">22 Jun 2018</small>
-                                                    <span class="badge badge-secondary">Medium</span>
+                            <!-- Task Item -->
+                            <div class="card mb-0">
+                                <div class="card-body p-3">
 
-                                                    <h5 class="mt-2 mb-2">
-                                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">Write a release note</a>
-                                                    </h5>
+                                    <h5 class="mt-2 mb-2">
+                                        <a href="${pageContext.request.contextPath}/admin/healthImage/healthImageList.do" data-toggle="modal" data-target="#task-detail-modal" class="text-body">건강 관리</a>
+                                    </h5>
 
-                                                    <p class="mb-0">
-                                                        <span class="pr-2 text-nowrap mb-2 d-inline-block">
-                                                            <i class="mdi mdi-briefcase-outline text-muted"></i>
-                                                            Hyper
-                                                        </span>
-                                                        <span class="text-nowrap mb-2 d-inline-block">
-                                                            <i class="mdi mdi-comment-multiple-outline text-muted"></i>
-                                                            <b>17</b> Comments
-                                                        </span>
-                                                    </p>
-
-                                                    <div class="dropdown float-right">
-                                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false">
-                                                            <i class="mdi mdi-dots-vertical font-18"></i>
-                                                        </a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-pencil mr-1"></i>Edit</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-delete mr-1"></i>Delete</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-plus-circle-outline mr-1"></i>Add People</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-exit-to-app mr-1"></i>Leave</a>
-                                                        </div>
-                                                    </div>
-
-                                                    <p class="mb-0">
-                                                        <img src="assets/images/users/avatar-5.jpg" alt="user-img" class="avatar-xs rounded-circle mr-1" />
-                                                        <span class="align-middle">Sean White</span>
-                                                    </p>
-                                                </div> <!-- end card-body -->
-                                            </div>
-                                            <!-- Task Item End -->
-
-                                            <!-- Task Item -->
-                                            <div class="card mb-0">
-                                                <div class="card-body p-3">
-                                                    <small class="float-right text-muted">19 Jun 2018</small>
-                                                    <span class="badge badge-success">Low</span>
-
-                                                    <h5 class="mt-2 mb-2">
-                                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">Enable analytics tracking</a>
-                                                    </h5>
-
-                                                    <p class="mb-0">
-                                                        <span class="pr-2 text-nowrap mb-2 d-inline-block">
-                                                            <i class="mdi mdi-briefcase-outline text-muted"></i>
-                                                            CRM
-                                                        </span>
-                                                        <span class="text-nowrap mb-2 d-inline-block">
-                                                            <i class="mdi mdi-comment-multiple-outline text-muted"></i>
-                                                            <b>48</b> Comments
-                                                        </span>
-                                                    </p>
-
-                                                    <div class="dropdown float-right">
-                                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false">
-                                                            <i class="mdi mdi-dots-vertical font-18"></i>
-                                                        </a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-pencil mr-1"></i>Edit</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-delete mr-1"></i>Delete</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-plus-circle-outline mr-1"></i>Add People</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-exit-to-app mr-1"></i>Leave</a>
-                                                        </div>
-                                                    </div>
-
-                                                    <p class="mb-0">
-                                                        <img src="assets/images/users/avatar-6.jpg" alt="user-img" class="avatar-xs rounded-circle mr-1" />
-                                                        <span class="align-middle">Louis Allen</span>
-                                                    </p>
-                                                </div> <!-- end card-body -->
-                                            </div>
-                                            <!-- Task Item End -->
-
-                                        </div> <!-- end company-list-2-->
+                                    <p class="mb-0">
+                                        <span class="pr-2 text-nowrap mb-2 d-inline-block">
+                                            <i class="mdi mdi-briefcase-outline text-muted"></i>
+                                            Heatlh
+                                        </span>
+                                    </p>
+                                    
+                                    <div class="dropdown float-right">
+                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical font-18"></i>
+                                        </a>
                                     </div>
 
+                                    <p class="mb-0">
+                                        <img src="${pageContext.request.contextPath }/resources/html/dist/assets/images/users/avatar-1.jpg" alt="user-img" class="avatar-xs rounded-circle mr-1" />
+                                        <span class="align-middle">Lee su a</span>
+                                    </p>
+                                </div> <!-- end card-body -->
+                            </div>
+                            <!-- Task Item End -->
 
-                                    <div class="tasks">
-                                        <h5 class="mt-0 task-header text-uppercase">Review (4)</h5>
-                                        <div id="task-list-three" class="task-list-items">
+                            <!-- Task Item -->
+                            <div class="card mb-0">
+                                <div class="card-body p-3">
+                                    <h5 class="mt-2 mb-2">
+                                        <a href="${pageContext.request.contextPath}/admin/knowledge/knowledgeList.do" data-toggle="modal" data-target="#task-detail-modal" class="text-body">지식 관리</a>
+                                    </h5>
 
-                                            <!-- Task Item -->
-                                            <div class="card mb-0">
-                                                <div class="card-body p-3">
-                                                    <small class="float-right text-muted">2 May 2018</small>
-                                                    <span class="badge badge-danger">High</span>
+                                    <p class="mb-0">
+                                        <span class="pr-2 text-nowrap mb-2 d-inline-block">
+                                            <i class="mdi mdi-briefcase-outline text-muted"></i>
+                                            Knowledge
+                                        </span>
+                                    </p>
 
-                                                    <h5 class="mt-2 mb-2">
-                                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">Kanban board design</a>
-                                                    </h5>
-
-                                                    <p class="mb-0">
-                                                        <span class="pr-2 text-nowrap mb-2 d-inline-block">
-                                                            <i class="mdi mdi-briefcase-outline text-muted"></i>
-                                                            CRM
-                                                        </span>
-                                                        <span class="text-nowrap mb-2 d-inline-block">
-                                                            <i class="mdi mdi-comment-multiple-outline text-muted"></i>
-                                                            <b>65</b> Comments
-                                                        </span>
-                                                    </p>
-
-                                                    <div class="dropdown float-right">
-                                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false">
-                                                            <i class="mdi mdi-dots-vertical font-18"></i>
-                                                        </a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-pencil mr-1"></i>Edit</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-delete mr-1"></i>Delete</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-plus-circle-outline mr-1"></i>Add People</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-exit-to-app mr-1"></i>Leave</a>
-                                                        </div>
-                                                    </div>
-
-                                                    <p class="mb-0">
-                                                        <img src="assets/images/users/avatar-1.jpg" alt="user-img" class="avatar-xs rounded-circle mr-1" />
-                                                        <span class="align-middle">Coder Themes</span>
-                                                    </p>
-                                                </div> <!-- end card-body -->
-                                            </div>
-                                            <!-- Task Item End -->
-
-                                            <!-- Task Item -->
-                                            <div class="card mb-0">
-                                                <div class="card-body p-3">
-                                                    <small class="float-right text-muted">7 May 2018</small>
-                                                    <span class="badge badge-secondary">Medium</span>
-
-                                                    <h5 class="mt-2 mb-2">
-                                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">Code HTML email template</a>
-                                                    </h5>
-
-                                                    <p class="mb-0">
-                                                        <span class="pr-2 text-nowrap mb-2 d-inline-block">
-                                                            <i class="mdi mdi-briefcase-outline text-muted"></i>
-                                                            CRM
-                                                        </span>
-                                                        <span class="text-nowrap mb-2 d-inline-block">
-                                                            <i class="mdi mdi-comment-multiple-outline text-muted"></i>
-                                                            <b>106</b> Comments
-                                                        </span>
-                                                    </p>
-
-                                                    <div class="dropdown float-right">
-                                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false">
-                                                            <i class="mdi mdi-dots-vertical font-18"></i>
-                                                        </a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-pencil mr-1"></i>Edit</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-delete mr-1"></i>Delete</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-plus-circle-outline mr-1"></i>Add People</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-exit-to-app mr-1"></i>Leave</a>
-                                                        </div>
-                                                    </div>
-
-                                                    <p class="mb-0">
-                                                        <img src="assets/images/users/avatar-9.jpg" alt="user-img" class="avatar-xs rounded-circle mr-1" />
-                                                        <span class="align-middle">Zak Turnbull</span>
-                                                    </p>
-                                                </div> <!-- end card-body -->
-                                            </div>
-                                            <!-- Task Item End -->
-
-                                            <!-- Task Item -->
-                                            <div class="card mb-0">
-                                                <div class="card-body p-3">
-                                                    <small class="float-right text-muted">8 Jul 2018</small>
-                                                    <span class="badge badge-secondary">Medium</span>
-
-                                                    <h5 class="mt-2 mb-2">
-                                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">Brand logo design</a>
-                                                    </h5>
-
-                                                    <p class="mb-0">
-                                                        <span class="pr-2 text-nowrap mb-2 d-inline-block">
-                                                            <i class="mdi mdi-briefcase-outline text-muted"></i>
-                                                            Design
-                                                        </span>
-                                                        <span class="text-nowrap mb-2 d-inline-block">
-                                                            <i class="mdi mdi-comment-multiple-outline text-muted"></i>
-                                                            <b>95</b> Comments
-                                                        </span>
-                                                    </p>
-
-                                                    <div class="dropdown float-right">
-                                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false">
-                                                            <i class="mdi mdi-dots-vertical font-18"></i>
-                                                        </a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-pencil mr-1"></i>Edit</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-delete mr-1"></i>Delete</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-plus-circle-outline mr-1"></i>Add People</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-exit-to-app mr-1"></i>Leave</a>
-                                                        </div>
-                                                    </div>
-
-                                                    <p class="mb-0">
-                                                        <img src="assets/images/users/avatar-8.jpg" alt="user-img" class="avatar-xs rounded-circle mr-1" />
-                                                        <span class="align-middle">Lily Parkin</span>
-                                                    </p>
-                                                </div> <!-- end card-body -->
-                                            </div>
-                                            <!-- Task Item End -->
-
-                                            <!-- Task Item -->
-                                            <div class="card mb-0">
-                                                <div class="card-body p-3">
-                                                    <small class="float-right text-muted">22 Jul 2018</small>
-                                                    <span class="badge badge-danger">High</span>
-
-                                                    <h5 class="mt-2 mb-2">
-                                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">Improve animation loader</a>
-                                                    </h5>
-
-                                                    <p class="mb-0">
-                                                        <span class="pr-2 text-nowrap mb-2 d-inline-block">
-                                                            <i class="mdi mdi-briefcase-outline text-muted"></i>
-                                                            CRM
-                                                        </span>
-                                                        <span class="text-nowrap mb-2 d-inline-block">
-                                                            <i class="mdi mdi-comment-multiple-outline text-muted"></i>
-                                                            <b>39</b> Comments
-                                                        </span>
-                                                    </p>
-
-                                                    <div class="dropdown float-right">
-                                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false">
-                                                            <i class="mdi mdi-dots-vertical font-18"></i>
-                                                        </a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-pencil mr-1"></i>Edit</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-delete mr-1"></i>Delete</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-plus-circle-outline mr-1"></i>Add People</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-exit-to-app mr-1"></i>Leave</a>
-                                                        </div>
-                                                    </div>
-
-                                                    <p class="mb-0">
-                                                        <img src="assets/images/users/avatar-4.jpg" alt="user-img" class="avatar-xs rounded-circle mr-1" />
-                                                        <span class="align-middle">Riley Steele</span>
-                                                    </p>
-                                                </div> <!-- end card-body -->
-                                            </div>
-                                            <!-- Task Item End -->
-
-                                        </div> <!-- end company-list-3-->
+                                    <div class="dropdown float-right">
+                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical font-18"></i>
+                                        </a>
                                     </div>
 
-                                    <div class="tasks">
-                                        <h5 class="mt-0 task-header text-uppercase">Done (1)</h5>
-                                        <div id="task-list-four" class="task-list-items">
+                                    <p class="mb-0">
+                                        <img src="${pageContext.request.contextPath }/resources/html/dist/assets/images/users/avatar-1.jpg" alt="user-img" class="avatar-xs rounded-circle mr-1" />
+                                        <span class="align-middle">Lee su a</span>
+                                    </p>
+                                </div> <!-- end card-body -->
+                            </div>
+                            <!-- Task Item End -->
+                            
+                            <!-- Task Item -->
+                            <div class="card mb-0">
+                                <div class="card-body p-3">
+                                    <h5 class="mt-2 mb-2">
+                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">일정 관리</a>
+                                    </h5>
 
-                                            <!-- Task Item -->
-                                            <div class="card mb-0">
-                                                <div class="card-body p-3">
-                                                    <small class="float-right text-muted">16 Jul 2018</small>
-                                                    <span class="badge badge-success">Low</span>
+                                    <p class="mb-0">
+                                        <span class="pr-2 text-nowrap mb-2 d-inline-block">
+                                            <i class="mdi mdi-briefcase-outline text-muted"></i>
+                                            Schedule
+                                        </span>
+                                    </p>
 
-                                                    <h5 class="mt-2 mb-2">
-                                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">Dashboard design</a>
-                                                    </h5>
-
-                                                    <p class="mb-0">
-                                                        <span class="pr-2 text-nowrap mb-2 d-inline-block">
-                                                            <i class="mdi mdi-briefcase-outline text-muted"></i>
-                                                            Hyper
-                                                        </span>
-                                                        <span class="text-nowrap mb-2 d-inline-block">
-                                                            <i class="mdi mdi-comment-multiple-outline text-muted"></i>
-                                                            <b>287</b> Comments
-                                                        </span>
-                                                    </p>
-
-                                                    <div class="dropdown float-right">
-                                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false">
-                                                            <i class="mdi mdi-dots-vertical font-18"></i>
-                                                        </a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-pencil mr-1"></i>Edit</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-delete mr-1"></i>Delete</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-plus-circle-outline mr-1"></i>Add People</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-exit-to-app mr-1"></i>Leave</a>
-                                                        </div>
-                                                    </div>
-
-                                                    <p class="mb-0">
-                                                        <img src="assets/images/users/avatar-10.jpg" alt="user-img" class="avatar-xs rounded-circle mr-1" />
-                                                        <span class="align-middle">Harvey Dickinson</span>
-                                                    </p>
-                                                </div> <!-- end card-body -->
-                                            </div>
-                                            <!-- Task Item End -->
-                                            
-                                        </div> <!-- end company-list-4-->
+                                    <div class="dropdown float-right">
+                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical font-18"></i>
+                                        </a>
                                     </div>
 
-                                </div> <!-- end .board-->
-                            </div> <!-- end col -->
-                        </div>
+                                    <p class="mb-0">
+                                        <img src="${pageContext.request.contextPath }/resources/html/dist/assets/images/users/avatar-9.jpg" alt="user-img" class="avatar-xs rounded-circle mr-1" />
+                                        <span class="align-middle">Seo Han Byeol</span>
+                                    </p>
+                                </div> <!-- end card-body -->
+                            </div>
+                            <!-- Task Item End -->
+                            
+                            <!-- Task Item -->
+                            <div class="card mb-0">
+                                <div class="card-body p-3">
+                                    <h5 class="mt-2 mb-2">
+                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">내 차 관리</a>
+                                    </h5>
+
+                                    <p class="mb-0">
+                                        <span class="pr-2 text-nowrap mb-2 d-inline-block">
+                                            <i class="mdi mdi-briefcase-outline text-muted"></i>
+                                            My Car
+                                        </span>
+                                    </p>
+
+                                    <div class="dropdown float-right">
+                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical font-18"></i>
+                                        </a>
+                                    </div>
+
+                                    <p class="mb-0">
+                                        <img src="${pageContext.request.contextPath }/resources/html/dist/assets/images/users/avatar-6.jpg" alt="user-img" class="avatar-xs rounded-circle mr-1" />
+                                        <span class="align-middle">Lee Seung Min</span>
+                                    </p>
+                                </div> <!-- end card-body -->
+                            </div>
+                            <!-- Task Item End -->
+                            
+                            <!-- Task Item -->
+                            <div class="card mb-0">
+                                <div class="card-body p-3">
+                                    <h5 class="mt-2 mb-2">
+                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">금전 관리</a>
+                                    </h5>
+
+                                    <p class="mb-0">
+                                        <span class="pr-2 text-nowrap mb-2 d-inline-block">
+                                            <i class="mdi mdi-briefcase-outline text-muted"></i>
+                                            Assets
+                                        </span>
+                                    </p>
+
+                                    <div class="dropdown float-right">
+                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical font-18"></i>
+                                        </a>
+                                    </div>
+
+                                    <p class="mb-0">
+                                        <img src="${pageContext.request.contextPath }/resources/html/dist/assets/images/users/avatar-9.jpg" alt="user-img" class="avatar-xs rounded-circle mr-1" />
+                                        <img src="${pageContext.request.contextPath }/resources/html/dist/assets/images/users/avatar-1.jpg" alt="user-img" class="avatar-xs rounded-circle mr-1" />
+                                        <span class="align-middle">Seo & Lee</span>
+                                    </p>
+                                </div> <!-- end card-body -->
+                            </div>
+                            <!-- Task Item End -->
+                            
+                            <!-- Task Item -->
+                            <div class="card mb-0">
+                                <div class="card-body p-3">
+                                    <h5 class="mt-2 mb-2">
+                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">운동 관리</a>
+                                    </h5>
+
+                                    <p class="mb-0">
+                                        <span class="pr-2 text-nowrap mb-2 d-inline-block">
+                                            <i class="mdi mdi-briefcase-outline text-muted"></i>
+                                            Diet
+                                        </span>
+                                    </p>
+
+                                    <div class="dropdown float-right">
+                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical font-18"></i>
+                                        </a>
+                                    </div>
+
+                                    <p class="mb-0">
+                                        <img src="${pageContext.request.contextPath }/resources/html/dist/assets/images/users/avatar-3.jpg" alt="user-img" class="avatar-xs rounded-circle mr-1" />
+                                        <span class="align-middle">Lee Jae Ho</span>
+                                    </p>
+                                </div> <!-- end card-body -->
+                            </div>
+                            <!-- Task Item End -->
+                            
+                            
+                        </div> <!-- end company-list-1-->
+                    </div>
+
+                    <div class="tasks">
+                        <h5 class="mt-0 task-header text-uppercase">회원 및 게시판 관리</h5>
+                        
+                        <div id="task-list-two" class="task-list-items">
+
+                            <!-- Task Item -->
+                            <div class="card mb-0">
+                                <div class="card-body p-3">
+                                    <h5 class="mt-2 mb-2">
+                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">회원 관리</a>
+                                    </h5>
+
+                                    <p class="mb-0">
+                                        <span class="pr-2 text-nowrap mb-2 d-inline-block">
+                                            <i class="mdi mdi-briefcase-outline text-muted"></i>
+                                            board
+                                        </span>
+                                    </p>
+
+                                    <div class="dropdown float-right">
+                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical font-18"></i>
+                                        </a>
+                                    </div>
+
+                                    <p class="mb-0">
+                                        <img src="${pageContext.request.contextPath }/resources/html/dist/assets/images/users/avatar-6.jpg" alt="user-img" class="avatar-xs rounded-circle mr-1" />
+                                        <span class="align-middle">Lee Seung Min</span>
+                                    </p>
+                                </div> <!-- end card-body -->
+                            </div>
+                            <!-- Task Item End -->
+                            
+                            <!-- Task Item -->
+                            <div class="card mb-0">
+                                <div class="card-body p-3">
+                                    <h5 class="mt-2 mb-2">
+                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">공지사항</a>
+                                    </h5>
+
+                                    <p class="mb-0">
+                                        <span class="pr-2 text-nowrap mb-2 d-inline-block">
+                                            <i class="mdi mdi-briefcase-outline text-muted"></i>
+                                            board
+                                        </span>
+                                    </p>
+
+                                    <div class="dropdown float-right">
+                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical font-18"></i>
+                                        </a>
+                                    </div>
+
+                                    <p class="mb-0">
+                                        <img src="${pageContext.request.contextPath }/resources/html/dist/assets/images/users/avatar-4.jpg" alt="user-img" class="avatar-xs rounded-circle mr-1" />
+                                        <span class="align-middle">Sim Yun Hee</span>
+                                    </p>
+                                </div> <!-- end card-body -->
+                            </div>
+                            <!-- Task Item End -->
+                            
+                            <!-- Task Item -->
+                            <div class="card mb-0">
+                                <div class="card-body p-3">
+                                    <h5 class="mt-2 mb-2">
+                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">건의 사항</a>
+                                    </h5>
+
+                                    <p class="mb-0">
+                                        <span class="pr-2 text-nowrap mb-2 d-inline-block">
+                                            <i class="mdi mdi-briefcase-outline text-muted"></i>
+                                            board
+                                        </span>
+                                    </p>
+
+                                    <div class="dropdown float-right">
+                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical font-18"></i>
+                                        </a>
+                                    </div>
+
+                                    <p class="mb-0">
+                                        <img src="${pageContext.request.contextPath }/resources/html/dist/assets/images/users/avatar-4.jpg" alt="user-img" class="avatar-xs rounded-circle mr-1" />
+                                        <span class="align-middle">Sim Yun Hee</span>
+                                    </p>
+                                </div> <!-- end card-body -->
+                            </div>
+                            <!-- Task Item End -->
+
+							<!-- Task Item -->
+                            <div class="card mb-0">
+                                <div class="card-body p-3">
+                                    <h5 class="mt-2 mb-2">
+                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">자유게시판</a>
+                                    </h5>
+
+                                    <p class="mb-0">
+                                        <span class="pr-2 text-nowrap mb-2 d-inline-block">
+                                            <i class="mdi mdi-briefcase-outline text-muted"></i>
+                                            board
+                                        </span>
+                                    </p>
+
+                                    <div class="dropdown float-right">
+                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical font-18"></i>
+                                        </a>
+                                    </div>
+
+                                    <p class="mb-0">
+                                        <img src="${pageContext.request.contextPath }/resources/html/dist/assets/images/users/avatar-4.jpg" alt="user-img" class="avatar-xs rounded-circle mr-1" />
+                                        <span class="align-middle">Sim Yun Hee</span>
+                                    </p>
+                                </div> <!-- end card-body -->
+                            </div>
+                            <!-- Task Item End -->
+                            
+                            <!-- Task Item -->
+                            <div class="card mb-0">
+                                <div class="card-body p-3">
+                                    <h5 class="mt-2 mb-2">
+                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">QnA</a>
+                                    </h5>
+
+                                    <p class="mb-0">
+                                        <span class="pr-2 text-nowrap mb-2 d-inline-block">
+                                            <i class="mdi mdi-briefcase-outline text-muted"></i>
+                                            board
+                                        </span>
+                                    </p>
+
+                                    <div class="dropdown float-right">
+                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical font-18"></i>
+                                        </a>
+                                    </div>
+
+                                    <p class="mb-0">
+                                        <img src="${pageContext.request.contextPath }/resources/html/dist/assets/images/users/avatar-4.jpg" alt="user-img" class="avatar-xs rounded-circle mr-1" />
+                                        <span class="align-middle">Sim Yun Hee</span>
+                                    </p>
+                                </div> <!-- end card-body -->
+                            </div>
+                            <!-- Task Item End -->
+
+
+                        </div> <!-- end company-list-2-->
+                    </div>
+                    
+                    <div class="tasks">
+                        <h5 class="mt-0 task-header text-uppercase">채팅 관리</h5>
+		                    <div id="task-list-three" class="task-list-items">
+
+                            <!-- Task Item -->
+                            <div class="card mb-0">
+                                <div class="card-body p-3">
+                                    <h5 class="mt-2 mb-2">
+                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">채팅</a>
+                                    </h5>
+
+                                    <p class="mb-0">
+                                        <span class="pr-2 text-nowrap mb-2 d-inline-block">
+                                            <i class="mdi mdi-briefcase-outline text-muted"></i>
+                                            Chat
+                                        </span>
+                                    </p>
+
+                                    <div class="dropdown float-right">
+                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical font-18"></i>
+                                        </a>
+                                    </div>
+
+                                    <p class="mb-0">
+                                        <img src="${pageContext.request.contextPath }/resources/html/dist/assets/images/users/avatar-6.jpg" alt="user-img" class="avatar-xs rounded-circle mr-1" />
+                                        <span class="align-middle">Lee Jae Ho</span>
+                                    </p>
+                                </div> <!-- end card-body -->
+                            </div>
+                            <!-- Task Item End -->
+
+							<!-- Task Item -->
+                            <div class="card mb-0">
+                                <div class="card-body p-3">
+                                    <h5 class="mt-2 mb-2">
+                                        <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">챗봇</a>
+                                    </h5>
+
+                                    <p class="mb-0">
+                                        <span class="pr-2 text-nowrap mb-2 d-inline-block">
+                                            <i class="mdi mdi-briefcase-outline text-muted"></i>
+                                            ChatBot
+                                        </span>
+                                    </p>
+
+                                    <div class="dropdown float-right">
+                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical font-18"></i>
+                                        </a>
+                                    </div>
+
+                                    <p class="mb-0">
+                                        <img src="${pageContext.request.contextPath }/resources/html/dist/assets/images/users/avatar-6.jpg" alt="user-img" class="avatar-xs rounded-circle mr-1" />
+                                        <span class="align-middle">Lee Jae Ho</span>
+                                    </p>
+                                </div> <!-- end card-body -->
+                            </div>
+                            <!-- Task Item End -->
+
+                        </div> <!-- end company-list-3-->
+                    </div>
+
+
+
+
+                   </div>
+            </div> <!-- end col -->
+        </div>
 		
 	</section>
 	<!-- =======================
@@ -578,13 +519,13 @@
 	<!--Global JS-->
 	
 	
-	<script src="${pageContext.request.contextPath }/resources/html/dist/assets/js/app.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/html/dist/${pageContext.request.contextPath }/resources/html/dist/assets/js/app.min.js"></script>
 
         <!-- dragula js-->
-        <script src="${pageContext.request.contextPath }/resources/html/dist/assets/js/vendor/dragula.min.js"></script>
+        <script src="${pageContext.request.contextPath }/resources/html/dist/${pageContext.request.contextPath }/resources/html/dist/assets/js/vendor/dragula.min.js"></script>
 
         <!-- demo js -->
-        <script src="${pageContext.request.contextPath }/resources/html/dist/assets/js/ui/component.dragula.js"></script>
+        <script src="${pageContext.request.contextPath }/resources/html/dist/${pageContext.request.contextPath }/resources/html/dist/assets/js/ui/component.dragula.js"></script>
 
 </body>
 </html>
