@@ -3,6 +3,50 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <script>
+
+window.onload = function () {
+    if (window.Notification) {
+        Notification.requestPermission();
+    }
+}
+
+
+
+function notify(message) {
+    if (Notification.permission !== 'granted') {
+        alert('notification is disabled');
+    }
+    else {
+        var notification = new Notification(message, {
+            icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
+            body: '클릭하면 스케줄로 들어갑니다',
+        });
+
+        notification.onclick = function () {
+            window.open('http://localhost/lastProject/user/schedule/schedule.do');
+        };
+    }
+}
+
+function notifymedical(message) {
+    if (Notification.permission !== 'granted') {
+        alert('notification is disabled');
+    }
+    else {
+        var notification = new Notification(message, {
+            icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
+            body: '클릭하면 약 스케줄로 들어갑니다',
+        });
+
+        notification.onclick = function () {
+            window.open('http://localhost/lastProject/user/medical/medicalMain.do');
+        };
+    }
+}
+
+
+
+
 function LogOut(){
 	$.ajax({
 		type : 'POST',
@@ -18,7 +62,6 @@ function LogOut(){
 
 
 var timer = setInterval(function(){
-
 	   var html;
 			   $.ajax({
 		           url     : '${pageContext.request.contextPath}/user/schedule/alarm.do',
@@ -27,14 +70,13 @@ var timer = setInterval(function(){
 		           data : {'mem_no':${LOGIN_MEMBERINFO.mem_no}},
 		           success : function(result) {  
 			           for(var i=0; i<result.json.length; i++){
-				           console.log(result)
-		             		alert(result.json[i].s_memo);
-				       }                    
+		             		notify(result.json[i].s_memo);
+				       }
+				       for(var i=0; i<result.medicaljson.length; i++){
+							notifymedical(result.medicaljson[i].pill_name);
+					   }                    
 		           	}
-		                
 		        });                
-		           
-		         
 		    },60000) //일정 알림주기
 
 
