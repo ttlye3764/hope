@@ -62,19 +62,15 @@ public class CarController {
 		carInfo = (MyCarVO) service.selectchoiceMycar(params);
 		
 		List<MyCarDetailVO> kmList = service.selectKm(params);
-//		List<MyCarDetailVO> engineList = service.selectEngine(params);
-//		List<MyCarDetailVO> breakList = service.selectBreak(params);
-//		
+		List<MyCarDetailVO> engineList = service.selectEngine(params);
+		List<MyCarDetailVO> breakList = service.selectBreak(params);
+		
 		String result = "success";
 		
-		int kmlistsize = kmList.size();
-		System.out.println(kmlistsize);
-		
 		andView.addObject("carInfo", carInfo);
-		andView.addObject("kmlistsize",kmlistsize);
-//		andView.addObject("kmList", kmList);
-//		andView.addObject("engineList", engineList);
-//		andView.addObject("breakList", breakList);
+		andView.addObject("kmList", kmList);
+		andView.addObject("engineList", engineList);
+		andView.addObject("breakList", breakList);
 		andView.addObject("json",result);
 		andView.setViewName("jsonConvertView");
 		
@@ -97,6 +93,22 @@ public class CarController {
 	public String insertMycarkm(MyCarDetailVO carDetailInfo) throws Exception{
 		
 		service.insertKm(carDetailInfo);
+		
+		return "redirect:/user/car/carMain.do";
+	}
+	
+	@RequestMapping("insertMycarEg")
+	public String insertMycarEg(MyCarDetailVO carDetailInfo) throws Exception{
+		
+		service.insertEngine(carDetailInfo);
+		
+		return "redirect:/user/car/carMain.do";
+	}
+	
+	@RequestMapping("insertMycarBk")
+	public String insertMycarBk(MyCarDetailVO carDetailInfo) throws Exception{
+		
+		service.insertBreak(carDetailInfo);
 		
 		return "redirect:/user/car/carMain.do";
 	}
