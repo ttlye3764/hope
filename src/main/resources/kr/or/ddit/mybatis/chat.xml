@@ -177,7 +177,7 @@
 	</insert>
 	<update id="updateChatFile" parameterType="chatFileVO">
 		UPDATE CHAT_FILE SET CF_NAME = #{cf_name},
-							 CF_SAVE_NAVE = #{cf_save_name},
+							 CF_SAVE_NAME = #{cf_save_name},
 							 CF_SIZE = #{cf_size},
 							 CF_TYPE = #{cf_type}
 	</update>

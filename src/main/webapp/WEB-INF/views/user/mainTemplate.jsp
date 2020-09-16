@@ -101,13 +101,15 @@ function LogOut(){
 	
 	
 	
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700">
 	
 	
 	
 	
 	
 	
-	
+	<!-- chatbot -->
+	<link href='${pageContext.request.contextPath }/resources/myCSS/chatbot.css' rel='stylesheet'>
 	<link
 	href='${pageContext.request.contextPath }/resources/timepicker/jquery.datetimepicker.min.css'
 	rel='stylesheet' />

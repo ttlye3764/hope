@@ -1,4 +1,7 @@
 
+
+
+
 <div class="divider mt-3"></div>
 <footer class="footer bg-white" >
 	<div class="footer-content pb-3"  >
@@ -96,4 +99,8 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	
+	
 </footer>

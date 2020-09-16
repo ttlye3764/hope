@@ -33,5 +33,12 @@ body.loading {
 <link href="${pageContext.request.contextPath }/resources/html/dist/assets/css/app.min.css"
 	rel="stylesheet" type="text/css" id="main-style-container" />
 
+
+
+
+
 </head>
+
+
+
 </html>

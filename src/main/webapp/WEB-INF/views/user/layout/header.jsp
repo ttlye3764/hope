@@ -2,6 +2,11 @@
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
+
+
+
+
 <script>
 
 window.onload = function () {
@@ -79,7 +84,72 @@ var timer = setInterval(function(){
 		        });                
 		    },60000) //일정 알림주기
 
+// 챗봇스타트
 
+$(function() {
+
+	$('.chatbot').slideToggle(300, 'swing');
+	$('.chatbot-message-counter').fadeToggle(300, 'swing');
+
+	$('#live-chat header').on('click', function() {
+
+		$('.chatbot').slideToggle(300, 'swing');
+		$('.chatbot-message-counter').fadeToggle(300, 'swing');
+
+	});
+
+	$('.chatbot-close').on('click', function(e) {
+
+		e.preventDefault();
+		$('#live-chat').fadeOut(300);
+
+	});
+}) 
+var chatbotInput;
+function sendChatbotBTN(){
+
+	chatbotInput = $('#chatbotInput').val();
+	$('#chatbotInput').val("");
+
+	var chatbot_answer = '<div class="chatbot-message clearfix">';
+	chatbot_answer += '<img src="http://lorempixum.com/32/32/people" alt="" width="32" height="32">';
+	chatbot_answer += '<div class="chatbot-message-content clearfix">';
+	chatbot_answer += '<span class="chatbot-time">13:35</span>';
+	chatbot_answer += '<h5>${LOGIN_MEMBERINFO.mem_name}</h5>';
+	chatbot_answer += '<p>'+chatbotInput+'</p>';
+	chatbot_answer += '</div>';
+	chatbot_answer += '</div>';
+	chatbot_answer += '<hr>';
+
+	$('.chatbot-history').append(chatbot_answer);
+
+	$.ajax({
+		url : '${pageContext.request.contextPath}/user/chat/chatbot',
+		data : {
+			chatbotInput : chatbotInput
+			},
+		success : function(result){
+			
+			var chatbot_answer = '<div class="chatbot-message clearfix">';
+			chatbot_answer += '<img src="http://lorempixum.com/32/32/people" alt="" width="32" height="32">';
+			chatbot_answer += '<div class="chatbot-message-content clearfix">';
+			chatbot_answer += '<span class="chatbot-time">13:35</span>';
+			chatbot_answer += '<h5>chatbot</h5>';
+			chatbot_answer += '<p>'+result.answer+'</p>';
+			chatbot_answer += '</div>';
+			chatbot_answer += '</div>';
+			chatbot_answer += '<hr>';
+
+			$('.chatbot-history').append(chatbot_answer);
+		},
+		error : function(result){
+			alert('챗봇 실패')
+		}
+	})
+
+}
+
+//챗봇 앤드
 		    
 </script>
 
@@ -291,7 +361,43 @@ var timer = setInterval(function(){
 	<!-- =======================
 	header End-->
 
+	<!-- chatbot start-->
 	
+	<div id="chatbot-body">
+	<div id="live-chat">
+		
+		<header class="clearfix">
+			
+			<h4>무엇이든지 물어보세요</h4>
+
+			<span class="chat-message-counter"></span>
+
+		</header>
+
+		<div class="chatbot">
+			
+			<div class="chatbot-history">
+				
+				
+
+			</div> <!-- end chat-history -->
+
+			<form action="#" method="post">
+
+				<fieldset>
+					
+					<input id="chatbotInput" class="chatbotInput" type="text" placeholder="Type your message…" autofocus="">
+					
+
+				</fieldset>
+
+			</form>
+			<button id="chatbotInputBTN" onclick="sendChatbotBTN();" type="button">보내기</button>
+		</div> <!-- end chat -->
+
+	</div>
+	</div>
+	<!-- chatbot end -->
 
 	<div> <a href="#" class="back-top btn btn-grad"><i class="ti-angle-up"></i></a> </div>
 

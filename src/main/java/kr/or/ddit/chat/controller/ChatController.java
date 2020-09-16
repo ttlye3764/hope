@@ -347,15 +347,27 @@ public class ChatController {
 	}
 	
 	 // DialogFlow API Detect Intent sample with text inputs.
-	  @RequestMapping(value="dialog")
-	  public ModelAndView detectIntentTexts(
-	      String projectId,  String sessionId, String languageCode, ModelAndView andView)
-	      throws IOException, ApiException {
+	  @RequestMapping(value="chatbot")
+	  public ModelAndView detectIntentTexts(String projectId, 
+			  								String sessionId,
+			  								String languageCode,
+			  								ModelAndView andView,
+			  								@RequestParam(value="chatbotInput", required = false) String sendMessage,
+			  								HttpServletRequest request
+			  								)throws IOException, ApiException {
 		  String result=null;
+		  
 		  List<String> texts = new ArrayList<>();
-		  texts.add("수아");
+		  
+		  texts.add(sendMessage);
+		  
 		  projectId = "testagent-crvsfc";
-		  sessionId="testAgent";
+		  
+		  sessionId = request.getSession().getId();
+//		  sessionId="testAgent";
+		  
+		  
+		  
 		  languageCode="ko";
 		  
 	    Map<String, QueryResult> queryResults = Maps.newHashMap();
@@ -376,7 +388,6 @@ public class ChatController {
 
 	        // Performs the detect intent request
 	        DetectIntentResponse response = sessionsClient.detectIntent(session, queryInput);
-
 	        // Display the query result
 	        QueryResult queryResult = response.getQueryResult();
 
@@ -389,10 +400,11 @@ public class ChatController {
 	        result = queryResult.getFulfillmentText();
 	        queryResults.put(text, queryResult);
 	      }
+	      
 	    }
 	    System.out.println("queryREsults : " + queryResults);
-	    andView.addObject("result", result);
-	    andView.setViewName("user/chat/chatBot");
+	    andView.addObject("answer", result);
+	    andView.setViewName("jsonConvertView");
 	    return andView;
 	  }
 	
