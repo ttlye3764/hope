@@ -4,25 +4,36 @@
 <head>
 <meta charset="UTF-8">
 <title>자유게시글 등록</title>
-<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/fitvids/jquery.fitvids.js"></script>
-<script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
+
+<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/jquery/jquery.min.js"></script>
+   <script src="${pageContext.request.contextPath }/resources/template/assets/vendor/popper.js/umd/popper.min.js"></script>
+   <script src="${pageContext.request.contextPath }/resources/template/assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+   <script src="${pageContext.request.contextPath }/resources/template/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+   <!--Vendors-->
+   <script src="${pageContext.request.contextPath }/resources/template/assets/vendor/fitvids/jquery.fitvids.js"></script>
+
+   <!--Template Functions-->
+   <script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
+
 <script>
 $(function(){
-	
+
 	$("#files").on("change", handleImgFileSelect);
 
  	// 등록버튼기능
     $('form[name=boardForm]').on('submit', function(){
-
-    	$(this).attr('action','${pageContext.request.contextPath}/user/board/insertBoardInfo.do?bd_division=${bd_division }');
+    
+		var bd_title = $('input[name="bd_title"]').val();
+		var bd_writer = $('input[name="bd_writer"]').val();
+    	$(this).attr('action','${pageContext.request.contextPath}/admin/board/insertBoardInfo.do?bd_division=${bd_division }' + '&bd_title=' + bd_title + '&bd_writer=' + bd_writer);
      
         return true;
      });
 
     // 목록버튼기능
     $('#listBtn').on('click', function(){	
-    	//'${pageContext.request.contextPath}/user/board/boardView.do?bd_no=' + bd_no + '&rnum=' + rnum + "&bd_division=${bd_division}"
-		$(location).attr('href','${pageContext.request.contextPath}/user/board/boardList.do?bd_division=${bd_division}');	
+		$(location).attr('href','${pageContext.request.contextPath}/admin/board/boardList.do?bd_division=${bd_division}');	
 	});
 
 	// 파일 

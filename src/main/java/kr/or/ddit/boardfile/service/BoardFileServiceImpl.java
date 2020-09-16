@@ -11,12 +11,13 @@ import kr.or.ddit.vo.Board_FileVO;
 
 @Service
 public class BoardFileServiceImpl implements IBoardFileService{
+	
 	@Autowired
 	private IBoardFileDao dao;
 
 	@Override
 	public void insertFileItem(List<Board_FileVO> fileitemList) throws Exception {
-		
+		dao.insertFileItem(fileitemList);
 	}
 
 	@Override

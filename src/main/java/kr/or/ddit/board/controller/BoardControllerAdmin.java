@@ -59,7 +59,8 @@ public class BoardControllerAdmin {
 	// 조회
 	@RequestMapping("boardList")
 	public ModelAndView boardList(String bd_division, Map<String, String> params, ModelAndView andView,
-			HttpSession session, HttpServletRequest request, String currentPage, RolePaginationUtil_yun pagination,
+			HttpSession session, HttpServletRequest request, 
+			@RequestParam(defaultValue = "1", required = false ) String currentPage, RolePaginationUtil_yun pagination,
 			@RequestParam(defaultValue = "", required = false) String search_keyword,
 			@RequestParam(defaultValue = "TOTAL", required = false) String search_keycode) throws Exception {
 
@@ -94,7 +95,7 @@ public class BoardControllerAdmin {
 		System.out.println(search_keycode);
 		String totalCount = this.boardService.totalCount(params);
 
-		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount), bd_division, search_keycode, search_keyword);
+		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount), bd_division, search_keycode, search_keyword, "/lastProject/admin/board/boardList.do");
 
 		String startCount = String.valueOf(pagination.getStartCount());
 		String endCount = String.valueOf(pagination.getEndCount());
@@ -110,75 +111,13 @@ public class BoardControllerAdmin {
 		andView.addObject("currentPage", currentPage);
 		andView.addObject("search_keycode", search_keycode);
 		andView.addObject("search_keyword", search_keyword);
-		andView.setViewName("user/board/boardList");
+		andView.setViewName("admin/board/boardList");
 		andView.addObject("pagination", pagination.getPagingHtmls());
 
 		return andView;
 	}
 
-	// 검색에 필요한 아이
-//		@RequestMapping("list")
-//		public ModelAndView list(String bd_division,
-//				                      Map<String, String> params,
-//				                      ModelAndView andView,
-//									  HttpSession session,
-//									  HttpServletRequest request, 
-//									  String currentPage, 
-//									  RolePaginationUtil_yun pagination, 
-//									  String search_keyword, 
-//									  String search_keycode) throws Exception{		
-//		
-//			if(currentPage == null){
-//		         currentPage = "1";
-//		      }
-//
-//			System.out.println("bd_division : " + bd_division);
-//			
-//			String board_division_name = "";
-//
-//			switch(bd_division){
-//		    case "1" : 
-//		         board_division_name = "자유게시판";
-//		        break;
-//		    case "2" : 
-//		         board_division_name = "공지사항";
-//		        break;
-//		    case "3" :
-//		    	board_division_name = "건의사항";
-//		    	break;
-//		    case "4" : 
-//		    	board_division_name = "QNA 게시판";
-//		    	break;    
-//			}
-//			
-//			params.put("bd_division",bd_division);
-//			params.put("search_keyword",search_keyword);
-//			params.put("search_keycode",search_keycode);
-//			
-//			System.out.println(search_keyword);
-//			System.out.println(search_keycode);
-//		    		
-//		    String totalCount = this.boardService.totalCount(params);
-//		    
-//		    pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount),bd_division, search_keycode, search_keyword);
-//		    
-//		    String startCount = String.valueOf(pagination.getStartCount());
-//		    String endCount = String.valueOf(pagination.getEndCount());
-//		    params.put("startCount", startCount);
-//		    params.put("endCount", endCount);
-//			
-//		    List<BoardVO> boardList = this.boardService.boardList(params);  
-//			
-//			andView.addObject("boardList", boardList);
-//			andView.addObject("board_division_name", board_division_name);
-//			andView.addObject("bd_division", bd_division);
-//			andView.addObject("search_keycode", search_keycode);
-//			andView.addObject("search_keyword", search_keyword);
-//			andView.setViewName("jsonConvertView");		
-//			andView.addObject("pagination", pagination.getPagingHtmls());
-//
-//			return andView;
-//		}
+
 
 	// 상세보기
 	@RequestMapping("boardView")
@@ -234,9 +173,8 @@ public class BoardControllerAdmin {
 			throws Exception {
 
 		this.boardService.updateBoard(boardVO, items);
-		modelMap.addAttribute("bd_division", bd_division);
 
-		return "redirect:/user/board/boardView.do?bd_no=" + bd_no + "&re_no=" + re_no + "&bd_division=" + bd_division
+		return "redirect:/admin/board/boardView.do?bd_no=" + bd_no + "&re_no=" + re_no + "&bd_division=" + bd_division
 				+ "&currentPage=" + currentPage + "&search_keyword=" + search_keyword + "&search_keycode="
 				+ search_keycode;
 	}
@@ -325,16 +263,20 @@ public class BoardControllerAdmin {
 
 	// 댓글 등록
 	@RequestMapping("insertBoardReply")
-	public ModelAndView insertBoardReply(HttpSession session, String re_content, String bd_no) {
-		System.out.println("///////////////////////////////bd_no : " + bd_no);
+	public ModelAndView insertBoardReply(HttpSession session, String re_content, String bd_no, String mem_no) {
 		ModelAndView andView = new ModelAndView();
 		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		
 		String re_writer = memberInfo.getMem_nickname();
+		
 		boardService.insertBoardReply(re_content, bd_no, re_writer);
+		
 		List<Board_ReplyVO> board_replyList = boardService.selectBoardReply(bd_no);
+		
 		andView.addObject("board_replyList", board_replyList);
 		andView.setViewName("jsonConvertView");
-		return andView;
+		
+		return andView;		
 	}
 
 	// 댓글 수정
@@ -348,7 +290,7 @@ public class BoardControllerAdmin {
 
 		boardService.updateBoardReply(re_content, bd_no, mem_id, re_no);
 
-		return "redirect:/user/board/boardView.do?bd_no=" + bd_no + "&re_no=" + re_no + "&bd_division=" + bd_division
+		return "redirect:/admin/board/boardView.do?bd_no=" + bd_no + "&re_no=" + re_no + "&bd_division=" + bd_division
 				+ "&currentPage=" + currentPage + "&search_keyword=" + search_keyword + "&search_keycode="
 				+ search_keycode;
 	}
@@ -363,7 +305,7 @@ public class BoardControllerAdmin {
 
 		boardService.deleteBoardReply(bd_no, re_no);
 
-		return "redirect:/admin/board/boardView.do?bd_no=" + bd_no + "&re_no=" + re_no + "&bd_divison=bd_division";
+		return "redirect:/admin/board/boardView.do?bd_no=" + bd_no + "&bd_division=" + bd_division;
 	}
 	
 	
@@ -373,7 +315,7 @@ public class BoardControllerAdmin {
 			                      ModelAndView andView) {
 
 		andView.addObject("bd_division", bd_division);
-		andView.setViewName("user/board/replyForm");
+		andView.setViewName("admin/board/replyForm");
 
 		return andView;
 	}
