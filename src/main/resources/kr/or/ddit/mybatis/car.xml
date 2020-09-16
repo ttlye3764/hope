@@ -48,4 +48,72 @@
 		WHERE MEM_NO = #{mem_no}
 		AND CAR_NO = #{car_no}
 	</select>
+	
+	<delete id="deleteMycar" parameterType="map">
+		DELETE FROM MYCAR
+		WHERE MEM_NO = #{mem_no}
+		AND CAR_NO = #{car_no}
+	</delete>
+	
+	<insert id="insertKm" parameterType="mycarDetailVO">
+		INSERT INTO MYCAR_DETAIL(
+				CAR_NO,
+				MD_KM,
+				MD_DATE)
+			VALUES(
+				#{car_no},
+				#{md_km},
+				#{md_date}
+			)
+	</insert>
+	
+	<insert id="insertBreak" parameterType="mycarDetailVO">
+		INSERT INTO MYCAR_DETAIL(
+				CAR_NO,
+				MD_KM,
+				MD_BRAKE
+				)
+			VALUES(
+				#{car_no},
+				#{md_km},
+				#{md_brake}
+			)
+	</insert>
+	
+	<insert id="insertEngine" parameterType="mycarDetailVO">
+		INSERT INTO MYCAR_DETAIL(
+				CAR_NO,
+				MD_KM,
+				MD_ENGINE
+				)
+			VALUES(
+				#{car_no},
+				#{md_km},
+				#{md_engine}
+			)
+	</insert>
+	
+	<select id="selectKM" parameterType="map" resultType="mycarDetailVO">
+		SELECT CAR_NO, MD_DATE, MD_KM
+		FROM MYCAR_DETAIL
+		WHERE CAR_NO = #{car_no}
+		AND MD_DATE IS NOT NULL
+		ORDER BY MD_DATE
+	</select>
+	
+	<select id="selectBreak" parameterType="map" resultType="mycarDetailVO">
+		SELECT CAR_NO, MD_KM, MD_BRAKE
+		FROM MYCAR_DETAIL
+		WHERE CAR_NO = #{car_no}
+		AND MD_BRAKE IS NOT NULL
+		ORDER BY MD_BRAKE
+	</select>
+	
+	<select id="selectEngine" parameterType="map" resultType="mycarDetailVO">
+		SELECT CAR_NO, MD_KM, MD_ENGINE
+		FROM MYCAR_DETAIL
+		WHERE CAR_NO = #{car_no}
+		AND MD_ENGINE IS NOT NULL
+		ORDER BY MD_ENGINE
+	</select>
 </mapper>    

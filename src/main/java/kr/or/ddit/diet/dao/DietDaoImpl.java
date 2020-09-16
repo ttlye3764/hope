@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.or.ddit.vo.DietBoardVO;
+import kr.or.ddit.vo.DietVO;
 import kr.or.ddit.vo.Diet_dayVO;
 import kr.or.ddit.vo.Diet_day_infoVO;
 import kr.or.ddit.vo.Diet_infoVO;
@@ -105,5 +106,15 @@ public class DietDaoImpl implements IDietDao {
 	@Override
 	public void insertDietBoardFirst(Map<String, String> params) throws Exception {
 		client.insert("diet.insertDietBoardFirst",params);
+	}
+	
+	@Override
+	public List<DietVO> recommendDietList(Map<String, String> params) throws Exception {
+		return client.selectList("diet.recommendDietList",params);
+	}
+	
+	@Override
+	public List<Diet_infoVO> recommendDietInfo(Map<String, String> params) throws Exception {
+		return client.selectList("diet.recommendDietInfo", params);
 	}
 }

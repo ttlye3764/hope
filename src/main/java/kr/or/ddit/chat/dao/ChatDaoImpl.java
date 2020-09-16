@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import kr.or.ddit.vo.ChatFileVO;
 import kr.or.ddit.vo.ChatingRoomVO;
 import kr.or.ddit.vo.FriendVO;
 import kr.or.ddit.vo.MemberVO;
@@ -45,31 +46,43 @@ public class ChatDaoImpl implements IChatDao{
 	}
 	@Override
 	public void insertFriendInfo(FriendVO freindInfo) throws Exception {
-		client.insert("insertFriendInfo", freindInfo);	
+		client.insert("chat.insertFriendInfo", freindInfo);	
 	}
 	@Override
 	public List<MemberVO> selectMemList(Map<String, String> params) throws Exception {
-		return client.selectList("selectMemList", params);
+		return client.selectList("chat.selectMemList", params);
 	}
 	
 	@Override
 	public FriendVO selectTwoMemInfo(Map<String, String> params) throws Exception {
-		return client.selectOne("selectTwoMemInfo", params);
+		return client.selectOne("chat.selectTwoMemInfo", params);
 	}
 	@Override
 	public List<MemberVO> selectFriendList(Map<String, String> params) throws Exception {
-		return client.selectList("selectFriendList", params);
+		return client.selectList("chat.selectFriendList", params);
 	}
 	@Override
 	public List<MemberVO> chatRoomList(Map<String, String> params) throws Exception {	
-		return client.selectList("chatRoomList", params);
+		return client.selectList("chat.chatRoomList", params);
 	}
 	@Override
 	public List<MessageVO> messageList(Map<String, String> params) throws Exception {
-		return client.selectList("messageList", params);
+		return client.selectList("chat.messageList", params);
 	}
-@Override
+	@Override
 	public MessageVO messageLast(Map<String, String> params) throws Exception {
-		return client.selectOne("messageLast", params);
+		return client.selectOne("chat.messageLast", params);
+	}
+	@Override
+	public int insertChatFile(ChatFileVO chatFileInfo) throws Exception {
+		return client.insert("chat.insertChatFile", chatFileInfo);
+	}
+	@Override
+	public ChatFileVO selectChatFileInfo(Map<String, String> params) throws Exception {
+		return client.selectOne("chat.selectChatFileInfo", params);
+	}
+	@Override
+	public int updateChatFile(ChatFileVO chatFileInfo) throws Exception {
+		return client.update("chat.updateChatFile", chatFileInfo);
 	}
 }

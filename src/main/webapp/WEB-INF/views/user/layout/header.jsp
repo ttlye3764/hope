@@ -3,6 +3,50 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <script>
+
+window.onload = function () {
+    if (window.Notification) {
+        Notification.requestPermission();
+    }
+}
+
+
+
+function notify(message) {
+    if (Notification.permission !== 'granted') {
+        alert('notification is disabled');
+    }
+    else {
+        var notification = new Notification(message, {
+            icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
+            body: '클릭하면 스케줄로 들어갑니다',
+        });
+
+        notification.onclick = function () {
+            window.open('http://localhost/lastProject/user/schedule/schedule.do');
+        };
+    }
+}
+
+function notifymedical(message) {
+    if (Notification.permission !== 'granted') {
+        alert('notification is disabled');
+    }
+    else {
+        var notification = new Notification(message, {
+            icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
+            body: '클릭하면 약 스케줄로 들어갑니다',
+        });
+
+        notification.onclick = function () {
+            window.open('http://localhost/lastProject/user/medical/medicalMain.do');
+        };
+    }
+}
+
+
+
+
 function LogOut(){
 	$.ajax({
 		type : 'POST',
@@ -18,23 +62,20 @@ function LogOut(){
 
 
 var timer = setInterval(function(){
-
 	   var html;
 			   $.ajax({
 		           url     : '${pageContext.request.contextPath}/user/schedule/alarm.do',
 		           type    : 'post',
 		           dataType: 'json',
-		           data : {'mem_no':${LOGIN_MEMBERINFO.mem_no}},
 		           success : function(result) {  
 			           for(var i=0; i<result.json.length; i++){
-				           console.log(result)
-		             		alert(result.json[i].s_memo);
-				       }                    
+		             		notify(result.json[i].s_memo);
+				       }
+				       for(var i=0; i<result.medicaljson.length; i++){
+							notifymedical(result.medicaljson[i].pill_name);
+					   }                    
 		           	}
-		                
 		        });                
-		           
-		         
 		    },60000) //일정 알림주기
 
 
@@ -146,7 +187,6 @@ var timer = setInterval(function(){
 							<a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Knowledge</a>
 							<ul class="dropdown-menu" aria-labelledby="pagesMenu">
 								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/knowledge/knowledgeList.do'>퀴즈 풀이</a></li>
-								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/knowledge/news.do'>최신 뉴스</a></li>
 							</ul>
 						</li>
 						<!-- Menu item 4 Portfolio-->
@@ -165,9 +205,9 @@ var timer = setInterval(function(){
 							<a class="nav-link dropdown-toggle" href="#" id="docMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">car</a>
 							<ul class="dropdown-menu" aria-labelledby="docMenu">
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/carMain.do">내 차 관리</a> </li>
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/carForm.do">세차하기 좋은 날</a> </li>
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/diet_my">카센터 위치</a> </li>
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/pet_albumForm.do">주유소 가격 조회</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/weather.do">세차하기 좋은 날</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/oil.do">주변 주유소 위치</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/parking.do">주차장 찾기</a> </li>
 							</ul>
 						</li>
 						<!-- Menu item 5 Elements-->
@@ -189,10 +229,8 @@ var timer = setInterval(function(){
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/dayKcal?titleName=당신에게 맞는 하루 열량과 그에 따른 운동을 확인해보세요!">일일 열량</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/menuList?titleName=오늘 당신이 먹은 혹은 먹을 음식의 칼로리를 확인해보세요!">칼로리 사전</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/bmi?titleName=당신의 BMI는!!?">BMI 계산기</a> </li>
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/diet_my?titleName=추천 식단을 확인해보세요">추천 식단 리스트</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/recommendDiet?titleName=추천 식단을 확인해보세요">추천 식단 리스트</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/diet_my?titleName=나의 식단관리에 대한 모든 것을 확인해보세요!">나의 식단관리</a> </li>
-								<li class="dropdown-divider"></li>
-								<li> <a class="dropdown-item" href="http://support.webestica.com/" target="_blank">Support</a> </li>
 							</ul>
 						</li>
 						<!-- Menu item 8 board-->

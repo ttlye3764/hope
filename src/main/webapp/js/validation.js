@@ -24,9 +24,22 @@ String.prototype.validationBIR = function() {
 	return /^(19\d{2}|20\d{2})-([1-9]|0[1-9]|1[0-2])-([1-9]|0[1-9]|[1-2]\d|3[0-1])$/.test(this);
 };
 
+String.prototype.validationCARYEAR = function() {
+	// "1999-01-01".validationBIR()
+	return /^(19\d{2}|20\d{2})$/.test(this);
+};
+
 String.prototype.validationMAIL = function(){
 	// test@test.com or test@test.co.kr
 	return /^[a-z0-9]+@[a-z]+(\.[a-z]+){1,2}$/.test(this);
+};
+
+String.prototype.validationKM = function(){
+	return /^[0-9]{1,6}$/.test(this);
+};
+
+String.prototype.validationCARKIND = function(){
+	return /^[0-9]{2,3}+[가-힣]{1}+[0-9]{4}$/.test(this);
 };
 
 String.prototype.validationHP = function(){

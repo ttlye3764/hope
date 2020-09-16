@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.ddit.chat.dao.IChatDao;
+import kr.or.ddit.vo.ChatFileVO;
 import kr.or.ddit.vo.ChatingRoomVO;
 import kr.or.ddit.vo.FriendVO;
 import kr.or.ddit.vo.MemberVO;
@@ -70,6 +71,18 @@ public class ChatServiceImpl implements IChatService {
 	@Override
 	public MessageVO messageLast(Map<String, String> params) throws Exception {
 		return chatDao.messageLast(params);
+	}
+	@Override
+	public int insertChatFile(ChatFileVO chatFileInfo) throws Exception {
+		return chatDao.insertChatFile(chatFileInfo);
+	}
+	@Override
+	public ChatFileVO selectChatFileInfo(Map<String, String> params) throws Exception {
+		return chatDao.selectChatFileInfo(params);
+	}
+	@Override
+	public int updateChatFile(ChatFileVO chatFileInfo) throws Exception {
+		return chatDao.updateChatFile(chatFileInfo);
 	}
 }
 

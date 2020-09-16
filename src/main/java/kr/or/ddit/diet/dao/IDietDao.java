@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.or.ddit.vo.DietBoardVO;
+import kr.or.ddit.vo.DietVO;
 import kr.or.ddit.vo.Diet_dayVO;
 import kr.or.ddit.vo.Diet_day_infoVO;
 import kr.or.ddit.vo.Diet_infoVO;
@@ -61,4 +62,10 @@ public interface IDietDao {
 	
 	//다이어트 게시판 처음 삽입
 	public void insertDietBoardFirst(Map<String, String> params) throws Exception;
+	
+	// 추천식단 리스트 가져오기
+	public List<DietVO> recommendDietList(Map<String, String> params) throws Exception;
+	
+	//추천식단 상세 가져오기
+	public List<Diet_infoVO> recommendDietInfo(Map<String, String> params) throws Exception;
 }

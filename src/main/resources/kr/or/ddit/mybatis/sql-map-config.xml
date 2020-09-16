@@ -16,12 +16,14 @@
 		<typeAlias alias="messageVO" type="kr.or.ddit.vo.MessageVO"/>
 		<typeAlias alias="participationVO" type="kr.or.ddit.vo.ParticipationVO"/>
 		<typeAlias alias="dietVO" type="kr.or.ddit.vo.DietVO"/>
+		<typeAlias alias="dietInfoVO" type="kr.or.ddit.vo.Diet_infoVO"/>
 		<typeAlias alias="dietMemVO" type="kr.or.ddit.vo.Diet_memVO"/>
 		<typeAlias alias="menuVO" type="kr.or.ddit.vo.MenuVO"/>
 		<typeAlias alias="dietDayVO" type="kr.or.ddit.vo.Diet_dayVO"/>
 		<typeAlias alias="dietDayInfoVO" type="kr.or.ddit.vo.Diet_day_infoVO"/>
 		<typeAlias alias="dietBoardVO" type="kr.or.ddit.vo.DietBoardVO"/>
 		<typeAlias alias="dietFileVO" type="kr.or.ddit.vo.DietFileVO"/>
+		<typeAlias alias="chatFileVO" type="kr.or.ddit.vo.ChatFileVO"/>
 		
 		<!-- 용춘 -->
 		<typeAlias alias="mypillVO" type="kr.or.ddit.vo.MypillVO" />
@@ -38,6 +40,7 @@
 		<typeAlias alias="MemberFileVO" type="kr.or.ddit.vo.MemberFileVO" />
 		<typeAlias alias="LoginVO" type="kr.or.ddit.vo.LoginVO" />
 		<typeAlias alias="mycarVO" type="kr.or.ddit.vo.MyCarVO" />
+		<typeAlias alias="mycarDetailVO" type="kr.or.ddit.vo.MyCarDetailVO" />
 			
 		<!-- 윤희 -->
 		<typeAlias alias="boardVO" type="kr.or.ddit.vo.BoardVO" />

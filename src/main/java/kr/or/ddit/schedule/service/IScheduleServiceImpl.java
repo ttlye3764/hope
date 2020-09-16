@@ -78,6 +78,11 @@ public class IScheduleServiceImpl implements IScheduleService {
 		return dao.searchFriends(mem_no);
 	}
 
+	@Override
+	public List<ScheduleVO> scheduleListAlarm(String mem_no) throws Exception {
+		return dao.scheduleListAlarm(mem_no);
+	}
+
    /*@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
    @Override
    public MemberVO memberInfo(Map<String, String> params) throws Exception {

@@ -63,4 +63,10 @@ public interface IDietService {
 		
 		//다이어트 게시판 처음 삽입
 		public void insertDietBoardFirst(Map<String, String> params) throws Exception;
+		
+		// 추천식단 리스트 가져오기
+		public List<DietVO> recommendDietList(Map<String, String> params) throws Exception;
+		
+		//추천식단 상세 가져오기
+		public List<Diet_infoVO> recommendDietInfo(Map<String, String> params) throws Exception;
 }

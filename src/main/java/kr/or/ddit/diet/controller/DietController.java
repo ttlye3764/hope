@@ -35,8 +35,10 @@ import com.google.protobuf.ByteString;
 import kr.or.ddit.diet.service.IDietService;
 import kr.or.ddit.utiles.RolePaginationUtil_diet;
 import kr.or.ddit.vo.DietBoardVO;
+import kr.or.ddit.vo.DietVO;
 import kr.or.ddit.vo.Diet_dayVO;
 import kr.or.ddit.vo.Diet_day_infoVO;
+import kr.or.ddit.vo.Diet_infoVO;
 import kr.or.ddit.vo.Diet_memVO;
 import kr.or.ddit.vo.MemberVO;
 import kr.or.ddit.vo.MenuVO;
@@ -184,7 +186,42 @@ public class DietController {
 	}
 
 	@RequestMapping("recommendDiet")
-	public void recommendDiet() {
+	public ModelAndView recommendDiet(ModelAndView andView,
+									Map<String, String> params) throws Exception{
+		
+		List<DietVO> dietList = dietService.recommendDietList(params);
+		
+		andView.addObject("dietList", dietList);
+		andView.setViewName("user/diet/recommendDiet");
+		return andView;
+	}
+	@RequestMapping("recommendDietInfo")
+	public ModelAndView recommendDietInfo(ModelAndView andView,
+											Map<String, String> params,
+											@RequestParam(value="diet_no", required = false) String diet_no) throws Exception{
+		
+		params.put("diet_no", diet_no);
+		List<Diet_infoVO> dietInfoList = dietService.recommendDietInfo(params);
+		List<Diet_infoVO> dietInfoList1 = new ArrayList<Diet_infoVO>();
+		List<Diet_infoVO> dietInfoList2 = new ArrayList<Diet_infoVO>();
+		List<Diet_infoVO> dietInfoList3 = new ArrayList<Diet_infoVO>();
+		
+		for(Diet_infoVO dietInfo : dietInfoList) {
+			if(dietInfo.getDiet_info_division().equals("1")) {
+				dietInfoList1.add(dietInfo);
+			}
+			if(dietInfo.getDiet_info_division().equals("2")) {
+				dietInfoList2.add(dietInfo);
+			}
+			if(dietInfo.getDiet_info_division().equals("3")) {
+				dietInfoList3.add(dietInfo);
+			}
+		}
+		andView.addObject("dietInfoList1", dietInfoList1);
+		andView.addObject("dietInfoList2", dietInfoList2);
+		andView.addObject("dietInfoList3", dietInfoList3);
+		andView.setViewName("jsonConvertView");
+		return andView;
 	}
 
 	@RequestMapping("bmi")
@@ -395,6 +432,68 @@ public class DietController {
 		dietService.updateDietDayKcal(params);
 
 		andView.setViewName("jsonConvertView");
+		return andView;
+	}
+	
+	@RequestMapping("kcalCalculate")
+	public ModelAndView kcalCalculate(ModelAndView andView,
+									@RequestParam(value="kcal", required = false)String kcall,
+									Map<String, String> kcal) throws Exception{
+		
+		int intKcal = Integer.parseInt(kcall);
+		
+		String ring = intKcal / 5+"";
+		String tenis = intKcal / 6+ "";
+		String hiking = intKcal /  3 +"";
+		String takgu = intKcal /  4 +"";
+		String waking = intKcal /  3 +"";
+		String cycle = intKcal /  4 +"";
+		String joging = intKcal /  7 +"";
+		String ski =intKcal /  6 +"";
+		String mealPreparation =intKcal /  2 +"";
+		String blanket = intKcal /  3 +"";
+		String dressing = intKcal /  3 +"";
+		String talk = intKcal /  1 +"";
+		String clean = intKcal /  3 +"";
+		String bath = intKcal /  2 +"";
+		String ironing = intKcal /  2 +"";
+		String sleep = intKcal /  1 +"";
+		String look = intKcal /  1 +"";
+		String cleanShoes = intKcal /  2 +"";
+		String tv = intKcal /  1 +"";
+		String makeup =intKcal /  1 +"";
+		String wash = intKcal /  3 +"";
+		String staris = intKcal /  3 +"";
+		String swimming = intKcal /  5 +"";
+		
+		
+		kcal.put("ring",ring);
+		kcal.put("tenis", tenis);
+		kcal.put("hiking", hiking);
+		kcal.put("takgu", takgu);
+		kcal.put("waking", waking);
+		kcal.put("cycle", cycle);
+		kcal.put("joging", joging);
+		kcal.put("ski", ski);
+		kcal.put("mealPreparation", mealPreparation);
+		kcal.put("blanket", blanket);
+		kcal.put("dreesing", dressing);
+		kcal.put("talk", talk);
+		kcal.put("clean",clean);
+		kcal.put("bath", bath);
+		kcal.put("ironing", ironing);
+		kcal.put("sleep", sleep);
+		kcal.put("look", look);
+		kcal.put("cleanShoes", cleanShoes);
+		kcal.put("tv", tv);
+		kcal.put("makeup", makeup);
+		kcal.put("wash", wash);
+		kcal.put("stairs",staris);
+		kcal.put("swimming", swimming);
+		
+		
+		andView.addObject("kcal", kcal);
+		andView.setViewName("user/diet/dayKcal");
 		return andView;
 	}
 
