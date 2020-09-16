@@ -2,8 +2,6 @@ package kr.or.ddit.utiles;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.stereotype.Component;
-
 
 public class RolePaginationUtil_seung {
 	private int currentPage; 		// 현재 페이지
