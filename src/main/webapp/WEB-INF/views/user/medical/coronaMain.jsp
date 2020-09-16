@@ -1260,7 +1260,7 @@ function AgeBarChart(label,data){
 		 backgroundColor : [ '#f3545d','#fdaf4b','#0095ff', '#32a852', '#ff8400', '#ae00ff','#ff0000','#00ffd9','#eaff00' ],   
          data: data
 		 }];
-
+	
 
 	 var options = {
 			 legend: {

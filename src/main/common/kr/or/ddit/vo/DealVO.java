@@ -15,9 +15,23 @@ public class DealVO {
 	private String deal_division;
 	private String deal_card_name;
 	private String groupPrice;
+	private String totalPrice;
+	private String d_date;
 	
 	
 	
+	public String getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(String totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	public String getD_date() {
+		return d_date;
+	}
+	public void setD_date(String d_date) {
+		this.d_date = d_date;
+	}
 	public String getGroupPrice() {
 		return groupPrice;
 	}

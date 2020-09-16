@@ -42,5 +42,11 @@ public interface IDealDao {
 	public String fix_minus(String mem_no) throws Exception;
 	public List<DealVO> groupPlus(String mem_no) throws Exception;
 	public List<DealVO> groupMinus(String mem_no) throws Exception;
+	public List<DealVO> accountList_Minus(Map<String, String> params)throws Exception;
+	public List<DealVO> accountList_Plus(Map<String, String> params)throws Exception;
+	public List<DealVO> accountList2_Plus(Map<String, String> params)throws Exception;
+	public List<DealVO> accountList2_Minus(Map<String, String> params)throws Exception;
+	public List<DealVO> accountLabel(Map<String, String> params)throws Exception;
+	public List<DealVO> accountLabel2(Map<String, String> params)throws Exception;
 
 }

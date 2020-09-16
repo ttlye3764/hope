@@ -100,6 +100,94 @@
 		where deal_no = #{deal_no}
 	</select>
 	
+	<select id="accountList_Minus" parameterType="map" resultType="dealVO">	
+		select deal_option, d_date, sum(deal_price) totalPrice
+		from (select deal.*, TO_CHAR(deal_date, 'YYYY/MM') d_date 
+           	  from deal
+           	  where mem_no = #{mem_no})
+		where 1=1 and deal_option = '출금'
+			<if test="deal_year != null">
+				and
+				deal_date between  to_date(#{deal_year}||'01','yyyymm') and to_date(#{deal_year}||'12','yyyymm')
+			</if>
+			<if test="deal_bungi != null">
+				and
+				deal_date between to_date('2020'||#{bungiStart},'yyyymm') and last_day(to_date('2020'||#{bungiEnd},'yyyymm'))
+			</if>
+			<if test="startDate != null">
+				and
+				deal_date between to_date('2020'||#{startDate},'yyyymm') and last_day(to_date('2020'||#{endDate},'yyyymm'))
+			</if>
+		group by deal_option, d_date 
+		order by d_date
+	</select>
+	
+	<select id="accountList_Plus" parameterType="map" resultType="dealVO">	
+		select deal_option, d_date, sum(deal_price) totalPrice
+		from (select deal.*, TO_CHAR(deal_date, 'YYYY/MM') d_date 
+           	  from deal
+           	  where mem_no = #{mem_no})
+		where 1=1 and deal_option = '입금'
+			<if test="deal_year != null">
+				and
+				deal_date between  to_date(#{deal_year}||'01','yyyymm') and to_date(#{deal_year}||'12','yyyymm')
+			</if>
+			<if test="deal_bungi != null">
+				and
+				deal_date between to_date('2020'||#{bungiStart},'yyyymm') and last_day(to_date('2020'||#{bungiEnd},'yyyymm'))
+			</if>
+			<if test="startDate != null">
+				and
+				deal_date between to_date('2020'||#{startDate},'yyyymm') and last_day(to_date('2020'||#{endDate},'yyyymm'))
+			</if>
+		group by deal_option, d_date 
+		order by d_date
+	</select>
+	
+	<select id="accountList2_Minus" parameterType="map" resultType="dealVO">
+		select deal_option,deal_date, sum(deal_price) totalPrice
+		from deal
+		where mem_no = #{mem_no} and deal_date between  to_date('2020'||#{deal_month},'yyyymm') and last_day(to_date('2020'||#{deal_month},'yyyymm')) and deal_option = '출금'
+		group by deal_option, deal_date
+		order by deal_date
+	</select>
+	<select id="accountList2_Plus" parameterType="map" resultType="dealVO">
+		select deal_option,deal_date, sum(deal_price) totalPrice
+		from deal
+		where mem_no = #{mem_no} and deal_date between  to_date('2020'||#{deal_month},'yyyymm') and last_day(to_date('2020'||#{deal_month},'yyyymm')) and deal_option = '입금'
+		group by deal_option, deal_date
+		order by deal_date
+	</select>
+	
+	<select id="accountLabel2" parameterType="map" resultType="dealVO">
+		select deal_date
+		from deal
+		where mem_no = #{mem_no} and deal_date between  to_date('2020'||#{deal_month},'yyyymm') and last_day(to_date('2020'||#{deal_month},'yyyymm'))
+		group by deal_date
+		order by deal_date
+	</select>
+	<select id="accountLabel" parameterType="map" resultType="dealVO">
+		select d_date
+		from (select deal.*, TO_CHAR(deal_date, 'YYYY/MM') d_date 
+           	  from deal
+           	  where mem_no = #{mem_no})
+		where 1=1
+			<if test="deal_year != null">
+				and
+				deal_date between  to_date(#{deal_year}||'01','yyyymm') and to_date(#{deal_year}||'12','yyyymm')
+			</if>
+			<if test="deal_bungi != null">
+				and
+				deal_date between to_date('2020'||#{bungiStart},'yyyymm') and last_day(to_date('2020'||#{bungiEnd},'yyyymm'))
+			</if>
+			<if test="startDate != null">
+				and
+				deal_date between to_date('2020'||#{startDate},'yyyymm') and last_day(to_date('2020'||#{endDate},'yyyymm'))
+			</if>
+		group by d_date 
+		order by d_date
+	</select>
+	
 	
 	<select id="searchList" parameterType="map" resultType="dealVO">
 	select b.*	

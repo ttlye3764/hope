@@ -123,14 +123,8 @@ var timer = setInterval(function(){
 							<a class="nav-link dropdown-toggle" href="#" id="blogMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Medical</a>
 							<ul class="dropdown-menu" aria-labelledby="blogMenu">
 								<li class="dropdown-submenu">
-								
 									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalMain.do">복용관리</a>
-
 								</li>
-								<li class="dropdown-submenu">
-									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalMapMain.do">내 주변 병원/약국 위치보기</a>
-								</li>
-								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/searchPill.do">알약 정보보기</a></li>
 								<li class="dropdown-submenu">
 									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/coronaMain.do">코로나</a>
 								</li>
@@ -183,7 +177,7 @@ var timer = setInterval(function(){
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/accountBook/setting.do">거래 등록</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/accountBook/accountList.do">거래 내역 보기</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/accountBook/accountStatistics.do">거래 내역 통계</a> </li>
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/">가까운 은행보기</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/accountBook/accountMap.do">가까운 은행보기</a> </li>
 								
 							</ul>
 						</li>

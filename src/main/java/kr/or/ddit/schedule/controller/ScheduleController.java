@@ -190,10 +190,7 @@ public class ScheduleController {
 							  System.out.println(scheduleList.get(i).getS_startdate());
 							  System.out.println(scheduleList.get(i).getS_enddate());
 							  System.out.println("--------------------------------------------");
-							  
 							  alarmList.add(scheduleList.get(i));
-							  
-							  
 						  }
 					  }
 				  }
@@ -210,9 +207,16 @@ public class ScheduleController {
 			  
 		}
 		
-		for(int i=0; i<alarmList.size(); i++) {
-			System.out.println(alarmList.get(i).getS_memo());
-		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		ModelAndView andView = new ModelAndView();
 		andView.addObject("json", alarmList);
 		andView.setViewName("jsonConvertView");

@@ -113,6 +113,32 @@ public class IDealServiceImpl implements IDealService{
 		return dao.groupMinus(mem_no);
 	}
 
+	@Override
+	public List<DealVO> accountList_Plus(Map<String, String> params) throws Exception {
+		return dao.accountList_Plus(params);
+	}
+	@Override
+	public List<DealVO> accountList_Minus(Map<String, String> params) throws Exception {
+		return dao.accountList_Minus(params);
+	}
+	@Override
+	public List<DealVO> accountList2_Plus(Map<String, String> params) throws Exception {
+		return dao.accountList2_Plus(params);
+	}
+	@Override
+	public List<DealVO> accountList2_Minus(Map<String, String> params) throws Exception {
+		return dao.accountList2_Minus(params);
+	}
+
+	@Override
+	public List<DealVO> accountLabel(Map<String, String> params) throws Exception {
+		return dao.accountLabel(params);
+	}
+	@Override
+	public List<DealVO> accountLabel2(Map<String, String> params) throws Exception {
+		return dao.accountLabel2(params);
+	}
+
 	
 
 	
