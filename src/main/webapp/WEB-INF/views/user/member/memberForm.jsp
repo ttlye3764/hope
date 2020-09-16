@@ -409,7 +409,7 @@ $(function(){
          <tr>
             <td width="150px" height="25" class="idright">비밀번호</td>
             <td><input type="password" class="form-control" name="mem_pass" id="pass" value="" onkeyup="pwcheck()"/> 
-            <label>8 ~ 20 자리 영문자 및 숫자 사용</label></td>
+            <label>4 ~ 15자리 영문자 및 숫자 사용</label></td>
          </tr>
          
          <tr>

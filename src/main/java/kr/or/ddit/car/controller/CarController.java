@@ -27,9 +27,6 @@ public class CarController {
 	@RequestMapping("oil")
 	public void oil() {}
 	
-	@RequestMapping("weather")
-	public void weather() {}
-	
 	@RequestMapping("carMain")
 	public ModelAndView carMain(HttpSession session, ModelAndView andView) throws Exception {
 		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
@@ -139,6 +136,7 @@ public class CarController {
 		params.put("mem_no", mem_no);
 		params.put("car_no", car_no);
 		
+		service.deleteMycarDetail(params);
 		service.deleteMycar(params);
 		
 		return "redirect:/user/car/carMain.do";

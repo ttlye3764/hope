@@ -270,7 +270,7 @@ function sendChatbotBTN(){
 							</ul>
 						</li>
 						
-						<!-- 펫 관리 -->
+						<!-- 내 차 관리 -->
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="docMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">car</a>
 							<ul class="dropdown-menu" aria-labelledby="docMenu">
