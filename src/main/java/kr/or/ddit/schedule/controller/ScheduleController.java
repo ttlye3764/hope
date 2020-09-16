@@ -53,6 +53,10 @@ public class ScheduleController {
 	@Autowired
 	private IScheduleService service;
 
+	
+	@Autowired
+	private IMedicalService medicalservice;
+	
 	@Autowired
 	private IMemberService MemberService;
 
