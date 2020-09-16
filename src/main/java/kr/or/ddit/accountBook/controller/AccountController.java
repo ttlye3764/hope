@@ -266,8 +266,112 @@ public class AccountController {
 		System.out.println(deal_bungi);
 		System.out.println(deal_month);
 		
+		Map<String, String> params = new HashMap<>();
+		
+		String bungiStart = null;
+		String bungiEnd = null;
+		int check = 0;
+		
+		
+		if( endDate == null || endDate.length()<1 ) {
+			startDate = null;
+			params.put("startDate", startDate);
+			System.out.println("startdate null");
+			endDate = null;
+			params.put("endDate", endDate);
+			System.out.println("endDate null");
+		}
+		else if(startDate != null || endDate != null) {
+			String[] a = startDate.split("-");
+			startDate = a[1];
+			a = endDate.split("-");
+			endDate = a[1];
+			params.put("startDate", startDate);
+			params.put("endDate", endDate);
+			System.out.println("선택날짜");
+			System.out.println(startDate);  //04
+			System.out.println(endDate);    //09
+		}
+		if(deal_year == null || deal_year.length()<1 ) {
+			deal_year = null;
+			params.put("deal_year", deal_year);
+			System.out.println("deal_year null");
+		}
+		if( deal_bungi == null || deal_bungi.length()<1 ) {
+			deal_bungi = null;
+			params.put("deal_bungi", deal_bungi);
+			System.out.println("deal_bungi null");
+		}else if(deal_bungi.length()>0) {
+			String[] str = deal_bungi.split("/");
+			deal_bungi = str[0];
+			if(deal_bungi.equals("1")) {
+				bungiStart = "1";
+				bungiEnd = "3";
+			}
+			else if(deal_bungi.equals("2")) {
+				bungiStart = "4";
+				bungiEnd = "6";
+			}
+			else if(deal_bungi.equals("3")) {
+				bungiStart = "7";
+				bungiEnd = "9";
+			}
+			else if(deal_bungi.equals("4")) {
+				bungiStart = "10";
+				bungiEnd = "12";
+			}
+			params.put("bungiStart", bungiStart);
+			params.put("bungiEnd", bungiEnd);
+			params.put("deal_bungi", deal_bungi);
+		}
+		
+		if(deal_month == null || deal_month.length()<1   ) {
+			deal_month = null;
+			params.put("deal_month", deal_month);
+			System.out.println("deal_month null");
+		}else if(deal_month.length()>0) {
+			String[] m = deal_month.split("월");
+			deal_month = m[0];
+			params.put("deal_month", deal_month);
+			System.out.println("월별");
+			System.out.println(deal_month);
+		}
+		List<DealVO> listPlus = new ArrayList<DealVO>();
+		List<DealVO> listMinus = new ArrayList<DealVO>();
+		List<DealVO> label = new ArrayList<DealVO>();
+		
+	
+		params.put("deal_year", deal_year);		
+		params.put("mem_no", mem_no);		
+		
+		if(deal_year != null || deal_bungi != null) {
+			listPlus = service.accountList_Plus(params);
+			listMinus = service.accountList_Minus(params);
+			label = service.accountLabel(params);
+			check = 1;
+		}
+		
+		if(deal_month != null) {
+			listPlus = service.accountList2_Plus(params);
+			listMinus = service.accountList2_Minus(params);
+			label = service.accountLabel2(params);
+			check = 2;
+		}
+		
+		
+		if(startDate != null || endDate != null) {
+			listPlus = service.accountList_Plus(params);
+			listMinus = service.accountList_Minus(params);
+			label = service.accountLabel(params);
+			check = 1;
+		}
+		
 		
 		ModelAndView andView = new ModelAndView();
+		andView.addObject("check",check);
+		andView.addObject("label",label);
+		andView.addObject("listMinus",listMinus);
+		andView.addObject("listPlus",listPlus);
 		andView.setViewName("jsonConvertView");
 		return andView;
 	}
@@ -392,6 +496,10 @@ public class AccountController {
 		params.put("deal_option", deal_option);
 		params.put("deal_name", deal_name);
 		params.put("deal_division", deal_division);
+		
+		
+		
+		
 		if(deal_kind == null) {
 			params.put("deal_kind", null);
 			params.put("deal_card_name", null);
@@ -560,7 +668,8 @@ public class AccountController {
 			}
 			return saveName;
 		}
-		
+	@RequestMapping("accountMap")
+	public void accountMap() {}
 		
 		
 	@RequestMapping("excelDown")

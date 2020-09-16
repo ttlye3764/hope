@@ -52,10 +52,11 @@ public class ScheduleController {
 
 	@Autowired
 	private IScheduleService service;
+
 	
 	@Autowired
 	private IMedicalService medicalservice;
-
+	
 	@Autowired
 	private IMemberService MemberService;
 
@@ -167,9 +168,9 @@ public class ScheduleController {
 	
 	
 	@RequestMapping("alarm")
-	public ModelAndView alarm(String mem_no) throws Exception {
-		
-		List<ScheduleVO> scheduleList = this.service.scheduleListAlarm(mem_no);
+	public ModelAndView alarm(HttpServletRequest request,HttpSession session) throws Exception {
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		List<ScheduleVO> scheduleList = this.service.scheduleListAlarm(memberInfo.getMem_no());
 	     List<ScheduleVO> alarmList = new ArrayList<>();
 		for(int i=0; i<scheduleList.size(); i++) {
 			  String start = scheduleList.get(i).getS_startdate(); //시작
@@ -189,7 +190,9 @@ public class ScheduleController {
 				  if(Calendar.getInstance().before(ecalendar)) {
 					  if(Calendar.getInstance().getTime().getHours()==calendar.getTime().getHours()) {
 						  if(Calendar.getInstance().getTime().getMinutes()==calendar.getTime().getMinutes()) {
+
 							  alarmList.add(scheduleList.get(i));
+
 							  
 							  
 						  }
@@ -204,9 +207,7 @@ public class ScheduleController {
 		}
 		
 		
-		
-		
-		List<MypillVO> medicalList = this.medicalservice.medicalList(mem_no);
+		List<MypillVO> medicalList = this.medicalservice.medicalList(memberInfo.getMem_no());
 	    List<MypillVO> medicalalarmList = new ArrayList<>();
 		for(int i=0; i<medicalList.size(); i++) {
 			  String start = medicalList.get(i).getPill_start(); //시작

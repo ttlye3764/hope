@@ -72,7 +72,6 @@ var timer = setInterval(function(){
 		           url     : '${pageContext.request.contextPath}/user/schedule/alarm.do',
 		           type    : 'post',
 		           dataType: 'json',
-		           data : {'mem_no':${LOGIN_MEMBERINFO.mem_no}},
 		           success : function(result) {  
 			           for(var i=0; i<result.json.length; i++){
 		             		notify(result.json[i].s_memo);
@@ -235,14 +234,8 @@ function sendChatbotBTN(){
 							<a class="nav-link dropdown-toggle" href="#" id="blogMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Medical</a>
 							<ul class="dropdown-menu" aria-labelledby="blogMenu">
 								<li class="dropdown-submenu">
-								
 									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalMain.do">복용관리</a>
-
 								</li>
-								<li class="dropdown-submenu">
-									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalMapMain.do">내 주변 병원/약국 위치보기</a>
-								</li>
-								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/searchPill.do">알약 정보보기</a></li>
 								<li class="dropdown-submenu">
 									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/coronaMain.do">코로나</a>
 								</li>
@@ -282,9 +275,9 @@ function sendChatbotBTN(){
 							<a class="nav-link dropdown-toggle" href="#" id="docMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">car</a>
 							<ul class="dropdown-menu" aria-labelledby="docMenu">
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/carMain.do">내 차 관리</a> </li>
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/carForm.do">세차하기 좋은 날</a> </li>
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/diet_my">카센터 위치</a> </li>
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/parking.do">목적지 주차장 찾기</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/weather.do">세차하기 좋은 날</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/oil.do">주변 주유소 위치</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/parking.do">주차장 찾기</a> </li>
 							</ul>
 						</li>
 						<!-- Menu item 5 Elements-->
@@ -294,7 +287,7 @@ function sendChatbotBTN(){
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/accountBook/setting.do">거래 등록</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/accountBook/accountList.do">거래 내역 보기</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/accountBook/accountStatistics.do">거래 내역 통계</a> </li>
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/">가까운 은행보기</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/accountBook/accountMap.do">가까운 은행보기</a> </li>
 								
 							</ul>
 						</li>

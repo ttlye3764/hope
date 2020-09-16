@@ -334,11 +334,82 @@ $(function () {
 		$(".endDate").val("");
 		barChart();
 	});
+	
+	function getToday(){
+		var date = new Date();
+		return date.getFullYear()+("0"+(date.getMonth()+1)).slice(-2)+("0"+(date.getDate()-1)).slice(-2);
+	}
+	var myChart;
+	
+	$(function(){
+		var today = getToday();
+		$.ajax({
+			 url     : '${pageContext.request.contextPath}/user/accountBook/barChart.do',  
+		       type    : 'post',
+		       dataType: 'json',
+		       data : {'mem_no':${LOGIN_MEMBERINFO.mem_no},'deal_month':(today.substring(4,6)+'월')},
+		       success : function(result) {
+					var listPlus = [];
+					var listMinus = [];
+					var la = [];
+					console.log(result.listPlus);
+					console.log(result.listMinus);
+					
+					if(result.check == 1){
+						$.each(result.label,function(i,v){
+							la.push(v.d_date);
+						})
+					}else{
+						$.each(result.label,function(i,v){
+							var date = v.deal_date.split(' ');
+							la.push(date[0]);
+						})	
+					}
+					$.each(result.listPlus,function(i,v){						
+						listPlus.push(v.totalPrice);
+					})					
+					$.each(result.listMinus,function(i,v){
+						
+						listMinus.push(v.totalPrice);
+					})					
+					console.log(la);
+					/* Bar(la,listPlus,listMinus);	 */	
 
 
+					var ctx = document.getElementById('myChart').getContext('2d');
+					myChart = new Chart(ctx, {
+					    type: 'bar',
+					    data: {
+					        labels: la,
+					        datasets: [{
+					            label: '지출',
+					            data: listPlus,		
+					            backgroundColor : '#f3545d'         
+					        },
+					        {
+					            label: '수입',
+					            data: listMinus,		
+					            backgroundColor : '#0095ff'            
+					        }
+					        ]
+					    },
+					    options: {
+					        scales: {
+					            yAxes: [{
+					                ticks: {
+					                    beginAtZero: true
+					                }
+					            }]
+					        }
+					    }
+					});
+			    }
+		})
+	})
 
 
 	function barChart(){
+		myChart.destroy();
 		var startDate = $('.startDate').val();
 		var endDate = $('.endDate').val();
 		var deal_year = $('.deal_year').val();
@@ -346,51 +417,56 @@ $(function () {
 		var deal_month = $('.deal_month').val();
 
 		$.ajax({
-			 url     : '${pageContext.request.contextPath}/user/accountBook/barChart.do',  //나이/성별
+			 url     : '${pageContext.request.contextPath}/user/accountBook/barChart.do',  
 		       type    : 'post',
 		       dataType: 'json',
 		       data : {'mem_no':${LOGIN_MEMBERINFO.mem_no}, 'startDate':startDate, 'endDate':endDate, 'deal_year':deal_year, 'deal_bungi':deal_bungi,'deal_month':deal_month },
 		       success : function(result) {
-					var list = [];
+					var listPlus = [];
+					var listMinus = [];
 					var la = [];
-					$.each(result.response.body.items.item,function(i,v){
-						if(i<9){
-							list.push(v.confCase);
-							la.push(v.gubun);
-						}
+					console.log(result.listPlus);
+					console.log(result.listMinus);
+					
+					if(result.check == 1){
+						$.each(result.label,function(i,v){
+							la.push(v.d_date);
+						})
+					}else{
+						$.each(result.label,function(i,v){
+							var date = v.deal_date.split(' ');
+							la.push(date[0]);
+						})	
+					}
+					$.each(result.listPlus,function(i,v){						
+						listPlus.push(v.totalPrice);
 					})					
-					Bar(la,list);					
+					$.each(result.listMinus,function(i,v){
+						
+						listMinus.push(v.totalPrice);
+					})					
+					console.log(la);
+					Bar(la,listPlus,listMinus);					
 			    }
 		})
 	}
-	
-	function Bar(){
+	function Bar(la,listPlus,listMinus){
 		var ctx = document.getElementById('myChart').getContext('2d');
-		var myChart = new Chart(ctx, {
+		myChart = new Chart(ctx, {
 		    type: 'bar',
 		    data: {
-		        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+		        labels: la,
 		        datasets: [{
-		            label: '# of Votes',
-		            data: [12, 19, 3, 5, 2, 3],
-		            backgroundColor: [
-		                'rgba(255, 99, 132, 0.2)',
-		                'rgba(54, 162, 235, 0.2)',
-		                'rgba(255, 206, 86, 0.2)',
-		                'rgba(75, 192, 192, 0.2)',
-		                'rgba(153, 102, 255, 0.2)',
-		                'rgba(255, 159, 64, 0.2)'
-		            ],
-		            borderColor: [
-		                'rgba(255, 99, 132, 1)',
-		                'rgba(54, 162, 235, 1)',
-		                'rgba(255, 206, 86, 1)',
-		                'rgba(75, 192, 192, 1)',
-		                'rgba(153, 102, 255, 1)',
-		                'rgba(255, 159, 64, 1)'
-		            ],
-		            borderWidth: 1
-		        }]
+		            label: '지출',
+		            data: listPlus,		
+		            backgroundColor : '#f3545d'         
+		        },
+		        {
+		            label: '수입',
+		            data: listMinus,		
+		            backgroundColor : '#0095ff'            
+		        }
+		        ]
 		    },
 		    options: {
 		        scales: {

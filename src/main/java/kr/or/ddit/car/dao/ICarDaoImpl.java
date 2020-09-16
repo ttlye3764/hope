@@ -63,7 +63,7 @@ public class ICarDaoImpl implements ICarDao{
 
 	@Override
 	public List<MyCarDetailVO> selectKm(Map<String, String> params) throws Exception {
-		return client.selectList("car.selectKM",params);
+		return client.selectList("car.selectKM", params);
 	}
 
 	@Override

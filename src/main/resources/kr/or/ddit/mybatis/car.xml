@@ -57,12 +57,10 @@
 	
 	<insert id="insertKm" parameterType="mycarDetailVO">
 		INSERT INTO MYCAR_DETAIL(
-				MD_NO,
 				CAR_NO,
 				MD_KM,
 				MD_DATE)
 			VALUES(
-				#{md_no},
 				#{car_no},
 				#{md_km},
 				#{md_date}
@@ -71,54 +69,51 @@
 	
 	<insert id="insertBreak" parameterType="mycarDetailVO">
 		INSERT INTO MYCAR_DETAIL(
-				MD_NO,
 				CAR_NO,
 				MD_KM,
-				MD_BRAKE,
-				MD_DATE)
+				MD_BRAKE
+				)
 			VALUES(
-				#{md_no},
 				#{car_no},
 				#{md_km},
-				#{md_break},
-				#{md_date}
+				#{md_brake}
 			)
 	</insert>
 	
 	<insert id="insertEngine" parameterType="mycarDetailVO">
 		INSERT INTO MYCAR_DETAIL(
-				MD_NO,
 				CAR_NO,
 				MD_KM,
-				MD_ENGINE,
-				MD_DATE)
+				MD_ENGINE
+				)
 			VALUES(
-				#{md_no},
 				#{car_no},
 				#{md_km},
-				#{md_engine},
-				#{md_date}
+				#{md_engine}
 			)
 	</insert>
 	
-	<select id="selectKm" parameterType="map" resultType="mycarDetailVO">
+	<select id="selectKM" parameterType="map" resultType="mycarDetailVO">
 		SELECT CAR_NO, MD_DATE, MD_KM
 		FROM MYCAR_DETAIL
-		WHERE MEM_NO = #{mem_no}
-		AND CAR_NO = #{car_no}
+		WHERE CAR_NO = #{car_no}
+		AND MD_DATE IS NOT NULL
+		ORDER BY MD_DATE
 	</select>
 	
 	<select id="selectBreak" parameterType="map" resultType="mycarDetailVO">
-		SELECT CAR_NO, MD_DATE, MD_KM, MD_BREAK
+		SELECT CAR_NO, MD_KM, MD_BRAKE
 		FROM MYCAR_DETAIL
-		WHERE MEM_NO = #{mem_no}
-		AND CAR_NO = #{car_no}
+		WHERE CAR_NO = #{car_no}
+		AND MD_BRAKE IS NOT NULL
+		ORDER BY MD_BRAKE
 	</select>
 	
 	<select id="selectEngine" parameterType="map" resultType="mycarDetailVO">
-		SELECT CAR_NO, MD_DATE, MD_KM, MD_ENGINE
+		SELECT CAR_NO, MD_KM, MD_ENGINE
 		FROM MYCAR_DETAIL
-		WHERE MEM_NO = #{mem_no}
-		AND CAR_NO = #{car_no}
+		WHERE CAR_NO = #{car_no}
+		AND MD_ENGINE IS NOT NULL
+		ORDER BY MD_ENGINE
 	</select>
 </mapper>    

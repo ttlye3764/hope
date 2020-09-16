@@ -1,18 +1,11 @@
 package kr.or.ddit.vo;
 
 public class MyCarDetailVO {
-	String md_no;
 	String car_no;
 	String md_km;
 	String md_engine;
 	String md_brake;
 	String md_date;
-	public String getMd_no() {
-		return md_no;
-	}
-	public void setMd_no(String md_no) {
-		this.md_no = md_no;
-	}
 	public String getCar_no() {
 		return car_no;
 	}

@@ -4,9 +4,106 @@
 
 <script type='text/javascript'
 	src='<%=request.getContextPath()%>/js/validation.js'></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type='text/javascript' src='<%=request.getContextPath()%>/js/validation.js'></script>
 <script type="text/javascript">
 	$(function() {
+		$('form[name=insertcarForm]').submit(function() {
+			var car_kinds = $('#is_car_kinds').val();
+			var car_date = $('#is_car_date').val();
+			var car_no = $('#is_car_no').val();
+			if(car_kinds == ''){
+				swal("","차종을 입력해주세요.", "warning");
+				return false;
+			}
+			if(car_no == ''){
+				swal("","차량번호를 입력해주세요.", "warning");
+				return false;
+			}
+// 			if(!car_no.validationCARKIND()){
+// 				swal("","올바른 차량번호를 입력해주세요.","warning");
+// 				return false;
+// 			}
+			if (!car_date.validationCARYEAR()) {
+				 swal("","올바른 출고년도를 입력해주세요.", "warning");
+		         return false;
+		    }
+		});
+		$('form[name=updatecarForm]').submit(function() {
+			var car_kinds = $('#ud_car_kinds').val();
+			var car_date = $('#ud_car_date').val();
+			var car_no = $('#ud_car_no').val();
+			if(car_kinds == ''){
+				swal("","차종을 입력해주세요.", "warning");
+				return false;
+			}
+			if(car_no == ''){
+				swal("","차량번호를 입력해주세요.", "warning");
+				return false;
+			}
+			if (!car_date.validationCARYEAR()) {
+				 swal("","올바른 출고년도를 입력해주세요.", "warning");
+		         return false;
+		    }
+		});
+		$('form[name=kmcarForm]').submit(function() {
+			var car_date = $('#km_md_date').val();
+			var md_km = $('#km_md_km').val();
+			if(car_date == ''){
+				swal("","날짜를 입력해주세요.", "warning");
+				return false;
+			}
+			if(md_km == ''){
+				swal("","키로수를 입력해주세요.", "warning");
+				return false;
+			}
+			if (!md_km.validationKM()) {
+				 swal("","올바른 키로수를 입력해주세요.", "warning");
+		         return false;
+		    }
+		});
+
+		$('form[name=egcarForm]').submit(function() {
+			var car_date = $('#eg_md_date').val();
+			var md_km = $('#eg_md_km').val();
+			if(car_date == ''){
+				swal("","날짜를 입력해주세요.", "warning");
+				return false;
+			}
+			if(md_km == ''){
+				swal("","키로수를 입력해주세요.", "warning");
+				return false;
+			}
+			if (!md_km.validationKM()) {
+				 swal("","올바른 키로수를 입력해주세요.", "warning");
+		         return false;
+		    }
+		});
+
+		$('form[name=bkcarForm]').submit(function() {
+			var car_date = $('#bk_md_brake').val();
+			var md_km = $('#bk_md_km').val();
+			if(car_date == ''){
+				swal("","날짜를 입력해주세요.", "warning");
+				return false;
+			}
+			if(md_km == ''){
+				swal("","키로수를 입력해주세요.", "warning");
+				return false;
+			}
+			if (!md_km.validationKM()) {
+				 swal("","올바른 키로수를 입력해주세요.", "warning");
+		         return false;
+		    }
+		});
+		
 		$('#lt_btn').click(function(){
+			var kind = $('#lt_car_kinds_hd').val();
+
+			if(kind == ''){
+				swal("","수정할 자동차를 선택해주세요.", "warning");
+				return false;
+			}
 			$.ajax({
 				type : 'POST',
 				url : '${pageContext.request.contextPath}/user/car/carView.do',
@@ -36,7 +133,16 @@
 		$('table tr:gt(0)').on('click', function() {
 			var no = $(this).find('td:eq(0)').text();
 			$('#hid').val(no);
+			$('#km_car_no').val(no);
+			$('#km_car_no2').val(no);
+			$('#eg_car_no').val(no);
+			$('#eg_car_no2').val(no);
+			$('#bk_car_no').val(no);
+			$('#bk_car_no2').val(no);
 			$('#collapse-1').collapse('show');
+			$('#kmtb').empty();
+			$('#enginetb').empty();
+			$('#breaktb').empty();
 
 			$.ajax({
 				type : 'POST',
@@ -47,18 +153,42 @@
 				},
 				success : function(result) {
 					$('#lt_car_kinds').val(result.carInfo.car_kinds);
+					$('#lt_car_kinds_hd').val(result.carInfo.car_kinds);
 					$('#lt_car_no').val(result.carInfo.car_no);
 					$('#lt_car_no_hd').val(result.carInfo.car_no);
 					$('#lt_car_date').val(result.carInfo.car_date);
 					$('#lt_car_oil').val(result.carInfo.car_oil);
-					console.log(result);
-				},
-				error : function(result) {
-					$('#lt_car_kinds').val(result.carInfo.car_kinds);
-					$('#lt_car_no').val(result.carInfo.car_no);
-					$('#lt_car_no_hd').val(result.carInfo.car_no);
-					$('#lt_car_date').val(result.carInfo.car_date);
-					$('#lt_car_oil').val(result.carInfo.car_oil);
+
+					$('#kmtb').append('<thead><tr><th>차량번호</th><th>총 키로수</th><th>입력날짜</th></tr></thead>');
+		            $('#kmtb').append('<tbody>');
+		            if(result.kmList.length == 0){
+						$('#kmtb').append('<tr><td colspan="3" align="center">등록된 키로수가 없습니다.</td></tr>');
+			        }
+					for(var i = 0 ; i < result.kmList.length ; i++){
+						$('#kmtb').append('<tr><td>'+result.kmList[i].car_no+'</td><td>'+result.kmList[i].md_km+'km</td><td>'+result.kmList[i].md_date+'</td></tr>');
+					}
+		            $('#kmtb').append('</tbody>')
+// 			엔진오일
+		            $('#enginetb').append('<thead><tr><th>차량번호</th><th>총 키로수</th><th>교환날짜</th></tr></thead>');
+		            $('#enginetb').append('<tbody>');
+		            if(result.engineList.length == 0){
+						$('#enginetb').append('<tr><td colspan="3" align="center">등록된 교환 기록이 없습니다.</td></tr>');
+			        }
+		            for(var i = 0 ; i < result.engineList.length ; i++){
+		            	$('#enginetb').append('<tr><td>'+result.engineList[i].car_no+'</td><td>'+result.engineList[i].md_km+'km</td><td>'+result.engineList[i].md_engine+'</td></tr>');
+		            }
+		            $('#enginetb').append('</tbody>')
+
+// 		            브레이크
+		            $('#breaktb').append('<thead><tr><th>차량번호</th><th>총 키로수</th><th>교환날짜</th></tr></thead>');
+		            $('#breaktb').append('<tbody>');
+		            if(result.breakList.length == 0){
+						$('#breaktb').append('<tr><td colspan="3" align="center">등록된 교환 기록이 없습니다.</td></tr>');
+			        }
+		            for(var i = 0 ; i < result.breakList.length ; i++){
+		            	$('#breaktb').append('<tr><td>'+result.breakList[i].car_no+'</td><td>'+result.breakList[i].md_km+'km</td><td>'+result.breakList[i].md_brake+'</td></tr>');
+		            }
+		            $('#breaktb').append('</tbody>')
 				}
 			});
 		});
@@ -72,6 +202,33 @@
 	});
 	function insertCar() {
 		$("#insertCar").modal("show"); //모달창 띄우기
+	}
+	function insertKm(){
+		var kind = $('#lt_car_kinds_hd').val();
+
+		if(kind == ''){
+			swal("","등록할 자동차를 선택해주세요.", "warning");
+			return false;
+		}
+		$("#insertKm").modal("show");
+	}
+	function insertEngine(){
+		var kind = $('#lt_car_kinds_hd').val();
+
+		if(kind == ''){
+			swal("","등록할 자동차를 선택해주세요.", "warning");
+			return false;
+		}
+		$("#insertEngine").modal("show");
+	}
+	function insertBreak(){
+		var kind = $('#lt_car_kinds_hd').val();
+
+		if(kind == ''){
+			swal("","등록할 자동차를 선택해주세요.", "warning");
+			return false;
+		}
+		$("#insertBreak").modal("show");
 	}
 </script>
 <div class="innerpage-banner center bg-overlay-dark-7 py-7"
@@ -96,12 +253,132 @@
 <br>
 <br>
 
+<!-- 키로수 Modal -->
+<div class="modal fade text-left" id="insertKm" tabindex="-1"
+	role="dialog" aria-labelledby="exampleModal" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<form name="kmcarForm" method="post"
+				action="${pageContext.request.contextPath}/user/car/insertMycarkm.do">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">내 차 키로수 등록</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" id="hid">
+					<div class="input-group mb-3" style="width: 400px" align="center">
+						<input type="hidden" name="car_no" id="km_car_no">
+						차량번호&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="form-control"
+							id="km_car_no2" disabled="disabled"/>
+					</div>
+					<div class="input-group mb-3" style="width: 400px" align="center">
+						등록날짜&nbsp;&nbsp;&nbsp;&nbsp;<input
+							type="date" class="form-control" id="km_md_date" name="md_date" />
+					</div>
+					<div class="input-group mb-3" style="width: 400px" align="center">
+						총 키로수&nbsp;&nbsp;&nbsp;<input type="text" class="form-control"
+							id="km_md_km" name="md_km" />
+					</div>
+				</div>
+				<div class="modal-footer">
+					<input type="submit" value="등록">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">닫기</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- 엔진오일 Modal -->
+<div class="modal fade text-left" id="insertEngine" tabindex="-1"
+	role="dialog" aria-labelledby="exampleModal" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<form name="egcarForm" method="post"
+				action="${pageContext.request.contextPath}/user/car/insertMycarEg.do">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">엔진오일 교환 일자 등록</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" id="hid">
+					<div class="input-group mb-3" style="width: 400px" align="center">
+						<input type="hidden" name="car_no" id="eg_car_no">
+						차량번호&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="form-control"
+							id="eg_car_no2" disabled="disabled"/>
+					</div>
+					<div class="input-group mb-3" style="width: 400px" align="center">
+						교환날짜&nbsp;&nbsp;&nbsp;&nbsp;<input
+							type="date" class="form-control" id="eg_md_date" name="md_engine" />
+					</div>
+					<div class="input-group mb-3" style="width: 400px" align="center">
+						총 키로수&nbsp;&nbsp;&nbsp;<input type="text" class="form-control"
+							id="eg_md_km" name="md_km" />
+					</div>
+				</div>
+				<div class="modal-footer">
+					<input type="submit" value="등록">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">닫기</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- 브레이크오일 Modal -->
+<div class="modal fade text-left" id="insertBreak" tabindex="-1"
+	role="dialog" aria-labelledby="exampleModal" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<form name="bkcarForm" method="post"
+				action="${pageContext.request.contextPath}/user/car/insertMycarBk.do">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">브레이크오일 교환 일자 등록</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" id="hid">
+					<div class="input-group mb-3" style="width: 400px" align="center">
+						<input type="hidden" name="car_no" id="bk_car_no">
+						차량번호&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="form-control"
+							id="bk_car_no2" disabled="disabled"/>
+					</div>
+					<div class="input-group mb-3" style="width: 400px" align="center">
+						교환날짜&nbsp;&nbsp;&nbsp;&nbsp;<input
+							type="date" class="form-control" id="bk_md_brake" name="md_brake" />
+					</div>
+					<div class="input-group mb-3" style="width: 400px" align="center">
+						총 키로수&nbsp;&nbsp;&nbsp;<input type="text" class="form-control"
+							id="bk_md_km" name="md_km" />
+					</div>
+				</div>
+				<div class="modal-footer">
+					<input type="submit" value="등록">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">닫기</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
 <!-- 내 차 등록 Modal -->
 <div class="modal fade text-left" id="insertCar" tabindex="-1"
 	role="dialog" aria-labelledby="exampleModal" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			<form name="carForm" method="post"
+			<form name="insertcarForm" method="post"
 				action="${pageContext.request.contextPath}/user/car/insertMycar.do">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">내 차 등록</h5>
@@ -114,18 +391,18 @@
 					<input type="hidden" id="hid">
 					<div class="input-group mb-3" style="width: 400px" align="center">
 						차&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;종&nbsp;&nbsp;&nbsp;&nbsp;<input
-							type="text" class="form-control" id="car_kinds" name="car_kinds" />
+							type="text" class="form-control" id="is_car_kinds" name="car_kinds" />
 					</div>
 					<div class="input-group mb-3" style="width: 400px" align="center">
 						차량번호&nbsp;&nbsp;&nbsp;<input type="text" class="form-control"
-							id="car_no" name="car_no" />
+							id="is_car_no" name="car_no" />
 					</div>
 					<div class="input-group mb-3" style="width: 400px" align="center">
 						출고년도&nbsp;&nbsp;&nbsp;<input type="text" class="form-control"
-							id="car_date" name="car_date" />
+							id="is_car_date" name="car_date" />
 					</div>
 					<div class="input-group mb-3" style="width: 400px" align="center">
-						유종구분&nbsp;&nbsp;&nbsp;<select id="search_keycode" name="car_oil"
+						유종구분&nbsp;&nbsp;&nbsp;<select id="is_car_oil" name="car_oil"
 							class="custom-select select-big">
 							<option value="휘발유" selected="selected">휘발유</option>
 							<option value="경유">경유</option>
@@ -160,6 +437,11 @@
 					</tr>
 				</thead>
 				<tbody>
+					<c:if test="${carList==null }">
+						<tr>
+							<td colspan="4">등록된 차가 없습니다.</td>
+						</tr>
+					</c:if>
 					<c:forEach items="${carList }" var="car">
 						<tr>
 							<td>${car.car_no }</td>
@@ -190,6 +472,7 @@
 								<div class="collapse" id="collapse-1"	data-parent="#accordion1">
 									<div class="accordion-content">
 									<div class="input-group mb-3" style="width: 400px" align="center">
+									<input type="hidden" id="lt_car_kinds_hd">
 										차&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;종&nbsp;&nbsp;&nbsp;&nbsp;
 									<input type="text" class="form-control" id="lt_car_kinds" disabled="disabled"/>
 								</div>
@@ -223,25 +506,11 @@
 						</div>
 						<div class="collapse" id="collapse-2"	data-parent="#accordion1">
 							<div class="accordion-content">
-								<table class="table table-hover">
-									<thead>
-										<tr>
-											<th scope="col">차량번호</th>
-											<th scope="col">차 종</th>
-											<th scope="col">출고년도</th>
-											<th scope="col">유종구분</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach items="${carList }" var="car">
-											<tr>
-												<td>${car.car_no }</td>
-												<td>${car.car_kinds }</td>
-												<td>${car.car_date }</td>
-												<td>${car.car_oil }</td>
-											</tr>
-										</c:forEach>
-									</tbody>
+								<div align="right">
+									<button type="button" onClick="insertKm()" class="btn">주행거리 등록</button>
+								</div>
+								<table id="kmtb" class="table table-hover">
+									
 								</table>
 							</div>
 						</div>
@@ -254,12 +523,12 @@
 						</div>
 						<div class="collapse" id="collapse-3" data-parent="#accordion1">
 							<div class="accordion-content">
-								<p class="pt-2">
-									에어로빅 : 42, 52, 59<br> 계단 오르내리기 : 48, 58, 68<br> 팔 굽혀
-									펴기 : 32, 42, 49<br> 자전거타기 : 37, 44, 52<br> 테니스 : 60,
-									72, 84<br> 배드민턴 : 59, 70, 82<br> 배구 : 59, 70, 82<br>
-								</p>
-								<h6 class="mb-2">운동 소요 시간 : 10분</h6>
+								<div align="right">
+									<button type="button" onClick="insertEngine()" class="btn">엔진오일 교환 등록</button>
+								</div>
+								<table id="enginetb" class="table table-hover">
+									
+								</table>
 							</div>
 						</div>
 					</div>
@@ -271,12 +540,12 @@
 						</div>
 						<div class="collapse" id="collapse-4" data-parent="#accordion1">
 							<div class="accordion-content">
-								<p class="pt-2">
-									수영(자유형) : 145, 174, 204<br> 수영(접형) : 184, 220, 258<br>
-									농구 : 67, 80, 93<br> 윗몸 일으키기 : 72, 86, 101<br> 줄넘기 :
-									75, 89, 104<br>
-								</p>
-								<h6 class="mb-2">운동 소요 시간 : 10분</h6>
+								<div align="right">
+									<button type="button" onClick="insertBreak()" class="btn">브레이크 오일 교환 등록</button>
+								</div>
+								<table id="breaktb" class="table table-hover">
+									
+								</table>
 							</div>
 						</div>
 					</div>
@@ -291,7 +560,7 @@
 	role="dialog" aria-labelledby="exampleModal" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			<form name="carForm" method="post"
+			<form name="updatecarForm" method="post"
 				action="${pageContext.request.contextPath}/user/car/updateMycar.do">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">내 차 수정</h5>

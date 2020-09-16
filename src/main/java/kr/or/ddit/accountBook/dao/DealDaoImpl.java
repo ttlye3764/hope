@@ -129,5 +129,32 @@ public class DealDaoImpl implements IDealDao{
 		return client.selectList("deal.groupMinus",mem_no);
 	}
 
+	@Override
+	public List<DealVO> accountList_Minus(Map<String, String> params) throws Exception {
+		return client.selectList("deal.accountList_Minus",params);
+	}
+	@Override
+	public List<DealVO> accountList_Plus(Map<String, String> params) throws Exception {
+		return client.selectList("deal.accountList_Plus",params);
+	}
+	@Override
+	public List<DealVO> accountList2_Plus(Map<String, String> params) throws Exception {
+		return client.selectList("deal.accountList2_Plus",params);
+	}
+	@Override
+	public List<DealVO> accountList2_Minus(Map<String, String> params) throws Exception {
+		return client.selectList("deal.accountList2_Minus",params);
+	}
+
+	@Override
+	public List<DealVO> accountLabel(Map<String, String> params) throws Exception {
+		return client.selectList("deal.accountLabel",params);
+	}
+	
+	@Override
+	public List<DealVO> accountLabel2(Map<String, String> params) throws Exception {
+		return client.selectList("deal.accountLabel2",params);
+	}
+
 
 }

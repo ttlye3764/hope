@@ -38,7 +38,7 @@ $(function(){
 			return false;
 		} 
 
-		if (!radio1) {
+		if (!$('input:radio[name=k_answer]').is(':checked')) {
 			swal("error","버튼을 체크해주세요.", "warning");
 
 			return false;

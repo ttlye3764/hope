@@ -24,6 +24,12 @@ public class CarController {
 	@RequestMapping("parking")
 	public void parking() {}
 	
+	@RequestMapping("oil")
+	public void oil() {}
+	
+	@RequestMapping("weather")
+	public void weather() {}
+	
 	@RequestMapping("carMain")
 	public ModelAndView carMain(HttpSession session, ModelAndView andView) throws Exception {
 		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
@@ -61,16 +67,16 @@ public class CarController {
 		
 		carInfo = (MyCarVO) service.selectchoiceMycar(params);
 		
-//		List<MyCarDetailVO> kmList = service.selectKm(params);
-//		List<MyCarDetailVO> engineList = service.selectEngine(params);
-//		List<MyCarDetailVO> breakList = service.selectBreak(params);
-//		
+		List<MyCarDetailVO> kmList = service.selectKm(params);
+		List<MyCarDetailVO> engineList = service.selectEngine(params);
+		List<MyCarDetailVO> breakList = service.selectBreak(params);
+		
 		String result = "success";
 		
 		andView.addObject("carInfo", carInfo);
-//		andView.addObject("kmList", kmList);
-//		andView.addObject("engineList", engineList);
-//		andView.addObject("breakList", breakList);
+		andView.addObject("kmList", kmList);
+		andView.addObject("engineList", engineList);
+		andView.addObject("breakList", breakList);
 		andView.addObject("json",result);
 		andView.setViewName("jsonConvertView");
 		
@@ -85,6 +91,30 @@ public class CarController {
 		carInfo.setMem_no(mem_no);
 		
 		service.insertMycar(carInfo);
+		
+		return "redirect:/user/car/carMain.do";
+	}
+	
+	@RequestMapping("insertMycarkm")
+	public String insertMycarkm(MyCarDetailVO carDetailInfo) throws Exception{
+		
+		service.insertKm(carDetailInfo);
+		
+		return "redirect:/user/car/carMain.do";
+	}
+	
+	@RequestMapping("insertMycarEg")
+	public String insertMycarEg(MyCarDetailVO carDetailInfo) throws Exception{
+		
+		service.insertEngine(carDetailInfo);
+		
+		return "redirect:/user/car/carMain.do";
+	}
+	
+	@RequestMapping("insertMycarBk")
+	public String insertMycarBk(MyCarDetailVO carDetailInfo) throws Exception{
+		
+		service.insertBreak(carDetailInfo);
 		
 		return "redirect:/user/car/carMain.do";
 	}

@@ -225,11 +225,11 @@ $(function(){
 						</div>
 					</div>
 					<br>
-					 <a class="mb-4 d-block" data-fancybox="portfolio" 
+					 <%-- <a class="mb-4 d-block" data-fancybox="portfolio" 
 						data-caption="Perfect planning">
 						<img style="padding-left: 80px;width: 700px;" 
 							src="${pageContext.request.contextPath }/resources/template/assets/images/diet.jpg" alt="">
-					</a> 
+					</a>  --%>
 					
 					 <table class="tg" style="width: 650px;margin: auto;">
                   <thead>

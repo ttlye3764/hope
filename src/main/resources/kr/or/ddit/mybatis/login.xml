@@ -21,6 +21,6 @@
 		<if test="status != null">
 			AND LG_STATUS = #{status}
 		</if>
-		ORDER BY LG_TIME, LG_COUNT
+		ORDER BY LG_TIME DESC
 	</select>
 </mapper>    
