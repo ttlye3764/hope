@@ -502,7 +502,9 @@ function subwayRouteName(e){
             	  $('#timeTable').append('<thead><tr><th>상행도착시간</th></tr></thead>');
             	 $('#timeTable').append('<tbody>');
              for(var i=0; i<Result.response.body.totalCount; i++){
-            	 $('#timeTable').append('<tr><td>'+Result.response.body.items.item[i].arrTime+'</td></tr>');
+            	 var arrTime = Result.response.body.items.item[i].arrTime;
+            	 arrTime = arrTime.split("");
+            	 $('#timeTable').append('<tr><td>'+arrTime[0]+arrTime[1]+':'+arrTime[2]+arrTime[3]+':'+arrTime[4]+arrTime[5]+'</td></tr>');
                  }
             	 $('#timeTable').append('<tbody>'); 
             
@@ -536,7 +538,9 @@ function subwayRouteName(e){
             	  $('#timeTableU').append('<thead><tr><th>하행도착시간</th></tr></thead>');
             	 $('#timeTableU').append('<tbody>');
              for(var i=0; i<Result.response.body.totalCount; i++){
-            	 $('#timeTableU').append('<tr><td>'+Result.response.body.items.item[i].arrTime+'</td></tr>');
+            	 var arrTime = Result.response.body.items.item[i].arrTime;
+            	 arrTime = arrTime.split("");
+            	 $('#timeTableU').append('<tr><td>'+arrTime[0]+arrTime[1]+':'+arrTime[2]+arrTime[3]+':'+arrTime[4]+arrTime[5]+'</td></tr>');
                  }
             	 $('#timeTableU').append('<tbody>'); 
             
