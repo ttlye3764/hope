@@ -218,7 +218,7 @@ function sendChatbotBTN(){
 				<a class="navbar-brand" href="${pageContext.request.contextPath}/user/main/mainForm.do">
 					<!-- SVG Logo Start -->
 					
-						<img src="../../image/logo.png" style="width: 100%; height: 100%;"/>
+						<img src="../../image/logo.png" style="width: 80%; height: 80%;"/>
 					
 					<!-- SVG Logo End -->
 				</a>
