@@ -218,7 +218,7 @@ function sendChatbotBTN(){
 				<a class="navbar-brand" href="${pageContext.request.contextPath}/user/main/mainForm.do">
 					<!-- SVG Logo Start -->
 					
-						<img src="../../image/logo.png" style="width: 100%; height: 100%;"/>
+						<img src="../../image/logo.png" style="width: 80%; height: 80%;"/>
 					
 					<!-- SVG Logo End -->
 				</a>
@@ -270,12 +270,11 @@ function sendChatbotBTN(){
 							</ul>
 						</li>
 						
-						<!-- 펫 관리 -->
+						<!-- 내 차 관리 -->
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="docMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">car</a>
 							<ul class="dropdown-menu" aria-labelledby="docMenu">
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/carMain.do">내 차 관리</a> </li>
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/weather.do">세차하기 좋은 날</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/oil.do">주변 주유소 위치</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/parking.do">주차장 찾기</a> </li>
 							</ul>

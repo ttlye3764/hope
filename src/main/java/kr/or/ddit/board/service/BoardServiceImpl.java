@@ -36,6 +36,7 @@ public class BoardServiceImpl implements IBoardService{
 		boardDao.deleteBoard(bd_no);
 		
 	}
+	
 	// 등록
 	@Override            
 	public void insertBoard(BoardVO boardVO, MultipartFile[] items) throws Exception {

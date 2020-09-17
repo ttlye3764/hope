@@ -23,7 +23,6 @@ $(function(){
   		*/
   		var bd_no = $('input[name="bd_no"]').val();
         $(this).attr('action','${pageContext.request.contextPath}/user/board/updateBoardInfo.do?bd_no=' + bd_no + '&re_no=${re_no}' + '&bd_division=${bd_division}' + '&currentPage=${currentPage}' + '&search_keyword=${search_keyword}' + '&search_keycode=${search_keycode}');
- 
         return true;
      });
 
@@ -96,24 +95,26 @@ function replyList(){
 			var replyList = "";
 			var count = 0;
 			$.each(result.replyList, function(index, item){
+
 				replyList += '<input type="hidden" name="re_no" value="'+item.re_no+'" id="re_no">';
 				replyList += '<div class="comment">';
-				replyList += '<div class="comment-author"><img class="avatar" src="assets/images/thumbnails/avatar-01.jpg" alt=""></div>';
-				replyList += '<div class="comment-body">';
-				replyList += '<div class="comment-meta">';
-				replyList += '<div class="comment-meta-author"><a href="#">'+item.re_writer+'</a></div>';
-				replyList += '<div class="comment-meta-date">'+item.re_date+'</div>';
+				replyList += '	<div class="comment-author"><img class="avatar" src="assets/images/thumbnails/avatar-01.jpg" alt=""></div>';
+				replyList += '	<div class="comment-body">';
+				replyList += '		<div class="comment-meta">';
+				replyList += '			<div class="comment-meta-author"><a href="#">'+item.re_writer+'</a></div>';
+				replyList += '			<div class="comment-meta-date">'+item.re_date+'</div>';
+				replyList += '		</div>';
+				replyList += '		<div class="comment-content" style="width: 920px;">';
+				replyList += '			<p>'+item.re_content+'</p>';
+				replyList += '			<div align="right">';
+					if(item.re_writer == '${LOGIN_MEMBERINFO.mem_no}'){
+						replyList += '				<button type="button" id="updateReply1"  data-toggle="modal" data-target="#replyModal'+count+'">수정</button>';
+						replyList += '				<button type="button" id="deleteReply"  class="" data-re_no="' + item.re_no +'"  onclick="deleteReplyA(' + $('#bd_no').val() + ',' + item.re_no + ');" >삭제</button>';
+						}		
+				replyList += '			</div>';
+				replyList += '		</div>';
 				replyList += '</div>';
-				replyList += '<div class="comment-content" style="width: 920px;">';
-				replyList += '<p>'+item.re_content+'</p>';
-				replyList += '<div align="right">';
-				replyList += '<button type="button" id="updateReply1"  data-toggle="modal" data-target="#replyModal$'+count+'">수정</button>';
-				replyList += '<button type="button" id="deleteReply"  class="">삭제</button>';
-				replyList += '</div>';
-				replyList += '</div>';
-				replyList += '</div>';
-				replyList += '</div>';
-				count ++;
+				count++;
 			})
 
 			$('#comment_list').append(replyList);
@@ -123,9 +124,6 @@ function replyList(){
 		}
 	})   		
 }
-	
-
-
 
 // 파일 다운로드기능 
 function fileDown(fileName, fileNo, fileBdNo) {
@@ -156,8 +154,6 @@ function deleteReplyA(bd_no, re_no, index){
 
 
 
-
-
 </script>
 </head>
 <body>
@@ -176,45 +172,37 @@ function deleteReplyA(bd_no, re_no, index){
 						<div class="col-md-9 mb-2"><span class="form-group"><input type="text" class="form-control" placeholder="title"  id="bd_title" name="bd_title" value="${boardInfo.bd_title}"></span></div>
 						<div class="col-md-9 mb-2"><span class="form-group"><input type="text" class="form-control" placeholder="writer" id="bd_writer" name="bd_writer" value="${boardInfo.bd_writer}"></span></div>
 						<div class="col-md-9"><span class="form-group"><input type="text" class="form-control" id="bd_date" name="bd_date" value="${boardInfo.bd_date}"></span></div>
-						<div class="col-md-9 input-group mb-4">							
+						<div class="col-md-13 input-group mb-1">							
 							 <!-- 파일  -->
 							 <c:forEach items="${boardInfo.items2 }" var="fileitemInfo" varStatus="status">
 									<!-- 파일일 때 --> 
-									<p>${status.count }. &nbsp;&nbsp; <a href="#" onclick="fileDown('${fileitemInfo.file_save_name }','${fileitemInfo.file_no }','${fileitemInfo.file_bd_no }');">${fileitemInfo.file_name } </a></p>
+									<p>${status.count }.&nbsp;&nbsp; <a href="#" onclick="fileDown('${fileitemInfo.file_save_name }','${fileitemInfo.file_no }','${fileitemInfo.file_bd_no }');">${fileitemInfo.file_name } </a></p>
 							 </c:forEach>
 						</div>
+						<c:if test="${boardInfo.mem_no eq LOGIN_MEMBERINFO.mem_no}">
+							<div class="form-group">
+								<label for="exampleFormControlFile1"></label>
+								<input type="file" class="form-control-file" name="files" id="exampleFormControlFile1" onchange="setThumbnail(event);"/>
+							</div>
+						</c:if>
+						
+								
 						<div class="col-md-12 mb-2">
 							<span class="form-group "><textarea cols="25" rows="20" class="form-control" placeholder="내용" name="bd_content" >${boardInfo.bd_content}</textarea></span>
 						</div>
-						<div class="col-md-2 text-center" style="margin-left:650px; float:left; display:inline-block;">
-							<button type="submit" id="updateBtn" value="수정" class="btn-block btn btn-dark">수정</button>
-							<button type="button" id="deleteBtn" value="삭제" class="btn-block btn btn-dark">삭제</button>
-							<button type="button" id="listBtn" value="목록" class="btn-block btn btn-dark">목록</button>
-							<button type="button" id="Btn" value="답글달기" class="btn-block btn btn-dark">답글달기</button>
-						</div>
-						
-						
-						
+							<div class="col-md-2 text-center" style="margin-left:700px; float:left; display:inline-block;" > 
+								<c:if test="${bd_division ne 2 }">
+									<button type="submit" id="updateBtn" value="수정" class="btn-block btn btn-dark" >수정</button>
+									<button type="button" id="deleteBtn" value="삭제" class="btn-block btn btn-dark" >삭제</button>
+<!-- 									<button type="button" id="Btn" value="답글달기" class="btn-block btn btn-dark" >답글달기</button> -->
+								</c:if>
+									<button type="button" id="listBtn" value="목록" class="btn-block btn btn-dark" >목록</button>
+							</div> 
 						
 						
 <!-- ***********************************- 댓글 자리 -********************************* -->
 <!-- comments area -->
 		<div class="row mt-5 comments-area">
-					
-<!-- 					<div> -->
-<!-- 		                <table class="table mb-2">                     -->
-<!-- 		                    <tr> -->
-<!-- 		                        <td> -->
-<!-- 		                            <textarea style="width: 925px" rows="3" cols="30" id="re_content" name="re_content" placeholder="댓글을 입력하세요"></textarea> -->
-<!-- 		                            <br> -->
-<!-- 		                            <div> -->
-<%-- 		                                <a href='#' onclick="insertReply('${boardInfo.bd_no}')" class="btn pull-right btn-success">등록</a> --%>
-<!-- 		                            </div> -->
-<!-- 		                        </td> -->
-<!-- 		                    </tr> -->
-<!-- 		                </table> -->
-<!-- 	            	</div> -->
-					
 					
 						<div style="width: 100%;">
 							<h4>댓글</h4>
@@ -251,14 +239,14 @@ function deleteReplyA(bd_no, re_no, index){
 													<div class="comment-content" style="width: 920px;">
 														<p>${vo.re_content}</p>
 														<div align="right">
-															<button type="button" id="updateReply1"  data-toggle="modal" data-target="#replyModal${status.index }">수정</button>
-															<button type="button" id="deleteReply"  onclick="deleteReplyA('${boardInfo.bd_no}','${vo.re_no }','${status.index}')" class="">삭제</button>
+															<c:if test="${LOIGN_MEMBERINFO.mem_no eq boardInfo.mem_no}">
+																<button type="button" id="updateReply1"  data-toggle="modal" data-target="#replyModal${status.index }">수정</button>
+																<button type="button" id="deleteReply"  onclick="deleteReplyA('${boardInfo.bd_no}','${vo.re_no }','${status.index}')" class="">삭제</button>
+															</c:if>
 														</div>
 													</div>
 												</div>
-											
 												<!-- sub comment end-->
-												
 											</div>
 										</c:forEach>
 		    						</c:otherwise> 
@@ -281,10 +269,7 @@ function deleteReplyA(bd_no, re_no, index){
 								<button type="button" id="insertReply" onclick="insertReplyA(${boardInfo.bd_no})" style="background-color: #343a40; color: #fff; border-color:#343a40;">등록</button>
 							</div>		
 						</div>
-						
-						
-
-				</div>
+					</div>
 				<!-- blog End -->
 			</div>
 		</div>
@@ -312,14 +297,12 @@ function deleteReplyA(bd_no, re_no, index){
 														</div>
 													<div align="right">
  														<button type="button" onclick="updateReply2('${boardInfo.bd_no}', '${vo.re_no }',${status.index})" style="margin: 0px 0px 0px 160px;">수정</button>
-<!--  														<button type="button" class="" id="cencelReply" style="margin: 0px 0px 0px 160px;">취소</button> -->
  													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 							</c:forEach>		
-	
 			</div>
 </form>
 </body>

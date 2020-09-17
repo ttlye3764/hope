@@ -44,10 +44,9 @@
 
 
    <!-- SignIn modal content -->
-   <div id="regist-modal" class="modal fade" tabindex="-1" role="dialog"
-      aria-hidden="true">
-      <div class="modal-dialog">
-         <div class="modal-content">
+   <div id="regist-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
             <div class="modal-body">
                <div class="text-center mt-2 mb-4">
                   <a href="index.html" class="text-success"> <span><img
@@ -78,10 +77,10 @@
                   </div>
 
                   <div class="form-group">
-                     <div class="custom-control custom-checkbox">
+                     
                         <input type="checkbox" id="Check" name="regist-Check"> <label
-                           class="custom-control-label">알람</label>
-                     </div>
+                          >알람</label>
+                     
                   </div>
                   
                   <div class="form-group">
@@ -119,16 +118,12 @@
 
 
    <!-- change modal content -->
-   <div id="change-modal" class="modal fade" tabindex="-1" role="dialog"
-      aria-hidden="true">
-      <div class="modal-dialog">
-         <div class="modal-content">
+   <div id="change-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
             <div class="modal-body">
                <div class="text-center mt-2 mb-4">
-                  <a href="index.html" class="text-success"> <span><img
-                        src="${pageContext.request.contextPath }/resources/html/dist/assets/images/logo-dark.png"
-                        alt="" height="18"></span>
-                  </a>
+                  
                </div>
 
                <form name="scheduleChangeForm"   class="pl-3 pr-3">
@@ -150,10 +145,8 @@
                   </div>
 
                   <div class="form-group">
-                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" id="Check" name="change-Check"> <label
-                           class="custom-control-label">알람</label>
-                     </div>
+                          >알람</label>
                   </div>
                   
                   <input type="hidden" name="mem_no">
@@ -164,8 +157,8 @@
                   
                   <label>달력 표시 색 설정</label><div><input type="color" id="s_color" name="s_color"></div>
                   <div class="form-group text-center">
-                     <button id="save" name="save" class="btn btn-rounded btn-primary"
-                        type="submit">save</button>
+                     <input id="save" name="save" value="save" class="btn btn-rounded btn-primary"
+                        type="submit">
                      <button id="delete" name="delete" class="btn btn-rounded btn-primary"
                         type="button">delete</button>   
                   </div>

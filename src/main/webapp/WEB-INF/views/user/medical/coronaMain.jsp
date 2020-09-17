@@ -535,10 +535,10 @@
 						<strong id="strongID1" style="display:block; margin-top: 18px; margin-left:12px; color: #174069; font-family: 'Spoqa Han Sans'; font-size:20px;"></strong>
 						
 						<div style="background-color: rgb(233, 233, 233); height: 400px; margin-top: 10px;">
-						<div class="chart_d" style="height: 400px;" >
+							<div class="chart_d" style="height: 400px;">
 								<div style="height: 400px;">
-									<div class="cc_graph"  style="display: flex; flex-direction : column; height: 400px; border-bottom:3px solid #164068; ">
-									<canvas id="myPieChart"  style="height: 400px; width: 400px; margin-left: 5px;"></canvas>		<!-- height: 190px; width: 100%; -->
+									<div class="cc_graph"  style="display: flex; flex-direction : column; height: 400px; border-bottom:3px solid #164068;">
+										<canvas id="myPieChart" style="height: 280px !important; width: 280px !important; margin-left: 5px;"></canvas>		<!-- height: 190px; width: 100%; -->
 									</div>
 								</div>
 							</div>						
@@ -620,12 +620,15 @@
 	
 <script>
 var pieChart;
+var data;
+var option;
 var ageBarChart;
 var agePieChart;
+var ctxPie = document.getElementById('myPieChart').getContext('2d');
 var ctxAgePie = document.getElementById('AgePieChart').getContext('2d');
 var ctxAgeBar = document.getElementById('AgeBarChart').getContext('2d');
 var ctxLine = document.getElementById('myChart').getContext('2d');
-var ctxPie = document.getElementById('myPieChart').getContext('2d');
+
 	var dateList = [];
 	var dataList = [];
 	var deathList = [];
@@ -654,7 +657,6 @@ function startday(){
 	var caledmonth, caledday, caledYear;
 	var loadDt = new Date();
 	var date = new Date(Date.parse(loadDt) - 7 * 1000 * 60 * 60 * 24);
-
 	caledYear = date.getFullYear();
 
 	if( date.getMonth() < 9 ){
@@ -662,7 +664,7 @@ function startday(){
 	}else{
 		  caledmonth = date.getMonth()+1;
 	}
-	if( date.getDate() < 9 ){
+	if( date.getDate() < 9 || date.getDate() == 9 ){
 		  caledday = '0'+date.getDate();
 	}else{
 		  caledday = date.getDate();
@@ -676,6 +678,7 @@ var startdate = startday();
 var enddate = endday();
 
 function getCorona(name1){
+	
 	$.ajax({
         url     : '${pageContext.request.contextPath}/user/medical/coronaSidoAPI.do',
         type    : 'post',
@@ -712,7 +715,8 @@ function getCorona(name1){
 						}
 				}
 	        });
-			resetPieChart();
+	        
+			/* resetPieChart(); */
 			dataList[0] = all;
 			dataList[1] = target;
 			var label = [];
@@ -949,7 +953,6 @@ $(function(){
         data : {'date':date },
         success : function(result) {
 			console.log(result.response.body.items.item);
-			
 			var n1;
 			var n2;
 			var n3;
@@ -958,12 +961,22 @@ $(function(){
 			labels.push('전체');
 			dataList.push(result.response.body.items.item[18].defCnt);
 			
-			PieChart(labels, dataList);
-			
+			/* PieChart(labels, dataList); */
+		
+		data = [{
+				 backgroundColor : [ '#0095ff', '#fdaf4b' ],   
+		         data: dataList
+				 }];		
+				
+		pieChart = new Chart(ctxPie, {
+				    type: 'doughnut',
+				    data: {
+				        labels: labels,
+				        datasets:data
+				    },
+				    options: options
+		});
 
-
-
-			
 			/* <deathCnt>0			사망자 수       
 			<defCnt>45		확진자 수
 			<gubun>제주			시도명			
@@ -1169,34 +1182,12 @@ function drawChart(dateList,clearList,deathList,decideList){
 
 
 function PieChart(labels,dataList){
-	 var data = [{
+	 data = [{
 		 backgroundColor : [ '#0095ff', '#fdaf4b' ],   
          data: dataList
 		 }];
-
-
-	 var options = {
-			   plugins: {
-			     datalabels: {
-			       formatter: (value, ctxPie) => {
-
-			         let datasets = ctxPie.chart.data.datasets;
-
-			         if (datasets.indexOf(ctx.dataset) === datasets.length - 1) {
-			           let sum = datasets[0].data.reduce((a, b) => a + b, 0);
-			           let percentage = Math.round((value / sum) * 100) + '%';
-			           return percentage;
-			         } else {
-			           return percentage;
-			         }
-			       },
-			       color: '#fff',
-			     }
-			   }
-			 };
-
-		
-		 pieChart = new Chart(ctxPie, {
+	 
+	 pieChart = new Chart(ctxPie, {
 		    type: 'doughnut',
 
 		    data: {
@@ -1206,12 +1197,12 @@ function PieChart(labels,dataList){
 		    },
 		    options: options
 		});
-		 pieChart.update();	
 }
 
 function resetPieChart(){
-	 pieChart.update();	
-	 pieChart.clear();
+	 /* pieChart.update();
+	 pieChart.clear(); */
+	/*  pieChart.destroy(); */
 	
 }
 function AgePieChart(label,data){

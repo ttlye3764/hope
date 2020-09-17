@@ -150,7 +150,6 @@ $(function(){
 		var option = $('#modal_option').val();
 		var method = $('#modal_method').val();
 		var card_name ="";		
-		alert(deal_no);
 		if(method=='현금'){
 			$("#modal_kind2").hide(); 
 		}

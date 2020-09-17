@@ -20,12 +20,14 @@ public class RolePaginationUtil_yun {
 	private String bd_division;
 	private String search_keycode;
 	private String search_keyword;
+	private String url;
 	public void RolePaginationUtil(HttpServletRequest request,
 							  int currentPage,
 							  int totalCount,
 							  String bd_division,
 							  String search_keycode,
-							  String search_keyword){
+							  String search_keyword,
+							  String url){
 		this.request = request;
 		this.currentPage = currentPage;
 		this.totalCount = totalCount;
@@ -33,6 +35,7 @@ public class RolePaginationUtil_yun {
 		pagingHtmls = new StringBuffer();
 		this.search_keycode = search_keycode;
 		this.search_keyword = search_keyword;
+		this.url = url;
 		
 		makePagination();
 	}
@@ -62,7 +65,9 @@ public class RolePaginationUtil_yun {
 		this.pagingHtmls.append("<div class='text-center'>");
 		this.pagingHtmls.append("<ul class='pagination justify-content-center'>");
 		
-		String requestURI ="/lastProject/user/board/boardList.do";
+		//String requestURI ="/lastProject/user/board/boardList.do";
+		String requestURI = url;
+		
 		// 이전|1|2|3|4|5|다음
 		// 이전
 		if((this.currentPage - 1) == 0){

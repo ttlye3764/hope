@@ -55,6 +55,11 @@
 		AND CAR_NO = #{car_no}
 	</delete>
 	
+	<delete id="deleteMycarDetail" parameterType="map">
+		DELETE FROM MYCAR_DETAIL
+		WHERE CAR_NO = #{car_no}
+	</delete>
+	
 	<insert id="insertKm" parameterType="mycarDetailVO">
 		INSERT INTO MYCAR_DETAIL(
 				CAR_NO,

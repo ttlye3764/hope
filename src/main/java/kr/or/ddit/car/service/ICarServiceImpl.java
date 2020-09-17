@@ -75,4 +75,9 @@ public class ICarServiceImpl implements ICarService{
 		return dao.selectBreak(params);
 	}
 
+	@Override
+	public void deleteMycarDetail(Map<String, String> params) throws Exception {
+		dao.deleteMycarDetail(params);
+	}
+
 }

@@ -2,8 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<script type='text/javascript'
-	src='<%=request.getContextPath()%>/js/validation.js'></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type='text/javascript' src='<%=request.getContextPath()%>/js/validation.js'></script>
 <script type="text/javascript">
@@ -20,14 +18,14 @@
 				swal("","차량번호를 입력해주세요.", "warning");
 				return false;
 			}
-// 			if(!car_no.validationCARKIND()){
-// 				swal("","올바른 차량번호를 입력해주세요.","warning");
-// 				return false;
-// 			}
 			if (!car_date.validationCARYEAR()) {
 				 swal("","올바른 출고년도를 입력해주세요.", "warning");
 		         return false;
 		    }
+			if(!car_no.validationCARKIND()){
+				swal("","올바른 차량번호를 입력해주세요.","warning");
+				return false;
+			}
 		});
 		$('form[name=updatecarForm]').submit(function() {
 			var car_kinds = $('#ud_car_kinds').val();
@@ -155,6 +153,7 @@
 					$('#lt_car_kinds').val(result.carInfo.car_kinds);
 					$('#lt_car_kinds_hd').val(result.carInfo.car_kinds);
 					$('#lt_car_no').val(result.carInfo.car_no);
+					$('#lt_car_no1').val(result.carInfo.car_no);
 					$('#lt_car_no_hd').val(result.carInfo.car_no);
 					$('#lt_car_date').val(result.carInfo.car_date);
 					$('#lt_car_oil').val(result.carInfo.car_oil);
@@ -196,7 +195,12 @@
 			$(location).attr('href','${pageContext.request.contextPath}/user/car/carForm.do');
 		});
 		$('#del').click(function() {
-			var car_no = $('#ud_car_no_hd').val();
+			var car_no = $('#lt_car_no').val();
+
+			if(car_no == ''){
+				swal("","삭제할 자동차를 선택해주세요.", "warning");
+				return false;
+			}
 			$(location).attr('href','${pageContext.request.contextPath}/user/car/deleteMycar.do?car_no='+ car_no);
 		});
 	});
@@ -279,7 +283,7 @@
 							type="date" class="form-control" id="km_md_date" name="md_date" />
 					</div>
 					<div class="input-group mb-3" style="width: 400px" align="center">
-						총 키로수&nbsp;&nbsp;&nbsp;<input type="text" class="form-control"
+						총 키로수&nbsp;&nbsp;&nbsp;<input type="text" placeholder="숫자만 입력해주세요." class="form-control"
 							id="km_md_km" name="md_km" />
 					</div>
 				</div>
@@ -320,7 +324,7 @@
 					</div>
 					<div class="input-group mb-3" style="width: 400px" align="center">
 						총 키로수&nbsp;&nbsp;&nbsp;<input type="text" class="form-control"
-							id="eg_md_km" name="md_km" />
+							id="eg_md_km" name="md_km" placeholder="숫자만 입력해주세요."/>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -360,7 +364,7 @@
 					</div>
 					<div class="input-group mb-3" style="width: 400px" align="center">
 						총 키로수&nbsp;&nbsp;&nbsp;<input type="text" class="form-control"
-							id="bk_md_km" name="md_km" />
+							id="bk_md_km" name="md_km" placeholder="숫자만 입력해주세요."/>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -395,11 +399,11 @@
 					</div>
 					<div class="input-group mb-3" style="width: 400px" align="center">
 						차량번호&nbsp;&nbsp;&nbsp;<input type="text" class="form-control"
-							id="is_car_no" name="car_no" />
+							id="is_car_no" name="car_no" placeholder="12가1234"/>
 					</div>
 					<div class="input-group mb-3" style="width: 400px" align="center">
 						출고년도&nbsp;&nbsp;&nbsp;<input type="text" class="form-control"
-							id="is_car_date" name="car_date" />
+							id="is_car_date" name="car_date" placeholder="숫자만 입력해주세요."/>
 					</div>
 					<div class="input-group mb-3" style="width: 400px" align="center">
 						유종구분&nbsp;&nbsp;&nbsp;<select id="is_car_oil" name="car_oil"
@@ -477,8 +481,9 @@
 									<input type="text" class="form-control" id="lt_car_kinds" disabled="disabled"/>
 								</div>
 								<div class="input-group mb-3" style="width: 400px" align="center">
-									차량번호&nbsp;&nbsp;&nbsp;<input type="text" class="form-control"
-										id="lt_car_no" disabled="disabled" />
+									차량번호&nbsp;&nbsp;&nbsp;
+									<input type="hidden" id="lt_car_no">
+									<input type="text" class="form-control" id="lt_car_no1" disabled="disabled" />
 								</div>
 								<div class="input-group mb-3" style="width: 400px" align="center">
 									출고년도&nbsp;&nbsp;&nbsp;<input type="text" class="form-control"
@@ -493,7 +498,8 @@
 									</select>
 								</div>
 								<div class="input-group mb-3" style="width:400px; align:center;">
-									<button type="button" id="lt_btn" style="margin:0px 0px 0px 170px">수정</button>
+									<button type="button" class="btn btn-secondary" id="lt_btn" style="margin:0px 0px 0px 140px">수정</button>
+									<button type="button" class="btn btn-secondary" id="del" style="margin:0px 0px 0px 1px">삭제</button>
 								</div>
 							</div>
 						</div>
@@ -578,11 +584,11 @@
 					<div class="input-group mb-3" style="width: 400px" align="center">
 						<input type="hidden" name="car_no" id="ud_car_no_hd">
 						차량번호&nbsp;&nbsp;&nbsp;<input type="text" class="form-control"
-							id="ud_car_no" disabled="disabled" />
+							id="ud_car_no" disabled="disabled" placeholder="12가1234"/>
 					</div>
 					<div class="input-group mb-3" style="width: 400px" align="center">
 						출고년도&nbsp;&nbsp;&nbsp;<input type="text" class="form-control"
-							id="ud_car_date" name="car_date" />
+							id="ud_car_date" name="car_date" placeholder="숫자만 입력해주세요."/>
 					</div>
 					<div class="input-group mb-3" style="width: 400px" align="center">
 						유종구분&nbsp;&nbsp;&nbsp;<select id="ud_car_oil" name="car_oil"
@@ -595,7 +601,6 @@
 				</div>
 				<div class="modal-footer">
 					<input type="submit" class="btn btn-secondary" value="수정">
-					<button type="button" class="btn btn-secondary" id="del">삭제</button>
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">닫기</button>
 				</div>

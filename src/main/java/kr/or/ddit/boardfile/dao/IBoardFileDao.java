@@ -11,5 +11,7 @@ public interface IBoardFileDao {
 	public Board_FileVO fileitemInfo(Map<String, String> params) throws Exception;
 	
 	public void updateFileItem(List<Board_FileVO> fileItemList) throws Exception;
+	
+//	public void deleteFileItem(String file_)
 
 }

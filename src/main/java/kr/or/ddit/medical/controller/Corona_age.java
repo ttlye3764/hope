@@ -37,6 +37,8 @@ public class Corona_age {
         }
         rd.close();
         conn.disconnect();
+        System.out.println("시작일자");
+        System.out.println(startdate);
         System.out.println(sb.toString());
         
         org.json.JSONObject xmlJSONObj = XML.toJSONObject(sb.toString());
