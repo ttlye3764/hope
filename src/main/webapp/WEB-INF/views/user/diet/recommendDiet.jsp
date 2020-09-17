@@ -53,14 +53,13 @@
 					<!-- Post item  with image-->
 					
 				<div class="col-md-6 mb-5">
-					<h5 class="mb-3">Accordion Default</h5>
 					<div class="accordion toggle-icon-round" id="accordion5" style="width:700px;">
 						<!-- item -->
 						<c:forEach items="${dietList}" var="dietInfo" varStatus="status">
 						<div class="accordion-item">
-							<div class="accordion-title">
-								${result.diet_kcal }
-								<a class="h6 mb-0 collapsed" data-toggle="collapse" href="#collapse-${status.count }" aria-expanded="false" onclick="recommendDietInfo(this);">${dietInfo.diet_name }          칼로리 : ${dietInfo.diet_kcal }<input type="hidden" value="${dietInfo.diet_no }"></a>
+							<div class="accordion-title" >
+								<a class="h6 mb-0 collapsed" data-toggle="collapse" href="#collapse-${status.count }" aria-expanded="false" onclick="recommendDietInfo(this);">${dietInfo.diet_name } <input type="hidden" class="diet_no" value="${dietInfo.diet_no }"></a>
+								&nbsp&nbsp&nbsp&nbsp${dietInfo.diet_kcal }Kcal
 							</div>
 							<div class="collapse" id="collapse-${status.count }" data-parent="#accordion5" style="">
 								<div class="accordion-content">
@@ -73,8 +72,9 @@
 					</div>
 				</div>
 							 
-							 
-							
+							 diet_no 가지고 총열량, diet_info 테이블에서 식사 시기와 메뉴 번호 가지고 가서 인설트 / 순서는 diet_day 테이블 만들고 만들어진 dd_no로 diet_info 테이블에서 가져온거 삽입
+							   
+							 주의 사항 // 일자로 검색해서  이미 해당 일자의 식단이 잇을때 그 해당 일자의 diet_day를 cascade로 삭제하고 새로 insert create 안해주고 / 없을 때는 그냥 인설트							
 					
 				</div>
 				<!-- blog End -->
@@ -87,7 +87,27 @@
 	
 <script type="text/javascript">
 
+function dietInsertToDietDay(e){
+	var dietNo = $(e).parents('div.accordion-item').find('input').val();
+		
+	var dietDate = $(e).parent().prev().find('input').val();
 
+	$.ajax({
+		url : '${pageContext.request.contextPath}/user/diet/dietInsertToDietDay',
+		data : {
+			diet_no : dietNo,
+			diet_date : dietDate
+		},
+		success : function(result){
+			alert('추가 완료');
+		},
+		error : function(result){
+			alert('추가 실패')
+		}
+	})
+
+	
+}
 function recommendDietInfo(e){
 	
 	var dietNo = $(e).find('input').val();
@@ -104,19 +124,23 @@ function recommendDietInfo(e){
 			dietInfo += '<h4 class="callout-title"> 아침</h4>';
 
 			$.each(result.dietInfoList1, function(index, item){
-				dietInfo += '<p class="text-dark mt-3">'+item.menu_name+ '     '+item.menu_kcal+'kcal</p>';
+				dietInfo += '<p class="text-dark mt-3">'+item.menu_name+ ' ('+item.menu_kcal+'kcal)</p>';
 			})
-			dietInfo += '<h4 class="callout-title"> 점심</h4>';
+			dietInfo += '<br><h4 class="callout-title"> 점심</h4>';
 			$.each(result.dietInfoList2, function(index, item){
-				dietInfo += '<p class="text-dark mt-3">'+item.menu_name+ '     '+item.menu_kcal+'kcal</p>';
+				dietInfo += '<p class="text-dark mt-3">'+item.menu_name+ ' ('+item.menu_kcal+'kcal)</p>';
 			})
-			dietInfo += '<h4 class="callout-title"> 저녁</h4>';
+			dietInfo += '<br><h4 class="callout-title"> 저녁</h4>';
 			$.each(result.dietInfoList3, function(index, item){
-				dietInfo += '<p class="text-dark mt-3">'+item.menu_name+'     '+ item.menu_kcal+'kcal</p>';
+				dietInfo += '<p class="text-dark mt-3">'+item.menu_name+' ('+ item.menu_kcal+'kcal)</p>';
 			})
+				
 			dietInfo += '</div>';
+			dietInfo += '<div class="flex_justify-end diet_date"><input style="flex-basis: 30px;" type="date" class="form-control"></div>';
+			dietInfo += '<div class="flex_justify-end"><button type="button" onclick="dietInsertToDietDay(this)">내 식단에 추가하기</button></div>'
+				
 			dietInfo += '</div>';
-			
+		
 			$(e).closest('div').next().find('div').append(dietInfo);		
 		},
 		erorr: function(result){

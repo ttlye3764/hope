@@ -605,6 +605,83 @@ public class DietController {
 		return andView;
 	}
 	
+	@RequestMapping("dietInsertToDietDay")
+	public ModelAndView dietInsertToDietDay(ModelAndView andView,
+											Map<String, String> params,
+											HttpServletRequest request,
+											HttpSession session,
+											@RequestParam(value="diet_no", required = false) String diet_no,
+											@RequestParam(value="diet_date", required = false) String diet_date) throws Exception{
+		session = request.getSession();
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		String mem_no = memberInfo.getMem_no();
+		
+		params.put("diet_no", diet_no);
+		params.put("mem_no", mem_no);
+		params.put("dd_date", diet_date);
+		
+		//diet테이블에서 diet_no에 해당하는 값 가져온다.
+		DietVO dietInfo = dietService.selectDietInfo(params);
+		
+		//diet_info 테이블에서 diet_no에 해당 하는 값 가져온다.
+		List<Diet_infoVO> dietInfoList = dietService.recommendDietInfo(params);
+		
+		
+		// diet_day 테이블에 넣을 값 세팅
+		Diet_dayVO dietDayInsert = new Diet_dayVO();
+		dietDayInsert.setDd_kcal(dietInfo.getDiet_kcal());
+		dietDayInsert.setDd_date(diet_date);
+		dietDayInsert.setMem_no(mem_no);
+		
+		// diet_day_info에넣을 값 세팅1
+		List<Diet_day_infoVO> dietDayInfoInsert = new ArrayList<Diet_day_infoVO>();
+		
+		
+		Diet_dayVO dietDayInfo = dietService.selectDietDay(params);
+		
+		if(dietDayInfo == null) {
+			// diet_day 테이블에 diet_date로 검색해서 값이 없으면 그냥 삽입
+			
+			dietService.insertDietDay(dietDayInsert);
+			
+			// 삽입한 dd_no로 diet_day_info 테이블에 삽입 
+			// diet_day_info에넣을 값 세팅2
+			for(Diet_infoVO dietinfor : dietInfoList) {
+				Diet_day_infoVO dietDayInfor = new Diet_day_infoVO();
+				dietDayInfor.setDd_info_division(dietinfor.getDiet_info_division());
+				dietDayInfor.setMenu_no(dietinfor.getMenu_no());
+				dietDayInfor.setDd_no(dietDayInsert.getDd_no());
+				dietDayInfoInsert.add(dietDayInfor);
+			}
+			
+			dietService.InsertDietDayInfoList(dietDayInfoInsert);
+			params.put("dd_no", dietDayInsert.getDd_no());
+			dietService.updateDietDayKcal(params);
+			
+			
+		}else {
+			// diet_day 테이블에 diet_date로 검색해서 값이 있으면 cascade로 삭제하고 삽입
+			
+			dietService.deleteDietDay(params);
+			
+			dietService.insertDietDay(dietDayInsert);
+			
+			for(Diet_infoVO dietinfor : dietInfoList) {
+				Diet_day_infoVO dietDayInfor = new Diet_day_infoVO();
+				dietDayInfor.setDd_info_division(dietinfor.getDiet_info_division());
+				dietDayInfor.setMenu_no(dietinfor.getMenu_no());
+				dietDayInfor.setDd_no(dietDayInsert.getDd_no());
+				dietDayInfoInsert.add(dietDayInfor);
+			}
+			dietService.InsertDietDayInfoList(dietDayInfoInsert);
+			
+			params.put("dd_no", dietDayInsert.getDd_no());
+			dietService.updateDietDayKcal(params);
+		}
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
+	
 
 	@RequestMapping("ocr")
 	public static void detectText(HttpServletRequest request) throws IOException {

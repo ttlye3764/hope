@@ -44,7 +44,8 @@ function LogOut(){
 	<!--한별추가  -->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/styles/bis.css"/>
 	
-	
+	<!-- flex CSS -->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/myCSS/flex.css">
 	<!-- chat CSS -->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/chat.css">
 <%-- 	 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/myCSS/chatMain.css"> --%>

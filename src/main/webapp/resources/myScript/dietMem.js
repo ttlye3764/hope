@@ -25,13 +25,10 @@ function insertDietMemBTN(){
 		insertDietMemForm += '</label>';
 		insertDietMemForm += '</div>';									
 		insertDietMemForm += '</div>';					
-						
-					
-		
 		insertDietMemForm += '<button type="button" onclick="insertDietMem();">등록</button><br>';
 		insertDietMemForm += '<button type="button" onclick="cancelDietMem();">취소</button><br>';
 	
-	$('#div_dietMem_right').append(insertDietMemForm);
+		$('#div_dietMem_right').append(insertDietMemForm);
 }
 
 function insertDietMem(){
@@ -87,7 +84,7 @@ function dietMemList(){
 				count ++;
  				var dietMemDetail = '<div class="accordion-item">';
  				dietMemDetail += '<div class="accordion-title">';
- 				dietMemDetail += '<a class="h6 mb-0 collapsed" data-toggle="collapse" href="#collapse-'+count+'" aria-expanded="false">'+item.dm_date+'</a>'
+ 				dietMemDetail += '<a class="h6 mb-0 collapsed" data-toggle="collapse" href="#collapse-'+count+'" aria-expanded="false">'+item.dm_date.split(' ')[0]+'</a>'
  				dietMemDetail += '</div>';
  				dietMemDetail += '<div class="collapse" id="collapse-'+count+'" data-parent="#dietMemDetail" style="">';
  				dietMemDetail += '<div class="accordion-content">';

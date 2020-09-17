@@ -56,11 +56,6 @@
 			<!-- blog start -->
 			<div class="col-md-9 order-first order-lg-first">
 
-
-				<h5 class="mb-2 mt-5">나의 식단 관리</h5>
-				<div class="divider divider-grad"></div>
-				<br>
-
 				<h5 class="mb-2 mt-5">내 정보</h5>
 				<div class="divider divider-bold"></div>
 				<br> <br>
@@ -91,7 +86,7 @@
 									<div class="accordion-item">
 										<div class="accordion-title">
 											<a class="h6 mb-0 collapsed" data-toggle="collapse"
-												href="#collapse-${status.count }" aria-expanded="false">${dietMemInfo.dm_date }</a>
+												href="#collapse-${status.count }" aria-expanded="false">${dietMemInfo.dm_date.split(' ')[0] }</a>
 										</div>
 										<div class="collapse" id="collapse-${status.count }"
 											data-parent="#dietMemDetail" style="">
@@ -111,23 +106,13 @@
 							</div>
 						</div>
 					</div>
-					<div id="div_dietMem_right">
-						<button id="insertDietMem" class="btn btn-grad"
-							onclick="insertDietMemBTN();">등록</button>
+					<div  style="display:flex; justify-content: center; align-items: center;" id="div_dietMem_right">
+						<button id="insertDietMem" class="btn btn-grad" onclick="insertDietMemBTN();">등록</button>
 					</div>
+					
+
 				</div>
 				<!-- 내 정보 상세 끝 -->
-				
-				<h5 class="mb-2 mt-5">열량 차트</h5>
-				<div class="divider divider-bold"></div>
-				<!-- goole chart star 구글차트-->
-				<div id="Line_Controls_Chart">
-					<!-- 라인 차트 생성할 영역 -->
-					<div id="lineChartArea" style="padding: 0px 20px 0px 0px;"></div>
-					<!-- 컨트롤바를 생성할 영역 -->
-					<div id="controlsArea" style="padding: 0px 20px 0px 0px;"></div>
-				</div>
-				<!-- goole chart end -->
 
 				<h5 class="mb-2 mt-5">나의 식단표</h5>
 				<div class="divider divider-bold"></div>
@@ -165,6 +150,18 @@
 				
 
 				<!-- 달력 끝 -->
+				
+				<!-- goole chart start -->
+				<h5 class="mb-2 mt-5">열량 차트</h5>
+				<div class="divider divider-bold"></div>
+				<!-- goole chart star 구글차트-->
+				<div id="Line_Controls_Chart">
+					<!-- 라인 차트 생성할 영역 -->
+					<div id="lineChartArea" style="padding: 0px 20px 0px 0px;"></div>
+					<!-- 컨트롤바를 생성할 영역 -->
+					<div id="controlsArea" style="padding: 0px 20px 0px 0px;"></div>
+				</div>
+				<!-- goole chart end -->
 				
 				<h5 class="mb-2 mt-5">다이어트 일기장</h5>
 				<div class="divider divider-bold"></div>

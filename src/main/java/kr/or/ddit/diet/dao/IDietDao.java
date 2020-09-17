@@ -74,4 +74,13 @@ public interface IDietDao {
 	
 	// diet_mem 삭제
 	public int deleteDietMemInfo(Map<String, String> params) throws Exception;
+	
+	// dietDayInfoList 삽입
+	public int InsertDietDayInfoList(List<Diet_day_infoVO> dietDayInfoInsert) throws Exception;
+	
+	// dietDay 테이블 cascade로 삭제
+	public int deleteDietDay(Map<String, String> params) throws Exception;
+	
+	// diet에서 값 하나 뽑아오기
+	public DietVO selectDietInfo(Map<String, String> params) throws Exception;
 }
