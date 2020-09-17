@@ -430,16 +430,6 @@ $(function(){
 		var kcal = $('#kcal_kcal').val();
 		$(location).attr('href', '${pageContext.request.contextPath}/user/diet/kcalCalculate?kcal='+kcal);
 		
-// 		var walking = $('#kcal_kcal').val() / 4
-// 		var jump = $('#kcal_kcal').val() / 10
-// 		var swimming = $('#kcal_kcal').val() / 9
-// 		var stairs = $('#kcal_kcal').val() / 7
-
-// 		$('#kcal_walking').text(walking);
-// 		$('#kcal_walking').attr('data-to', walking);
-// 		$('#kcal_jump').text(jump);
-// 		$('#kcal_swimming').text(swimming);
-// 		$('#kcal_stairs').text(stairs);
 	})
 })
 

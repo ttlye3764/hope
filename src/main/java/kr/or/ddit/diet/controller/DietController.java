@@ -511,7 +511,7 @@ public class DietController {
 		
 		
 		andView.addObject("kcal", kcal);
-		andView.setViewName("user/diet/dayKcal?title_name=운동별 칼로리 소모량을 확인하세요!");
+		andView.setViewName("user/diet/dayKcal");
 		return andView;
 	}
 
@@ -530,6 +530,7 @@ public class DietController {
 		andView.addObject("dietDayMemList", dietDayMemList);
 
 		andView.setViewName("jsonConvertView");
+		
 		return andView;
 	}
 

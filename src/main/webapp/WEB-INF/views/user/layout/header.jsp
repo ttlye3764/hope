@@ -292,7 +292,7 @@ function sendChatbotBTN(){
 						</li>
 						<!-- Menu item 6 Docs-->
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath }/user/diet/dietMain" id="docMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">diet</a>
+							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath }/user/diet/dietMain" id="docMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">식단관리</a>
 							<ul class="dropdown-menu" aria-labelledby="docMenu">
 <%-- 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/dietMain">dietMain</a> </li> --%>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/dayKcal?titleName=당신에게 맞는 하루 열량과 그에 따른 운동을 확인해보세요!">일일 열량</a> </li>
@@ -322,7 +322,7 @@ function sendChatbotBTN(){
 						</li>
 						<!-- Menu item 7 chat-->
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/user/chat/chat.do" id="docMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">chat</a>
+							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/user/chat/chat.do" id="docMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">채팅</a>
 							<ul class="dropdown-menu" aria-labelledby="docMenu">
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/chat/chat">채팅하기</a> </li>
 							</ul>
