@@ -430,10 +430,14 @@
 	</div>
 </div>
 
-<div align="center">
-	<div class="col-sm-12 mb-5" style="width: 50%">
-		<div class="table-responsive-sm">
-			<h3>내 차 리스트</h3>
+
+
+
+	<div class="row mb-4" style="width:100%">		
+		<div class="table-responsive-sm" style="width:40%; margin:0px 0px 0px 300px">
+			<div align="center">
+				<h3>내 차 리스트</h3>
+			</div>
 			<div align="right">
 				<button type="button" onClick="insertCar()" class="btn">등록</button>
 			</div>
@@ -463,15 +467,10 @@
 				</tbody>
 			</table>
 		</div>
-	</div>
-</div>
-
-<div align="center">
-	<div class="col-sm-12 mb-5" style="width: 50%">
-		<div class="row" align="center">
-			<!-- Job positions -->
-			<div class="col-md-8" style="margin-left:140px">
-<!-- 				<h3 class="mb-3">내 차 세부정보</h3> -->
+				
+		<div class="col-md-3" style="overflow: auto; overflow-x:hidden; width: 45%; margin:0px 0px 0px 100px">
+			<div class="row" align="center" >
+<!-- 			<h3 class="mb-3">내 차 세부정보</h3> -->
 				<div class="accordion accordion-line toggle-icon-left toggle-icon-round"
 					id="accordion1">
 					<!-- item -->
@@ -565,7 +564,6 @@
 			</div>
 		</div>
 	</div>
-</div>
 
 <!-- 내 차 수정 Modal -->
 <div class="modal fade text-left" id="updateCar" tabindex="-1"
