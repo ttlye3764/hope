@@ -24,9 +24,6 @@ import kr.or.ddit.utiles.UserSha256;
 import kr.or.ddit.vo.BoardVO;
 import kr.or.ddit.vo.MemberVO;
 
-// /SpringToddler/user/member/memberList.do
-// /SpringToddler/user/member/memberView.do
-// /SpringToddler/user/member/memberForm.do
 @Controller
 @RequestMapping("/user/member/")
 public class MemberController {
@@ -44,7 +41,6 @@ public class MemberController {
 		params.put("mem_id", mem_id);
 		MemberVO memberInfo = this.service.memberInfo(params);
 
-//	      ModelMap modelMap = new ModelMap();
 		modelMap.addAttribute("memberInfo", memberInfo);
 
 		return modelMap;
@@ -64,10 +60,10 @@ public class MemberController {
 			params.put("mem_no",mem_no);
 			List<BoardVO> fboardList = this.boardService.myboardList(params);
 			
-			params.put("bd_division","3");
+			params.replace("bd_division","3");
 			List<BoardVO> boardList = this.boardService.myboardList(params);
 			
-			params.put("bd_division","4");
+			params.replace("bd_division","4");
 			List<BoardVO> qboardList = this.boardService.myboardList(params);
 			
 			andView.addObject("fboardList", fboardList);
@@ -152,7 +148,6 @@ public class MemberController {
 
 		MemberVO memberInfo = this.service.memberInfo(params);
 
-		// Model(view 대상 전송 데이타 저장) + String(view 경로와 이름)
 		ModelAndView andView = new ModelAndView();
 		andView.addObject("memberInfo", memberInfo);
 
@@ -265,9 +260,9 @@ public class MemberController {
 			int a = (int) (Math.random() * 25) + 65;
 			int b = (int) (Math.random() * 25) + 97;
 
-			int cnt = (int) (Math.random() * 2) + 1;
+			int cnt = (int) (Math.random() * 2) + 1; //대문자를 입력할 것인지 소문자를 입력할 것인지 선택
 
-			char a1 = (char) a;
+			char a1 = (char) a; // 아스키 코드 변환
 			char b1 = (char) b;
 
 			if (cnt == 1) {

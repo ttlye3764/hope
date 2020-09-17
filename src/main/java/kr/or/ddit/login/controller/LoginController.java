@@ -44,10 +44,10 @@ public class LoginController {
 
 		if (end_time == null) {
 		} else {
-			d_end_time = format1.parse(end_time);
+			d_end_time = format1.parse(end_time); // String 타입의 end_time을 date형식으로 포맷
 			cal.setTime(d_end_time);
 
-			cal.add(Calendar.DATE, +1);
+			cal.add(Calendar.DATE, +1); // 9월14일~9월15일을 검색하게 된다면 9월 14일 00:00:00 ~ 9월 15일 00:00:00으로 인식됨.
 			day = cal.getTime();
 			end_time = format1.format(day);
 		}
@@ -58,7 +58,7 @@ public class LoginController {
 
 		if (end_time == null) {
 		} else {
-			cal.add(Calendar.DATE, -1);
+			cal.add(Calendar.DATE, -1); // view에는 사용자가 입력한 값을 보여줘야 하기 때문에 원래 값으로 되돌림
 			day = cal.getTime();
 			end_time = format1.format(day);
 		}
