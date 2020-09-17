@@ -434,7 +434,7 @@
 
 
 	<div class="row mb-4" style="width:100%">		
-		<div class="table-responsive-sm" style="width:40%; margin:0px 0px 0px 300px">
+		<div class="table-responsive-sm" style="width:40%; margin:0px 0px 0px 30%">
 			<div align="center">
 				<h3>내 차 리스트</h3>
 			</div>
@@ -468,7 +468,7 @@
 			</table>
 		</div>
 				
-		<div class="col-md-3" style="overflow: auto; overflow-x:hidden; width: 45%; margin:0px 0px 0px 100px">
+		<div class="col-md-3" style="overflow: auto; overflow-x:hidden; width: 30%; margin:0px 0px 0px 30px">
 			<div class="row" align="center" >
 <!-- 			<h3 class="mb-3">내 차 세부정보</h3> -->
 				<div class="accordion accordion-line toggle-icon-left toggle-icon-round"
@@ -480,21 +480,21 @@
 						</div>
 								<div class="collapse" id="collapse-1"	data-parent="#accordion1">
 									<div class="accordion-content">
-									<div class="input-group mb-3" style="width: 400px" align="center">
+									<div class="input-group mb-3" align="center">
 									<input type="hidden" id="lt_car_kinds_hd">
 										차&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;종&nbsp;&nbsp;&nbsp;&nbsp;
 									<input type="text" class="form-control" id="lt_car_kinds" disabled="disabled"/>
 								</div>
-								<div class="input-group mb-3" style="width: 400px" align="center">
+								<div class="input-group mb-3" align="center">
 									차량번호&nbsp;&nbsp;&nbsp;
 									<input type="hidden" id="lt_car_no">
 									<input type="text" class="form-control" id="lt_car_no1" disabled="disabled" />
 								</div>
-								<div class="input-group mb-3" style="width: 400px" align="center">
+								<div class="input-group mb-3" align="center">
 									출고년도&nbsp;&nbsp;&nbsp;<input type="text" class="form-control"
 										id="lt_car_date" disabled="disabled"/>
 								</div>
-								<div class="input-group mb-3" style="width: 400px" align="center">
+								<div class="input-group mb-3" align="center">
 									유종구분&nbsp;&nbsp;&nbsp;<select id="lt_car_oil"
 										class="custom-select select-big" disabled="disabled">
 										<option value="휘발유" selected="selected">휘발유</option>
@@ -502,8 +502,8 @@
 										<option value="LPG">LPG</option>
 									</select>
 								</div>
-								<div class="input-group mb-3" style="width:400px; align:center;">
-									<button type="button" class="btn btn-secondary" id="lt_btn" style="margin:0px 0px 0px 140px">수정</button>
+								<div class="input-group mb-3" align:center;">
+									<button type="button" class="btn btn-secondary" id="lt_btn" style="margin:0px 0px 0px 70px">수정</button>
 									<button type="button" class="btn btn-secondary" id="del" style="margin:0px 0px 0px 1px">삭제</button>
 								</div>
 							</div>
