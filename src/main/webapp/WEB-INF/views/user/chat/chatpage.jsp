@@ -30,15 +30,18 @@
   <div class="inbox_msg">
 	<div class="inbox_people">
 	  <div class="headind_srch">
-	   <ul class="social-icons si-colored-bg si-medium">
-	   		<li class="social-icons-item social-dribbble">
-				<a class="social-icons-link" onclick="searchFriendForm();"><i class="fa fa-dribbble"></i></a>
-			</li>
-			<li class="social-icons-item social-flickr">
-				<a class="social-icons-link" onclick="friendListForm();"><i class="fa fa-flickr"></i></a>
-			</li>
-			
-		</ul>
+<!-- 	   <ul class="social-icons si-colored-bg si-medium"> -->
+<!-- 	   		<li class="social-icons-item social-dribbble"> -->
+<!-- 				<a class="social-icons-link" onclick="searchFriendForm();"><i class="fa fa-dribbble"></i></a> -->
+<!-- 			</li> -->
+<!-- 			<li class="social-icons-item social-flickr"> -->
+<!-- 				<a class="social-icons-link" onclick="friendListForm();"><i class="fa fa-flickr"></i></a> -->
+<!-- 			</li> -->		
+<!-- 		</ul> -->
+		<div style="display:flex;  justify-content: flex-end;">
+		<img src="${pageContext.request.contextPath }/image/hug.png" style="width=:40px; height:40px;" onclick="searchFriendForm();">
+		<img src="${pageContext.request.contextPath }/image/friends.png" style="width=:40px; height:40px;" onclick="friendListForm();">
+		</div>
 		<div class="recent_heading">
 		  <h4>Recent</h4>
 		 
@@ -77,12 +80,15 @@
 	  <!-- 친구 목록 끝 -->
 	</div>
 	<div class="mesgs">
-		<ul class="social-icons si-colored-bg si-medium">
-			<li class="social-icons-item social-dribbble">
-				<a class="social-icons-link" onclick="updateChatImageForm();"><i class="fa fa-dribbble"></i></a>
-			</li>
-		</ul>
-	  <div class="msg_history" id="msg_history" style="background-image: url(${pageContext.request.contextPath}/image/kakao.jpg);">
+<!-- 		<ul class="social-icons si-colored-bg si-medium"> -->
+<!-- 			<li class="social-icons-item social-dribbble"> -->
+<!-- 				<a class="social-icons-link" onclick="updateChatImageForm();"><i class="fa fa-dribbble"></i></a> -->
+<!-- 			</li> -->
+<!-- 		</ul> -->
+		<div style="display:flex;  justify-content: flex-end;">
+			<img src="${pageContext.request.contextPath }/image/settings.png" style=" width=:40px; height:40px;" onclick="updateChatImageForm();">
+	  	</div>
+	  <div class="msg_history" id="msg_history" style="background-image: url();">
 		<div class="incoming_msg">
 		  <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
 		  <div class="received_msg">
@@ -266,7 +272,7 @@ function chatRoomList(){
 					chatRoomList += '<input type="hidden" id="ch_no" value="'+item.ch_no+'">';
 					chatRoomList += '<input type="hidden" id="mem_no" value="'+item.mem_no+'">';
 					chatRoomList += '<div class="chat_people">';
-					chatRoomList += '<div class="chat_img"> <img src="${pageContext.request.contextPath}/resources/image/friend1.jpg" alt="sunil"> </div>';
+					chatRoomList += '<div class="chat_img"> <img src="${pageContext.request.contextPath}/resources/image/empty.png" alt=""> </div>';
 					chatRoomList += '<div class="chat_ib">';
 					chatRoomList += '<h5 id="mem_no"><input type="hidden" id="mem_name" value="'+item.mem_name+'">'+item.mem_name+'<span class="chat_date" id="lastChat">'+item.msg_date+'</span></h5>';
 					chatRoomList += '<p>'+item.msg_content+'</p>';
@@ -363,7 +369,7 @@ function messageList(){
 					messageList += '</div>';
 				}else{
 					messageList += '<div class="incoming_msg">';
-					messageList += '<div class="incoming_msg_img"> <img src="${pageContext.request.contextPath}/resources/image/friend1.jpg" alt="sunil"> </div>';
+					messageList += '<div class="incoming_msg_img"> <img src="${pageContext.request.contextPath}/resources/image/empty.png" alt=""> </div>';
 					messageList += '<div class="received_msg">';
 					messageList += '<div class="received_withd_msg">';
 					messageList += '<p>'+item.msg_content+'</p>';
@@ -594,9 +600,12 @@ function insertFriendBtn(e){
 		});
 	}
 
-
 $(function(){
-	initSocket("http://localhost/lastProject/echo?mem_no=" + ${LOGIN_MEMBERINFO.mem_no});
+
+// 	192.168.31.35
+
+	
+	initSocket("http://192.168.31.35/lastProject/echo?mem_no=" + ${LOGIN_MEMBERINFO.mem_no});
 	chatRoomList();
 	$('.chat_list').click(function(){
 		$('.chat_list').toggleClass('active_chat');	

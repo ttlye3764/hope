@@ -517,7 +517,7 @@ function updateDietBoardComplete(){
 		diet_board_list.push(data);
 	}
 	var jsonData = JSON.stringify(diet_board_list) ;
-		alert(jsonData);
+// 		alert(jsonData);
 
 	$.ajax({
 		type : 'POST',
