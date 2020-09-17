@@ -164,7 +164,9 @@
 						$('#kmtb').append('<tr><td colspan="3" align="center">등록된 키로수가 없습니다.</td></tr>');
 			        }
 					for(var i = 0 ; i < result.kmList.length ; i++){
-						$('#kmtb').append('<tr><td>'+result.kmList[i].car_no+'</td><td>'+result.kmList[i].md_km+'km</td><td>'+result.kmList[i].md_date+'</td></tr>');
+						var date = result.kmList[i].md_date;
+		            	date = date.split(" ");
+						$('#kmtb').append('<tr><td>'+result.kmList[i].car_no+'</td><td>'+result.kmList[i].md_km+'km</td><td>'+date[0]+'</td></tr>');
 					}
 		            $('#kmtb').append('</tbody>')
 // 			엔진오일
@@ -174,7 +176,9 @@
 						$('#enginetb').append('<tr><td colspan="3" align="center">등록된 교환 기록이 없습니다.</td></tr>');
 			        }
 		            for(var i = 0 ; i < result.engineList.length ; i++){
-		            	$('#enginetb').append('<tr><td>'+result.engineList[i].car_no+'</td><td>'+result.engineList[i].md_km+'km</td><td>'+result.engineList[i].md_engine+'</td></tr>');
+		            	var date = result.engineList[i].md_engine;
+		            	date = date.split(" ");
+		            	$('#enginetb').append('<tr><td>'+result.engineList[i].car_no+'</td><td>'+result.engineList[i].md_km+'km</td><td>'+date[0]+'</td></tr>');
 		            }
 		            $('#enginetb').append('</tbody>')
 
@@ -185,7 +189,9 @@
 						$('#breaktb').append('<tr><td colspan="3" align="center">등록된 교환 기록이 없습니다.</td></tr>');
 			        }
 		            for(var i = 0 ; i < result.breakList.length ; i++){
-		            	$('#breaktb').append('<tr><td>'+result.breakList[i].car_no+'</td><td>'+result.breakList[i].md_km+'km</td><td>'+result.breakList[i].md_brake+'</td></tr>');
+		            	var date = result.breakList[i].md_brake;
+		            	date = date.split(" ");
+		            	$('#breaktb').append('<tr><td>'+result.breakList[i].car_no+'</td><td>'+result.breakList[i].md_km+'km</td><td>'+date[0]+'</td></tr>');
 		            }
 		            $('#breaktb').append('</tbody>')
 				}
