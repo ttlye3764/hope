@@ -468,7 +468,7 @@
 			</table>
 		</div>
 				
-		<div class="col-md-3" style="overflow: auto; overflow-x:hidden; width: 30%; margin:0px 0px 0px 30px">
+		<div class="col-md-3" style="overflow: auto; overflow-x:hidden; width: 27%; margin:0px 0px 0px 80px">
 			<div class="row" align="center" >
 <!-- 			<h3 class="mb-3">내 차 세부정보</h3> -->
 				<div class="accordion accordion-line toggle-icon-left toggle-icon-round"
