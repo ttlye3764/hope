@@ -152,7 +152,30 @@
 
 	<select id="dietMemGraphList" parameterType="Map"
 		resultType="dietDayVO">
-		SELECT c.MEM_NO MEM_NO, d.DD_DATE DD_DATE, d.DD_KCAL DD_KCAL, c.DAY_KCAL DAY_KCAL
+<!-- 		SELECT c.MEM_NO MEM_NO, d.DD_DATE DD_DATE, d.DD_KCAL DD_KCAL, c.DAY_KCAL DAY_KCAL -->
+<!-- 		FROM ( -->
+<!-- 			SELECT MEM_NO, dm_no, DAY_KCAL, TO_CHAR(DM_DATE, 'YYYY-MM-DD') dm_date -->
+<!-- 			FROM DIET_MEM -->
+<!-- 			WHERE dm_no IN ( -->
+<!-- 				SELECT max(a.dm_no) dm_no -->
+<!-- 				FROM diet_mem a, diet_day b -->
+<!-- 				WHERE a.MEM_NO = b.MEM_NO -->
+<!-- 				AND b.dd_date = TO_CHAR(a.DM_DATE, 'YYYY-MM-DD') -->
+<!-- 				GROUP BY dd_date) -->
+<!-- 			AND TO_CHAR(DM_DATE, 'YYYY-MM-DD') IN ( -->
+<!-- 													SELECT dd_date -->
+<!-- 													FROM diet_mem a, diet_day b -->
+<!-- 													WHERE a.MEM_NO = b.MEM_NO -->
+<!-- 													AND b.dd_date = TO_CHAR(a.DM_DATE, 'YYYY-MM-DD') -->
+<!-- 													GROUP BY dd_date -->
+<!-- 													) -->
+<!-- 			)c , DIET_DAY d -->
+<!-- 		WHERE c.dm_date = d.dd_date -->
+<!-- 		AND c.mem_no = #{mem_no} -->
+<!-- 		ORDER BY dd_date -->
+SELECT *
+from(
+SELECT c.MEM_NO MEM_NO, d.DD_DATE DD_DATE, d.DD_KCAL DD_KCAL, c.DAY_KCAL DAY_KCAL
 		FROM (
 			SELECT MEM_NO, dm_no, DAY_KCAL, TO_CHAR(DM_DATE, 'YYYY-MM-DD') dm_date
 			FROM DIET_MEM
@@ -171,8 +194,9 @@
 													)
 			)c , DIET_DAY d
 		WHERE c.dm_date = d.dd_date
-		AND c.mem_no = #{mem_no}
-		ORDER BY dd_date
+		AND d.mem_no = #{mem_no}
+		ORDER BY dd_date)
+		WHERE mem_no = #{mem_no}
 	</select>
 
 	<select id="dietBoardList" parameterType="Map" resultType="dietBoardVO">
@@ -260,6 +284,19 @@
 			FROM menu) b
 			WHERE a.menu_no = b.menu_no
     </select>
+    
+    <update id="updateDietMemInfo" parameterType="DietMemVO">
+    	UPDATE DIET_MEM SET HEIGHT = #{height},
+    						CURRENT_WEIGHT = #{current_weight},
+    						PURPOSE_WEIGHT = #{purpose_weight},
+    						BMI = #{bmi},
+    						DAY_KCAL = #{day_kcal}
+    	WHERE DM_NO = #{dm_no}
+    </update>
+    
+    <delete id="deleteDietMemInfo" parameterType="Map">
+    	DELETE DIET_MEM WHERE DM_NO = #{dm_no}
+    </delete>
 </mapper>
 
 

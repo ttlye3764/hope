@@ -69,4 +69,10 @@ public interface IDietService {
 		
 		//추천식단 상세 가져오기
 		public List<Diet_infoVO> recommendDietInfo(Map<String, String> params) throws Exception;
+		
+		// diet_mem 수정
+		public int updateDietMemInfo(Diet_memVO dietMemInfo) throws Exception;
+		
+		// diet_mem 삭제
+		public int deleteDietMemInfo(Map<String, String> params) throws Exception;
 }

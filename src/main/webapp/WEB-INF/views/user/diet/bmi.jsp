@@ -29,24 +29,24 @@
 				<aside class="col-md-3 sidebar order-last order-md-first">
 					<!-- Text Widget -->
 					<div class="widget">
-						<h5 class="widget-title" id="dietSide_h5_my">내꺼 내꺼 내</h5>
-						<p class="mb-0"> procuring the why performed continual improving. Civil songs so large shade in cause.</p>
+						<h5 class="widget-title" id="dietSide_h5_my">나의 식단 관리</h5>
+						<p class="mb-0"> 나만의 식단 관리를 체험해보세요!</p>
 					</div>
 					<div class="widget">
 						<h5 class="widget-title" id="dietSide_h5_dayKcal">일일 열량</h5>
-						<p class="mb-0">R shade in cause.</p>
+						<p class="mb-0">일일 추천 열량과 운동별 열량 소모량을 확인하세요!</p>
 					</div>
 					<div class="widget">
-						<h5 class="widget-title" id="dietSide_h5_menuList">메뉴 리스트</h5>
-						<p class="mb-0">R shade in cause.</p>
+						<h5 class="widget-title" id="dietSide_h5_menuList">칼로리 사전</h5>
+						<p class="mb-0">음식별 칼로리를 확인하세요!</p>
 					</div>
 					<div class="widget">
-						<h5 class="widget-title" id="dietSied_h5_recommendDiet">추천 식단 리스트</h5>
-						<p class="mb-0"> procuring the why performed continual improving. Civil songs so large shade in cause.</p>
+						<h5 class="widget-title" id="dietSide_h5_recommendDiet">추천 식단 리스트</h5>
+						<p class="mb-0"> 회원님에게 맞는 식단표를 확인해보세요!</p>
 					</div>
 					<div class="widget">
-						<h5 class="widget-title" id="dietSied_h5_bmi">BMI 계산기</h5>
-						<p class="mb-0">. She procuring the why performed continual improving. Civil songs so large shade in cause.</p>
+						<h5 class="widget-title" id="dietSide_h5_bmi">BMI 계산기</h5>
+						<p class="mb-0">회원님의 BMI를 확인해보세요!</p>
 					</div>
 				</aside>
 				<!-- sidebar end -->

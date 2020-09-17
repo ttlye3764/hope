@@ -35,31 +35,31 @@
 				<aside class="col-md-3 sidebar order-last order-md-first">
 					<!-- Text Widget -->
 					<div class="widget">
-						<h5 class="widget-title" id="dietSide_h5_my">내꺼 내꺼 내</h5>
-						<p class="mb-0"> procuring the why performed continual improving. Civil songs so large shade in cause.</p>
+						<h5 class="widget-title" id="dietSide_h5_my">나의 식단 관리</h5>
+						<p class="mb-0"> 나만의 식단 관리를 체험해보세요!</p>
 					</div>
 					<div class="widget">
 						<h5 class="widget-title" id="dietSide_h5_dayKcal">일일 열량</h5>
-						<p class="mb-0">R shade in cause.</p>
+						<p class="mb-0">일일 추천 열량과 운동별 열량 소모량을 확인하세요!</p>
 					</div>
 					<div class="widget">
-						<h5 class="widget-title" id="dietSide_h5_menuList">메뉴 리스트</h5>
-						<p class="mb-0">R shade in cause.</p>
+						<h5 class="widget-title" id="dietSide_h5_menuList">칼로리 사전</h5>
+						<p class="mb-0">음식별 칼로리를 확인하세요!</p>
 					</div>
 					<div class="widget">
 						<h5 class="widget-title" id="dietSide_h5_recommendDiet">추천 식단 리스트</h5>
-						<p class="mb-0"> procuring the why performed continual improving. Civil songs so large shade in cause.</p>
+						<p class="mb-0"> 회원님에게 맞는 식단표를 확인해보세요!</p>
 					</div>
 					<div class="widget">
 						<h5 class="widget-title" id="dietSide_h5_bmi">BMI 계산기</h5>
-						<p class="mb-0">. She procuring the why performed continual improving. Civil songs so large shade in cause.</p>
+						<p class="mb-0">회원님의 BMI를 확인해보세요!</p>
 					</div>
 				</aside>
 				<!-- sidebar end -->
 
 				
 				<div class="col-sm-12 col-md-6">
-					<h5 class="mb-4">Tab default</h5>
+					<h5 class="mb-4"></h5>
 					<ul class="nav nav-tabs" style="width:650px; !important">
 						<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tab-1-1"> 열량표 </a> </li>
 						<li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#tab-1-2"> 열량에 따른 운동 </a> </li>
@@ -368,7 +368,7 @@
 				<div class="col-md-3 col-6">
 					<div class="counter-item text-center">
 						<img class="diet_img" src="${pageContext.request.contextPath }/image/cleanshoes.jpg">
-						<h2 class="counter-item-digit" data-from="0" data-to="${kcal.cleanshoes }" data-speed="3000" data-refresh-interval="10">${kcal.cleanshoes }</h2>
+						<h2 class="counter-item-digit" data-from="0" data-to="${kcal.cleanShoes }" data-speed="3000" data-refresh-interval="10">${kcal.cleanShoes }</h2>
 						<p class="counter-item-text">구두닦이</p>
 					</div>
 				</div>
@@ -405,13 +405,13 @@
 					</div>
 				</div>
 				<!-- count item -->
-				<div class="col-md-3 col-6">
-					<div class="counter-item text-center">
-						<img class="diet_img" src="${pageContext.request.contextPath }/image/.jpg">
-						<h2 class="counter-item-digit" data-from="0" data-to="16" data-speed="3000" data-refresh-interval="10">16</h2>
-						<p class="counter-item-text">Awards won</p>
-					</div>
-				</div>
+<!-- 				<div class="col-md-3 col-6"> -->
+<!-- 					<div class="counter-item text-center"> -->
+<%-- 						<img class="diet_img" src="${pageContext.request.contextPath }/image/.jpg"> --%>
+<!-- 						<h2 class="counter-item-digit" data-from="0" data-to="16" data-speed="3000" data-refresh-interval="10">16</h2> -->
+<!-- 						<p class="counter-item-text">Awards won</p> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
 			</div>
 		</div>
 	</section>

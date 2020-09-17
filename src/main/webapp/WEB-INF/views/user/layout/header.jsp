@@ -295,7 +295,7 @@ function sendChatbotBTN(){
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath }/user/diet/dietMain" id="docMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">diet</a>
 							<ul class="dropdown-menu" aria-labelledby="docMenu">
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/dietMain">dietMain</a> </li>
+<%-- 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/dietMain">dietMain</a> </li> --%>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/dayKcal?titleName=당신에게 맞는 하루 열량과 그에 따른 운동을 확인해보세요!">일일 열량</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/menuList?titleName=오늘 당신이 먹은 혹은 먹을 음식의 칼로리를 확인해보세요!">칼로리 사전</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/bmi?titleName=당신의 BMI는!!?">BMI 계산기</a> </li>
@@ -325,14 +325,7 @@ function sendChatbotBTN(){
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/user/chat/chat.do" id="docMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">chat</a>
 							<ul class="dropdown-menu" aria-labelledby="docMenu">
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/chat/chat">chat</a> </li>
-								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/">Introduction</a> </li>
-								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/#getting-started-section">Directory structure</a> </li>
-								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/#installation-section">Gulp</a> </li>
-								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/#edit-section">Customization</a> </li>
-								<li> <a class="dropdown-item" href="https://wizixo.webestica.com/documentation/#faqs">FAQs</a> </li>
-								<li class="dropdown-divider"></li>
-								<li> <a class="dropdown-item" href="http://support.webestica.com/" target="_blank">Support</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/chat/chat">채팅하기</a> </li>
 							</ul>
 						</li>
 					</ul>

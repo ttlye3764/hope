@@ -98,7 +98,7 @@ function dietMemList(){
  				dietMemDetail += '일일 목표 열량 : <a>'+item.day_kcal+'</a><br>';
  				dietMemDetail += '</div>';
  				dietMemDetail += '<div>';
- 				dietMemDetail += '<button id="updateDietMem" class="btn btn-grad" onclick="updateDietMem(this);">수정</button>';
+ 				dietMemDetail += '<button id="updateDietMem" class="btn btn-grad" onclick="updateDietMemForm(this);">수정</button>';
  				dietMemDetail += '<button id="deleteDietMem" class="btn btn-grad" onclick="deleteDietMem(this);">삭제</button>';
  				dietMemDetail += '</div>';
  				dietMemDetail += '</div>';
@@ -111,3 +111,93 @@ function dietMemList(){
 		}
 	})
 }
+
+
+
+
+function deleteDietMem(e){
+	var appendDiv = $(e).closest('div').prev();
+	var dietMemInfoDmNo = $(e).prev().prev().val();
+
+	$.ajax({
+		url : 'deleteDietMemInfo',
+		data : {
+			dm_no : dietMemInfoDmNo
+		},
+		success : function(result){
+			
+		},
+		error : function(result){
+
+		},
+		complete : function() {
+    		dietMemList();
+                             
+        },
+	})
+}
+
+
+function updateDietMemComplete(e){
+	var appendDiv = $(e).closest('div').prev();
+	var dietMemInfoDmNo = $(e).prev().val();
+
+
+	var update_height = appendDiv.find('.update_height').val();
+	var update_weight = appendDiv.find('.update_weight').val();
+	var update_purpose_weight = appendDiv.find('.update_purpose_weight').val();
+	var update_bmi = appendDiv.find('.update_bmi').val();
+	var update_day_kcal = appendDiv.find('.update_day_kcal').val();
+
+	$.ajax({
+		url : 'updateDietMemInfo',
+		data : { 
+			dm_no : dietMemInfoDmNo,
+			height : update_height,
+			current_weight : update_weight,
+			purpose_weight : update_purpose_weight,
+			bmi : update_bmi,
+			day_kcal : update_day_kcal	
+		},
+		success : function(result){
+			appendDiv.empty();
+			var dietMemInfo = '키 : <a class="height">'+update_height+'</a><br>';
+			dietMemInfo += '체중 : <a class="weight">'+update_weight+'</a><br>';
+			dietMemInfo += '목표 체중 : <a class="purpose_weight">'+update_purpose_weight+'</a><br>';
+			dietMemInfo += 'BMI : <a class="bmi">'+update_bmi+'</a><br>';
+			dietMemInfo += '일일 목표 열량 : <a class="day_kcal">'+update_day_kcal+'</a><br>';  
+			appendDiv.append(dietMemInfo);
+
+			$('#updateDietMemBTN').text('수정');
+			$('#updateDietMemBTN').attr('onclick', 'updateDietMemForm(this)');
+		},
+		error : function(result){
+			alert('회원 정보 수정 실패');
+		}
+	})
+}
+
+
+function updateDietMemForm(e){
+	var appendDiv = $(e).closest('div').prev();
+	var dietMemInfoDmNo = $(e).prev();
+
+	var height = appendDiv.find('.height').text();
+	var weight = appendDiv.find('.weight').text();
+	var purpose_weight = appendDiv.find('.purpose_weight').text();
+	var bmi = appendDiv.find('.bmi').text();
+	var day_kcal = appendDiv.find('.day_kcal').text();
+
+	appendDiv.empty();
+
+	var dietMemInfo = '키 : <textarea class="update_height" style="background-color:transparent; height:19px;">'+height+'</textarea><br><br>';
+	dietMemInfo += '체중 : <textarea class="update_weight" style="background-color:transparent; height:19px;">'+weight+'</textarea><br><br>';
+	dietMemInfo += '목표체중 : <textarea class="update_purpose_weight" style="background-color:transparent; height:19px;">'+purpose_weight+'</textarea><br><br>';
+	dietMemInfo += 'bmi : <textarea class="update_bmi" style="background-color:transparent; height:19px;">'+bmi+'</textarea><br><br>';
+	dietMemInfo += '일일 목표 열량 : <textarea class="update_day_kcal" style="background-color:transparent; height:19px;">'+day_kcal+'</textarea><br><br>';
+	appendDiv.append(dietMemInfo);	
+
+	$('#updateDietMemBTN').text('완료');
+	$('#updateDietMemBTN').attr('onclick', 'updateDietMemComplete(this)');
+}
+

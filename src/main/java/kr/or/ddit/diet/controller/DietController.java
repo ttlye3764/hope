@@ -71,7 +71,6 @@ public class DietController {
 								RolePaginationUtil_diet pagination,
 								HttpServletRequest request,
 								String ajax) throws Exception {
-		
 
 		if(currentPage == null) {
 			currentPage = "1";
@@ -113,7 +112,6 @@ public class DietController {
 	    params.put("endCount", endCount);
 	    
 	    menuList = dietService.menuList(params);
-	    
 	    
 	    andView.addObject("menuList", menuList);
 		andView.addObject("pagination",pagination.getPagingHtmls());
@@ -164,6 +162,26 @@ public class DietController {
 		andView.addObject("dietMemLast", dietMemLast);
 		andView.addObject("dietMemList", dietMemList);
 		andView.setViewName("user/diet/diet_my");
+		return andView;
+	}
+	
+	@RequestMapping("updateDietMemInfo")
+	public ModelAndView updateDietMemInfo(ModelAndView andView,
+											Diet_memVO dietMemInfo) throws Exception{
+		
+		dietService.updateDietMemInfo(dietMemInfo);
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
+	
+	@RequestMapping("deleteDietMemInfo")
+	public ModelAndView deleteDietMemInfo(ModelAndView andView,
+										@RequestParam(value="dm_no", required = false)String dm_no,
+										Map<String, String> params) throws Exception{
+		
+		params.put("dm_no",dm_no);
+		dietService.deleteDietMemInfo(params);
+		andView.setViewName("jsonConvertView");
 		return andView;
 	}
 
@@ -493,7 +511,7 @@ public class DietController {
 		
 		
 		andView.addObject("kcal", kcal);
-		andView.setViewName("user/diet/dayKcal");
+		andView.setViewName("user/diet/dayKcal?title_name=운동별 칼로리 소모량을 확인하세요!");
 		return andView;
 	}
 
