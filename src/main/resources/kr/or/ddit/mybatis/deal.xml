@@ -254,14 +254,14 @@
 					WHERE MEM_NO = #{mem_no}
 					AND deal_fix_revenue = 0
 					AND deal_fix_expenditure = 0
-				ORDER BY DEAL_NO
+				ORDER BY DEAL_date
 				)A
 			)B
 			<![CDATA[
 				WHERE B.RNUM <= #{startCount}
 				AND B.RNUM >= #{endCount}
 	        ]]>	
-	      ORDER BY DEAL_NO DESC 
+	      ORDER BY DEAL_date DESC 
 	</select>
 	
 	
