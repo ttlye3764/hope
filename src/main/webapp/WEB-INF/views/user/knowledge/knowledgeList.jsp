@@ -144,7 +144,7 @@
 	// 움직이는 메뉴 스크롤
 	$("document").ready(function() {  
 	    $(window).scroll(function()  {  
-	        $('#scroll').animate({top:$(window).scrollTop()+"px" },{queue: false, duration: 350});    
+	        $('#scroll').animate({top:$(window).scrollTop()-190 },{queue: false, duration: 350});    
 	    });  
 	 
 	    $('#scroll').click(function() {  
@@ -279,9 +279,9 @@
 	
 						<!-- Modal -->
 						<div class="modal fade text-left" id="exampleModalCenter" tabindex="-1" role="dialog" 
-							aria-labelledby="exampleModalCenter" aria-hidden="true">
+							aria-labelledby="exampleModalCenter" aria-hidden="true" >
 							<div class="modal-dialog modal-dialog-centered" role="document">
-						  		<div class="modal-content" id="modals">
+						  		<div class="modal-content" id="modals" >
 									<div class="modal-header">
 										<h5 class="modal-title" id="exampleModalLongTitle" ><p id="allChk"></p></h5>
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -291,19 +291,6 @@
 									<div class="modal-body">
 										<p id="check"></p>
 									</div>
-									
-									<!-- <div class="col-xl-6" >
-			                            <div class="card" style="width: 470px; height: 300px; margin-bottom: 30px;" id="statistic">
-			                                <div class="card-body">
-			                                    <h4 class="header-title mb-4">통계 분석</h4>
-			                                    <div class="bar-container-horizontal" style="width: 100%;height: 300px;">
-			                                    
-			                                    </div>
-			                                </div>
-			                                end card body
-			                            </div>
-			                            end card
-			                        </div> -->
 			                        
 			                       <div id="donutchart" style="width: 450px; height: 400px; margin: 0 auto;"></div>
 									

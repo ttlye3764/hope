@@ -213,7 +213,6 @@ $(function(){
 							 </span>
 						 <button class="btn-block btn btn-dark" style="margin-top: 15px;" id="btn"
 						 data-toggle="modal" data-target="#exampleModalCenter">확인</button>
-						 <button class="btn-block btn btn-dark" style="margin-top: 15px;" id="btn">내 정보 불러오기</button>
 						</div>
 						
 						<div class="col-md-5" style="margin: auto">

@@ -113,7 +113,7 @@
 			                     	<form id="form1" name="form1" method="post" enctype="multipart/form-data">
 			                          <div class="text-sm-right">
 			                              <button type="button" class="btn btn-light mb-2 mr-1" id="Inbody" data-toggle="modal" data-target="#exampleModal">Inbody</button>
-			                              <button type="button" class="btn btn-light mb-2 mr-1" id="excel">Excel</button>
+<!-- 			                              <button type="button" class="btn btn-light mb-2 mr-1" id="excel">Excel</button> -->
 			                          </div>
 			                     	</form>
 			                     </div><!-- end col-->

@@ -164,7 +164,9 @@
 						$('#kmtb').append('<tr><td colspan="3" align="center">등록된 키로수가 없습니다.</td></tr>');
 			        }
 					for(var i = 0 ; i < result.kmList.length ; i++){
-						$('#kmtb').append('<tr><td>'+result.kmList[i].car_no+'</td><td>'+result.kmList[i].md_km+'km</td><td>'+result.kmList[i].md_date+'</td></tr>');
+						var date = result.kmList[i].md_date;
+		            	date = date.split(" ");
+						$('#kmtb').append('<tr><td>'+result.kmList[i].car_no+'</td><td>'+result.kmList[i].md_km+'km</td><td>'+date[0]+'</td></tr>');
 					}
 		            $('#kmtb').append('</tbody>')
 // 			엔진오일
@@ -174,7 +176,9 @@
 						$('#enginetb').append('<tr><td colspan="3" align="center">등록된 교환 기록이 없습니다.</td></tr>');
 			        }
 		            for(var i = 0 ; i < result.engineList.length ; i++){
-		            	$('#enginetb').append('<tr><td>'+result.engineList[i].car_no+'</td><td>'+result.engineList[i].md_km+'km</td><td>'+result.engineList[i].md_engine+'</td></tr>');
+		            	var date = result.engineList[i].md_engine;
+		            	date = date.split(" ");
+		            	$('#enginetb').append('<tr><td>'+result.engineList[i].car_no+'</td><td>'+result.engineList[i].md_km+'km</td><td>'+date[0]+'</td></tr>');
 		            }
 		            $('#enginetb').append('</tbody>')
 
@@ -185,7 +189,9 @@
 						$('#breaktb').append('<tr><td colspan="3" align="center">등록된 교환 기록이 없습니다.</td></tr>');
 			        }
 		            for(var i = 0 ; i < result.breakList.length ; i++){
-		            	$('#breaktb').append('<tr><td>'+result.breakList[i].car_no+'</td><td>'+result.breakList[i].md_km+'km</td><td>'+result.breakList[i].md_brake+'</td></tr>');
+		            	var date = result.breakList[i].md_brake;
+		            	date = date.split(" ");
+		            	$('#breaktb').append('<tr><td>'+result.breakList[i].car_no+'</td><td>'+result.breakList[i].md_km+'km</td><td>'+date[0]+'</td></tr>');
 		            }
 		            $('#breaktb').append('</tbody>')
 				}
@@ -424,10 +430,14 @@
 	</div>
 </div>
 
-<div align="center">
-	<div class="col-sm-12 mb-5" style="width: 50%">
-		<div class="table-responsive-sm">
-			<h3>내 차 리스트</h3>
+
+
+
+	<div class="row mb-4" style="width:100%">		
+		<div class="table-responsive-sm" style="width:40%; margin:0px 0px 0px 30%">
+			<div align="center">
+				<h3>내 차 리스트</h3>
+			</div>
 			<div align="right">
 				<button type="button" onClick="insertCar()" class="btn">등록</button>
 			</div>
@@ -457,15 +467,10 @@
 				</tbody>
 			</table>
 		</div>
-	</div>
-</div>
-
-<div align="center">
-	<div class="col-sm-12 mb-5" style="width: 50%">
-		<div class="row" align="center">
-			<!-- Job positions -->
-			<div class="col-md-8" style="margin-left:140px">
-<!-- 				<h3 class="mb-3">내 차 세부정보</h3> -->
+				
+		<div class="col-md-3" style="overflow: auto; overflow-x:hidden; width: 27%; margin:0px 0px 0px 80px">
+			<div class="row" align="center" >
+<!-- 			<h3 class="mb-3">내 차 세부정보</h3> -->
 				<div class="accordion accordion-line toggle-icon-left toggle-icon-round"
 					id="accordion1">
 					<!-- item -->
@@ -475,21 +480,21 @@
 						</div>
 								<div class="collapse" id="collapse-1"	data-parent="#accordion1">
 									<div class="accordion-content">
-									<div class="input-group mb-3" style="width: 400px" align="center">
+									<div class="input-group mb-3" align="center">
 									<input type="hidden" id="lt_car_kinds_hd">
 										차&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;종&nbsp;&nbsp;&nbsp;&nbsp;
 									<input type="text" class="form-control" id="lt_car_kinds" disabled="disabled"/>
 								</div>
-								<div class="input-group mb-3" style="width: 400px" align="center">
+								<div class="input-group mb-3" align="center">
 									차량번호&nbsp;&nbsp;&nbsp;
 									<input type="hidden" id="lt_car_no">
 									<input type="text" class="form-control" id="lt_car_no1" disabled="disabled" />
 								</div>
-								<div class="input-group mb-3" style="width: 400px" align="center">
+								<div class="input-group mb-3" align="center">
 									출고년도&nbsp;&nbsp;&nbsp;<input type="text" class="form-control"
 										id="lt_car_date" disabled="disabled"/>
 								</div>
-								<div class="input-group mb-3" style="width: 400px" align="center">
+								<div class="input-group mb-3" align="center">
 									유종구분&nbsp;&nbsp;&nbsp;<select id="lt_car_oil"
 										class="custom-select select-big" disabled="disabled">
 										<option value="휘발유" selected="selected">휘발유</option>
@@ -497,8 +502,8 @@
 										<option value="LPG">LPG</option>
 									</select>
 								</div>
-								<div class="input-group mb-3" style="width:400px; align:center;">
-									<button type="button" class="btn btn-secondary" id="lt_btn" style="margin:0px 0px 0px 140px">수정</button>
+								<div class="input-group mb-3" align:center;">
+									<button type="button" class="btn btn-secondary" id="lt_btn" style="margin:0px 0px 0px 70px">수정</button>
 									<button type="button" class="btn btn-secondary" id="del" style="margin:0px 0px 0px 1px">삭제</button>
 								</div>
 							</div>
@@ -559,7 +564,6 @@
 			</div>
 		</div>
 	</div>
-</div>
 
 <!-- 내 차 수정 Modal -->
 <div class="modal fade text-left" id="updateCar" tabindex="-1"

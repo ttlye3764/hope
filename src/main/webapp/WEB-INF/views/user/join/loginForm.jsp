@@ -115,26 +115,26 @@ $(function(){
       };
       
       function caps_lock(e) {
-              var keyCode = 0;
-              var shiftKey = false;
-              keyCode = e.keyCode;
-              shiftKey = e.shiftKey;
-              if (((keyCode >= 65 && keyCode <= 90) && !shiftKey)
-                      || ((keyCode >= 97 && keyCode <= 122) && shiftKey)) {
-                  show_caps_lock();
-                  setTimeout("hide_caps_lock()", 3500);
-              } else {
-                  hide_caps_lock();
-              }
-          }
+         var keyCode = 0;
+         var shiftKey = false;
+         keyCode = e.keyCode;
+         shiftKey = e.shiftKey;
+         if (((keyCode >= 65 && keyCode <= 90) && !shiftKey)
+                 || ((keyCode >= 97 && keyCode <= 122) && shiftKey)) {
+             show_caps_lock();
+             setTimeout("hide_caps_lock()", 3500);
+         } else {
+             hide_caps_lock();
+         }
+      }
    
       function show_caps_lock() {
     	  $('#label').css('color', 'red');
-           $("#label").text("CapsLock이 켜져있습니다.");
+          $("#label").text("CapsLock이 켜져있습니다.");
       }
    
       function hide_caps_lock() {
-           $("#label").text("");
+          $("#label").text("");
       }
 
       function search_id_modal(){
@@ -183,7 +183,6 @@ $(function(){
 				hp_num : $('input[name=hp_num]').val()
 			},
 			success : function(result) {
-				//{ flag : true | false}
 				if(result.json == '인증이 완료되었습니다.'){
 					$('#hplabel').text(result.json);
 					$('input[name=hp_num]').attr("disabled",true);
@@ -292,9 +291,6 @@ $(function(){
 		$(location).attr('href', '${pageContext.request.contextPath}/user/member/delete.do');
 	}
 </script>
-	<div class="preloader">
-		<img src="assets/images/preloader.svg" alt="Pre-loader">
-	</div>
 
 	<!-- =======================
 	Sign in -->
@@ -364,15 +360,6 @@ $(function(){
 	</section>
 	<!-- =======================
 	Sign in -->
-
-	<!--Global JS-->
-	<script src="assets/vendor/jquery/jquery.min.js"></script>
-	<script src="assets/vendor/popper.js/umd/popper.min.js"></script>
-	<script src="assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-	<!--Template Functions-->
-	<script src="assets/js/functions.js"></script>
 	
 	<!-- Modal -->
 	<div class="modal fade text-left" id="search_id_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true">
