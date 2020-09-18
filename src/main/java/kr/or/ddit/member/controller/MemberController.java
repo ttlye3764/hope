@@ -36,7 +36,7 @@ public class MemberController {
 	@Autowired
 	private IBoardService boardService;
 
-	@RequestMapping("memberView")
+	@RequestMapping("memberView") // 멤버 상세 정보
 	public ModelMap memberView(String mem_id, Map<String, String> params, ModelMap modelMap) throws Exception {
 		params.put("mem_id", mem_id);
 		MemberVO memberInfo = this.service.memberInfo(params);
@@ -46,7 +46,7 @@ public class MemberController {
 		return modelMap;
 	}
 	
-	@RequestMapping("myBoard")
+	@RequestMapping("myBoard") // 내가 작성한 게시글 목록
 	public ModelAndView myBoard(ModelAndView andView
 								,Map<String,String>params
 								,HttpServletRequest request) throws Exception{
@@ -56,14 +56,14 @@ public class MemberController {
 		}else {
 			String mem_no = memberInfo.getMem_no();
 			
-			params.put("bd_division","1");
+			params.put("bd_division","1"); // 자유게시판 게시판 번호
 			params.put("mem_no",mem_no);
 			List<BoardVO> fboardList = this.boardService.myboardList(params);
 			
-			params.replace("bd_division","3");
+			params.replace("bd_division","3"); // 건의사항 게시판 번호
 			List<BoardVO> boardList = this.boardService.myboardList(params);
 			
-			params.replace("bd_division","4");
+			params.replace("bd_division","4"); // Qna 게시판 번호
 			List<BoardVO> qboardList = this.boardService.myboardList(params);
 			
 			andView.addObject("fboardList", fboardList);
@@ -89,18 +89,18 @@ public class MemberController {
 	public String updateMember(MemberVO memberInfo, HttpSession session, Map<String, String> params, @RequestParam("files") MultipartFile[] items) throws Exception {
 		params.put("mem_id", memberInfo.getMem_id());
 		
-		if(!(memberInfo.getMem_pass().length()>0)) {
-			MemberVO memberInfo2 = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		if(!(memberInfo.getMem_pass().length()>0)) { // 새로운 비밀번호를 사용자가 입력하지 않았을 경우
+			MemberVO memberInfo2 = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO"); // 세션에서 사용자 정보를 불러와서 비밀번호에 그대로 넣어줌
 			params.put("mem_pass", memberInfo2.getMem_pass());
 		}else {
-			String pass = UserSha256.encrypt(memberInfo.getMem_pass());
+			String pass = UserSha256.encrypt(memberInfo.getMem_pass()); // 새로운 비밀번호를 암호화 시켜줘서 다시 넣어줌
 			memberInfo.setMem_pass(pass);
 			params.put("mem_pass", memberInfo.getMem_pass());
 		}
 		this.service.updateMemberInfo(memberInfo, items);
 		
 		memberInfo = this.service.memberInfo(params);
-		session.setAttribute("LOGIN_MEMBERINFO", memberInfo);
+		session.setAttribute("LOGIN_MEMBERINFO", memberInfo); // 세션에 새로운 정보 저장
 
 		return "redirect:/user/main/mainForm.do";
 	}
