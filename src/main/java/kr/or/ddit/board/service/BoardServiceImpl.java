@@ -41,9 +41,7 @@ public class BoardServiceImpl implements IBoardService{
 	@Override            
 	public void insertBoard(BoardVO boardVO, MultipartFile[] items) throws Exception {
 		boardDao.insertBoard(boardVO);
-		  		
 	    List<Board_FileVO> fileItemList = AttachFileMapper.boardMapper(items, boardVO.getBd_no());
-	      
 	    boardfileDao.insertFileItem(fileItemList);
 	}
 	

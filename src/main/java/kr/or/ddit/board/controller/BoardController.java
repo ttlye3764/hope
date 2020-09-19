@@ -60,9 +60,11 @@ public class BoardController {
 	// 조회
 	@RequestMapping("boardList")
 	public ModelAndView boardList(String bd_division, Map<String, String> params, ModelAndView andView,
-			HttpSession session, HttpServletRequest request, String currentPage, RolePaginationUtil_yun pagination,
-			@RequestParam(defaultValue = "", required = false) String search_keyword,
-			@RequestParam(defaultValue = "TOTAL", required = false) String search_keycode) throws Exception {
+								  HttpSession session, HttpServletRequest request, String currentPage, 
+								  RolePaginationUtil_yun pagination,
+								  @RequestParam(defaultValue = "", required = false) String search_keyword,
+								  @RequestParam(defaultValue = "TOTAL", required = false) String search_keycode) 
+								  throws Exception {
 
 		if (currentPage == null) {
 			currentPage = "1";
@@ -95,7 +97,8 @@ public class BoardController {
 		System.out.println(search_keycode);
 		String totalCount = this.boardService.totalCount(params);
 
-		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount), bd_division, search_keycode, search_keyword, "/lastProject/user/board/boardList.do");
+		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount), 
+				                      bd_division, search_keycode, search_keyword, "/lastProject/user/board/boardList.do");
 
 		String startCount = String.valueOf(pagination.getStartCount());
 		String endCount = String.valueOf(pagination.getEndCount());
@@ -131,6 +134,8 @@ public class BoardController {
 		modelMap.addAttribute("replyList", replyList);
 
 		System.out.println(boardInfo);
+		
+		System.err.println(replyList); 
 
 		params.put("currentPage", currentPage);
 		params.put("search_keyword", search_keyword);
@@ -196,9 +201,12 @@ public class BoardController {
 
 		String board_division_name = "";
 
-		System.out.println(boardVO.getBd_division());
+		System.out.println(boardVO);
+		System.out.println("-----------------------------------1");
 		modelMap.addAttribute("bd_division", bd_division);
+		System.out.println("-----------------------------------2");
 		boardService.insertBoard(boardVO, items);
+		System.out.println("-----------------------------------3");
 
 		return "redirect:/user/board/boardList.do";
 	}

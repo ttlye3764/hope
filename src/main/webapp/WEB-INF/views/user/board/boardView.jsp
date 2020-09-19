@@ -13,19 +13,16 @@
 <script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
 <script>
 $(function(){
-
     // 수정버튼
     $('form[name=boardView]').on('submit', function(){
-
-		//같이 보내줄 값이 필요하기 때문에 bd_no을 hidden으로 감싸서 같이 리턴을 해줘야한다  ?
-  		/* $(this).append('<input type="hidden" name="bd_no" value="${boardInfo.bd_no}"/>'); 
-  			 기능이 수행되지 않아서  body부분에 <input type="hidden" name="bd_no" value="${boardInfo.bd_no}"/>을 넣기..
-  		*/
+		
   		var bd_no = $('input[name="bd_no"]').val();
-        $(this).attr('action','${pageContext.request.contextPath}/user/board/updateBoardInfo.do?bd_no=' + bd_no + '&re_no=${re_no}' + '&bd_division=${bd_division}' + '&currentPage=${currentPage}' + '&search_keyword=${search_keyword}' + '&search_keycode=${search_keycode}');
+        $(this).attr('action','${pageContext.request.contextPath}/user/board/updateBoardInfo.do?bd_no=' + bd_no + '&re_no=${re_no}' + 
+                      '&bd_division=${bd_division}' + '&currentPage=${currentPage}' + '&search_keyword=${search_keyword}' + '&search_keycode=${search_keycode}');
         return true;
      });
 
+    
     // 삭제버튼
   	$('#deleteBtn').on('click', function(){
 		//alert('삭제');
@@ -40,25 +37,32 @@ $(function(){
         var currentPage = '${currentPage}';
         var search_keyword = '${search_keyword}';
         var search_keycode = '${search_keycode}';
+        var bd_division = '${bd_division}';
 
 //         if(rnum == 'nu'){
 // 			$(location).attr('href','${pageContext.request.contextPath}/user/member/myBoard.do');
 //         }else{
-			$(location).attr('href','${pageContext.request.contextPath}/user/board/boardList.do?currentPage='+ currentPage + '&search_keyword='+ search_keyword + '&search_keycode=' + search_keycode + '&bd_division=${bd_division}');
+			$(location).attr('href','${pageContext.request.contextPath}/user/board/boardList.do?currentPage='+ currentPage + '&search_keyword='+ search_keyword + '&search_keycode=' + search_keycode + '&bd_division=' + bd_division );
 //         }
 		
 	});
 
-	// 답글버튼
-	$('#Btn').on('click', function(){
-
-		alert('답글버튼확인');
-
-		$(location).attr('href', '${pageContext.request.contextPath}/user/board/replyForm.do?bd_division=${bd_division}');
 		
+	$("#comment_list").on("click", ".updateReply", function(){
+		var re_content = $(this).parent().siblings()[0].innerText;
+
+		$("input[name=re_contentModel]").val(re_content);
+
+		var bd_no = $(this).data("bd_no");   
+		var re_no = $(this).data("re_no");
+
+		$("#modal_bd_no").val(bd_no);
+		$("#modal_re_no").val(re_no);
+	}); 
+
+	$("#modalUpdateBtn").on("click", function(){
+		updateReply2();
 	});
-	
-        
 });
 
 
@@ -101,14 +105,14 @@ function replyList(){
 				replyList += '	<div class="comment-author"><img class="avatar" src="assets/images/thumbnails/avatar-01.jpg" alt=""></div>';
 				replyList += '	<div class="comment-body">';
 				replyList += '		<div class="comment-meta">';
-				replyList += '			<div class="comment-meta-author"><a href="#">'+item.re_writer+'</a></div>';
+				replyList += '			<div class="comment-meta-author"><a href="#">'+item.mem_name+'</a></div>';
 				replyList += '			<div class="comment-meta-date">'+item.re_date+'</div>';
 				replyList += '		</div>';
 				replyList += '		<div class="comment-content" style="width: 920px;">';
 				replyList += '			<p>'+item.re_content+'</p>';
 				replyList += '			<div align="right">';
 					if(item.re_writer == '${LOGIN_MEMBERINFO.mem_no}'){
-						replyList += '				<button type="button" id="updateReply1"  data-toggle="modal" data-target="#replyModal'+count+'">수정</button>';
+						replyList += '				<button type="button" id="updateReply1"  class="updateReply" data-bd_no="' + item.bd_no + '" data-re_no="' + item.re_no+ '" data-toggle="modal" data-target="#replyModal">수정</button>';
 						replyList += '				<button type="button" id="deleteReply"  class="" data-re_no="' + item.re_no +'"  onclick="deleteReplyA(' + $('#bd_no').val() + ',' + item.re_no + ');" >삭제</button>';
 						}		
 				replyList += '			</div>';
@@ -125,33 +129,30 @@ function replyList(){
 	})   		
 }
 
-// 파일 다운로드기능 
-function fileDown(fileName, fileNo, fileBdNo) {
-	$(location).attr('href','${pageContext.request.contextPath}/user/board/fileDownload.do?fileName='+ fileName + '&fileNo='+ fileNo + '&fileBdNo='+ fileBdNo);
-}
-
 
 
 
 // 댓글 수정기능 
-function updateReply2(bd_no, re_no, index){
-	var re_content = $('input[name="re_contentModel"]').eq(index).val();	//모달 댓글 수정창의 댓글 input 태그 값으로 정정
-	//var bdNo = $('input[name="bd_no"]').val();	//ok
-	//var re_no = $('input[name="re_no"]').val();	//re_no라는 이름의 input 태그가 복수개(6개)
-	//var re_no = re_no;
+function updateReply2(){
+	var re_content = $('input[name="re_contentModel"]').val();	//모달 댓글 수정창의 댓글 input 태그 값으로 정정
+	var bd_no = $('#modal_bd_no').val();	//ok
+	var re_no = $('#modal_re_no').val();	//re_no라는 이름의 input 태그가 복수개(6개)
 	
 	$(location).attr('href','${pageContext.request.contextPath}/user/board/updateBoardReply.do?re_content='+ re_content + '&bd_no=' + bd_no + '&re_no=' + re_no + '&bd_division=${bd_division}');		
 }
 
 
 // 댓글 삭제기능
-function deleteReplyA(bd_no, re_no, index){
-	alert(re_no);
-	var re_no = $('input[name="re_no"]').val();
-
+function deleteReplyA(bd_no, re_no){
 	$(location).attr('href', '${pageContext.request.contextPath}/user/board/deleteBoardReply.do?bd_no=' + bd_no + '&re_no=' + re_no + '&bd_division=${bd_division}');
 }
 
+
+
+//파일 다운로드기능 
+function fileDown(fileName, fileNo, fileBdNo) {
+	$(location).attr('href','${pageContext.request.contextPath}/user/board/fileDownload.do?fileName='+ fileName + '&fileNo='+ fileNo + '&fileBdNo='+ fileBdNo);
+}
 
 
 </script>
@@ -194,7 +195,6 @@ function deleteReplyA(bd_no, re_no, index){
 								<c:if test="${bd_division ne 2 }">
 									<button type="submit" id="updateBtn" value="수정" class="btn-block btn btn-dark" >수정</button>
 									<button type="button" id="deleteBtn" value="삭제" class="btn-block btn btn-dark" >삭제</button>
-<!-- 									<button type="button" id="Btn" value="답글달기" class="btn-block btn btn-dark" >답글달기</button> -->
 								</c:if>
 									<button type="button" id="listBtn" value="목록" class="btn-block btn btn-dark" >목록</button>
 							</div> 
@@ -229,19 +229,21 @@ function deleteReplyA(bd_no, re_no, index){
 		        						<!-- Comment-->
 										<c:forEach var="vo" items="${replyList}" varStatus="status">
 		        						<input type="hidden" name="re_no" value="${vo.re_no}" id="re_no">
+		        				
 											<div class="comment">
 												<div class="comment-author"><img class="avatar" src="assets/images/thumbnails/avatar-01.jpg" alt=""></div>
 												<div class="comment-body">
 													<div class="comment-meta">
-														<div class="comment-meta-author"><a href="#">${vo.re_writer}</a></div>
+														<div class="comment-meta-author"><a href="#">${vo.mem_name}</a></div>
 														<div class="comment-meta-date">${vo.re_date }</div>
 													</div>
 													<div class="comment-content" style="width: 920px;">
 														<p>${vo.re_content}</p>
 														<div align="right">
-															<c:if test="${LOIGN_MEMBERINFO.mem_no eq boardInfo.mem_no}">
-																<button type="button" id="updateReply1"  data-toggle="modal" data-target="#replyModal${status.index }">수정</button>
-																<button type="button" id="deleteReply"  onclick="deleteReplyA('${boardInfo.bd_no}','${vo.re_no }','${status.index}')" class="">삭제</button>
+														<%-- INDEX : [${status.index }]   인덱스 번호 확인해볼때는 이렇게 el태그로 확인할 수 있다.--%>
+															<c:if test="${LOGIN_MEMBERINFO.mem_name eq vo.mem_name}">
+																<button type="button" id="updateReply1" class="updateReply" data-bd_no="${vo.bd_no}" data-re_no="${vo.re_no }" data-toggle="modal" data-target="#replyModal">수정</button>
+																<button type="button" id="deleteReply"  onclick="deleteReplyA('${boardInfo.bd_no}','${vo.re_no }')" class="">삭제</button>
 															</c:if>
 														</div>
 													</div>
@@ -255,7 +257,6 @@ function deleteReplyA(bd_no, re_no, index){
 							<!-- Comment-respond -->
 						</div>
 					</div>
-
 						<div class="row mt-5">
 							<div class="col-md-12">
 								<h2 class="mb-2">댓글 작성</h2>
@@ -277,32 +278,35 @@ function deleteReplyA(bd_no, re_no, index){
 	
 	
 		<!-- 모달2 inbody -->
-							<c:forEach var="vo" items="${replyList}" varStatus="status">
-									<div class="modal fade text-left" id="replyModal${status.index }" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true">
-										<div class="modal-dialog modal-dialog-centered" role="document">
-									  		<div class="modal-content" id="modals">
-												<div class="modal-header">
-													<h5 class="modal-title" id="exampleModalLongTitle" ><p>댓글 수정</p></h5>
-													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-													<span aria-hidden="true">&times;</span>
-													</button>
-												</div>
-												<div class="modal-body">
-														<div class="form-group">
-															<label for="exampleFormControlFile1">댓글 내용 ${status.index}</label>
-															<!-- 어떠한 댓글을 수정을 해도 0번째 댓글 내용으로 수정이 되어 보여지는 이유 : 이 모달창은 id는 유일값만 존재해야하는데 모든 댓글이 같은 id값으로 되어있기때문에 오로지 0번째 내용으로만 바뀌는 것이다. 
-															                                                                                                    그러므로 좋은 방법은 아니지만, 최선의 방법은 바뀔 내용 input태그에 클래스나 네임값을 줘서 위에 기능 수행하기  
-															 -->
-															<input type="text" name="re_contentModel" value="${vo.re_content}">
-														</div>
-													<div align="right">
- 														<button type="button" onclick="updateReply2('${boardInfo.bd_no}', '${vo.re_no }',${status.index})" style="margin: 0px 0px 0px 160px;">수정</button>
- 													</div>
+<%-- 								<c:forEach var="vo" items="${replyList}" varStatus="status"> --%>
+										<div class="modal fade text-left" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true">
+											<input type="hidden" id="modal_bd_no" />
+											<input type="hidden" id="modal_re_no" />
+											
+											<div class="modal-dialog modal-dialog-centered" role="document">
+										  		<div class="modal-content" id="modals">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLongTitle" ><p>댓글 수정</p></h5>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<div class="modal-body">
+															<div class="form-group">
+																<label for="exampleFormControlFile1">댓글 내용 ${status.index}</label>
+																<!-- 어떠한 댓글을 수정을 해도 0번째 댓글 내용으로 수정이 되어 보여지는 이유 : 이 모달창은 id는 유일값만 존재해야하는데 모든 댓글이 같은 id값으로 되어있기때문에 오로지 0번째 내용으로만 바뀌는 것이다. 
+																                                                                                                    그러므로 좋은 방법은 아니지만, 최선의 방법은 바뀔 내용 input태그에 클래스나 네임값을 줘서 위에 기능 수행하기  
+																 -->
+																<input type="text" name="re_contentModel" value=""> <%--${vo.re_content} --%>
+															</div>
+														<div align="right">
+	 														<button type="button" id="modalUpdateBtn" style="margin: 0px 0px 0px 160px;">수정</button>
+	 													</div>
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-							</c:forEach>		
+<%-- 								</c:forEach>		 --%>
 			</div>
 </form>
 </body>
