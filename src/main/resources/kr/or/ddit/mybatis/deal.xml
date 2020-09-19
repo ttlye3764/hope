@@ -41,9 +41,9 @@
 		SELECT *
 		FROM deal
 		WHERE MEM_NO = #{mem_no}
-		AND deal_fix_revenue = 0
-		AND deal_fix_expenditure = 0
-		ORDER BY deal_no
+			AND deal_fix_revenue = 0
+			AND deal_fix_expenditure = 0
+		ORDER BY deal_date desc
 	</select>
 	
 	
@@ -69,8 +69,8 @@
 							deal_kind like #{deal_kind} 
 						</if> 
 						<if test="deal_card_name !=null">
-								and
-								deal_card_name like #{deal_card_name} 
+							and
+							deal_card_name like #{deal_card_name} 
 						</if>
 						<if test="startDate !=null">
 							and
@@ -194,54 +194,47 @@
 		from(select ROWNUM rnum, a.*
 			 from(select *
 				  from deal
-			  	  where 1=1 and mem_no = #{mem_no} AND deal_fix_revenue = 0
-					AND deal_fix_expenditure = 0
+			  	  where mem_no = #{mem_no} AND deal_fix_revenue = 0
+				  	AND deal_fix_expenditure = 0
 							<if test="deal_name !=null">	
 								and 
 								deal_name like '%' || #{deal_name} || '%' 
-							</if>
-							<if test="deal_option !=null">   
+							</if><if test="deal_option !=null">   
 								and
 								deal_option like #{deal_option}
-							</if> 
-							<if test="deal_division !=null">
+							</if><if test="deal_division !=null">
 								and
 								deal_division like #{deal_division} 
-							</if> 
-							<if test="deal_kind !=null">
+							</if><if test="deal_kind !=null">
 								and
 								deal_kind like #{deal_kind} 
-							</if> 
-							<if test="deal_card_name !=null">
+							</if><if test="deal_card_name !=null">
 								and
 								deal_card_name like #{deal_card_name} 
-							</if> 
-							<if test="startDate !=null">
+							</if><if test="startDate !=null">
 								and
 							<![CDATA[	deal_date > to_date(#{startDate},'yyyy-mm-dd') ]]>
-							</if> 
-							<if test="endDate !=null">
+							</if><if test="endDate !=null">
 								and
 							<![CDATA[	deal_date < to_date(#{endDate},'yyyy-mm-dd') ]]>
-							</if> 
-							<if test="deal_year !=null">  
+							</if><if test="deal_year !=null">  
 								and
 							<![CDATA[	deal_date between  to_date(#{deal_year}||'01','yyyymm') and to_date(#{deal_year}||'12','yyyymm') ]]>
-							</if> 
-							<if test="deal_bungi !=null">  
+							</if><if test="deal_bungi !=null">  
 								and
 							<![CDATA[	deal_date between  to_date('2020'||#{bungiStart},'yyyymm') and last_day(to_date('2020'||#{bungiEnd},'yyyymm')) ]]>
-							</if> 
-							<if test="deal_month !=null">  
+							</if><if test="deal_month !=null">  
 								and
 							<![CDATA[	deal_date between  to_date('2020'||#{deal_month},'yyyymm') and last_day(to_date('2020'||#{deal_month},'yyyymm')) ]]>
 							</if>
+							order by deal_date
 				)a
 			)b
 		<![CDATA[
 			WHERE B.RNUM <= #{startCount}
 			AND B.RNUM >= #{endCount}
 		]]>
+		order by b.deal_date desc
 	</select>
 
 
@@ -362,9 +355,4 @@
 		where deal_option='출금' and to_char(deal_date,'yyyymm') = to_char(sysdate,'yyyymm') and mem_no = #{mem_no}
 		group by deal_division
 	</select>
-	
-	
-	
-	
 </mapper>    
-

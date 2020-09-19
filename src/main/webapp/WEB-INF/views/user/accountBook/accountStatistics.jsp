@@ -351,9 +351,7 @@ $(function () {
 		       success : function(result) {
 					var listPlus = [];
 					var listMinus = [];
-					var la = [];
-					console.log(result.listPlus);
-					console.log(result.listMinus);
+					var la = [];				
 					
 					if(result.check == 1){
 						$.each(result.label,function(i,v){
@@ -458,12 +456,12 @@ $(function () {
 		        labels: la,
 		        datasets: [{
 		            label: '지출',
-		            data: listPlus,		
+		            data: listMinus,		
 		            backgroundColor : '#f3545d'         
 		        },
 		        {
 		            label: '수입',
-		            data: listMinus,		
+		            data: listPlus,		
 		            backgroundColor : '#0095ff'            
 		        }
 		        ]

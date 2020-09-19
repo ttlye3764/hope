@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <style>
 	.control-label {
@@ -17,6 +19,10 @@ tr:hover{
 	} 
 </style>
 <script>
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 
 function updateFunc(i){
 	var card ="";
@@ -44,7 +50,6 @@ function updateFunc(i){
 				card = result.dealInfo.deal_card_name;
 				$('#modal_kind2').empty();
 				$.ajax({
-			   	 	async    : false,
 			        url     : '${pageContext.request.contextPath}/user/accountBook/cardList.do',
 			        type    : 'post',
 			        dataType : 'json',
@@ -114,10 +119,11 @@ function getAccountList(){
 				$.each(result.list,function(i,v){
 					str += '<tr><input type="hidden" value="'+v.deal_no+'"/>';
 					str += '<th>'+(i+1)+'</th>';
-					str += '<td>'+v.deal_date +'</td>';
+					var date = v.deal_date.split(' ');
+					str += '<td>'+ date[0] +'</td>';
 					str += '<td>'+v.deal_name +'</td>';
 					str += '<td>'+v.deal_division +'</td>';
-					str += '<td>'+v.deal_price +'</td>';
+					str += '<td>'+numberWithCommas(v.deal_price) +'</td>';
 					if(v.deal_kind=='현금'){
 						str += '<td>'+v.deal_kind +'</td>';
 					}else if(v.deal_kind=='카드'){
@@ -199,10 +205,11 @@ $(function(){
 	        					$.each(result.list,function(i,v){
 	        						str += '<tr><input type="hidden" value="'+v.deal_no+'"/>';
 	        						str += '<th>'+(i+1)+'</th>';
-	        						str += '<td>'+v.deal_date +'</td>';
+	        						var date = v.deal_date.split(' ');
+	    							str += '<td>'+ date[0] +'</td>';
 	        						str += '<td>'+v.deal_name +'</td>';
 	        						str += '<td>'+v.deal_division +'</td>';
-	        						str += '<td>'+v.deal_price +'</td>';
+	        						str += '<td>'+numberWithCommas(v.deal_price) +'</td>';
 	        						if(v.deal_kind=='현금'){
 	        							str += '<td>'+v.deal_kind +'</td>';
 	        						}else if(v.deal_kind=='카드'){
@@ -221,17 +228,7 @@ $(function(){
 			    }
 		 })
 	});
-		
 
-	
-	/* $('#tbody').on('mouseenter', 'tr', function() {
-		$(this).find('.img1').show();
-		$(this).find('.img2').show();
-	}).on('mouseleave', 'tr', function() {
-		$(this).find('.img1').hide();
-		$(this).find('.img2').hide();
-	});
- */
 	$(document).on('mouseenter','#tbody tr', function(){
 		$(this).find('.img1').show();
 		$(this).find('.img2').show();
@@ -240,32 +237,7 @@ $(function(){
 		$(this).find('.img1').hide();
 		$(this).find('.img2').hide();
 	});
-//  	$('#tbody tr').on('mouseenter', function() {
-// 		$(this).find('.img1').show();
-// 		$(this).find('.img2').show();
-// 	});
-// 	$('#tbody tr').on('mouseleave', function() {
-// 		$(this).find('.img1').hide();
-// 		$(this).find('.img2').hide();
-// 	}); 
-	
-// 	$('#tbody tr').on('mouseenter', function() {
-// 		$(this).find('.img1').show();
-// 		$(this).find('.img2').show();
-// 	});
-// 	$('#tbody tr').on('mouseleave', function() {
-// 		$(this).find('.img1').hide();
-// 		$(this).find('.img2').hide();
-// 	}); 
-		
-	/* $('#tbody tr').hover(function(){
-		$(this).find('.img1').show();
-		$(this).find('.img2').show();
-	},function(){
-		$(this).find('.img1').hide();
-		$(this).find('.img2').hide();
-	}); */
-	 
+
 	
 	
 	
@@ -321,10 +293,11 @@ $(function(){
 						$.each(result.list,function(i,v){
 							str += '<tr><input type="hidden" value="'+v.deal_no+'"/>';
 							str += '<th>'+(i+1)+'</th>';
-							str += '<td>'+v.deal_date +'</td>';
+							var date = v.deal_date.split(' ');
+							str += '<td>'+ date[0] +'</td>';
 							str += '<td>'+v.deal_name +'</td>';
 							str += '<td>'+v.deal_division +'</td>';
-							str += '<td>'+v.deal_price +'</td>';
+							str += '<td>'+numberWithCommas(v.deal_price) +'</td>';
 							if(v.deal_kind=='현금'){
 								str += '<td>'+v.deal_kind +'</td>';
 							}else if(v.deal_kind=='카드'){
@@ -505,10 +478,11 @@ $(function(){
 					var str = "";
 					$.each(result.list,function(i,v){
 						str += '<tr><th>'+(i+1)+'</th>';
-						str += '<td>'+v.deal_date +'</td>';
+						var date = v.deal_date.split(' ');
+						str += '<td>'+ date[0] +'</td>';
 						str += '<td>'+v.deal_name +'</td>';
 						str += '<td>'+v.deal_division +'</td>';
-						str += '<td>'+v.deal_price +'</td>';
+						str += '<td>'+numberWithCommas(v.deal_price) +'</td>';
 						if(v.deal_kind=='현금'){
 							str += '<td>'+v.deal_kind +'</td>';
 						}else if(v.deal_kind=='카드'){
@@ -669,10 +643,10 @@ $(function(){
 									<tr>
 										<input type="hidden" value="${dealVO.deal_no }"/>
 										<th>${status.count }</th>
-										<td>${dealVO.deal_date }</td>
+										<td>${fn:substring(dealVO.deal_date,0,10) }</td>
 										<td>${dealVO.deal_name}</td>
 										<td>${dealVO.deal_division}</td>
-										<td>${dealVO.deal_price}</td>
+										<td><fmt:formatNumber value="${dealVO.deal_price}" groupingUsed="true"/></td>
 										<c:if test="${dealVO.deal_kind eq '현금'}">
 											<td>${dealVO.deal_kind}</td>
 										</c:if>

@@ -678,7 +678,6 @@ var startdate = startday();
 var enddate = endday();
 
 function getCorona(name1){
-	
 	$.ajax({
         url     : '${pageContext.request.contextPath}/user/medical/coronaSidoAPI.do',
         type    : 'post',
@@ -715,20 +714,12 @@ function getCorona(name1){
 						}
 				}
 	        });
-	        
-			/* resetPieChart(); */
 			dataList[0] = all;
 			dataList[1] = target;
 			var label = [];
 			label[0] = '전체';
 			label[1] = name1;
 			PieChart(label,dataList);
-			
-
-
-
-
-			
         }
 	});
 

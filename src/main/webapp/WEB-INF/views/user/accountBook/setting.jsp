@@ -4,6 +4,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
 	Calendar cal = Calendar.getInstance();
 %>
@@ -300,15 +302,9 @@ function deleteCard(card_no){
 	        $('#cardTable').empty();
 	        for(var i=0; i<Result.cardlist.length; i++){
         		$('#cardTable').append('<tr><td>'+Result.cardlist[i].card_kind+'</td><td><button type="button" value="'+Result.cardlist[i].card_no+'" onclick="deleteCard('+Result.cardlist[i].card_no+')">삭제</button></td></tr>');
-
 		    }
-	        
-
         }
-
    	});  // 삭제
-   	
-	
 }
 
 function handleImgFileSelect(e){
@@ -332,9 +328,7 @@ function handleImgFileSelect(e){
 }
 
 function categoryChange(e){
-
 	var kind_a = [];
-	
 	$.ajax({
    	 	async    : false,
         url     : '${pageContext.request.contextPath}/user/accountBook/cardList.do',
@@ -346,12 +340,10 @@ function categoryChange(e){
 				kind_a[i] = Result.cardlist[i].card_kind;
 		    }
         }
-
    	});  // 등록 
 	
    	
     var target = document.getElementById("kind");
-    
 	if(e.value=="카드"){
     var d = kind_a;
 	$("#kind").show(); 
@@ -373,7 +365,6 @@ function categoryChange(e){
 
 function staticcategoryChange(e){
 	var statickind_a = [];
-	
 	$.ajax({
    	 	async    : false,
         url     : '${pageContext.request.contextPath}/user/accountBook/cardList.do',
@@ -385,7 +376,6 @@ function staticcategoryChange(e){
 	        	statickind_a[i] = Result.cardlist[i].card_kind;
 		    }
         }
-
    	});  // 등록 
 	
    	
@@ -568,10 +558,10 @@ function receiptcategoryChange(e){
 														<c:forEach var="dealVO" items="${dealList }" varStatus="status">
 															<tr>
 																<th>${status.count }</th>
-									 							<td>${dealVO.deal_date }</td>
+									 							<td>${fn:substring(dealVO.deal_date,0,10) }</td>
 									 							<td>${dealVO.deal_division }</td>
 									 							<td>${dealVO.deal_name}</td>
-									 							<td>${dealVO.deal_price}</td>
+									 							<td><fmt:formatNumber value="${dealVO.deal_price}" groupingUsed="true"/></td>
 									 							<td>${dealVO.deal_option}</td>
 									 							<td>${dealVO.deal_kind }
 									 							<td><button id="deleteBtn" type="button" value="${dealVO.deal_no }" onclick="deletebtn(${dealVO.deal_no })">삭제</button></td>
