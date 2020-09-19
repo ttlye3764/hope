@@ -180,18 +180,10 @@
 <script>
 
 /*---------------------------------- 공유아이디 ----------------------------------- */
-//const btnAdd = document.querySelector('#btnAdd');
-//const btnRemove = document.querySelector('#btnRemove');
 const sb = document.querySelector('#list');
 const id = document.querySelector('#id');
 var name;
-
-
 $(function(){
-
-
-
-	
 	$('#regist').click(function(){
 	         var shareId = $("#list option:selected").text(); 
          var array = shareId.split(" "); //배열로 담기
@@ -228,7 +220,6 @@ $(function(){
 			 $.ajax({
 			   	    url     : '${pageContext.request.contextPath}/user/schedule/insertScheduleInfo.do',
 			        type    : 'POST',
-			        dataType: 'json',
 			        contentType : 'application/json; charset=UTF-8',
 			        async: false,
 			        data :JSON.stringify(arrSchedule),
@@ -242,50 +233,6 @@ $(function(){
        return true;
    });  //서브밋
 })
-// //add selected option
-// btnAdd.onclick = (e) => {
-//     e.preventDefault();
-//      $.ajax({
-//    	   url     : '${pageContext.request.contextPath}/user/schedule/searchId.do',
-//         type    : 'post',
-//         dataType: 'json',
-//         data : {'mem_id':id.value},
-//         success : function(result) {
-// 	            if(result.memberInfo==null){
-// 					alert("존재하지 않는 아이디 입니다.");
-// 	            }
-// 	            else{
-// 		            alert(result.memberInfo.mem_name+"님 공유 목록에 추가하였습니다.");
-// 	   	    		const option = new Option(result.memberInfo.mem_id+' ', result.memberInfo.mem_id+' ');
-// 	   	    		sb.add(option, undefined);
-// 		        }
-//         },
-//         		error : function(request,status,error){
-// 				alert("에러입니다.");
-//         }
-//  	}); 
-//     name.value = '';
-// };
-
-// // remove selected option
-// btnRemove.onclick = (e) => {
-//     e.preventDefault();
-
-//     // save the selected option
-//     let selected = [];
-
-//     for (let i = 0; i < sb.options.length; i++) {
-//         selected[i] = sb.options[i].selected;
-//     }
-
-//     // remove all selected option
-//     let index = sb.options.length;
-//     while (index--) {
-//         if (selected[index]) {
-//             sb.remove(index);
-//         }
-//     }
-// };
 /*---------------------------------- 공유아이디 ----------------------------------- */
 
 

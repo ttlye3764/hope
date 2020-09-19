@@ -14,11 +14,9 @@ import kr.or.ddit.vo.DealVO;
 
 @Component
 public class Scheduler {
-	
 	@Autowired
 	private IDealDao dealDao;
-	
-	@Scheduled(cron = "0 32 14 1 * *") // 초 분 시 일 월 요일
+	@Scheduled(cron = "0 0 1 1 * *") // 초 분 시 일 월 요일
 	public void crontest1() {
 		try {
 			
@@ -35,7 +33,6 @@ public class Scheduler {
 				dealDao.insertDeal(expenditureList.get(i));
 			}	//고정 지출 insert
 				
-		
 		    List<DealVO> revenueList = dealDao.selectrevenue();
 		    for(int i=0; i<revenueList.size(); i++) {
 		    	revenueList.get(i).setDeal_fix_revenue("0");
@@ -46,9 +43,7 @@ public class Scheduler {
 				String[] rday = ryear[2].split(" "); 
 				revenueList.get(i).setDeal_date(ryear[0]+'-'+month+'-'+rday[0]);
 				dealDao.insertDeal(revenueList.get(i));
-		    }
-			
-			
+		    }  //고정 수입 insert
 
 		}catch(Exception e) {
 			e.printStackTrace();
