@@ -19,4 +19,5 @@ public interface ICarDao {
 	public List<MyCarDetailVO> selectKm(Map<String,String> params) throws Exception;
 	public List<MyCarDetailVO> selectEngine(Map<String,String> params) throws Exception;
 	public List<MyCarDetailVO> selectBreak(Map<String,String> params) throws Exception;
+	public void deleteMycarDetail (Map<String,String> params) throws Exception;
 }

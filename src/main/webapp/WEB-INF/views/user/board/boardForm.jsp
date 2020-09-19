@@ -62,12 +62,10 @@ $(function(){
 							<input type="hidden" name="bd_writer" value='${LOGIN_MEMBERINFO.mem_nickname }'>
 							<input type="hidden" name="mem_no" value='${LOGIN_MEMBERINFO.mem_no }'>
 							<div class="col-md-9 input-group mb-2">
-															
-								<div class="form-group">
-									<label for="exampleFormControlFile1"></label>
-									<input type="file" class="form-control-file" name="files" id="exampleFormControlFile1" onchange="setThumbnail(event);"/>
-								</div>
-								
+									<div class="form-group">
+										<label for="exampleFormControlFile1"></label>
+										<input type="file" class="form-control-file" name="files" id="exampleFormControlFile1" onchange="setThumbnail(event);"/>
+									</div>
 							</div>
 							<div class="col-md-12 mb-2">
 								<span class="form-group"><textarea cols="25" rows="20" class="form-control" placeholder="내용" name="bd_content"></textarea></span>

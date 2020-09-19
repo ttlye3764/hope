@@ -44,6 +44,7 @@ import com.google.inject.internal.util.Maps;
 import com.google.protobuf.ByteString;
 
 import kr.or.ddit.chat.service.IChatService;
+import kr.or.ddit.global.GlobalConstant;
 import kr.or.ddit.member.service.IMemberService;
 import kr.or.ddit.vo.ChatFileVO;
 import kr.or.ddit.vo.ChatingRoomVO;
@@ -118,8 +119,8 @@ public class ChatController {
 //		
 //		System.out.println(request.getSession().getServletContext().getRealPath("image"));
 		
-		String path = "/Users/jaeho/Pictures";
-		
+//		String path = "/Users/jaeho/Pictures";
+		String path = GlobalConstant.FILE_PATH;
 		File fileDir = new File(path);
 				
 		if (!fileDir.exists()) {

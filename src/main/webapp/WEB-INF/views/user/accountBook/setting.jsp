@@ -114,7 +114,9 @@ $(function(){
 	        dataType : 'json',
 	        data : {'deal_option':staticpaymentOption,'deal_kind':staticpaymentMethod,'deal_date':staticdate,'deal_name':staticitem,'deal_price':staticprice, 'mem_no':${LOGIN_MEMBERINFO.mem_no}, 'deal_division':staticdivision, 'deal_fix_revenue':staticdeal_fix_revenue, 'deal_fix_expenditure':staticdeal_fix_expenditure, 'deal_card_name':staticcard_name},
 	        success : function(Result) {
-	        	$('#staticTable').append('<tr><td>'+Result.list[Result.list.length-1].deal_name+'</td><td>'+Result.list[Result.list.length-1].deal_date+'</td><td>'+Result.list[Result.list.length-1].deal_price+'</td><td><button type="button" value="'+Result.list[Result.list.length-1].deal_no+'" onclick="deleteStaticDeal('+Result.list[Result.list.length-1].deal_no+')">삭제</button></td></tr>');
+	            var date = Result.list[Result.list.length-1].deal_date;
+	        	date = date.split(""); 
+	        	$('#staticTable').append('<tr><td>'+Result.list[Result.list.length-1].deal_name+'</td><td>'+date[8]+date[9]+'</td><td>'+Result.list[Result.list.length-1].deal_price+'</td><td><button type="button" value="'+Result.list[Result.list.length-1].deal_no+'" onclick="deleteStaticDeal('+Result.list[Result.list.length-1].deal_no+')">삭제</button></td></tr>');
 	        }
 	
 	   	});  // 고정 수입 지출 등록 
@@ -177,8 +179,9 @@ $(function(){
 		        											$('#staticTable').append('</tr>');
 		        													$('#staticTable').append('</thead>');
 			        for(var i=0; i<Result.staticList.length; i++){
-				        console.log(Result);
-		        	$('#staticTable').append('<tr><td>'+Result.staticList[i].deal_name+'</td><td>'+Result.staticList[i].deal_date+'</td><td>'+Result.staticList[i].deal_price+'</td><td><button type="button" value="'+Result.staticList[i].deal_no+'" onclick="deleteStaticDeal('+Result.staticList[i].deal_no+')">삭제</button></td></tr>');
+				    var date = Result.staticList[i].deal_date;
+				    date = date.split("");
+		        	$('#staticTable').append('<tr><td>'+Result.staticList[i].deal_name+'</td><td>'+date[8]+date[9]+'</td><td>'+Result.staticList[i].deal_price+'</td><td><button type="button" value="'+Result.staticList[i].deal_no+'" onclick="deleteStaticDeal('+Result.staticList[i].deal_no+')">삭제</button></td></tr>');
 
 				    }
 		        }
@@ -234,7 +237,39 @@ $(function(){
 		        }
 		
 		   	});  // 카드등록 
-		
+
+
+		 var kind_a = [];
+			
+			$.ajax({
+		   	 	async    : false,
+		        url     : '${pageContext.request.contextPath}/user/accountBook/cardList.do',
+		        type    : 'post',
+		        dataType : 'json',
+		        data : {'mem_no':${LOGIN_MEMBERINFO.mem_no}},
+		        success : function(Result) {
+			        for(var i=0; i<Result.cardlist.length; i++){
+						kind_a[i] = Result.cardlist[i].card_kind;
+				    }
+		        }
+
+		   	});  // 카테고리 리스트 불러오기
+			
+		   	
+		    var target = document.getElementById("kind");
+		    var d = kind_a;
+			$("#kind").show(); 
+			$("#cardRegistBtn").show(); 
+			
+			target.options.length = 0;
+
+			for(x in d){
+				var opt = document.createElement("option");
+				opt.value=d[x];
+				opt.innerHTML=d[x];
+				target.appendChild(opt);
+			}
+			//모달창 나갔을때 카테고리 다시 가져오기
 		   	
 	}); //카드 등록 액션
 
@@ -280,7 +315,9 @@ function deleteStaticDeal(deal_no){
         											$('#staticTable').append('</tr>');
         													$('#staticTable').append('</thead>');
 	        for(var i=0; i<Result.staticList.length; i++){
-	        	$('#staticTable').append('<tr><td>'+Result.staticList[i].deal_name+'</td><td>'+Result.staticList[i].deal_date+'</td><td>'+Result.staticList[i].deal_price+'</td><td><button type="button" value="'+Result.staticList[i].deal_no+'" onclick="deleteStaticDeal('+Result.staticList[i].deal_no+')">삭제</button></td></tr>');
+	        	 var date = Result.staticList[i].deal_date;
+				    date = date.split("");
+		        	$('#staticTable').append('<tr><td>'+Result.staticList[i].deal_name+'</td><td>'+date[8]+date[9]+'</td><td>'+Result.staticList[i].deal_price+'</td><td><button type="button" value="'+Result.staticList[i].deal_no+'" onclick="deleteStaticDeal('+Result.staticList[i].deal_no+')">삭제</button></td></tr>');
 
 		    }
             
@@ -305,6 +342,38 @@ function deleteCard(card_no){
 		    }
         }
    	});  // 삭제
+
+    var kind_a = [];
+	
+	$.ajax({
+   	 	async    : false,
+        url     : '${pageContext.request.contextPath}/user/accountBook/cardList.do',
+        type    : 'post',
+        dataType : 'json',
+        data : {'mem_no':${LOGIN_MEMBERINFO.mem_no}},
+        success : function(Result) {
+	        for(var i=0; i<Result.cardlist.length; i++){
+				kind_a[i] = Result.cardlist[i].card_kind;
+		    }
+        }
+
+   	});  // 카테고리 리스트 불러오기
+
+	var target = document.getElementById("kind");
+    var d = kind_a;
+	$("#kind").show(); 
+	$("#cardRegistBtn").show(); 
+	
+	target.options.length = 0;
+
+	for(x in d){
+		var opt = document.createElement("option");
+		opt.value=d[x];
+		opt.innerHTML=d[x];
+		target.appendChild(opt);
+	}
+	//삭제시 카테고리 리스트 변경을 위한 코드
+	
 }
 
 function handleImgFileSelect(e){
@@ -340,7 +409,7 @@ function categoryChange(e){
 				kind_a[i] = Result.cardlist[i].card_kind;
 		    }
         }
-   	});  // 등록 
+   	});  // 카테고리 리스트 불러오기
 	
    	
     var target = document.getElementById("kind");
@@ -582,7 +651,7 @@ function receiptcategoryChange(e){
                             
                             
                             <!-- SignIn modal content -->
-							<div id="regist-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+							<div id="regist-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="z-index:2147483647;">
 								<div class="modal-dialog">
 									<div class="modal-content" style="width:580px; height: 100%;">
 										<div class="modal-body">
@@ -671,7 +740,7 @@ function receiptcategoryChange(e){
 	
 	
 						 <!-- Center modal content -->
-                                        <div class="modal fade" id="centermodal" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal fade" id="centermodal" tabindex="-1" role="dialog" aria-hidden="true" style="z-index:2147483647;">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -704,7 +773,7 @@ function receiptcategoryChange(e){
 	
 	
 						 <!-- Center modal content -->
-                                        <div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-hidden="true" style="z-index:2147483647;">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
                                                     <div class="modal-header">

@@ -44,7 +44,8 @@ function LogOut(){
 	<!--한별추가  -->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/styles/bis.css"/>
 	
-	
+	<!-- flex CSS -->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/myCSS/flex.css">
 	<!-- chat CSS -->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/chat.css">
 <%-- 	 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/myCSS/chatMain.css"> --%>
@@ -52,7 +53,6 @@ function LogOut(){
 	<!-- Theme CSS -->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/template/assets/css/style.css" />
 
-	 <link rel="shortcut icon" href="assets/favicon.ico">  
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <!-- FontAwesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.1.1/js/all.js" integrity="sha384-BtvRZcyfv4r0x/phJt9Y9HhnN5ur1Z+kZbKVgzVBAlQZX4jvAuImlIz+bG7TS00a" crossorigin="anonymous"></script>

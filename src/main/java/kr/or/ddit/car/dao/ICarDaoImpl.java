@@ -75,5 +75,10 @@ public class ICarDaoImpl implements ICarDao{
 	public List<MyCarDetailVO> selectBreak(Map<String, String> params) throws Exception {
 		return client.selectList("car.selectBreak",params);
 	}
+
+	@Override
+	public void deleteMycarDetail(Map<String, String> params) throws Exception {
+		client.delete("car.deleteMycarDetail",params);
+	}
 	
 }

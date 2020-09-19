@@ -1,7 +1,7 @@
 <%@ page language="JAVA" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <div class="preloader">
-		<img src="assets/images/preloader.svg" alt="Pre-loader">
+		<img src="${pageContext.request.contextPath }/resources/template/assets/images/preloader.svg" alt="Pre-loader">
 	</div>
 
 
@@ -15,9 +15,9 @@
 					<div class="container h-100">
 						<div class="row d-flex h-100">
 							<div class="col-lg-8 col-xl-6 mr-auto slider-content justify-content-center align-self-center align-items-start text-left">
-								<h2 class="animated fadeInUp dealy-500 display-6 display-md-4 display-lg-3 font-weight-bold text-white">We provide personalized service for one person.</h2>
-								<h3 class="animated fadeInUp dealy-1000 text-white display-8 display-md-7 alt-font font-italic mb-2 my-md-4">Welcome</h3>
-								<div class="animated fadeInUp mt-3 dealy-1500"><a href="#" class="btn btn-grad">Try it Now!</a> <a href="#" class="btn btn-link text-white">Thank you!</a></div>
+								<h2 class="animated fadeInUp dealy-500 display-6 display-md-4 display-lg-3 font-weight-bold text-white">1인 케어 시스템</h2>
+								<h3 class="animated fadeInUp dealy-1000 text-white display-8 display-md-7 alt-font font-italic mb-2 my-md-4">Jobis</h3>
+								<div class="animated fadeInUp mt-3 dealy-1500"><a href="#" class="btn btn-grad">시작하기</a></div>
 							</div>
 						</div>
 					</div>
@@ -28,9 +28,9 @@
 						<div class="row d-flex h-100">
 							<div class="col-md-8 justify-content-center align-self-center align-items-start mx-auto">
 								<div class="col-lg-8 col-xl-6 mr-auto slider-content justify-content-center align-self-center align-items-start text-left">
-									<h3 class="animated fadeInUp dealy-500 display-8 display-md-7 text-white alt-font font-italic">Try this service!</h3>
-									<h2 class="animated fadeInUp dealy-500 display-6 display-md-4 display-lg-3 font-weight-bold text-white">We are always on standby.</h2>
-									<div class="animated fadeInUp mt-3 dealy-1500"><a href="#" class="btn btn-grad">Contact us</a></div>
+									<h3 class="animated fadeInUp dealy-500 display-8 display-md-7 text-white alt-font font-italic">Jobis</h3>
+									<h2 class="animated fadeInUp dealy-500 display-6 display-md-4 display-lg-3 font-weight-bold text-white">만나보세요</h2>
+									<div class="animated fadeInUp mt-3 dealy-1500"><a href="#" class="btn btn-grad">시작하기</a></div>
 								</div>
 							</div>
 						</div>

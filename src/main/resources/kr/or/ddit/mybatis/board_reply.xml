@@ -22,10 +22,11 @@
 </insert>
 
 <select id="selectBoardReply" parameterType="String" resultType="board_replyVO">
-	select *
-	from board_reply
-	where bd_no = #{bd_no}
-	ORDER BY TO_NUMBER(re_rnum) DESC
+	SELECT t1.* , t2.mem_id, t2.mem_name
+	FROM board_reply t1
+	LEFT JOIN member t2 ON t1.re_writer = t2.mem_no
+	where t1.bd_no = #{bd_no}
+	ORDER BY TO_NUMBER(t1.re_rnum) DESC
 </select>
 
 <update id="updateBoardReply" parameterType="map">

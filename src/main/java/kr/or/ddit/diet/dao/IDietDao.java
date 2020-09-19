@@ -68,4 +68,19 @@ public interface IDietDao {
 	
 	//추천식단 상세 가져오기
 	public List<Diet_infoVO> recommendDietInfo(Map<String, String> params) throws Exception;
+	
+	// diet_mem 수정
+	public int updateDietMemInfo(Diet_memVO dietMemInfo) throws Exception;
+	
+	// diet_mem 삭제
+	public int deleteDietMemInfo(Map<String, String> params) throws Exception;
+	
+	// dietDayInfoList 삽입
+	public int InsertDietDayInfoList(List<Diet_day_infoVO> dietDayInfoInsert) throws Exception;
+	
+	// dietDay 테이블 cascade로 삭제
+	public int deleteDietDay(Map<String, String> params) throws Exception;
+	
+	// diet에서 값 하나 뽑아오기
+	public DietVO selectDietInfo(Map<String, String> params) throws Exception;
 }

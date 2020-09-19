@@ -29,41 +29,32 @@
 		<div class="row">
 			<!-- sidebar start -->
 			<aside class="col-md-3 sidebar order-last order-md-first">
-				<!-- Text Widget -->
-				<div class="widget">
-					<h5 class="widget-title" id="dietSide_h5_my">나의 식단 관리</h5>
-					<p class="mb-0">procuring the why performed continual
-						improving. Civil songs so large shade in cause.</p>
-				</div>
-				<div class="widget">
-					<h5 class="widget-title" id="dietSide_h5_dayKcal">일일 열량</h5>
-					<p class="mb-0">R shade in cause.</p>
-				</div>
-				<div class="widget">
-					<h5 class="widget-title" id="dietSide_h5_menuList">메뉴 리스트</h5>
-					<p class="mb-0">R shade in cause.</p>
-				</div>
-				<div class="widget">
-					<h5 class="widget-title" id="dietSide_h5_recommendDiet">추천 식단
-						리스트</h5>
-					<p class="mb-0">procuring the why performed continual
-						improving. Civil songs so large shade in cause.</p>
-				</div>
-				<div class="widget">
-					<h5 class="widget-title" id="dietSide_h5_bmi">BMI 계산기</h5>
-					<p class="mb-0">. She procuring the why performed continual
-						improving. Civil songs so large shade in cause.</p>
-				</div>
-			</aside>
+					<!-- Text Widget -->
+					<div class="widget">
+						<h5 class="widget-title" id="dietSide_h5_my">나의 식단 관리</h5>
+						<p class="mb-0"> 나만의 식단 관리를 체험해보세요!</p>
+					</div>
+					<div class="widget">
+						<h5 class="widget-title" id="dietSide_h5_dayKcal">일일 열량</h5>
+						<p class="mb-0">일일 추천 열량과 운동별 열량 소모량을 확인하세요!</p>
+					</div>
+					<div class="widget">
+						<h5 class="widget-title" id="dietSide_h5_menuList">칼로리 사전</h5>
+						<p class="mb-0">음식별 칼로리를 확인하세요!</p>
+					</div>
+					<div class="widget">
+						<h5 class="widget-title" id="dietSide_h5_recommendDiet">추천 식단 리스트</h5>
+						<p class="mb-0"> 회원님에게 맞는 식단표를 확인해보세요!</p>
+					</div>
+					<div class="widget">
+						<h5 class="widget-title" id="dietSide_h5_bmi">BMI 계산기</h5>
+						<p class="mb-0">회원님의 BMI를 확인해보세요!</p>
+					</div>
+				</aside>
 			<!-- sidebar end -->
 
 			<!-- blog start -->
 			<div class="col-md-9 order-first order-lg-first">
-
-
-				<h5 class="mb-2 mt-5">나의 식단 관리</h5>
-				<div class="divider divider-grad"></div>
-				<br>
 
 				<h5 class="mb-2 mt-5">내 정보</h5>
 				<div class="divider divider-bold"></div>
@@ -91,25 +82,23 @@
 								style="width: 390px; !important">
 								<!-- item -->
 
-								<c:forEach items="${dietMemList }" var="dietMemInfo"
-									varStatus="status">
+								<c:forEach items="${dietMemList }" var="dietMemInfo" varStatus="status">
 									<div class="accordion-item">
 										<div class="accordion-title">
 											<a class="h6 mb-0 collapsed" data-toggle="collapse"
-												href="#collapse-${status.count }" aria-expanded="false">${dietMemInfo.dm_date }</a>
+												href="#collapse-${status.count }" aria-expanded="false">${dietMemInfo.dm_date.split(' ')[0] }</a>
 										</div>
 										<div class="collapse" id="collapse-${status.count }"
 											data-parent="#dietMemDetail" style="">
 											<div class="accordion-content">
-												키 : <a>${dietMemInfo.height}</a><br> 체중 : <a>${dietMemInfo.current_weight}</a><br>
-												목표 체중 : <a>${dietMemInfo.purpose_weight}</a><br> BMI :
-												<a>${dietMemInfo.bmi}</a><br> 일일 목표 열량 : <a>${dietMemInfo.day_kcal}</a><br>
+												키 : <a class="height">${dietMemInfo.height}</a><br> 체중 : <a class="weight">${dietMemInfo.current_weight}</a><br>
+												목표 체중 : <a class="purpose_weight">${dietMemInfo.purpose_weight}</a><br> BMI :
+												<a class="bmi">${dietMemInfo.bmi}</a><br> 일일 목표 열량 : <a class="day_kcal">${dietMemInfo.day_kcal}</a><br>
 											</div>
 											<div>
-												<button id="updateDietMem" class="btn btn-grad"
-													onclick="updateDietMem(this);">수정</button>
-												<button id="deleteDietMem" class="btn btn-grad"
-													onclick="deleteDietMem(this);">삭제</button>
+												<input type="hidden" value="${dietMemInfo.dm_no }">
+												<button id="updateDietMemBTN" class="btn btn-grad" onclick="updateDietMemForm(this);">수정</button>
+												<button id="deleteDietMemBTN" class="btn btn-grad" onclick="deleteDietMem(this);">삭제</button>
 											</div>
 										</div>
 									</div>
@@ -117,23 +106,13 @@
 							</div>
 						</div>
 					</div>
-					<div id="div_dietMem_right">
-						<button id="insertDietMem" class="btn btn-grad"
-							onclick="insertDietMemBTN();">등록</button>
+					<div  style="display:flex; justify-content: center; align-items: center;" id="div_dietMem_right">
+						<button id="insertDietMem" class="btn btn-grad" onclick="insertDietMemBTN();">등록</button>
 					</div>
+					
+
 				</div>
 				<!-- 내 정보 상세 끝 -->
-				
-				<h5 class="mb-2 mt-5">열량 차트</h5>
-				<div class="divider divider-bold"></div>
-				<!-- goole chart star 구글차트-->
-				<div id="Line_Controls_Chart">
-					<!-- 라인 차트 생성할 영역 -->
-					<div id="lineChartArea" style="padding: 0px 20px 0px 0px;"></div>
-					<!-- 컨트롤바를 생성할 영역 -->
-					<div id="controlsArea" style="padding: 0px 20px 0px 0px;"></div>
-				</div>
-				<!-- goole chart end -->
 
 				<h5 class="mb-2 mt-5">나의 식단표</h5>
 				<div class="divider divider-bold"></div>
@@ -171,6 +150,18 @@
 				
 
 				<!-- 달력 끝 -->
+				
+				<!-- goole chart start -->
+				<h5 class="mb-2 mt-5">열량 차트</h5>
+				<div class="divider divider-bold"></div>
+				<!-- goole chart star 구글차트-->
+				<div id="Line_Controls_Chart">
+					<!-- 라인 차트 생성할 영역 -->
+					<div id="lineChartArea" style="padding: 0px 20px 0px 0px;"></div>
+					<!-- 컨트롤바를 생성할 영역 -->
+					<div id="controlsArea" style="padding: 0px 20px 0px 0px;"></div>
+				</div>
+				<!-- goole chart end -->
 				
 				<h5 class="mb-2 mt-5">다이어트 일기장</h5>
 				<div class="divider divider-bold"></div>
@@ -344,8 +335,7 @@
 				<div id="dd_kcal"></div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary">확인</button>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+				<button id="dietInfoComplete" type="button" class="btn btn-primary">확인</button>
 			</div>
 		</div>
 	</div>
@@ -364,7 +354,6 @@ var month;
 var day;
 var dd_date;
 var dd_no;
-
 
 
 
@@ -525,7 +514,7 @@ function updateDietBoardComplete(){
 		diet_board_list.push(data);
 	}
 	var jsonData = JSON.stringify(diet_board_list) ;
-		alert(jsonData);
+// 		alert(jsonData);
 
 	$.ajax({
 		type : 'POST',
@@ -694,6 +683,10 @@ $(function() {
 
 	dietBoardList();
 
+	$('#dietInfoComplete').click(function(){
+		$(location).attr('href', '${pageContext.request.contextPath}/user/diet/diet_my');
+	})
+
 // 	현재
 	displayCalender(currentMonth)
 	$("#date").append(new Date);
@@ -827,6 +820,7 @@ function calendarModal(e){
 
 function menu_search1(){
 	var menu_search;
+	
 	$.ajax({
  		url : '${pageContext.request.contextPath}/user/diet/menuSearch',
  		dataType : 'JSON',
@@ -837,7 +831,8 @@ function menu_search1(){
  			alert(result.status);
  		},
  		success : function(result) {
- 			$('#menu_saerch_result1').empty();
+ 	 		
+ 			$('#menu_search_result1').empty();
 
  			$('#menu_search_result1').append('<tr>')
  			$('#menu_search_result1').append('<th>메뉴</td>');
@@ -867,7 +862,7 @@ function menu_search2(){
  			alert(result.status);
  		},
  		success : function(result) {
- 			$('#menu_saerch_result2').empty();
+ 			$('#menu_search_result2').empty();
 
  			$('#menu_search_result2').append('<tr>')
  			$('#menu_search_result2').append('<th>메뉴</td>');
@@ -897,7 +892,7 @@ function menu_search3(){
  			alert(result.status);
  		},
  		success : function(result) {
- 			$('#menu_saerch_result3').empty();
+ 			$('#menu_search_result3').empty();
 
  			$('#menu_search_result3').append('<tr>')
  			$('#menu_search_result3').append('<th>메뉴</td>');

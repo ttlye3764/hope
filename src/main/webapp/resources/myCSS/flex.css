@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+
+.flex_justify-center{
+	display: flex;
+	justify-content : center;
+	align-items : center;	
+}
+
+
+.flex_justify-end{
+	display: flex;
+	justify-content: flex-end;
+}
+
+.flex_justify-start{
+	display: flex;
+	justify-content: flex-start;
+}
+
+
+/* 요소들간에 동일한 간격을  */
+.flex_jsutify-content_space-between{
+	display: flex;
+	justify-content: space-between;
+}
+
+
+/* 요소들 주위에 동일한 간격 */
+.flex_space-around{
+	display: flex;
+	justify-content: space-around;	
+}
+
+/* 요소를 꼭대기로 */
+.flex_align-item_felx-start{
+	display: flex;
+	align-items : flex-start;	
+}
+
+.flex_align-item_felx-end{
+	display: flex;
+	align-items : flex-end;	
+}
+
+.flex_align-item_felx-center{
+	display: flex;
+	align-items : center;	
+}
+
+/* 왼쪽 정렬 */
+.flex-direction_row{
+	display: flex;
+	flex-direction : row;	
+}
+
+/* 오른쪽 정렬 */
+.flex-direction_row-reverse{
+	display: flex;
+	flex-direction : row-reverse;
+}
+
+/* 위에서 아래로 정렬 */
+.flex-direction_column{
+	display: flex;
+	flex-direction : column;
+}
+
+/* 아래에서 위로 정렬 */
+.flex-direction_column-reverse{
+	flex-direction : column-reverse;
+}
+
+
+

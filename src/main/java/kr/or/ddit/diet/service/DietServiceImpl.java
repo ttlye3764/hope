@@ -115,4 +115,29 @@ public class DietServiceImpl implements IDietService {
 	public List<Diet_infoVO> recommendDietInfo(Map<String, String> params) throws Exception {
 		return dietDao.recommendDietInfo(params);
 	}
+	
+	@Override
+	public int deleteDietMemInfo(Map<String, String> params) throws Exception {
+		return dietDao.deleteDietMemInfo(params);
+	}
+	
+	@Override
+	public int updateDietMemInfo(Diet_memVO dietMemInfo) throws Exception {
+		return dietDao.updateDietMemInfo(dietMemInfo);
+	}
+	
+	@Override
+	public int deleteDietDay(Map<String, String> params) throws Exception {
+		return dietDao.deleteDietDay(params);
+	}
+	
+	@Override
+	public int InsertDietDayInfoList(List<Diet_day_infoVO> dietDayInfoInsert) throws Exception {
+		return dietDao.InsertDietDayInfoList(dietDayInfoInsert);
+	}
+	
+	@Override
+	public DietVO selectDietInfo(Map<String, String> params) throws Exception {
+		return dietDao.selectDietInfo(params);
+	}
 }

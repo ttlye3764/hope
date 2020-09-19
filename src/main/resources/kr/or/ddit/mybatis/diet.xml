@@ -146,13 +146,14 @@
 		DELETE
 		DIET_DAY_INFO
 		WHERE DDI_NO = #{ddi_no}
-		AND DD_INFO_DIVISION =
-		#{dd_info_division}
+		AND DD_INFO_DIVISION = #{dd_info_division}
 	</delete>
 
 	<select id="dietMemGraphList" parameterType="Map"
 		resultType="dietDayVO">
-		SELECT c.MEM_NO MEM_NO, d.DD_DATE DD_DATE, d.DD_KCAL DD_KCAL, c.DAY_KCAL DAY_KCAL
+SELECT *
+from(
+SELECT c.MEM_NO MEM_NO, d.DD_DATE DD_DATE, d.DD_KCAL DD_KCAL, c.DAY_KCAL DAY_KCAL
 		FROM (
 			SELECT MEM_NO, dm_no, DAY_KCAL, TO_CHAR(DM_DATE, 'YYYY-MM-DD') dm_date
 			FROM DIET_MEM
@@ -171,8 +172,9 @@
 													)
 			)c , DIET_DAY d
 		WHERE c.dm_date = d.dd_date
-		AND c.mem_no = #{mem_no}
-		ORDER BY dd_date
+		AND d.mem_no = #{mem_no}
+		ORDER BY dd_date)
+		WHERE mem_no = #{mem_no}
 	</select>
 
 	<select id="dietBoardList" parameterType="Map" resultType="dietBoardVO">
@@ -260,6 +262,39 @@
 			FROM menu) b
 			WHERE a.menu_no = b.menu_no
     </select>
+    
+    <update id="updateDietMemInfo" parameterType="DietMemVO">
+    	UPDATE DIET_MEM SET HEIGHT = #{height},
+    						CURRENT_WEIGHT = #{current_weight},
+    						PURPOSE_WEIGHT = #{purpose_weight},
+    						BMI = #{bmi},
+    						DAY_KCAL = #{day_kcal}
+    	WHERE DM_NO = #{dm_no}
+    </update>
+    
+    <delete id="deleteDietMemInfo" parameterType="Map">
+    	DELETE DIET_MEM WHERE DM_NO = #{dm_no}
+    </delete>
+    
+   	<insert id="insertDietDayInfoList" parameterType="List">
+   		BEGIN
+		<foreach collection="list" item="item" separator=";">
+			INSERT INTO DIET_DAY_INFO(DD_NO, MENU_NO, DD_INFO_DIVISION, DDI_NO) VALUES (#{item.dd_no}, #{item.menu_no}, #{item.dd_info_division}, DIET_DAY_INFO_SEQ.NEXTVAL) 
+		</foreach>;
+		END;
+   	</insert>
+   	
+   	<delete id="deleteDietDay" parameterType="map">
+   		DELETE DIET_DAY 
+   		WHERE DD_DATE = #{dd_date}
+   		AND MEM_NO = #{mem_no}
+   	</delete>
+   	
+   	<select id="selectDietInfo" parameterType="Map" resultType="dietVO">
+   		SELECT *
+   		FROM DIET
+   		WHERE DIET_NO = #{diet_no}
+   	</select>
 </mapper>
 
 

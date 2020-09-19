@@ -10,11 +10,10 @@
       <div class="container">
          <div class="row all-text-white">
             <div class="col-md-12 align-self-center">
-               <h1 class="innerpage-title">내 주변 주유소</h1>
+               <h1 class="innerpage-title">내 주변 찾기</h1>
                <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
                      <li class="breadcrumb-item active"><a href="${pageContext.request.contextPath}/user/main/mainForm.do"><i class="ti-home"></i> Home</a></li>
-                     <li class="breadcrumb-item">Timeline</li>
                   </ol>
                </nav>
             </div>

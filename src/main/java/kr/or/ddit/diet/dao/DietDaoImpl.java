@@ -117,4 +117,29 @@ public class DietDaoImpl implements IDietDao {
 	public List<Diet_infoVO> recommendDietInfo(Map<String, String> params) throws Exception {
 		return client.selectList("diet.recommendDietInfo", params);
 	}
+	
+	@Override
+	public int updateDietMemInfo(Diet_memVO dietMemInfo) throws Exception {
+		return client.update("diet.updateDietMemInfo", dietMemInfo);
+	}
+	
+	@Override
+	public int deleteDietMemInfo(Map<String, String> params) throws Exception {
+		return client.delete("diet.deleteDietMemInfo", params);
+	}
+	
+	@Override
+	public int deleteDietDay(Map<String, String> params) throws Exception {
+		return client.delete("diet.deleteDietDay", params);
+	}
+	
+	@Override
+	public int InsertDietDayInfoList(List<Diet_day_infoVO> dietDayInfoInsert) throws Exception {
+		return client.insert("diet.insertDietDayInfoList", dietDayInfoInsert);
+	}
+	
+	@Override
+	public DietVO selectDietInfo(Map<String, String> params) throws Exception {
+		return client.selectOne("diet.selectDietInfo", params);
+	}
 }
