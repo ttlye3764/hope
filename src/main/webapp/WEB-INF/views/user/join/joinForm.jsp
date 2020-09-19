@@ -36,7 +36,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 $(function(){
-   $('form[name=memberForm]').submit(function() {
+   $('form[name=joinForm]').submit(function() {
       var idcheck = $('#idlabel').text();
       var emailcheck = $('#emaillabel').text();
       var smscheck = $('#hplabel').text();
@@ -385,7 +385,7 @@ $(function(){
       <br>
       <br>
       <br>
-   <form name="memberForm" method="post" enctype="multipart/form-data">
+   <form name="joinForm" method="post" enctype="multipart/form-data">
    <input type="hidden" name="mem_division" value="0"> 
       <table style="border: none" align="center">
       	<tr>

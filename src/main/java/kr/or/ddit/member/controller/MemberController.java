@@ -35,16 +35,6 @@ public class MemberController {
 	private IMemberService service;
 	@Autowired
 	private IBoardService boardService;
-
-	@RequestMapping("memberView") // 멤버 상세 정보
-	public ModelMap memberView(String mem_id, Map<String, String> params, ModelMap modelMap) throws Exception {
-		params.put("mem_id", mem_id);
-		MemberVO memberInfo = this.service.memberInfo(params);
-
-		modelMap.addAttribute("memberInfo", memberInfo);
-
-		return modelMap;
-	}
 	
 	@RequestMapping("myBoard") // 내가 작성한 게시글 목록
 	public ModelAndView myBoard(ModelAndView andView
@@ -76,7 +66,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("myPage")
-	public ModelMap memberView(Map<String, String> params, ModelMap modelMap, HttpServletRequest request) throws Exception {
+	public ModelMap myPage(Map<String, String> params, ModelMap modelMap, HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
 		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
 		
@@ -119,10 +109,6 @@ public class MemberController {
 		andView.setViewName("jsonConvertView");
 		
 		return andView;
-	}
-
-	@RequestMapping("memberForm")
-	public void memberForm() {
 	}
 	
 	@RequestMapping("checkPassForm")

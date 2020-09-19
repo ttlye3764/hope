@@ -47,6 +47,10 @@ public class JoinController {
 	public void joinChoiceForm() {
 	}
 	
+	@RequestMapping("joinForm")
+	public void joinForm() {
+	}
+	
 	@RequestMapping("loginForm")
 	public void loginForm(HttpServletRequest request) {
 		Map<String, ?> paramMap = RequestContextUtils.getInputFlashMap(request);

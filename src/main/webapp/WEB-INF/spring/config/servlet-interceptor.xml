@@ -33,7 +33,7 @@
 			<mvc:exclude-mapping path="/user/join/loginForm.do"/>
 			<mvc:exclude-mapping path="/user/join/loginCheck.do"/>
 			<mvc:exclude-mapping path="/user/join/joinChoiceForm.do"/>
-			<mvc:exclude-mapping path="/user/member/memberForm.do"/>
+			<mvc:exclude-mapping path="/user/join/joinForm.do"/>
 			<mvc:exclude-mapping path="/user/main/mainForm.do"/>
 			<mvc:exclude-mapping path="/user/member/insertMemberInfo.do"/>
 			<mvc:exclude-mapping path="/user/member/idCheck.do"/>
