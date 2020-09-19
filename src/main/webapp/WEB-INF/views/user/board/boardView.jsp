@@ -42,7 +42,7 @@ $(function(){
 //         if(rnum == 'nu'){
 // 			$(location).attr('href','${pageContext.request.contextPath}/user/member/myBoard.do');
 //         }else{
-			$(location).attr('href','${pageContext.request.contextPath}/user/board/boardList.do?currentPage='+ currentPage + '&search_keyword='+ search_keyword + '&search_keycode=' + search_keycode + '&bd_division=' + bd_division );
+			$(location).attr('href','${pageContext.request.contextPath}/user/board/boardList.do?currentPage='+ currentPage + '&search_keyword='+ search_keyword + '&search_keycode=' + search_keycode + '&bd_division=${bd_division}');
 //         }
 		
 	});
@@ -180,7 +180,7 @@ function fileDown(fileName, fileNo, fileBdNo) {
 									<p>${status.count }.&nbsp;&nbsp; <a href="#" onclick="fileDown('${fileitemInfo.file_save_name }','${fileitemInfo.file_no }','${fileitemInfo.file_bd_no }');">${fileitemInfo.file_name } </a></p>
 							 </c:forEach>
 						</div>
-						<c:if test="${boardInfo.mem_no eq LOGIN_MEMBERINFO.mem_no}">
+						<c:if test="${LOGIN_MEMBERINFO.mem_no eq 1}">
 							<div class="form-group">
 								<label for="exampleFormControlFile1"></label>
 								<input type="file" class="form-control-file" name="files" id="exampleFormControlFile1" onchange="setThumbnail(event);"/>
