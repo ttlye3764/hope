@@ -13,6 +13,14 @@
 <script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
 <script>
 $(function(){
+	if(!(${LOGIN_MEMBERINFO.mem_no} == ${boardInfo.mem_no})){
+		$('#bd_title').attr("disabled", true);
+		$('#bd_writer').attr("disabled", true);
+		$('#bd_date').attr("disabled", true);
+		$('#bd_content').attr("disabled", true);
+	}
+	
+	
     // 수정버튼
     $('form[name=boardView]').on('submit', function(){
 		
@@ -39,11 +47,11 @@ $(function(){
         var search_keycode = '${search_keycode}';
         var bd_division = '${bd_division}';
 
-//         if(rnum == 'nu'){
-// 			$(location).attr('href','${pageContext.request.contextPath}/user/member/myBoard.do');
-//         }else{
+        if(rnum == 'nu'){
+			$(location).attr('href','${pageContext.request.contextPath}/user/member/myBoard.do');
+        }else{
 			$(location).attr('href','${pageContext.request.contextPath}/user/board/boardList.do?currentPage='+ currentPage + '&search_keyword='+ search_keyword + '&search_keycode=' + search_keycode + '&bd_division=${bd_division}');
-//         }
+        }
 		
 	});
 
@@ -189,12 +197,14 @@ function fileDown(fileName, fileNo, fileBdNo) {
 						
 								
 						<div class="col-md-12 mb-2">
-							<span class="form-group "><textarea cols="25" rows="20" class="form-control" placeholder="내용" name="bd_content" >${boardInfo.bd_content}</textarea></span>
+							<span class="form-group "><textarea cols="25" rows="20" class="form-control" placeholder="내용" id="bd_content" name="bd_content" >${boardInfo.bd_content}</textarea></span>
 						</div>
 							<div class="col-md-2 text-center" style="margin-left:700px; float:left; display:inline-block;" > 
 								<c:if test="${bd_division ne 2 }">
-									<button type="submit" id="updateBtn" value="수정" class="btn-block btn btn-dark" >수정</button>
-									<button type="button" id="deleteBtn" value="삭제" class="btn-block btn btn-dark" >삭제</button>
+								   <c:if test="${LOGIN_MEMBERINFO.mem_no eq boardInfo.mem_no}">
+										<button type="submit" id="updateBtn" value="수정" class="btn-block btn btn-dark" >수정</button>
+										<button type="button" id="deleteBtn" value="삭제" class="btn-block btn btn-dark" >삭제</button>
+									</c:if>
 								</c:if>
 									<button type="button" id="listBtn" value="목록" class="btn-block btn btn-dark" >목록</button>
 							</div> 
