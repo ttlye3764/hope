@@ -17,6 +17,15 @@ public class BoardVO {
 	private String mem_no;
 	private String rnum;
 	private String bd_writer;
+	private String mem_name;
+
+	public String getMem_name() {
+		return mem_name;
+	}
+
+	public void setMem_name(String mem_name) {
+		this.mem_name = mem_name;
+	}
 
 	private List<Board_FileVO> items;
 	private List<Board_FileVO> items2;
@@ -140,5 +149,25 @@ public class BoardVO {
 	public void setMem_no(String mem_no) {
 		this.mem_no = mem_no;
 	}
+
+	@Override
+	public String toString() {
+		return "BoardVO [" + (bd_no != null ? "bd_no=" + bd_no + ", " : "")
+				+ (bd_title != null ? "bd_title=" + bd_title + ", " : "")
+				+ (bd_content != null ? "bd_content=" + bd_content + ", " : "")
+				+ (bd_date != null ? "bd_date=" + bd_date + ", " : "")
+				+ (bd_hit != null ? "bd_hit=" + bd_hit + ", " : "")
+				+ (bd_pass != null ? "bd_pass=" + bd_pass + ", " : "")
+				+ (bd_sequence != null ? "bd_sequence=" + bd_sequence + ", " : "")
+				+ (bd_group != null ? "bd_group=" + bd_group + ", " : "")
+				+ (bd_depth != null ? "bd_depth=" + bd_depth + ", " : "")
+				+ (bd_division != null ? "bd_division=" + bd_division + ", " : "")
+				+ (mem_no != null ? "mem_no=" + mem_no + ", " : "") + (rnum != null ? "rnum=" + rnum + ", " : "")
+				+ (bd_writer != null ? "bd_writer=" + bd_writer + ", " : "")
+				+ (items != null ? "items=" + items + ", " : "") + (items2 != null ? "items2=" + items2 : "") + "]";
+	}
+	
+	
+	
 
 }

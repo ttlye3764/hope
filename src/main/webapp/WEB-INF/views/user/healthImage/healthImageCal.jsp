@@ -196,6 +196,63 @@ $(function(){
 
 		
 	});
+
+	$('#btn2').click(function(){
+		var tall = $('#tall').val();
+		var weight = $('#weight2').val();
+
+		if (tall == "" || weight == "") {
+			swal("warning","키 또는 몸무게를 입력해주세요.", "warning");
+
+			return false;
+		}
+
+		var bmi = (weight / (tall * tall)) * 10000;
+	
+		document.getElementById("content2").innerHTML = "현재 BMI 지수는 " + bmi.toFixed(1) + "입니다.<br/><br/>"; 		
+		document.getElementById("content2").innerHTML += "18.5 이하 : 저체중<br/>"; 
+		document.getElementById("content2").innerHTML += "18.5~22.9 : 정상<br/>"; 
+		document.getElementById("content2").innerHTML += "23~24.9 : 과체중<br/>";
+		document.getElementById("content2").innerHTML += "25~30 : 비만<br/>"; 
+		document.getElementById("content2").innerHTML += "31 이상 : 고도비만<br/>";
+
+		if (bmi <= 18.5) {
+			$('#1').show();
+			$('#2').hide();
+			$('#3').hide();
+			$('#4').hide();
+			$('#5').hide();
+
+		} else if (18.5 < bmi && bmi < 23) {
+			$('#1').hide();
+			$('#2').show();
+			$('#3').hide();
+			$('#4').hide();
+			$('#5').hide();
+
+		} else if (23 <= bmi && bmi < 25) {
+			$('#1').hide();
+			$('#2').hide();
+			$('#3').show();
+			$('#4').hide();
+			$('#5').hide();
+
+		} else if (25 <= bmi && bmi < 31) {
+			$('#1').hide();
+			$('#2').hide();
+			$('#3').hide();
+			$('#4').show();
+			$('#5').hide();
+
+		} else if (31 <= bmi) {
+			$('#1').hide();
+			$('#2').hide();
+			$('#3').hide();
+			$('#4').hide();
+			$('#5').show();
+
+		} 
+	});
 });
 
 </script>
@@ -267,11 +324,71 @@ $(function(){
 						<strong><h5 id="content" style="text-align: center;"></h5></strong>
 						</div>
 					</div>
+					
+					<hr>
+					
+					<div class="row mt-5">
+						<div class="col-md-12" style="margin: auto">
+							<h2 class="mb-3" style="padding-left: 55px;">BMI 측정</h2></div>
+						<div class="col-md-3" style="margin: auto">
+							키 <span class="form-group"> 
+							<input type="text" class="form-control" id="tall" placeholder="cm">
+							</span>
+							 몸무게 <span class="form-group"> 
+							 <input style="margin-top: 10px;" type="text" id="weight2" class="form-control" placeholder="kg">
+							 </span>
+						 <button class="btn-block btn btn-dark" style="margin-top: 15px;" id="btn2"
+						 data-toggle="modal" data-target="#exampleModalCenter">확인</button>
+						</div>
+						
+						<div class="col-md-5" style="margin: auto">
+						<p><strong>체질량 지수(BMI)란?</strong></p>
+						<br>
+						<p>키와 몸무게를 이용하여 지방의 양을 추정하는 비만 측정법으로 자신의 몸무게(kg)를 키(m)의 제곱으로 나눈 값입니다. <br><br>
+						BMI = 체중(kg) / 키(m) x 키(m)
+						</p>
+						</div>
+						
+						<div class="modal fade text-left" id="exampleModalCenter" tabindex="-1" role="dialog" 
+							aria-labelledby="exampleModalCenter" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+				  		<div class="modal-content" id="modals">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLongTitle" ><p>표준 몸무게 확인 지표</p></h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<br>
+								 <ul style="padding-left: 60px;">
+							      <li class="p-3 mb-2 text-dark" style="background-color: #CEF6CE">저체중</li>
+							      <li class="p-3 mb-2 text-dark" style="background-color: #F3E2A9">정상</li>
+							      <li class="p-3 mb-2 text-dark" style="background-color: #FFBF00">과체중</li>
+							      <li class="p-3 mb-2 text-dark" style="background-color: #FA8258">비만</li>
+							      <li class="p-3 mb-2 text-dark" style="background-color: #FA5858">고도비만</li>
+							    </ul>
+							    <br>
+							    <ul style="padding-left: 60px;">
+							      <img id="1" style="padding-left: 25px;" src="${pageContext.request.contextPath }/resources/template/assets/images/triangle.png" alt="">
+							      <img id="2" style="padding-left: 90px;" src="${pageContext.request.contextPath }/resources/template/assets/images/triangle.png" alt="">
+							      <img id="3" style="padding-left: 155px;" src="${pageContext.request.contextPath }/resources/template/assets/images/triangle.png" alt="">
+							      <img id="4" style="padding-left: 225px;" src="${pageContext.request.contextPath }/resources/template/assets/images/triangle.png" alt="">
+							      <img id="5" style="padding-left: 300px;" src="${pageContext.request.contextPath }/resources/template/assets/images/triangle.png" alt="">
+							    </ul>
+							    <br>
+							    <p id="content2" style="text-align: center;"></p>
+							</div>
+						</div>
+					</div>
+				</div>
+					</div>
 				</div>
 				
 			</div>
 		</div>
 	</section>
+	
 	
 	<section>
 		<div class="container">

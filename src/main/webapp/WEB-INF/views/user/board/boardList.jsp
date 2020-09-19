@@ -106,7 +106,7 @@
 </head>
 <body>
 	<div class="preloader">
-		<img src="assets/images/preloader.svg" alt="Pre-loader">
+		<img src="${pageContext.request.contextPath }/resources/template/assets/images/preloader.svg" alt="Pre-loader">
 	</div>
 
 	<!-- =======================

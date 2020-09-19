@@ -672,8 +672,8 @@ function subwayRouteName(e){
 
    function searchBusStop(){
 	   $('#information').html("");
-	var busStopNodeid;
-	var busStopcityCode;
+		var busStopNodeid;
+		var busStopcityCode;
 	  $.ajax({
 		   	 async    : false,
 		        url     : '${pageContext.request.contextPath}/user/schedule/busStop.do',
@@ -701,7 +701,6 @@ function subwayRouteName(e){
 		        },
 		   }); //정류소목록 불러오기
 
-
 		// var timer = setInterval(function(){
 		  $('#information').html("");
 		   var html;
@@ -714,21 +713,22 @@ function subwayRouteName(e){
 			        success : function(Result) {
 			            console.log(Result)
 			            if(Result.response.body.totalCount==1){
-			            	html = "<h5><b>"+Result.response.body.items.item.routeno+"</b>번 버스가 <b>"+parseInt(Result.response.body.items.item.arrtime/60)+"</b>분 <b>"+Result.response.body.items.item.arrtime%60+"</b>초 뒤에 진입예정입니다.</h3>";
+			            	html = "<h5><b>"+Result.response.body.items.item.routeno+"</b>번 버스가 <b>"
+			            	+parseInt(Result.response.body.items.item.arrtime/60)+"</b>분 <b>"
+			            	+Result.response.body.items.item.arrtime%60+"</b>초 뒤에 진입예정입니다.</h3>";
 							$('#information').append(html);
 					    }
 				        for(var i=0; i<Result.response.body.totalCount; i++){
 							console.log(Result.response.body.items.item[i].routeno);
 							console.log(Result.response.body.items.item[i].arrtime);
-							html = "<h5><b>"+Result.response.body.items.item[i].routeno+"</b>번 버스가 <b>"+parseInt(Result.response.body.items.item[i].arrtime/60)+"</b>분<b> "+Result.response.body.items.item[i].arrtime%60+"</b>초 뒤에 진입예정입니다.</h3>";
+							html = "<h5><b>"+Result.response.body.items.item[i].routeno+"</b>번 버스가 <b>"
+							+parseInt(Result.response.body.items.item[i].arrtime/60)+"</b>분<b> "
+							+Result.response.body.items.item[i].arrtime%60+"</b>초 뒤에 진입예정입니다.</h3>";
 							$('#information').append(html);
 					    }
 			        },
 			   }); //정류소목록 불러오기
-
-
 			// },1000)
-	   
    }
 
  

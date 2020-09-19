@@ -242,6 +242,7 @@
 			WHERE B.RNUM <= #{startCount}
 			AND B.RNUM >= #{endCount}
 		]]>
+		
 	</select>
 
 

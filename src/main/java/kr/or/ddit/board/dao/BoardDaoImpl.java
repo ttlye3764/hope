@@ -36,8 +36,7 @@ public class BoardDaoImpl implements IBoardDao{
 	public int insertBoard(BoardVO boardVO) throws Exception{
 		System.out.println("------------------------------------insertBoard");
 		System.out.println(boardVO);
-		return client.insert("board.insertBoardInfo", boardVO);
-		
+		return client.insert("board.insertBoardInfo", boardVO);	
 	}
 	
 	//수정

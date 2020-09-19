@@ -177,23 +177,29 @@ public class ScheduleController {
 			  String end =  scheduleList.get(i).getS_enddate(); //끝
 			  
 			  Calendar calendar = Calendar.getInstance();
-			  calendar.setTimeInMillis(System.currentTimeMillis()); 
+			  //calendar.setTimeInMillis(System.currentTimeMillis()); 
 			  calendar.set(Integer.parseInt(start.substring(0, 4)),Integer.parseInt(start.substring(5, 7))-1,Integer.parseInt(start.substring(8, 10)),Integer.parseInt(start.substring(11, 13)),Integer.parseInt(start.substring(14, 16)));
 			  
 			  Calendar ecalendar = Calendar.getInstance();
-			  ecalendar.setTimeInMillis(System.currentTimeMillis()); 
+			  //ecalendar.setTimeInMillis(System.currentTimeMillis()); 
 			  ecalendar.set(Integer.parseInt(end.substring(0, 4)),Integer.parseInt(end.substring(5, 7))-1,Integer.parseInt(end.substring(8, 10)),Integer.parseInt(end.substring(11, 13)),Integer.parseInt(end.substring(14, 16)));
 
-			 
-			  
-			  if(Calendar.getInstance().after(calendar)) {
-				  if(Calendar.getInstance().before(ecalendar)) {
-					  if(Calendar.getInstance().getTime().getHours()==calendar.getTime().getHours()) {
-						  if(Calendar.getInstance().getTime().getMinutes()==calendar.getTime().getMinutes()) {
-							  alarmList.add(scheduleList.get(i));
-						  }
-					  }
+			  if(Calendar.getInstance().equals(calendar) && Calendar.getInstance().before(ecalendar)) {
+				  if(Calendar.getInstance().getTime().getHours()==calendar.getTime().getHours() && Calendar.getInstance().getTime().getMinutes()==calendar.getTime().getMinutes() ) {
+						  alarmList.add(scheduleList.get(i));
 				  }
+			  }
+			  
+			  if(Calendar.getInstance().after(calendar) && Calendar.getInstance().equals(ecalendar)) {
+				  if(Calendar.getInstance().getTime().getHours()==calendar.getTime().getHours() && Calendar.getInstance().getTime().getMinutes()==calendar.getTime().getMinutes() ) {
+						  alarmList.add(scheduleList.get(i));
+				  }
+			  }
+			  
+			  if(Calendar.getInstance().after(calendar) && Calendar.getInstance().before(ecalendar)) {
+					  if(Calendar.getInstance().getTime().getHours()==calendar.getTime().getHours() && Calendar.getInstance().getTime().getMinutes()==calendar.getTime().getMinutes() ) {
+							  alarmList.add(scheduleList.get(i));
+					  }
 			  }
 			  
 			  if(Calendar.getInstance().equals(calendar)) {
@@ -210,24 +216,30 @@ public class ScheduleController {
 			  String end =  medicalList.get(i).getPill_end(); //끝
 			  
 			  Calendar calendar = Calendar.getInstance();
-			  calendar.setTimeInMillis(System.currentTimeMillis()); 
+			  //calendar.setTimeInMillis(System.currentTimeMillis()); 
 			  calendar.set(Integer.parseInt(start.substring(0, 4)),Integer.parseInt(start.substring(5, 7))-1,Integer.parseInt(start.substring(8, 10)),Integer.parseInt(start.substring(11, 13)),Integer.parseInt(start.substring(14, 16)));
 			  
 			  Calendar ecalendar = Calendar.getInstance();
-			  ecalendar.setTimeInMillis(System.currentTimeMillis()); 
+			  //ecalendar.setTimeInMillis(System.currentTimeMillis()); 
 			  ecalendar.set(Integer.parseInt(end.substring(0, 4)),Integer.parseInt(end.substring(5, 7))-1,Integer.parseInt(end.substring(8, 10)),Integer.parseInt(end.substring(11, 13)),Integer.parseInt(end.substring(14, 16)));
 
-			 
 			  
-			  if(Calendar.getInstance().after(calendar)) {
-				  if(Calendar.getInstance().before(ecalendar)) {
-					  if(Calendar.getInstance().getTime().getHours()==calendar.getTime().getHours()) {
-						  if(Calendar.getInstance().getTime().getMinutes()==calendar.getTime().getMinutes()) {
-							  medicalalarmList.add(medicalList.get(i));
-							  
-							  
-						  }
-					  }
+			  if(Calendar.getInstance().equals(calendar) && Calendar.getInstance().before(ecalendar)) {
+				  if(Calendar.getInstance().getTime().getHours()==calendar.getTime().getHours() && Calendar.getInstance().getTime().getMinutes()==calendar.getTime().getMinutes() ) {
+						  alarmList.add(scheduleList.get(i));
+				  }
+			  }
+			  
+			  if(Calendar.getInstance().after(calendar) && Calendar.getInstance().equals(ecalendar)) {
+				  if(Calendar.getInstance().getTime().getHours()==calendar.getTime().getHours() && Calendar.getInstance().getTime().getMinutes()==calendar.getTime().getMinutes() ) {
+						  alarmList.add(scheduleList.get(i));
+				  }
+			  }
+			  
+			  
+			  if(Calendar.getInstance().after(calendar) && Calendar.getInstance().before(ecalendar)) {
+				  if(Calendar.getInstance().getTime().getHours()==calendar.getTime().getHours() && Calendar.getInstance().getTime().getMinutes()==calendar.getTime().getMinutes() ) {
+						  alarmList.add(scheduleList.get(i));
 				  }
 			  }
 			  
@@ -245,6 +257,10 @@ public class ScheduleController {
 		andView.setViewName("jsonConvertView");
 		return andView;
 	}
+	
+	
+
+	
 	
 	
 	
