@@ -89,44 +89,7 @@
 			<img src="${pageContext.request.contextPath }/image/settings.png" style=" width=:40px; height:40px;" onclick="updateChatImageForm();">
 	  	</div>
 	  <div class="msg_history" id="msg_history" style="background-image: url();">
-		<div class="incoming_msg">
-		  <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-		  <div class="received_msg">
-			<div class="received_withd_msg">
-			  <p>Test which is a new approach to have all
-				solutions</p>
-			  <span class="time_date"> 11:01 AM    |    June 9</span></div>
-		  </div>
-		</div>
-		<div class="outgoing_msg">
-		  <div class="sent_msg">
-			<p>Test which is a new approach to have all
-			  solutions</p>
-			<span class="time_date"> 11:01 AM    |    June 9</span> </div>
-		</div>
-		<div class="incoming_msg">
-		  <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-		  <div class="received_msg">
-			<div class="received_withd_msg">
-			  <p>Test, which is a new approach to have</p>
-			  <span class="time_date"> 11:01 AM    |    Yesterday</span></div>
-		  </div>
-		</div>
-		<div class="outgoing_msg">
-		  <div class="sent_msg">
-			<p>Apollo University, Delhi, India Test</p>
-			<span class="time_date"> 11:01 AM    |    Today</span> </div>
-		</div>
-		<div class="incoming_msg">
-		  <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-		  <div class="received_msg">
-			<div class="received_withd_msg">
-			  <p>We work directly with our designers and suppliers,
-				and sell direct to you, which means quality, exclusive
-				products, at a price anyone can afford.</p>
-			  <span class="time_date"> 11:01 AM    |    Today</span></div>
-		  </div>
-		</div>
+		
 	  </div>
 	  <div class="type_msg">
 		<div class="input_msg_write">
@@ -605,7 +568,7 @@ $(function(){
 // 	192.168.31.35
 
 	
-	initSocket("http://192.168.31.35/lastProject/echo?mem_no=" + ${LOGIN_MEMBERINFO.mem_no});
+	initSocket("http://localhost:8080/lastProject/echo?mem_no=" + ${LOGIN_MEMBERINFO.mem_no});
 	chatRoomList();
 	$('.chat_list').click(function(){
 		$('.chat_list').toggleClass('active_chat');	
