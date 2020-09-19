@@ -231,12 +231,8 @@ function sendChatbotBTN(){
 					<ul class="navbar-nav ml-auto">
 						<!-- Menu item 2 Blog-->
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="blogMenu" 
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">복용관리</a>
+							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/user/medical/medicalMain.do">복용관리</a>
 							<ul class="dropdown-menu" aria-labelledby="blogMenu">
-								<li class="dropdown-submenu">
-									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalMain.do">복용관리</a>
-								</li>
 								<li class="dropdown-submenu">
 									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/coronaMain.do">코로나</a>
 								</li>
@@ -247,8 +243,7 @@ function sendChatbotBTN(){
 							<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">건강관리</a>
 							<ul class="dropdown-menu" aria-labelledby="blogMenu">
 								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/healthImage/healthImageList.do'>운동법 리스트</a></li>
-								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/healthImage/healthImageWeight.do'>표준몸무게</a></li>
-								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/healthImage/healthImageCal.do'>운동 칼로리 계산기</a></li>
+								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/healthImage/healthImageCal.do'>운동 계산기</a></li>
 								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/healthImage/healthImageMap.do'>내 주변 헬스장</a></li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/menuList?titleName=오늘 당신이 먹은 혹은 먹을 음식의 칼로리를 확인해보세요!">칼로리 사전</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/recommendDiet?titleName=추천 식단을 확인해보세요">추천 식단 리스트</a> </li>
@@ -265,9 +260,8 @@ function sendChatbotBTN(){
 						</li>
 						<!-- Menu item 4 Portfolio-->
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="portfolioMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">일정관리</a>
+							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/user/schedule/schedule.do" >일정관리</a>
 							<ul class="dropdown-menu" aria-labelledby="portfolioMenu">
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/schedule.do">일정관리</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/dday.do">일정리스트</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/schedule/bis.do">버스&지하철</a> </li>
 								
@@ -276,9 +270,8 @@ function sendChatbotBTN(){
 						
 						<!-- 내 차 관리 -->
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="docMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">내차관리</a>
+							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/user/car/carMain.do">내차관리</a>
 							<ul class="dropdown-menu" aria-labelledby="docMenu">
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/carMain.do">내 차 관리</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/oil.do">주변 주유소 위치</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/parking.do">주차장 찾기</a> </li>
 							</ul>
@@ -325,6 +318,10 @@ function sendChatbotBTN(){
 							</ul>
 						</li>
 						<!-- Menu item 7 chat-->
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/user/healthImage/healthImageMap.do">가까운 거리</a>
+						</li>
+						
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/user/chat/chat.do" id="docMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">채팅</a>
 							<ul class="dropdown-menu" aria-labelledby="docMenu">
