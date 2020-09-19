@@ -271,10 +271,6 @@ function sendChatbotBTN(){
 						<!-- 내 차 관리 -->
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/user/car/carMain.do">내차관리</a>
-							<ul class="dropdown-menu" aria-labelledby="docMenu">
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/oil.do">주변 주유소 위치</a> </li>
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/car/parking.do">주차장 찾기</a> </li>
-							</ul>
 						</li>
 						<!-- Menu item 5 Elements-->
 						<li class="nav-item dropdown">
@@ -319,7 +315,7 @@ function sendChatbotBTN(){
 						</li>
 						<!-- Menu item 7 chat-->
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/user/healthImage/healthImageMap.do">가까운 거리</a>
+							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/user/car/oil.do">가까운 거리</a>
 						</li>
 						
 						<li class="nav-item dropdown">
