@@ -26,7 +26,7 @@
 
 <div style="width:100%" align="center">
 	<div class="input-group mb-3" style="width:400px" align="center">
-		<input type="text" class="form-control" id="searchtxt">
+		<input type="text" class="form-control" id="searchtxt" placeholder="대전 중구">
 		<button type="button" onclick="search()">검색</button>
 	</div>
 	<div id="map" style="width:50%;height:550px;"></div>

@@ -244,20 +244,16 @@ function sendChatbotBTN(){
 							<ul class="dropdown-menu" aria-labelledby="blogMenu">
 								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/healthImage/healthImageList.do'>운동법 리스트</a></li>
 								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/healthImage/healthImageCal.do'>운동 계산기</a></li>
-								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/healthImage/healthImageMap.do'>내 주변 헬스장</a></li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/menuList?titleName=오늘 당신이 먹은 혹은 먹을 음식의 칼로리를 확인해보세요!">칼로리 사전</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/recommendDiet?titleName=추천 식단을 확인해보세요">추천 식단 리스트</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath }/user/diet/diet_my?titleName=나의 식단관리에 대한 모든 것을 확인해보세요!">나의 식단관리</a> </li>
 							</ul>
 						</li>
 						
-						<!-- 지식 관리 -->
+					<%-- 	<!-- 지식 관리 -->
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">지식관리</a>
-							<ul class="dropdown-menu" aria-labelledby="pagesMenu">
-								<li> <a class="dropdown-item" href='${pageContext.request.contextPath}/user/knowledge/knowledgeList.do'>퀴즈 풀이</a></li>
-							</ul>
-						</li>
+							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/user/knowledge/knowledgeList.do">지식관리</a>
+						</li> --%>
 						<!-- Menu item 4 Portfolio-->
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/user/schedule/schedule.do" >일정관리</a>
@@ -268,10 +264,10 @@ function sendChatbotBTN(){
 							</ul>
 						</li>
 						
-						<!-- 내 차 관리 -->
+						<%-- <!-- 내 차 관리 -->
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/user/car/carMain.do">내차관리</a>
-						</li>
+						</li> --%>
 						<!-- Menu item 5 Elements-->
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="elementsMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">금전관리</a>
@@ -315,7 +311,7 @@ function sendChatbotBTN(){
 						</li>
 						<!-- Menu item 7 chat-->
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/user/car/oil.do">가까운 거리</a>
+							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/user/healthImage/healthImageMap.do">가까운 거리</a>
 						</li>
 						
 						<li class="nav-item dropdown">

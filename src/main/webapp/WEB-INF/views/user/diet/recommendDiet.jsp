@@ -71,10 +71,10 @@
 						<!-- item -->
 					</div>
 				</div>
-							 
+							<!--  
 							 diet_no 가지고 총열량, diet_info 테이블에서 식사 시기와 메뉴 번호 가지고 가서 인설트 / 순서는 diet_day 테이블 만들고 만들어진 dd_no로 diet_info 테이블에서 가져온거 삽입
 							   
-							 주의 사항 // 일자로 검색해서  이미 해당 일자의 식단이 잇을때 그 해당 일자의 diet_day를 cascade로 삭제하고 새로 insert create 안해주고 / 없을 때는 그냥 인설트							
+							 주의 사항 // 일자로 검색해서  이미 해당 일자의 식단이 잇을때 그 해당 일자의 diet_day를 cascade로 삭제하고 새로 insert create 안해주고 / 없을 때는 그냥 인설트 -->							
 					
 				</div>
 				<!-- blog End -->
