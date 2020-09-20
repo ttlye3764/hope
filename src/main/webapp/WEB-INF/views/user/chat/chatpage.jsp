@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
 <!--   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 <!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/myCSS/chatPage.css">
@@ -25,7 +23,6 @@
 <br>
 <br>
 <br>
-
 <div class="messaging">
   <div class="inbox_msg">
 	<div class="inbox_people">
@@ -75,7 +72,6 @@
 			</div>
 		  </div>
 		</div>
-		
 	  </div>
 	  <!-- 친구 목록 끝 -->
 	</div>
@@ -263,7 +259,10 @@ function startChat(e){
 	console.log(targetMemName);
 
 	$('#msg_history').empty();
+	
 	messageList();
+
+	
 }
 
 function insertChatFile(){
@@ -370,8 +369,12 @@ function initSocket(url) {
 		console.log(text);
 		text = "";
 		$('#message').empty();
+
+		setTimeout(function(){
+			messageList();
+		}, 500)
 		
- 		messageList();
+ 		
 	});
 }
 

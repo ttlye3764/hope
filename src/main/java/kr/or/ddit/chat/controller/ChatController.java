@@ -84,9 +84,7 @@ public class ChatController {
 		HttpSession session = request.getSession();
 		
 		memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
-		
-		System.out.println(memberInfo.getMem_no());
-		
+				
 		params.put("mem_no", memberInfo.getMem_no());
 		
 		List<FriendVO> friendList = memberService.friendMemberList(params);
