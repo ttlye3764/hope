@@ -360,7 +360,7 @@ function initSocket(url) {
 	
 	socket.onclose = function(evt) {
 		console.log("연결 종료료");
-	}
+	
 	
 	$("#sendBtn").on("click", function() {
 		var msg = $("#message").val();
