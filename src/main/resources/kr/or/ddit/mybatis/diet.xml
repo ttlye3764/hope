@@ -295,6 +295,16 @@ SELECT c.MEM_NO MEM_NO, d.DD_DATE DD_DATE, d.DD_KCAL DD_KCAL, c.DAY_KCAL DAY_KCA
    		FROM DIET
    		WHERE DIET_NO = #{diet_no}
    	</select>
+   	
+   	<select id="checkCalendar" parameterType="Map" resultType="dietDayVO">
+   		SELECT *
+   		FROM DIET_DAY
+   		WHERE MEM_NO = #{mem_no}
+   		AND DD_DATE = #{dd_date}
+   		<![CDATA[ 
+		AND DD_KCAL > 0
+    	]]> 
+   	</select>
 </mapper>
 
 

@@ -234,10 +234,12 @@ function sendChatbotBTN(){
 							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/user/medical/medicalMain.do">복용관리</a>
 							<ul class="dropdown-menu" aria-labelledby="blogMenu">
 								<li class="dropdown-submenu">
-									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/coronaMain.do">의약품정보</a>
+
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalMain.doo">알약정보</a>
 								</li>
 								<li class="dropdown-submenu">
-									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/coronaMain.do">내 주변 병원/약국</a>
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalMain.do">내 주변 병원/약국</a>
+
 								</li>
 								<li class="dropdown-submenu">
 									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/coronaMain.do">코로나</a>

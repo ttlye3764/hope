@@ -98,7 +98,6 @@
 	<delete id="deleteBoardInfo" parameterType="String" >
 		DELETE FROM BOARD
 		WHERE BD_NO = #{bd_no}
-		
 	</delete>
 	
 	<update id="updateBoardInfo" parameterType="boardVO" >

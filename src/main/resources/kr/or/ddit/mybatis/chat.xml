@@ -52,27 +52,31 @@
 	</select>
 	
 	<select id="chatRoomList" parameterType="Map" resultType="memberVO">
-		SELECT a.ch_no CH_NO, a.mem_no MEM_NO, a.mem_name MEM_NAME, b.msg_content MSG_CONTENT, b.msg_date MSG_DATE
-		from
-			(SELECT b.ch_no ch_no, a.mem_no mem_no, a.mem_name mem_name
-			FROM MEMBER a,(
-				SELECT ch_no, mem_no
-				FROM PARTICIPATION
-				WHERE ch_no IN (
-								SELECT ch_no
-								FROM PARTICIPATION
-								WHERE MEM_NO = #{mem_no}
-								)
-				AND MEM_NO != #{mem_no}) b
-			WHERE a.mem_no = b.mem_no) a ,
-			(SELECT *
-			FROM (SELECT ch_no,
-						MSG_CONTENT,
-						msg_date,
+		SELECT d.CH_NO CH_NO, d.MEM_NO MEM_NO, d.MEM_NAME MEM_NAME, D.MSG_CONTENT MSG_CONTENT, D.MSG_DATE MSG_DATE, c.FILE_SAVE_NAME FILE_SAVE_NAME
+		FROM (
+			SELECT *
+			FROM MEMBERFILE m) c, 
+			(
+				SELECT a.ch_no CH_NO, a.mem_no MEM_NO, a.mem_name MEM_NAME, b.msg_content MSG_CONTENT, b.msg_date MSG_DATE
+				FROM
+					(SELECT b.ch_no ch_no, a.mem_no mem_no, a.mem_name mem_name
+					 FROM MEMBER a,(
+						SELECT ch_no, mem_no
+						FROM PARTICIPATION
+						WHERE ch_no IN (
+									SELECT ch_no
+									FROM PARTICIPATION
+									WHERE MEM_NO = '2'
+									)
+						AND MEM_NO != '2') b
+				WHERE a.mem_no = b.mem_no) a ,
+					(SELECT *
+					FROM (SELECT ch_no, MSG_CONTENT, msg_date,
 						ROW_NUMBER() OVER (PARTITION BY ch_no ORDER BY msg_date DESC) AS RankNo 
-						FROM message)
-			WHERE RankNo = 1) b
-		WHERE a.ch_no = b.ch_no(+)
+						  FROM message)
+						  WHERE RankNo = 1) b
+				WHERE a.ch_no = b.ch_no(+)) d 
+		WHERE c.mem_no(+) = d.mem_no;
 	</select>
 	
 	<select id ="participationList" parameterType="Map" resultType="participationVO">

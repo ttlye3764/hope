@@ -142,4 +142,9 @@ public class DietDaoImpl implements IDietDao {
 	public DietVO selectDietInfo(Map<String, String> params) throws Exception {
 		return client.selectOne("diet.selectDietInfo", params);
 	}
+	
+	@Override
+	public Diet_dayVO checkCalendar(Map<String, String> params) throws Exception {
+		return client.selectOne("diet.checkCalendar", params);
+	}
 }

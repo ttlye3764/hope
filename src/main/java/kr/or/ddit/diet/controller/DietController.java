@@ -1,3 +1,4 @@
+
 package kr.or.ddit.diet.controller;
 
 import java.io.BufferedReader;
@@ -678,6 +679,47 @@ public class DietController {
 			params.put("dd_no", dietDayInsert.getDd_no());
 			dietService.updateDietDayKcal(params);
 		}
+		andView.setViewName("jsonConvertView");
+		return andView;
+	}
+	
+	@RequestMapping("checkCalendar")
+	public ModelAndView checkCalendar(ModelAndView andView,
+									  String i,
+									  String currentMonth,
+									  String currentYear,
+									  HttpServletRequest request,
+									  HttpSession session,
+									  Map<String, String> params) throws Exception{
+		session = request.getSession();
+		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+		params.put("mem_no", memberInfo.getMem_no());
+		
+		currentMonth.replace("월", "");
+		
+		int intCurrentMonth = Integer.parseInt(currentMonth) + 1;
+		
+		if(intCurrentMonth < 10) {
+			currentMonth = "0"+intCurrentMonth;
+		}
+		
+		
+		if(Integer.parseInt(i) < 10) {
+			i = "0"+i;
+		}
+		if(Integer.parseInt(currentYear) < 10) {
+			currentYear = "0"+currentYear;
+		}
+		
+		String dd_date = currentYear + "-" + currentMonth + "-" + i;
+		
+		params.put("dd_date", dd_date);
+		
+		Diet_dayVO dietDayInfo = dietService.checkCalendar(params);
+		
+		
+		
+		andView.addObject("dietDayInfo", dietDayInfo);
 		andView.setViewName("jsonConvertView");
 		return andView;
 	}

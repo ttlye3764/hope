@@ -140,4 +140,9 @@ public class DietServiceImpl implements IDietService {
 	public DietVO selectDietInfo(Map<String, String> params) throws Exception {
 		return dietDao.selectDietInfo(params);
 	}
+	
+	@Override
+	public Diet_dayVO checkCalendar(Map<String, String> params) throws Exception {
+		return dietDao.checkCalendar(params);
+	}
 }
