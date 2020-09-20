@@ -360,7 +360,9 @@ public class ChatController {
 		  
 		  texts.add(sendMessage);
 		  
-		  projectId = "testagent-crvsfc";
+//		  projectId = "what-289707";
+		  projectId = "basic-perigee-288302";
+
 		  
 		  sessionId = request.getSession().getId();
 //		  sessionId="testAgent";
