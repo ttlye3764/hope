@@ -104,8 +104,7 @@
 	<update id="updateBoardInfo" parameterType="boardVO" >
 		UPDATE BOARD
 		   SET BD_TITLE   = #{bd_title},
-	 		   BD_CONTENT = #{bd_content},
-			   MEM_NO     = 1
+	 		   BD_CONTENT = #{bd_content}
 		 WHERE BD_NO      = #{bd_no}			
 	</update>
 	

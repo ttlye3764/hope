@@ -25,7 +25,7 @@ $(function(){
     $('form[name=boardView]').on('submit', function(){
 		
   		var bd_no = $('input[name="bd_no"]').val();
-        $(this).attr('action','${pageContext.request.contextPath}/user/board/updateBoardInfo.do?bd_no=' + bd_no + '&re_no=${re_no}' + 
+        $(this).attr('action','${pageContext.request.contextPath}/user/board/updateBoardInfo.do?bd_no=' + bd_no + '&re_no=${re_no}' +
                       '&bd_division=${bd_division}' + '&currentPage=${currentPage}' + '&search_keyword=${search_keyword}' + '&search_keycode=${search_keycode}');
         return true;
      });
@@ -166,6 +166,8 @@ function fileDown(fileName, fileNo, fileBdNo) {
 </script>
 </head>
 <body>
+
+
 <form name="boardView" class="board-form-area" role="form" method="post" enctype="multipart/form-data">			
 <div class="container">
 			<div class="row">
