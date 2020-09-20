@@ -35,7 +35,7 @@ $(function(){
   	$('#deleteBtn').on('click', function(){
 		//alert('삭제');
 		var bd_no = $('input[name="bd_no"]').val();
-		$(location).attr('href','${pageContext.request.contextPath}/user/board/deleteBoardInfo.do?bd_no=' + bd_no + "&bd_division=${bd_division}");
+		$(location).attr('href','${pageContext.request.contextPath}/user/board/deleteBoardInfo.do?bd_no=' + bd_no + '&bd_division=${bd_division}');
   	 });  
  
   	

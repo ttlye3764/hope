@@ -308,7 +308,7 @@ public class BoardController {
 
 		boardService.deleteBoardReply(bd_no, re_no);
 
-		return "redirect:/user/board/boardView.do?bd_no=" + bd_no + "&re_no=" + re_no + "&bd_divison=bd_division";
+		return "redirect:/user/board/boardView.do?bd_no=" + bd_no + "&re_no=" + re_no + "&bd_divison=" + bd_division;
 	}
 	
 	
