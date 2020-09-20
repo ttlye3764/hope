@@ -95,6 +95,7 @@ function dietMemList(){
  				dietMemDetail += '일일 목표 열량 : <a>'+item.day_kcal+'</a><br>';
  				dietMemDetail += '</div>';
  				dietMemDetail += '<div>';
+ 				dietMemDetail += '<input type="hidden" value="'+item.dm_no+'">';
  				dietMemDetail += '<button id="updateDietMem" class="btn btn-grad updateDietMem" onclick="updateDietMemForm(this);">수정</button>';
  				dietMemDetail += '<button id="deleteDietMem" class="btn btn-grad deleteDietMem" onclick="deleteDietMem(this);">삭제</button>';
  				dietMemDetail += '</div>';
