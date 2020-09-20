@@ -1291,10 +1291,10 @@ function pill_info(pill_no){
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b0cb6f2e037b46943623093ec6be0f37&libraries=services,clusterer,drawing"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> 
 						<div class="tab-pane" id="tab-6-3">
-							<div class="" style="width: 1300px; display: flex; justify-content: space-between;">
-								<div class="map_wrap" style="width: 1300px;">
+							<div class="" style="width: 880px; display: flex; justify-content: space-between;">
+								<div class="map_wrap" style="width: 880px;">
 									<div id="map"
-										style="width: 1300px; border: 1px solid black; height: 500px;"></div>
+										style="width: 880px; border: 1px solid black; height: 500px;"></div>
 									<ul id="category">
 										<li id="HP8" data-order="2"><span
 											class="category_bg pharmacy"></span> 병원</li>

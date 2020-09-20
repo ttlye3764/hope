@@ -524,17 +524,17 @@ $(function(){
 		<br>
 		<br>
 
-<div align="center" style="height: auto; margin: auto;">
-	<div class="col-lg-6">
-		<div class="card-body">
-			<ul class="nav nav-tabs nav-bordered mb-3">
+<div align="center" style="height: auto; margin : auto;">
+	<div class="col-lg-6" style="width:880px;">
+		<div class="card-body"  style="width: 880px;">
+			<ul class="nav nav-tabs nav-bordered mb-3"  style="width: 880px;">
 				<li class="nav-item"><a href="#profile-b1" data-toggle="tab"
 					aria-expanded="true" class="nav-link active"> <i
 						class="mdi mdi-account-circle d-lg-none d-block mr-1"></i> <span
 						class="d-none d-lg-block">거래 내역</span>
 				</a></li>
 			</ul>
-			<div class="tab-content">
+			<div class="tab-content"  style="width: 880px;">
 				<form style="width: 880px; height: 150px; display: flex; justify-content:space-between;  border: 1px solid #e3e3e3; ">
 					<div style="width:600px; height:150px;">
 						<div style="width:600px; height:75px;display: flex; justify-content:flex-start;">
