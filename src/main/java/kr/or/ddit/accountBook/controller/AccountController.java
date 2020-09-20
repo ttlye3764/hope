@@ -679,7 +679,6 @@ public class AccountController {
 	public void excelDown(HttpServletResponse response,
 							HttpSession session
 							,Map<String, String> params
-							,RolePaginationUtil_BYEOL pagination
 							,HttpServletRequest request
 							,@RequestParam(value = "currentPage", required = false) String currentPage) throws Exception {
 		
@@ -688,17 +687,7 @@ public class AccountController {
 	      }
 		
 		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
-		List<DealVO> list4Size = service.dealList(memberInfo.getMem_no());
-		String totalCount = Integer.toString(list4Size.size());
-	    
-		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount));
-	    String startCount = String.valueOf(pagination.getStartCount());
-	    String endCount = String.valueOf(pagination.getEndCount());
-	    
-	    params.put("startCount", startCount);
-	    params.put("endCount", endCount);
 	    params.put("mem_no", memberInfo.getMem_no());
-	    
 	    List<DealVO> list = service.dealList(memberInfo.getMem_no());
 		
 		// 워크북 생성
