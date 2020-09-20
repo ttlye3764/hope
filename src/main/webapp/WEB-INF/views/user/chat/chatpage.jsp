@@ -566,7 +566,7 @@ $(function(){
 // 	192.168.31.35
 
 	
-	initSocket("http://localhost:8080/lastProject/echo?mem_no=" + ${LOGIN_MEMBERINFO.mem_no});
+	initSocket("http://localhost/lastProject/echo?mem_no=" + ${LOGIN_MEMBERINFO.mem_no});
 	chatRoomList();
 	$('.chat_list').click(function(){
 		$('.chat_list').toggleClass('active_chat');	
