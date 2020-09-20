@@ -86,6 +86,7 @@ function insertReplyA(bd_no){
         },
         complete : function(){
         	 replyList();
+        	 $('#re_content').val("");
          }
    	});  
 }
