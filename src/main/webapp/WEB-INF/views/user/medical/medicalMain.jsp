@@ -844,11 +844,11 @@ function pill_info(pill_no){
 	<!-- =======================
 	tab -->
 	<section>
-		<div class="container" style="width: 1300px; margin-left: 15%;">
-			<div class="row" style="width: 1300px; ">
+		<div class="container" style="width: 1000px; margin-left: 15%;">
+			<div class="row" style="width: 1000px; ">
 			
 				<!-- Tab gradient -->
-				<div class="" style="width:1300px;  height:1300px;">
+				<div class="" style="width:1000px;  height:1300px;">
 					<ul class="nav nav-tabs tab-dark">
 						<li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#tab-6-1">복용관리 </a> </li>
 						<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tab-6-2" onclick="pillFirst();"> 알약정보 </a> </li>
@@ -856,7 +856,7 @@ function pill_info(pill_no){
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane show active" id="tab-6-1">
-						<div class="" style="width:1300px; display: flex; justify-content:space-between;">			
+						<div class="" style="width:1000px; display: flex; justify-content:space-between;">			
 
 
   
@@ -1017,10 +1017,10 @@ function pill_info(pill_no){
 				</div>
 					</div>
 						<div class="tab-pane" id="tab-6-2">
-							<div class="" style="width:1300px;">	<!-- 알약정보 -->		
+							<div class="" style="width:1000px;">	<!-- 알약정보 -->		
 	<div>
-		<form id="searchForm" style="margin-bottom: 50px; width:1300px; margin-left: 0%;">
-			<table id="searchTable" style=" width:1300px;">
+		<form id="searchForm" style="margin-bottom: 50px; width:1000px; margin-left: 0%;">
+			<table id="searchTable" style=" width:1000px;">
 				<tbody>
 					<tr>
 						<th>제품명</th>
@@ -1158,7 +1158,7 @@ function pill_info(pill_no){
 	</div>
 
 
-	<div class="card" style="width: 1300px;">
+	<div class="card" style="width: 1000px;">
 		<div class="card-body" style="">
 			<div id="" class="" >
 				<table class="table-list" data-currentpage="1">
@@ -1291,10 +1291,10 @@ function pill_info(pill_no){
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b0cb6f2e037b46943623093ec6be0f37&libraries=services,clusterer,drawing"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> 
 						<div class="tab-pane" id="tab-6-3">
-							<div class="" style="width: 1300px; display: flex; justify-content: space-between;">
-								<div class="map_wrap" style="width: 1300px;">
+							<div class="" style="width: 1000px; display: flex; justify-content: space-between;">
+								<div class="map_wrap" style="width: 1000px;">
 									<div id="map"
-										style="width: 1300px; border: 1px solid black; height: 500px;"></div>
+										style="width: 1000px; border: 1px solid black; height: 500px;"></div>
 									<ul id="category">
 										<li id="HP8" data-order="2"><span
 											class="category_bg pharmacy"></span> 병원</li>

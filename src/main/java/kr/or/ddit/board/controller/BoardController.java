@@ -153,6 +153,7 @@ public class BoardController {
 			rnum = "nu";
 		}
 		modelMap.addAttribute("rnum", rnum);
+		modelMap.addAttribute("boardInfo.mem_no", boardInfo.getMem_no());
 
 		return boardInfo;
 	}
