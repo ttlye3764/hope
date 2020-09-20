@@ -84,4 +84,7 @@ public interface IDietService {
 		
 		// diet에서 값 하나 뽑아오기
 		public DietVO selectDietInfo(Map<String, String> params) throws Exception;
+		
+		// calendar 그릴때 diet_day에 값이 있나 없나
+		public Diet_dayVO checkCalendar(Map<String, String> params) throws Exception;
 }

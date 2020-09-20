@@ -231,7 +231,7 @@ function chatRoomList(){
 					chatRoomList += '<input type="hidden" id="ch_no" value="'+item.ch_no+'">';
 					chatRoomList += '<input type="hidden" id="mem_no" value="'+item.mem_no+'">';
 					chatRoomList += '<div class="chat_people">';
-					chatRoomList += '<div class="chat_img"> <img src="${pageContext.request.contextPath}/resources/image/empty.png" alt=""> </div>';
+					chatRoomList += '<div class="chat_img"> <img src="/files/'+item.file_save_name+'" alt=""> </div>';
 					chatRoomList += '<div class="chat_ib">';
 					chatRoomList += '<h5 id="mem_no"><input type="hidden" id="mem_name" value="'+item.mem_name+'">'+item.mem_name+'<span class="chat_date" id="lastChat">'+item.msg_date+'</span></h5>';
 					chatRoomList += '<p>'+item.msg_content+'</p>';
@@ -368,7 +368,7 @@ function initSocket(url) {
 		socket.send(text);
 		console.log(text);
 		text = "";
-		$('#message').empty();
+		$('#message').val("");
 
 		setTimeout(function(){
 			messageList();
