@@ -197,6 +197,7 @@
 					
 					
 <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js'></script>
+
 <script type="text/javascript">
 
 
@@ -231,7 +232,7 @@ function chatRoomList(){
 					chatRoomList += '<input type="hidden" id="ch_no" value="'+item.ch_no+'">';
 					chatRoomList += '<input type="hidden" id="mem_no" value="'+item.mem_no+'">';
 					chatRoomList += '<div class="chat_people">';
-					chatRoomList += '<div class="chat_img"> <img src="/files/'+item.file_save_name+'" alt=""> </div>';
+					chatRoomList += '<div class="chat_img"> <img src="${pageContext.request.contextPath}/resources/image/empty.png" alt=""> </div>';
 					chatRoomList += '<div class="chat_ib">';
 					chatRoomList += '<h5 id="mem_no"><input type="hidden" id="mem_name" value="'+item.mem_name+'">'+item.mem_name+'<span class="chat_date" id="lastChat">'+item.msg_date+'</span></h5>';
 					chatRoomList += '<p>'+item.msg_content+'</p>';
@@ -259,10 +260,7 @@ function startChat(e){
 	console.log(targetMemName);
 
 	$('#msg_history').empty();
-	
 	messageList();
-
-	
 }
 
 function insertChatFile(){
@@ -360,7 +358,7 @@ function initSocket(url) {
 	
 	socket.onclose = function(evt) {
 		console.log("연결 종료료");
-	
+	}
 	
 	$("#sendBtn").on("click", function() {
 		var msg = $("#message").val();
@@ -369,12 +367,9 @@ function initSocket(url) {
 		console.log(text);
 		text = "";
 		$('#message').val("");
-
 		setTimeout(function(){
 			messageList();
-		}, 500)
-		
- 		
+			}, 500);
 	});
 }
 
@@ -580,6 +575,7 @@ $(function(){
 	$('#files').on('change', handleImgFileSelect);
 })
 </script>
+
 
 
 

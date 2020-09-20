@@ -325,7 +325,7 @@ function sendChatbotBTN(){
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/user/chat/chat.do" id="docMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">채팅</a>
 							<ul class="dropdown-menu" aria-labelledby="docMenu">
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/chat/chat.do">채팅하기</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/chat/chat">채팅하기</a> </li>
 							</ul>
 						</li>
 					</ul>

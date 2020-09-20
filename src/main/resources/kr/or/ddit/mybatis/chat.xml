@@ -66,9 +66,9 @@
 						WHERE ch_no IN (
 									SELECT ch_no
 									FROM PARTICIPATION
-									WHERE MEM_NO = '2'
+									WHERE MEM_NO = #{mem_no}
 									)
-						AND MEM_NO != '2') b
+						AND MEM_NO != #{mem_no}) b
 				WHERE a.mem_no = b.mem_no) a ,
 					(SELECT *
 					FROM (SELECT ch_no, MSG_CONTENT, msg_date,
@@ -76,7 +76,7 @@
 						  FROM message)
 						  WHERE RankNo = 1) b
 				WHERE a.ch_no = b.ch_no(+)) d 
-		WHERE c.mem_no(+) = d.mem_no;
+		WHERE c.mem_no(+) = d.mem_no
 	</select>
 	
 	<select id ="participationList" parameterType="Map" resultType="participationVO">
