@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -364,8 +365,13 @@ public class ChatController {
 		  projectId = "basic-perigee-288302";
 
 		  
-		  sessionId = request.getSession().getId();
+		  Random random = new Random();
+		  
+		  String a = "a" + (random.nextInt(10000) + random.nextInt(10000));
+		  
+//		  sessionId = request.getSession().getId();
 //		  sessionId="testAgent";
+		  sessionId= a;
 		  
 		  
 		  

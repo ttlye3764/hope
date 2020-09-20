@@ -228,11 +228,11 @@ function chatRoomList(){
 						item.msg_content = '';
 					}
 					
-					chatRoomList += '<div class="chat_list active_chat" onclick="startChat(this);">';
+					chatRoomList += '<div class="chat_list" onclick="startChat(this);">';
 					chatRoomList += '<input type="hidden" id="ch_no" value="'+item.ch_no+'">';
 					chatRoomList += '<input type="hidden" id="mem_no" value="'+item.mem_no+'">';
 					chatRoomList += '<div class="chat_people">';
-					chatRoomList += '<div class="chat_img"> <img src="${pageContext.request.contextPath}/resources/image/empty.png" alt=""> </div>';
+					chatRoomList += '<div class="chat_img"> <img src="/files/'+item.file_save_name+'" alt=""> </div>';
 					chatRoomList += '<div class="chat_ib">';
 					chatRoomList += '<h5 id="mem_no"><input type="hidden" id="mem_name" value="'+item.mem_name+'">'+item.mem_name+'<span class="chat_date" id="lastChat">'+item.msg_date+'</span></h5>';
 					chatRoomList += '<p>'+item.msg_content+'</p>';
@@ -258,6 +258,9 @@ function startChat(e){
 	console.log(chatingRoomNo);
 	console.log(targetMemNo);
 	console.log(targetMemName);
+
+	$('.chat_list').removeClass('active_chat');
+	$(e).toggleClass('active_chat');
 
 	$('#msg_history').empty();
 	messageList();
@@ -329,7 +332,7 @@ function messageList(){
 					messageList += '</div>';
 				}else{
 					messageList += '<div class="incoming_msg">';
-					messageList += '<div class="incoming_msg_img"> <img src="${pageContext.request.contextPath}/resources/image/empty.png" alt=""> </div>';
+					messageList += '<div class="incoming_msg_img"> <img src="${pageContext.request.contextPath}/image/empty.png" alt=""> </div>';
 					messageList += '<div class="received_msg">';
 					messageList += '<div class="received_withd_msg">';
 					messageList += '<p>'+item.msg_content+'</p>';
@@ -561,16 +564,16 @@ function insertFriendBtn(e){
 		});
 	}
 
+
 $(function(){
 
 // 	192.168.31.35
 
-	
-	initSocket("http://localhost/lastProject/echo?mem_no=" + ${LOGIN_MEMBERINFO.mem_no});
+
+	initSocket("http://localhost:8080/lastProject/echo?mem_no=" + ${LOGIN_MEMBERINFO.mem_no});
 	chatRoomList();
-	$('.chat_list').click(function(){
-		$('.chat_list').toggleClass('active_chat');	
-	})	
+	
+	
 
 	$('#files').on('change', handleImgFileSelect);
 })

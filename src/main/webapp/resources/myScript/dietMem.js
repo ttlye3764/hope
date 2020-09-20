@@ -88,11 +88,11 @@ function dietMemList(){
  				dietMemDetail += '</div>';
  				dietMemDetail += '<div class="collapse" id="collapse-'+count+'" data-parent="#dietMemDetail" style="">';
  				dietMemDetail += '<div class="accordion-content">';
- 				dietMemDetail += '키 : <a>'+item.height+'</a><br>';
- 				dietMemDetail += '체중 : <a>'+item.current_weight+'</a><br>';
- 				dietMemDetail += '목표 체중 : <a>'+item.purpose_weight+'</a><br>';
- 				dietMemDetail += 'BMI : <a>'+item.bmi+'</a><br>';
- 				dietMemDetail += '일일 목표 열량 : <a>'+item.day_kcal+'</a><br>';
+ 				dietMemDetail += '키 : <a class="height">'+item.height+'</a><br>';
+ 				dietMemDetail += '체중 : <a class="weight">'+item.current_weight+'</a><br>';
+ 				dietMemDetail += '목표 체중 : <a class="purpose_weight">'+item.purpose_weight+'</a><br>';
+ 				dietMemDetail += 'BMI : <a class="bmi">'+item.bmi+'</a><br>';
+ 				dietMemDetail += '일일 목표 열량 : <a class="day_kcal">'+item.day_kcal+'</a><br>';
  				dietMemDetail += '</div>';
  				dietMemDetail += '<div>';
  				dietMemDetail += '<input type="hidden" value="'+item.dm_no+'">';
