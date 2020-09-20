@@ -81,7 +81,6 @@ function pill_info(pill_no){
             		var str = '<a href="#" class="btn btn-outline-primary" /* onclick="pill_info('+v.pill_no+');" */ id="'+v.pill_no+'"  style="margin-left: 5px; display: block; margin-top:5px; margin-right:5px;">'+v.pill_name+'</a>';
 					$('#calendarDiv1').append(str);
              	 });            	   
-          	  
   			}
   		});
 		 $.ajax({			//일주일 복용리스트
@@ -109,7 +108,6 @@ function pill_info(pill_no){
 			var date = $('#pill_start').val();
 	        date2 = $('#pill_end').val();
 	        if(date > date2){
-				alert('복용시작일과 복용종료일을 제대로 입력해주세요.');
 				$('#pill_count1').val("0");
 			}else{			
 				var dateString = date; 
@@ -128,7 +126,6 @@ function pill_info(pill_no){
 			var date = $('#pill_start').val();
 			var date2 = $('#pill_end').val();
 			if(date > date2){
-				alert('복용시작일과 복용종료일을 제대로 입력해주세요.');
 				$('#pill_count1').val("0");
 			}else{
 				var dateString = date; 
@@ -145,8 +142,8 @@ function pill_info(pill_no){
 		$('#pill_start_update').change(function (){
 			var date = $('#pill_start_update').val();
 	        date2 = $('#pill_end_update').val();
+	        
 	        if(date > date2){
-				alert('복용시작일이 복용종료일보다 작아야합니다.');
 				$('#pill_count1_update').val("0");
 			}else{			
 				var dateString = date; 
@@ -164,8 +161,8 @@ function pill_info(pill_no){
 		$('#pill_end_update').change(function (){
 			var date = $('#pill_start_update').val();
 			var date2 = $('#pill_end_update').val();
+			
 			if(date > date2){
-				alert('복용시작일이 복용종료일보다 작아야합니다.');
 				$('#pill_count1_update').val("0");
 			}else{
 				var dateString = date; 
@@ -272,31 +269,7 @@ function pill_info(pill_no){
 	          },
 	          dateClick: function(info) {
 	          $("#regist-modal").modal("show"); //모달창 띄우기
-	          $("#img").attr("src", " ");
-	         /*  $('form[name=scheduleForm]').submit(function(){
-	          	var arr = getCalendarDataInDB();
-	             $(this).append('<input type="hidden" name="mem_no" value="0"/>');
-	                 var dateStr = info.dateStr;
-	                 var start = $("#s_startdate").val();
-	                 var title=$("#s_memo").val();
-	                 var end = $("#s_enddate").val();
-	                 var startdate = new Date(start);
-	                 var enddate = new Date(end);
-	       
-	                 if (!isNaN(startdate.valueOf())) { // valid?
-	                     calendar.addEvent(
-	                   {     title: title,
-	                         start: startdate, //시작날짜(시간까지 정함)
-	                         end: enddate, //끝나는날짜 (시간까지 정함)
-	                         allDay: false 
-	                   });
-	                   alert('Great. Now, update your database...');
-	                 } else {
-	                   alert('Invalid date.');
-	                 }       
-	                 $(this).attr('action','/lastProject/user/medical/insertMedicalInfo.do');
-	                 return true;
-	            });  */ //서브밋
+	          $("#img").attr("src", " ");	         
 	       },//클릭
 	       events:(jsonData),
 	       eventColor:event.color
@@ -322,13 +295,7 @@ function pill_info(pill_no){
 					url : '${pageContext.request.contextPath}/user/medical/searchPillJson.do',
 					type : 'post',
 					dataType : 'json',
-					data : {
-						'shapes' : shapes,
-						'colors' : colors,
-						'pname' : pname,
-						'cname' : cname,
-						'lines' : lines
-					},
+					data : {'shapes' : shapes,'colors' : colors,'pname' : pname,'cname' : cname,'lines' : lines},
 					success : function(result) {
 						$('.list').empty();
 						$('#paginationDIV').empty();
@@ -338,10 +305,8 @@ function pill_info(pill_no){
 										function(index,
 												item) {
 											var newTr = $('<tr data-timestamp="1509426000" data-status="3" style="height: 60px;"></tr>');
-											newTr
-													.append('<input type="hidden" value="'+item.pi_no+'"/>');
-											newTr
-													.append('<td class="" style="height: 60px;"><img alt="" src="'+item.pi_bigimg+'" style="width: 96px; height: 71px;"></td>');
+											newTr.append('<input type="hidden" value="'+item.pi_no+'"/>');
+											newTr.append('<td class="" style="height: 60px;"><img alt="" src="'+item.pi_bigimg+'" style="width: 96px; height: 71px;"></td>');
 											var fmark = item.pi_f_mark;
 											var bmark = item.pi_b_mark;
 											if (fmark == null) {
@@ -350,57 +315,27 @@ function pill_info(pill_no){
 											if (bmark == null) {
 												bmark = " ";
 											}
-											var mark = fmark
-													.concat("/");
-											mark = mark
-													.concat(bmark);
-											newTr
-													.append('<td class="" style="height: 60px; text-align:center; ">'
-															+ mark
-															+ '</td>');
-											newTr
-													.append('<td class="" style="height: 60px;">'
-															+ item.pi_shape_name
-															+ '</td>');
-											newTr
-													.append('<td class="" style="height: 60px;">'
-															+ item.pi_x_size
-															+ '</td>');
-											newTr
-													.append('<td class="" style="height: 60px;">'
-															+ item.pi_y_size
-															+ '</td>');
-											newTr
-													.append('<td class="" style="height: 60px;">'
-															+ item.pi_z_size
-															+ '</td>');
-											newTr
-													.append('<td class="" style="height: 60px;">'
-															+ item.pi_name
-															+ '</td>');
-											newTr
-													.append('<td class="" style="height: 60px;">'
-															+ item.pi_b_name
-															+ '</td>');
-											$('.list')
-													.append(
-															newTr);
+											var mark = fmark.concat("/");
+											mark = mark.concat(bmark);
+											newTr.append('<td class="" style="height: 60px; text-align:center; ">'+ mark+ '</td>');
+											newTr.append('<td class="" style="height: 60px;">'+ item.pi_shape_name+ '</td>');
+											newTr.append('<td class="" style="height: 60px;">'+ item.pi_x_size+ '</td>');
+											newTr.append('<td class="" style="height: 60px;">'+ item.pi_y_size+ '</td>');
+											newTr.append('<td class="" style="height: 60px;">'+ item.pi_z_size+ '</td>');
+											newTr.append('<td class="" style="height: 60px;">'+ item.pi_name+ '</td>');
+											newTr.append('<td class="" style="height: 60px;">'+ item.pi_b_name+ '</td>');
+											$('.list').append(newTr);
 										})
-						$('.list tr').on(
-								'click',
-								function() {
+						$('.list tr').on('click',function() {
 									var pi_no = $(this)
 											.find('input')
 											.val();
 									getpillAPI(pi_no);
-								});
+						});
 					}
 				});
 	}
 	function callAjax(i){
-		/* $('.pagination li').click(function(){
-			$(this).find('font').addClass('clickPagination');
-		}); */
 		var shapes = [];
 		var colors = [];
 		var lines = [];
@@ -551,8 +486,6 @@ function pill_info(pill_no){
 										console.log(ee_doc_data); 
 									});
 								}
-								
-								
 							});
 						}
 						else{
@@ -605,8 +538,6 @@ function pill_info(pill_no){
 										console.log(ee_doc_data); 
 									});
 								}
-								
-								
 							});
 						}
 						else{
@@ -635,22 +566,7 @@ function pill_info(pill_no){
 						}
 					}
 				});
-				console.log(result.response.body.items.item); 
-				/*                  
-	           	 	console.log(result.response.body.items.item.ITEM_NAME);		//제품명
-	           	 	console.log(result.response.body.items.item.MAIN_ITEM_INGR);		//성분
-	           	 	console.log(result.response.body.items.item.MATERIAL_NAME);		//함량
-	           	 	console.log(result.response.body.items.item.INGR_NAME);		//첨가제
-	           	 	console.log(result.response.body.items.item.ETC_OTC_CODE);		//전문/일반
-	           	 	console.log(result.response.body.items.item.ENTP_NAME);  //제조/수입사
-	           	 	console.log(result.response.body.items.item.CHART);  //성상
-	           	 	console.log(result.response.body.items.item.ITEM_PERMIT_DATE);  //허가일
-	           	 	console.log(result.response.body.items.item.PACK_UNIT);  //포장단위
-	           	 	console.log(result.response.body.items.item.STORAGE_METHOD);  //저장방법
-	           	 	console.log(result.response.body.items.item.VALID_TERM);  //유효기간//완제/원료구분/업종구분
-	           	 	console.log(result.response.body.items.item.MAKE_MATERIAL_FLAG);  //완제/원료구분
-	           	 	console.log(result.response.body.items.item.INDUTY_TYPE);  //업종구분 */
-	           	 	
+				console.log(result.response.body.items.item); 		
 	           	 var material = (result.response.body.items.item.MATERIAL_NAME).split('|');
 				
 	           $("#infotable").empty();
@@ -752,6 +668,41 @@ function pill_info(pill_no){
 	
 	
 	$(function() {
+		
+		$('#updateBTN').on('click', function(){
+			var date = $('#pill_start_update').val();
+			var date2 = $('#pill_end_update').val();      
+			
+	        if(date < date2 || date == date2){
+	        	var dateString = date; 
+				var dateString2 = date2;
+				var dateArray = dateString.split("-");
+				var dateArray2 = dateString2.split("-");
+				var dateObj = new Date(dateArray[0], Number(dateArray[1])-1, dateArray[2]);  
+				var dateObj2 = new Date(dateArray2[0], Number(dateArray2[1])-1, dateArray2[2]);  
+				var betweenDay = (dateObj2.getTime() - dateObj.getTime())/1000/60/60/24;
+				$('#pill_count_update').val(betweenDay);
+				$('#pill_count1_update').val(betweenDay);
+		        return true;
+			}else{
+				alert("복용 시작일과 종료일을 제대로 입력해주세요.");
+				return false;
+			}
+	     });
+	     
+		$('#insertBTN').on('click', function(){
+			var date = $('#pill_start').val();
+			var date1 = $('#pill_end').val();
+			
+	        if(date < date1 || date == date1){
+		        return true;
+			}else{
+				alert("복용 시작일과 종료일을 제대로 입력해주세요.");
+				return false;
+			}
+	     });
+
+		
 		$('#cancleBTN').on('click',function(){
 			$('#pname').val('');
 			$('#cname').val('');
@@ -769,11 +720,7 @@ function pill_info(pill_no){
 			var pi_no = $(this).find('input').val();
 			getpillAPI(pi_no);
 		});
-		/* $('.list tr').click(function(){
-			var pi_no = $(this).find('input').val();
-			alert(pi_no);
-			//$(location).attr('href', '${pageContext.request.contextPath}/user/freeboard/freeboardView.do?bo_no=' + bo_no + '&rnum=' + rnum);
-		}); */
+		
 		$('.idty li').click(function() {
 			if ($(this).hasClass('li_selected')) {
 				$(this).removeClass('li_selected');
@@ -786,9 +733,6 @@ function pill_info(pill_no){
 		$('#searchBTN')
 				.click(
 						function() {
-							/* $('.pagination li').click(function(){
-								$(this).find('font').addClass('clickPagination');
-							}); */
 							var shapes = [];
 							var colors = [];
 							var lines = [];
@@ -990,7 +934,7 @@ function pill_info(pill_no){
 								
 								</div>																													
 								
-								<button class="btn btn-outline-grad btn-block" type="submit">등록</button>								
+								<button class="btn btn-outline-grad btn-block" id="insertBTN" type="submit">등록</button>								
 							
 							<!-- End main form -->
 						</form>
@@ -1049,7 +993,7 @@ function pill_info(pill_no){
 								</div>																							
 								<!-- submit button -->
 							
-								<button class="btn btn-outline-grad btn-block" type="submit">수정</button>
+								<button class="btn btn-outline-grad btn-block" id="updateBTN" type="submit">수정</button>
 								<button class="btn btn-outline-grad btn-block" style="color: #37bf74;" id="deleteBTN" type="button">삭제</button>
 							
 							<!-- End main form -->
@@ -1388,24 +1332,17 @@ function pill_info(pill_no){
 		var geocoder = new daum.maps.services.Geocoder();
 		// 장소 검색 객체를 생성합니다
 		var ps = new kakao.maps.services.Places(map); 
-		
 		// 지도에 idle 이벤트를 등록합니다
 		kakao.maps.event.addListener(map, 'idle', searchPlaces);
-		
 		// 커스텀 오버레이의 컨텐츠 노드에 css class를 추가합니다 
-		contentNode.className = 'placeinfo_wrap';
-		
 		// 커스텀 오버레이의 컨텐츠 노드에 mousedown, touchstart 이벤트가 발생했을때
 		// 지도 객체에 이벤트가 전달되지 않도록 이벤트 핸들러로 kakao.maps.event.preventMap 메소드를 등록합니다 
 		addEventHandle(contentNode, 'mousedown', kakao.maps.event.preventMap);
 		addEventHandle(contentNode, 'touchstart', kakao.maps.event.preventMap);
-		
 		// 커스텀 오버레이 컨텐츠를 설정합니다
 		placeOverlay.setContent(contentNode);  
-		
 		// 각 카테고리에 클릭 이벤트를 등록합니다
 		addCategoryClickEvent();
-		
 		// 엘리먼트에 이벤트 핸들러를 등록하는 함수입니다
 		function addEventHandle(target, type, callback) {
 		    if (target.addEventListener) {
@@ -1414,22 +1351,17 @@ function pill_info(pill_no){
 		        target.attachEvent('on' + type, callback);
 		    }
 		}
-		
 		// 카테고리 검색을 요청하는 함수입니다
 		function searchPlaces() {
 		    if (!currCategory) {
 		        return;
 		    }
-		    
 		    // 커스텀 오버레이를 숨깁니다 
 		    placeOverlay.setMap(null);
-		
 		    // 지도에 표시되고 있는 마커를 제거합니다
 		    removeMarker();
-		    
 		    ps.categorySearch(currCategory, placesSearchCB, {useMapBounds:true, useMapCenter:true, radius:1000}); 
 		}
-		
 		// 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
 		function placesSearchCB(data, status, pagination) {
 		    if (status === kakao.maps.services.Status.OK) {
@@ -1441,16 +1373,11 @@ function pill_info(pill_no){
 		        // 에러로 인해 검색결과가 나오지 않은 경우 해야할 처리가 있다면 이곳에 작성해 주세요
 		    }
 		}
-		
 		// 지도에 마커를 표출하는 함수입니다
 		function displayPlaces(places) {
-		
 		    // 몇번째 카테고리가 선택되어 있는지 얻어옵니다
 		    // 이 순서는 스프라이트 이미지에서의 위치를 계산하는데 사용됩니다
 		    var order = document.getElementById(currCategory).getAttribute('data-order');
-		
-		    
-		
 		    for ( var i=0; i<places.length; i++ ) {
 		
 		            // 마커를 생성하고 지도에 표시합니다
@@ -1465,7 +1392,6 @@ function pill_info(pill_no){
 		            })(marker, places[i]);
 		    }
 		}
-		
 		// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 		function addMarker(position, order) {
 		    var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
@@ -1486,7 +1412,6 @@ function pill_info(pill_no){
 		
 		    return marker;
 		}
-		
 		// 지도 위에 표시되고 있는 마커를 모두 제거합니다
 		function removeMarker() {
 		    for ( var i = 0; i < markers.length; i++ ) {
@@ -1494,7 +1419,6 @@ function pill_info(pill_no){
 		    }   
 		    markers = [];
 		}
-		
 		// 클릭한 마커에 대한 장소 상세정보를 커스텀 오버레이로 표시하는 함수입니다
 		function displayPlaceInfo (place) {
 		    var content = '<div class="placeinfo">' +
@@ -1515,8 +1439,6 @@ function pill_info(pill_no){
 		    placeOverlay.setPosition(new kakao.maps.LatLng(place.y, place.x));
 		    placeOverlay.setMap(map);  
 		}
-		
-		
 		// 각 카테고리에 클릭 이벤트를 등록합니다
 		function addCategoryClickEvent() {
 		    var category = document.getElementById('category'),
@@ -1526,7 +1448,6 @@ function pill_info(pill_no){
 		        children[i].onclick = onClickCategory;
 		    }
 		}
-		
 		// 카테고리를 클릭했을 때 호출되는 함수입니다
 		function onClickCategory() {
 		    var id = this.id,
@@ -1544,7 +1465,6 @@ function pill_info(pill_no){
 		        searchPlaces();
 		    }
 		}
-		
 		// 클릭된 카테고리에만 클릭된 스타일을 적용하는 함수입니다
 		function changeCategoryClass(el) {
 		    var category = document.getElementById('category'),
@@ -1554,7 +1474,6 @@ function pill_info(pill_no){
 		    for ( i=0; i<children.length; i++ ) {
 		        children[i].className = '';
 		    }
-		
 		    if (el) {
 		        el.className = 'on';
 		    } 
@@ -1569,7 +1488,6 @@ function pill_info(pill_no){
 					if(data.buildingName !== ''){ extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName); } // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다. 
 					fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : ''); }
 					// 주소 정보를 해당 필드에 넣는다. 
-					
 					// 주소로 상세 정보를 검색
 					geocoder.addressSearch(data.address, function(results, status) { 
 					// 정상적으로 검색이 완료됐으면 
@@ -1586,9 +1504,7 @@ function pill_info(pill_no){
 								mapContainer.style.display = "block";
 								map.relayout(); // 지도 중심을 변경한다. 
 								map.setCenter(coords); // 마커를 결과값으로 받은 위치로 옮긴다. 
-
 								marker.setPosition(coords);
-
 						}
 					}); 
 			} }).open(); }

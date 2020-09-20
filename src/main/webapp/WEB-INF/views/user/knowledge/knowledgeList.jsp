@@ -279,7 +279,7 @@
 	
 						<!-- Modal -->
 						<div class="modal fade text-left" id="exampleModalCenter" tabindex="-1" role="dialog" 
-							aria-labelledby="exampleModalCenter" aria-hidden="true" >
+							aria-labelledby="exampleModalCenter" aria-hidden="true" style="z-index:2147483647;" >
 							<div class="modal-dialog modal-dialog-centered" role="document">
 						  		<div class="modal-content" id="modals" >
 									<div class="modal-header">

@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!-- c:url을 이용하여 처리 -->
-<c:url var="regustMemberURI" value="/user/member/memberForm.do"></c:url>
+<c:url var="regustMemberURI" value="/user/join/joinForm.do"></c:url>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type='text/javascript'
@@ -79,7 +79,7 @@
       <br>
       <br>
 <div align="center" >
-	<form action="${pageContext.request.contextPath}/user/member/memberForm.do" name="form" method="post">
+	<form name="form" method="post">
 		<table  style="width:900; height:650">
 			<tr>
 				<td  align="center">

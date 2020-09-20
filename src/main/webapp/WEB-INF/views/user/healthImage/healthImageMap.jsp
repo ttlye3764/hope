@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <meta charset="utf-8">
-    <title>키워드로 장소검색하고 목록으로 표출하기</title>
-    <style>
+<style>
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
 .map_wrap {position:relative;width:100%;height:500px;}
@@ -75,7 +71,7 @@
 					        <div class="option">
 					            <div>
 					                <form onsubmit="searchPlaces(); return false;">
-					                  	  키워드 : <input type="text" value="대전 중구 헬스장" id="keyword" size="15"> 
+					                  	  키워드 : <input type="text" value="대전 중구 영민빌딩" id="keyword" size="15"> 
 					                    <input type="submit" style="margin: 5px 0px 0px 70px;">
 					                </form>
 					            </div>
@@ -89,7 +85,6 @@
 		</div>
 		<!-- portfolio End -->
 	</section>
-</div>
 
 <script src="${pageContext.request.contextPath }/resources/template/assets/vendor/jquery/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/popper.js/umd/popper.min.js"></script>
@@ -104,42 +99,7 @@
 	<script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b0cb6f2e037b46943623093ec6be0f37&libraries=services"></script>
 <script>
-// 마커를 담을 배열입니다
 
- document.addEventListener("DOMContentLoaded", function() {
-        function getLocation(position) {
-
-            var latitud = position.coords.latitude;
-            var longitude = position.coords.longitude;
-        
-            var mapContainer = document.getElementById("map")    // 지도를 표시할 DIV
-            var mapOption = {
-                  center : new daum.maps.LatLng(latitud, longitude)    // 지도의 중심좌표
-                , level : 3    // 지도의 확대레벨
-            };
-            
-            // 지도를 생성
-            var map = new daum.maps.Map(mapContainer, mapOption);
-
-            // 마커가 표시될 위치
-            var markerPosition = new daum.maps.LatLng(latitud, longitude);
-
-            // 마커를 생성
-            var marker = new daum.maps.Marker({ position:markerPosition });
-
-            marker.setMap(map);
-        }
-
-        if(navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(getLocation, function(error) {
-                consol.log(error.message);    
-            });
-        } else {
-            consol.log("Geolocation을 지원하지 않는 브라우저 입니다.");
-        }
-    });
-
- 
 var markers = [];
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -262,7 +222,7 @@ function getListItem(index, places) {
     var el = document.createElement('li'),
     itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
                 '<div class="info">' +
-                '   <h6>' + places.place_name + '</h6>';
+                '   <h5>' + places.place_name + '</h5>';
 
     if (places.road_address_name) {
         itemStr += '    <span>' + places.road_address_name + '</span>' +
@@ -355,13 +315,4 @@ function removeAllChildNods(el) {
         el.removeChild (el.lastChild);
     }
 }
-
-function relayout() {    
-    
-    // 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
-    // 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다 
-    // window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
-    map.relayout();
-}
 </script>
-</html>

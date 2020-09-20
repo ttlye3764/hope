@@ -49,12 +49,9 @@ public class pillInfo {
         rd.close();
         conn.disconnect();
         System.out.println(sb.toString());
-        
-
         org.json.JSONObject xmlJSONObj = XML.toJSONObject(sb.toString());
         String xmlJSONObjString = xmlJSONObj.toString();
         System.out.println(xmlJSONObjString);
-        
         return xmlJSONObjString;
         
     }

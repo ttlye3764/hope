@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!-- c:url을 이용하여 처리 -->
-<c:url var="regustMemberURI" value="/user/member/memberForm.do"></c:url>
+<c:url var="regustMemberURI" value="/user/join/joinForm.do"></c:url>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript"

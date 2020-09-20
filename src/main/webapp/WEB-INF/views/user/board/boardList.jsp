@@ -117,13 +117,8 @@ Banner innerpage -->
 			<div class="row all-text-white">
 				<div class="col-md-12 align-self-center">
 					<h1 class="innerpage-title">${board_division_name}</h1>
-					<h6 class="subtitle">We transform your perception into an
-						excellent website</h6>
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
-							<li class="breadcrumb-item active"><a href="index.html"><i
-									class="ti-home"></i> Home</a></li>
-							<li class="breadcrumb-item">Table</li>
 						</ol>
 					</nav>
 				</div>

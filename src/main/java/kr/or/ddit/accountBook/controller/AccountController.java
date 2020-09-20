@@ -154,8 +154,8 @@ public class AccountController {
 		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
 		
 		
-		List<DealVO> list4Size = service.dealList(memberInfo.getMem_no());
-		String totalCount = Integer.toString(list4Size.size());
+		List<DealVO> listSize = service.dealList(memberInfo.getMem_no());
+		String totalCount = Integer.toString(listSize.size());
 		
 		pagination.RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount));
 		String startCount = String.valueOf(pagination.getStartCount());
@@ -167,6 +167,9 @@ public class AccountController {
 		
 		List<DealVO> list = service.searchList(params);
 		
+		for(int i = 0; i<list.size(); i++) {
+			System.out.println(list.get(i).getDeal_date());
+		}
 		andView.addObject("dealList", list);
 		andView.addObject("pagination",pagination.getPagingHtmls());
 		andView.setViewName("user/accountBook/accountList");
