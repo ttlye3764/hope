@@ -1,11 +1,6 @@
 <%@ page language="JAVA" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>자유게시글 등록</title>
-<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/fitvids/jquery.fitvids.js"></script>
-<script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
+
+
 <script>
 $(function(){
 	
@@ -25,25 +20,40 @@ $(function(){
 		$(location).attr('href','${pageContext.request.contextPath}/user/board/boardList.do?bd_division=${bd_division}');	
 	});
 
+   
+
+    
 	// 파일 
-   function handleImgFileSelect(e){
-		var files = e.target.files;
-		var filesArr = Array.prototype.slice.call(files);
-			
-			sel_file = f;
-			var reader = new FileReader();
-			reader.onload = function(e)	{
-					$("#img").attr("src", e.target.result);
-			}
-			reader.readAsDataURL(f);
-	}
+   
 });
 
 
+function handleImgFileSelect(e){
+	var files = e.target.files;
+	var filesArr = Array.prototype.slice.call(files);
 
+	filesArr.forEach(function(f){
+		if(!f.type.match("image.*")){
+			alert("이미지만 업로드 가능합니다.");
+			return;
+		}
+		
+		sel_file = f;
+		var reader = new FileReader();
+		reader.onload = function(e)	{
+				var imgInsert = '<div style="width: 390px; height: 280px; align-content: center;">';
+				imgInsert += '<img id="img" style="width: 100%; height: 100%; margin-left: 15px; margin-top: 30px;" src="'+e.target.result+'">';
+				imgInsert += '</div>'; 
+				$('#imgimg').append(imgInsert);
+				
+		}
+		reader.readAsDataURL(f);
+	});
+		
+		
+}
 </script>
-</head>
-<body>
+
 	<form name="boardForm" class="board-form-area" role="form" method="post" enctype="multipart/form-data">			
 	<div class="container">
 				<div class="row">
@@ -64,7 +74,10 @@ $(function(){
 							<div class="col-md-9 input-group mb-2">
 									<div class="form-group">
 										<label for="exampleFormControlFile1"></label>
-										<input type="file" class="form-control-file" name="files" id="exampleFormControlFile1" onchange="setThumbnail(event);"/>
+										<input type="file" class="form-control-file" name="files" id="exampleFormControlFile1" onchange="handleImgFileSelect(event);"/>
+										<div id="imgimg">
+											
+										</div>
 									</div>
 							</div>
 							<div class="col-md-12 mb-2">
@@ -77,6 +90,8 @@ $(function(){
 								<button type="button" id="listBtn" value="목록" class="btn-block btn btn-dark">목록</button>
 							</div>	
 				</div>
+				
+				</div>
+			</div>
+		</div>
 	</form>
-</body>
-</html>

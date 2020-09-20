@@ -3,14 +3,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
 
-<title>자유게시글 등록</title>
-<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/fitvids/jquery.fitvids.js"></script>
-<script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
+
 <script>
 $(function(){
 	if(!(${LOGIN_MEMBERINFO.mem_no} == ${boardInfo.mem_no})){
@@ -164,8 +158,7 @@ function fileDown(fileName, fileNo, fileBdNo) {
 
 
 </script>
-</head>
-<body>
+
 
 
 <form name="boardView" class="board-form-area" role="form" method="post" enctype="multipart/form-data">			
@@ -183,13 +176,7 @@ function fileDown(fileName, fileNo, fileBdNo) {
 						<div class="col-md-9 mb-2"><span class="form-group"><input type="text" class="form-control" placeholder="title"  id="bd_title" name="bd_title" value="${boardInfo.bd_title}"></span></div>
 						<div class="col-md-9 mb-2"><span class="form-group"><input type="text" class="form-control" placeholder="writer" id="bd_writer" name="bd_writer" value="${boardInfo.bd_writer}"></span></div>
 						<div class="col-md-9"><span class="form-group"><input type="text" class="form-control" id="bd_date" name="bd_date" value="${boardInfo.bd_date}"></span></div>
-						<div class="col-md-13 input-group mb-1">							
-							 <!-- 파일  -->
-							 <c:forEach items="${boardInfo.items2 }" var="fileitemInfo" varStatus="status">
-									<!-- 파일일 때 --> 
-									<p>${status.count }.&nbsp;&nbsp; <a href="#" onclick="fileDown('${fileitemInfo.file_save_name }','${fileitemInfo.file_no }','${fileitemInfo.file_bd_no }');">${fileitemInfo.file_name } </a></p>
-							 </c:forEach>
-						</div>
+						
 						<c:if test="${LOGIN_MEMBERINFO.mem_no eq 1}">
 							<div class="form-group">
 								<label for="exampleFormControlFile1"></label>
@@ -201,6 +188,14 @@ function fileDown(fileName, fileNo, fileBdNo) {
 						<div class="col-md-12 mb-2">
 							<span class="form-group "><textarea cols="25" rows="20" class="form-control" placeholder="내용" id="bd_content" name="bd_content" >${boardInfo.bd_content}</textarea></span>
 						</div>
+						<div class="col-md-13 input-group mb-1">							
+							 <!-- 파일  -->
+							 <c:forEach items="${boardInfo.items2 }" var="fileitemInfo" varStatus="status">
+									<!-- 파일일 때 --> 
+									<p>${status.count }.&nbsp;&nbsp; <a href="#" onclick="fileDown('${fileitemInfo.file_save_name }','${fileitemInfo.file_no }','${fileitemInfo.file_bd_no }');">${fileitemInfo.file_name } </a></p>
+									<img src="/files/${fileitemInfo.file_save_name }" >
+							 </c:forEach>
+						</div>
 							<div class="col-md-2 text-center" style="margin-left:700px; float:left; display:inline-block;" > 
 								<c:if test="${bd_division ne 2 }">
 								   <c:if test="${LOGIN_MEMBERINFO.mem_no eq boardInfo.mem_no}">
@@ -209,13 +204,15 @@ function fileDown(fileName, fileNo, fileBdNo) {
 									</c:if>
 								</c:if>
 									<button type="button" id="listBtn" value="목록" class="btn-block btn btn-dark" >목록</button>
-							</div> 
+							</div>
+						 
 						
 						
 <!-- ***********************************- 댓글 자리 -********************************* -->
 <!-- comments area -->
+	
 		<div class="row mt-5 comments-area">
-					
+				
 						<div style="width: 100%;">
 							<h4>댓글</h4>
 							<div class="comment-list" id="comment_list">
@@ -286,7 +283,7 @@ function fileDown(fileName, fileNo, fileBdNo) {
 				<!-- blog End -->
 			</div>
 		</div>
-	</section>
+
 	
 	
 		<!-- 모달2 inbody -->
@@ -321,5 +318,3 @@ function fileDown(fileName, fileNo, fileBdNo) {
 <%-- 								</c:forEach>		 --%>
 			</div>
 </form>
-</body>
-</html>

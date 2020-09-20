@@ -1,19 +1,14 @@
 <%@ page language="JAVA" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>답글 등록 화면 </title>
-<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/fitvids/jquery.fitvids.js"></script>
-<script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
+
+
+
 <script>
 function(){
 
 }
 
 </script>
-</head>
-<body>
+
 	 <form name="replyForm" action="${pageContext.request.contextPath}/user/board/insertReplyInfo.do" class="board-form-area" role="form" method="post" enctype="multipart/form-data">			
 	<div class="container">
 				<div class="row">
@@ -47,6 +42,8 @@ function(){
 								<button type="button" value="취소" class="btn-block btn btn-dark" onclick="window.history.back()">취소</button>
 							</div>	
 				</div>
+				
+				</div>
+			</div>
+		</div>		
 	</form>
-</body>
-</html>
