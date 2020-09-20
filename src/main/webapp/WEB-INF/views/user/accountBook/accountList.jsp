@@ -534,7 +534,7 @@ $(function(){
 						class="d-none d-lg-block">거래 내역</span>
 				</a></li>
 			</ul>
-			<div class="tab-content"  style="width: 880px;">
+			<div class="tab-content">
 				<form style="width: 880px; height: 150px; display: flex; justify-content:space-between;  border: 1px solid #e3e3e3; ">
 					<div style="width:600px; height:150px;">
 						<div style="width:600px; height:75px;display: flex; justify-content:flex-start;">
@@ -621,7 +621,7 @@ $(function(){
 					</div>
 				</form>
 				
-				<div class="tab-pane show active" id="profile-b1" style="margin-top: 60px;">
+				<div class="tab-pane show active" id="profile-b1" style="margin-top: 60px; width : 880px">
 					<div>
 						<table id="accountTable"
 							class="table table-sm table-centered mb-0"
