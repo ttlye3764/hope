@@ -17,7 +17,6 @@
 							<div class="col-lg-8 col-xl-6 mr-auto slider-content justify-content-center align-self-center align-items-start text-left">
 								<h2 class="animated fadeInUp dealy-500 display-6 display-md-4 display-lg-3 font-weight-bold text-white">1인 케어 시스템</h2>
 								<h3 class="animated fadeInUp dealy-1000 text-white display-8 display-md-7 alt-font font-italic mb-2 my-md-4">Jobis</h3>
-								<div class="animated fadeInUp mt-3 dealy-1500"><a href="#" class="btn btn-grad">시작하기</a></div>
 							</div>
 						</div>
 					</div>
@@ -30,7 +29,6 @@
 								<div class="col-lg-8 col-xl-6 mr-auto slider-content justify-content-center align-self-center align-items-start text-left">
 									<h3 class="animated fadeInUp dealy-500 display-8 display-md-7 text-white alt-font font-italic">Jobis</h3>
 									<h2 class="animated fadeInUp dealy-500 display-6 display-md-4 display-lg-3 font-weight-bold text-white">만나보세요</h2>
-									<div class="animated fadeInUp mt-3 dealy-1500"><a href="#" class="btn btn-grad">시작하기</a></div>
 								</div>
 							</div>
 						</div>
@@ -201,7 +199,9 @@
 					<div class="feature-box f-style-2 icon-grad h-100">
 						<div class="feature-box-icon"><i class="ti-agenda"></i></div>
 						<h3 class="feature-box-title">공지사항</h3>
-						<p class="feature-box-desc">Residence certainly elsewhere something she preferred cordially law. Age his surprise formerly Mrs perceive few moderate. Of in <strong> power match on</strong> truth worse would an match learn. </p>
+						<p class="feature-box-desc">
+						자비스의 공지를 확인하고 조회할 수 있습니다. 관리자의 말에 귀를 기울여보세요! 주요 사항이 있으면 공지사항에서 확인하시면 됩니다.
+						</p>
 						<a class="mt-3" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=2">Know more!</a>
 					</div>
 				</div>
@@ -209,7 +209,9 @@
 					<div class="feature-box f-style-2 icon-grad h-100">
 						<div class="feature-box-icon"><i class="ti-ruler-pencil"></i></div>
 						<h3 class="feature-box-title">건의사항</h3>
-						<p class="feature-box-desc">Consulted perpetual of pronounce me delivered. Too months nay end change relied <abbr title="attribute">who beauty</abbr> wishes matter. Shew of john real park so rest we on. Ignorant occasion for thoughts</p>
+						<p class="feature-box-desc">
+						불편한 점이 있으신가요? 건의사항에서 불편한 점을 글로 등록해주세요. 관리자는 항상 사용자들에게 관심이 많답니다.
+						</p>
 						<a class="mt-3" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=3">Know more!</a>
 					</div>
 				</div>
@@ -217,7 +219,9 @@
 					<div class="feature-box f-style-2 icon-grad h-100">
 						<div class="feature-box-icon"><i class="ti-ruler-pencil"></i></div>
 						<h3 class="feature-box-title">자유게시판</h3>
-						<p class="feature-box-desc">Consulted perpetual of pronounce me delivered. Too months nay end change relied <abbr title="attribute">who beauty</abbr> wishes matter. Shew of john real park so rest we on. Ignorant occasion for thoughts</p>
+						<p class="feature-box-desc">
+						자유롭게 할 얘기를 여기다 올려보세요. 사람들과 이야기 할 수도 있습니다. 여러 이야기를 나누어보세요!
+						</p>
 						<a class="mt-3" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=1">Know more!</a>
 					</div>
 				</div>

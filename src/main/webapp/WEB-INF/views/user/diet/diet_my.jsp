@@ -97,8 +97,8 @@
 											</div>
 											<div>
 												<input type="hidden" value="${dietMemInfo.dm_no }">
-												<button id="updateDietMemBTN" class="btn btn-grad" onclick="updateDietMemForm(this);">수정</button>
-												<button id="deleteDietMemBTN" class="btn btn-grad" onclick="deleteDietMem(this);">삭제</button>
+												<button id="updateDietMemBTN" class="btn btn-grad updateDietMem" onclick="updateDietMemForm(this);">수정</button>
+												<button id="deleteDietMemBTN" class="btn btn-grad deleteDietMem" onclick="deleteDietMem(this);">삭제</button>
 											</div>
 										</div>
 									</div>
@@ -1135,14 +1135,42 @@ function displayCalender() {
 	}
 	for (var i = 1; i <= days; i++) {
 		var day = new Date(currentYear, currentMonth, i).getDay();
-		var string = "<div class='month'><div id='" + dayNames[day] + "-" + i + "-" + monthNames[currentMonth] + "-" + currentYear + "'class='month-selector flex center-vh clickable' onclick='calendarModal(this.id)' ><p>" + i + "</p></div></div>";
-		$("#calender-content").append(string);
+
+		checkCalendar(i, day);
+		
 	}
 
 }
 function firstDayOffset(date) {
 	return new Date(currentYear, currentMonth, 1).getDay();
 }
+
+function checkCalendar(i, day){
+	$.ajax({
+		url : '${pageContext.request.contextPath}/user/diet/checkCalendar',
+		data : {
+			i : i,
+			currentMonth : currentMonth,
+			currentYear : currentYear
+		},
+		async:false,
+		success : function(result){
+			if(result.dietDayInfo != null){
+				var string = "<div class='month'><div id='" + dayNames[day] + "-" + i + "-" + monthNames[currentMonth] + "-" + currentYear + "'style='background-color:#ED7470; color:white'  class='month-selector flex center-vh clickable' onclick='calendarModal(this.id)' ><p>" + i + "</p></div></div>";
+				$("#calender-content").append(string);
+			}else{
+				var string = "<div class='month'><div id='" + dayNames[day] + "-" + i + "-" + monthNames[currentMonth] + "-" + currentYear + "'class='month-selector flex center-vh clickable' onclick='calendarModal(this.id)' ><p>" + i + "</p></div></div>";
+				$("#calender-content").append(string);
+			}
+					
+		},
+		error : function(result){
+			
+		}	
+	})	
+}
+
+
 
 function formatDates(dates) {
 	if (dates != null) {

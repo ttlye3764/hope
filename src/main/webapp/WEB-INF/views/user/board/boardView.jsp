@@ -3,21 +3,23 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
 
-<title>자유게시글 등록</title>
-<script src="${pageContext.request.contextPath }/resources/template/assets/vendor/fitvids/jquery.fitvids.js"></script>
-<script src="${pageContext.request.contextPath }/resources/template/assets/js/functions.js"></script>
+
 <script>
 $(function(){
+	if(!(${LOGIN_MEMBERINFO.mem_no} == ${boardInfo.mem_no})){
+		$('#bd_title').attr("disabled", true);
+		$('#bd_writer').attr("disabled", true);
+		$('#bd_date').attr("disabled", true);
+		$('#bd_content').attr("disabled", true);
+	}
+	
+	
     // 수정버튼
     $('form[name=boardView]').on('submit', function(){
 		
   		var bd_no = $('input[name="bd_no"]').val();
-        $(this).attr('action','${pageContext.request.contextPath}/user/board/updateBoardInfo.do?bd_no=' + bd_no + '&re_no=${re_no}' + 
+        $(this).attr('action','${pageContext.request.contextPath}/user/board/updateBoardInfo.do?bd_no=' + bd_no + '&re_no=${re_no}' +
                       '&bd_division=${bd_division}' + '&currentPage=${currentPage}' + '&search_keyword=${search_keyword}' + '&search_keycode=${search_keycode}');
         return true;
      });
@@ -39,11 +41,11 @@ $(function(){
         var search_keycode = '${search_keycode}';
         var bd_division = '${bd_division}';
 
-//         if(rnum == 'nu'){
-// 			$(location).attr('href','${pageContext.request.contextPath}/user/member/myBoard.do');
-//         }else{
-			$(location).attr('href','${pageContext.request.contextPath}/user/board/boardList.do?currentPage='+ currentPage + '&search_keyword='+ search_keyword + '&search_keycode=' + search_keycode + '&bd_division=' + bd_division );
-//         }
+        if(rnum == 'nu'){
+			$(location).attr('href','${pageContext.request.contextPath}/user/member/myBoard.do');
+        }else{
+			$(location).attr('href','${pageContext.request.contextPath}/user/board/boardList.do?currentPage='+ currentPage + '&search_keyword='+ search_keyword + '&search_keycode=' + search_keycode + '&bd_division=${bd_division}');
+        }
 		
 	});
 
@@ -84,6 +86,7 @@ function insertReplyA(bd_no){
         },
         complete : function(){
         	 replyList();
+        	 $('#re_content').val("");
          }
    	});  
 }
@@ -156,8 +159,9 @@ function fileDown(fileName, fileNo, fileBdNo) {
 
 
 </script>
-</head>
-<body>
+
+
+
 <form name="boardView" class="board-form-area" role="form" method="post" enctype="multipart/form-data">			
 <div class="container">
 			<div class="row">
@@ -173,14 +177,8 @@ function fileDown(fileName, fileNo, fileBdNo) {
 						<div class="col-md-9 mb-2"><span class="form-group"><input type="text" class="form-control" placeholder="title"  id="bd_title" name="bd_title" value="${boardInfo.bd_title}"></span></div>
 						<div class="col-md-9 mb-2"><span class="form-group"><input type="text" class="form-control" placeholder="writer" id="bd_writer" name="bd_writer" value="${boardInfo.bd_writer}"></span></div>
 						<div class="col-md-9"><span class="form-group"><input type="text" class="form-control" id="bd_date" name="bd_date" value="${boardInfo.bd_date}"></span></div>
-						<div class="col-md-13 input-group mb-1">							
-							 <!-- 파일  -->
-							 <c:forEach items="${boardInfo.items2 }" var="fileitemInfo" varStatus="status">
-									<!-- 파일일 때 --> 
-									<p>${status.count }.&nbsp;&nbsp; <a href="#" onclick="fileDown('${fileitemInfo.file_save_name }','${fileitemInfo.file_no }','${fileitemInfo.file_bd_no }');">${fileitemInfo.file_name } </a></p>
-							 </c:forEach>
-						</div>
-						<c:if test="${boardInfo.mem_no eq LOGIN_MEMBERINFO.mem_no}">
+						
+						<c:if test="${LOGIN_MEMBERINFO.mem_no eq 1}">
 							<div class="form-group">
 								<label for="exampleFormControlFile1"></label>
 								<input type="file" class="form-control-file" name="files" id="exampleFormControlFile1" onchange="setThumbnail(event);"/>
@@ -189,21 +187,33 @@ function fileDown(fileName, fileNo, fileBdNo) {
 						
 								
 						<div class="col-md-12 mb-2">
-							<span class="form-group "><textarea cols="25" rows="20" class="form-control" placeholder="내용" name="bd_content" >${boardInfo.bd_content}</textarea></span>
+							<span class="form-group "><textarea cols="25" rows="20" class="form-control" placeholder="내용" id="bd_content" name="bd_content" >${boardInfo.bd_content}</textarea></span>
+						</div>
+						<div class="col-md-13 input-group mb-1">							
+							 <!-- 파일  -->
+							 <c:forEach items="${boardInfo.items2 }" var="fileitemInfo" varStatus="status">
+									<!-- 파일일 때 --> 
+									<p>${status.count }.&nbsp;&nbsp; <a href="#" onclick="fileDown('${fileitemInfo.file_save_name }','${fileitemInfo.file_no }','${fileitemInfo.file_bd_no }');">${fileitemInfo.file_name } </a></p>
+									<img src="/files/${fileitemInfo.file_save_name }" >
+							 </c:forEach>
 						</div>
 							<div class="col-md-2 text-center" style="margin-left:700px; float:left; display:inline-block;" > 
 								<c:if test="${bd_division ne 2 }">
-									<button type="submit" id="updateBtn" value="수정" class="btn-block btn btn-dark" >수정</button>
-									<button type="button" id="deleteBtn" value="삭제" class="btn-block btn btn-dark" >삭제</button>
+								   <c:if test="${LOGIN_MEMBERINFO.mem_no eq boardInfo.mem_no}">
+										<button type="submit" id="updateBtn" value="수정" class="btn-block btn btn-dark" >수정</button>
+										<button type="button" id="deleteBtn" value="삭제" class="btn-block btn btn-dark" >삭제</button>
+									</c:if>
 								</c:if>
 									<button type="button" id="listBtn" value="목록" class="btn-block btn btn-dark" >목록</button>
-							</div> 
+							</div>
+						 
 						
 						
 <!-- ***********************************- 댓글 자리 -********************************* -->
 <!-- comments area -->
+	
 		<div class="row mt-5 comments-area">
-					
+				
 						<div style="width: 100%;">
 							<h4>댓글</h4>
 							<div class="comment-list" id="comment_list">
@@ -274,7 +284,7 @@ function fileDown(fileName, fileNo, fileBdNo) {
 				<!-- blog End -->
 			</div>
 		</div>
-	</section>
+
 	
 	
 		<!-- 모달2 inbody -->
@@ -309,5 +319,3 @@ function fileDown(fileName, fileNo, fileBdNo) {
 <%-- 								</c:forEach>		 --%>
 			</div>
 </form>
-</body>
-</html>

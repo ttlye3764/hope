@@ -27,7 +27,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>회원가입 약관동의</title>
 <div align="center" style="width:100%">
-	<form action="${pageContext.request.contextPath}/user/member/memberForm.do" name="form" method="post">
+	<form action="${pageContext.request.contextPath}/user/join/joinForm.do" name="form" method="post">
 		<table width="900" height="650">
 			<tr>
 				<td width="100%" height="50%" align="center">

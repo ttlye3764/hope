@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -84,9 +85,7 @@ public class ChatController {
 		HttpSession session = request.getSession();
 		
 		memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
-		
-		System.out.println(memberInfo.getMem_no());
-		
+				
 		params.put("mem_no", memberInfo.getMem_no());
 		
 		List<FriendVO> friendList = memberService.friendMemberList(params);
@@ -364,8 +363,13 @@ public class ChatController {
 		  
 		  projectId = "testagent-crvsfc";
 		  
-		  sessionId = request.getSession().getId();
+		  Random random = new Random();
+		  
+		  String a = "a" + (random.nextInt(10000) + random.nextInt(10000));
+		  
+//		  sessionId = request.getSession().getId();
 //		  sessionId="testAgent";
+		  sessionId= a;
 		  
 		  
 		  

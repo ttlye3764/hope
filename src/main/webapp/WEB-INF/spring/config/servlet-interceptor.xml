@@ -30,10 +30,12 @@
 		
 		<mvc:interceptor>
 			<mvc:mapping path="/user/**/*.do"/>
+			<mvc:exclude-mapping path="/user/healthImage/healthImageList.do"/>
+			<mvc:exclude-mapping path="/user/healthImage/healthImageCal.do"/>
 			<mvc:exclude-mapping path="/user/join/loginForm.do"/>
 			<mvc:exclude-mapping path="/user/join/loginCheck.do"/>
 			<mvc:exclude-mapping path="/user/join/joinChoiceForm.do"/>
-			<mvc:exclude-mapping path="/user/member/memberForm.do"/>
+			<mvc:exclude-mapping path="/user/join/joinForm.do"/>
 			<mvc:exclude-mapping path="/user/main/mainForm.do"/>
 			<mvc:exclude-mapping path="/user/member/insertMemberInfo.do"/>
 			<mvc:exclude-mapping path="/user/member/idCheck.do"/>
@@ -42,6 +44,9 @@
 			<mvc:exclude-mapping path="/user/member/searchPW.do"/>
 			<mvc:exclude-mapping path="/user/main/callback.do"/>
 			<mvc:exclude-mapping path="/user/diet/menuList"/>
+			<mvc:exclude-mapping path="/user/board/boardList.do"/>
+			<mvc:exclude-mapping path="/user/medical/coronaMain.do"/>
+			<mvc:exclude-mapping path="/user/medical/coronaMain.do"/>
 			<mvc:exclude-mapping path="/user/medical/coronaMain.do"/>
 			<bean class="kr.or.ddit.utiles.LoginCheckInterceptor"></bean>
 		</mvc:interceptor> 

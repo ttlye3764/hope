@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
 <!--   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 <!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/myCSS/chatPage.css">
@@ -25,7 +23,6 @@
 <br>
 <br>
 <br>
-
 <div class="messaging">
   <div class="inbox_msg">
 	<div class="inbox_people">
@@ -75,7 +72,6 @@
 			</div>
 		  </div>
 		</div>
-		
 	  </div>
 	  <!-- 친구 목록 끝 -->
 	</div>
@@ -89,44 +85,7 @@
 			<img src="${pageContext.request.contextPath }/image/settings.png" style=" width=:40px; height:40px;" onclick="updateChatImageForm();">
 	  	</div>
 	  <div class="msg_history" id="msg_history" style="background-image: url();">
-		<div class="incoming_msg">
-		  <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-		  <div class="received_msg">
-			<div class="received_withd_msg">
-			  <p>Test which is a new approach to have all
-				solutions</p>
-			  <span class="time_date"> 11:01 AM    |    June 9</span></div>
-		  </div>
-		</div>
-		<div class="outgoing_msg">
-		  <div class="sent_msg">
-			<p>Test which is a new approach to have all
-			  solutions</p>
-			<span class="time_date"> 11:01 AM    |    June 9</span> </div>
-		</div>
-		<div class="incoming_msg">
-		  <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-		  <div class="received_msg">
-			<div class="received_withd_msg">
-			  <p>Test, which is a new approach to have</p>
-			  <span class="time_date"> 11:01 AM    |    Yesterday</span></div>
-		  </div>
-		</div>
-		<div class="outgoing_msg">
-		  <div class="sent_msg">
-			<p>Apollo University, Delhi, India Test</p>
-			<span class="time_date"> 11:01 AM    |    Today</span> </div>
-		</div>
-		<div class="incoming_msg">
-		  <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-		  <div class="received_msg">
-			<div class="received_withd_msg">
-			  <p>We work directly with our designers and suppliers,
-				and sell direct to you, which means quality, exclusive
-				products, at a price anyone can afford.</p>
-			  <span class="time_date"> 11:01 AM    |    Today</span></div>
-		  </div>
-		</div>
+		
 	  </div>
 	  <div class="type_msg">
 		<div class="input_msg_write">
@@ -238,6 +197,7 @@
 					
 					
 <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js'></script>
+
 <script type="text/javascript">
 
 
@@ -268,11 +228,11 @@ function chatRoomList(){
 						item.msg_content = '';
 					}
 					
-					chatRoomList += '<div class="chat_list active_chat" onclick="startChat(this);">';
+					chatRoomList += '<div class="chat_list" onclick="startChat(this);">';
 					chatRoomList += '<input type="hidden" id="ch_no" value="'+item.ch_no+'">';
 					chatRoomList += '<input type="hidden" id="mem_no" value="'+item.mem_no+'">';
 					chatRoomList += '<div class="chat_people">';
-					chatRoomList += '<div class="chat_img"> <img src="${pageContext.request.contextPath}/resources/image/empty.png" alt=""> </div>';
+					chatRoomList += '<div class="chat_img"> <img src="/files/'+item.file_save_name+'" alt=""> </div>';
 					chatRoomList += '<div class="chat_ib">';
 					chatRoomList += '<h5 id="mem_no"><input type="hidden" id="mem_name" value="'+item.mem_name+'">'+item.mem_name+'<span class="chat_date" id="lastChat">'+item.msg_date+'</span></h5>';
 					chatRoomList += '<p>'+item.msg_content+'</p>';
@@ -298,6 +258,9 @@ function startChat(e){
 	console.log(chatingRoomNo);
 	console.log(targetMemNo);
 	console.log(targetMemName);
+
+	$('.chat_list').removeClass('active_chat');
+	$(e).toggleClass('active_chat');
 
 	$('#msg_history').empty();
 	messageList();
@@ -369,7 +332,7 @@ function messageList(){
 					messageList += '</div>';
 				}else{
 					messageList += '<div class="incoming_msg">';
-					messageList += '<div class="incoming_msg_img"> <img src="${pageContext.request.contextPath}/resources/image/empty.png" alt=""> </div>';
+					messageList += '<div class="incoming_msg_img"> <img src="${pageContext.request.contextPath}/image/empty.png" alt=""> </div>';
 					messageList += '<div class="received_msg">';
 					messageList += '<div class="received_withd_msg">';
 					messageList += '<p>'+item.msg_content+'</p>';
@@ -406,9 +369,10 @@ function initSocket(url) {
 		socket.send(text);
 		console.log(text);
 		text = "";
-		$('#message').empty();
-		
- 		messageList();
+		$('#message').val("");
+		setTimeout(function(){
+			messageList();
+			}, 500);
 	});
 }
 
@@ -600,20 +564,21 @@ function insertFriendBtn(e){
 		});
 	}
 
+
 $(function(){
 
 // 	192.168.31.35
 
-	
-	initSocket("http://192.168.31.35/lastProject/echo?mem_no=" + ${LOGIN_MEMBERINFO.mem_no});
+
+	initSocket("http://localhost:8080/lastProject/echo?mem_no=" + ${LOGIN_MEMBERINFO.mem_no});
 	chatRoomList();
-	$('.chat_list').click(function(){
-		$('.chat_list').toggleClass('active_chat');	
-	})	
+	
+	
 
 	$('#files').on('change', handleImgFileSelect);
 })
 </script>
+
 
 
 

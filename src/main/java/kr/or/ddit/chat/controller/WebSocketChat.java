@@ -36,30 +36,7 @@ public class WebSocketChat extends TextWebSocketHandler{
     
     private MemberVO memberInfo = null;
     
-    	// 웹소켓에 연결 -> 
-	
- 		// 눌렀을때 누구한테 보낼지 타겟유저 mem_no을 보
-    
-    	// 61이라는 걸로 session에서 어떻게 특정하지??
-    
-    
-    //HttpSession정보를 바로 가져다 쓸 수 있으면 Map<Object, Object> userMap 만들어서
-    
-    // 혹은 Map<String, Object> 해서
-    
-    // String에 아이디 혹은 넘버
-    
-    // Object에 webSocketSession넣고
-    
-    // 메세지 보낼 때 if문으로 나 자신 제외하고
-    
-    // 웹소켓에 접속하고 있는 session에 타겟유저번호로 session비교해서메세지를 보낸다
-    
-    // 그러면 웹소케셍 접속하지 않는 사람들은 ??? 아예못보내는 건가??
-    
-    // -> 그러면 디비에 메세지 보낼때 누가, 누구한테 보냈는지 저장해서
-    
-    // 채팅방에 출력해논다?
+    	
     
     public WebSocketChat() {
         // TODO Auto-generated constructor stub

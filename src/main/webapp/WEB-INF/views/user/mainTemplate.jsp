@@ -60,6 +60,14 @@ function LogOut(){
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/documentation/assets/css/prism.css">
     <link id="theme-style" rel="stylesheet" href="${pageContext.request.contextPath }/resources/documentation/assets/css/styles.css"> 
     
+    
+    
+    
+    
+    <script src="${pageContext.request.contextPath }/resources/template/assets/vendor/fitvids/jquery.fitvids.js"></script>
+
+
+
     <!-- script -->
     
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>

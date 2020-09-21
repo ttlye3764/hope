@@ -88,15 +88,16 @@ function dietMemList(){
  				dietMemDetail += '</div>';
  				dietMemDetail += '<div class="collapse" id="collapse-'+count+'" data-parent="#dietMemDetail" style="">';
  				dietMemDetail += '<div class="accordion-content">';
- 				dietMemDetail += '키 : <a>'+item.height+'</a><br>';
- 				dietMemDetail += '체중 : <a>'+item.current_weight+'</a><br>';
- 				dietMemDetail += '목표 체중 : <a>'+item.purpose_weight+'</a><br>';
- 				dietMemDetail += 'BMI : <a>'+item.bmi+'</a><br>';
- 				dietMemDetail += '일일 목표 열량 : <a>'+item.day_kcal+'</a><br>';
+ 				dietMemDetail += '키 : <a class="height">'+item.height+'</a><br>';
+ 				dietMemDetail += '체중 : <a class="weight">'+item.current_weight+'</a><br>';
+ 				dietMemDetail += '목표 체중 : <a class="purpose_weight">'+item.purpose_weight+'</a><br>';
+ 				dietMemDetail += 'BMI : <a class="bmi">'+item.bmi+'</a><br>';
+ 				dietMemDetail += '일일 목표 열량 : <a class="day_kcal">'+item.day_kcal+'</a><br>';
  				dietMemDetail += '</div>';
  				dietMemDetail += '<div>';
- 				dietMemDetail += '<button id="updateDietMem" class="btn btn-grad" onclick="updateDietMemForm(this);">수정</button>';
- 				dietMemDetail += '<button id="deleteDietMem" class="btn btn-grad" onclick="deleteDietMem(this);">삭제</button>';
+ 				dietMemDetail += '<input type="hidden" value="'+item.dm_no+'">';
+ 				dietMemDetail += '<button id="updateDietMem" class="btn btn-grad updateDietMem" onclick="updateDietMemForm(this);">수정</button>';
+ 				dietMemDetail += '<button id="deleteDietMem" class="btn btn-grad deleteDietMem" onclick="deleteDietMem(this);">삭제</button>';
  				dietMemDetail += '</div>';
  				dietMemDetail += '</div>';
  				dietMemDetail += '</div>';
@@ -165,8 +166,8 @@ function updateDietMemComplete(e){
 			dietMemInfo += '일일 목표 열량 : <a class="day_kcal">'+update_day_kcal+'</a><br>';  
 			appendDiv.append(dietMemInfo);
 
-			$('#updateDietMemBTN').text('수정');
-			$('#updateDietMemBTN').attr('onclick', 'updateDietMemForm(this)');
+			$(e).text('수정');
+			$(e).attr('onclick', 'updateDietMemForm(this)');
 		},
 		error : function(result){
 			alert('회원 정보 수정 실패');
@@ -194,7 +195,7 @@ function updateDietMemForm(e){
 	dietMemInfo += '일일 목표 열량 : <textarea class="update_day_kcal" style="background-color:transparent; height:19px;">'+day_kcal+'</textarea><br><br>';
 	appendDiv.append(dietMemInfo);	
 
-	$('#updateDietMemBTN').text('완료');
-	$('#updateDietMemBTN').attr('onclick', 'updateDietMemComplete(this)');
+	$(e).text('완료');
+	$(e).attr('onclick', 'updateDietMemComplete(this)');
 }
 
