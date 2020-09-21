@@ -91,7 +91,11 @@
 	</select>
 	
 	<select id="selectMemList" parameterType="Map" resultType="MemberVO">
-		SELECT *
+		select *
+		from(
+		select *
+		from memberfile) a,
+		(SELECT *
 		FROM MEMBER
 		WHERE MEM_NO != #{mem_no}
 		<if test="mem_id != null">
@@ -99,8 +103,8 @@
 		</if>
 		<if test="mem_name != null">
 			AND MEM_NAME LIKE '%'||#{mem_name}||'%'
-		</if>
-		
+		</if>) b
+		where a.mem_no(+) = b.mem_no
 	</select>
 	
 	<select id="selectTwoMemInfo" parameterType="Map" resultType="FriendVO">
@@ -157,10 +161,17 @@
 	</select>
 	
 	<select id="messageList" parameterType="Map" resultType="messageVO">
-		SELECT *
-		FROM MESSAGE
-		WHERE CH_NO = #{ch_no}
-		ORDER BY MSG_DATE
+		select *
+		from
+		(
+		select *
+		from memberfile) a
+		,(
+		select *
+		from message
+		where ch_no = 81) b
+		where a.mem_no = b.mem_no
+		ORDER BY b.MSG_DATE
 	</select>
 	
 	<insert id="insertChatFile" parameterType="chatFileVO">

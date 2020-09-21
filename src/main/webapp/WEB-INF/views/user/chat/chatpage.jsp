@@ -40,12 +40,12 @@
 		<img src="${pageContext.request.contextPath }/image/friends.png" style="width=:40px; height:40px;" onclick="friendListForm();">
 		</div>
 		<div class="recent_heading">
-		  <h4>Recent</h4>
+		  <h4>채팅 목록</h4>
 		 
 		</div>
 		<div class="srch_bar">
 		  <div class="stylish-input-group">
-			<input type="text" class="search-bar"  placeholder="Search" >
+<!-- 			<input type="text" class="search-bar"  placeholder="Search" > -->
 			</div>
 		</div>
 	  </div>
@@ -145,7 +145,7 @@
 									<!-- 친구한명 끝 -->
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">확인</button>
+									<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="chatMain();">확인</button>
 								</div>
 							</div>
 						</div>
@@ -183,7 +183,7 @@
 									<br>
 									<div style="float: right;">
 										<button type="button" class="btn btn-primary" onclick="insertChatFile()">저장</button>
-										<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">확인</button>
 									</div>
 								</div>
 											
@@ -208,6 +208,10 @@ var targetMemName;
 var currentTargetMemNo;
 var chatingRoomNo;
 
+function chatMain(){
+	$(location).attr('href', '${pageContext.request.contextPath}/user/chat/chat.do');
+};
+
 //채팅방 리스트 띄우기
 function chatRoomList(){
 	$.ajax({
@@ -227,14 +231,19 @@ function chatRoomList(){
 					if(item.msg_content==null){
 						item.msg_content = '';
 					}
+
+					if(item.msg_date.split(' ')[1] == null){
+						item.msg_date = "  "
+					}
+					
 					
 					chatRoomList += '<div class="chat_list" onclick="startChat(this);">';
 					chatRoomList += '<input type="hidden" id="ch_no" value="'+item.ch_no+'">';
 					chatRoomList += '<input type="hidden" id="mem_no" value="'+item.mem_no+'">';
 					chatRoomList += '<div class="chat_people">';
-					chatRoomList += '<div class="chat_img"> <img src="/files/'+item.file_save_name+'" alt=""> </div>';
+					chatRoomList += '<div class="chat_img"> <img class="img" src="/files/'+item.file_save_name+'" style="width:100%; height:100%" alt=""> </div>';
 					chatRoomList += '<div class="chat_ib">';
-					chatRoomList += '<h5 id="mem_no"><input type="hidden" id="mem_name" value="'+item.mem_name+'">'+item.mem_name+'<span class="chat_date" id="lastChat">'+item.msg_date+'</span></h5>';
+					chatRoomList += '<h5 id="mem_no"><input type="hidden" id="mem_name" value="'+item.mem_name+'">'+item.mem_name+'<span class="chat_date" id="lastChat">'+item.msg_date.split(' ')[1]+'</span></h5>';
 					chatRoomList += '<p>'+item.msg_content+'</p>';
 					chatRoomList += '</div>';
 					chatRoomList += '</div>';
@@ -314,9 +323,14 @@ function messageList(){
 		success : function(result){
 
 			$('#msg_history').empty();
+			
 			if(result.chatFileInfo != null){
-				$('#msg_history').css('background', 'url(/files/'+result.chatFileInfo.cf_save_name + ')') ;
-				}
+					$('#msg_history').css('background', 'url(/files/'+result.chatFileInfo.cf_save_name + ')') ;
+					$('#msg_history').css('background-size', 'cover');
+			}else{
+				$('#msg_history').css('background', 'url("files/white.jpeg")');
+				
+			}
 			
 			if(result.messageList==null){
 
@@ -332,7 +346,7 @@ function messageList(){
 					messageList += '</div>';
 				}else{
 					messageList += '<div class="incoming_msg">';
-					messageList += '<div class="incoming_msg_img"> <img src="${pageContext.request.contextPath}/image/empty.png" alt=""> </div>';
+					messageList += '<div class="incoming_msg_img"><img src="/files/'+item.file_save_name+'" alt=""> </div>';
 					messageList += '<div class="received_msg">';
 					messageList += '<div class="received_withd_msg">';
 					messageList += '<p>'+item.msg_content+'</p>';
@@ -386,15 +400,6 @@ function updateChatImageForm(){
 }
 
 
-
- 
-
-  
-  
-  
-  
-
-
 // 친구목록
 function friendListForm(){
 	$.ajax({
@@ -408,10 +413,10 @@ function friendListForm(){
 				$.each(result.memberList, function(index, item){
 					friendInfo += '<div style="margin : 15px 15px 15px 15px; border : 1px solid black;">'
 					friendInfo += '<div class="row">';
-					friendInfo += '<div class="col-4" id="profile-image"><img id="modal-img" src="'+item.file_save_name+'" alt=""></div>';
+					friendInfo += '<div class="col-4" id="profile-image"><img id="modal-img" src="/files/'+item.file_save_name+'" alt=""></div>';
 					friendInfo += '<div class="col-8" id="all-info">';
 					friendInfo += '<div id="profile-name"><i class="fas fa-user"></i>'+item.mem_name+'</div>';
-					friendInfo += '<div id="profile-birthday"><i class="fas fa-birthday-cake"></i>'+item.mem_birth+'</div>';
+					friendInfo += '<div id="profile-birthday"><i class="fas fa-birthday-cake"></i>'+item.mem_birth.split(' ')[0]+'</div>';
 					friendInfo += '<div id="profile-country"><i class="fas fa-globe"></i>'+item.mem_hp+'</div>';
 					friendInfo += '<div id="profile-email"><i class="fas fa-envelope"></i>'+item.mem_email+'</div>';
 					friendInfo += '</div>';
@@ -490,7 +495,7 @@ function searchFriendID(){
  			
  			$.each(result.memberList, function(index, item){
  				$('#searchFriendID').append('<tr>');
- 				$('#searchFriendID').append('<td><img src=""></td>');
+ 				$('#searchFriendID').append('<td><img style="width:150px; height:150px" src="/files/'+item.file_save_name+'"></td>');
  				$('#searchFriendID').append('<td>'+item.mem_id+'</td>');
  				$('#searchFriendID').append('<td>'+item.mem_name+'</td>');
  				$('#searchFriendID').append('<td><button type="button" onclick="insertFriendBtn(this)"><input type="hidden" value="'+item.mem_no+'">추가</button></td>');
@@ -523,7 +528,7 @@ function searchFriendName(){
 	 			
 	 			$.each(result.memberList, function(index, item){
 	 				$('#searchFriendName').append('<tr>');
-	 				$('#searchFriendName').append('<td><img src=""></td>');
+	 				$('#searchFriendName').append('<td><img style="width:150px; height:150px" src="/files/'+item.file_save_name+'"></td>');
 	 				$('#searchFriendName').append('<td onclick="">'+item.mem_id+'</td>');
 	 				$('#searchFriendName').append('<td>'+item.mem_name+'</td>');
 	 				$('#searchFriendName').append('<td><button type="button" onclick="insertFriendBtn(this)"><input type="hidden" value="'+item.mem_no+'">추가</button></td>');
@@ -570,7 +575,7 @@ $(function(){
 // 	192.168.31.35
 
 
-	initSocket("http://localhost:8080/lastProject/echo?mem_no=" + ${LOGIN_MEMBERINFO.mem_no});
+	initSocket("http://localhost/lastProject/echo?mem_no=" + ${LOGIN_MEMBERINFO.mem_no});
 	chatRoomList();
 	
 	

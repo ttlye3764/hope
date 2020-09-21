@@ -144,7 +144,7 @@ function searchMenu(){
 				menuList += '<tr>';
 				menuList += '<th scope="row">'+count+'</th>';
 				menuList += '<td>'+item.menu_name+'</td>';
-				menuList += '<td>'+item.menu_kcal+'</td>';
+				menuList += '<td>'+item.menu_kcal+'kcal</td>';
 				menuList += '</tr>';
 				count ++;
 			})

@@ -94,7 +94,7 @@
 			<div class="row">
 				<div class="col-12 col-lg-8 mx-auto">
 					<div class="title text-center">
-						<span class="pre-title">Check out some of our latest blog post.</span>
+						<span class="pre-title">지금 당신에게 필요한 기능을 체크해보세요</span>
 						<h2>자비스의 관리 서비스를 이용해보세요</h2>
 					</div>
 				</div>

@@ -107,13 +107,20 @@ $(function() {
 var chatbotInput;
 function sendChatbotBTN(){
 
+	var Now = new Date();
+
+	var NowTime =  Now.getHours();
+
+
+	NowTime += ':' + Now.getMinutes();
+
 	chatbotInput = $('#chatbotInput').val();
 	$('#chatbotInput').val("");
 
 	var chatbot_answer = '<div class="chatbot-message clearfix">';
 	chatbot_answer += '<img src="http://lorempixum.com/32/32/people" alt="" width="32" height="32">';
 	chatbot_answer += '<div class="chatbot-message-content clearfix">';
-	chatbot_answer += '<span class="chatbot-time">13:35</span>';
+	chatbot_answer += '<span class="chatbot-time">'+NowTime+'</span>';
 	chatbot_answer += '<h5>${LOGIN_MEMBERINFO.mem_name}</h5>';
 	chatbot_answer += '<p>'+chatbotInput+'</p>';
 	chatbot_answer += '</div>';
@@ -132,7 +139,7 @@ function sendChatbotBTN(){
 			var chatbot_answer = '<div class="chatbot-message clearfix">';
 			chatbot_answer += '<img src="http://lorempixum.com/32/32/people" alt="" width="32" height="32">';
 			chatbot_answer += '<div class="chatbot-message-content clearfix">';
-			chatbot_answer += '<span class="chatbot-time">13:35</span>';
+			chatbot_answer += '<span class="chatbot-time">'+NowTime+'</span>';
 			chatbot_answer += '<h5>chatbot</h5>';
 			chatbot_answer += '<p>'+result.answer+'</p>';
 			chatbot_answer += '</div>';
@@ -310,7 +317,7 @@ function sendChatbotBTN(){
 									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=3">건의사항</a>
 								</li>
 								<li class="dropdown-submenu">
-									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=1">자유게시판</a>
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=1">freeboard</a>
 								</li>
 								<li class="dropdown-submenu">
 									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/board/boardList.do?bd_division=4">QNA</a>
@@ -325,7 +332,7 @@ function sendChatbotBTN(){
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/user/chat/chat.do" id="docMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">채팅</a>
 							<ul class="dropdown-menu" aria-labelledby="docMenu">
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/chat/chat">채팅하기</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/chat/chat.do">채팅하기</a> </li>
 							</ul>
 						</li>
 					</ul>

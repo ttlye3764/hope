@@ -6,7 +6,16 @@ public class MessageVO {
 	private String ch_no;
 	private String msg_content;
 	private String msg_date;
+	private String file_save_name;
 	
+	
+	
+	public String getFile_save_name() {
+		return file_save_name;
+	}
+	public void setFile_save_name(String file_save_name) {
+		this.file_save_name = file_save_name;
+	}
 	public String getMsg_no() {
 		return msg_no;
 	}

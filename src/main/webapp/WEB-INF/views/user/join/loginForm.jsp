@@ -310,11 +310,11 @@ $(function(){
 							</svg>
 							<!-- SVG Logo End -->
 						</div>
-						<h3 class="font-weight-light">We connect you with the world largest community</h3>
+						<h3 class="font-weight-light">지금 자비스의 세상과 연결해보세요!</h3>
 						<ul class="list-group list-group-borderless mt-4">
-							<li class="list-group-item text-white"><i class="fa fa-check"></i>Connect with your community via Wizixo</li>
-							<li class="list-group-item text-white"><i class="fa fa-check"></i>Discover the best experience with fellowship</li>
-							<li class="list-group-item text-white"><i class="fa fa-check"></i>Create your wishlist and enjoy to best experience</li>
+							<li class="list-group-item text-white"><i class="fa fa-check"></i>자비스는 여러가지 기능을 포함하고 있습니다.</li>
+							<li class="list-group-item text-white"><i class="fa fa-check"></i>당신만을 위한 1인케어 서비스를 체험해보세요</li>
+							<li class="list-group-item text-white"><i class="fa fa-check"></i>혼자만의 특별한 경험, 자비스</li>
 						</ul>
 					</div>
 				</div>
