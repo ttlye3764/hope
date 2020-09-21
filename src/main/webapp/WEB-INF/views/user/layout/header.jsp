@@ -234,6 +234,15 @@ function sendChatbotBTN(){
 							<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/user/medical/medicalMain.do">복용관리</a>
 							<ul class="dropdown-menu" aria-labelledby="blogMenu">
 								<li class="dropdown-submenu">
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalMain.do">복용관리</a>
+								</li>
+								<li class="dropdown-submenu">
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalMain.do">알약검색</a>
+								</li>
+								<li class="dropdown-submenu">
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/medicalMain.do">내 주변 은행/약국</a>
+								</li>
+								<li class="dropdown-submenu">
 									<a class="dropdown-item" href="${pageContext.request.contextPath}/user/medical/coronaMain.do">코로나</a>
 								</li>
 							</ul>
@@ -279,7 +288,7 @@ function sendChatbotBTN(){
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/accountBook/setting.do">거래 등록</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/accountBook/accountList.do">거래 내역 보기</a> </li>
 								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/accountBook/accountStatistics.do">거래 내역 통계</a> </li>
-								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/accountBook/accountMap.do">가까운 은행보기</a> </li>
+								<li> <a class="dropdown-item" href="${pageContext.request.contextPath}/user/accountBook/accountMap.do">내 주변 은행</a> </li>
 								
 							</ul>
 						</li>
