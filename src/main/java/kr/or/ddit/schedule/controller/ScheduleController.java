@@ -97,40 +97,41 @@ public class ScheduleController {
 	}
 	
 
-	  @RequestMapping("insertScheduleInfo")
-	  public String insertSchedule(@RequestBody List<Map> scheduleListVO) throws Exception 
-	  {
-		  ScheduleVO insertScheduleInfo = new ScheduleVO();
+	@RequestMapping("insertScheduleInfo")
+    public String insertSchedule(@RequestBody List<Map> scheduleListVO) throws Exception 
+    {
+       ScheduleVO insertScheduleInfo = new ScheduleVO();
 
-		  for(int i=0; i<scheduleListVO.size(); i++) {
-			  
-			  System.out.println(scheduleListVO.get(i).get("mem_no"));
-			  String start1 = (String) scheduleListVO.get(i).get("s_startdate");
-			  String start2 = (String) scheduleListVO.get(i).get("s_startdate");
-			  String end1 = (String) scheduleListVO.get(i).get("s_enddate");
-			  String end2 = (String) scheduleListVO.get(i).get("s_enddate");
-			  
-			  start1 = start1.substring(0, start1.indexOf(" "));
-			  start1 = start1.replace("/", "-");
-			  start2 = start2.substring(start2.indexOf(" ")+1, start2.length());
-			  start1 = start1.concat("T");
-			  insertScheduleInfo.setS_startdate(start1.concat(start2));
-			  
-			  end1 = end1.substring(0, end1.indexOf(" "));
-			  end1 = end1.replace("/", "-");
-			  end2 = end2.substring(end2.indexOf(" ")+1, end2.length());
-			  end1 = end1.concat("T"); 
-			  insertScheduleInfo.setS_enddate(end1.concat(end2));
-			  
-			  insertScheduleInfo.setMem_no(scheduleListVO.get(i).get("mem_no").toString());
-			  insertScheduleInfo.setS_memo(scheduleListVO.get(i).get("s_memo").toString());
-			  insertScheduleInfo.setS_color(scheduleListVO.get(i).get("s_color").toString());
-			  this.service.insertSchedule(insertScheduleInfo); 
-		  }
+       for(int i=0; i<scheduleListVO.size(); i++) {
+          
+          System.out.println(scheduleListVO.get(i).get("mem_no"));
+          String start1 = (String) scheduleListVO.get(i).get("s_startdate");
+          String start2 = (String) scheduleListVO.get(i).get("s_startdate");
+          String end1 = (String) scheduleListVO.get(i).get("s_enddate");
+          String end2 = (String) scheduleListVO.get(i).get("s_enddate");
+          
+          start1 = start1.substring(0, start1.indexOf(" "));
+          start1 = start1.replace("/", "-");
+          start2 = start2.substring(start2.indexOf(" ")+1, start2.length());
+          start1 = start1.concat("T");
+          insertScheduleInfo.setS_startdate(start1.concat(start2));
+          
+          end1 = end1.substring(0, end1.indexOf(" "));
+          end1 = end1.replace("/", "-");
+          end2 = end2.substring(end2.indexOf(" ")+1, end2.length());
+          end1 = end1.concat("T"); 
+          insertScheduleInfo.setS_enddate(end1.concat(end2));
+          
+          insertScheduleInfo.setMem_no(scheduleListVO.get(i).get("mem_no").toString());
+          insertScheduleInfo.setS_memo(scheduleListVO.get(i).get("s_memo").toString());
+          insertScheduleInfo.setS_color(scheduleListVO.get(i).get("s_color").toString());
+          insertScheduleInfo.setS_alerttime(scheduleListVO.get(i).get("s_alerttime").toString());
+          
+          this.service.insertSchedule(insertScheduleInfo); 
+       }
 
-		  return "redirect:/user/schedule/schedule.do";
-	  }
-
+       return "redirect:/user/schedule/schedule.do";
+    }
 
 	
 
@@ -166,99 +167,96 @@ public class ScheduleController {
 		return andView;
 	}
 	
+
 	
 	@RequestMapping("alarm")
-	public ModelAndView alarm(HttpServletRequest request,HttpSession session) throws Exception {
-		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
-		List<ScheduleVO> scheduleList = this.service.scheduleListAlarm(memberInfo.getMem_no());
-	     List<ScheduleVO> alarmList = new ArrayList<>();
-		for(int i=0; i<scheduleList.size(); i++) {
-			  String start = scheduleList.get(i).getS_startdate(); //시작
-			  String end =  scheduleList.get(i).getS_enddate(); //끝
-			  
-			  Calendar calendar = Calendar.getInstance();
-			  //calendar.setTimeInMillis(System.currentTimeMillis()); 
-			  calendar.set(Integer.parseInt(start.substring(0, 4)),Integer.parseInt(start.substring(5, 7))-1,Integer.parseInt(start.substring(8, 10)),Integer.parseInt(start.substring(11, 13)),Integer.parseInt(start.substring(14, 16)));
-			  
-			  Calendar ecalendar = Calendar.getInstance();
-			  //ecalendar.setTimeInMillis(System.currentTimeMillis()); 
-			  ecalendar.set(Integer.parseInt(end.substring(0, 4)),Integer.parseInt(end.substring(5, 7))-1,Integer.parseInt(end.substring(8, 10)),Integer.parseInt(end.substring(11, 13)),Integer.parseInt(end.substring(14, 16)));
+	   public ModelAndView alarm(HttpServletRequest request,HttpSession session) throws Exception {
+	      MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
+	      List<ScheduleVO> scheduleList = this.service.scheduleListAlarm(memberInfo.getMem_no());
+	       List<ScheduleVO> alarmList = new ArrayList<>();
+	      for(int i=0; i<scheduleList.size(); i++) {
+	           String start = scheduleList.get(i).getS_startdate(); //시작
+	           String end =  scheduleList.get(i).getS_enddate(); //끝
+	           
+	           Calendar calendar = Calendar.getInstance();
+	           //calendar.setTimeInMillis(System.currentTimeMillis()); 
+	           calendar.set(Integer.parseInt(start.substring(0, 4)),Integer.parseInt(start.substring(5, 7))-1,Integer.parseInt(start.substring(8, 10)),Integer.parseInt(start.substring(11, 13)),Integer.parseInt(start.substring(14, 16)));
+	           
+	           Calendar ecalendar = Calendar.getInstance();
+	           //ecalendar.setTimeInMillis(System.currentTimeMillis()); 
+	           ecalendar.set(Integer.parseInt(end.substring(0, 4)),Integer.parseInt(end.substring(5, 7))-1,Integer.parseInt(end.substring(8, 10)),Integer.parseInt(end.substring(11, 13)),Integer.parseInt(end.substring(14, 16)));
 
-			  if(Calendar.getInstance().equals(calendar) && Calendar.getInstance().before(ecalendar)) {
-				  if(Calendar.getInstance().getTime().getHours()==calendar.getTime().getHours() && Calendar.getInstance().getTime().getMinutes()==calendar.getTime().getMinutes() ) {
-						  alarmList.add(scheduleList.get(i));
-				  }
-			  }
-			  
-			  if(Calendar.getInstance().after(calendar) && Calendar.getInstance().equals(ecalendar)) {
-				  if(Calendar.getInstance().getTime().getHours()==calendar.getTime().getHours() && Calendar.getInstance().getTime().getMinutes()==calendar.getTime().getMinutes() ) {
-						  alarmList.add(scheduleList.get(i));
-				  }
-			  }
-			  
-			  if(Calendar.getInstance().after(calendar) && Calendar.getInstance().before(ecalendar)) {
-					  if(Calendar.getInstance().getTime().getHours()==calendar.getTime().getHours() && Calendar.getInstance().getTime().getMinutes()==calendar.getTime().getMinutes() ) {
-							  alarmList.add(scheduleList.get(i));
-					  }
-			  }
-			  
-			  if(Calendar.getInstance().equals(calendar)) {
-				  alarmList.add(scheduleList.get(i));
-			  }
-			  
-		}
-		
-		
-		List<MypillVO> medicalList = this.medicalservice.medicalList(memberInfo.getMem_no());
-	    List<MypillVO> medicalalarmList = new ArrayList<>();
-		for(int i=0; i<medicalList.size(); i++) {
-			  String start = medicalList.get(i).getPill_start(); //시작
-			  String end =  medicalList.get(i).getPill_end(); //끝
-			  
-			  Calendar calendar = Calendar.getInstance();
-			  //calendar.setTimeInMillis(System.currentTimeMillis()); 
-			  calendar.set(Integer.parseInt(start.substring(0, 4)),Integer.parseInt(start.substring(5, 7))-1,Integer.parseInt(start.substring(8, 10)),Integer.parseInt(start.substring(11, 13)),Integer.parseInt(start.substring(14, 16)));
-			  
-			  Calendar ecalendar = Calendar.getInstance();
-			  //ecalendar.setTimeInMillis(System.currentTimeMillis()); 
-			  ecalendar.set(Integer.parseInt(end.substring(0, 4)),Integer.parseInt(end.substring(5, 7))-1,Integer.parseInt(end.substring(8, 10)),Integer.parseInt(end.substring(11, 13)),Integer.parseInt(end.substring(14, 16)));
+	           if(Calendar.getInstance().equals(calendar) && Calendar.getInstance().before(ecalendar)) {
+	              if(Calendar.getInstance().getTime().getHours()==calendar.getTime().getHours() && Calendar.getInstance().getTime().getMinutes()==calendar.getTime().getMinutes() ) {
+	                    alarmList.add(scheduleList.get(i));
+	              }
+	           }
+	           
+	           if(Calendar.getInstance().after(calendar) && Calendar.getInstance().equals(ecalendar)) {
+	              if(Calendar.getInstance().getTime().getHours()==calendar.getTime().getHours() && Calendar.getInstance().getTime().getMinutes()==calendar.getTime().getMinutes() ) {
+	                    alarmList.add(scheduleList.get(i));
+	              }
+	           }
+	           
+	           if(Calendar.getInstance().after(calendar) && Calendar.getInstance().before(ecalendar)) {
+	                 if(Calendar.getInstance().getTime().getHours()==calendar.getTime().getHours() && Calendar.getInstance().getTime().getMinutes()==calendar.getTime().getMinutes() ) {
+	                       alarmList.add(scheduleList.get(i));
+	                 }
+	           }
+	           
+	           if(Calendar.getInstance().equals(calendar)) {
+	              alarmList.add(scheduleList.get(i));
+	           }
+	           
+	      }
+	      
+	      
+	      List<MypillVO> medicalList = this.medicalservice.medicalList(memberInfo.getMem_no());
+	       List<MypillVO> medicalalarmList = new ArrayList<>();
+	      for(int i=0; i<medicalList.size(); i++) {
+	           String start = medicalList.get(i).getPill_start(); //시작
+	           String end =  medicalList.get(i).getPill_end(); //끝
+	           
+	           Calendar calendar = Calendar.getInstance();
+	           //calendar.setTimeInMillis(System.currentTimeMillis()); 
+	           calendar.set(Integer.parseInt(start.substring(0, 4)),Integer.parseInt(start.substring(5, 7))-1,Integer.parseInt(start.substring(8, 10)),Integer.parseInt(start.substring(11, 13)),Integer.parseInt(start.substring(14, 16)));
+	           
+	           Calendar ecalendar = Calendar.getInstance();
+	           //ecalendar.setTimeInMillis(System.currentTimeMillis()); 
+	           ecalendar.set(Integer.parseInt(end.substring(0, 4)),Integer.parseInt(end.substring(5, 7))-1,Integer.parseInt(end.substring(8, 10)),Integer.parseInt(end.substring(11, 13)),Integer.parseInt(end.substring(14, 16)));
 
-			  
-			  if(Calendar.getInstance().equals(calendar) && Calendar.getInstance().before(ecalendar)) {
-				  if(Calendar.getInstance().getTime().getHours()==calendar.getTime().getHours() && Calendar.getInstance().getTime().getMinutes()==calendar.getTime().getMinutes() ) {
-						  alarmList.add(scheduleList.get(i));
-				  }
-			  }
-			  
-			  if(Calendar.getInstance().after(calendar) && Calendar.getInstance().equals(ecalendar)) {
-				  if(Calendar.getInstance().getTime().getHours()==calendar.getTime().getHours() && Calendar.getInstance().getTime().getMinutes()==calendar.getTime().getMinutes() ) {
-						  alarmList.add(scheduleList.get(i));
-				  }
-			  }
-			  
-			  
-			  if(Calendar.getInstance().after(calendar) && Calendar.getInstance().before(ecalendar)) {
-				  if(Calendar.getInstance().getTime().getHours()==calendar.getTime().getHours() && Calendar.getInstance().getTime().getMinutes()==calendar.getTime().getMinutes() ) {
-						  alarmList.add(scheduleList.get(i));
-				  }
-			  }
-			  
-			  if(Calendar.getInstance().equals(calendar)) {
-				  medicalalarmList.add(medicalList.get(i));
-			  }
-			  
+	           
+	           if(Calendar.getInstance().equals(calendar) && Calendar.getInstance().before(ecalendar)) {
+	              if(Calendar.getInstance().getTime().getHours()==calendar.getTime().getHours() && Calendar.getInstance().getTime().getMinutes()==calendar.getTime().getMinutes() ) {
+	                 medicalalarmList.add(medicalList.get(i));
+	              }
+	           }
+	           
+	           if(Calendar.getInstance().after(calendar) && Calendar.getInstance().equals(ecalendar)) {
+	              if(Calendar.getInstance().getTime().getHours()==calendar.getTime().getHours() && Calendar.getInstance().getTime().getMinutes()==calendar.getTime().getMinutes() ) {
+	                 medicalalarmList.add(medicalList.get(i));
+	              }
+	           }
+	           
+	           
+	           if(Calendar.getInstance().after(calendar) && Calendar.getInstance().before(ecalendar)) {
+	              if(Calendar.getInstance().getTime().getHours()==calendar.getTime().getHours() && Calendar.getInstance().getTime().getMinutes()==calendar.getTime().getMinutes() ) {
+	                 medicalalarmList.add(medicalList.get(i));
+	              }
+	           }
+	           
+	           if(Calendar.getInstance().equals(calendar)) {
+	              medicalalarmList.add(medicalList.get(i));
+	           }
+	           
+	      }
+
+			ModelAndView andView = new ModelAndView();
+			andView.addObject("json", alarmList);
+			andView.addObject("medicaljson", medicalalarmList);
+			andView.setViewName("jsonConvertView");
+			return andView;
 		}
-		
-		
-		
-		ModelAndView andView = new ModelAndView();
-		andView.addObject("json", alarmList);
-		andView.addObject("medicaljson", medicalalarmList);
-		andView.setViewName("jsonConvertView");
-		return andView;
-	}
-	
-	
 
 	
 	

@@ -166,10 +166,9 @@
 		(
 		select *
 		from memberfile) a
-		,(
-		select *
-		from message
-		where ch_no = 81) b
+		,(select *
+		  from message
+		where ch_no = #{ch_no}) b
 		where a.mem_no = b.mem_no
 		ORDER BY b.MSG_DATE
 	</select>
