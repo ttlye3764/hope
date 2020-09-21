@@ -381,12 +381,12 @@ $(function () {
 					        labels: la,
 					        datasets: [{
 					            label: '지출',
-					            data: listPlus,		
+					            data: listMinus,		
 					            backgroundColor : '#f3545d'         
 					        },
 					        {
 					            label: '수입',
-					            data: listMinus,		
+					            data: listPlus,		
 					            backgroundColor : '#0095ff'            
 					        }
 					        ]
