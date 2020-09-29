@@ -6,9 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,10 +21,6 @@ import kr.or.ddit.vo.MemberVO;
 @Controller
 @RequestMapping("/admin/member/")
 public class AdminMemberController {
-	@Autowired
-	private MessageSourceAccessor accessor;
-	@Autowired
-	private ObjectMapper mapper;
 	@Autowired
 	private IMemberService service;
 	
@@ -80,7 +74,6 @@ public class AdminMemberController {
 		params.put("mem_id", mem_id);
 		MemberVO memberInfo = this.service.memberInfo(params);
 
-//	      ModelMap modelMap = new ModelMap();
 		modelMap.addAttribute("search_keycode",search_keycode);
 		modelMap.addAttribute("search_keyword",search_keyword);
 		modelMap.addAttribute("currentPage",currentPage);
@@ -91,17 +84,13 @@ public class AdminMemberController {
 	
 	@RequestMapping("updateMemberInfo")
 	public String updateMember(MemberVO memberInfo, HttpSession session, Map<String, String> params) throws Exception {
-		params.put("mem_id", memberInfo.getMem_id());
 		
-		if(!memberInfo.getMem_pass().equals("")) {
-			String pass = UserSha256.encrypt(memberInfo.getMem_pass());
-			memberInfo.setMem_pass(pass);
+		if(!memberInfo.getMem_pass().equals("")) { // 관리자가 사용자의 비밀번호 수정 했을 경우
+			memberInfo.setMem_pass(UserSha256.encrypt(memberInfo.getMem_pass()));
 		}
 		
 		this.service.updateMemberInfo(memberInfo, null);
 		
-		memberInfo = this.service.memberInfo(params);
-
 		return "redirect:/admin/member/memberList.do";
 	}
 	

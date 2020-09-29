@@ -6,12 +6,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,10 +24,6 @@ import kr.or.ddit.vo.MemberVO;
 @Controller
 @RequestMapping("/user/member/")
 public class MemberController {
-	@Autowired
-	private MessageSourceAccessor accessor;
-	@Autowired
-	private ObjectMapper mapper;
 	@Autowired
 	private IMemberService service;
 	@Autowired
@@ -83,8 +76,7 @@ public class MemberController {
 			MemberVO memberInfo2 = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO"); // 세션에서 사용자 정보를 불러와서 비밀번호에 그대로 넣어줌
 			params.put("mem_pass", memberInfo2.getMem_pass());
 		}else {
-			String pass = UserSha256.encrypt(memberInfo.getMem_pass()); // 새로운 비밀번호를 암호화 시켜줘서 다시 넣어줌
-			memberInfo.setMem_pass(pass);
+			memberInfo.setMem_pass(UserSha256.encrypt(memberInfo.getMem_pass())); // 새로운 비밀번호 암호화
 			params.put("mem_pass", memberInfo.getMem_pass());
 		}
 		this.service.updateMemberInfo(memberInfo, items);
@@ -124,7 +116,6 @@ public class MemberController {
 		
 		this.service.insertMember(memberInfo, items);
 		
-		redirectAttributes.addFlashAttribute("message", "회원가입이 완료되었습니다");
 		return "redirect:/user/join/loginForm.do";
 	}
 
@@ -169,22 +160,18 @@ public class MemberController {
 		return andView;
 	}
 	
-	@RequestMapping("passCheck")
-	public ModelAndView passCheck(@RequestParam String mem_pass, Map<String, String> params, HttpServletRequest request) throws Exception {
+	@RequestMapping("passCheck") // 마이페이지 들어가기 전 비밀번호 확인 페이지
+	public ModelAndView passCheck(@RequestParam String mem_pass, Map<String, String> params, HttpServletRequest request, ModelAndView andView) throws Exception {
 		HttpSession session = request.getSession();
 		MemberVO memberInfo = (MemberVO) session.getAttribute("LOGIN_MEMBERINFO");
 		
-		String session_mem_pass = memberInfo.getMem_pass();
+		String session_mem_pass = memberInfo.getMem_pass(); // 세션이 가지고 있는 해당 유저의 비밀번호
 
-		ModelAndView andView = new ModelAndView();
-		andView.addObject("memberInfo", memberInfo);
-		
-		String pass = UserSha256.encrypt(mem_pass);
-		mem_pass = pass;
+		mem_pass = UserSha256.encrypt(mem_pass);
 
 		String result;
 		if (session_mem_pass.equals(mem_pass)) {
-			result = "1";
+			result = "1"; // 성공
 		} else {
 			result = "0";
 		}
@@ -201,7 +188,7 @@ public class MemberController {
 		params.put("mem_name", mem_name);
 		params.put("mem_birth", mem_birth);
 
-		String result = this.service.searchID(params);
+		String result = this.service.searchID(params); // 검색 결과 아이디
 
 		ModelAndView andView = new ModelAndView();
 
@@ -224,16 +211,14 @@ public class MemberController {
 
 		if (result == null) {
 		} else {
-			mem_temporary_pass = random();
-			String pass = UserSha256.encrypt(mem_temporary_pass);
-			String t_pass = pass;
-			params.put("mem_temporary_pass", t_pass);
-			service.makePass(params);
+			mem_temporary_pass = random(); // 임시 비밀번호 생성
+			params.put("mem_temporary_pass", UserSha256.encrypt(mem_temporary_pass));
+			service.makePass(params); // 암호화 된 임시비밀번호 DB에 저장
 		}
 
 		ModelAndView andView = new ModelAndView();
 
-		andView.addObject("json", mem_temporary_pass);
+		andView.addObject("json", mem_temporary_pass); // 사용자에게는 암호화되지 않은 임시비밀번호 출력
 		andView.setViewName("jsonConvertView");
 
 		return andView;

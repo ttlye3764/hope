@@ -105,19 +105,14 @@ public class NaverLoginController {
 		Object obj = parser.parse(apiResult);
 		JSONObject jsonObj = (JSONObject) obj;
 //3. 데이터 파싱
-//Top레벨 단계 _response 파싱
 		JSONObject response_obj = (JSONObject) jsonObj.get("response");
-//response의 nickname값 파싱
+		
 		String nickname = (String) response_obj.get("nickname");
-		
 		String gender = (String) response_obj.get("gender");
-		
 		String name = (String) response_obj.get("name");
-		
 		String email = (String) response_obj.get("email");
 		
 		String [] id = email.split("@");
-//4.파싱 닉네임 세션으로 저장
 		params.put("mem_id", id[0]+"_naver");
 		params.put("mem_join_addr", "n");
 		MemberVO memberInfo1 = this.service.memberInfo(params);
